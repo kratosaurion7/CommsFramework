@@ -1,11 +1,11 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
 
-class DSprite : public sf::Sprite
+class DSprite
 {
 public:
-    DSprite();
-    ~DSprite();
+    
+    virtual void DoStuff() = 0;
+
 };
 

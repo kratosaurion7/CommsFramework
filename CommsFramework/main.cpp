@@ -1,12 +1,16 @@
 #include <SFML/Graphics.hpp>
 
-#include "Graphic\DSprite.h";
+#include "Graphic\SfSprite.h";
 
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(1024, 720), "SFML works!");
 
     window.setVerticalSyncEnabled(true);
+
+    SfSprite sprite;
+
+    sprite.DoStuff();
 
     sf::CircleShape shape(100.f);
     shape.setFillColor(sf::Color::Green);
