@@ -1,12 +1,14 @@
 #include "DTexture.h"
 
+#include <SFML\Graphics.hpp>
 
 DTexture::DTexture()
 {
-    innerImpl = NULL;
+    innerImpl = new sf::Texture();
 }
 
 
 DTexture::~DTexture()
 {
+	delete innerImpl;
 }

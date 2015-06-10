@@ -1,15 +1,15 @@
 #include "DSprite.h"
 
+#include <SFML\Graphics.hpp>
 
 DSprite::DSprite()
 {
-    innerImpl = NULL;
+	innerImpl = new sf::Sprite();
 	spriteTexture = NULL;
 	isVisible = false;
-	position = NULL;
-	size = NULL;
+	position = new FPosition();
+	size = new FSize();
 }
-
 
 DSprite::~DSprite()
 {
@@ -31,8 +31,7 @@ DTexture * DSprite::GetTexture()
 
 void DSprite::SetTexture(DTexture * texture)
 {
-	if (texture != NULL)
-		spriteTexture = texture;
+	spriteTexture = texture;
 }
 
 float DSprite::GetX()

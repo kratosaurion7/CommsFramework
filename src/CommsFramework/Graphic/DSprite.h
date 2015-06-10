@@ -1,9 +1,10 @@
 #pragma once
 
+#include <string.h>
+
 #include <SFML\Graphics.hpp>
 
 #include "DTexture.h"
-
 #include "FPosition.h"
 #include "FSize.h"
 
@@ -13,32 +14,33 @@ public:
     DSprite();
     ~DSprite();
 
-    void Show(bool show);
+	std::string* Ident;
+	
+	virtual void Show(bool show);
 
-    DTexture* GetTexture();
-    void SetTexture(DTexture* texture);
+	virtual DTexture* GetTexture();
+	virtual void SetTexture(DTexture* texture);
 
+    virtual float GetX();
+	virtual float GetY();
 
-    float GetX();
-    float GetY();
+	virtual void SetX(float value);
+	virtual void SetY(float value);
 
-    void SetX(float value);
-    void SetY(float value);
-
-    FPosition* GetPos();
-    void SetPos(float x, float y);
-	void SetPos(FPosition* value);
+	virtual FPosition* GetPos();
+	virtual void SetPos(float x, float y);
+	virtual void SetPos(FPosition* value);
     
 
-    float GetHeight();
-    float GetWidth();
+	virtual float GetHeight();
+	virtual float GetWidth();
 
-    void SetHeight(float height);
-    void SetWidth(float width);
+	virtual void SetHeight(float height);
+	virtual void SetWidth(float width);
 
-    FSize* GetSize();
-    void SetSize(float height, float width);
-	void SetSize(FSize* value);
+	virtual FSize* GetSize();
+	virtual void SetSize(float height, float width);
+	virtual void SetSize(FSize* value);
 
 private:
     sf::Sprite* innerImpl;
