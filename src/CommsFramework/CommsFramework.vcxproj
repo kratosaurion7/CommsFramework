@@ -304,15 +304,20 @@ XCOPY /y "E:\Prog\lib\sfml\SFML-2.3_x64\bin\*.dll" "$(TargetDir)"
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Graphic\FSize.cpp" />
+    <ClCompile Include="Graphic\FPosition.cpp" />
+    <ClCompile Include="Graphic\DTexture.cpp" />
+    <ClCompile Include="Graphic\DSprite.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Graphic\SfSprite.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\texture.png" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Graphic\FSize.h" />
+    <ClInclude Include="Graphic\FPosition.h" />
+    <ClInclude Include="Graphic\DTexture.h" />
     <ClInclude Include="Graphic\DSprite.h" />
-    <ClInclude Include="Graphic\SfSprite.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

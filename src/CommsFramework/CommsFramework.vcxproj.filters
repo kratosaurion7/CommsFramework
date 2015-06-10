@@ -18,7 +18,16 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Graphic\SfSprite.cpp">
+    <ClCompile Include="Graphic\DSprite.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic\DTexture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic\FPosition.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic\FSize.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -31,7 +40,13 @@
     <ClInclude Include="Graphic\DSprite.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Graphic\SfSprite.h">
+    <ClInclude Include="Graphic\DTexture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\FPosition.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\FSize.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

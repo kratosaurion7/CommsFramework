@@ -1,6 +1,6 @@
 #include <SFML/Graphics.hpp>
 
-#include "Graphic\SfSprite.h";
+#include "Graphic\DSprite.h"
 
 int main()
 {
@@ -8,9 +8,9 @@ int main()
 
     window.setVerticalSyncEnabled(true);
 
-    SfSprite sprite;
 
-    sprite.DoStuff();
+    DSprite mySprite;
+
 
     sf::CircleShape shape(100.f);
     shape.setFillColor(sf::Color::Green);
