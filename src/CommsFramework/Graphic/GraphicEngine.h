@@ -10,7 +10,8 @@ public:
 
 	void Initialize();
 
-	void Run();
+	void Process();
+    void StartLooping();
 
 	void Stop();
 

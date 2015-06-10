@@ -24,15 +24,10 @@ void GraphicEngine::Initialize()
 
 }
 
-void GraphicEngine::Run()
+void GraphicEngine::Process()
 {
-	isRunning = true;
-
-	while (window->isOpen())
+	if (window->isOpen() && isRunning)
 	{
-		if (!isRunning)
-			break;
-
 		sf::Event event;
 		while (window->pollEvent(event))
 		{
@@ -45,7 +40,19 @@ void GraphicEngine::Run()
 		//window->draw(spr);
 		window->display();
 	}
+}
 
+void GraphicEngine::StartLooping()
+{
+	isRunning = true;
+
+	while (window->isOpen())
+	{
+		if (!isRunning)
+			break;
+
+		Process();
+	}
 }
 
 void GraphicEngine::Stop()
