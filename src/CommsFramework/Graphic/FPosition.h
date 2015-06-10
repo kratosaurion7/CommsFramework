@@ -4,6 +4,7 @@ class FPosition
 {
 public:
     FPosition();
+	FPosition(float x, float y);
     ~FPosition();
 
     float X;

@@ -7,6 +7,12 @@ FPosition::FPosition()
     Y = 0;
 }
 
+FPosition::FPosition(float x, float y)
+{
+	X = x;
+	Y = y;
+}
+
 
 FPosition::~FPosition()
 {

@@ -22,11 +22,12 @@ public:
     float GetX();
     float GetY();
 
-    void SetX();
-    void SetY();
+    void SetX(float value);
+    void SetY(float value);
 
     FPosition* GetPos();
     void SetPos(float x, float y);
+	void SetPos(FPosition* value);
     
 
     float GetHeight();
@@ -37,10 +38,16 @@ public:
 
     FSize* GetSize();
     void SetSize(float height, float width);
+	void SetSize(FSize* value);
 
 private:
     sf::Sprite* _innerImpl;
 
+	DTexture* spriteTexture;
+
+	bool isVisible;
+
     FPosition* position;
+	FSize* size;
 };
 
