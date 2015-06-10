@@ -2,6 +2,8 @@
 
 #include "Graphic\DSprite.h"
 
+#include "Graphic\GraphicEngine.h"
+
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(1024, 720), "SFML works!");

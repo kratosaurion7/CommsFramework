@@ -304,6 +304,7 @@ XCOPY /y "E:\Prog\lib\sfml\SFML-2.3_x64\bin\*.dll" "$(TargetDir)"
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Graphic\GraphicEngine.cpp" />
     <ClCompile Include="Graphic\FSize.cpp" />
     <ClCompile Include="Graphic\FPosition.cpp" />
     <ClCompile Include="Graphic\DTexture.cpp" />
@@ -314,6 +315,7 @@ XCOPY /y "E:\Prog\lib\sfml\SFML-2.3_x64\bin\*.dll" "$(TargetDir)"
     <Image Include="Assets\texture.png" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Graphic\GraphicEngine.h" />
     <ClInclude Include="Graphic\FSize.h" />
     <ClInclude Include="Graphic\FPosition.h" />
     <ClInclude Include="Graphic\DTexture.h" />
