@@ -41,7 +41,7 @@ public:
 	void SetSize(FSize* value);
 
 private:
-    sf::Sprite* _innerImpl;
+    sf::Sprite* innerImpl;
 
 	DTexture* spriteTexture;
 

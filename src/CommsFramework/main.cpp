@@ -9,7 +9,7 @@ int main()
     window.setVerticalSyncEnabled(true);
 
 
-    DSprite mySprite;
+	DSprite* mySprite = new DSprite();
 
 
     sf::CircleShape shape(100.f);

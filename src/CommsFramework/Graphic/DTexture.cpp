@@ -3,7 +3,7 @@
 
 DTexture::DTexture()
 {
-    _innerImpl = NULL;
+    innerImpl = NULL;
 }
 
 

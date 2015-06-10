@@ -3,7 +3,7 @@
 
 DSprite::DSprite()
 {
-    _innerImpl = NULL;
+    innerImpl = NULL;
 	spriteTexture = NULL;
 	isVisible = false;
 	position = NULL;
@@ -13,6 +13,10 @@ DSprite::DSprite()
 
 DSprite::~DSprite()
 {
+	// Don't delete the sprite texture when deleting a sprite, the texture might be shared around.
+	delete innerImpl;
+	delete position;
+	delete size;
 }
 
 void DSprite::Show(bool show)
@@ -41,7 +45,6 @@ float DSprite::GetX()
 	{
 		return 0;
 	}
-	
 }
 
 float DSprite::GetY()

@@ -9,6 +9,6 @@ public:
     ~DTexture();
 
 private:
-    sf::Texture* _innerImpl;
+    sf::Texture* innerImpl;
 };
 
