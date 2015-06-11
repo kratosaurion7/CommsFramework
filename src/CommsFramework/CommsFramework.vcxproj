@@ -122,7 +122,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir)..\..\libs\SFML\x32\include;$(ProjectDir)..\..\libs\ZeroMQ\x32\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)..\..\libs\SFML\x32\include;$(ProjectDir)..\..\libs\ZeroMQ\x32\include;$(ProjectDir)..\..\libs\rapidxml;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)..\..\libs\SFML\x32\lib;$(ProjectDir)..\..\libs\ZeroMQ\x32\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Static|Win32'">
@@ -304,22 +304,29 @@ XCOPY /y "E:\Prog\lib\sfml\SFML-2.3_x64\bin\*.dll" "$(TargetDir)"
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Graphic\GraphicEngineInitParams.cpp" />
     <ClCompile Include="Graphic\GraphicEngine.cpp" />
     <ClCompile Include="Graphic\FSize.cpp" />
     <ClCompile Include="Graphic\FPosition.cpp" />
     <ClCompile Include="Graphic\DTexture.cpp" />
     <ClCompile Include="Graphic\DSprite.cpp" />
+    <ClCompile Include="IO\FileReader.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="XML\XmlReader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\texture.png" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Graphic\GraphicEngineInitParams.h" />
     <ClInclude Include="Graphic\GraphicEngine.h" />
     <ClInclude Include="Graphic\FSize.h" />
     <ClInclude Include="Graphic\FPosition.h" />
     <ClInclude Include="Graphic\DTexture.h" />
     <ClInclude Include="Graphic\DSprite.h" />
+    <ClInclude Include="IO\FileReader.h" />
+    <ClInclude Include="Macros.h" />
+    <ClInclude Include="XML\XmlReader.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
