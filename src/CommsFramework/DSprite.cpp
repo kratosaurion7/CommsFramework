@@ -32,6 +32,7 @@ DTexture * DSprite::GetTexture()
 void DSprite::SetTexture(DTexture * texture)
 {
 	spriteTexture = texture;
+	innerImpl->setTexture((*texture->innerImpl));
 }
 
 float DSprite::GetX()

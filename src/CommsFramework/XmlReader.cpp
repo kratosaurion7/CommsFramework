@@ -264,7 +264,7 @@ int XmlSearchSyntax::GetSyntaxTokensLength()
 {
     XmlSearchNode *lastNode = firstNode;
 
-    int total;
+    int total = 0;
 
     while (lastNode->nextNode != NULL)
     {
