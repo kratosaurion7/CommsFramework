@@ -1,5 +1,10 @@
 #include "GraphicEngine.h"
 
+#include "DSprite.h"
+
+#include <list>
+#include <iterator>
+
 #include <SFML\Graphics.hpp>
 
 
@@ -7,6 +12,7 @@ GraphicEngine::GraphicEngine()
 {
 	window = NULL;
 	isRunning = false;
+	Sprites = new PointerList<DSprite*>();
 }
 
 
@@ -69,7 +75,22 @@ void GraphicEngine::ProcessDraw(sf::RenderWindow* targetWindow)
 {
 	targetWindow->clear();
 	//targetWindow.draw(shape);
+	
+	std::list<DSprite*>::iterator iter = Sprites->GetContainer()->begin();
+
+	while (iter != Sprites->GetContainer()->end())
+	{
+		// TODO : CHECK FOR LEAKS
+		sf::Sprite innerSprite = (*(*iter)->innerImpl); // Dereference the iterator to get the inner object, then need to dereference the DSPrite's InnerImpl to get the value itself.
+
+		targetWindow->draw(innerSprite);
+		//(*iter)->Update(this->CreateGameContext());
+
+		iter++;
+	}
+
 	//targetWindow->draw(spr);
+
 	targetWindow->display();
 
 }

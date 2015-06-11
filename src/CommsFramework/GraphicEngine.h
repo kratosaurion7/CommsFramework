@@ -2,7 +2,9 @@
 
 #include <SFML\Graphics.hpp>
 
+#include "PointerList.h"
 
+#include "DSprite.h"
 
 #include "GraphicEngineInitParams.h"
 
@@ -21,7 +23,7 @@ public:
 	void Stop();
 
 private:
-
+	BaseList<DSprite*>* Sprites;
 
 	bool isRunning;
 
