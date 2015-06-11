@@ -15,8 +15,6 @@ GraphicEngine::GraphicEngine()
 	Sprites = new PointerList<DSprite*>();
 }
 
-
-
 GraphicEngine::~GraphicEngine()
 {
 	if (window == NULL)

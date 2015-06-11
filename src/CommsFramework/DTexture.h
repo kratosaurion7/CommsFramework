@@ -16,8 +16,9 @@ public:
 
 	virtual FSize* GetSize();
 
+	sf::Texture* innerImpl;
 private:
-    sf::Texture* innerImpl;
+    
 
 	FSize* size;
 };

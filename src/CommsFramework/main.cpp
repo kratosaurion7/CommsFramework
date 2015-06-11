@@ -6,7 +6,33 @@
 
 #include "FileReader.h"
 
+#include <string>
+
 int main()
+{
+	GraphicEngine* eng = new GraphicEngine();
+
+	GraphicEngineInitParams* params = new GraphicEngineInitParams();
+	params->EnableVerticalSync = true;
+	params->WindowSize = new FSize(600, 600);
+	params->WindowTitle = new std::string("WINNING!");
+
+	eng->Initialize(params);
+
+	DSprite* spr = new DSprite();
+
+	DTexture* txr = new DTexture();
+	txr->Load("Assets/Texture.png");
+	spr->SetTexture(txr);
+
+	eng->Sprites->Add(spr);
+
+	eng->StartLooping();
+
+	return 0;
+}
+
+int main3()
 {
 	getchar();
 
@@ -24,6 +50,8 @@ int main()
 
 
 	getchar();
+
+	return 0;
 }
 
 int main2()

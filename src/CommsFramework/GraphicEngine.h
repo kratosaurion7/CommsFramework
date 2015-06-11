@@ -22,8 +22,9 @@ public:
 
 	void Stop();
 
-private:
 	BaseList<DSprite*>* Sprites;
+private:
+	
 
 	bool isRunning;
 
