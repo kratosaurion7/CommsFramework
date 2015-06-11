@@ -4,7 +4,29 @@
 
 #include "GraphicEngine.h"
 
+#include "FileReader.h"
+
 int main()
+{
+	getchar();
+
+	for (int i = 0; i < 100000;i++)
+	{
+		FileReader* rdr = new FileReader();
+
+		rdr->OpenFile("input.txt", READ);
+
+		FileContents* contents = rdr->GetFileContents();
+
+		delete rdr;
+		delete contents;
+	}
+
+
+	getchar();
+}
+
+int main2()
 {
     sf::RenderWindow window(sf::VideoMode(1024, 720), "SFML works!");
 

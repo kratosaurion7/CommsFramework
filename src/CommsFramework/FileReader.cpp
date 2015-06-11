@@ -18,6 +18,9 @@ FileReader::~FileReader()
 {
     if (file != NULL)
         fclose(file);
+
+	if (contents != NULL)
+		delete contents;
     
 };
 
@@ -47,7 +50,10 @@ FileContents* FileReader::GetFileContents()
     }
 
     FileContents *fileContents = new FileContents();
-    fileContents->buffer = contents->c_str();
+	int bufferSize = contents->size() + 1; // Add one to include the null ternimating char
+    //fileContents->buffer = contents->c_str();
+	fileContents->buffer = new char[bufferSize];
+	memcpy((void*)fileContents->buffer, contents->c_str(), bufferSize);
     fileContents->fileSize = contents->size();
 
     return fileContents;
