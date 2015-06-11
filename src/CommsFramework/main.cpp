@@ -1,8 +1,8 @@
 #include <SFML/Graphics.hpp>
 
-#include "Graphic\DSprite.h"
+#include "DSprite.h"
 
-#include "Graphic\GraphicEngine.h"
+#include "GraphicEngine.h"
 
 int main()
 {

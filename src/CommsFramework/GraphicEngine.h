@@ -3,6 +3,7 @@
 #include <SFML\Graphics.hpp>
 
 
+
 #include "GraphicEngineInitParams.h"
 
 
@@ -20,6 +21,8 @@ public:
 	void Stop();
 
 private:
+
+
 	bool isRunning;
 
 	void ProcessWindowsEvents(sf::RenderWindow* targetWindow);
@@ -27,6 +30,7 @@ private:
 	void ProcessDraw(sf::RenderWindow* targetWindow);
 
 	sf::RenderWindow* window;
+
 
 
 };

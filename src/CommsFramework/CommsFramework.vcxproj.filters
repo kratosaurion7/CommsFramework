@@ -13,34 +13,46 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Collections">
+      <UniqueIdentifier>{fb70d5b6-8628-4802-8bc8-ba0fea540a5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphic">
+      <UniqueIdentifier>{94709dac-c382-4d9a-86ca-a770656399dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="IO">
+      <UniqueIdentifier>{eac451c5-fc94-422d-bc0a-8f9dbd159a86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="XML">
+      <UniqueIdentifier>{5a7de150-8d61-49ee-a3ac-42d007bd4764}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Graphic\DSprite.cpp">
+    <ClCompile Include="XmlReader.cpp">
+      <Filter>XML</Filter>
+    </ClCompile>
+    <ClCompile Include="FileReader.cpp">
+      <Filter>IO</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicEngineInitParams.cpp">
+      <Filter>Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicEngine.cpp">
+      <Filter>Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="FSize.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Graphic\DTexture.cpp">
+    <ClCompile Include="FPosition.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Graphic\FPosition.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="DTexture.cpp">
+      <Filter>Graphic</Filter>
     </ClCompile>
-    <ClCompile Include="Graphic\FSize.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphic\GraphicEngine.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphic\GraphicEngineInitParams.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="IO\FileReader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="XML\XmlReader.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="DSprite.cpp">
+      <Filter>Graphic</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -49,32 +61,38 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Graphic\DSprite.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphic\DTexture.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphic\FPosition.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphic\FSize.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphic\GraphicEngine.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphic\GraphicEngineInitParams.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Macros.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IO\FileReader.h">
+    <ClInclude Include="XmlReader.h">
+      <Filter>XML</Filter>
+    </ClInclude>
+    <ClInclude Include="FileReader.h">
+      <Filter>IO</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicEngineInitParams.h">
+      <Filter>Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicEngine.h">
+      <Filter>Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="FSize.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="XML\XmlReader.h">
+    <ClInclude Include="FPosition.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DTexture.h">
+      <Filter>Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="DSprite.h">
+      <Filter>Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="PointerList.h">
+      <Filter>Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseList.h">
+      <Filter>Collections</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

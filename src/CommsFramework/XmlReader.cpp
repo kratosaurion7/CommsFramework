@@ -2,9 +2,9 @@
 
 #include "rapidxml.hpp"
 
-#include "../IO/FileReader.h"
+#include "FileReader.h"
 
-#include "../Macros.h"
+#include "Macros.h"
 
 #include <functional>
 
