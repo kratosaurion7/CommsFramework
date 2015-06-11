@@ -10,35 +10,30 @@ GraphicEngine::GraphicEngine()
 }
 
 
+
 GraphicEngine::~GraphicEngine()
 {
 	if (window == NULL)
 		delete window;
 }
 
-void GraphicEngine::Initialize()
+void GraphicEngine::Initialize(GraphicEngineInitParams* params)
 {
-	window = new sf::RenderWindow(sf::VideoMode(1024, 720), "SFML works!");
+	window = new sf::RenderWindow(sf::VideoMode(params->WindowSize->Height, params->WindowSize->Width), params->WindowTitle->c_str());
 
-	window->setVerticalSyncEnabled(true);
-
+	window->setVerticalSyncEnabled(params->EnableVerticalSync);
 }
 
 void GraphicEngine::Process()
 {
-	if (window->isOpen() && isRunning)
+	if (window->isOpen())
 	{
-		sf::Event event;
-		while (window->pollEvent(event))
-		{
-			if (event.type == sf::Event::Closed)
-				window->close();
-		}
+		ProcessWindowsEvents(window); // Need to process the Windows events no matter what.
 
-		window->clear();
-		//window.draw(shape);
-		//window->draw(spr);
-		window->display();
+		if (isRunning)
+		{
+			ProcessDraw(window);
+		}
 	}
 }
 
@@ -58,4 +53,23 @@ void GraphicEngine::StartLooping()
 void GraphicEngine::Stop()
 {
 	isRunning = false;
+}
+
+void GraphicEngine::ProcessWindowsEvents(sf::RenderWindow* targetWindow)
+{
+	sf::Event event;
+	while (targetWindow->pollEvent(event))
+	{
+		if (event.type == sf::Event::Closed)
+			targetWindow->close();
+	}
+}
+
+void GraphicEngine::ProcessDraw(sf::RenderWindow* targetWindow)
+{
+	targetWindow->clear();
+	//targetWindow.draw(shape);
+	//targetWindow->draw(spr);
+	targetWindow->display();
+
 }
