@@ -72,7 +72,6 @@ void GraphicEngine::ProcessWindowsEvents(sf::RenderWindow* targetWindow)
 void GraphicEngine::ProcessDraw(sf::RenderWindow* targetWindow)
 {
 	targetWindow->clear();
-	//targetWindow.draw(shape);
 	
 	std::list<DSprite*>::iterator iter = Sprites->GetContainer()->begin();
 
@@ -82,13 +81,9 @@ void GraphicEngine::ProcessDraw(sf::RenderWindow* targetWindow)
 		sf::Sprite innerSprite = (*(*iter)->innerImpl); // Dereference the iterator to get the inner object, then need to dereference the DSPrite's InnerImpl to get the value itself.
 
 		targetWindow->draw(innerSprite);
-		//(*iter)->Update(this->CreateGameContext());
 
 		iter++;
 	}
 
-	//targetWindow->draw(spr);
-
 	targetWindow->display();
-
 }

@@ -48,7 +48,6 @@ int main3()
 		delete contents;
 	}
 
-
 	getchar();
 
 	return 0;
