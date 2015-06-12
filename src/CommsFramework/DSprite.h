@@ -8,18 +8,21 @@
 #include "FPosition.h"
 #include "FSize.h"
 
-class DSprite
+#include "BaseSprite.h"
+
+class DSprite : public BaseSprite
 {
 public:
     DSprite();
     ~DSprite();
 
-	std::string* Ident;
+	//std::string* Ident;
 	
 	virtual void Show(bool show);
 
 	virtual DTexture* GetTexture();
-	virtual void SetTexture(DTexture* texture);
+	//virtual void SetTexture(DTexture* texture);
+	virtual void SetTexture(BaseTexture* texture);
 
     virtual float GetX();
 	virtual float GetY();

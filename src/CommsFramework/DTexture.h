@@ -4,9 +4,11 @@
 
 #include "FSize.h"
 
+#include "BaseTexture.h"
+
 #include <string>
 
-class DTexture
+class DTexture : public BaseTexture
 {
 public:
     DTexture();

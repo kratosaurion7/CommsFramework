@@ -6,11 +6,13 @@
 
 #include "FileReader.h"
 
+#include "BaseGraphicEngine.h"
+
 #include <string>
 
 int main()
 {
-	GraphicEngine* eng = new GraphicEngine();
+	BaseGraphicEngine* eng = new GraphicEngine();
 
 	GraphicEngineInitParams* params = new GraphicEngineInitParams();
 	params->EnableVerticalSync = true;
@@ -19,13 +21,16 @@ int main()
 
 	eng->Initialize(params);
 
-	DSprite* spr = new DSprite();
+	BaseSprite* spr = eng->CreateSprite();
+	
 
-	DTexture* txr = new DTexture();
+	BaseTexture* txr = eng->CreateTexture();
 	txr->Load("Assets/Texture.png");
 	spr->SetTexture(txr);
+	spr->Show(true);
 
-	eng->Sprites->Add(spr);
+	eng->AddObject(spr);
+	
 
 	eng->StartLooping();
 

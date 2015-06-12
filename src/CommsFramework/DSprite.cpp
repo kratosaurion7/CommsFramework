@@ -29,10 +29,14 @@ DTexture* DSprite::GetTexture()
 	return spriteTexture;
 }
 
-void DSprite::SetTexture(DTexture * texture)
+// TODO : Need to receive a BaseTexture but it always(?) is going to be a DTexture anyway
+//void DSprite::SetTexture(DTexture * texture)
+void DSprite::SetTexture(BaseTexture * texture)
 {
-	spriteTexture = texture;
-	innerImpl->setTexture((*texture->innerImpl));
+	DTexture* dtxr = dynamic_cast<DTexture*>(texture);
+
+	if (dtxr != NULL)
+		innerImpl->setTexture((*dtxr->innerImpl));
 }
 
 float DSprite::GetX()

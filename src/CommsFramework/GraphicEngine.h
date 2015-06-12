@@ -8,14 +8,21 @@
 
 #include "GraphicEngineInitParams.h"
 
+#include "BaseGraphicEngine.h"
 
-class GraphicEngine
+class GraphicEngine : public BaseGraphicEngine
 {
 public:
 	GraphicEngine();
 	~GraphicEngine();
 
 	void Initialize(GraphicEngineInitParams* params);
+
+	void AddObject(DrawObject* obj);
+	void RemoveObject(DrawObject* obj);
+	DrawObject* GetObject(std::string identifier);
+	BaseSprite* CreateSprite();
+	BaseTexture* CreateTexture();
 
 	void Process();
     void StartLooping();

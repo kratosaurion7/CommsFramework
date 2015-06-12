@@ -25,6 +25,15 @@
     <Filter Include="XML">
       <UniqueIdentifier>{5a7de150-8d61-49ee-a3ac-42d007bd4764}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Graphic\Base Classes">
+      <UniqueIdentifier>{39c9a345-ea9f-4385-8198-85a5744a395d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{89e85133-dbc5-4b58-b9b8-6e89d3bb39d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphic\SFML">
+      <UniqueIdentifier>{caf1c03c-da63-4480-8d0c-58636161e336}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -48,11 +57,14 @@
     <ClCompile Include="FPosition.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DTexture.cpp">
-      <Filter>Graphic</Filter>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Game</Filter>
     </ClCompile>
     <ClCompile Include="DSprite.cpp">
-      <Filter>Graphic</Filter>
+      <Filter>Graphic\SFML</Filter>
+    </ClCompile>
+    <ClCompile Include="DTexture.cpp">
+      <Filter>Graphic\SFML</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -82,17 +94,32 @@
     <ClInclude Include="FPosition.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DTexture.h">
-      <Filter>Graphic</Filter>
-    </ClInclude>
-    <ClInclude Include="DSprite.h">
-      <Filter>Graphic</Filter>
-    </ClInclude>
     <ClInclude Include="PointerList.h">
       <Filter>Collections</Filter>
     </ClInclude>
     <ClInclude Include="BaseList.h">
       <Filter>Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseGraphicEngine.h">
+      <Filter>Graphic\Base Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseSprite.h">
+      <Filter>Graphic\Base Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawObject.h">
+      <Filter>Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseTexture.h">
+      <Filter>Graphic\Base Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="DSprite.h">
+      <Filter>Graphic\SFML</Filter>
+    </ClInclude>
+    <ClInclude Include="DTexture.h">
+      <Filter>Graphic\SFML</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

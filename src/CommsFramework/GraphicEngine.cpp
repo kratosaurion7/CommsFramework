@@ -8,6 +8,7 @@
 #include <SFML\Graphics.hpp>
 
 
+
 GraphicEngine::GraphicEngine()
 {
 	window = NULL;
@@ -26,6 +27,38 @@ void GraphicEngine::Initialize(GraphicEngineInitParams* params)
 	window = new sf::RenderWindow(sf::VideoMode(params->WindowSize->Height, params->WindowSize->Width), params->WindowTitle->c_str());
 
 	window->setVerticalSyncEnabled(params->EnableVerticalSync);
+}
+
+BaseSprite* GraphicEngine::CreateSprite()
+{
+	DSprite* spr = new DSprite();
+	
+	return spr;
+}
+
+BaseTexture * GraphicEngine::CreateTexture()
+{
+	DTexture* tex = new DTexture();
+
+	return tex;
+}
+
+void GraphicEngine::AddObject(DrawObject* obj)
+{
+	DSprite* dspr = dynamic_cast<DSprite*>(obj);
+
+	if(dspr != NULL)
+		Sprites->Add(dspr);
+}
+
+void GraphicEngine::RemoveObject(DrawObject * obj)
+{
+	
+}
+
+DrawObject * GraphicEngine::GetObject(std::string identifier)
+{
+	return NULL;
 }
 
 void GraphicEngine::Process()
