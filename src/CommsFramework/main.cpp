@@ -22,7 +22,6 @@ int main()
 	eng->Initialize(params);
 
 	BaseSprite* spr = eng->CreateSprite();
-	
 
 	BaseTexture* txr = eng->CreateTexture();
 	txr->Load("Assets/Texture.png");

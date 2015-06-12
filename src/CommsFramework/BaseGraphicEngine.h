@@ -14,7 +14,7 @@ public:
 
 	virtual void RemoveObject(DrawObject* obj) = 0;
 
-	virtual DrawObject* GetObject(std::string identifier) = 0;
+	virtual DrawObject* GetObject(std::string* identifier) = 0;
 
 	virtual BaseSprite* CreateSprite() = 0;
 

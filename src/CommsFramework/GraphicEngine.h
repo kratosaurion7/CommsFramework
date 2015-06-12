@@ -20,7 +20,7 @@ public:
 
 	void AddObject(DrawObject* obj);
 	void RemoveObject(DrawObject* obj);
-	DrawObject* GetObject(std::string identifier);
+	DrawObject* GetObject(std::string* identifier);
 	BaseSprite* CreateSprite();
 	BaseTexture* CreateTexture();
 

@@ -26,7 +26,6 @@ public:
 
         for (std::list<T>::iterator it = _container->begin(); it != _container->end(); it++)
         {
-
             if (index == i)
             {
                 return *it;
@@ -38,10 +37,42 @@ public:
         return NULL;
     };
 
+	int BaseList::IndexOf(T item)
+	{
+		int i = 0;
+
+		for (std::list<T>::iterator it = _container->begin(); it != _container->end(); it++)
+		{
+			T current = (*it);
+
+			if (current == item)
+			{
+				return i;
+			}
+
+			i++;
+		}
+
+		return NULL;
+	}
+
     void BaseList::Remove(int index)
     {
         _container->erase(index);
     };
+	
+	void BaseList::RemoveObject(T object)
+	{
+		for (std::list<T>::iterator it = _container->begin(); it != _container->end(); it++)
+		{
+			T current = (*it);
+
+			if (current == object)
+			{
+				_container->erase(it);
+			}
+		}
+	};
 
     int BaseList::Count()
     {
