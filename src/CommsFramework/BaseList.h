@@ -56,7 +56,7 @@ public:
 		return NULL;
 	}
 
-    void BaseList::Remove(int index)
+    void BaseList::RemoveAt(int index)
     {
         _container->erase(index);
     };
