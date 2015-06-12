@@ -78,6 +78,7 @@ void GraphicEngine::ProcessDraw(sf::RenderWindow* targetWindow)
 
 	while (iter != Sprites->GetContainer()->end())
 	{
+		// Problem here is that I must present innerImpl as a public member of DSprite. Not very library agnostic.
 		// TODO : CHECK FOR LEAKS
 		sf::Sprite innerSprite = (*(*iter)->innerImpl); // Dereference the iterator to get the inner object, then need to dereference the DSPrite's InnerImpl to get the value itself.
 
