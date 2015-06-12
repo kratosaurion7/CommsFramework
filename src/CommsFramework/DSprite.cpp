@@ -24,7 +24,7 @@ void DSprite::Show(bool show)
 	isVisible = show;
 }
 
-DTexture * DSprite::GetTexture()
+DTexture* DSprite::GetTexture()
 {
 	return spriteTexture;
 }
@@ -75,7 +75,7 @@ void DSprite::SetY(float value)
 	}
 }
 
-FPosition * DSprite::GetPos()
+FPosition* DSprite::GetPos()
 {
 	return position;
 }
@@ -136,7 +136,7 @@ void DSprite::SetWidth(float width)
 	}
 }
 
-FSize * DSprite::GetSize()
+FSize* DSprite::GetSize()
 {
 	return size;
 }
@@ -155,4 +155,9 @@ void DSprite::SetSize(FSize * value)
 		delete size;
 
 	size = value;
+}
+
+bool DSprite::IsVisible()
+{
+	return isVisible;
 }

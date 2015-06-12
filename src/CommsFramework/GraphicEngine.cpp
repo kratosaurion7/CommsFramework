@@ -78,9 +78,15 @@ void GraphicEngine::ProcessDraw(sf::RenderWindow* targetWindow)
 	while (iter != Sprites->GetContainer()->end())
 	{
 		// TODO : CHECK FOR LEAKS
-		sf::Sprite innerSprite = (*(*iter)->innerImpl); // Dereference the iterator to get the inner object, then need to dereference the DSPrite's InnerImpl to get the value itself.
 
-		targetWindow->draw(innerSprite);
+		DSprite* targetSprite = (*iter);
+
+		if (targetSprite->IsVisible())
+		{
+			sf::Sprite innerSprite = (*targetSprite->innerImpl);
+
+			targetWindow->draw(innerSprite);
+		}
 
 		iter++;
 	}

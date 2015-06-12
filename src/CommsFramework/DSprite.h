@@ -44,9 +44,9 @@ public:
 
 	sf::Sprite* innerImpl;
 
-private:
-    
+	bool IsVisible();
 
+private:
 	DTexture* spriteTexture;
 
 	bool isVisible;
