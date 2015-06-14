@@ -2,6 +2,9 @@
 
 #include "GameObject.h"
 
+#include "FPosition.h"
+#include "FSize.h"
+
 class DrawObject : public GameObject
 {
 public:

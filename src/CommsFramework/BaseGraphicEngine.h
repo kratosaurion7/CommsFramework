@@ -4,6 +4,8 @@
 #include "DrawObject.h"
 #include "BaseTexture.h"
 
+#include "GraphicEngineInitParams.h"
+
 class BaseGraphicEngine
 {
 public:

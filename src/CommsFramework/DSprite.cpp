@@ -6,7 +6,7 @@ DSprite::DSprite()
 {
 	innerImpl = new sf::Sprite();
 	spriteTexture = NULL;
-	isVisible = false;
+	isVisible = true;
 	position = new FPosition();
 	size = new FSize();
 }
@@ -36,7 +36,11 @@ void DSprite::SetTexture(BaseTexture * texture)
 	DTexture* dtxr = dynamic_cast<DTexture*>(texture);
 
 	if (dtxr != NULL)
+	{
 		innerImpl->setTexture((*dtxr->innerImpl));
+		spriteTexture = dtxr;
+	}
+		
 }
 
 float DSprite::GetX()
@@ -90,6 +94,8 @@ void DSprite::SetPos(float x, float y)
 		delete position;
 
 	position = new FPosition(x, y);
+	
+	innerImpl->setPosition(x, y);
 }
 
 void DSprite::SetPos(FPosition * value)
@@ -98,6 +104,8 @@ void DSprite::SetPos(FPosition * value)
 		delete position;
 
 	position = value;
+
+	innerImpl->setPosition(value->X, value->Y);
 }
 
 float DSprite::GetHeight()

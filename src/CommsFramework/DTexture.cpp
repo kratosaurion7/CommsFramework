@@ -4,6 +4,9 @@
 
 #include <SFML\Graphics.hpp>
 
+#include <cstdint>
+
+
 DTexture::DTexture()
 {
     innerImpl = new sf::Texture();
@@ -14,6 +17,16 @@ DTexture::DTexture()
 DTexture::~DTexture()
 {
 	delete innerImpl;
+}
+
+void DTexture::Initalize(int width, int height)
+{
+	FSize* mySize = new FSize();
+
+	mySize->Height = height;
+	mySize->Width = width;
+
+	size = mySize;
 }
 
 void DTexture::Load(std::string path)
@@ -33,4 +46,12 @@ void DTexture::Load(std::string path)
 FSize* DTexture::GetSize()
 {
 	return size;
+}
+
+void DTexture::SetSolidColor(uint32_t pixelColor)
+{
+	sf::Image* image = new sf::Image();
+	image->create(size->Width, size->Height, sf::Color(pixelColor));
+
+	innerImpl->loadFromImage((*image)); // Should declare the image as stack local ?
 }
