@@ -7,7 +7,6 @@
 class BaseGraphicEngine
 {
 public:
-	// TODO : GraphicEngineInitParams is not abstracted away from SFML
 	virtual void Initialize(GraphicEngineInitParams* params) = 0;
 
 	virtual void AddObject(DrawObject* obj) = 0;

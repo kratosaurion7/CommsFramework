@@ -13,26 +13,29 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Collections">
-      <UniqueIdentifier>{fb70d5b6-8628-4802-8bc8-ba0fea540a5c}</UniqueIdentifier>
+    <Filter Include="Framework">
+      <UniqueIdentifier>{7456fd13-2544-4936-88a6-6643c3b2e701}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Graphic">
+    <Filter Include="Framework\Graphic">
       <UniqueIdentifier>{94709dac-c382-4d9a-86ca-a770656399dc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="IO">
-      <UniqueIdentifier>{eac451c5-fc94-422d-bc0a-8f9dbd159a86}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="XML">
-      <UniqueIdentifier>{5a7de150-8d61-49ee-a3ac-42d007bd4764}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Graphic\Base Classes">
+    <Filter Include="Framework\Graphic\Base Classes">
       <UniqueIdentifier>{39c9a345-ea9f-4385-8198-85a5744a395d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game">
+    <Filter Include="Framework\Graphic\SFML">
+      <UniqueIdentifier>{caf1c03c-da63-4480-8d0c-58636161e336}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Game">
       <UniqueIdentifier>{89e85133-dbc5-4b58-b9b8-6e89d3bb39d9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Graphic\SFML">
-      <UniqueIdentifier>{caf1c03c-da63-4480-8d0c-58636161e336}</UniqueIdentifier>
+    <Filter Include="Framework\Collections">
+      <UniqueIdentifier>{fb70d5b6-8628-4802-8bc8-ba0fea540a5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\XML">
+      <UniqueIdentifier>{5a7de150-8d61-49ee-a3ac-42d007bd4764}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\IO">
+      <UniqueIdentifier>{eac451c5-fc94-422d-bc0a-8f9dbd159a86}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -40,31 +43,31 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="XmlReader.cpp">
-      <Filter>XML</Filter>
+      <Filter>Framework\XML</Filter>
     </ClCompile>
     <ClCompile Include="FileReader.cpp">
-      <Filter>IO</Filter>
+      <Filter>Framework\IO</Filter>
     </ClCompile>
     <ClCompile Include="GraphicEngineInitParams.cpp">
-      <Filter>Graphic</Filter>
-    </ClCompile>
-    <ClCompile Include="FSize.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="FPosition.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Framework\Graphic</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
-      <Filter>Game</Filter>
+      <Filter>Framework\Game</Filter>
     </ClCompile>
     <ClCompile Include="DSprite.cpp">
-      <Filter>Graphic\SFML</Filter>
+      <Filter>Framework\Graphic\SFML</Filter>
     </ClCompile>
     <ClCompile Include="DTexture.cpp">
-      <Filter>Graphic\SFML</Filter>
+      <Filter>Framework\Graphic\SFML</Filter>
     </ClCompile>
     <ClCompile Include="GraphicEngine.cpp">
-      <Filter>Graphic\SFML</Filter>
+      <Filter>Framework\Graphic\SFML</Filter>
+    </ClCompile>
+    <ClCompile Include="FSize.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="FPosition.cpp">
+      <Filter>Framework</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -73,53 +76,59 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Macros.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="XmlReader.h">
-      <Filter>XML</Filter>
+      <Filter>Framework\XML</Filter>
     </ClInclude>
     <ClInclude Include="FileReader.h">
-      <Filter>IO</Filter>
+      <Filter>Framework\IO</Filter>
     </ClInclude>
     <ClInclude Include="GraphicEngineInitParams.h">
-      <Filter>Graphic</Filter>
-    </ClInclude>
-    <ClInclude Include="FSize.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FPosition.h">
-      <Filter>Header Files</Filter>
+      <Filter>Framework\Graphic</Filter>
     </ClInclude>
     <ClInclude Include="PointerList.h">
-      <Filter>Collections</Filter>
+      <Filter>Framework\Collections</Filter>
     </ClInclude>
     <ClInclude Include="BaseList.h">
-      <Filter>Collections</Filter>
+      <Filter>Framework\Collections</Filter>
     </ClInclude>
     <ClInclude Include="BaseGraphicEngine.h">
-      <Filter>Graphic\Base Classes</Filter>
+      <Filter>Framework\Graphic\Base Classes</Filter>
     </ClInclude>
     <ClInclude Include="BaseSprite.h">
-      <Filter>Graphic\Base Classes</Filter>
+      <Filter>Framework\Graphic\Base Classes</Filter>
     </ClInclude>
     <ClInclude Include="DrawObject.h">
-      <Filter>Graphic</Filter>
+      <Filter>Framework\Graphic</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h">
-      <Filter>Game</Filter>
+      <Filter>Framework\Game</Filter>
     </ClInclude>
     <ClInclude Include="BaseTexture.h">
-      <Filter>Graphic\Base Classes</Filter>
+      <Filter>Framework\Graphic\Base Classes</Filter>
     </ClInclude>
     <ClInclude Include="DSprite.h">
-      <Filter>Graphic\SFML</Filter>
+      <Filter>Framework\Graphic\SFML</Filter>
     </ClInclude>
     <ClInclude Include="DTexture.h">
-      <Filter>Graphic\SFML</Filter>
+      <Filter>Framework\Graphic\SFML</Filter>
     </ClInclude>
     <ClInclude Include="GraphicEngine.h">
-      <Filter>Graphic\SFML</Filter>
+      <Filter>Framework\Graphic\SFML</Filter>
+    </ClInclude>
+    <ClInclude Include="Macros.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="FSize.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="FPosition.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStartInfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphical.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

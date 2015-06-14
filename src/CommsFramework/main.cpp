@@ -29,7 +29,6 @@ int main()
 	spr->Show(true);
 
 	eng->AddObject(spr);
-	
 
 	eng->StartLooping();
 
