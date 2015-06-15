@@ -69,16 +69,16 @@ int main()
 			engine->Stop();
 		
 		if (engine->Keyboard->IsKeyPressed(D) && paddle1->GetX() < WINDOW_WIDTH - PADDLE_WIDTH)
-			paddleOne->Velocity->X = 5;//paddle1->IncrementX(5);
+			paddleOne->PaddleSprite->IncrementX(5);
 		
 		if (engine->Keyboard->IsKeyPressed(A) && paddle1->GetX() > 0)
-			paddleOne->Velocity->X = -5;//paddle1->IncrementX(-5);
+			paddle1->IncrementX(-5);
 
 		if (engine->Keyboard->IsKeyPressed(Right) && paddle2->GetX() < WINDOW_WIDTH - PADDLE_WIDTH)
-			paddleTwo->Velocity->X = 5;//paddle2->IncrementX(5);
+			paddle2->IncrementX(5);
 
 		if (engine->Keyboard->IsKeyPressed(Left) && paddle2->GetX() > 0)
-			paddleTwo->Velocity->X = -5;//paddle2->IncrementX(-5);
+			paddle2->IncrementX(-5);
 
 		engine->Draw();
 	}
