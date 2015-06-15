@@ -72,6 +72,8 @@ void DSprite::SetX(float value)
 	if (position != NULL)
 	{
 		position->X = value;
+
+		UpdateInnerImpl();
 	}
 }
 
@@ -80,7 +82,23 @@ void DSprite::SetY(float value)
 	if (position != NULL)
 	{
 		position->Y = value;
+
+		UpdateInnerImpl();
 	}
+}
+
+void DSprite::IncrementX(float value)
+{
+	position->X += value;
+
+	UpdateInnerImpl();
+}
+
+void DSprite::IncrementY(float value)
+{
+	position->Y += value;
+
+	UpdateInnerImpl();
 }
 
 FPosition* DSprite::GetPos()
@@ -95,7 +113,7 @@ void DSprite::SetPos(float x, float y)
 
 	position = new FPosition(x, y);
 	
-	innerImpl->setPosition(x, y);
+	UpdateInnerImpl();
 }
 
 void DSprite::SetPos(FPosition * value)
@@ -105,7 +123,7 @@ void DSprite::SetPos(FPosition * value)
 
 	position = value;
 
-	innerImpl->setPosition(value->X, value->Y);
+	UpdateInnerImpl();
 }
 
 float DSprite::GetHeight()
@@ -172,4 +190,9 @@ void DSprite::SetSize(FSize * value)
 bool DSprite::IsVisible()
 {
 	return isVisible;
+}
+
+void DSprite::UpdateInnerImpl()
+{
+	innerImpl->setPosition(position->X, position->Y);
 }

@@ -30,6 +30,9 @@ public:
 	virtual void SetX(float value);
 	virtual void SetY(float value);
 
+	virtual void IncrementX(float value);
+	virtual void IncrementY(float value);
+
 	virtual FPosition* GetPos();
 	virtual void SetPos(float x, float y);
 	virtual void SetPos(FPosition* value);
@@ -56,5 +59,7 @@ private:
 
     FPosition* position;
 	FSize* size;
+
+	void UpdateInnerImpl();
 };
 

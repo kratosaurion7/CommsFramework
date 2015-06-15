@@ -17,6 +17,9 @@ public:
 	virtual void SetX(float value) = 0;
 	virtual void SetY(float value) = 0;
 
+	virtual void IncrementX(float value) = 0;
+	virtual void IncrementY(float value) = 0;
+
 	virtual FPosition* GetPos() = 0;
 	virtual void SetPos(float x, float y) = 0;
 	virtual void SetPos(FPosition* value) = 0;
