@@ -2,6 +2,7 @@
 #include "Graphical.h"
 
 #include "PongBall.h"
+#include "PongPaddle.h"
 
 int main()
 {
@@ -30,6 +31,8 @@ int main()
 	engine->AddObject(paddle1);
 	engine->AddObject(paddle2);
 
+	PongPaddle* paddleOne = new PongPaddle(paddle1);
+
 	BaseSprite* ballSprite = engine->CreateSprite();
 	BaseTexture* ballTexture = engine->CreateTexture();
 	ballTexture->Initalize(25, 25);
@@ -53,11 +56,9 @@ int main()
 		engine->ProcessEvents();
 
 		ball->Update();
-
+		
 		if (engine->Keyboard->IsKeyPressed(Escape))
-		{
 			engine->Stop();
-		}
 		
 		if (engine->Keyboard->IsKeyPressed(D))
 			paddle1->IncrementX(5);
@@ -70,7 +71,6 @@ int main()
 
 		if (engine->Keyboard->IsKeyPressed(Left))
 			paddle2->IncrementX(-5);
-
 
 		engine->Draw();
 	}

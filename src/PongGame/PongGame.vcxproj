@@ -60,7 +60,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ShowProgress>LinkVerbose</ShowProgress>
+      <ShowProgress>NotSet</ShowProgress>
       <AdditionalDependencies>libzmq-v120-mt-4_0_4.lib;sfml-graphics-d.lib;sfml-system-d.lib;sfml-window-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -93,6 +93,7 @@
     <ClCompile Include="..\CommsFramework\SFMLKeyboard.cpp" />
     <ClCompile Include="..\CommsFramework\XmlReader.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PongPaddle.cpp" />
     <ClCompile Include="PongBall.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -115,6 +116,7 @@
     <ClInclude Include="..\CommsFramework\PointerList.h" />
     <ClInclude Include="..\CommsFramework\SFMLKeyboard.h" />
     <ClInclude Include="..\CommsFramework\XmlReader.h" />
+    <ClInclude Include="PongPaddle.h" />
     <ClInclude Include="PongBall.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
