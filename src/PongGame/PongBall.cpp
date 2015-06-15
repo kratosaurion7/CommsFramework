@@ -56,3 +56,8 @@ void PongBall::Update()
 		}
 	}
 }
+
+void PongBall::ResetBallPosition()
+{
+	BallSprite->SetPos(((right / 2) - (BallSprite->GetWidth() / 2)), ((bottom / 2) - (BallSprite->GetHeight() / 2)));
+}

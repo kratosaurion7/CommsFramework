@@ -17,6 +17,8 @@ public:
 
 	void Update();
 
+	void ResetBallPosition();
+
 private:
 	int left;
 	int right;

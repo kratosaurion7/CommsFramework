@@ -36,14 +36,18 @@ int main()
 	ballTexture->SetSolidColor(0x0000FF00);
 
 	PongBall* ball = new PongBall(ballSprite);
-
 	ball->SetupBounds(0, 0, 600, 600);
+	ball->ResetBallPosition();
+
+	engine->AddObject(ball->BallSprite);
 
 	engine->Start();
 
 	while (engine->IsRunning())
 	{
 		engine->ProcessEvents();
+
+		ball->Update();
 
 		if (engine->Keyboard->IsKeyPressed(Escape))
 		{
