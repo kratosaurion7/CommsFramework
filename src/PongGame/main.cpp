@@ -1,8 +1,13 @@
 
 #include "Graphical.h"
 
+#define WINDOW_HEIGHT 600
+#define WINDOW_WIDTH  600
 #include "PongBall.h"
 #include "PongPaddle.h"
+
+#define PADDLE_WIDTH 150
+#define PADDLE_HEIGHT 30
 
 int main()
 {
@@ -10,7 +15,7 @@ int main()
 
 	GraphicEngineInitParams* params = new GraphicEngineInitParams();
 	params->EnableVerticalSync = true;
-	params->WindowSize = new FSize(600, 600);
+	params->WindowSize = new FSize(WINDOW_HEIGHT, WINDOW_WIDTH);
 	params->WindowTitle = new std::string("PONG");
 
 	engine->Initialize(params);
@@ -19,7 +24,7 @@ int main()
 	BaseSprite* paddle2 = engine->CreateSprite();
 
 	BaseTexture* paddleTexture = engine->CreateTexture();
-	paddleTexture->Initalize(150, 30);
+	paddleTexture->Initalize(PADDLE_WIDTH, PADDLE_HEIGHT);
 	paddleTexture->SetSolidColor(0xFFEEDDFF);
 
 	paddle1->SetTexture(paddleTexture);
@@ -63,16 +68,16 @@ int main()
 		if (engine->Keyboard->IsKeyPressed(Escape))
 			engine->Stop();
 		
-		if (engine->Keyboard->IsKeyPressed(D))
+		if (engine->Keyboard->IsKeyPressed(D) && paddle1->GetX() < WINDOW_WIDTH - PADDLE_WIDTH)
 			paddleOne->Velocity->X = 5;//paddle1->IncrementX(5);
 		
-		if (engine->Keyboard->IsKeyPressed(A))
+		if (engine->Keyboard->IsKeyPressed(A) && paddle1->GetX() > 0)
 			paddleOne->Velocity->X = -5;//paddle1->IncrementX(-5);
 
-		if (engine->Keyboard->IsKeyPressed(Right))
+		if (engine->Keyboard->IsKeyPressed(Right) && paddle2->GetX() < WINDOW_WIDTH - PADDLE_WIDTH)
 			paddleTwo->Velocity->X = 5;//paddle2->IncrementX(5);
 
-		if (engine->Keyboard->IsKeyPressed(Left))
+		if (engine->Keyboard->IsKeyPressed(Left) && paddle2->GetX() > 0)
 			paddleTwo->Velocity->X = -5;//paddle2->IncrementX(-5);
 
 		engine->Draw();
