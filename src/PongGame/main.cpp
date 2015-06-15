@@ -33,7 +33,7 @@ int main()
 	BaseSprite* ballSprite = engine->CreateSprite();
 	BaseTexture* ballTexture = engine->CreateTexture();
 	ballTexture->Initalize(25, 25);
-	ballTexture->SetSolidColor(0x0000FF00);
+	ballTexture->SetSolidColor(0xFFFFFFFF);
 
 	ballSprite->SetTexture(ballTexture);
 
