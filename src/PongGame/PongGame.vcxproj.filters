@@ -51,6 +51,9 @@
     <ClCompile Include="..\CommsFramework\SFMLKeyboard.cpp">
       <Filter>ImportedFiles</Filter>
     </ClCompile>
+    <ClCompile Include="PongBall.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\CommsFramework\XmlReader.h">
@@ -109,6 +112,9 @@
     </ClInclude>
     <ClInclude Include="..\CommsFramework\SFMLKeyboard.h">
       <Filter>ImportedFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="PongBall.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

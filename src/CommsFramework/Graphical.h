@@ -13,4 +13,6 @@
 #include "BaseGraphicEngine.h"
 #include "GraphicEngine.h"
 
+#include "Vectors.h"
+
 #include <string>

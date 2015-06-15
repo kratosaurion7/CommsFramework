@@ -93,6 +93,7 @@
     <ClCompile Include="..\CommsFramework\SFMLKeyboard.cpp" />
     <ClCompile Include="..\CommsFramework\XmlReader.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PongBall.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\CommsFramework\BaseGraphicEngine.h" />
@@ -114,6 +115,7 @@
     <ClInclude Include="..\CommsFramework\PointerList.h" />
     <ClInclude Include="..\CommsFramework\SFMLKeyboard.h" />
     <ClInclude Include="..\CommsFramework\XmlReader.h" />
+    <ClInclude Include="PongBall.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

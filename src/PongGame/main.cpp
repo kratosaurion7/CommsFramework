@@ -1,6 +1,8 @@
 
 #include "Graphical.h"
 
+#include "PongBall.h"
+
 int main()
 {
 	BaseGraphicEngine* engine = new GraphicEngine();
@@ -27,6 +29,9 @@ int main()
 	
 	engine->AddObject(paddle1);
 	engine->AddObject(paddle2);
+
+	PongBall* ball = new PongBall();
+
 
 	engine->Start();
 
