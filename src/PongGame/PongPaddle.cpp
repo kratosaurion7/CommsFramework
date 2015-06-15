@@ -5,6 +5,8 @@
 PongPaddle::PongPaddle(BaseSprite* sprite)
 {
 	PaddleSprite = sprite;
+	Velocity = new Vector2<float>();
+	Velocity->Set(0, 0);
 }
 
 PongPaddle::~PongPaddle()

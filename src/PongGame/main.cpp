@@ -32,6 +32,7 @@ int main()
 	engine->AddObject(paddle2);
 
 	PongPaddle* paddleOne = new PongPaddle(paddle1);
+	PongPaddle* paddleTwo= new PongPaddle(paddle2);
 
 	BaseSprite* ballSprite = engine->CreateSprite();
 	BaseTexture* ballTexture = engine->CreateTexture();
@@ -56,21 +57,23 @@ int main()
 		engine->ProcessEvents();
 
 		ball->Update();
+		paddleOne->Update();
+		paddleTwo->Update();
 		
 		if (engine->Keyboard->IsKeyPressed(Escape))
 			engine->Stop();
 		
 		if (engine->Keyboard->IsKeyPressed(D))
-			paddle1->IncrementX(5);
+			paddleOne->Velocity->X = 5;//paddle1->IncrementX(5);
 		
 		if (engine->Keyboard->IsKeyPressed(A))
-			paddle1->IncrementX(-5);
+			paddleOne->Velocity->X = -5;//paddle1->IncrementX(-5);
 
 		if (engine->Keyboard->IsKeyPressed(Right))
-			paddle2->IncrementX(5);
+			paddleTwo->Velocity->X = 5;//paddle2->IncrementX(5);
 
 		if (engine->Keyboard->IsKeyPressed(Left))
-			paddle2->IncrementX(-5);
+			paddleTwo->Velocity->X = -5;//paddle2->IncrementX(-5);
 
 		engine->Draw();
 	}
