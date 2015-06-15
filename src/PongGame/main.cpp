@@ -28,7 +28,32 @@ int main()
 	engine->AddObject(paddle1);
 	engine->AddObject(paddle2);
 
-	engine->StartLooping();
+	engine->Start();
+
+	while (engine->IsRunning())
+	{
+		engine->ProcessEvents();
+
+		if (engine->Keyboard->IsKeyPressed(Escape))
+		{
+			engine->Stop();
+		}
+		
+		if (engine->Keyboard->IsKeyPressed(D))
+			paddle1->IncrementX(5);
+		
+		if (engine->Keyboard->IsKeyPressed(A))
+			paddle1->IncrementX(-5);
+
+		if (engine->Keyboard->IsKeyPressed(Right))
+			paddle2->IncrementX(5);
+
+		if (engine->Keyboard->IsKeyPressed(Left))
+			paddle2->IncrementX(-5);
 
 
+		engine->Draw();
+	}
+
+	return 0;
 }

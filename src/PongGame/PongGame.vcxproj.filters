@@ -13,90 +13,102 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="ImportedFiles">
+      <UniqueIdentifier>{26d4f5e1-a9e4-4e75-b1f2-a9f5be400756}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\CommsFramework\DSprite.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>ImportedFiles</Filter>
     </ClCompile>
     <ClCompile Include="..\CommsFramework\DTexture.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>ImportedFiles</Filter>
     </ClCompile>
     <ClCompile Include="..\CommsFramework\FileReader.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>ImportedFiles</Filter>
     </ClCompile>
     <ClCompile Include="..\CommsFramework\FPosition.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>ImportedFiles</Filter>
     </ClCompile>
     <ClCompile Include="..\CommsFramework\FSize.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>ImportedFiles</Filter>
     </ClCompile>
     <ClCompile Include="..\CommsFramework\GameObject.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>ImportedFiles</Filter>
     </ClCompile>
     <ClCompile Include="..\CommsFramework\GraphicEngine.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>ImportedFiles</Filter>
     </ClCompile>
     <ClCompile Include="..\CommsFramework\GraphicEngineInitParams.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>ImportedFiles</Filter>
     </ClCompile>
     <ClCompile Include="..\CommsFramework\XmlReader.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>ImportedFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CommsFramework\SFMLKeyboard.cpp">
+      <Filter>ImportedFiles</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\CommsFramework\BaseGraphicEngine.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\CommsFramework\BaseList.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\CommsFramework\BaseSprite.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\CommsFramework\BaseTexture.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\CommsFramework\DrawObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\CommsFramework\DSprite.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\CommsFramework\DTexture.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\CommsFramework\FileReader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\CommsFramework\FPosition.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\CommsFramework\FSize.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\CommsFramework\GameObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\CommsFramework\GameStartInfo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\CommsFramework\GraphicEngine.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\CommsFramework\GraphicEngineInitParams.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\CommsFramework\Macros.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\CommsFramework\XmlReader.h">
+      <Filter>ImportedFiles</Filter>
     </ClInclude>
     <ClInclude Include="..\CommsFramework\PointerList.h">
-      <Filter>Header Files</Filter>
+      <Filter>ImportedFiles</Filter>
     </ClInclude>
-    <ClInclude Include="..\CommsFramework\XmlReader.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\CommsFramework\BaseGraphicEngine.h">
+      <Filter>ImportedFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CommsFramework\BaseList.h">
+      <Filter>ImportedFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CommsFramework\BaseSprite.h">
+      <Filter>ImportedFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CommsFramework\BaseTexture.h">
+      <Filter>ImportedFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CommsFramework\DrawObject.h">
+      <Filter>ImportedFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CommsFramework\DSprite.h">
+      <Filter>ImportedFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CommsFramework\DTexture.h">
+      <Filter>ImportedFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CommsFramework\FileReader.h">
+      <Filter>ImportedFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CommsFramework\FPosition.h">
+      <Filter>ImportedFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CommsFramework\FSize.h">
+      <Filter>ImportedFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CommsFramework\GameObject.h">
+      <Filter>ImportedFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CommsFramework\GameStartInfo.h">
+      <Filter>ImportedFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CommsFramework\GraphicEngine.h">
+      <Filter>ImportedFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CommsFramework\GraphicEngineInitParams.h">
+      <Filter>ImportedFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CommsFramework\Macros.h">
+      <Filter>ImportedFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CommsFramework\BaseKeyboard.h">
+      <Filter>ImportedFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CommsFramework\SFMLKeyboard.h">
+      <Filter>ImportedFiles</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
