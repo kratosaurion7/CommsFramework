@@ -16,4 +16,10 @@ public:
 
 	T X;
 	T Y;
+
+	void Set(T x, T y)
+	{
+		X = x;
+		Y = y;
+	}
 };

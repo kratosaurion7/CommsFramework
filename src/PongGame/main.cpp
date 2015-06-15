@@ -35,11 +35,16 @@ int main()
 	ballTexture->Initalize(25, 25);
 	ballTexture->SetSolidColor(0x0000FF00);
 
+	ballSprite->SetTexture(ballTexture);
+
 	PongBall* ball = new PongBall(ballSprite);
 	ball->SetupBounds(0, 0, 600, 600);
 	ball->ResetBallPosition();
 
 	engine->AddObject(ball->BallSprite);
+
+	ball->Direction->Set(1, 0);
+	ball->Velocity->Set(3, 3);
 
 	engine->Start();
 
