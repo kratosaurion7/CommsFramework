@@ -19,7 +19,7 @@ int main()
 
 	BaseTexture* paddleTexture = engine->CreateTexture();
 	paddleTexture->Initalize(150, 30);
-	paddleTexture->SetSolidColor(0xFFEEDDCC);
+	paddleTexture->SetSolidColor(0xFFEEDDFF);
 
 	paddle1->SetTexture(paddleTexture);
 	paddle2->SetTexture(paddleTexture);
@@ -30,8 +30,14 @@ int main()
 	engine->AddObject(paddle1);
 	engine->AddObject(paddle2);
 
-	PongBall* ball = new PongBall();
+	BaseSprite* ballSprite = engine->CreateSprite();
+	BaseTexture* ballTexture = engine->CreateTexture();
+	ballTexture->Initalize(25, 25);
+	ballTexture->SetSolidColor(0x0000FF00);
 
+	PongBall* ball = new PongBall(ballSprite);
+
+	ball->SetupBounds(0, 0, 600, 600);
 
 	engine->Start();
 

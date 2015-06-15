@@ -5,10 +5,10 @@
 class PongBall
 {
 public:
-	PongBall(DSprite* sprite);
+	PongBall(BaseSprite* sprite);
 	~PongBall();
 
-	DSprite* BallSprite;
+	BaseSprite* BallSprite;
 
 	Vector2<float>* Direction;
 	Vector2<float>* Velocity;

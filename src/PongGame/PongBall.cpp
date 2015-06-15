@@ -2,7 +2,7 @@
 
 #include "Macros.h"
 
-PongBall::PongBall(DSprite* sprite)
+PongBall::PongBall(BaseSprite* sprite)
 {
 	BallSprite = sprite;
 	Direction = new Vector2<float>();
