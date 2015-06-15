@@ -3,12 +3,15 @@
 #include "BaseSprite.h"
 #include "DrawObject.h"
 #include "BaseTexture.h"
+#include "BaseKeyboard.h"
 
 #include "GraphicEngineInitParams.h"
 
 class BaseGraphicEngine
 {
 public:
+	BaseKeyboard* Keyboard;
+
 	virtual void Initialize(GraphicEngineInitParams* params) = 0;
 
 	virtual void AddObject(DrawObject* obj) = 0;
@@ -21,11 +24,14 @@ public:
 
 	virtual BaseTexture* CreateTexture() = 0;
 
-	virtual void Process() = 0;
+	virtual void Start() = 0;
 
-	virtual void StartLooping() = 0;
+	virtual void Draw() = 0;
+
+	virtual void ProcessEvents() = 0;
 
 	virtual void Stop() = 0;
 
+	virtual bool IsRunning() = 0;
 };
 

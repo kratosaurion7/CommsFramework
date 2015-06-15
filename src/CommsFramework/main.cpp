@@ -30,7 +30,7 @@ int main()
 
 	eng->AddObject(spr);
 
-	eng->StartLooping();
+	eng->Start();
 
 	return 0;
 }

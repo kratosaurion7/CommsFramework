@@ -24,12 +24,20 @@ public:
 	BaseSprite* CreateSprite();
 	BaseTexture* CreateTexture();
 
-	void Process();
-    void StartLooping();
+	void Start();
+
+	void Draw();
+
+	void ProcessEvents();
 
 	void Stop();
 
 	BaseList<DSprite*>* Sprites;
+
+	bool IsRunning();
+
+	sf::RenderWindow* MainWindow;
+
 private:
 	
 
@@ -39,7 +47,7 @@ private:
 
 	void ProcessDraw(sf::RenderWindow* targetWindow);
 
-	sf::RenderWindow* window;
+	
 
 
 

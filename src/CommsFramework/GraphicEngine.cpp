@@ -7,26 +7,27 @@
 
 #include <SFML\Graphics.hpp>
 
-
+#include "SFMLKeyboard.h"
 
 GraphicEngine::GraphicEngine()
 {
-	window = NULL;
+	MainWindow = NULL;
 	isRunning = false;
 	Sprites = new PointerList<DSprite*>();
+	Keyboard = new SFMLKeyboard();
 }
 
 GraphicEngine::~GraphicEngine()
 {
-	if (window == NULL)
-		delete window;
+	if (MainWindow == NULL)
+		delete MainWindow;
 }
 
 void GraphicEngine::Initialize(GraphicEngineInitParams* params)
 {
-	window = new sf::RenderWindow(sf::VideoMode(params->WindowSize->Height, params->WindowSize->Width), params->WindowTitle->c_str());
+	MainWindow = new sf::RenderWindow(sf::VideoMode(params->WindowSize->Height, params->WindowSize->Width), params->WindowTitle->c_str());
 
-	window->setVerticalSyncEnabled(params->EnableVerticalSync);
+	MainWindow->setVerticalSyncEnabled(params->EnableVerticalSync);
 }
 
 BaseSprite* GraphicEngine::CreateSprite()
@@ -81,35 +82,29 @@ DrawObject * GraphicEngine::GetObject(std::string* identifier)
 	return NULL;
 }
 
-void GraphicEngine::Process()
-{
-	if (window->isOpen())
-	{
-		ProcessWindowsEvents(window); // Need to process the Windows events no matter what.
-
-		if (isRunning)
-		{
-			ProcessDraw(window);
-		}
-	}
-}
-
-void GraphicEngine::StartLooping()
+void GraphicEngine::Start()
 {
 	isRunning = true;
+}
 
-	while (window->isOpen())
-	{
-		if (!isRunning)
-			break;
+void GraphicEngine::Draw()
+{
+	ProcessDraw(MainWindow);
+}
 
-		Process();
-	}
+void GraphicEngine::ProcessEvents()
+{
+	ProcessWindowsEvents(MainWindow);
 }
 
 void GraphicEngine::Stop()
 {
 	isRunning = false;
+}
+
+bool GraphicEngine::IsRunning()
+{
+	return isRunning;
 }
 
 void GraphicEngine::ProcessWindowsEvents(sf::RenderWindow* targetWindow)
