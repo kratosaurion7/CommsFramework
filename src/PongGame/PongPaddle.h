@@ -4,6 +4,11 @@
 
 #include "Macros.h"
 
+enum Directions {
+	PADDLE_DIRECTION_LEFT,
+	PADDLE_DIRECTION_RIGHT
+};
+
 class PongPaddle
 {
 public:
@@ -14,9 +19,9 @@ public:
 
 	Vector2<float>* Velocity;
 
-	void SetBounds(int minWidth, int maxWidth);
+	void Move(Directions direction);
 
-	void Update();
+	void SetBounds(int minWidth, int maxWidth);
 
 private:
 	int left;
