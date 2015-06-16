@@ -55,6 +55,13 @@ void PongBall::Update()
 			BallSprite->IncrementY(Direction->Y * Velocity->Y);
 		}
 	}
+
+	if (BallSprite->GetX() + BallSprite->GetWidth() >= right || BallSprite->GetX() <= 0)
+	{
+		Direction->X *= -1;
+		BallSprite->IncrementX(Direction->X * Velocity->X);
+	}
+
 }
 
 void PongBall::ResetBallPosition()

@@ -39,6 +39,7 @@ void DSprite::SetTexture(BaseTexture * texture)
 	{
 		innerImpl->setTexture((*dtxr->innerImpl));
 		spriteTexture = dtxr;
+		size = texture->GetSize();
 	}
 		
 }
