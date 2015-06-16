@@ -16,7 +16,11 @@ DTexture::DTexture()
 
 DTexture::~DTexture()
 {
-	delete innerImpl;
+	if(innerImpl != NULL)
+		delete innerImpl;
+
+	if(size != NULL)
+		delete size;
 }
 
 void DTexture::Initalize(int width, int height)

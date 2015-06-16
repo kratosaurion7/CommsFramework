@@ -9,4 +9,6 @@ GraphicEngineInitParams::GraphicEngineInitParams()
 
 GraphicEngineInitParams::~GraphicEngineInitParams()
 {
+	delete WindowSize;
+	delete WindowTitle;
 }

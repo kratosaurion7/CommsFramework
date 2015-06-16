@@ -1,10 +1,10 @@
 
 #include "Graphical.h"
+#include "PongBall.h"
+#include "PongPaddle.h"
 
 #define WINDOW_HEIGHT 600
 #define WINDOW_WIDTH  600
-#include "PongBall.h"
-#include "PongPaddle.h"
 
 #define PADDLE_WIDTH 150
 #define PADDLE_HEIGHT 30
@@ -17,7 +17,7 @@ int main()
 	params->EnableVerticalSync = true;
 	params->WindowSize = new FSize(WINDOW_HEIGHT, WINDOW_WIDTH);
 	params->WindowTitle = new std::string("PONG");
-
+	
 	engine->Initialize(params);
 
 	BaseSprite* paddle1 = engine->CreateSprite();

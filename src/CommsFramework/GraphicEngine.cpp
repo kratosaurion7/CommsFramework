@@ -21,6 +21,9 @@ GraphicEngine::~GraphicEngine()
 {
 	if (MainWindow == NULL)
 		delete MainWindow;
+
+	if (Sprites != NULL)
+		Sprites;
 }
 
 void GraphicEngine::Initialize(GraphicEngineInitParams* params)

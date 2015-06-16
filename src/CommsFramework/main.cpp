@@ -10,7 +10,62 @@
 
 #include <string>
 
+#include <memory>
+
+using namespace std;
+
+struct Tard
+{
+	char* arr;
+	int two;
+
+	~Tard()
+	{
+		delete arr;
+	};
+};
+
+struct Qwerty
+{
+	Tard* trd;
+};
+
 int main()
+{
+	std::vector<int> vec;
+
+	vec.push_back(9);
+	vec.push_back(8);
+	vec.push_back(7);
+	vec.push_back(6);
+
+	vec.insert(vec.begin() + 2, 4);
+
+	auto it = vec.begin();
+
+	while (it != vec.end())
+	{
+		printf("%d", *it);
+
+		it++;
+	}
+
+	{
+		Tard* newTard = new Tard();
+		newTard->arr = new char[1024 * 1024 * 8 * 8];
+
+		unique_ptr<Tard> blerb(newTard);
+		//blerb->arr = new char[1024 * 1024 * 8 * 8];
+		blerb->two = 888;
+		
+		auto x = make_unique<Tard*>(new Tard);
+
+	}
+	int i = 0;
+}
+
+
+int main4()
 {
 	BaseGraphicEngine* eng = new GraphicEngine();
 
