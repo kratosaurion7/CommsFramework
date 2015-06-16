@@ -30,8 +30,13 @@ struct Qwerty
 	Tard* trd;
 };
 
+int main4();
+
 int main()
 {
+	int(*testes)();
+	testes = &main4;
+
 	std::vector<int> vec;
 
 	vec.push_back(9);
@@ -40,6 +45,8 @@ int main()
 	vec.push_back(6);
 
 	vec.insert(vec.begin() + 2, 4);
+
+	auto element = std::find_if(vec.begin(), vec.end(), [](const int n) { return n == 8;});
 
 	auto it = vec.begin();
 
