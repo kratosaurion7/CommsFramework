@@ -304,6 +304,7 @@ XCOPY /y "E:\Prog\lib\sfml\SFML-2.3_x64\bin\*.dll" "$(TargetDir)"
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="FRectangle.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GraphicEngineInitParams.cpp" />
     <ClCompile Include="GraphicEngine.cpp" />
@@ -326,6 +327,7 @@ XCOPY /y "E:\Prog\lib\sfml\SFML-2.3_x64\bin\*.dll" "$(TargetDir)"
     <ClInclude Include="BaseSprite.h" />
     <ClInclude Include="BaseTexture.h" />
     <ClInclude Include="DrawObject.h" />
+    <ClInclude Include="FRectangle.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Graphical.h" />
     <ClInclude Include="Keys.h" />
