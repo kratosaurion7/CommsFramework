@@ -25,6 +25,9 @@ int main()
 	params->WindowSize = new FSize(WINDOW_HEIGHT, WINDOW_WIDTH);
 	params->WindowTitle = new std::string("PONG");
 	
+	int PlayerOneScore = 0;
+	int PlayerTwoScore = 0;
+
 	engine->Initialize(params);
 
 	BaseSprite* paddle1 = engine->CreateSprite();
@@ -110,6 +113,22 @@ int main()
 		delete(ballCollisionBox);
 
 		// Check if the ball touches the top or bottom for points
+		if (ball->BallSprite->GetY() <= 0)
+		{
+			// P1 scores !
+			PlayerOneScore++;
+		}
+		else if (ball->BallSprite->GetY() >= 0)
+		{
+			// P2 scores !
+			PlayerTwoScore++;
+		}
+
+		// Unstuck check, if the ball is going in straight +1 or -1 X velocity.
+		if (ball->Direction->X == -1 || ball->Direction->X == 1)
+		{
+			ball->Direction->X = (0.5 * ball->Direction->X);
+		}
 
 		engine->Draw();
 	}
