@@ -34,6 +34,7 @@ public:
 	virtual FPosition* GetPos();
 	virtual void SetPos(float x, float y);
 	virtual void SetPos(FPosition* value);
+	virtual void SetCenterPos(FPosition* value);
     
 	virtual FRectangle* GetRectangle();
 

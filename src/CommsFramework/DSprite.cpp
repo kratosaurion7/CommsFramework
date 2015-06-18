@@ -136,6 +136,11 @@ void DSprite::SetPos(FPosition * value)
 	UpdateInnerImpl();
 }
 
+void DSprite::SetCenterPos(FPosition * value)
+{
+	SetPos(value->X - (GetWidth() / 2), value->Y - (GetHeight() / 2));
+}
+
 FRectangle* DSprite::GetRectangle()
 {
 	//FRectangle* rec = new FRectangle(GetX(), GetY(), GetHeight(), GetWidth());
