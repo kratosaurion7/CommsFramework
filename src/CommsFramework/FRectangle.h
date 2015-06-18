@@ -12,6 +12,7 @@ enum DistanceFromType {
 class FRectangle
 {
 public:
+	FRectangle();
 	FRectangle(float x, float y, float h, float w);
 	~FRectangle();
 
@@ -34,6 +35,5 @@ public:
 	bool IsPointInside(float x, float y);
 	bool Intersect(FRectangle* rec);
 
-	Vector2<float>* DistanceFrom(FRectangle* rec, DistanceFromType comparaisonType = OriginToOrigin);
+	Vector2<float>* DistanceFrom(FRectangle* rec, DistanceFromType comparaisonType);
 };
-

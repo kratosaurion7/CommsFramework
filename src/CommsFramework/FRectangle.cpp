@@ -1,5 +1,13 @@
 #include "FRectangle.h"
 
+#include "FPosition.h"
+#include "FSize.h"
+#include "Vectors.h"
+
+FRectangle::FRectangle()
+{
+}
+
 FRectangle::FRectangle(float x, float y, float h, float w)
 {
 	Left = x;
@@ -68,7 +76,8 @@ bool FRectangle::Intersect(FRectangle * rec)
 	{
 		return true;
 	}
-		
+
+	return false;
 }
 
 Vector2<float>* FRectangle::DistanceFrom(FRectangle * rec, DistanceFromType comparaisonType)

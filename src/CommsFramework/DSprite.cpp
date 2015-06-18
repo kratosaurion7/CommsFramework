@@ -2,6 +2,15 @@
 
 #include <SFML\Graphics.hpp>
 
+#include "BaseSprite.h"
+
+#include "BaseTexture.h"
+#include "DTexture.h"
+
+#include "FPosition.h"
+#include "FSize.h"
+#include "FRectangle.h"
+
 DSprite::DSprite()
 {
 	innerImpl = new sf::Sprite();
@@ -125,6 +134,16 @@ void DSprite::SetPos(FPosition * value)
 	position = value;
 
 	UpdateInnerImpl();
+}
+
+FRectangle* DSprite::GetRectangle()
+{
+	//FRectangle* rec = new FRectangle(GetX(), GetY(), GetHeight(), GetWidth());
+	FRectangle* rec = new FRectangle(0, 0, 0, 0);
+
+	return rec;
+
+	return NULL;
 }
 
 float DSprite::GetHeight()

@@ -3,6 +3,7 @@
 #include "GameObject.h"
 
 #include "FPosition.h"
+#include "FRectangle.h"
 #include "FSize.h"
 
 class DrawObject : public GameObject
@@ -24,6 +25,7 @@ public:
 	virtual void SetPos(float x, float y) = 0;
 	virtual void SetPos(FPosition* value) = 0;
 
+	virtual FRectangle* GetRectangle() = 0;
 
 	virtual float GetHeight() = 0;
 	virtual float GetWidth() = 0;

@@ -57,6 +57,12 @@
     <ClCompile Include="PongPaddle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\CommsFramework\FRectangle.cpp">
+      <Filter>ImportedFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CommsFramework\main.cpp">
+      <Filter>ImportedFiles</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\CommsFramework\XmlReader.h">
@@ -121,6 +127,18 @@
     </ClInclude>
     <ClInclude Include="PongPaddle.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CommsFramework\FRectangle.h">
+      <Filter>ImportedFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CommsFramework\Graphical.h">
+      <Filter>ImportedFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CommsFramework\Keys.h">
+      <Filter>ImportedFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CommsFramework\Vectors.h">
+      <Filter>ImportedFiles</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

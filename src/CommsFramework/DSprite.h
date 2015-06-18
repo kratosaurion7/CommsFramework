@@ -1,27 +1,25 @@
 #pragma once
 
-#include <string.h>
-
 #include <SFML\Graphics.hpp>
 
-#include "DTexture.h"
-#include "FPosition.h"
-#include "FSize.h"
-
 #include "BaseSprite.h"
+
+#include "BaseTexture.h"
+#include "DTexture.h"
+
+#include "FPosition.h"
+#include "FRectangle.h"
+#include "FSize.h"
 
 class DSprite : public BaseSprite
 {
 public:
     DSprite();
     ~DSprite();
-
-	//std::string* Ident;
 	
 	virtual void Show(bool show);
 
 	virtual DTexture* GetTexture();
-	//virtual void SetTexture(DTexture* texture);
 	virtual void SetTexture(BaseTexture* texture);
 
     virtual float GetX();
@@ -37,6 +35,7 @@ public:
 	virtual void SetPos(float x, float y);
 	virtual void SetPos(FPosition* value);
     
+	virtual FRectangle* GetRectangle();
 
 	virtual float GetHeight();
 	virtual float GetWidth();

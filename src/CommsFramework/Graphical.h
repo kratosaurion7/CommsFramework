@@ -13,9 +13,9 @@
 #include "BaseGraphicEngine.h"
 #include "GraphicEngine.h"
 
-#include "Vectors.h"
 #include "FSize.h"
 #include "FPosition.h"
+#include "Vectors.h"
 #include "FRectangle.h"
 
 #include <string>

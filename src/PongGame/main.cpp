@@ -1,5 +1,12 @@
 
 #include "Graphical.h"
+
+#include "BaseSprite.h"
+#include "DTexture.h"
+
+#include "FPosition.h"
+#include "FRectangle.h"
+
 #include "PongBall.h"
 #include "PongPaddle.h"
 
@@ -66,9 +73,11 @@ int main()
 
 		ball->Update();
 		
+		// Check for game exit
 		if (engine->Keyboard->IsKeyPressed(Escape))
 			engine->Stop();
 		
+		// Check for player paddles movements
 		if (engine->Keyboard->IsKeyPressed(D) && paddle1->GetX() < WINDOW_WIDTH - PADDLE_WIDTH)
 			paddleOne->Move(PADDLE_DIRECTION_RIGHT);
 		
@@ -80,6 +89,27 @@ int main()
 
 		if (engine->Keyboard->IsKeyPressed(Left) && paddle2->GetX() > 0)
 			paddleTwo->Move(PADDLE_DIRECTION_LEFT);
+
+		// Check for ball collision with the paddles.
+		FRectangle* p1CollisionBox = paddleOne->PaddleSprite->GetRectangle();
+		FRectangle* p2CollisionBox = paddleTwo->PaddleSprite->GetRectangle();
+		FRectangle* ballCollisionBox = ball->BallSprite->GetRectangle();
+
+		if (p1CollisionBox->Intersect(ballCollisionBox))
+		{
+			// Simple collision for now
+			ball->Direction->Y *= -1;
+		}
+		else if (p2CollisionBox->Intersect(ballCollisionBox))
+		{
+			ball->Direction->Y *= -1;
+		}
+
+		delete(p1CollisionBox);
+		delete(p2CollisionBox);
+		delete(ballCollisionBox);
+
+		// Check if the ball touches the top or bottom for points
 
 		engine->Draw();
 	}
