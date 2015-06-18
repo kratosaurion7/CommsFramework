@@ -1,11 +1,4 @@
-
 #include "Graphical.h"
-
-#include "BaseSprite.h"
-#include "DTexture.h"
-
-#include "FPosition.h"
-#include "FRectangle.h"
 
 #include "PongBall.h"
 #include "PongPaddle.h"

@@ -1,7 +1,6 @@
 #pragma once
 
 #include "FSize.h"
-
 #include <string>
 
 class GraphicEngineInitParams

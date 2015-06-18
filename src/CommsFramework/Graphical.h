@@ -2,6 +2,13 @@
 
 #include <SFML/Graphics.hpp>
 
+#include <string>
+
+#include "FSize.h"
+#include "FPosition.h"
+#include "Vectors.h"
+#include "FRectangle.h"
+
 #include "BaseSprite.h"
 #include "DSprite.h"
 
@@ -13,9 +20,4 @@
 #include "BaseGraphicEngine.h"
 #include "GraphicEngine.h"
 
-#include "FSize.h"
-#include "FPosition.h"
-#include "Vectors.h"
-#include "FRectangle.h"
 
-#include <string>

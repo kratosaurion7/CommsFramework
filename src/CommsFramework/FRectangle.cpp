@@ -4,38 +4,34 @@
 #include "FSize.h"
 #include "Vectors.h"
 
-FRectangle::FRectangle()
-{
-}
-
 FRectangle::FRectangle(float x, float y, float h, float w)
 {
 	Left = x;
 	Top = h;
 	Right = x + w;
 	Bottom = y + h;
-}
+};
 
 FRectangle::~FRectangle()
 {
-}
+};
 
 float FRectangle::Width()
 {
 	return Right - Left;
-}
+};
 
 float FRectangle::Height()
 {
 	return Bottom - Top;
-}
+};
 
 FPosition* FRectangle::Origin()
 {
 	FPosition* pos = new FPosition(Left, Top);
 
 	return pos;
-}
+};
 
 FPosition* FRectangle::Center()
 {
@@ -45,18 +41,19 @@ FPosition* FRectangle::Center()
 	pos->Y = (Bottom - Top) / 2;
 
 	return pos;
-}
+};
 
 FSize * FRectangle::Size()
 {
 	FSize* siz = new FSize(Height(), Width());
 
 	return siz;
-}
+};
+
 bool FRectangle::IsPointInside(FPosition * pos)
 {
 	return IsPointInside(pos->X, pos->Y);
-}
+};
 
 bool FRectangle::IsPointInside(float x, float y)
 {
@@ -66,7 +63,7 @@ bool FRectangle::IsPointInside(float x, float y)
 	}
 
 	return false;
-}
+};
 
 bool FRectangle::Intersect(FRectangle * rec)
 {
@@ -78,7 +75,7 @@ bool FRectangle::Intersect(FRectangle * rec)
 	}
 
 	return false;
-}
+};
 
 Vector2<float>* FRectangle::DistanceFrom(FRectangle * rec, DistanceFromType comparaisonType)
 {
@@ -110,4 +107,4 @@ Vector2<float>* FRectangle::DistanceFrom(FRectangle * rec, DistanceFromType comp
 	delete(otherTargetPosition);
 
 	return distance;
-}
+};

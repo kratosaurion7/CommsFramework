@@ -1,7 +1,5 @@
 #include "GraphicEngineInitParams.h"
 
-
-
 GraphicEngineInitParams::GraphicEngineInitParams()
 {
 }

@@ -12,7 +12,7 @@ public:
 	~Vector2()
 	{
 
-	}
+	};
 
 	T X;
 	T Y;
@@ -21,5 +21,5 @@ public:
 	{
 		X = x;
 		Y = y;
-	}
+	};
 };
