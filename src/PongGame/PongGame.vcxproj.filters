@@ -63,6 +63,12 @@
     <ClCompile Include="..\CommsFramework\main.cpp">
       <Filter>ImportedFiles</Filter>
     </ClCompile>
+    <ClCompile Include="..\CommsFramework\SFMLFont.cpp">
+      <Filter>ImportedFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CommsFramework\SFMLText.cpp">
+      <Filter>ImportedFiles</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\CommsFramework\XmlReader.h">
@@ -138,6 +144,18 @@
       <Filter>ImportedFiles</Filter>
     </ClInclude>
     <ClInclude Include="..\CommsFramework\Vectors.h">
+      <Filter>ImportedFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CommsFramework\BaseFont.h">
+      <Filter>ImportedFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CommsFramework\BaseText.h">
+      <Filter>ImportedFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CommsFramework\SFMLFont.h">
+      <Filter>ImportedFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CommsFramework\SFMLText.h">
       <Filter>ImportedFiles</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,6 +1,10 @@
 #include <SFML/Graphics.hpp>
 
 #include "DSprite.h"
+#include "DTexture.h"
+#include "SFMLFont.h"
+#include "SFMLKeyboard.h"
+#include "SFMLText.h"
 
 #include "GraphicEngine.h"
 

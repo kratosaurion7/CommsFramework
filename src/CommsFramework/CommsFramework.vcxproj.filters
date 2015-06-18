@@ -84,6 +84,12 @@
     <ClCompile Include="FRectangle.cpp">
       <Filter>Framework\Geometry</Filter>
     </ClCompile>
+    <ClCompile Include="SFMLFont.cpp">
+      <Filter>Framework\Graphic\SFML</Filter>
+    </ClCompile>
+    <ClCompile Include="SFMLText.cpp">
+      <Filter>Framework\Graphic\SFML</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\texture.png">
@@ -156,6 +162,18 @@
     </ClInclude>
     <ClInclude Include="Vectors.h">
       <Filter>Framework\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseFont.h">
+      <Filter>Framework\Graphic\Base Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="SFMLFont.h">
+      <Filter>Framework\Graphic\SFML</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseText.h">
+      <Filter>Framework\Graphic\Base Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="SFMLText.h">
+      <Filter>Framework\Graphic\SFML</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

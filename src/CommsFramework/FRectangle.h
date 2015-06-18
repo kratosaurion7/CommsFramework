@@ -5,8 +5,8 @@
 #include "Vectors.h"
 
 enum DistanceFromType {
-	CenterToCenter,
-	OriginToOrigin
+	OriginToOrigin,
+	CenterToCenter
 };
 
 class FRectangle
@@ -34,5 +34,5 @@ public:
 	bool IsPointInside(float x, float y);
 	bool Intersect(FRectangle* rec);
 
-	Vector2<float>* DistanceFrom(FRectangle* rec, DistanceFromType comparaisonType);
+	Vector2<float>* DistanceFrom(FRectangle* rec, DistanceFromType comparaisonType = OriginToOrigin);
 };

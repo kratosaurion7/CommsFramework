@@ -92,17 +92,21 @@
     <ClCompile Include="..\CommsFramework\GraphicEngine.cpp" />
     <ClCompile Include="..\CommsFramework\GraphicEngineInitParams.cpp" />
     <ClCompile Include="..\CommsFramework\main.cpp" />
+    <ClCompile Include="..\CommsFramework\SFMLFont.cpp" />
     <ClCompile Include="..\CommsFramework\SFMLKeyboard.cpp" />
+    <ClCompile Include="..\CommsFramework\SFMLText.cpp" />
     <ClCompile Include="..\CommsFramework\XmlReader.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PongPaddle.cpp" />
     <ClCompile Include="PongBall.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\CommsFramework\BaseFont.h" />
     <ClInclude Include="..\CommsFramework\BaseGraphicEngine.h" />
     <ClInclude Include="..\CommsFramework\BaseKeyboard.h" />
     <ClInclude Include="..\CommsFramework\BaseList.h" />
     <ClInclude Include="..\CommsFramework\BaseSprite.h" />
+    <ClInclude Include="..\CommsFramework\BaseText.h" />
     <ClInclude Include="..\CommsFramework\BaseTexture.h" />
     <ClInclude Include="..\CommsFramework\DrawObject.h" />
     <ClInclude Include="..\CommsFramework\DSprite.h" />
@@ -119,7 +123,9 @@
     <ClInclude Include="..\CommsFramework\Keys.h" />
     <ClInclude Include="..\CommsFramework\Macros.h" />
     <ClInclude Include="..\CommsFramework\PointerList.h" />
+    <ClInclude Include="..\CommsFramework\SFMLFont.h" />
     <ClInclude Include="..\CommsFramework\SFMLKeyboard.h" />
+    <ClInclude Include="..\CommsFramework\SFMLText.h" />
     <ClInclude Include="..\CommsFramework\Vectors.h" />
     <ClInclude Include="..\CommsFramework\XmlReader.h" />
     <ClInclude Include="PongPaddle.h" />

@@ -24,6 +24,7 @@ public:
 	virtual FPosition* GetPos() = 0;
 	virtual void SetPos(float x, float y) = 0;
 	virtual void SetPos(FPosition* value) = 0;
+	virtual void SetCenterPos(FPosition* value) = 0;
 
 	virtual FRectangle* GetRectangle() = 0;
 

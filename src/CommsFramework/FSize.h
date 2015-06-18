@@ -10,5 +10,7 @@ public:
     float Height;
 
     float Width;
+
+	void Set(float h, float w);
 };
 

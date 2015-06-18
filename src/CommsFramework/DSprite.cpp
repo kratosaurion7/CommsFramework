@@ -99,16 +99,22 @@ void DSprite::SetY(float value)
 
 void DSprite::IncrementX(float value)
 {
-	position->X += value;
+	if (position != NULL)
+	{
+		position->X += value;
 
-	UpdateInnerImpl();
+		UpdateInnerImpl();
+	}
 }
 
 void DSprite::IncrementY(float value)
 {
-	position->Y += value;
+	if (position != NULL)
+	{
+		position->Y += value;
 
-	UpdateInnerImpl();
+		UpdateInnerImpl();
+	}
 }
 
 FPosition* DSprite::GetPos()
@@ -119,11 +125,12 @@ FPosition* DSprite::GetPos()
 void DSprite::SetPos(float x, float y)
 {
 	if (position != NULL)
-		delete position;
+	{
+		position->Set(x, y);
 
-	position = new FPosition(x, y);
-	
-	UpdateInnerImpl();
+		UpdateInnerImpl();
+	}
+
 }
 
 void DSprite::SetPos(FPosition * value)

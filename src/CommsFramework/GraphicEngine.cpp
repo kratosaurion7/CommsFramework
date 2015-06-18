@@ -1,6 +1,9 @@
 #include "GraphicEngine.h"
 
 #include "DSprite.h"
+#include "DTexture.h"
+#include "SFMLFont.h"
+#include "SFMLText.h"
 
 #include <list>
 #include <iterator>
@@ -47,6 +50,20 @@ BaseTexture * GraphicEngine::CreateTexture()
 	return tex;
 }
 
+BaseFont * GraphicEngine::CreateFont()
+{
+	SFMLFont* font = new SFMLFont();
+
+	return font;
+}
+
+BaseText * GraphicEngine::CreateText()
+{
+	SFMLText* text = new SFMLText();
+
+	return text;
+}
+
 void GraphicEngine::AddObject(DrawObject* obj)
 {
 	DSprite* dspr = dynamic_cast<DSprite*>(obj);
@@ -55,7 +72,7 @@ void GraphicEngine::AddObject(DrawObject* obj)
 		Sprites->Add(dspr);
 }
 
-void GraphicEngine::RemoveObject(DrawObject * obj)
+void GraphicEngine::RemoveObject(DrawObject* obj)
 {
 	DSprite* dspr = dynamic_cast<DSprite*>(obj);
 
@@ -63,7 +80,7 @@ void GraphicEngine::RemoveObject(DrawObject * obj)
 		Sprites->RemoveObject(dspr);
 }
 
-DrawObject * GraphicEngine::GetObject(std::string* identifier)
+DrawObject * GraphicEngine::GetObject(std::string identifier)
 {
 	std::list<DSprite*>::iterator iter = Sprites->GetContainer()->begin();
 
@@ -74,7 +91,7 @@ DrawObject * GraphicEngine::GetObject(std::string* identifier)
 
 		DSprite* targetSprite = (*iter);
 
-		if (targetSprite->Ident == identifier)
+		if (targetSprite->Ident == &identifier)
 		{
 			return targetSprite;
 		}

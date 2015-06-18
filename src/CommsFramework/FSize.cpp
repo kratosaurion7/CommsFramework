@@ -17,3 +17,9 @@ FSize::FSize(float height, float width)
 FSize::~FSize()
 {
 }
+
+void FSize::Set(float h, float w)
+{
+	Height = h;
+	Width = w;
+}

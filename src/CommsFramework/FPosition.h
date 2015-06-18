@@ -10,5 +10,7 @@ public:
     float X;
 
     float Y;
+
+	void Set(float x, float y);
 };
 

@@ -314,17 +314,21 @@ XCOPY /y "E:\Prog\lib\sfml\SFML-2.3_x64\bin\*.dll" "$(TargetDir)"
     <ClCompile Include="DSprite.cpp" />
     <ClCompile Include="FileReader.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="SFMLFont.cpp" />
     <ClCompile Include="SFMLKeyboard.cpp" />
+    <ClCompile Include="SFMLText.cpp" />
     <ClCompile Include="XmlReader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\texture.png" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BaseFont.h" />
     <ClInclude Include="BaseGraphicEngine.h" />
     <ClInclude Include="BaseKeyboard.h" />
     <ClInclude Include="BaseList.h" />
     <ClInclude Include="BaseSprite.h" />
+    <ClInclude Include="BaseText.h" />
     <ClInclude Include="BaseTexture.h" />
     <ClInclude Include="DrawObject.h" />
     <ClInclude Include="FRectangle.h" />
@@ -340,7 +344,9 @@ XCOPY /y "E:\Prog\lib\sfml\SFML-2.3_x64\bin\*.dll" "$(TargetDir)"
     <ClInclude Include="DSprite.h" />
     <ClInclude Include="FileReader.h" />
     <ClInclude Include="Macros.h" />
+    <ClInclude Include="SFMLFont.h" />
     <ClInclude Include="SFMLKeyboard.h" />
+    <ClInclude Include="SFMLText.h" />
     <ClInclude Include="Vectors.h" />
     <ClInclude Include="XmlReader.h" />
   </ItemGroup>
