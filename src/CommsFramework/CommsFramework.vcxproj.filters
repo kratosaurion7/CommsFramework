@@ -145,9 +145,6 @@
     <ClInclude Include="SFMLKeyboard.h">
       <Filter>Framework\Graphic\SFML</Filter>
     </ClInclude>
-    <ClInclude Include="Vectors.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="FPosition.h">
       <Filter>Framework\Geometry</Filter>
     </ClInclude>
@@ -155,6 +152,9 @@
       <Filter>Framework\Geometry</Filter>
     </ClInclude>
     <ClInclude Include="FRectangle.h">
+      <Filter>Framework\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Vectors.h">
       <Filter>Framework\Geometry</Filter>
     </ClInclude>
   </ItemGroup>
