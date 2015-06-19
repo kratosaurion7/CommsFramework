@@ -24,6 +24,8 @@ public:
 
     void OpenFile(char* fileName, FileAccessFlags access);
 
+	void OpenFile(const char* fileName, FileAccessFlags access);
+
     FileContents* GetFileContents();
     
 

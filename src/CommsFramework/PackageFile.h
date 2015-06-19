@@ -4,6 +4,8 @@
 
 #include <string>
 
+#include "FileReader.h"
+
 enum SortingMethods {
 
 };
@@ -37,17 +39,17 @@ public:
 
 	void SortPackage(SortingMethods sortingMethod);
 
-
 	void Save(std::string path);
 private:
 
 	std::string fileName;
 
 	Header* header;
-	DirectoryEntry* entries;
+	DirectoryEntry** entries;
 	int filesCount;
 	char* data;
 	
-
+	// File stuff
+	FileReader* reader;
 };
 

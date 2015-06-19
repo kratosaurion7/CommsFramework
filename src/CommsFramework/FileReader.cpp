@@ -26,13 +26,17 @@ FileReader::~FileReader()
 
 void FileReader::OpenFile(char* fileName, FileAccessFlags access)
 {
-    char* mode = TranslateAccessFlag(access);
-    file = fopen(fileName, mode);
-    
-    if (file == NULL)
-        return; // TODO : Return an error enum value ?
+	OpenFile(fileName, access);
 };
 
+void FileReader::OpenFile(const char* fileName, FileAccessFlags access)
+{
+	char* mode = TranslateAccessFlag(access);
+	file = fopen(fileName, mode);
+
+	if (file == NULL)
+		return; // TODO : Return an error enum value ?
+};
 
 FileContents* FileReader::GetFileContents()
 {
