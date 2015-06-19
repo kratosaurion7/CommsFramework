@@ -93,6 +93,9 @@
     <ClCompile Include="DrawObject.cpp">
       <Filter>Framework\Graphic</Filter>
     </ClCompile>
+    <ClCompile Include="PackageFile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\texture.png">
@@ -180,6 +183,9 @@
     </ClInclude>
     <ClInclude Include="SFMLDrawable.h">
       <Filter>Framework\Graphic\SFML</Filter>
+    </ClInclude>
+    <ClInclude Include="PackageFile.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

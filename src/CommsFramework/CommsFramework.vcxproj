@@ -315,6 +315,7 @@ XCOPY /y "E:\Prog\lib\sfml\SFML-2.3_x64\bin\*.dll" "$(TargetDir)"
     <ClCompile Include="DSprite.cpp" />
     <ClCompile Include="FileReader.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PackageFile.cpp" />
     <ClCompile Include="SFMLFont.cpp" />
     <ClCompile Include="SFMLKeyboard.cpp" />
     <ClCompile Include="SFMLText.cpp" />
@@ -336,6 +337,7 @@ XCOPY /y "E:\Prog\lib\sfml\SFML-2.3_x64\bin\*.dll" "$(TargetDir)"
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Graphical.h" />
     <ClInclude Include="Keys.h" />
+    <ClInclude Include="PackageFile.h" />
     <ClInclude Include="PointerList.h" />
     <ClInclude Include="GraphicEngineInitParams.h" />
     <ClInclude Include="GraphicEngine.h" />

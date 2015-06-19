@@ -78,7 +78,6 @@ void GraphicEngine::AddObject(BaseText* obj)
 
 	if (txt != NULL)
 		Sprites->Add(txt);
-
 }
 
 void GraphicEngine::RemoveObject(DrawObject* obj)
