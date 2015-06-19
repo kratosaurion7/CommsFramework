@@ -4,7 +4,11 @@
 
 #include "PointerList.h"
 
+#include "SFMLDrawable.h"
+
+#include "DrawObject.h"
 #include "DSprite.h"
+#include "SFMLText.h"
 
 #include "GraphicEngineInitParams.h"
 
@@ -18,7 +22,10 @@ public:
 
 	void Initialize(GraphicEngineInitParams* params);
 
-	void AddObject(DrawObject* obj);
+	void AddObject(BaseSprite* obj);
+
+	void AddObject(BaseText* obj);
+
 	void RemoveObject(DrawObject* obj);
 
 	DrawObject* GetObject(std::string identifier);
@@ -36,7 +43,7 @@ public:
 
 	void Stop();
 
-	BaseList<DSprite*>* Sprites;
+	BaseList<DrawObject*>* Sprites;
 
 	bool IsRunning();
 

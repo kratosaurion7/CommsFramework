@@ -16,7 +16,9 @@ public:
 
 	virtual void Initialize(GraphicEngineInitParams* params) = 0;
 
-	virtual void AddObject(DrawObject* obj) = 0;
+	virtual void AddObject(BaseSprite* obj) = 0;
+
+	virtual void AddObject(BaseText* obj) = 0;
 
 	virtual void RemoveObject(DrawObject* obj) = 0;
 

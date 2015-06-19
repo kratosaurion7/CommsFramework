@@ -90,6 +90,9 @@
     <ClCompile Include="SFMLText.cpp">
       <Filter>Framework\Graphic\SFML</Filter>
     </ClCompile>
+    <ClCompile Include="DrawObject.cpp">
+      <Filter>Framework\Graphic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\texture.png">
@@ -173,6 +176,9 @@
       <Filter>Framework\Graphic\Base Classes</Filter>
     </ClInclude>
     <ClInclude Include="SFMLText.h">
+      <Filter>Framework\Graphic\SFML</Filter>
+    </ClInclude>
+    <ClInclude Include="SFMLDrawable.h">
       <Filter>Framework\Graphic\SFML</Filter>
     </ClInclude>
   </ItemGroup>

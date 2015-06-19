@@ -14,6 +14,7 @@ SFMLText::SFMLText()
 	isVisible = true;
 	position = new FPosition();
 	size = new FSize();
+	currentStyle = TEXT_STYLE_REGULAR;
 }
 
 
@@ -24,174 +25,9 @@ SFMLText::~SFMLText()
 	delete size;
 }
 
-void SFMLText::Show(bool show)
+sf::Drawable * SFMLText::GetDrawableImplementation()
 {
-	isVisible = show;
-}
-
-bool SFMLText::IsVisible()
-{
-	return isVisible;
-}
-
-float SFMLText::GetX()
-{
-	if (position != NULL)
-	{
-		return position->X;
-	}
-	else
-	{
-		return 0;
-	}
-}
-
-float SFMLText::GetY()
-{
-	if (position != NULL)
-	{
-		return position->Y;
-	}
-	else
-	{
-		return 0;
-	}
-}
-
-void SFMLText::SetX(float value)
-{
-	if (position != NULL)
-	{
-		position->X = value;
-
-		UpdateInnerImpl();
-	}
-}
-
-void SFMLText::SetY(float value)
-{
-	if (position != NULL)
-	{
-		position->Y = value;
-
-		UpdateInnerImpl();
-	}
-}
-
-void SFMLText::IncrementX(float value)
-{
-	if (position != NULL)
-	{
-		position->X += value;
-
-		UpdateInnerImpl();
-	}
-}
-
-void SFMLText::IncrementY(float value)
-{
-	if (position != NULL)
-	{
-		position->Y += value;
-
-		UpdateInnerImpl();
-	}
-}
-
-FPosition * SFMLText::GetPos()
-{
-	return position;
-}
-
-void SFMLText::SetPos(float x, float y)
-{
-	if (position != NULL)
-	{
-		position->Set(x, y);
-
-		UpdateInnerImpl();
-	}
-}
-
-void SFMLText::SetPos(FPosition* value)
-{
-	if (position != NULL)
-		delete position;
-
-	position = value;
-}
-
-void SFMLText::SetCenterPos(FPosition * value)
-{
-	SetPos(value->X - (GetWidth() / 2), value->Y - (GetHeight() / 2));
-}
-
-FRectangle * SFMLText::GetRectangle()
-{
-	FRectangle* rec = new FRectangle(GetX(), GetY(), GetHeight(), GetWidth());
-
-	return rec;
-}
-
-float SFMLText::GetHeight()
-{
-	if (size != NULL)
-	{
-		return size->Height;
-	}
-	else
-	{
-		return 0;
-	}
-}
-
-float SFMLText::GetWidth()
-{
-	if (size != NULL)
-	{
-		return size->Width;
-	}
-	else
-	{
-		return 0;
-	}
-}
-
-void SFMLText::SetHeight(float height)
-{
-	if (size != NULL)
-	{
-		size->Height = height;
-	}
-}
-
-void SFMLText::SetWidth(float width)
-{
-	if (size != NULL)
-	{
-		size->Width = width;
-	}
-}
-
-FSize * SFMLText::GetSize()
-{
-	return size;
-}
-
-void SFMLText::SetSize(float height, float width)
-{
-	if (size != NULL)
-	{
-		size->Set(height, width);
-	}
-}
-
-void SFMLText::SetSize(FSize * value)
-{
-	if (size != NULL)
-		delete size;
-
-	size = value;
+	return innerImpl;
 }
 
 std::string SFMLText::GetText()
@@ -213,9 +49,13 @@ void SFMLText::SetFont(BaseFont * font)
 {
 	SFMLFont* sfmlFont = dynamic_cast<SFMLFont*>(font);
 
-	textFont = font;
+	if (sfmlFont != NULL)
+	{
+		textFont = font;
 
-	innerImpl->setFont(*sfmlFont->innerImpl);
+		innerImpl->setFont(*(sfmlFont->innerImpl));
+	}
+
 }
 
 int SFMLText::GetCharacterSize()

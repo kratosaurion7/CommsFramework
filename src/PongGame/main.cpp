@@ -23,6 +23,18 @@ int main()
 
 	engine->Initialize(params);
 
+	BaseFont* gameFont = engine->CreateFont();
+	gameFont->Load("Assets/arial.ttf");
+
+	BaseText* playerOneScoreText = engine->CreateText();
+	playerOneScoreText->SetFont(gameFont);
+	playerOneScoreText->SetPos(0, 0);
+	playerOneScoreText->SetCharacterSize(24);
+	playerOneScoreText->SetColor(0xFFFFFFFF);
+	playerOneScoreText->SetText(std::to_string(PlayerOneScore));
+
+	engine->AddObject(playerOneScoreText);
+
 	BaseSprite* paddle1 = engine->CreateSprite();
 	BaseSprite* paddle2 = engine->CreateSprite();
 

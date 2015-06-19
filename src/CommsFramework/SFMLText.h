@@ -5,7 +5,7 @@
 #include <string>
 #include <cstdint>
 
-
+#include "SFMLDrawable.h"
 #include "BaseText.h"
 #include "FPosition.h"
 #include "FSize.h"
@@ -18,35 +18,7 @@ public:
 	SFMLText();
 	~SFMLText();
 
-	// DrawObject
-	void Show(bool show);
-	bool IsVisible();
-
-	float GetX();
-	float GetY();
-
-	void SetX(float value);
-	void SetY(float value);
-
-	void IncrementX(float value);
-	void IncrementY(float value);
-
-	FPosition* GetPos();
-	void SetPos(float x, float y);
-	void SetPos(FPosition* value);
-	void SetCenterPos(FPosition* value);
-
-	FRectangle* GetRectangle();
-
-	float GetHeight();
-	float GetWidth();
-
-	void SetHeight(float height);
-	void SetWidth(float width);
-
-	FSize* GetSize();
-	void SetSize(float height, float width);
-	void SetSize(FSize* value);
+	sf::Drawable* GetDrawableImplementation();
 
 	// BaseText
 	std::string GetText();
@@ -68,11 +40,6 @@ public:
 
 private:
 	BaseFont* textFont;
-
-	bool isVisible;
-
-	FPosition* position;
-	FSize* size;
 
 	int characterSize;
 

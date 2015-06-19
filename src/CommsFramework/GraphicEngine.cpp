@@ -16,7 +16,7 @@ GraphicEngine::GraphicEngine()
 {
 	MainWindow = NULL;
 	isRunning = false;
-	Sprites = new PointerList<DSprite*>();
+	Sprites = new PointerList<DrawObject*>();
 	Keyboard = new SFMLKeyboard();
 }
 
@@ -64,12 +64,21 @@ BaseText * GraphicEngine::CreateText()
 	return text;
 }
 
-void GraphicEngine::AddObject(DrawObject* obj)
+void GraphicEngine::AddObject(BaseSprite* obj)
 {
 	DSprite* dspr = dynamic_cast<DSprite*>(obj);
 
 	if(dspr != NULL)
 		Sprites->Add(dspr);
+}
+
+void GraphicEngine::AddObject(BaseText* obj)
+{
+	SFMLText* txt = dynamic_cast<SFMLText*>(obj);
+
+	if (txt != NULL)
+		Sprites->Add(txt);
+
 }
 
 void GraphicEngine::RemoveObject(DrawObject* obj)
@@ -82,14 +91,11 @@ void GraphicEngine::RemoveObject(DrawObject* obj)
 
 DrawObject * GraphicEngine::GetObject(std::string identifier)
 {
-	std::list<DSprite*>::iterator iter = Sprites->GetContainer()->begin();
+	std::list<DrawObject*>::iterator iter = Sprites->GetContainer()->begin();
 
 	while (iter != Sprites->GetContainer()->end())
 	{
-		// Problem here is that I must present innerImpl as a public member of DSprite. Not very library agnostic.
-		// TODO : CHECK FOR LEAKS
-
-		DSprite* targetSprite = (*iter);
+		DrawObject* targetSprite = (*iter);
 
 		if (targetSprite->Ident == &identifier)
 		{
@@ -141,20 +147,34 @@ void GraphicEngine::ProcessDraw(sf::RenderWindow* targetWindow)
 {
 	targetWindow->clear();
 	
-	std::list<DSprite*>::iterator iter = Sprites->GetContainer()->begin();
+	std::list<DrawObject*>::iterator iter = Sprites->GetContainer()->begin();
 
 	while (iter != Sprites->GetContainer()->end())
 	{
-		// Problem here is that I must present innerImpl as a public member of DSprite. Not very library agnostic.
-		// TODO : CHECK FOR LEAKS
-
-		DSprite* targetSprite = (*iter);
+		DrawObject* targetSprite = (*iter);
 
 		if (targetSprite->IsVisible())
 		{
-			sf::Sprite innerSprite = (*targetSprite->innerImpl);
+			sf::Drawable* targetDrawable;
 
-			targetWindow->draw(innerSprite);
+			DSprite* spriteCast = dynamic_cast<DSprite*>(targetSprite);
+
+			if (spriteCast != NULL)
+			{
+				targetDrawable = spriteCast->innerImpl;
+			}
+			
+			SFMLText* textCast = dynamic_cast<SFMLText*>(targetSprite);
+
+			if (textCast != NULL)
+			{
+				targetDrawable = textCast->innerImpl;
+			}
+
+
+			//sf::Sprite innerSprite = (*targetSprite->innerImpl);
+
+			targetWindow->draw(*targetDrawable);
 		}
 
 		iter++;

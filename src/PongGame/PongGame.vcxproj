@@ -82,6 +82,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\CommsFramework\DrawObject.cpp" />
     <ClCompile Include="..\CommsFramework\DSprite.cpp" />
     <ClCompile Include="..\CommsFramework\DTexture.cpp" />
     <ClCompile Include="..\CommsFramework\FileReader.cpp" />
@@ -123,6 +124,7 @@
     <ClInclude Include="..\CommsFramework\Keys.h" />
     <ClInclude Include="..\CommsFramework\Macros.h" />
     <ClInclude Include="..\CommsFramework\PointerList.h" />
+    <ClInclude Include="..\CommsFramework\SFMLDrawable.h" />
     <ClInclude Include="..\CommsFramework\SFMLFont.h" />
     <ClInclude Include="..\CommsFramework\SFMLKeyboard.h" />
     <ClInclude Include="..\CommsFramework\SFMLText.h" />

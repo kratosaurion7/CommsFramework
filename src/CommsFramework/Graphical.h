@@ -15,6 +15,12 @@
 #include "BaseTexture.h"
 #include "DTexture.h"
 
+#include "BaseFont.h"
+#include "SFMLFont.h"
+
+#include "BaseText.h"
+#include "SFMLText.h"
+
 #include "FileReader.h"
 
 #include "BaseGraphicEngine.h"
