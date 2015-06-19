@@ -94,7 +94,7 @@
       <Filter>Framework\Graphic</Filter>
     </ClCompile>
     <ClCompile Include="PackageFile.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Framework\IO</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -185,7 +185,7 @@
       <Filter>Framework\Graphic\SFML</Filter>
     </ClInclude>
     <ClInclude Include="PackageFile.h">
-      <Filter>Header Files</Filter>
+      <Filter>Framework\IO</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

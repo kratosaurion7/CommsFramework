@@ -135,6 +135,8 @@ int main()
 			ball->Direction->X = (0.5 * ball->Direction->X);
 		}
 
+		playerOneScoreText->SetText(std::to_string(PlayerOneScore++));
+
 		engine->Draw();
 	}
 

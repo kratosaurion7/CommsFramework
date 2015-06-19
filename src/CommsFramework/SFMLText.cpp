@@ -25,11 +25,6 @@ SFMLText::~SFMLText()
 	delete size;
 }
 
-sf::Drawable * SFMLText::GetDrawableImplementation()
-{
-	return innerImpl;
-}
-
 std::string SFMLText::GetText()
 {
 	return innerImpl->getString();
@@ -55,7 +50,6 @@ void SFMLText::SetFont(BaseFont * font)
 
 		innerImpl->setFont(*(sfmlFont->innerImpl));
 	}
-
 }
 
 int SFMLText::GetCharacterSize()
@@ -90,6 +84,11 @@ void SFMLText::SetColor(uint32_t color)
 	textColorImpl = new sf::Color(color);
 
 	innerImpl->setColor(*textColorImpl);
+}
+
+sf::Drawable* SFMLText::GetDrawableImplementation()
+{
+	return innerImpl;
 }
 
 void SFMLText::UpdateInnerImpl()

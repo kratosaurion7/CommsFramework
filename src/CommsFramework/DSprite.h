@@ -13,7 +13,7 @@
 #include "FRectangle.h"
 #include "FSize.h"
 
-class DSprite : public BaseSprite
+class DSprite : public BaseSprite, public SFMLDrawable
 {
 public:
     DSprite();

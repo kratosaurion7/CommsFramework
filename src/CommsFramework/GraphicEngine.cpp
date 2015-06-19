@@ -155,23 +155,13 @@ void GraphicEngine::ProcessDraw(sf::RenderWindow* targetWindow)
 		if (targetSprite->IsVisible())
 		{
 			sf::Drawable* targetDrawable;
+				
+			SFMLDrawable* drawbleObject = dynamic_cast<SFMLDrawable*>(targetSprite);
 
-			DSprite* spriteCast = dynamic_cast<DSprite*>(targetSprite);
-
-			if (spriteCast != NULL)
+			if (drawbleObject != NULL)
 			{
-				targetDrawable = spriteCast->innerImpl;
+				targetDrawable = drawbleObject->GetDrawableImplementation();
 			}
-			
-			SFMLText* textCast = dynamic_cast<SFMLText*>(targetSprite);
-
-			if (textCast != NULL)
-			{
-				targetDrawable = textCast->innerImpl;
-			}
-
-
-			//sf::Sprite innerSprite = (*targetSprite->innerImpl);
 
 			targetWindow->draw(*targetDrawable);
 		}

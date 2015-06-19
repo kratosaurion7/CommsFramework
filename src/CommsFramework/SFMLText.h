@@ -12,13 +12,11 @@
 #include "FRectangle.h"
 
 
-class SFMLText : public BaseText
+class SFMLText : public BaseText, public SFMLDrawable
 {
 public:
 	SFMLText();
 	~SFMLText();
-
-	sf::Drawable* GetDrawableImplementation();
 
 	// BaseText
 	std::string GetText();
@@ -37,6 +35,8 @@ public:
 	void SetColor(uint32_t color);
 
 	sf::Text* innerImpl;
+
+	sf::Drawable* GetDrawableImplementation();
 
 private:
 	BaseFont* textFont;
