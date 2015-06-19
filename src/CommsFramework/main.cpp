@@ -12,6 +12,8 @@
 
 #include "BaseGraphicEngine.h"
 
+#include "PackageFile.h"
+
 #include <string>
 
 #include <memory>
@@ -38,6 +40,11 @@ int main4();
 
 int main()
 {
+	PackageFile* fil = new PackageFile("asd");
+	
+
+
+
 	int(*testes)();
 	testes = &main4;
 

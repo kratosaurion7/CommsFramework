@@ -93,6 +93,7 @@
     <ClCompile Include="..\CommsFramework\GraphicEngine.cpp" />
     <ClCompile Include="..\CommsFramework\GraphicEngineInitParams.cpp" />
     <ClCompile Include="..\CommsFramework\main.cpp" />
+    <ClCompile Include="..\CommsFramework\PackageFile.cpp" />
     <ClCompile Include="..\CommsFramework\SFMLFont.cpp" />
     <ClCompile Include="..\CommsFramework\SFMLKeyboard.cpp" />
     <ClCompile Include="..\CommsFramework\SFMLText.cpp" />
@@ -123,6 +124,7 @@
     <ClInclude Include="..\CommsFramework\GraphicEngineInitParams.h" />
     <ClInclude Include="..\CommsFramework\Keys.h" />
     <ClInclude Include="..\CommsFramework\Macros.h" />
+    <ClInclude Include="..\CommsFramework\PackageFile.h" />
     <ClInclude Include="..\CommsFramework\PointerList.h" />
     <ClInclude Include="..\CommsFramework\SFMLDrawable.h" />
     <ClInclude Include="..\CommsFramework\SFMLFont.h" />

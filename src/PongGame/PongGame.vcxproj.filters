@@ -72,6 +72,9 @@
     <ClCompile Include="..\CommsFramework\DrawObject.cpp">
       <Filter>ImportedFiles</Filter>
     </ClCompile>
+    <ClCompile Include="..\CommsFramework\PackageFile.cpp">
+      <Filter>ImportedFiles</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\CommsFramework\XmlReader.h">
@@ -162,6 +165,9 @@
       <Filter>ImportedFiles</Filter>
     </ClInclude>
     <ClInclude Include="..\CommsFramework\SFMLDrawable.h">
+      <Filter>ImportedFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CommsFramework\PackageFile.h">
       <Filter>ImportedFiles</Filter>
     </ClInclude>
   </ItemGroup>
