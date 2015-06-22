@@ -42,8 +42,9 @@ int main()
 {
 	PackageFile* fil = new PackageFile("asd");
 	
-
-
+	FileReader rdr;
+	rdr.OpenFile("test.txt", READ);
+	rdr.GetFileContents();
 
 	int(*testes)();
 	testes = &main4;

@@ -9,9 +9,6 @@
 FileReader::FileReader()
 {
     file = NULL;
-    contents = NULL;
-
-    contents = new std::string();
 };
 
 FileReader::~FileReader()
@@ -19,9 +16,7 @@ FileReader::~FileReader()
     if (file != NULL)
         fclose(file);
 
-	if (contents != NULL)
-		delete contents;
-    
+	delete(newContent);
 };
 
 void FileReader::OpenFile(char* fileName, FileAccessFlags access)
@@ -38,27 +33,42 @@ void FileReader::OpenFile(const char* fileName, FileAccessFlags access)
 		return; // TODO : Return an error enum value ?
 };
 
-FileContents* FileReader::GetFileContents()
+FileContents * FileReader::GetFileContents()
 {
     char buf[READ_BLOCK_SIZE];
 
     if (file == NULL)
         return NULL;
 
-    while (!feof(file))
+	int fileSize = GetFileSize(file);
+	int bufIndex = 0;
+
+	newContent = new char[fileSize];
+	newContent[0] = '\0';
+
+    while (!feof(file) && bufIndex < fileSize)
     {
-        if (fgets(buf, READ_BLOCK_SIZE, file) == NULL)
+		int readBlockSize = READ_BLOCK_SIZE;
+		
+		int remainingBytes = fileSize - bufIndex;
+
+		if (fileSize - remainingBytes < readBlockSize)
+		{
+			readBlockSize = remainingBytes + 1;
+			// Adding +1 to the read because fgets seems to place a null char at the last index of the returned string
+		}
+
+        if (fgets(buf, readBlockSize, file) == NULL)
             break;
 
-        contents->append(buf);
+		strcat(newContent, buf);
+
+		bufIndex += readBlockSize;
     }
 
     FileContents *fileContents = new FileContents();
-	int bufferSize = contents->size() + 1; // Add one to include the null ternimating char
-    //fileContents->buffer = contents->c_str();
-	fileContents->buffer = new char[bufferSize];
-	memcpy((void*)fileContents->buffer, contents->c_str(), bufferSize);
-    fileContents->fileSize = contents->size();
+	fileContents->buffer = newContent;
+	fileContents->fileSize = fileSize;
 
     return fileContents;
 };
@@ -82,3 +92,17 @@ char* FileReader::TranslateAccessFlag(FileAccessFlags flag)
     }
 };
 
+int FileReader::GetFileSize(FILE* target)
+{
+	if (target != NULL)
+	{
+		fseek(target, 0, SEEK_END);
+		int size = ftell(target);
+
+		fseek(target, 0, 0);
+
+		return size;
+	}
+
+	return 0;
+};

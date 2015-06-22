@@ -26,14 +26,17 @@ public:
 
 	void OpenFile(const char* fileName, FileAccessFlags access);
 
-    FileContents* GetFileContents();
+	FileContents * GetFileContents();
     
 
 private:
     FILE* file;
 
-    std::string* contents;
+	char* newContent;
+	int contentSize;
 
     char* TranslateAccessFlag(FileAccessFlags flag);
+
+	int GetFileSize(FILE* target);
 };
 
