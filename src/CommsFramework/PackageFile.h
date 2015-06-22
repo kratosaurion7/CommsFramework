@@ -39,6 +39,10 @@ public:
 
 	void SortPackage(SortingMethods sortingMethod);
 
+	void BuildFromDirectory(std::string dir);
+
+	void OpenPackage(std::string path);
+
 	void Save(std::string path);
 private:
 
@@ -48,6 +52,8 @@ private:
 	DirectoryEntry** entries;
 	int filesCount;
 	char* data;
+
+	void BuildStructures();
 	
 	// File stuff
 	FileReader* reader;

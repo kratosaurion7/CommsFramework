@@ -13,15 +13,14 @@ PackageFile::PackageFile(std::string path)
 	fileName = path;
 	reader = new FileReader();
 
-	reader->OpenFile(path.c_str(), READWRITE);
-	auto contents = reader->GetFileContents();
-	//data = contents->buffer;
+	OpenPackage(path);
 }
 
 PackageFile::~PackageFile()
 {
 	delete reader;
 	delete header;
+
 	for (int i = 0;i < filesCount;i++)
 	{
 		delete entries[i];
@@ -50,7 +49,24 @@ void PackageFile::SortPackage(SortingMethods sortingMethod)
 
 }
 
+void PackageFile::BuildFromDirectory(std::string dir)
+{
+
+}
+
+void PackageFile::OpenPackage(std::string path)
+{
+	reader->OpenFile(path.c_str(), READWRITE);
+	auto contents = reader->GetFileContents();
+	data = contents->buffer;
+}
+
 void PackageFile::Save(std::string path)
+{
+
+}
+
+void PackageFile::BuildStructures()
 {
 
 }
