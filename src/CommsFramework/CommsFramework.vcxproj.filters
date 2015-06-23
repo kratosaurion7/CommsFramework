@@ -46,6 +46,9 @@
     <Filter Include="Framework\Geometry">
       <UniqueIdentifier>{358afdf0-fd02-4698-a800-b19f15b4de91}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Framework\Filesystem">
+      <UniqueIdentifier>{32ab1b03-5159-4112-9b55-f5c9f12c474c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">

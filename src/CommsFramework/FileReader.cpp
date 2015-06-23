@@ -73,6 +73,12 @@ FileContents * FileReader::GetFileContents()
     return fileContents;
 };
 
+void FileReader::Close()
+{
+	if (file != NULL)
+		fclose(file);
+};
+
 char* FileReader::TranslateAccessFlag(FileAccessFlags flag)
 {
     switch (flag)

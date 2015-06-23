@@ -31,6 +31,8 @@ public:
 
 	~PackageFile();
 
+	static PackageFile* CreateFromDirectory(std::string dir);
+
 	char* GetFile(std::string fileName, int &size);
 
 	DirectoryEntry* GetFilesList(int &size);

@@ -28,6 +28,8 @@ public:
 
 	FileContents * GetFileContents();
 
+	void Close();
+
 private:
     FILE* file;
 

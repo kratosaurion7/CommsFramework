@@ -1,7 +1,5 @@
 #include "PackageFile.h"
 
-
-
 PackageFile::PackageFile()
 {
 	fileName = "";
@@ -27,6 +25,13 @@ PackageFile::~PackageFile()
 	}
 
 	delete data;
+}
+
+PackageFile * PackageFile::CreateFromDirectory(std::string dir)
+{
+	// Read all files in the directory and childrens
+
+	// Create PackageFile and call AddFile on each of those
 }
 
 char * PackageFile::GetFile(std::string fileName, int & size)
