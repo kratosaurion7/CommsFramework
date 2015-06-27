@@ -32,6 +32,8 @@ PackageFile * PackageFile::CreateFromDirectory(std::string dir)
 	// Read all files in the directory and childrens
 
 	// Create PackageFile and call AddFile on each of those
+
+	return NULL;
 }
 
 char * PackageFile::GetFile(std::string fileName, int & size)
