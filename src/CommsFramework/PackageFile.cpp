@@ -1,7 +1,5 @@
 #include "PackageFile.h"
 
-
-
 PackageFile::PackageFile()
 {
 	fileName = "";
@@ -13,21 +11,27 @@ PackageFile::PackageFile(std::string path)
 	fileName = path;
 	reader = new FileReader();
 
-	reader->OpenFile(path.c_str(), READWRITE);
-	auto contents = reader->GetFileContents();
-	//data = contents->buffer;
+	OpenPackage(path);
 }
 
 PackageFile::~PackageFile()
 {
 	delete reader;
 	delete header;
+
 	for (int i = 0;i < filesCount;i++)
 	{
 		delete entries[i];
 	}
 
 	delete data;
+}
+
+PackageFile * PackageFile::CreateFromDirectory(std::string dir)
+{
+	// Read all files in the directory and childrens
+
+	// Create PackageFile and call AddFile on each of those
 }
 
 char * PackageFile::GetFile(std::string fileName, int & size)
@@ -50,7 +54,24 @@ void PackageFile::SortPackage(SortingMethods sortingMethod)
 
 }
 
+void PackageFile::BuildFromDirectory(std::string dir)
+{
+
+}
+
+void PackageFile::OpenPackage(std::string path)
+{
+	reader->OpenFile(path.c_str(), READWRITE);
+	auto contents = reader->GetFileContents();
+	data = contents->buffer;
+}
+
 void PackageFile::Save(std::string path)
+{
+
+}
+
+void PackageFile::BuildStructures()
 {
 
 }

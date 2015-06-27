@@ -12,7 +12,7 @@ enum FileAccessFlags
 
 struct FileContents
 {
-    const char* buffer;
+    char* buffer;
     int fileSize;
 };
 
@@ -26,14 +26,18 @@ public:
 
 	void OpenFile(const char* fileName, FileAccessFlags access);
 
-    FileContents* GetFileContents();
-    
+	FileContents * GetFileContents();
+
+	void Close();
 
 private:
     FILE* file;
 
-    std::string* contents;
+	char* newContent;
+	int contentSize;
 
     char* TranslateAccessFlag(FileAccessFlags flag);
+
+	int GetFileSize(FILE* target);
 };
 
