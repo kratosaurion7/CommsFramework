@@ -74,6 +74,19 @@ public:
 		}
 	};
 
+	void Clear()
+	{
+		auto it = _container->begin();
+
+		while (it != _container->end())
+		{
+			_container->erase(it);
+
+			it++;
+		}
+
+	};
+
     int BaseList::Count()
     {
         return _container->size();

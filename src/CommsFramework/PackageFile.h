@@ -6,20 +6,20 @@
 
 #include "FileReader.h"
 
-enum SortingMethods {
-
-};
+#include "PointerList.h"
 
 struct Header {
-	char* sig = "PACK";
+	char sig[5];
 	int dirOffset;
 	int dirLength;
 };
 
 struct DirectoryEntry {
-	char* fileName[56];
+	char fileName[256];
 	int filePosition;
 	int fileLength;
+
+	char* fileContents;
 };
 
 class PackageFile
@@ -27,37 +27,22 @@ class PackageFile
 public:
 	PackageFile();
 	
-	PackageFile(std::string path);
-
 	~PackageFile();
 
-	static PackageFile* CreateFromDirectory(std::string dir);
+	void AddFile(std::string filename);
 
-	char* GetFile(std::string fileName, int &size);
+	void RemoveFile(std::string filename);
 
-	DirectoryEntry* GetFilesList(int &size);
-
-	void AddFile(std::string fileName, char* data, int size);
-
-	void SortPackage(SortingMethods sortingMethod);
-
-	void BuildFromDirectory(std::string dir);
-
-	void OpenPackage(std::string path);
-
-	void Save(std::string path);
-private:
-
-	std::string fileName;
-
-	Header* header;
-	DirectoryEntry** entries;
-	int filesCount;
-	char* data;
-
-	void BuildStructures();
+	void Save(std::string savePath);
 	
-	// File stuff
-	FileReader* reader;
+private:
+	Header* packageHeader;
+
+	PointerList<std::string>* filesList;
+
+	PointerList<DirectoryEntry*>* entries;
+
+	std::string OutputFileName;
+
 };
 

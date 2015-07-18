@@ -40,9 +40,11 @@ int main4();
 
 int main()
 {
-	PackageFile* fil = new PackageFile("asd");
+	PackageFile* fil = new PackageFile();
 	
+	fil->AddFile("E:\\Temp\\tex.txt");
 
+	fil->Save("E:\\Temp\\out.pack");
 
 	int(*testes)();
 	testes = &main4;

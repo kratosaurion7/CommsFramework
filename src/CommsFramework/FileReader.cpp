@@ -33,7 +33,7 @@ void FileReader::OpenFile(const char* fileName, FileAccessFlags access)
 		return; // TODO : Return an error enum value ?
 };
 
-FileContents * FileReader::GetFileContents()
+FileContents* FileReader::GetFileContents()
 {
     char buf[READ_BLOCK_SIZE];
 

@@ -9,8 +9,19 @@
 #define PADDLE_WIDTH 150
 #define PADDLE_HEIGHT 30
 
+#include "PackageFile.h"
+
 int main()
 {
+	// TEst code start
+	
+	PackageFile* p = new PackageFile();
+	p->AddFile("C:\\test_file.txt");
+	p->Save("C:\\temp\\out.bin");
+
+	return 0;
+
+	// Below is game code
 	BaseGraphicEngine* engine = new GraphicEngine();
 
 	GraphicEngineInitParams* params = new GraphicEngineInitParams();
@@ -35,24 +46,24 @@ int main()
 
 	engine->AddObject(playerOneScoreText);
 
-	BaseSprite* paddle1 = engine->CreateSprite();
-	BaseSprite* paddle2 = engine->CreateSprite();
+	BaseSprite* paddleSpriteOne = engine->CreateSprite();
+	BaseSprite* paddleSpriteTwo = engine->CreateSprite();
 
 	BaseTexture* paddleTexture = engine->CreateTexture();
 	paddleTexture->Initalize(PADDLE_WIDTH, PADDLE_HEIGHT);
 	paddleTexture->SetSolidColor(0xFFEEDDFF);
 
-	paddle1->SetTexture(paddleTexture);
-	paddle2->SetTexture(paddleTexture);
+	paddleSpriteOne->SetTexture(paddleTexture);
+	paddleSpriteTwo->SetTexture(paddleTexture);
 
-	paddle1->SetPos(300, 20);
-	paddle2->SetPos(300, 550);
+	paddleSpriteOne->SetPos(300, 20);
+	paddleSpriteTwo->SetPos(300, 550);
 	
-	engine->AddObject(paddle1);
-	engine->AddObject(paddle2);
+	engine->AddObject(paddleSpriteOne);
+	engine->AddObject(paddleSpriteTwo);
 
-	PongPaddle* paddleOne = new PongPaddle(paddle1);
-	PongPaddle* paddleTwo= new PongPaddle(paddle2);
+	PongPaddle* paddleOne = new PongPaddle(paddleSpriteOne);
+	PongPaddle* paddleTwo= new PongPaddle(paddleSpriteTwo);
 
 	paddleOne->Velocity->Set(5, 0);
 	paddleTwo->Velocity->Set(5, 0);
@@ -86,16 +97,16 @@ int main()
 			engine->Stop();
 		
 		// Check for player paddles movements
-		if (engine->Keyboard->IsKeyPressed(D) && paddle1->GetX() < WINDOW_WIDTH - PADDLE_WIDTH)
+		if (engine->Keyboard->IsKeyPressed(D) && paddleSpriteOne->GetX() < WINDOW_WIDTH - PADDLE_WIDTH)
 			paddleOne->Move(PADDLE_DIRECTION_RIGHT);
 		
-		if (engine->Keyboard->IsKeyPressed(A) && paddle1->GetX() > 0)
+		if (engine->Keyboard->IsKeyPressed(A) && paddleSpriteOne->GetX() > 0)
 			paddleOne->Move(PADDLE_DIRECTION_LEFT);
 
-		if (engine->Keyboard->IsKeyPressed(Right) && paddle2->GetX() < WINDOW_WIDTH - PADDLE_WIDTH)
+		if (engine->Keyboard->IsKeyPressed(Right) && paddleSpriteTwo->GetX() < WINDOW_WIDTH - PADDLE_WIDTH)
 			paddleTwo->Move(PADDLE_DIRECTION_RIGHT);
 
-		if (engine->Keyboard->IsKeyPressed(Left) && paddle2->GetX() > 0)
+		if (engine->Keyboard->IsKeyPressed(Left) && paddleSpriteTwo->GetX() > 0)
 			paddleTwo->Move(PADDLE_DIRECTION_LEFT);
 
 		// Check for ball collision with the paddles.
