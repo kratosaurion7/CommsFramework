@@ -1,8 +1,10 @@
 #include <stdio.h>
 
+#include "Stuff.h"
+
 int main()
 {
-	printf("Hello People.");
+	printf("Hello People. %d", DoStuff(42));
 
 	getchar();
 
