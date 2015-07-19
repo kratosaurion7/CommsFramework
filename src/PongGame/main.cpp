@@ -16,7 +16,7 @@ int main()
 	// TEst code start
 	
 	PackageFile* p = new PackageFile();
-	p->AddFile("C:\\test_file.txt");
+	p->AddFile("C:\\temp\\notnull.txt");
 	p->Save("C:\\temp\\out.bin");
 
 	return 0;
