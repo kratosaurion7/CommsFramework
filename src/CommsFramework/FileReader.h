@@ -28,7 +28,7 @@ public:
 
 	void OpenFile(const char* fileName, FileAccessFlags access);
 
-	FileContents * GetFileContents();
+	FileContents* GetFileContents();
 
 	void Close();
 

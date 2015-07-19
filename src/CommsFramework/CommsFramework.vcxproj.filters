@@ -102,6 +102,9 @@
     <ClCompile Include="PackageFile.cpp">
       <Filter>Framework\IO</Filter>
     </ClCompile>
+    <ClCompile Include="BitHelper.cpp">
+      <Filter>Framework\System</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\texture.png">
@@ -192,6 +195,9 @@
     </ClInclude>
     <ClInclude Include="PackageFile.h">
       <Filter>Framework\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="BitHelper.h">
+      <Filter>Framework\System</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

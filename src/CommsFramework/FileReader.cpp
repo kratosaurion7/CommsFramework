@@ -54,16 +54,9 @@ FileContents* FileReader::GetFileContents()
 		
 		int remainingBytes = fileSize - bufIndex;
 
-		if (fileSize - remainingBytes < readBlockSize)
-		{
-			readBlockSize = remainingBytes + 1;
-			// Adding +1 to the read because fgets seems to place a null char at the last index of the returned string
-		}
-
 		fileStream->get(buf, readBlockSize, NULL);
 
 		strcat(newContent, buf);
-		
 
 		bufIndex += readBlockSize;
     }

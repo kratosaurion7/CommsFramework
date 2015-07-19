@@ -17,7 +17,13 @@ int main()
 	
 	PackageFile* p = new PackageFile();
 	p->AddFile("C:\\temp\\notnull.txt");
+	p->AddFile("C:\\temp\\new_test_file.txt");
 	p->Save("C:\\temp\\out.bin");
+
+
+	PackageFile* p2 = new PackageFile("C:\\temp\\out.bin");
+	int fileSize;
+	const char* fileContents = p2->GetFile("C:\\temp\\notnull.txt", fileSize);
 
 	return 0;
 
