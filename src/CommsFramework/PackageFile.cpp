@@ -6,6 +6,8 @@
 
 #include <cstring>
 
+#include <fstream>
+
 PackageFile::PackageFile()
 {
 	packageHeader = new Header;
@@ -86,6 +88,9 @@ void PackageFile::Save(std::string savePath)
 	int fileSize = headerSize + bufPos + directorySize;
 	char* fileBuffer = new char[fileSize];
 
+	std::ofstream fileStream;
+	fileStream.open(OutputFileName.c_str(), std::ios::out | std::ios::binary | std::ios::trunc);
+
 	auto x = sizeof(char[256]);
 
 	Header *packHeader = new Header();
@@ -94,9 +99,9 @@ void PackageFile::Save(std::string savePath)
 	packHeader->dirLength = directorySize;
 
 
-	memcpy(fileBuffer, packHeader->sig, 5);
-	memcpy(fileBuffer + 5, &packHeader->dirOffset, 4);
-	memcpy(fileBuffer + 5 + sizeof(packHeader->dirOffset), &packHeader->dirLength, 4);
+	fileStream.write(packHeader->sig, 5);
+	fileStream.write((char*)&packHeader->dirOffset, 4);
+	fileStream.write((char*)&packHeader->dirLength, 4);
 
 	auto it2 = entries->GetContainer()->begin();
 
@@ -106,9 +111,9 @@ void PackageFile::Save(std::string savePath)
 	{
 		DirectoryEntry* entry = *it2;
 
-		memcpy(fileBuffer + headerSize, entry->fileName, sizeof(entry->fileName));
-		memcpy(fileBuffer + headerSize + sizeof(entry->fileName), &entry->fileLength, sizeof(entry->fileLength));
-		memcpy(fileBuffer + +headerSize + sizeof(entry->fileName) + sizeof(entry->fileLength), &entry->filePosition, sizeof(entry->filePosition));
+		fileStream.write(entry->fileName, sizeof(entry->fileName));
+		fileStream.write((char*)&entry->fileLength, sizeof(entry->fileLength));
+		fileStream.write((char*)&entry->filePosition, sizeof(entry->filePosition));
 
 		it2++;
 	}
@@ -119,14 +124,16 @@ void PackageFile::Save(std::string savePath)
 	{
 		DirectoryEntry* entry = *it3;
 
-		memcpy(headerSize + directorySize + fileBuffer + entry->filePosition, entry->fileContents, entry->fileLength);
+		fileStream.write(entry->fileContents, entry->fileLength);
 
 		it3++;
 	}
 
-	FILE* outFile = fopen(OutputFileName.c_str(), "w+");
+	//FILE* outFile = fopen(OutputFileName.c_str(), "w+");
 
-	fwrite(fileBuffer, sizeof(char), fileSize, outFile);
+	//fwrite(fileBuffer, sizeof(char), fileSize, outFile);
 
-	fclose(outFile);
+	//fclose(outFile);
+
+	fileStream.close();
 }

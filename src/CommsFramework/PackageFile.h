@@ -15,7 +15,7 @@ struct Header {
 };
 
 struct DirectoryEntry {
-	char fileName[256];
+	char fileName[32];
 	int filePosition;
 	int fileLength;
 
