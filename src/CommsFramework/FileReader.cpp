@@ -4,19 +4,23 @@
 
 #include <string>
 
+
+
 #define READ_BLOCK_SIZE 128
 
 FileReader::FileReader()
 {
-    file = NULL;
+	fileStream = new std::fstream();
+	newContent = NULL;
 };
 
 FileReader::~FileReader()
 {
-    if (file != NULL)
-        fclose(file);
+	if (fileStream != NULL)
+		fileStream->close();
 
 	delete(newContent);
+	delete(fileStream);
 };
 
 void FileReader::OpenFile(char* fileName, FileAccessFlags access)
@@ -26,27 +30,25 @@ void FileReader::OpenFile(char* fileName, FileAccessFlags access)
 
 void FileReader::OpenFile(const char* fileName, FileAccessFlags access)
 {
-	char* mode = TranslateAccessFlag(access);
-	file = fopen(fileName, mode);
+	fileStream->open(fileName, std::ios::in | std::ios::binary);
 
-	if (file == NULL)
-		return; // TODO : Return an error enum value ?
+
 };
 
 FileContents* FileReader::GetFileContents()
 {
     char buf[READ_BLOCK_SIZE];
 
-    if (file == NULL)
+    if (fileStream == NULL || !fileStream->good())
         return NULL;
 
-	int fileSize = GetFileSize(file);
+	int fileSize = GetFileSize();
 	int bufIndex = 0;
 
 	newContent = new char[fileSize];
 	newContent[0] = '\0';
 
-    while (!feof(file) && bufIndex < fileSize)
+    while (!fileStream->eof() && bufIndex < fileSize)
     {
 		int readBlockSize = READ_BLOCK_SIZE;
 		
@@ -58,10 +60,10 @@ FileContents* FileReader::GetFileContents()
 			// Adding +1 to the read because fgets seems to place a null char at the last index of the returned string
 		}
 
-        if (fgets(buf, readBlockSize, file) == NULL)
-            break;
+		fileStream->get(buf, readBlockSize, NULL);
 
 		strcat(newContent, buf);
+		
 
 		bufIndex += readBlockSize;
     }
@@ -75,8 +77,8 @@ FileContents* FileReader::GetFileContents()
 
 void FileReader::Close()
 {
-	if (file != NULL)
-		fclose(file);
+	if (fileStream != NULL)
+		fileStream->close();
 };
 
 char* FileReader::TranslateAccessFlag(FileAccessFlags flag)
@@ -98,17 +100,20 @@ char* FileReader::TranslateAccessFlag(FileAccessFlags flag)
     }
 };
 
-int FileReader::GetFileSize(FILE* target)
+int FileReader::GetFileSize()
 {
-	if (target != NULL)
+	int fileSize = 0;
+
+	if (fileStream->good())
 	{
-		fseek(target, 0, SEEK_END);
-		int size = ftell(target);
+		int currentPos = fileStream->tellg();
 
-		fseek(target, 0, 0);
+		fileStream->seekg(0, std::ios::end);
 
-		return size;
+		fileSize = fileStream->tellg();
+
+		fileStream->seekg(0, currentPos);
 	}
 
-	return 0;
+	return fileSize;
 };

@@ -3,6 +3,8 @@
 #include <string>
 #include <stdio.h>
 
+#include <fstream>
+
 enum FileAccessFlags
 {
     READ,
@@ -31,13 +33,13 @@ public:
 	void Close();
 
 private:
-    FILE* file;
-
+	std::fstream* fileStream;
+	
 	char* newContent;
 	int contentSize;
 
     char* TranslateAccessFlag(FileAccessFlags flag);
 
-	int GetFileSize(FILE* target);
+	int GetFileSize();
 };
 
