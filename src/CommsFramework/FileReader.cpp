@@ -23,12 +23,12 @@ FileReader::~FileReader()
 	delete(fileStream);
 };
 
-void FileReader::OpenFile(char* fileName, FileAccessFlags access)
+void FileReader::OpenFile(char* fileName)
 {
-	OpenFile(fileName, access);
+	OpenFile(fileName);
 };
 
-void FileReader::OpenFile(const char* fileName, FileAccessFlags access)
+void FileReader::OpenFile(const char* fileName)
 {
 	fileStream->open(fileName, std::ios::in | std::ios::binary);
 
@@ -72,25 +72,6 @@ void FileReader::Close()
 {
 	if (fileStream != NULL)
 		fileStream->close();
-};
-
-char* FileReader::TranslateAccessFlag(FileAccessFlags flag)
-{
-    switch (flag)
-    {
-        case READ:
-            return "r";
-            break;
-        case WRITE:
-            return "w";
-            break;
-        case READWRITE:
-            return "r+"; // Or maybe use w+ to auto create the file.
-            break;
-        default:
-            return "r";
-            break;
-    }
 };
 
 int FileReader::GetFileSize()

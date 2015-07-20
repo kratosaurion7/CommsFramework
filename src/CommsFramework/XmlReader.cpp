@@ -23,7 +23,7 @@ XmlReader::~XmlReader()
 void XmlReader::LoadFile(char* filePath)
 {
     FileReader reader;
-    reader.OpenFile(filePath, READ);
+    reader.OpenFile(filePath);
 
     FileContents *xmlFile = reader.GetFileContents();
 

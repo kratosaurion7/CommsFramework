@@ -9,7 +9,7 @@
 #include "PointerList.h"
 
 #define FILENAME_MAX_LENGTH 32
-#define PACK_FILE_SIG_LENGTH 5
+#define PACK_FILE_SIG_LENGTH 4
 
 /*
 	=Format=
@@ -26,7 +26,7 @@
 	File at each position (? bytes, char) file data
 */
 
-#define HEADER_SIZE 13
+#define HEADER_SIZE 12
 struct Header {
 	char sig[PACK_FILE_SIG_LENGTH];
 	int dirOffset;
@@ -69,6 +69,5 @@ private:
 	std::string TargetPackage;
 
 	std::string OutputFileName;
-
 };
 

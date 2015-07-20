@@ -49,17 +49,14 @@ const char * PackageFile::GetFile(std::string filename, int& fileSize)
 	char buf[256];
 	char* fileContents = NULL;
 
-	packageStream.get(buf, 5); // get(n) method returns at most n-1 elements. Signature is 4
-
-
+	packageStream.get(buf, PACK_FILE_SIG_LENGTH + 1); // get(n) method returns at most n-1 elements. Signature is 4
 	
 	// Step 1. Check it the file is the correct format
-	if (strncmp(buf, "PACK", 4) != 0)
+	if (strncmp(buf, "PACK", PACK_FILE_SIG_LENGTH) != 0)
 		return NULL;
 
 	packageStream.get(buf, sizeof(int));
 
-	//int dirOffset = (buf[3] << 24) + (buf[2] << 16) + (buf[1] << 8) + buf[0];
 	int dirOffset = BytesToInt(buf);
 
 	bool hasNextFile = true;
@@ -69,17 +66,17 @@ const char * PackageFile::GetFile(std::string filename, int& fileSize)
 	int filesIndex = 0;
 	while (hasNextFile && !fileFound)
 	{
-		packageStream.get(buf, DIRECTORY_ENTRY_SIZE);
+		packageStream.get(buf, DIRECTORY_ENTRY_SIZE + 1);
 		if (strncmp(filename.c_str(), buf, FILENAME_MAX_LENGTH) == 0)
 		{
 			int targetFilePos = BytesToInt(&buf[FILENAME_MAX_LENGTH]);
 			int targetFileLength = BytesToInt(&buf[FILENAME_MAX_LENGTH + sizeof(int)]);
 
-			int targetFileOffset = HEADER_SIZE + (DIRECTORY_ENTRY_SIZE - 1 * (filesIndex + 1));
-			packageStream.seekg(targetFileOffset + targetFilePos);
+			packageStream.seekg(targetFilePos);
 			fileContents = new char[targetFileLength];
-			packageStream.get(fileContents, targetFileLength, NULL);
+			packageStream.get(fileContents, targetFileLength, EOF);
 
+			fileSize = targetFileLength;
 			fileFound = true;
 		}
 		
@@ -105,7 +102,7 @@ void PackageFile::Save(std::string savePath)
 
 	FileReader* rdr = new FileReader();
 
-	int headerSize = 4 + 4 + 4; // Header Size
+	int headerSize = HEADER_SIZE; // Header Size
 	int directorySize = 0; // Directory size
 	int bufPos = 0; // Data section size
 	
@@ -116,7 +113,7 @@ void PackageFile::Save(std::string savePath)
 	{
 		std::string fileName = *it;
 
-		rdr->OpenFile(fileName.c_str(), FileAccessFlags::READ);
+		rdr->OpenFile(fileName.c_str());
 		
 		FileContents* contents = rdr->GetFileContents();
 
@@ -159,16 +156,18 @@ void PackageFile::Save(std::string savePath)
 	auto it2 = entries->GetContainer()->begin();
 
 	int currentDirectoryOffset = 0;
+	int currentDataSize = 0;
 
 	while (it2 != entries->GetContainer()->end())
 	{
 		DirectoryEntry* entry = *it2;
 
 		fileStream.write(entry->fileName, sizeof(entry->fileName));
-		fileStream.write((char*)&entry->filePosition, sizeof(entry->filePosition));
+		int currPos = headerSize + directorySize + currentDataSize;
+		fileStream.write((char*)&currPos, sizeof(entry->filePosition));
 		fileStream.write((char*)&entry->fileLength, sizeof(entry->fileLength));
 		
-
+		currentDataSize += entry->fileLength;
 		it2++;
 	}
 

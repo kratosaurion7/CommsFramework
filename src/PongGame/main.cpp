@@ -18,12 +18,16 @@ int main()
 	PackageFile* p = new PackageFile();
 	p->AddFile("C:\\temp\\notnull.txt");
 	p->AddFile("C:\\temp\\new_test_file.txt");
+	p->AddFile("C:\\temp\\BigFile.txt");
 	p->Save("C:\\temp\\out.bin");
 
 
 	PackageFile* p2 = new PackageFile("C:\\temp\\out.bin");
-	int fileSize;
-	const char* fileContents = p2->GetFile("C:\\temp\\notnull.txt", fileSize);
+	int fileSize = 0;
+	
+	const char* fileContents1 = p2->GetFile("C:\\temp\\notnull.txt", fileSize);
+	const char* fileContents2 = p2->GetFile("C:\\temp\\new_test_file.txt", fileSize);
+	const char* fileContents3 = p2->GetFile("C:\\temp\\BigFile.txt", fileSize);
 
 	return 0;
 

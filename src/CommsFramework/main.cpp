@@ -119,7 +119,7 @@ int main3()
 	{
 		FileReader* rdr = new FileReader();
 
-		rdr->OpenFile("input.txt", READ);
+		rdr->OpenFile("input.txt");
 
 		FileContents* contents = rdr->GetFileContents();
 

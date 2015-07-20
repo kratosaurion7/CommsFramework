@@ -5,13 +5,6 @@
 
 #include <fstream>
 
-enum FileAccessFlags
-{
-    READ,
-    WRITE,
-    READWRITE
-};
-
 struct FileContents
 {
     char* buffer;
@@ -24,9 +17,9 @@ public:
     FileReader();
     ~FileReader();
 
-    void OpenFile(char* fileName, FileAccessFlags access);
+    void OpenFile(char* fileName);
 
-	void OpenFile(const char* fileName, FileAccessFlags access);
+	void OpenFile(const char* fileName);
 
 	FileContents* GetFileContents();
 
@@ -37,8 +30,6 @@ private:
 	
 	char* newContent;
 	int contentSize;
-
-    char* TranslateAccessFlag(FileAccessFlags flag);
 
 	int GetFileSize();
 };
