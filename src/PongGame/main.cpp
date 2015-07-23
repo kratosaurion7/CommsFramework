@@ -10,6 +10,7 @@
 #define PADDLE_HEIGHT 30
 
 #include "PackageFile.h"
+#include "TestRunner.h"
 
 int main()
 {

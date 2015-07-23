@@ -52,6 +52,12 @@
     <Filter Include="Framework\System">
       <UniqueIdentifier>{bbef2363-079e-4690-9e27-09d950c7527c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Framework\Game\DataManager">
+      <UniqueIdentifier>{5d2c28c0-dc28-46f9-8edb-85632129d98b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests">
+      <UniqueIdentifier>{e2ffb807-6bbb-4c9e-83bb-a3ff7bd46a95}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -104,6 +110,12 @@
     </ClCompile>
     <ClCompile Include="BitHelper.cpp">
       <Filter>Framework\System</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>Framework\Game\DataManager</Filter>
+    </ClCompile>
+    <ClCompile Include="TestRunner.cpp">
+      <Filter>Tests</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -198,6 +210,12 @@
     </ClInclude>
     <ClInclude Include="BitHelper.h">
       <Filter>Framework\System</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>Framework\Game\DataManager</Filter>
+    </ClInclude>
+    <ClInclude Include="TestRunner.h">
+      <Filter>Tests</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

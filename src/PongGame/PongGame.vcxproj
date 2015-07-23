@@ -60,7 +60,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ShowProgress>LinkVerbose</ShowProgress>
+      <ShowProgress>NotSet</ShowProgress>
       <AdditionalDependencies>libzmq-v120-mt-4_0_4.lib;sfml-graphics-d.lib;sfml-system-d.lib;sfml-window-d.lib;CommsFramework.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>

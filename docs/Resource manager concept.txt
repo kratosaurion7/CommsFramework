@@ -1,0 +1,10 @@
+The resource manager is the class that loads all the content (images, audio, 
+config, etc) into memory and provides access to it. The manager is able to 
+load assets by priority and can choose to avoir loading an asset if it is not
+loaded. The resource manager manages images in several format (probably .png)
+audio, configuration data. It can load files from two locations : either a
+packaged asset file or loosely inside a folder.
+
+The manager uses XML files to locate the assets. All assets should be in a 
+folder below the one containing the executable.
+
