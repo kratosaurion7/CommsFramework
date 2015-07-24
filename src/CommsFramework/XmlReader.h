@@ -4,19 +4,17 @@
 
 #include "rapidxml.hpp"
 
-struct XmlNode
-{
-    char    *name;
-    char    *value;
-    int      size;
-};
+#include "BaseList.h"
 
-struct XmlAttribute
-{
+#include <string>
 
-};
+#include <functional>
 
-class XmlSearchSyntax;
+using namespace rapidxml;
+
+class XmlNode;
+class XmlNodeAttribute;
+
 
 class XmlReader
 {
@@ -26,50 +24,38 @@ public:
 
     void LoadFile(char* filePath);
 
-//protected:
-    XmlNode* ReadNode(char* pathSyntax);
-    XmlNode** ReadMultipleNodes(char* pathSyntax);
-    XmlNode** ReadNodes(char* pathSyntax, int& nodesAmount); // Alternative to the above functions
+	XmlNode* GetNode(std::string nodeName);
 
-    XmlAttribute* ReadAttribute(char* pathSyntax, char* attributeName);
-    XmlAttribute* ReadAttribute(char* pathSyntax, int attributeIndex);
-    XmlAttribute** ReadAttributes(char* pathSyntax, int& nodesAmount); // Alternative for the above functions
+	BaseList<XmlNode*>* GetNodes(std::string nodeName);
 
 private:
-    rapidxml::xml_node<>* FindNode(char* pathSyntax);
-    rapidxml::xml_node<>* FindNode(char* pathSyntax, rapidxml::xml_node<>* startingNode);
 
-    rapidxml::xml_node<>* Traverse(rapidxml::xml_node<>* node, bool(predicate)(rapidxml::xml_node<>*));
-    rapidxml::xml_node<>* Traverse(rapidxml::xml_node<>* node, XmlSearchSyntax *searchNodes, bool(predicate)(rapidxml::xml_node<>*));
+    xml_node<>* FindNode(xml_node<>* node, bool(predicate)(rapidxml::xml_node<>* node));
 
-    rapidxml::xml_document<>* rootDoc;
+	xml_node<>* FindNode2(xml_node<>* node, std::function<bool(rapidxml::xml_node<>*)> predicate);
+
+	BaseList<xml_node<>*>* FindNodeList(xml_node<>* node, std::function<bool(rapidxml::xml_node<>*)> predicate, BaseList<xml_node<>*> &aggregate);
+
+    xml_document<>* rootDoc;
 };
 
-class XmlSearchSyntax
+class XmlNode
 {
-    struct XmlSearchNode{
-        char* nodeName;
-
-        XmlSearchNode* nextNode;
-    };
-
 public:
-    XmlSearchSyntax();
-    XmlSearchSyntax(char** searchNodes);
-    ~XmlSearchSyntax();
+	char* NodeName;
 
-    char* GetNextNode();
+	BaseList<XmlNodeAttribute*>* NodeAttributes;
 
-    char* ReadCurrentNode();
 
-    bool HasNextNode();
+	XmlNode();
+	~XmlNode();
+};
 
-    void AddSearchNode(XmlSearchNode* newNode);
+class XmlNodeAttribute
+{
+public:
+	char* AttributeName;
 
-    int GetSyntaxTokensLength();
-
-private:
-    XmlSearchNode* firstNode;
-
-    XmlSearchNode* currentNode;
+	int valueSize;
+	char* AttributeValue;
 };

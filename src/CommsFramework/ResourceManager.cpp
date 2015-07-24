@@ -2,7 +2,7 @@
 
 
 
-ResourceManager::ResourceManager()
+ResourceManager::ResourceManager(std::string configFile)
 {
 }
 

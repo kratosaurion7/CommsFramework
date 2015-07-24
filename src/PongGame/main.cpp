@@ -14,8 +14,14 @@
 
 int main()
 {
-	// TEst code start
-	
+	// --- BEGIN  TEST CODE ---	
+
+	XmlReader rdr;
+
+	rdr.LoadFile("books.xml");
+
+	auto ret = rdr.GetNode("author");;
+
 	PackageFile* p = new PackageFile();
 	p->AddFile("C:\\temp\\notnull.txt");
 	p->AddFile("C:\\temp\\new_test_file.txt");
@@ -31,6 +37,8 @@ int main()
 	const char* fileContents3 = p2->GetFile("C:\\temp\\BigFile.txt", fileSize);
 
 	return 0;
+
+	// --- END TEST CODE ---
 
 	// Below is game code
 	BaseGraphicEngine* engine = new GraphicEngine();

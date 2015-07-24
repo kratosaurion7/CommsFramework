@@ -19,20 +19,18 @@ FileReader::~FileReader()
 	if (fileStream != NULL)
 		fileStream->close();
 
-	delete(newContent);
+	//delete(newContent); Throws exception sometimes
 	delete(fileStream);
 };
 
 void FileReader::OpenFile(char* fileName)
 {
-	OpenFile(fileName);
+	fileStream->open(fileName, std::ios::in | std::ios::binary);
 };
 
 void FileReader::OpenFile(const char* fileName)
 {
 	fileStream->open(fileName, std::ios::in | std::ios::binary);
-
-
 };
 
 FileContents* FileReader::GetFileContents()
