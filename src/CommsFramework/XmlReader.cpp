@@ -42,11 +42,6 @@ XmlNode * XmlReader::GetNode(std::string nodeName)
 		return strcmp(node->name(),nodeName.c_str()) == 0;
 	};
 
-
-	auto test = [](rapidxml::xml_node<>*) {
-		return true;
-	};
-
 	auto ret = FindNode2(rootDoc, pred);
 
 	if (ret != NULL)
@@ -79,7 +74,26 @@ XmlNode * XmlReader::GetNode(std::string nodeName)
 
 BaseList<XmlNode*>* XmlReader::GetNodes(std::string nodeName)
 {
-	return nullptr;
+	auto pred = [nodeName](rapidxml::xml_node<>*node) -> bool {
+		return strcmp(node->name(), nodeName.c_str()) == 0;
+	};
+	
+	BaseList<xml_node<>*> listOfStuff;
+
+	auto ret = FindNodeList(rootDoc, pred, listOfStuff);
+
+	auto stuff = listOfStuff.GetContainer();
+
+	auto it = stuff->begin();
+
+	while (it != listOfStuff.GetContainer()->end())
+	{
+		auto item = *it;
+
+		it++;
+	}
+
+	return NULL;
 }
 
 xml_node<>* XmlReader::FindNode(xml_node<>* node, bool(predicate)(rapidxml::xml_node<>*node))

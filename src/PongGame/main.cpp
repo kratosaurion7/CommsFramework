@@ -20,7 +20,7 @@ int main()
 
 	rdr.LoadFile("books.xml");
 
-	auto ret = rdr.GetNode("author");;
+	auto ret = rdr.GetNodes("author");;
 
 	PackageFile* p = new PackageFile();
 	p->AddFile("C:\\temp\\notnull.txt");
