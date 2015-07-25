@@ -28,7 +28,9 @@ void XmlReader::LoadFile(char* filePath)
     FileReader reader;
     reader.OpenFile(filePath);
 
-    FileContents *xmlFile = reader.GetFileContents();
+	reader.DumpFile("out.txt");
+
+    FileContents *xmlFile = reader.GetFileContents(true);
 
     if (xmlFile != NULL)
     {
@@ -135,6 +137,8 @@ xml_node<>* XmlReader::FindNode(xml_node<>* node, std::function<bool(rapidxml::x
 		if (nextNode->type() == node_data)
 			nextNode = node->next_sibling();
 
+		if (nextNode == NULL)
+			nextNode = node->parent()->next_sibling();
 
 		return FindNode(nextNode, predicate);
 	}

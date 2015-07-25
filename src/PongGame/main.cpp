@@ -18,9 +18,11 @@ int main()
 
 	XmlReader rdr;
 
-	rdr.LoadFile("Assets\\books.xml");
+	rdr.LoadFile("assets\\catalog.xml");
 
-	auto ret = rdr.GetNodes("author");;
+	return 0;
+
+	auto ret = rdr.GetNode("produce");;
 
 	PackageFile* p = new PackageFile();
 	p->AddFile("C:\\temp\\notnull.txt");

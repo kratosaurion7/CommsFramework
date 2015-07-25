@@ -21,9 +21,11 @@ public:
 
 	void OpenFile(const char* fileName);
 
-	FileContents* GetFileContents();
+	FileContents* GetFileContents(bool ensureNullTerminated = false);
 
 	void Close();
+
+	void DumpFile(std::string outFileName);
 
 private:
 	std::fstream* fileStream;

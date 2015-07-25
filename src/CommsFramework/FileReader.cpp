@@ -4,15 +4,13 @@
 
 #include <string>
 
-
-
 #define READ_BLOCK_SIZE 128
 
 FileReader::FileReader()
 {
 	fileStream = new std::fstream();
 	newContent = NULL;
-};
+}
 
 FileReader::~FileReader()
 {
@@ -21,56 +19,65 @@ FileReader::~FileReader()
 
 	//delete(newContent); Throws exception sometimes
 	delete(fileStream);
-};
+}
 
 void FileReader::OpenFile(char* fileName)
 {
 	fileStream->open(fileName, std::ios::in | std::ios::binary);
-};
+}
 
 void FileReader::OpenFile(const char* fileName)
 {
 	fileStream->open(fileName, std::ios::in | std::ios::binary);
-};
+}
 
-FileContents* FileReader::GetFileContents()
+FileContents* FileReader::GetFileContents(bool ensureNullTerminated)
 {
-    char buf[READ_BLOCK_SIZE];
-
     if (fileStream == NULL || !fileStream->good())
         return NULL;
-
+	
 	int fileSize = GetFileSize();
-	int bufIndex = 0;
 
 	newContent = new char[fileSize];
-	newContent[0] = '\0';
 
-    while (!fileStream->eof() && bufIndex < fileSize)
-    {
-		int readBlockSize = READ_BLOCK_SIZE;
-		
-		int remainingBytes = fileSize - bufIndex;
-
-		fileStream->get(buf, readBlockSize, NULL);
-
-		strcat(newContent, buf);
-
-		bufIndex += readBlockSize;
-    }
-
+	fileStream->read(newContent, fileSize);
+	
     FileContents *fileContents = new FileContents();
-	fileContents->buffer = newContent;
 	fileContents->fileSize = fileSize;
+	if (ensureNullTerminated)
+	{
+		newContent[fileSize] = '\0';
+	}
+	fileContents->buffer = newContent;
 
     return fileContents;
-};
+}
 
 void FileReader::Close()
 {
 	if (fileStream != NULL)
 		fileStream->close();
-};
+}
+void FileReader::DumpFile(std::string outFileName)
+{
+	fileStream->seekg(0, 0);
+
+	std::ofstream outStream = std::ofstream(outFileName.c_str(), std::ofstream::out | std::ofstream::binary);
+
+	int fileSize = GetFileSize();
+
+	char* contents = new char[fileSize];
+
+	fileStream->read(contents, fileSize);
+
+	outStream.write(contents, fileSize);
+
+	delete(contents);
+
+	outStream.close();
+
+	fileStream->seekg(0, 0);
+}
 
 int FileReader::GetFileSize()
 {
@@ -84,8 +91,12 @@ int FileReader::GetFileSize()
 
 		fileSize = fileStream->tellg();
 
-		fileStream->seekg(0, currentPos);
+		fileStream->seekg(150);
+
+
+		fileStream->seekg(currentPos);
+
 	}
 
 	return fileSize;
-};
+}
