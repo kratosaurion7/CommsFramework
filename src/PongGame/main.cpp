@@ -18,7 +18,7 @@ int main()
 
 	XmlReader rdr;
 
-	rdr.LoadFile("books.xml");
+	rdr.LoadFile("Assets\\books.xml");
 
 	auto ret = rdr.GetNodes("author");;
 
