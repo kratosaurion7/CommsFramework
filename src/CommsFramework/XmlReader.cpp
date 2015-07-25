@@ -42,7 +42,7 @@ XmlNode * XmlReader::GetNode(std::string nodeName)
 		return strcmp(node->name(),nodeName.c_str()) == 0;
 	};
 
-	auto ret = FindNode2(rootDoc, pred);
+	auto ret = FindNode(rootDoc, pred);
 
 	if (ret != NULL)
 	{
@@ -116,7 +116,7 @@ BaseList<XmlNode*>* XmlReader::GetNodes(std::string nodeName)
 	return nodeList;
 }
 
-xml_node<>* XmlReader::FindNode(xml_node<>* node, bool(predicate)(rapidxml::xml_node<>*node))
+xml_node<>* XmlReader::FindNode(xml_node<>* node, std::function<bool(rapidxml::xml_node<>*)> predicate)
 {
 	if (node == NULL)
 		return NULL;
@@ -137,30 +137,6 @@ xml_node<>* XmlReader::FindNode(xml_node<>* node, bool(predicate)(rapidxml::xml_
 
 
 		return FindNode(nextNode, predicate);
-	}
-}
-
-xml_node<>* XmlReader::FindNode2(xml_node<>* node, std::function<bool(rapidxml::xml_node<>*)> predicate)
-{
-	if (node == NULL)
-		return NULL;
-
-	if (predicate(node))
-	{
-		return node;
-	}
-	else
-	{
-		rapidxml::xml_node<>* nextNode = node->first_node();
-
-		if (nextNode == NULL)
-			nextNode = node->next_sibling();
-
-		if (nextNode->type() == node_data)
-			nextNode = node->next_sibling();
-
-
-		return FindNode2(nextNode, predicate);
 	}
 }
 

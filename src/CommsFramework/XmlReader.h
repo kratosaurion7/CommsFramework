@@ -32,7 +32,7 @@ private:
 
     xml_node<>* FindNode(xml_node<>* node, bool(predicate)(rapidxml::xml_node<>* node));
 
-	xml_node<>* FindNode2(xml_node<>* node, std::function<bool(rapidxml::xml_node<>*)> predicate);
+	xml_node<>* FindNode(xml_node<>* node, std::function<bool(rapidxml::xml_node<>*)> predicate);
 
 	void FindNodeList(xml_node<>* node, std::function<bool(rapidxml::xml_node<>*)> predicate, BaseList<xml_node<>*> &aggregate);
 
