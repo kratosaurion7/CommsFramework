@@ -79,8 +79,9 @@ BaseList<XmlNode*>* XmlReader::GetNodes(std::string nodeName)
 	};
 	
 	BaseList<xml_node<>*> listOfStuff;
+	BaseList<XmlNode*>* nodeList = new BaseList<XmlNode*>();
 
-	auto ret = FindNodeList(rootDoc, pred, listOfStuff);
+	FindNodeList(rootDoc, pred, listOfStuff);
 
 	auto stuff = listOfStuff.GetContainer();
 
@@ -90,10 +91,29 @@ BaseList<XmlNode*>* XmlReader::GetNodes(std::string nodeName)
 	{
 		auto item = *it;
 
+		XmlNode* foundNode = new XmlNode();
+		foundNode->NodeName = item->name();
+
+		auto attr = item->first_attribute();
+
+		while (attr != NULL)
+		{
+			XmlNodeAttribute* newAttribute = new XmlNodeAttribute();
+			newAttribute->AttributeName = attr->name();
+			newAttribute->AttributeValue = attr->value();
+			newAttribute->valueSize = attr->value_size();
+
+			foundNode->NodeAttributes->Add(newAttribute);
+
+			attr = attr->next_attribute();
+		}
+
+		nodeList->Add(foundNode);
+
 		it++;
 	}
 
-	return NULL;
+	return nodeList;
 }
 
 xml_node<>* XmlReader::FindNode(xml_node<>* node, bool(predicate)(rapidxml::xml_node<>*node))
@@ -144,10 +164,10 @@ xml_node<>* XmlReader::FindNode2(xml_node<>* node, std::function<bool(rapidxml::
 	}
 }
 
-BaseList<xml_node<>*>* XmlReader::FindNodeList(xml_node<>* node, std::function<bool(rapidxml::xml_node<>*)> predicate, BaseList<xml_node<>*> &aggregate)
+void XmlReader::FindNodeList(xml_node<>* node, std::function<bool(rapidxml::xml_node<>*)> predicate, BaseList<xml_node<>*> &aggregate)
 {
 	if (node == NULL)
-		return NULL;
+		return;
 
 	if (predicate(node))
 	{
@@ -156,14 +176,13 @@ BaseList<xml_node<>*>* XmlReader::FindNodeList(xml_node<>* node, std::function<b
 
 	rapidxml::xml_node<>* nextNode = node->first_node();
 
+	if (nextNode == NULL || nextNode->type() == node_data)
+		nextNode = node->next_sibling();
+
 	if (nextNode == NULL)
-		nextNode = node->next_sibling();
+		nextNode = node->parent()->next_sibling();
 
-	if (nextNode->type() == node_data)
-		nextNode = node->next_sibling();
-
-
-	return FindNodeList(nextNode, predicate, aggregate);
+	FindNodeList(nextNode, predicate, aggregate);
 }
 
 XmlNode::XmlNode()

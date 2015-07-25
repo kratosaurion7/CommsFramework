@@ -34,7 +34,7 @@ private:
 
 	xml_node<>* FindNode2(xml_node<>* node, std::function<bool(rapidxml::xml_node<>*)> predicate);
 
-	BaseList<xml_node<>*>* FindNodeList(xml_node<>* node, std::function<bool(rapidxml::xml_node<>*)> predicate, BaseList<xml_node<>*> &aggregate);
+	void FindNodeList(xml_node<>* node, std::function<bool(rapidxml::xml_node<>*)> predicate, BaseList<xml_node<>*> &aggregate);
 
     xml_document<>* rootDoc;
 };
