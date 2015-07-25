@@ -131,14 +131,22 @@ xml_node<>* XmlReader::FindNode(xml_node<>* node, std::function<bool(rapidxml::x
 	{
 		rapidxml::xml_node<>* nextNode = node->first_node();
 
-		if (nextNode == NULL)
+		if (nextNode == NULL || nextNode->type() == node_data)
 			nextNode = node->next_sibling();
 
-		if (nextNode->type() == node_data)
-			nextNode = node->next_sibling();
-
-		if (nextNode == NULL)
+		if (nextNode == NULL && node->parent())
 			nextNode = node->parent()->next_sibling();
+
+		rapidxml::xml_node<>* nextParent = node;
+		while (nextNode == NULL)
+		{
+			nextParent = nextParent->parent();
+			
+			if (nextParent->type() == node_document)
+				return;
+
+			nextNode = nextParent->next_sibling();
+		}
 
 		return FindNode(nextNode, predicate);
 	}
@@ -159,8 +167,19 @@ void XmlReader::FindNodeList(xml_node<>* node, std::function<bool(rapidxml::xml_
 	if (nextNode == NULL || nextNode->type() == node_data)
 		nextNode = node->next_sibling();
 
-	if (nextNode == NULL)
+	if (nextNode == NULL && node->parent())
 		nextNode = node->parent()->next_sibling();
+
+	rapidxml::xml_node<>* nextParent = node;
+	while (nextNode == NULL)
+	{
+		nextParent = nextParent->parent();
+
+		if (nextParent->type() == node_document)
+			return;
+		
+		nextNode = nextParent->next_sibling();
+	}
 
 	FindNodeList(nextNode, predicate, aggregate);
 }

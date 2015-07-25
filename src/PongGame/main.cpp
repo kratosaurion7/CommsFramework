@@ -20,9 +20,9 @@ int main()
 
 	rdr.LoadFile("assets\\catalog.xml");
 
-	return 0;
+	auto ret = rdr.GetNodes("produce");;
 
-	auto ret = rdr.GetNode("produce");;
+	return 0;
 
 	PackageFile* p = new PackageFile();
 	p->AddFile("C:\\temp\\notnull.txt");
