@@ -21,16 +21,18 @@ XmlReader::XmlReader()
 XmlReader::~XmlReader()
 {
     delete(rootDoc);
+
+    delete(xmlFile);
 }
 
-void XmlReader::LoadFile(char* filePath)
+void XmlReader::LoadFile(const char* filePath)
 {
     FileReader reader;
     reader.OpenFile(filePath);
 
-	reader.DumpFile("out.txt");
+    xmlFile = reader.GetFileContents(true);
 
-    FileContents *xmlFile = reader.GetFileContents(true);
+    reader.Close();
 
     if (xmlFile != NULL)
     {
@@ -74,14 +76,14 @@ XmlNode * XmlReader::GetNode(std::string nodeName)
 }
 
 
-BaseList<XmlNode*>* XmlReader::GetNodes(std::string nodeName)
+PointerList<XmlNode*>* XmlReader::GetNodes(std::string nodeName)
 {
 	auto pred = [nodeName](rapidxml::xml_node<>*node) -> bool {
 		return strcmp(node->name(), nodeName.c_str()) == 0;
 	};
 	
-	BaseList<xml_node<>*> listOfStuff;
-	BaseList<XmlNode*>* nodeList = new BaseList<XmlNode*>();
+	PointerList<xml_node<>*> listOfStuff;
+	PointerList<XmlNode*>* nodeList = new PointerList<XmlNode*>();
 
 	FindNodeList(rootDoc, pred, listOfStuff);
 
@@ -143,7 +145,7 @@ xml_node<>* XmlReader::FindNode(xml_node<>* node, std::function<bool(rapidxml::x
 			nextParent = nextParent->parent();
 			
 			if (nextParent->type() == node_document)
-				return;
+				return NULL;
 
 			nextNode = nextParent->next_sibling();
 		}
@@ -152,7 +154,7 @@ xml_node<>* XmlReader::FindNode(xml_node<>* node, std::function<bool(rapidxml::x
 	}
 }
 
-void XmlReader::FindNodeList(xml_node<>* node, std::function<bool(rapidxml::xml_node<>*)> predicate, BaseList<xml_node<>*> &aggregate)
+void XmlReader::FindNodeList(xml_node<>* node, std::function<bool(rapidxml::xml_node<>*)> predicate, PointerList<xml_node<>*> &aggregate)
 {
 	if (node == NULL)
 		return;
@@ -186,7 +188,7 @@ void XmlReader::FindNodeList(xml_node<>* node, std::function<bool(rapidxml::xml_
 
 XmlNode::XmlNode()
 {
-	NodeAttributes = new BaseList<XmlNodeAttribute*>();
+	NodeAttributes = new PointerList<XmlNodeAttribute*>();
 }
 
 XmlNode::~XmlNode()

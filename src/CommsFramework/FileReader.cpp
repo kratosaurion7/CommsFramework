@@ -38,7 +38,7 @@ FileContents* FileReader::GetFileContents(bool ensureNullTerminated)
 	
 	int fileSize = GetFileSize();
 
-	newContent = new char[fileSize];
+	newContent = new char[fileSize + 1];
 
 	fileStream->read(newContent, fileSize);
 	
@@ -99,4 +99,13 @@ int FileReader::GetFileSize()
 	}
 
 	return fileSize;
+}
+
+FileContents::FileContents()
+{
+}
+
+FileContents::~FileContents()
+{
+    delete(buffer);
 }

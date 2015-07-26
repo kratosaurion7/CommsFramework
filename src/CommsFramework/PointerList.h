@@ -14,7 +14,7 @@ public:
 
     ~PointerList()
     {
-        delete(_container);
+        //delete(_container);
     };
 
     void PointerList::Release()

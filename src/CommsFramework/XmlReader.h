@@ -6,6 +6,10 @@
 
 #include "BaseList.h"
 
+#include "PointerList.h"
+
+#include "FileReader.h"
+
 #include <string>
 
 #include <functional>
@@ -22,19 +26,18 @@ public:
     XmlReader();
     ~XmlReader();
 
-    void LoadFile(char* filePath);
+    void LoadFile(const char* filePath);
 
 	XmlNode* GetNode(std::string nodeName);
 
-	BaseList<XmlNode*>* GetNodes(std::string nodeName);
+	PointerList<XmlNode*>* GetNodes(std::string nodeName);
 
 private:
-
-    xml_node<>* FindNode(xml_node<>* node, bool(predicate)(rapidxml::xml_node<>* node));
-
 	xml_node<>* FindNode(xml_node<>* node, std::function<bool(rapidxml::xml_node<>*)> predicate);
 
-	void FindNodeList(xml_node<>* node, std::function<bool(rapidxml::xml_node<>*)> predicate, BaseList<xml_node<>*> &aggregate);
+	void FindNodeList(xml_node<>* node, std::function<bool(rapidxml::xml_node<>*)> predicate, PointerList<xml_node<>*> &aggregate);
+
+    FileContents* xmlFile;
 
     xml_document<>* rootDoc;
 };
@@ -42,13 +45,13 @@ private:
 class XmlNode
 {
 public:
+    XmlNode();
+    ~XmlNode();
+
 	char* NodeName;
 
-	BaseList<XmlNodeAttribute*>* NodeAttributes;
+	PointerList<XmlNodeAttribute*>* NodeAttributes;
 
-
-	XmlNode();
-	~XmlNode();
 };
 
 class XmlNodeAttribute

@@ -5,10 +5,14 @@
 
 #include <fstream>
 
-struct FileContents
+class FileContents
 {
+public:
     char* buffer;
     int fileSize;
+
+    FileContents();
+    ~FileContents();
 };
 
 class FileReader
