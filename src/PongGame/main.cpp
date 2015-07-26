@@ -14,163 +14,171 @@
 
 int main()
 {
-	// --- BEGIN  TEST CODE ---	
+    // --- BEGIN  TEST CODE ---	
 
-	XmlReader rdr;
+    while (true)
+    {
+        XmlReader rdr;
 
-	rdr.LoadFile("assets\\catalog.xml");
+        rdr.LoadFile("assets\\catalog.xml");
 
-	auto ret = rdr.GetNodes("produce");;
+        auto ret = rdr.GetNodes("produce");;
 
-	return 0;
+        ret->Release();
 
-	PackageFile* p = new PackageFile();
-	p->AddFile("C:\\temp\\notnull.txt");
-	p->AddFile("C:\\temp\\new_test_file.txt");
-	p->AddFile("C:\\temp\\BigFile.txt");
-	p->Save("C:\\temp\\out.bin");
+        delete(ret);
+    }
 
 
-	PackageFile* p2 = new PackageFile("C:\\temp\\out.bin");
-	int fileSize = 0;
-	
-	const char* fileContents1 = p2->GetFile("C:\\temp\\notnull.txt", fileSize);
-	const char* fileContents2 = p2->GetFile("C:\\temp\\new_test_file.txt", fileSize);
-	const char* fileContents3 = p2->GetFile("C:\\temp\\BigFile.txt", fileSize);
+    return 0;
 
-	return 0;
+    PackageFile* p = new PackageFile();
+    p->AddFile("C:\\temp\\notnull.txt");
+    p->AddFile("C:\\temp\\new_test_file.txt");
+    p->AddFile("C:\\temp\\BigFile.txt");
+    p->Save("C:\\temp\\out.bin");
 
-	// --- END TEST CODE ---
 
-	// Below is game code
-	BaseGraphicEngine* engine = new GraphicEngine();
+    PackageFile* p2 = new PackageFile("C:\\temp\\out.bin");
+    int fileSize = 0;
 
-	GraphicEngineInitParams* params = new GraphicEngineInitParams();
-	params->EnableVerticalSync = true;
-	params->WindowSize = new FSize(WINDOW_HEIGHT, WINDOW_WIDTH);
-	params->WindowTitle = new std::string("PONG");
-	
-	int PlayerOneScore = 0;
-	int PlayerTwoScore = 0;
+    const char* fileContents1 = p2->GetFile("C:\\temp\\notnull.txt", fileSize);
+    const char* fileContents2 = p2->GetFile("C:\\temp\\new_test_file.txt", fileSize);
+    const char* fileContents3 = p2->GetFile("C:\\temp\\BigFile.txt", fileSize);
 
-	engine->Initialize(params);
+    return 0;
 
-	BaseFont* gameFont = engine->CreateFont();
-	gameFont->Load("Assets/arial.ttf");
+    // --- END TEST CODE ---
 
-	BaseText* playerOneScoreText = engine->CreateText();
-	playerOneScoreText->SetFont(gameFont);
-	playerOneScoreText->SetPos(0, 0);
-	playerOneScoreText->SetCharacterSize(24);
-	playerOneScoreText->SetColor(0xFFFFFFFF);
-	playerOneScoreText->SetText(std::to_string(PlayerOneScore));
+    // Below is game code
+    BaseGraphicEngine* engine = new GraphicEngine();
 
-	engine->AddObject(playerOneScoreText);
+    GraphicEngineInitParams* params = new GraphicEngineInitParams();
+    params->EnableVerticalSync = true;
+    params->WindowSize = new FSize(WINDOW_HEIGHT, WINDOW_WIDTH);
+    params->WindowTitle = new std::string("PONG");
 
-	BaseSprite* paddleSpriteOne = engine->CreateSprite();
-	BaseSprite* paddleSpriteTwo = engine->CreateSprite();
+    int PlayerOneScore = 0;
+    int PlayerTwoScore = 0;
 
-	BaseTexture* paddleTexture = engine->CreateTexture();
-	paddleTexture->Initalize(PADDLE_WIDTH, PADDLE_HEIGHT);
-	paddleTexture->SetSolidColor(0xFFEEDDFF);
+    engine->Initialize(params);
 
-	paddleSpriteOne->SetTexture(paddleTexture);
-	paddleSpriteTwo->SetTexture(paddleTexture);
+    BaseFont* gameFont = engine->CreateFont();
+    gameFont->Load("Assets/arial.ttf");
 
-	paddleSpriteOne->SetPos(300, 20);
-	paddleSpriteTwo->SetPos(300, 550);
-	
-	engine->AddObject(paddleSpriteOne);
-	engine->AddObject(paddleSpriteTwo);
+    BaseText* playerOneScoreText = engine->CreateText();
+    playerOneScoreText->SetFont(gameFont);
+    playerOneScoreText->SetPos(0, 0);
+    playerOneScoreText->SetCharacterSize(24);
+    playerOneScoreText->SetColor(0xFFFFFFFF);
+    playerOneScoreText->SetText(std::to_string(PlayerOneScore));
 
-	PongPaddle* paddleOne = new PongPaddle(paddleSpriteOne);
-	PongPaddle* paddleTwo= new PongPaddle(paddleSpriteTwo);
+    engine->AddObject(playerOneScoreText);
 
-	paddleOne->Velocity->Set(5, 0);
-	paddleTwo->Velocity->Set(5, 0);
+    BaseSprite* paddleSpriteOne = engine->CreateSprite();
+    BaseSprite* paddleSpriteTwo = engine->CreateSprite();
 
-	BaseSprite* ballSprite = engine->CreateSprite();
-	BaseTexture* ballTexture = engine->CreateTexture();
-	ballTexture->Initalize(25, 25);
-	ballTexture->SetSolidColor(0xFFFFFFFF);
+    BaseTexture* paddleTexture = engine->CreateTexture();
+    paddleTexture->Initalize(PADDLE_WIDTH, PADDLE_HEIGHT);
+    paddleTexture->SetSolidColor(0xFFEEDDFF);
 
-	ballSprite->SetTexture(ballTexture);
+    paddleSpriteOne->SetTexture(paddleTexture);
+    paddleSpriteTwo->SetTexture(paddleTexture);
 
-	PongBall* ball = new PongBall(ballSprite);
-	ball->SetupBounds(0, 0, 600, 600);
-	ball->ResetBallPosition();
+    paddleSpriteOne->SetPos(300, 20);
+    paddleSpriteTwo->SetPos(300, 550);
 
-	engine->AddObject(ball->BallSprite);
+    engine->AddObject(paddleSpriteOne);
+    engine->AddObject(paddleSpriteTwo);
 
-	ball->Direction->Set(1, 0);
-	ball->Velocity->Set(3, 3);
+    PongPaddle* paddleOne = new PongPaddle(paddleSpriteOne);
+    PongPaddle* paddleTwo = new PongPaddle(paddleSpriteTwo);
 
-	engine->Start();
+    paddleOne->Velocity->Set(5, 0);
+    paddleTwo->Velocity->Set(5, 0);
 
-	while (engine->IsRunning())
-	{
-		engine->ProcessEvents();
+    BaseSprite* ballSprite = engine->CreateSprite();
+    BaseTexture* ballTexture = engine->CreateTexture();
+    ballTexture->Initalize(25, 25);
+    ballTexture->SetSolidColor(0xFFFFFFFF);
 
-		ball->Update();
-		
-		// Check for game exit
-		if (engine->Keyboard->IsKeyPressed(Escape))
-			engine->Stop();
-		
-		// Check for player paddles movements
-		if (engine->Keyboard->IsKeyPressed(D) && paddleSpriteOne->GetX() < WINDOW_WIDTH - PADDLE_WIDTH)
-			paddleOne->Move(PADDLE_DIRECTION_RIGHT);
-		
-		if (engine->Keyboard->IsKeyPressed(A) && paddleSpriteOne->GetX() > 0)
-			paddleOne->Move(PADDLE_DIRECTION_LEFT);
+    ballSprite->SetTexture(ballTexture);
 
-		if (engine->Keyboard->IsKeyPressed(Right) && paddleSpriteTwo->GetX() < WINDOW_WIDTH - PADDLE_WIDTH)
-			paddleTwo->Move(PADDLE_DIRECTION_RIGHT);
+    PongBall* ball = new PongBall(ballSprite);
+    ball->SetupBounds(0, 0, 600, 600);
+    ball->ResetBallPosition();
 
-		if (engine->Keyboard->IsKeyPressed(Left) && paddleSpriteTwo->GetX() > 0)
-			paddleTwo->Move(PADDLE_DIRECTION_LEFT);
+    engine->AddObject(ball->BallSprite);
 
-		// Check for ball collision with the paddles.
-		FRectangle* p1CollisionBox = paddleOne->PaddleSprite->GetRectangle();
-		FRectangle* p2CollisionBox = paddleTwo->PaddleSprite->GetRectangle();
-		FRectangle* ballCollisionBox = ball->BallSprite->GetRectangle();
+    ball->Direction->Set(1, 0);
+    ball->Velocity->Set(3, 3);
 
-		if (p1CollisionBox->Intersect(ballCollisionBox))
-		{
-			// Simple collision for now
-			ball->Direction->Y *= -1;
-		}
-		else if (p2CollisionBox->Intersect(ballCollisionBox))
-		{
-			ball->Direction->Y *= -1;
-		}
+    engine->Start();
 
-		delete(p1CollisionBox);
-		delete(p2CollisionBox);
-		delete(ballCollisionBox);
+    while (engine->IsRunning())
+    {
+        engine->ProcessEvents();
 
-		// Check if the ball touches the top or bottom for points
-		if (ball->BallSprite->GetY() <= 0)
-		{
-			// P1 scores !
-			PlayerOneScore++;
-		}
-		else if (ball->BallSprite->GetY() >= 0)
-		{
-			// P2 scores !
-			PlayerTwoScore++;
-		}
+        ball->Update();
 
-		// Unstuck check, if the ball is going in straight +1 or -1 X velocity.
-		if (ball->Direction->X == -1 || ball->Direction->X == 1)
-		{
-			ball->Direction->X = (0.5 * ball->Direction->X);
-		}
+        // Check for game exit
+        if (engine->Keyboard->IsKeyPressed(Escape))
+            engine->Stop();
 
-		playerOneScoreText->SetText(std::to_string(PlayerOneScore++));
+        // Check for player paddles movements
+        if (engine->Keyboard->IsKeyPressed(D) && paddleSpriteOne->GetX() < WINDOW_WIDTH - PADDLE_WIDTH)
+            paddleOne->Move(PADDLE_DIRECTION_RIGHT);
 
-		engine->Draw();
-	}
+        if (engine->Keyboard->IsKeyPressed(A) && paddleSpriteOne->GetX() > 0)
+            paddleOne->Move(PADDLE_DIRECTION_LEFT);
 
-	return 0;
+        if (engine->Keyboard->IsKeyPressed(Right) && paddleSpriteTwo->GetX() < WINDOW_WIDTH - PADDLE_WIDTH)
+            paddleTwo->Move(PADDLE_DIRECTION_RIGHT);
+
+        if (engine->Keyboard->IsKeyPressed(Left) && paddleSpriteTwo->GetX() > 0)
+            paddleTwo->Move(PADDLE_DIRECTION_LEFT);
+
+        // Check for ball collision with the paddles.
+        FRectangle* p1CollisionBox = paddleOne->PaddleSprite->GetRectangle();
+        FRectangle* p2CollisionBox = paddleTwo->PaddleSprite->GetRectangle();
+        FRectangle* ballCollisionBox = ball->BallSprite->GetRectangle();
+
+        if (p1CollisionBox->Intersect(ballCollisionBox))
+        {
+            // Simple collision for now
+            ball->Direction->Y *= -1;
+        }
+        else if (p2CollisionBox->Intersect(ballCollisionBox))
+        {
+            ball->Direction->Y *= -1;
+        }
+
+        delete(p1CollisionBox);
+        delete(p2CollisionBox);
+        delete(ballCollisionBox);
+
+        // Check if the ball touches the top or bottom for points
+        if (ball->BallSprite->GetY() <= 0)
+        {
+            // P1 scores !
+            PlayerOneScore++;
+        }
+        else if (ball->BallSprite->GetY() >= 0)
+        {
+            // P2 scores !
+            PlayerTwoScore++;
+        }
+
+        // Unstuck check, if the ball is going in straight +1 or -1 X velocity.
+        if (ball->Direction->X == -1 || ball->Direction->X == 1)
+        {
+            ball->Direction->X = (0.5 * ball->Direction->X);
+        }
+
+        playerOneScoreText->SetText(std::to_string(PlayerOneScore++));
+
+        engine->Draw();
+    }
+
+    return 0;
 }
