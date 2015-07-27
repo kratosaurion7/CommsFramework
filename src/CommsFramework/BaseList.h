@@ -20,6 +20,20 @@ public:
         _container->push_back(item);
     };
 
+	void BaseList::AddRange(BaseList<T>* items)
+	{
+		auto it = items->GetContainer()->begin();
+
+		while (it != items->GetContainer()->end())
+		{
+			T listItem = *it;
+
+			_container->push_back(listItem);
+
+			it++;
+		}
+	};
+
     T BaseList::Get(int index)
     {
         int i = 0;

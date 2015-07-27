@@ -210,6 +210,8 @@ XmlNodeAttribute* XmlNode::GetAttribute(std::string attributeName)
 		{
 			return attr;
 		}
+
+		it++;
 	}
 
 	return NULL;

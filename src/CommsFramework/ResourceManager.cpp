@@ -1,6 +1,9 @@
 #include "ResourceManager.h"
 
 #include "Resource.h"
+#include "PointerList.h"
+
+#include <queue>
 
 #include "XmlReader.h"
 
@@ -9,6 +12,10 @@ ResourceManager::ResourceManager(std::string configFile)
     configFileLocation = configFile;
 
     secondaryConfigFiles = new BaseList<std::string>();
+
+	resources = new PointerList<Resource*>();
+
+	resourceContainers = new PointerList<ResourceContainer*>();
 }
 
 
@@ -18,49 +25,132 @@ ResourceManager::~ResourceManager()
 
 void ResourceManager::ParseConfigFiles()
 {
-    auto nextConfigFile = configFileLocation;
+    std::string nextConfigFile = configFileLocation;
 
-    bool hasNextConfig = true;
+	std::queue<std::string>* configQueue = new std::queue<std::string>();
 
-    while (hasNextConfig)
+	configQueue->push(nextConfigFile);
+
+	bool hasNextConfig = true;
+
+    while (strcmp(nextConfigFile.c_str(), "") != 0)
     {
         XmlReader rdr;
 
         rdr.LoadFile(nextConfigFile.c_str());
 
-        auto resNodes = rdr.GetNodes("resource");
+		PointerList<XmlNode*>* resNodes = rdr.GetNodes("resource"); // TODO : Check to see if I can delete that list after the resources have been created.
+		auto newResources = CreateListOfResourcesFromXmlNodes(*resNodes);
+		
+		resources->AddRange(newResources);
 
-        auto it = resNodes->GetContainer()->begin();
+		PointerList<XmlNode*>* subConfigs = rdr.GetNodes("configFile");
+		
+		auto it = subConfigs->GetContainer()->begin();
+		while (it != subConfigs->GetContainer()->end())
+		{
+			XmlNode* element = *it;
 
-        while (it != resNodes->GetContainer()->end())
-        {
-            Resource* res = new Resource();
-            
-            XmlNode* node = (*it);
-            
-			res->Name = node->GetAttribute("name")->AttributeValue;
+			std::string combinedPath = "assets\\";
+			std::string configFileName = element->GetAttribute("path")->AttributeValue;
+			combinedPath.append(configFileName);
+
+			configQueue->push(combinedPath);
+			secondaryConfigFiles->Add(configFileName); // Add the config file name NOT prepended by the assets root folder path.
+
+			it++;
+		}
+        
+		PointerList<XmlNode*>* containers = rdr.GetNodes("container");
+		auto newContainers = CreateListOfContainersFromXmlNodes(*containers);
+
+		resourceContainers->AddRange(newContainers);
+
+		configQueue->pop();
+
+		if (configQueue->empty())
+		{
+			nextConfigFile = "";
+		}
+		else 
+		{
+			nextConfigFile = configQueue->front();
+		}
 			
-			auto resType = node->GetAttribute("type")->AttributeValue;
-
-			if (strcmp(resType, "image") == 0)
-			{
-				res->Type = RES_IMG;
-			}
-			else if (strcmp(resType, "font") == 0)
-			{
-				res->Type = RES_FONT;
-			}
-			else if (strcmp(resType, "audio") == 0)
-			{
-				res->Type = RES_AUDIO;
-			}
-
-			res->Format = node->GetAttribute("format")->AttributeValue;
-        }
-
-        auto containers = rdr.GetNodes("container");
-
-        auto subConfigs = rdr.GetNodes("config");
     }
 
+	int i = 0;
+
+}
+
+PointerList<Resource*>* ResourceManager::CreateListOfResourcesFromXmlNodes(PointerList<XmlNode*> &resourceNodes)
+{
+	PointerList<Resource*>* resourceList = new PointerList<Resource*>();
+
+	auto it = resourceNodes.GetContainer()->begin();
+
+	while (it != resourceNodes.GetContainer()->end())
+	{
+		Resource* res = new Resource();
+
+		XmlNode* node = (*it);
+
+		res->Name = node->GetAttribute("name")->AttributeValue;
+
+		auto resType = node->GetAttribute("type")->AttributeValue;
+
+		if (strcmp(resType, "image") == 0)
+		{
+			res->Type = RES_IMG;
+		}
+		else if (strcmp(resType, "font") == 0)
+		{
+			res->Type = RES_FONT;
+		}
+		else if (strcmp(resType, "audio") == 0)
+		{
+			res->Type = RES_AUDIO;
+		}
+
+		res->Format = node->GetAttribute("format")->AttributeValue;
+
+		resourceList->Add(res);
+
+		it++;
+	}
+
+	return resourceList;
+}
+
+PointerList<ResourceContainer*>* ResourceManager::CreateListOfContainersFromXmlNodes(PointerList<XmlNode*>& containerNodes)
+{
+	PointerList<ResourceContainer*>* containersList = new PointerList<ResourceContainer*>();
+
+	auto it = containerNodes.GetContainer()->begin();
+
+	while (it != containerNodes.GetContainer()->end())
+	{
+		ResourceContainer* res = new ResourceContainer();
+
+		XmlNode* node = (*it);
+
+		res->Name = node->GetAttribute("name")->AttributeValue;
+		
+		auto resformat = node->GetAttribute("format")->AttributeValue;
+
+		if (strcmp(resformat, "package") == 0)
+		{
+			res->ContainerType = CONTAINER_TYPE_PACKAGE;
+		}
+		else if (strcmp(resformat, "folder") == 0)
+		{
+			res->ContainerType = CONTAINER_TYPE_FOLDER;
+		}
+		
+		containersList->Add(res);
+
+		it++;
+	}
+
+	return containersList;
 }

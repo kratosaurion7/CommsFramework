@@ -5,7 +5,10 @@
 #include "FileReader.h"
 
 #include "BaseList.h"
+#include "PointerList.h"
 
+#include "Resource.h"
+#include "ResourceContainer.h"
 #include "XmlReader.h"
 
 class ResourceManager
@@ -17,11 +20,15 @@ public:
     void ParseConfigFiles();
 
 private:
-    FileContents* configFileContents;
-	
     std::string configFileLocation;
 
     BaseList<std::string>* secondaryConfigFiles;
+
+	PointerList<Resource*>* resources;
+	PointerList<ResourceContainer*>* resourceContainers;
+
+	PointerList<Resource*>* CreateListOfResourcesFromXmlNodes(PointerList<XmlNode*> &resourceNodes);
+	PointerList<ResourceContainer*>* CreateListOfContainersFromXmlNodes(PointerList<XmlNode*> &resourceNodes);
 
 };
 

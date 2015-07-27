@@ -120,6 +120,9 @@
     <ClCompile Include="Resource.cpp">
       <Filter>Framework\Game\DataManager</Filter>
     </ClCompile>
+    <ClCompile Include="ResourceContainer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\texture.png">
@@ -221,6 +224,9 @@
       <Filter>Tests</Filter>
     </ClInclude>
     <ClInclude Include="Resource.h">
+      <Filter>Framework\Game\DataManager</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceContainer.h">
       <Filter>Framework\Game\DataManager</Filter>
     </ClInclude>
   </ItemGroup>

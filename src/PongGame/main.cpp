@@ -12,8 +12,14 @@
 #include "PackageFile.h"
 #include "TestRunner.h"
 
+#include "ResourceManager.h";
+
 int main()
 {
+	ResourceManager* resmon = new ResourceManager("assets\\config_file_example.xml");
+	resmon->ParseConfigFiles();
+
+	return 0;
     // --- BEGIN  TEST CODE ---	
 
     while (true)
