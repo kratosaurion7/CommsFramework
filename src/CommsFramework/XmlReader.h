@@ -52,6 +52,7 @@ public:
 
 	PointerList<XmlNodeAttribute*>* NodeAttributes;
 
+	XmlNodeAttribute* GetAttribute(std::string attributeName);
 };
 
 class XmlNodeAttribute

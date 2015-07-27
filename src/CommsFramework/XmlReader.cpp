@@ -8,8 +8,8 @@
 
 #include <functional>
 
-class XmlNode;
-class XmlNodeAttribute;
+//class XmlNode;
+//class XmlNodeAttribute;
 
 using namespace rapidxml;
 
@@ -196,4 +196,21 @@ XmlNode::~XmlNode()
 	NodeAttributes->Clear(); // TODO : Create a Delete() method.
 
 	delete(NodeAttributes);
+}
+
+XmlNodeAttribute* XmlNode::GetAttribute(std::string attributeName)
+{
+	auto it = NodeAttributes->GetContainer()->begin();
+
+	while (it != NodeAttributes->GetContainer()->end())
+	{
+		XmlNodeAttribute* attr = *it;
+
+		if (strcmp(attr->AttributeName, attributeName.c_str()) == 0)
+		{
+			return attr;
+		}
+	}
+
+	return NULL;
 }
