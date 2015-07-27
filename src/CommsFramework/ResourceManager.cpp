@@ -38,6 +38,24 @@ void ResourceManager::ParseConfigFiles()
             
             XmlNode* node = (*it);
             
+			res->Name = node->GetAttribute("name")->AttributeValue;
+			
+			auto resType = node->GetAttribute("type")->AttributeValue;
+
+			if (strcmp(resType, "image") == 0)
+			{
+				res->Type = RES_IMG;
+			}
+			else if (strcmp(resType, "font") == 0)
+			{
+				res->Type = RES_FONT;
+			}
+			else if (strcmp(resType, "audio") == 0)
+			{
+				res->Type = RES_AUDIO;
+			}
+
+			res->Format = node->GetAttribute("format")->AttributeValue;
         }
 
         auto containers = rdr.GetNodes("container");
