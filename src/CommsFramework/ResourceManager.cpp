@@ -53,6 +53,10 @@ void ResourceManager::ParseConfigFiles()
 		
 		resources->AddRange(newResources);
 
+		// Delete the intermediate container, the resources created by CreateListOfResourcesFromXmlNodes are still alive but the temporary
+		// container newResources is deleted.
+		delete(newResources);
+
 		PointerList<XmlNode*>* subConfigs = rdr.GetNodes("configFile");
 		
 		auto it = subConfigs->GetContainer()->begin();
@@ -74,6 +78,8 @@ void ResourceManager::ParseConfigFiles()
 		auto newContainers = CreateListOfContainersFromXmlNodes(*containers);
 
 		resourceContainers->AddRange(newContainers);
+
+		delete(newContainers);
 
 		configQueue.pop();
 

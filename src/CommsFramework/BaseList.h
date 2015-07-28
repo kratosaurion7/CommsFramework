@@ -12,6 +12,7 @@ public:
 
     ~BaseList()
     {
+		_container->clear();
         delete(_container);
     };
 
@@ -90,15 +91,7 @@ public:
 
 	void Clear()
 	{
-		auto it = _container->begin();
-
-		while (it != _container->end())
-		{
-			_container->erase(it);
-
-			it++;
-		}
-
+		_container->clear();
 	};
 
     int BaseList::Count()
