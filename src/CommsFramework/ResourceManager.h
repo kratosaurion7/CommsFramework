@@ -11,6 +11,8 @@
 #include "ResourceContainer.h"
 #include "XmlReader.h"
 
+class Resource;
+
 class ResourceManager
 {
 public:

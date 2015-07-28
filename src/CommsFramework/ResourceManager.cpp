@@ -20,7 +20,6 @@ ResourceManager::ResourceManager(std::string configFile)
     PathToAssetsFolder = "assets\\";
 }
 
-
 ResourceManager::~ResourceManager()
 {
     delete(secondaryConfigFiles);
@@ -34,13 +33,14 @@ ResourceManager::~ResourceManager()
 
 void ResourceManager::ParseConfigFiles()
 {
+	if (configFileLocation == "")
+		return;
+
     std::string nextConfigFile = configFileLocation;
 
     std::queue<std::string> configQueue;
 
 	configQueue.push(nextConfigFile);
-
-	bool hasNextConfig = true;
 
     while (strcmp(nextConfigFile.c_str(), "") != 0)
     {
@@ -66,7 +66,6 @@ void ResourceManager::ParseConfigFiles()
 
             std::string combinedPath = PathToAssetsFolder + element->GetAttribute("path")->AttributeValue;
 			std::string configFileName = element->GetAttribute("path")->AttributeValue;
-			//combinedPath.append(configFileName);
 
 			configQueue.push(combinedPath);
 			secondaryConfigFiles->Add(configFileName); // Add the config file name NOT prepended by the assets root folder path.
@@ -80,6 +79,7 @@ void ResourceManager::ParseConfigFiles()
 		resourceContainers->AddRange(newContainers);
 
 		delete(newContainers);
+
 
 		configQueue.pop();
 
@@ -109,7 +109,7 @@ PointerList<Resource*>* ResourceManager::CreateListOfResourcesFromXmlNodes(Point
 
 	while (it != resourceNodes.GetContainer()->end())
 	{
-		Resource* res = new Resource();
+		Resource* res = new Resource(this);
 
 		XmlNode* node = (*it);
 
