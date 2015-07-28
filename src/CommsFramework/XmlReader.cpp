@@ -193,8 +193,7 @@ XmlNode::XmlNode()
 
 XmlNode::~XmlNode()
 {
-	NodeAttributes->Clear(); // TODO : Create a Delete() method.
-
+	NodeAttributes->Release(); // TODO : Create a Delete() method.
 	delete(NodeAttributes);
 }
 

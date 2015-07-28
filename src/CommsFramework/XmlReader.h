@@ -48,7 +48,7 @@ public:
     XmlNode();
     ~XmlNode();
 
-	char* NodeName;
+	std::string NodeName;
 
 	PointerList<XmlNodeAttribute*>* NodeAttributes;
 

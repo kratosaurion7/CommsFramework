@@ -18,10 +18,10 @@ public:
     };
 
     void PointerList::Release()
-    {
+    {        
         for (std::list<T>::iterator it = _container->begin(); it != _container->end(); it++)
         {
-            SAFE_DELETE((*it));
+            delete *it;
         }
 
         _container->clear();

@@ -19,13 +19,16 @@ public:
 
     void ParseConfigFiles();
 
-private:
+    std::string PathToAssetsFolder;
+
     std::string configFileLocation;
 
     BaseList<std::string>* secondaryConfigFiles;
 
-	PointerList<Resource*>* resources;
-	PointerList<ResourceContainer*>* resourceContainers;
+    PointerList<Resource*>* resources;
+    PointerList<ResourceContainer*>* resourceContainers;
+
+private:
 
 	PointerList<Resource*>* CreateListOfResourcesFromXmlNodes(PointerList<XmlNode*> &resourceNodes);
 	PointerList<ResourceContainer*>* CreateListOfContainersFromXmlNodes(PointerList<XmlNode*> &resourceNodes);

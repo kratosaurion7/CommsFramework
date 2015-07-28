@@ -8,3 +8,5 @@ packaged asset file or loosely inside a folder.
 The manager uses XML files to locate the assets. All assets should be in a 
 folder below the one containing the executable.
 
+
+Classes used throughout the resource loading process :

@@ -16,26 +16,35 @@ ResourceManager::ResourceManager(std::string configFile)
 	resources = new PointerList<Resource*>();
 
 	resourceContainers = new PointerList<ResourceContainer*>();
+
+    PathToAssetsFolder = "assets\\";
 }
 
 
 ResourceManager::~ResourceManager()
 {
+    delete(secondaryConfigFiles);
+    
+    resources->Release();
+    delete(resources);
+
+    resourceContainers->Release();
+    delete(resourceContainers);
 }
 
 void ResourceManager::ParseConfigFiles()
 {
     std::string nextConfigFile = configFileLocation;
 
-	std::queue<std::string>* configQueue = new std::queue<std::string>();
+    std::queue<std::string> configQueue;
 
-	configQueue->push(nextConfigFile);
+	configQueue.push(nextConfigFile);
 
 	bool hasNextConfig = true;
 
     while (strcmp(nextConfigFile.c_str(), "") != 0)
     {
-        XmlReader rdr;
+        XmlReader rdr = XmlReader();
 
         rdr.LoadFile(nextConfigFile.c_str());
 
@@ -51,11 +60,11 @@ void ResourceManager::ParseConfigFiles()
 		{
 			XmlNode* element = *it;
 
-			std::string combinedPath = "assets\\";
+            std::string combinedPath = PathToAssetsFolder + element->GetAttribute("path")->AttributeValue;
 			std::string configFileName = element->GetAttribute("path")->AttributeValue;
-			combinedPath.append(configFileName);
+			//combinedPath.append(configFileName);
 
-			configQueue->push(combinedPath);
+			configQueue.push(combinedPath);
 			secondaryConfigFiles->Add(configFileName); // Add the config file name NOT prepended by the assets root folder path.
 
 			it++;
@@ -66,21 +75,24 @@ void ResourceManager::ParseConfigFiles()
 
 		resourceContainers->AddRange(newContainers);
 
-		configQueue->pop();
+		configQueue.pop();
 
-		if (configQueue->empty())
+		if (configQueue.empty())
 		{
 			nextConfigFile = "";
 		}
 		else 
 		{
-			nextConfigFile = configQueue->front();
+			nextConfigFile = configQueue.front();
 		}
-			
+
+        subConfigs->Release();
+        delete(subConfigs);
+        resNodes->Release();
+        delete(resNodes);
+        containers->Release();
+        delete(containers);
     }
-
-	int i = 0;
-
 }
 
 PointerList<Resource*>* ResourceManager::CreateListOfResourcesFromXmlNodes(PointerList<XmlNode*> &resourceNodes)

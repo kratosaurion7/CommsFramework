@@ -16,8 +16,17 @@
 
 int main()
 {
-	ResourceManager* resmon = new ResourceManager("assets\\config_file_example.xml");
-	resmon->ParseConfigFiles();
+    while (true)
+    {
+        ResourceManager* resmon = new ResourceManager("assets\\config_file_example.xml");
+        resmon->ParseConfigFiles();
+
+
+
+        delete(resmon);
+
+        int i = 0;
+    }
 
 	return 0;
     // --- BEGIN  TEST CODE ---	
