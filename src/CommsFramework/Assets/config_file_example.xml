@@ -1,6 +1,6 @@
 <config>
     <!-- Resource reference -->
-    <resource name="tree" type="image" format="png" />
+    <resource name="texture" type="image" format="png" />
     <resource name="grass" type="image" format="png" />
     <resource name="brick" type="image" format="png" />
     
@@ -9,7 +9,7 @@
     <resource name="img2/warrior" type="image" format="png" />
     
     <!-- Containers of resources -->
-    <container name="package" format="package" />
+    <container name="package.pack" format="package" />
     <container name="secondaryAssetFolder" format="folder" />
     
     <configFile path="config2.xml" /> <!-- Secondary config reference -->

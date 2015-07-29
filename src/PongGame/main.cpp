@@ -18,18 +18,29 @@ int main()
 {
     while (true)
     {
+		PackageFile* pack = new PackageFile();
+		pack->AddFile("assets\\texture.png");
+		pack->Save("package.pack");
+
         ResourceManager* resmon = new ResourceManager("assets\\config_file_example.xml");
         resmon->ParseConfigFiles();
 
+		auto res = resmon->Resources->Get(0);
 
+		int siz = 0;
+		auto dat = res->GetData(siz);
+
+		auto dat2 = res->GetData(siz);
 
         delete(resmon);
+		delete(pack);
+		
+		delete(dat);
 
         int i = 0;
     }
 
 	return 0;
-    // --- BEGIN  TEST CODE ---	
 
     while (true)
     {

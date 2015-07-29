@@ -33,7 +33,7 @@ public:
 	char* GetData(int& dataSize, std::string targetModuleName = "");
 
 private:
-    int _dataSize;
+	int _dataSize;
 	char* _dataCache;
 
 	ResourceManager* _resourceManager;

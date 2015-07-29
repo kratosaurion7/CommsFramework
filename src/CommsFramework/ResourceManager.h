@@ -15,6 +15,7 @@
 
 class Resource;
 class ResourceModule;
+class ResourceContainer;
 
 class ResourceManager
 {
@@ -31,11 +32,13 @@ public:
     char* GetResourceDataFromStore(Resource* res, int& dataLenght, std::string targetModule = "");
 
     PointerList<Resource*>* Resources;
-    PointerList<ResourceContainer*>* ResourceContainers;
+    
     PointerList<ResourceModule*>* Modules;
 
 private:
     BaseList<std::string>* secondaryConfigFiles;
+
+	PointerList<ResourceContainer*>* ResourceContainers;
 
 	PointerList<Resource*>* CreateListOfResourcesFromXmlNodes(PointerList<XmlNode*> &resourceNodes);
 	PointerList<ResourceContainer*>* CreateListOfContainersFromXmlNodes(PointerList<XmlNode*> &resourceNodes);

@@ -3,6 +3,8 @@
 Resource::Resource(ResourceManager* resourceManagerPointer)
 {
 	_resourceManager = resourceManagerPointer;
+	_dataCache = NULL;
+	_dataSize = 0;
 }
 
 Resource::~Resource()
@@ -14,9 +16,7 @@ char* Resource::GetData(int& dataSize, std::string targetModuleName)
 {
     if (_dataCache == NULL)
     {
-        _dataCache = _resourceManager->GetResourceDataFromStore(this, dataSize, targetModuleName);
-
-        _dataSize = dataSize;
+		_dataCache = _resourceManager->GetResourceDataFromStore(this, dataSize, targetModuleName);
 
         return _dataCache;
     }

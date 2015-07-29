@@ -132,9 +132,39 @@ void ResourceManager::ParseConfigFiles()
     }
 }
 
-char* ResourceManager::GetResourceDataFromStore(Resource * res, int& dataLenght, std::string targetModule)
+char* ResourceManager::GetResourceDataFromStore(Resource* res, int& dataLenght, std::string targetModule)
 {
-    return "";
+	ResourceModule* moduleOfResource = NULL;
+
+	for (int i = 0; i < Modules->Count();i++)
+	{
+		ResourceModule* nextModule = Modules->Get(i);
+
+		if (strcmp(nextModule->ModuleName.c_str(), targetModule.c_str()) == 0)
+		{
+			moduleOfResource = nextModule;
+			break;
+		}
+	}
+
+	auto it = ResourceContainers->GetContainer()->begin();
+	while (it != ResourceContainers->GetContainer()->end())
+	{
+		ResourceContainer* container = *it;
+		
+		if (container->Contains(res))
+		{
+			const char* data = container->LoadData(res, dataLenght);
+
+			return const_cast<char*>(data);
+		}
+
+		it++;
+	}
+
+	// Nothing found
+	dataLenght = 0;
+	return NULL;
 }
 
 PointerList<Resource*>* ResourceManager::CreateListOfResourcesFromXmlNodes(PointerList<XmlNode*> &resourceNodes)
