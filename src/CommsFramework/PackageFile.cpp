@@ -20,6 +20,11 @@ PackageFile::PackageFile()
 
 PackageFile::PackageFile(std::string packageFilePath)
 {
+	packageHeader = new Header;
+	entries = new PointerList<DirectoryEntry*>;
+
+	filesList = new PointerList<std::string>();
+
 	TargetPackage = packageFilePath;
 }
 
