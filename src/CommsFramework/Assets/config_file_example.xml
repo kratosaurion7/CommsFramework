@@ -13,4 +13,5 @@
     <container name="secondaryAssetFolder" format="folder" />
     
     <configFile path="config2.xml" /> <!-- Secondary config reference -->
+    <configFile path="config3.xml" />
 </config>
