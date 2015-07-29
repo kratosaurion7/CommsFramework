@@ -29,7 +29,7 @@ ResourceManager::~ResourceManager()
     ResourceContainers->Release();
     delete(ResourceContainers);
 
-    //Modules->Release();
+    Modules->Release();
     delete(Modules);
 }
 
@@ -80,8 +80,6 @@ void ResourceManager::ParseConfigFiles()
             module->Resources->AddRange(newResources);
 
             Modules->Add(module);
-
-            delete(module);
         }
 
         delete(rootNode); // TEST ?
