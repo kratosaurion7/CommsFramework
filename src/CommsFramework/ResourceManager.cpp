@@ -12,10 +12,9 @@ ResourceManager::ResourceManager(std::string configFile)
     configFileLocation = configFile;
 
     secondaryConfigFiles = new BaseList<std::string>();
-
-	resources = new PointerList<Resource*>();
-
-	resourceContainers = new PointerList<ResourceContainer*>();
+	Resources = new PointerList<Resource*>();
+	ResourceContainers = new PointerList<ResourceContainer*>();
+    Modules = new PointerList<ResourceModule*>();
 
     PathToAssetsFolder = "assets\\";
 }
@@ -24,11 +23,14 @@ ResourceManager::~ResourceManager()
 {
     delete(secondaryConfigFiles);
     
-    resources->Release();
-    delete(resources);
+    Resources->Release();
+    delete(Resources);
 
-    resourceContainers->Release();
-    delete(resourceContainers);
+    ResourceContainers->Release();
+    delete(ResourceContainers);
+
+    //Modules->Release();
+    delete(Modules);
 }
 
 void ResourceManager::ParseConfigFiles()
@@ -42,16 +44,47 @@ void ResourceManager::ParseConfigFiles()
 
 	configQueue.push(nextConfigFile);
 
-    while (strcmp(nextConfigFile.c_str(), "") != 0)
+	while (strcmp(nextConfigFile.c_str(), "") != 0)
     {
         XmlReader rdr = XmlReader();
 
         rdr.LoadFile(nextConfigFile.c_str());
 
-		PointerList<XmlNode*>* resNodes = rdr.GetNodes("resource"); // TODO : Check to see if I can delete that list after the resources have been created.
+		PointerList<XmlNode*>* resNodes = rdr.GetNodes("resource");
 		auto newResources = CreateListOfResourcesFromXmlNodes(*resNodes);
 		
-		resources->AddRange(newResources);
+		Resources->AddRange(newResources);
+
+        auto rootNode = rdr.GetNode("config");
+        auto moduleNameAttr = rootNode->GetAttribute("ModuleName");
+
+        if (moduleNameAttr != NULL)
+        {
+            ResourceModule* module = NULL;
+            
+            for (int i = 0; i < Modules->Count(); i++)
+            {
+                ResourceModule* testModule = Modules->Get(i);
+
+                if (testModule->ModuleName == moduleNameAttr->AttributeName)
+                {
+                    module = testModule;
+                }
+            }
+
+            if(module == NULL)
+                module = new ResourceModule();
+
+            module->ModuleName = moduleNameAttr->AttributeValue;
+            
+            module->Resources->AddRange(newResources);
+
+            Modules->Add(module);
+
+            delete(module);
+        }
+
+        delete(rootNode); // TEST ?
 
 		// Delete the intermediate container, the resources created by CreateListOfResourcesFromXmlNodes are still alive but the temporary
 		// container newResources is deleted.
@@ -76,7 +109,7 @@ void ResourceManager::ParseConfigFiles()
 		PointerList<XmlNode*>* containers = rdr.GetNodes("container");
 		auto newContainers = CreateListOfContainersFromXmlNodes(*containers);
 
-		resourceContainers->AddRange(newContainers);
+		ResourceContainers->AddRange(newContainers);
 
 		delete(newContainers);
 
@@ -99,6 +132,11 @@ void ResourceManager::ParseConfigFiles()
         containers->Release();
         delete(containers);
     }
+}
+
+char* ResourceManager::GetResourceDataFromStore(Resource * res, int& dataLenght, std::string targetModule)
+{
+    return "";
 }
 
 PointerList<Resource*>* ResourceManager::CreateListOfResourcesFromXmlNodes(PointerList<XmlNode*> &resourceNodes)

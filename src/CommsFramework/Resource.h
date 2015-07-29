@@ -30,11 +30,16 @@ public:
 
     std::string Format;
 
-	char* GetData();
+	char* GetData(int& dataSize, std::string targetModuleName = "");
 
 private:
+    int _dataSize;
 	char* _dataCache;
 
 	ResourceManager* _resourceManager;
+
+    bool IsDataLoaded();
+
+    void LoadDataFromStore();
 };
 

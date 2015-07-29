@@ -60,6 +60,6 @@ class XmlNodeAttribute
 public:
 	char* AttributeName;
 
-	int valueSize;
-	char* AttributeValue;
+	int valueSize; // TODO : Check if removing this member
+	char* AttributeValue; // MUST BE NULL TERMINATED
 };

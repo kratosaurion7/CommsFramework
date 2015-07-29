@@ -121,7 +121,10 @@
       <Filter>Framework\Game\DataManager</Filter>
     </ClCompile>
     <ClCompile Include="ResourceContainer.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Framework\Game\DataManager</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceModule.cpp">
+      <Filter>Framework\Game\DataManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -227,6 +230,9 @@
       <Filter>Framework\Game\DataManager</Filter>
     </ClInclude>
     <ClInclude Include="ResourceContainer.h">
+      <Filter>Framework\Game\DataManager</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceModule.h">
       <Filter>Framework\Game\DataManager</Filter>
     </ClInclude>
   </ItemGroup>

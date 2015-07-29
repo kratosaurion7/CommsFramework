@@ -44,7 +44,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Static|Win32'" Label="Configuration">
@@ -167,12 +167,12 @@
       <AdditionalDependencies>libzmq-v120-mt-4_0_4.lib;sfml-graphics-d.lib;sfml-system-d.lib;sfml-window-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>XCOPY /y "$(ProjectDir)..\..\libs\SFML\x32\bin\*.dll" "$(TargetDir)"
-XCOPY /y "$(ProjectDir)..\..\libs\ZeroMQ\x32\bin\libzmq-v120-mt-4_0_4.dll" "$(TargetDir)"
+      <Command>XCOPY /Y "$(ProjectDir)..\..\libs\SFML\x32\bin\*.dll" "$(TargetDir)"
+XCOPY /Y "$(ProjectDir)..\..\libs\ZeroMQ\x32\bin\libzmq-v120-mt-4_0_4.dll" "$(TargetDir)"
 
 mkdir "$(TargetDir)Assets"
 
-XCOPY /y /E "Assets\*" "$(TargetDir)Assets"</Command>
+XCOPY /Y /E "Assets\*" "$(TargetDir)Assets"</Command>
     </PostBuildEvent>
     <Lib>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
@@ -324,6 +324,7 @@ XCOPY /y "E:\Prog\lib\sfml\SFML-2.3_x64\bin\*.dll" "$(TargetDir)"
     <ClCompile Include="Resource.cpp" />
     <ClCompile Include="ResourceContainer.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
+    <ClCompile Include="ResourceModule.cpp" />
     <ClCompile Include="SFMLFont.cpp" />
     <ClCompile Include="SFMLKeyboard.cpp" />
     <ClCompile Include="SFMLText.cpp" />
@@ -360,6 +361,7 @@ XCOPY /y "E:\Prog\lib\sfml\SFML-2.3_x64\bin\*.dll" "$(TargetDir)"
     <ClInclude Include="Resource.h" />
     <ClInclude Include="ResourceContainer.h" />
     <ClInclude Include="ResourceManager.h" />
+    <ClInclude Include="ResourceModule.h" />
     <ClInclude Include="SFMLDrawable.h" />
     <ClInclude Include="SFMLFont.h" />
     <ClInclude Include="SFMLKeyboard.h" />

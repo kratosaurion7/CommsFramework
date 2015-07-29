@@ -1,4 +1,4 @@
-<config>
+<config ModuleName="overworld">
     <!-- Resource reference -->
     <resource name="poop" type="image" format="png" />
     <resource name="keyboard" type="image" format="png" />

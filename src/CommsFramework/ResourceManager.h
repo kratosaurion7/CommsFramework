@@ -9,9 +9,12 @@
 
 #include "Resource.h"
 #include "ResourceContainer.h"
+#include "ResourceModule.h"
+#include "ResourceModule.h"
 #include "XmlReader.h"
 
 class Resource;
+class ResourceModule;
 
 class ResourceManager
 {
@@ -25,12 +28,14 @@ public:
 
     std::string configFileLocation;
 
-    BaseList<std::string>* secondaryConfigFiles;
+    char* GetResourceDataFromStore(Resource* res, int& dataLenght, std::string targetModule = "");
 
-    PointerList<Resource*>* resources;
-    PointerList<ResourceContainer*>* resourceContainers;
+    PointerList<Resource*>* Resources;
+    PointerList<ResourceContainer*>* ResourceContainers;
+    PointerList<ResourceModule*>* Modules;
 
 private:
+    BaseList<std::string>* secondaryConfigFiles;
 
 	PointerList<Resource*>* CreateListOfResourcesFromXmlNodes(PointerList<XmlNode*> &resourceNodes);
 	PointerList<ResourceContainer*>* CreateListOfContainersFromXmlNodes(PointerList<XmlNode*> &resourceNodes);
