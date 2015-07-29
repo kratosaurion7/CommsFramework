@@ -128,11 +128,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Assets\texture.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="XmlReader.h">
       <Filter>Framework\XML</Filter>
     </ClInclude>

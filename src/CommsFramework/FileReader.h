@@ -34,9 +34,6 @@ public:
 private:
 	std::fstream* fileStream;
 	
-	char* newContent;
-	int contentSize;
-
 	int GetFileSize();
 };
 

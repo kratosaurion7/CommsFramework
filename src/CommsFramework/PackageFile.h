@@ -62,9 +62,11 @@ public:
 private:
 	Header* packageHeader;
 
-	PointerList<std::string>* filesList;
+	BaseList<std::string>* filesList;
 
 	PointerList<DirectoryEntry*>* entries;
+
+	FileContents* contents;
 
 	std::string TargetPackage;
 

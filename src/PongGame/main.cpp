@@ -20,7 +20,10 @@ int main()
     {
 		PackageFile* pack = new PackageFile();
 		pack->AddFile("assets\\texture.png");
+		pack->AddFile("assets\\texture.png");
 		pack->Save("package.pack");
+
+		delete(pack);
 
         ResourceManager* resmon = new ResourceManager("assets\\config_file_example.xml");
         resmon->ParseConfigFiles();
@@ -33,7 +36,6 @@ int main()
 		auto dat2 = res->GetData(siz);
 
         delete(resmon);
-		delete(pack);
 		
 		delete(dat);
 

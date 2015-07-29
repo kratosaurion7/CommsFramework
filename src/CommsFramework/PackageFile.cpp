@@ -13,17 +13,19 @@
 PackageFile::PackageFile()
 {
 	packageHeader = new Header;
+	contents = NULL;
 	entries = new PointerList<DirectoryEntry*>;
 
-	filesList = new PointerList<std::string>();
+	filesList = new BaseList<std::string>();
 }
 
 PackageFile::PackageFile(std::string packageFilePath)
 {
 	packageHeader = new Header;
+	contents = NULL;
 	entries = new PointerList<DirectoryEntry*>;
 
-	filesList = new PointerList<std::string>();
+	filesList = new BaseList<std::string>();
 
 	TargetPackage = packageFilePath;
 }
@@ -31,19 +33,13 @@ PackageFile::PackageFile(std::string packageFilePath)
 
 PackageFile::~PackageFile()
 {
-	SAFE_DELETE(packageHeader);
+	delete(packageHeader);
 	
-	auto it = entries->GetContainer()->begin();
+	delete(contents);
 
-	while (it != entries->GetContainer()->end())
-	{
-		auto element = *it;
+	delete(filesList);
 
-		delete(element);
-
-		it++;
-	}
-
+	entries->Release();
 	delete(entries);
 }
 
@@ -105,7 +101,7 @@ void PackageFile::Save(std::string savePath)
 {
 	OutputFileName = savePath;
 
-	FileReader* rdr = new FileReader();
+	FileReader rdr;
 
 	int headerSize = HEADER_SIZE; // Header Size
 	int directorySize = 0; // Directory size
@@ -118,9 +114,12 @@ void PackageFile::Save(std::string savePath)
 	{
 		std::string fileName = *it;
 
-		rdr->OpenFile(fileName.c_str());
+		rdr.OpenFile(fileName.c_str());
 		
-		FileContents* contents = rdr->GetFileContents();
+		if (contents != NULL)
+			delete(contents);
+
+		contents = rdr.GetFileContents();
 
 		DirectoryEntry* newFileEntry = new DirectoryEntry();
 
@@ -135,18 +134,15 @@ void PackageFile::Save(std::string savePath)
 
 		entries->Add(newFileEntry);
 
-		rdr->Close();
+		rdr.Close();
 
 		it++;
 	}
 
 	int fileSize = headerSize + bufPos + directorySize;
-	char* fileBuffer = new char[fileSize];
 
 	std::ofstream fileStream;
 	fileStream.open(OutputFileName.c_str(), std::ios::out | std::ios::binary | std::ios::trunc);
-
-	auto x = sizeof(char[256]);
 
 	Header *packHeader = new Header();
 	strcpy(packHeader->sig, "PACK");
@@ -157,6 +153,8 @@ void PackageFile::Save(std::string savePath)
 	fileStream.write(packHeader->sig, 4);
 	fileStream.write((char*)&packHeader->dirOffset, 4);
 	fileStream.write((char*)&packHeader->dirLength, 4);
+
+	delete(packHeader);
 
 	auto it2 = entries->GetContainer()->begin();
 

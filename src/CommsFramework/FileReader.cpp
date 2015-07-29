@@ -9,7 +9,6 @@
 FileReader::FileReader()
 {
 	fileStream = new std::fstream();
-	newContent = NULL;
 }
 
 FileReader::~FileReader()
@@ -17,7 +16,6 @@ FileReader::~FileReader()
 	if (fileStream != NULL)
 		fileStream->close();
 
-	//delete(newContent); Throws exception sometimes
 	delete(fileStream);
 }
 
@@ -38,7 +36,7 @@ FileContents* FileReader::GetFileContents(bool ensureNullTerminated)
 	
 	int fileSize = GetFileSize();
 
-	newContent = new char[fileSize + 1];
+	auto newContent = new char[fileSize + 1];
 
 	fileStream->read(newContent, fileSize);
 	
