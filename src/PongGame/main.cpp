@@ -27,6 +27,10 @@ int main()
 
         ResourceManager* resmon = new ResourceManager("assets\\config_file_example.xml");
         resmon->ParseConfigFiles();
+		// [](const int n) { return n == 8;}
+		auto overworldModules = resmon->Modules->Where([](const ResourceModule* p) {
+			return strcmp(p->ModuleName.c_str(), "overworld") == 0;
+		});
 
 		auto res = resmon->Resources->Get(0);
 
@@ -38,6 +42,8 @@ int main()
         delete(resmon);
 		
 		delete(dat);
+
+		delete(overworldModules);
 
         int i = 0;
     }

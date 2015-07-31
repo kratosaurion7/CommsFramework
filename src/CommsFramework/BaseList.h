@@ -2,6 +2,8 @@
 
 #include <list>
 
+#include <functional>
+
 template <class T> class BaseList
 {
 public:
@@ -52,6 +54,25 @@ public:
         return NULL;
     };
 
+	BaseList<T>* BaseList::Where(std::function<bool(T)> predicate)
+	{
+		BaseList<T>* retList = new BaseList<T>();
+
+		for (std::list<T>::iterator it = _container->begin(); it != _container->end(); it++)
+		{
+			auto test = predicate(*it);
+
+			if (test)
+			{
+				retList->Add(*it);
+			}
+
+			it++;
+		}
+
+		return retList;
+	};
+
 	int BaseList::IndexOf(T item)
 	{
 		int i = 0;
@@ -69,7 +90,7 @@ public:
 		}
 
 		return NULL;
-	}
+	};
 
     void BaseList::RemoveAt(int index)
     {
