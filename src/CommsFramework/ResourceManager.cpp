@@ -67,9 +67,9 @@ void ResourceManager::ParseConfigFiles()
 		Resources->AddRange(newResources);
 
         XmlNode* rootNode = rdr.GetNode("config");
-        XmlNodeAttribute* moduleNameAttr = rootNode->GetAttribute("ModuleName");
+        XmlNodeAttribute moduleNameAttr = rootNode->GetAttribute("ModuleName");
 
-        if (moduleNameAttr != NULL)
+        if (moduleNameAttr.AttributeName != NULL)
         {
             GameModule* module = NULL;
             
@@ -77,7 +77,7 @@ void ResourceManager::ParseConfigFiles()
             {
                 GameModule* testModule = Modules->Get(i);
 
-                if (testModule->ModuleName == moduleNameAttr->AttributeName)
+                if (testModule->ModuleName == moduleNameAttr.AttributeName)
                 {
                     module = testModule;
                 }
@@ -86,7 +86,7 @@ void ResourceManager::ParseConfigFiles()
             if(module == NULL)
                 module = new GameModule();
 
-            module->ModuleName = moduleNameAttr->AttributeValue;
+            module->ModuleName = moduleNameAttr.AttributeValue;
             
             module->Resources->AddRange(newResources);
 
@@ -106,8 +106,8 @@ void ResourceManager::ParseConfigFiles()
 		{
 			XmlNode* element = *it;
 
-            std::string combinedPath = PathToAssetsFolder + element->GetAttribute("path")->AttributeValue;
-			std::string configFileName = element->GetAttribute("path")->AttributeValue;
+            std::string combinedPath = PathToAssetsFolder + element->GetAttribute("path").AttributeValue;
+			std::string configFileName = element->GetAttribute("path").AttributeValue;
 
 			configQueue.push(combinedPath);
 			secondaryConfigFiles->Add(configFileName); // Add the config file name NOT prepended by the assets root folder path.
@@ -122,8 +122,8 @@ void ResourceManager::ParseConfigFiles()
 
 		delete(newContainers);
 
-		PointerList<XmlNode*>* spriteNodes = rdr.GetNodes("sprite");
-		PointerList<SpriteDescriptor*>* newSprites = CreateSpritesFromXmlNodes(*spriteNodes);
+		//PointerList<XmlNode*>* spriteNodes = rdr.GetNodes("sprite");
+		//PointerList<SpriteDescriptor*>* newSprites = CreateSpritesFromXmlNodes(*spriteNodes);
 
 		configQueue.pop();
 
@@ -205,9 +205,9 @@ PointerList<Resource*>* ResourceManager::CreateListOfResourcesFromXmlNodes(Point
 
 		XmlNode* node = (*it);
 
-		res->Name = node->GetAttribute("name")->AttributeValue;
+		res->Name = node->GetAttribute("name").AttributeValue;
 
-		auto resType = node->GetAttribute("type")->AttributeValue;
+		auto resType = node->GetAttribute("type").AttributeValue;
 
 		if (strcmp(resType, "image") == 0)
 		{
@@ -222,7 +222,7 @@ PointerList<Resource*>* ResourceManager::CreateListOfResourcesFromXmlNodes(Point
 			res->Type = RES_AUDIO;
 		}
 
-		res->Format = node->GetAttribute("format")->AttributeValue;
+		res->Format = node->GetAttribute("format").AttributeValue;
 
 		resourceList->Add(res);
 
@@ -244,9 +244,9 @@ PointerList<ResourceContainer*>* ResourceManager::CreateListOfContainersFromXmlN
 
 		XmlNode* node = (*it);
 
-		res->Name = node->GetAttribute("name")->AttributeValue;
+		res->Name = node->GetAttribute("name").AttributeValue;
 		
-		auto resformat = node->GetAttribute("format")->AttributeValue;
+		auto resformat = node->GetAttribute("format").AttributeValue;
 
 		if (strcmp(resformat, "package") == 0)
 		{

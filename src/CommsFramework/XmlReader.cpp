@@ -221,29 +221,29 @@ PointerList<XmlNode*>* XmlNode::Children()
 
 }
 
-XmlNodeAttribute* XmlNode::GetAttribute(std::string attributeName)
+XmlNodeAttribute XmlNode::GetAttribute(std::string attributeName)
 {
 	if (data_node != NULL)
 	{
-		XmlNodeAttribute* returnAttr = new XmlNodeAttribute();
+        XmlNodeAttribute returnAttr;
 
 		auto attr = data_node->first_attribute(attributeName.c_str());
 
 		if (attr != NULL)
 		{
-			returnAttr->AttributeName = attr->name();
-			returnAttr->AttributeValue = attr->value();
-			returnAttr->valueSize = attr->value_size();
+			returnAttr.AttributeName = attr->name();
+			returnAttr.AttributeValue = attr->value();
+			returnAttr.valueSize = attr->value_size();
 
 			return returnAttr;
 		}
 		else 
 		{
-			return NULL;
+			return XmlNodeAttribute();
 		}
 	}
 	else 
 	{
-		return NULL;
+		return XmlNodeAttribute();
 	}
 }

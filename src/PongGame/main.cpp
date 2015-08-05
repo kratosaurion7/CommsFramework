@@ -26,8 +26,9 @@ int main()
 		delete(pack);
 
         ResourceManager* resmon = new ResourceManager();
-        resmon->ParseConfigFiles();
-		// [](const int n) { return n == 8;}
+        resmon->Init(ResourceManagerInitParams::GetDefaultParams());
+
+        // [](const int n) { return n == 8;}
 		//auto overworldModules = resmon->Modules->Where([](const GameModule* p) {
 		//	return strcmp(p->ModuleName.c_str(), "overworld") == 0;
 		//});
