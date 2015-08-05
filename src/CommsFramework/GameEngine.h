@@ -10,7 +10,7 @@ struct GameEngineInitParams
 {
 	GraphicEngineInitParams* GraphicsParams;
 
-	std::string RootConfigFile;
+	ResourceManagerInitParams* ResourceParams;
 
 	static GameEngineInitParams* CreateDefaultParams();
 };

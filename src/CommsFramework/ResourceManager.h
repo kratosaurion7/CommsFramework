@@ -17,13 +17,21 @@ class Resource;
 class GameModule;
 class ResourceContainer;
 
+struct ResourceManagerInitParams {
+
+	std::string AssetRootFolder;
+
+	std::string ConfigFileLocation;
+
+};
+
 class ResourceManager
 {
 public:
 	ResourceManager();
 	~ResourceManager();
 
-	void Init(std::string configFile);
+	void Init(ResourceManagerInitParams* initParams);
 
     void ParseConfigFiles();
 
@@ -40,6 +48,8 @@ public:
 	char* GetResourceDataFromStore(Resource* res, int& dataLenght, GameModule* targetModule = NULL);
 
 private:
+	ResourceManagerInitParams* startingParams;
+
     BaseList<std::string>* secondaryConfigFiles;
 
 	PointerList<GameModule*>* Modules;

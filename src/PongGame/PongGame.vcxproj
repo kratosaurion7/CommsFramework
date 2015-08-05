@@ -14,6 +14,7 @@
     <ProjectGuid>{44F0A79A-ADAA-4A71-8704-D85F0C0F302B}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>PongGame</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

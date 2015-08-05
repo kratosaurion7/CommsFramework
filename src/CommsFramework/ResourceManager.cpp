@@ -14,13 +14,16 @@ ResourceManager::ResourceManager()
 	ResourceContainers = new PointerList<ResourceContainer*>();
     Modules = new PointerList<GameModule*>();
 
-    PathToAssetsFolder = "assets\\";
+    PathToAssetsFolder = "assets\\"; // Temp default value
+	startingParams = NULL;
 }
 
 ResourceManager::~ResourceManager()
 {
     delete(secondaryConfigFiles);
-    
+	
+	delete(startingParams);
+
     Resources->Release();
     delete(Resources);
 
@@ -31,10 +34,12 @@ ResourceManager::~ResourceManager()
     delete(Modules);
 }
 
-void ResourceManager::Init(std::string configFile)
+void ResourceManager::Init(ResourceManagerInitParams* initParams)
 {
-	configFileLocation = configFile;
+	configFileLocation = initParams->ConfigFileLocation;
+	PathToAssetsFolder = initParams->AssetRootFolder;
 
+	startingParams = initParams;
 }
 
 void ResourceManager::ParseConfigFiles()
