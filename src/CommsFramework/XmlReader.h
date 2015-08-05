@@ -45,14 +45,23 @@ private:
 class XmlNode
 {
 public:
-    XmlNode();
+    XmlNode(xml_node<>* xmlData);
     ~XmlNode();
 
-	std::string NodeName;
+	std::string NodeName();
 
-	PointerList<XmlNodeAttribute*>* NodeAttributes;
+	std::string Contents();
+
+	PointerList<XmlNode*>* Children();
+
+	/*PointerList<XmlNodeAttribute*>* NodeAttributes;*/
 
 	XmlNodeAttribute* GetAttribute(std::string attributeName);
+
+
+
+private:
+	xml_node<>* data_node;
 };
 
 class XmlNodeAttribute

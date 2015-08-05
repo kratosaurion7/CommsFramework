@@ -50,22 +50,8 @@ XmlNode * XmlReader::GetNode(std::string nodeName)
 
 	if (ret != NULL)
 	{
-		XmlNode* foundNode = new XmlNode();
-		foundNode->NodeName = ret->name();
+		XmlNode* foundNode = new XmlNode(ret);
 		
-		auto attr = ret->first_attribute();
-		
-		while (attr != NULL)
-		{
-			XmlNodeAttribute* newAttribute = new XmlNodeAttribute();
-			newAttribute->AttributeName = attr->name();
-			newAttribute->AttributeValue = attr->value();
-			newAttribute->valueSize = attr->value_size();
-			
-			foundNode->NodeAttributes->Add(newAttribute);
-
-			attr = attr->next_attribute();
-		}
 
 		return foundNode;
 	}
@@ -95,22 +81,7 @@ PointerList<XmlNode*>* XmlReader::GetNodes(std::string nodeName)
 	{
 		auto item = *it;
 
-		XmlNode* foundNode = new XmlNode();
-		foundNode->NodeName = item->name();
-
-		auto attr = item->first_attribute();
-
-		while (attr != NULL)
-		{
-			XmlNodeAttribute* newAttribute = new XmlNodeAttribute();
-			newAttribute->AttributeName = attr->name();
-			newAttribute->AttributeValue = attr->value();
-			newAttribute->valueSize = attr->value_size();
-
-			foundNode->NodeAttributes->Add(newAttribute);
-
-			attr = attr->next_attribute();
-		}
+		XmlNode* foundNode = new XmlNode(item);
 
 		nodeList->Add(foundNode);
 
@@ -186,32 +157,85 @@ void XmlReader::FindNodeList(xml_node<>* node, std::function<bool(rapidxml::xml_
 	FindNodeList(nextNode, predicate, aggregate);
 }
 
-XmlNode::XmlNode()
+XmlNode::XmlNode(xml_node<>* xmlData)
 {
-	NodeAttributes = new PointerList<XmlNodeAttribute*>();
+	//NodeAttributes = new PointerList<XmlNodeAttribute*>();
+
+	data_node = xmlData;
 }
 
 XmlNode::~XmlNode()
 {
-	NodeAttributes->Release(); // TODO : Create a Delete() method.
-	delete(NodeAttributes);
+	//NodeAttributes->Release(); // TODO : Create a Delete() method.
+	//delete(NodeAttributes);
+}
+
+std::string XmlNode::NodeName()
+{
+	if (data_node != NULL)
+	{
+		return data_node->name();
+	}
+	else 
+	{
+		return "";
+	}
+}
+
+std::string XmlNode::Contents()
+{
+	if (data_node != NULL)
+	{
+		return data_node->value();
+	}
+	else
+	{
+		return "";
+	}
+}
+
+PointerList<XmlNode*>* XmlNode::Children()
+{
+	if (data_node != NULL)
+	{
+		PointerList<XmlNode*>* childrenList = new PointerList<XmlNode*>();
+
+		auto nextNode = data_node->first_node();
+
+		while (nextNode != 0)
+		{
+			XmlNode* newNode = new XmlNode(nextNode);
+
+			childrenList->Add(newNode);
+
+			nextNode->next_sibling();
+		}
+
+		return childrenList;
+	}
+	else 
+	{
+		return NULL;
+	}
+
 }
 
 XmlNodeAttribute* XmlNode::GetAttribute(std::string attributeName)
 {
-	auto it = NodeAttributes->GetContainer()->begin();
-
-	while (it != NodeAttributes->GetContainer()->end())
+	if (data_node != NULL)
 	{
-		XmlNodeAttribute* attr = *it;
+		XmlNodeAttribute* returnAttr;
 
-		if (strcmp(attr->AttributeName, attributeName.c_str()) == 0)
-		{
-			return attr;
-		}
+		auto attr = data_node->first_attribute(attributeName.c_str());
 
-		it++;
+		returnAttr->AttributeName = attr->name();
+		returnAttr->AttributeValue = attr->value();
+		returnAttr->valueSize = attr->value_size();
+
+		return returnAttr;
 	}
-
-	return NULL;
+	else 
+	{
+		return NULL;
+	}
 }

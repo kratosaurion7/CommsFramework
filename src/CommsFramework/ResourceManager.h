@@ -23,7 +23,6 @@ struct ResourceManagerInitParams {
 	std::string AssetRootFolder;
 
 	std::string ConfigFileLocation;
-
 };
 
 class ResourceManager
