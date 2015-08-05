@@ -12,7 +12,7 @@
 #include "PackageFile.h"
 #include "TestRunner.h"
 
-#include "ResourceManager.h";
+#include "ResourceManager.h"
 
 int main()
 {
@@ -25,12 +25,12 @@ int main()
 
 		delete(pack);
 
-        ResourceManager* resmon = new ResourceManager("assets\\config_file_example.xml");
+        ResourceManager* resmon = new ResourceManager();
         resmon->ParseConfigFiles();
 		// [](const int n) { return n == 8;}
-		auto overworldModules = resmon->Modules->Where([](const ResourceModule* p) {
-			return strcmp(p->ModuleName.c_str(), "overworld") == 0;
-		});
+		//auto overworldModules = resmon->Modules->Where([](const GameModule* p) {
+		//	return strcmp(p->ModuleName.c_str(), "overworld") == 0;
+		//});
 
 		auto res = resmon->Resources->Get(0);
 
@@ -43,7 +43,7 @@ int main()
 		
 		delete(dat);
 
-		delete(overworldModules);
+		//delete(overworldModules);
 
         int i = 0;
     }

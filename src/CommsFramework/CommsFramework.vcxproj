@@ -312,8 +312,8 @@ XCOPY /y "E:\Prog\lib\sfml\SFML-2.3_x64\bin\*.dll" "$(TargetDir)"
     <ClCompile Include="BitHelper.cpp" />
     <ClCompile Include="DrawObject.cpp" />
     <ClCompile Include="FRectangle.cpp" />
+    <ClCompile Include="GameEngine.cpp" />
     <ClCompile Include="GameObject.cpp" />
-    <ClCompile Include="GraphicEngineInitParams.cpp" />
     <ClCompile Include="GraphicEngine.cpp" />
     <ClCompile Include="FSize.cpp" />
     <ClCompile Include="FPosition.cpp" />
@@ -325,7 +325,7 @@ XCOPY /y "E:\Prog\lib\sfml\SFML-2.3_x64\bin\*.dll" "$(TargetDir)"
     <ClCompile Include="Resource.cpp" />
     <ClCompile Include="ResourceContainer.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
-    <ClCompile Include="ResourceModule.cpp" />
+    <ClCompile Include="GameModule.cpp" />
     <ClCompile Include="SFMLFont.cpp" />
     <ClCompile Include="SFMLKeyboard.cpp" />
     <ClCompile Include="SFMLText.cpp" />
@@ -344,6 +344,7 @@ XCOPY /y "E:\Prog\lib\sfml\SFML-2.3_x64\bin\*.dll" "$(TargetDir)"
     <ClInclude Include="BitHelper.h" />
     <ClInclude Include="DrawObject.h" />
     <ClInclude Include="FRectangle.h" />
+    <ClInclude Include="GameEngine.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Graphical.h" />
     <ClInclude Include="Keys.h" />
@@ -360,7 +361,7 @@ XCOPY /y "E:\Prog\lib\sfml\SFML-2.3_x64\bin\*.dll" "$(TargetDir)"
     <ClInclude Include="Resource.h" />
     <ClInclude Include="ResourceContainer.h" />
     <ClInclude Include="ResourceManager.h" />
-    <ClInclude Include="ResourceModule.h" />
+    <ClInclude Include="GameModule.h" />
     <ClInclude Include="SFMLDrawable.h" />
     <ClInclude Include="SFMLFont.h" />
     <ClInclude Include="SFMLKeyboard.h" />

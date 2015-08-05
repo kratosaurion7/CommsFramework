@@ -8,12 +8,12 @@
 
 class Resource;
 
-class ResourceModule
+class GameModule
 {
 public:
-    ResourceModule();
-    ResourceModule(std::string moduleName);
-    ~ResourceModule();
+    GameModule();
+    GameModule(std::string moduleName);
+    ~GameModule();
 
     std::string ModuleName;
 

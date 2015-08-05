@@ -9,19 +9,21 @@
 
 #include "Resource.h"
 #include "ResourceContainer.h"
-#include "ResourceModule.h"
-#include "ResourceModule.h"
+#include "GameModule.h"
+#include "GameModule.h"
 #include "XmlReader.h"
 
 class Resource;
-class ResourceModule;
+class GameModule;
 class ResourceContainer;
 
 class ResourceManager
 {
 public:
-	ResourceManager(std::string configFile);
+	ResourceManager();
 	~ResourceManager();
+
+	void Init(std::string configFile);
 
     void ParseConfigFiles();
 
@@ -29,15 +31,18 @@ public:
 
     std::string configFileLocation;
 
-    char* GetResourceDataFromStore(Resource* res, int& dataLenght, std::string targetModule = "");
+	Resource* GetResource(std::string name, GameModule* targetModule = NULL);
 
-    PointerList<Resource*>* Resources;
+	PointerList<Resource*> GetSpriteResources(std::string spriteName, GameModule* targetModule = NULL);
+
+	PointerList<Resource*>* Resources;
     
-    PointerList<ResourceModule*>* Modules;
+	char* GetResourceDataFromStore(Resource* res, int& dataLenght, GameModule* targetModule = NULL);
 
 private:
     BaseList<std::string>* secondaryConfigFiles;
 
+	PointerList<GameModule*>* Modules;
 	PointerList<ResourceContainer*>* ResourceContainers;
 
 	PointerList<Resource*>* CreateListOfResourcesFromXmlNodes(PointerList<XmlNode*> &resourceNodes);

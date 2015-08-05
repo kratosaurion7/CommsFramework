@@ -3,12 +3,8 @@
 #include "FSize.h"
 #include <string>
 
-class GraphicEngineInitParams
+struct GraphicEngineInitParams
 {
-public:
-	GraphicEngineInitParams();
-	~GraphicEngineInitParams();
-
 	FSize* WindowSize;
 	std::string* WindowTitle;
 

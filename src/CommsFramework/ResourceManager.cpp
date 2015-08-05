@@ -7,14 +7,12 @@
 
 #include "XmlReader.h"
 
-ResourceManager::ResourceManager(std::string configFile)
+ResourceManager::ResourceManager()
 {
-    configFileLocation = configFile;
-
     secondaryConfigFiles = new BaseList<std::string>();
 	Resources = new PointerList<Resource*>();
 	ResourceContainers = new PointerList<ResourceContainer*>();
-    Modules = new PointerList<ResourceModule*>();
+    Modules = new PointerList<GameModule*>();
 
     PathToAssetsFolder = "assets\\";
 }
@@ -31,6 +29,12 @@ ResourceManager::~ResourceManager()
 
     Modules->Release();
     delete(Modules);
+}
+
+void ResourceManager::Init(std::string configFile)
+{
+	configFileLocation = configFile;
+
 }
 
 void ResourceManager::ParseConfigFiles()
@@ -60,11 +64,11 @@ void ResourceManager::ParseConfigFiles()
 
         if (moduleNameAttr != NULL)
         {
-            ResourceModule* module = NULL;
+            GameModule* module = NULL;
             
             for (int i = 0; i < Modules->Count(); i++)
             {
-                ResourceModule* testModule = Modules->Get(i);
+                GameModule* testModule = Modules->Get(i);
 
                 if (testModule->ModuleName == moduleNameAttr->AttributeName)
                 {
@@ -73,7 +77,7 @@ void ResourceManager::ParseConfigFiles()
             }
 
             if(module == NULL)
-                module = new ResourceModule();
+                module = new GameModule();
 
             module->ModuleName = moduleNameAttr->AttributeValue;
             
@@ -132,15 +136,15 @@ void ResourceManager::ParseConfigFiles()
     }
 }
 
-char* ResourceManager::GetResourceDataFromStore(Resource* res, int& dataLenght, std::string targetModule)
+char* ResourceManager::GetResourceDataFromStore(Resource* res, int& dataLenght, GameModule* targetModule)
 {
-	ResourceModule* moduleOfResource = NULL;
+	GameModule* moduleOfResource = NULL;
 
 	for (int i = 0; i < Modules->Count();i++)
 	{
-		ResourceModule* nextModule = Modules->Get(i);
+		GameModule* nextModule = Modules->Get(i);
 
-		if (strcmp(nextModule->ModuleName.c_str(), targetModule.c_str()) == 0)
+		if (strcmp(nextModule->ModuleName.c_str(), targetModule->ModuleName.c_str()) == 0)
 		{
 			moduleOfResource = nextModule;
 			break;
@@ -165,6 +169,16 @@ char* ResourceManager::GetResourceDataFromStore(Resource* res, int& dataLenght, 
 	// Nothing found
 	dataLenght = 0;
 	return NULL;
+}
+
+Resource * ResourceManager::GetResource(std::string name, GameModule * targetModule)
+{
+	return nullptr;
+}
+
+PointerList<Resource*> ResourceManager::GetSpriteResources(std::string spriteName, GameModule * targetModule)
+{
+	return PointerList<Resource*>();
 }
 
 PointerList<Resource*>* ResourceManager::CreateListOfResourcesFromXmlNodes(PointerList<XmlNode*> &resourceNodes)

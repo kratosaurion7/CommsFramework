@@ -12,11 +12,11 @@ Resource::~Resource()
 	// Delete the data when deleting the Resource ?
 }
 
-char* Resource::GetData(int& dataSize, std::string targetModuleName)
+char* Resource::GetData(int& dataSize, GameModule* targetModule)
 {
     if (_dataCache == NULL)
     {
-		_dataCache = _resourceManager->GetResourceDataFromStore(this, dataSize, targetModuleName);
+		_dataCache = _resourceManager->GetResourceDataFromStore(this, dataSize, targetModule);
 
         return _dataCache;
     }

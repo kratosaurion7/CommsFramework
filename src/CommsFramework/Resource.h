@@ -4,6 +4,8 @@
 
 #include "ResourceManager.h"
 
+#include "GameModule.h"
+
 enum ResourceType
 {
     RES_IMG,
@@ -30,7 +32,7 @@ public:
 
     std::string Format;
 
-	char* GetData(int& dataSize, std::string targetModuleName = "");
+	char* GetData(int& dataSize, GameModule* targetModule = NULL);
 
 private:
 	int _dataSize;

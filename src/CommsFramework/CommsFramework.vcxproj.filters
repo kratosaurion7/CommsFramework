@@ -58,6 +58,9 @@
     <Filter Include="Tests">
       <UniqueIdentifier>{e2ffb807-6bbb-4c9e-83bb-a3ff7bd46a95}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Framework\Engine">
+      <UniqueIdentifier>{c5e0ac05-eff1-4a07-b8dc-9c1b1baec60f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -68,9 +71,6 @@
     </ClCompile>
     <ClCompile Include="FileReader.cpp">
       <Filter>Framework\IO</Filter>
-    </ClCompile>
-    <ClCompile Include="GraphicEngineInitParams.cpp">
-      <Filter>Framework\Graphic</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
       <Filter>Framework\Game</Filter>
@@ -123,8 +123,17 @@
     <ClCompile Include="ResourceContainer.cpp">
       <Filter>Framework\Game\DataManager</Filter>
     </ClCompile>
-    <ClCompile Include="ResourceModule.cpp">
-      <Filter>Framework\Game\DataManager</Filter>
+    <ClCompile Include="BaseSprite.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameModule.cpp">
+      <Filter>Framework\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -227,8 +236,14 @@
     <ClInclude Include="ResourceContainer.h">
       <Filter>Framework\Game\DataManager</Filter>
     </ClInclude>
-    <ClInclude Include="ResourceModule.h">
-      <Filter>Framework\Game\DataManager</Filter>
+    <ClInclude Include="SpriteLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameModule.h">
+      <Filter>Framework\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

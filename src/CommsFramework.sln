@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.22823.1
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CommsFramework", "CommsFramework\CommsFramework.vcxproj", "{BB1C3245-05C5-4512-93DB-E12D2ECD26E4}"
 EndProject
@@ -15,6 +15,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PongGame", "PongGame\PongGa
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SmallProj", "SmallProj\SmallProj.vcxproj", "{D335A0D8-8C63-4EF5-95A0-0F353F985654}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MatchFour", "MatchFour\MatchFour.vcxproj", "{31972B06-958F-4716-B8CB-131CAEBAFAF8}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BB1C3245-05C5-4512-93DB-E12D2ECD26E4} = {BB1C3245-05C5-4512-93DB-E12D2ECD26E4}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -104,6 +109,22 @@ Global
 		{D335A0D8-8C63-4EF5-95A0-0F353F985654}.Release-Static|Win32.Build.0 = Release|Win32
 		{D335A0D8-8C63-4EF5-95A0-0F353F985654}.Release-Static|x64.ActiveCfg = Release|Win32
 		{D335A0D8-8C63-4EF5-95A0-0F353F985654}.Release-Static|x64.Build.0 = Release|Win32
+		{31972B06-958F-4716-B8CB-131CAEBAFAF8}.Debug|Win32.ActiveCfg = Debug|Win32
+		{31972B06-958F-4716-B8CB-131CAEBAFAF8}.Debug|Win32.Build.0 = Debug|Win32
+		{31972B06-958F-4716-B8CB-131CAEBAFAF8}.Debug|x64.ActiveCfg = Debug|x64
+		{31972B06-958F-4716-B8CB-131CAEBAFAF8}.Debug|x64.Build.0 = Debug|x64
+		{31972B06-958F-4716-B8CB-131CAEBAFAF8}.Debug-Static|Win32.ActiveCfg = Debug|Win32
+		{31972B06-958F-4716-B8CB-131CAEBAFAF8}.Debug-Static|Win32.Build.0 = Debug|Win32
+		{31972B06-958F-4716-B8CB-131CAEBAFAF8}.Debug-Static|x64.ActiveCfg = Debug|x64
+		{31972B06-958F-4716-B8CB-131CAEBAFAF8}.Debug-Static|x64.Build.0 = Debug|x64
+		{31972B06-958F-4716-B8CB-131CAEBAFAF8}.Release|Win32.ActiveCfg = Release|Win32
+		{31972B06-958F-4716-B8CB-131CAEBAFAF8}.Release|Win32.Build.0 = Release|Win32
+		{31972B06-958F-4716-B8CB-131CAEBAFAF8}.Release|x64.ActiveCfg = Release|x64
+		{31972B06-958F-4716-B8CB-131CAEBAFAF8}.Release|x64.Build.0 = Release|x64
+		{31972B06-958F-4716-B8CB-131CAEBAFAF8}.Release-Static|Win32.ActiveCfg = Release|Win32
+		{31972B06-958F-4716-B8CB-131CAEBAFAF8}.Release-Static|Win32.Build.0 = Release|Win32
+		{31972B06-958F-4716-B8CB-131CAEBAFAF8}.Release-Static|x64.ActiveCfg = Release|x64
+		{31972B06-958F-4716-B8CB-131CAEBAFAF8}.Release-Static|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
