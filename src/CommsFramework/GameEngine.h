@@ -4,6 +4,8 @@
 
 #include "ResourceManager.h"
 
+#include "BaseSprite.h"
+
 #include <string>
 
 struct GameEngineInitParams
@@ -26,7 +28,12 @@ public:
 
 	void Init(GameEngineInitParams* params);
 
+	void Load();
+
+	BaseSprite* GetSprite(std::string name);
 private:
 	GameEngineInitParams* engineInitParams;
+
+	void CreateSpritesFromConfig();
 };
 

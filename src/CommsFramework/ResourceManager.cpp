@@ -40,6 +40,8 @@ void ResourceManager::Init(ResourceManagerInitParams* initParams)
 	PathToAssetsFolder = initParams->AssetRootFolder;
 
 	startingParams = initParams;
+
+	ParseConfigFiles();
 }
 
 void ResourceManager::ParseConfigFiles()
@@ -120,6 +122,8 @@ void ResourceManager::ParseConfigFiles()
 
 		delete(newContainers);
 
+		PointerList<XmlNode*>* spriteNodes = rdr.GetNodes("sprite");
+		auto newSprites = CreateSpritesFromXmlNodes(*spriteNodes);
 
 		configQueue.pop();
 
@@ -256,4 +260,19 @@ PointerList<ResourceContainer*>* ResourceManager::CreateListOfContainersFromXmlN
 	}
 
 	return containersList;
+}
+
+PointerList<SpriteDescriptor*>* ResourceManager::CreateSpritesFromXmlNodes(PointerList<XmlNode*>& spriteNodes)
+{
+	PointerList<SpriteDescriptor*>* descriptors = new PointerList<SpriteDescriptor*>();
+
+	auto it = spriteNodes.GetContainer()->begin();
+
+	while (it != spriteNodes.GetContainer()->end())
+	{
+		XmlNode* node = (*it);
+		
+	}
+
+	return NULL;
 }

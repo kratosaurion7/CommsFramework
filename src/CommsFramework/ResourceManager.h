@@ -12,6 +12,7 @@
 #include "GameModule.h"
 #include "GameModule.h"
 #include "XmlReader.h"
+#include "Models.h"
 
 class Resource;
 class GameModule;
@@ -57,6 +58,8 @@ private:
 
 	PointerList<Resource*>* CreateListOfResourcesFromXmlNodes(PointerList<XmlNode*> &resourceNodes);
 	PointerList<ResourceContainer*>* CreateListOfContainersFromXmlNodes(PointerList<XmlNode*> &resourceNodes);
+
+	PointerList<SpriteDescriptor*>* CreateSpritesFromXmlNodes(PointerList<XmlNode*> &spriteNodes);
 
 };
 

@@ -245,5 +245,8 @@
     <ClInclude Include="GameEngine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Models.h">
+      <Filter>Framework\Game</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

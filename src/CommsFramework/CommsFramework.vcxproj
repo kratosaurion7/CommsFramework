@@ -349,6 +349,7 @@ XCOPY /y "E:\Prog\lib\sfml\SFML-2.3_x64\bin\*.dll" "$(TargetDir)"
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Graphical.h" />
     <ClInclude Include="Keys.h" />
+    <ClInclude Include="Models.h" />
     <ClInclude Include="PackageFile.h" />
     <ClInclude Include="PointerList.h" />
     <ClInclude Include="GraphicEngineInitParams.h" />

@@ -22,13 +22,31 @@ GameEngine::~GameEngine()
 
 void GameEngine::Init(GameEngineInitParams * params)
 {
+	engineInitParams = params;
+
 	Graphics->Initialize(params->GraphicsParams);
 
 	Resources->Init(params->ResourceParams);
 
-	engineInitParams = params;
+
 }
 
+BaseSprite * GameEngine::GetSprite(std::string name)
+{
+	auto x = Graphics->CreateSprite();
+	
+	return NULL;
+}
+
+void GameEngine::Load()
+{
+	CreateSpritesFromConfig();
+}
+
+void GameEngine::CreateSpritesFromConfig()
+{
+
+}
 
 GameEngineInitParams * GameEngineInitParams::CreateDefaultParams()
 {
