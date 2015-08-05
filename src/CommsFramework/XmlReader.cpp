@@ -6,6 +6,7 @@
 
 #include "Macros.h"
 
+#include <string>
 #include <functional>
 
 //class XmlNode;
@@ -25,10 +26,10 @@ XmlReader::~XmlReader()
     delete(xmlFile);
 }
 
-void XmlReader::LoadFile(const char* filePath)
+void XmlReader::LoadFile(std::string filePath)
 {
     FileReader reader;
-    reader.OpenFile(filePath);
+    reader.OpenFile(filePath.c_str());
 
     xmlFile = reader.GetFileContents(true);
 
@@ -224,15 +225,22 @@ XmlNodeAttribute* XmlNode::GetAttribute(std::string attributeName)
 {
 	if (data_node != NULL)
 	{
-		XmlNodeAttribute* returnAttr;
+		XmlNodeAttribute* returnAttr = new XmlNodeAttribute();
 
 		auto attr = data_node->first_attribute(attributeName.c_str());
 
-		returnAttr->AttributeName = attr->name();
-		returnAttr->AttributeValue = attr->value();
-		returnAttr->valueSize = attr->value_size();
+		if (attr != NULL)
+		{
+			returnAttr->AttributeName = attr->name();
+			returnAttr->AttributeValue = attr->value();
+			returnAttr->valueSize = attr->value_size();
 
-		return returnAttr;
+			return returnAttr;
+		}
+		else 
+		{
+			return NULL;
+		}
 	}
 	else 
 	{

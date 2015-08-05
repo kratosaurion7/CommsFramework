@@ -26,7 +26,7 @@ public:
     XmlReader();
     ~XmlReader();
 
-    void LoadFile(const char* filePath);
+    void LoadFile(std::string filePath);
 
 	XmlNode* GetNode(std::string nodeName);
 

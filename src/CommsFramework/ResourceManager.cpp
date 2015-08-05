@@ -49,7 +49,7 @@ void ResourceManager::ParseConfigFiles()
 	if (configFileLocation == "")
 		return;
 
-    std::string nextConfigFile = configFileLocation;
+    std::string nextConfigFile = PathToAssetsFolder + configFileLocation;
 
     std::queue<std::string> configQueue;
 
@@ -62,12 +62,12 @@ void ResourceManager::ParseConfigFiles()
         rdr.LoadFile(nextConfigFile.c_str());
 
 		PointerList<XmlNode*>* resNodes = rdr.GetNodes("resource");
-		auto newResources = CreateListOfResourcesFromXmlNodes(*resNodes);
+		PointerList<Resource*>* newResources = CreateListOfResourcesFromXmlNodes(*resNodes);
 		
 		Resources->AddRange(newResources);
 
-        auto rootNode = rdr.GetNode("config");
-        auto moduleNameAttr = rootNode->GetAttribute("ModuleName");
+        XmlNode* rootNode = rdr.GetNode("config");
+        XmlNodeAttribute* moduleNameAttr = rootNode->GetAttribute("ModuleName");
 
         if (moduleNameAttr != NULL)
         {
@@ -116,14 +116,14 @@ void ResourceManager::ParseConfigFiles()
 		}
         
 		PointerList<XmlNode*>* containers = rdr.GetNodes("container");
-		auto newContainers = CreateListOfContainersFromXmlNodes(*containers);
+		PointerList<ResourceContainer*>* newContainers = CreateListOfContainersFromXmlNodes(*containers);
 
 		ResourceContainers->AddRange(newContainers);
 
 		delete(newContainers);
 
 		PointerList<XmlNode*>* spriteNodes = rdr.GetNodes("sprite");
-		auto newSprites = CreateSpritesFromXmlNodes(*spriteNodes);
+		PointerList<SpriteDescriptor*>* newSprites = CreateSpritesFromXmlNodes(*spriteNodes);
 
 		configQueue.pop();
 
@@ -149,14 +149,17 @@ char* ResourceManager::GetResourceDataFromStore(Resource* res, int& dataLenght, 
 {
 	GameModule* moduleOfResource = NULL;
 
-	for (int i = 0; i < Modules->Count();i++)
+	if (targetModule != NULL)
 	{
-		GameModule* nextModule = Modules->Get(i);
-
-		if (strcmp(nextModule->ModuleName.c_str(), targetModule->ModuleName.c_str()) == 0)
+		for (int i = 0; i < Modules->Count();i++)
 		{
-			moduleOfResource = nextModule;
-			break;
+			GameModule* nextModule = Modules->Get(i);
+
+			if (strcmp(nextModule->ModuleName.c_str(), targetModule->ModuleName.c_str()) == 0)
+			{
+				moduleOfResource = nextModule;
+				break;
+			}
 		}
 	}
 
@@ -275,4 +278,13 @@ PointerList<SpriteDescriptor*>* ResourceManager::CreateSpritesFromXmlNodes(Point
 	}
 
 	return NULL;
+}
+
+ResourceManagerInitParams * ResourceManagerInitParams::GetDefaultParams()
+{
+	ResourceManagerInitParams* ret = new ResourceManagerInitParams();
+	ret->AssetRootFolder = "Assets\\";
+	ret->ConfigFileLocation = "config_file_example.xml";
+
+	return ret;
 }
