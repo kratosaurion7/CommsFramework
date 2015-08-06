@@ -33,13 +33,11 @@ public:
 	PointerList<XmlNode*>* GetNodes(std::string nodeName);
 
 private:
-	xml_node<>* FindNode(xml_node<>* node, std::function<bool(rapidxml::xml_node<>*)> predicate);
-
-	void FindNodeList(xml_node<>* node, std::function<bool(rapidxml::xml_node<>*)> predicate, PointerList<xml_node<>*> &aggregate);
-
     FileContents* xmlFile;
 
     xml_document<>* rootDoc;
+
+	XmlNode* rootNode;
 };
 
 class XmlNode
