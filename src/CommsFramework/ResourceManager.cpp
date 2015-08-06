@@ -13,6 +13,7 @@ ResourceManager::ResourceManager()
 	Resources = new PointerList<Resource*>();
 	ResourceContainers = new PointerList<ResourceContainer*>();
     Modules = new PointerList<GameModule*>();
+	SpritesInfo = new PointerList<SpriteDescriptor*>();
 
     PathToAssetsFolder = "assets\\"; // Temp default value
 	startingParams = NULL;
@@ -23,6 +24,9 @@ ResourceManager::~ResourceManager()
     delete(secondaryConfigFiles);
 	
 	delete(startingParams);
+
+	SpritesInfo->Release();
+	delete(SpritesInfo);
 
     Resources->Release();
     delete(Resources);
@@ -122,8 +126,12 @@ void ResourceManager::ParseConfigFiles()
 
 		delete(newContainers);
 
-		//PointerList<XmlNode*>* spriteNodes = rdr.GetNodes("sprite");
-		//PointerList<SpriteDescriptor*>* newSprites = CreateSpritesFromXmlNodes(*spriteNodes);
+		PointerList<XmlNode*>* spriteNodes = rdr.GetNodes("sprite");
+		PointerList<SpriteDescriptor*>* newSprites = CreateSpritesFromXmlNodes(*spriteNodes);
+
+		SpritesInfo->AddRange(newSprites);
+
+		delete(newSprites);
 
 		configQueue.pop();
 
@@ -136,6 +144,8 @@ void ResourceManager::ParseConfigFiles()
 			nextConfigFile = configQueue.front();
 		}
 
+		spriteNodes->Release();
+		delete(spriteNodes);
         subConfigs->Release();
         delete(subConfigs);
         resNodes->Release();
@@ -274,10 +284,28 @@ PointerList<SpriteDescriptor*>* ResourceManager::CreateSpritesFromXmlNodes(Point
 	while (it != spriteNodes.GetContainer()->end())
 	{
 		XmlNode* node = (*it);
+
+		SpriteDescriptor* newDescriptor = new SpriteDescriptor();
 		
+		auto posNode = node->GetNode("position");
+		auto posX = atof(posNode->GetAttribute("X").AttributeValue);
+		auto posY = atof(posNode->GetAttribute("Y").AttributeValue);
+		newDescriptor->position = new FPosition(posX, posY);
+
+		auto sizeNode = node->GetNode("size");
+		auto sizeH = atof(sizeNode->GetAttribute("Height").AttributeValue);
+		auto sizeW = atof(sizeNode->GetAttribute("Width").AttributeValue);
+		newDescriptor->size = new FSize(sizeH, sizeW);
+
+		descriptors->Add(newDescriptor);
+
+		delete(sizeNode);
+		delete(posNode);
+
+		it++;
 	}
 
-	return NULL;
+	return descriptors;
 }
 
 ResourceManagerInitParams * ResourceManagerInitParams::GetDefaultParams()

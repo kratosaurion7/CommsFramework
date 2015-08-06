@@ -1,0 +1,11 @@
+<config>
+
+    <sprite name="Raven" module="overworld"> <!-- module is optional if the config is already targeting a module. If no modules the sprite is owned by the common module. -->
+        <position X="150" Y="200" /> <!-- Optional, set to 0,0 if absent -->
+        <size Height="200" Width="300" /> <!-- Optional, set size according to bitmap data if absent. -->
+        
+        
+        
+    </sprite>
+
+</config>

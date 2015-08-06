@@ -14,4 +14,5 @@
     
     <configFile path="config2.xml" /> <!-- Secondary config reference -->
     <configFile path="config3.xml" />
+    <configFile path="sprites.xml" />
 </config>

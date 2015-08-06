@@ -322,6 +322,7 @@ XCOPY /y "E:\Prog\lib\sfml\SFML-2.3_x64\bin\*.dll" "$(TargetDir)"
     <ClCompile Include="DSprite.cpp" />
     <ClCompile Include="FileReader.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Models.cpp" />
     <ClCompile Include="PackageFile.cpp" />
     <ClCompile Include="Resource.cpp" />
     <ClCompile Include="ResourceContainer.cpp" />

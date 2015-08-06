@@ -46,6 +46,8 @@ public:
 	PointerList<Resource*> GetSpriteResources(std::string spriteName, GameModule* targetModule = NULL);
 
 	PointerList<Resource*>* Resources;
+
+	PointerList<SpriteDescriptor*>* SpritesInfo;
     
 	char* GetResourceDataFromStore(Resource* res, int& dataLenght, GameModule* targetModule = NULL);
 
