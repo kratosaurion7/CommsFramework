@@ -123,20 +123,17 @@
     <ClCompile Include="ResourceContainer.cpp">
       <Filter>Framework\Game\DataManager</Filter>
     </ClCompile>
-    <ClCompile Include="BaseSprite.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SpriteLoader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GameModule.cpp">
       <Filter>Framework\Engine</Filter>
     </ClCompile>
-    <ClCompile Include="GameEngine.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="BaseSprite.cpp">
+      <Filter>Framework\Graphic</Filter>
     </ClCompile>
-    <ClCompile Include="Models.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="GameEngine.cpp">
+      <Filter>Framework\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteDescriptor.cpp">
+      <Filter>Framework\Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -181,9 +178,6 @@
     </ClInclude>
     <ClInclude Include="Macros.h">
       <Filter>Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphical.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Keys.h">
       <Filter>Framework\Input</Filter>
@@ -239,16 +233,16 @@
     <ClInclude Include="ResourceContainer.h">
       <Filter>Framework\Game\DataManager</Filter>
     </ClInclude>
-    <ClInclude Include="SpriteLoader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GameModule.h">
       <Filter>Framework\Engine</Filter>
     </ClInclude>
     <ClInclude Include="GameEngine.h">
-      <Filter>Header Files</Filter>
+      <Filter>Framework\Engine</Filter>
     </ClInclude>
-    <ClInclude Include="Models.h">
+    <ClInclude Include="Graphical.h">
+      <Filter>Framework\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteDescriptor.h">
       <Filter>Framework\Game</Filter>
     </ClInclude>
   </ItemGroup>

@@ -12,11 +12,12 @@
 #include "GameModule.h"
 #include "GameModule.h"
 #include "XmlReader.h"
-#include "Models.h"
+#include "SpriteDescriptor.h"
 
 class Resource;
 class GameModule;
 class ResourceContainer;
+class SpriteDescriptor;
 
 struct ResourceManagerInitParams {
 

@@ -322,7 +322,7 @@ XCOPY /y "E:\Prog\lib\sfml\SFML-2.3_x64\bin\*.dll" "$(TargetDir)"
     <ClCompile Include="DSprite.cpp" />
     <ClCompile Include="FileReader.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Models.cpp" />
+    <ClCompile Include="SpriteDescriptor.cpp" />
     <ClCompile Include="PackageFile.cpp" />
     <ClCompile Include="Resource.cpp" />
     <ClCompile Include="ResourceContainer.cpp" />
@@ -331,7 +331,6 @@ XCOPY /y "E:\Prog\lib\sfml\SFML-2.3_x64\bin\*.dll" "$(TargetDir)"
     <ClCompile Include="SFMLFont.cpp" />
     <ClCompile Include="SFMLKeyboard.cpp" />
     <ClCompile Include="SFMLText.cpp" />
-    <ClCompile Include="SpriteLoader.cpp" />
     <ClCompile Include="TestRunner.cpp" />
     <ClCompile Include="XmlReader.cpp" />
   </ItemGroup>
@@ -350,7 +349,7 @@ XCOPY /y "E:\Prog\lib\sfml\SFML-2.3_x64\bin\*.dll" "$(TargetDir)"
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Graphical.h" />
     <ClInclude Include="Keys.h" />
-    <ClInclude Include="Models.h" />
+    <ClInclude Include="SpriteDescriptor.h" />
     <ClInclude Include="PackageFile.h" />
     <ClInclude Include="PointerList.h" />
     <ClInclude Include="GraphicEngineInitParams.h" />
@@ -369,7 +368,6 @@ XCOPY /y "E:\Prog\lib\sfml\SFML-2.3_x64\bin\*.dll" "$(TargetDir)"
     <ClInclude Include="SFMLFont.h" />
     <ClInclude Include="SFMLKeyboard.h" />
     <ClInclude Include="SFMLText.h" />
-    <ClInclude Include="SpriteLoader.h" />
     <ClInclude Include="TestRunner.h" />
     <ClInclude Include="Vectors.h" />
     <ClInclude Include="XmlReader.h" />

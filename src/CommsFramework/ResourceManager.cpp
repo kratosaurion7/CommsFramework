@@ -297,7 +297,45 @@ PointerList<SpriteDescriptor*>* ResourceManager::CreateSpritesFromXmlNodes(Point
 		auto sizeW = atof(sizeNode->GetAttribute("Width").AttributeValue);
 		newDescriptor->size = new FSize(sizeH, sizeW);
 
+		auto spriteFrames = node->GetNodes("frame");
+
+		auto spriteFramesIterator = spriteFrames->GetContainer()->begin();
+		while (spriteFramesIterator != spriteFrames->GetContainer()->end())
+		{
+			XmlNode* frameNode = (*spriteFramesIterator);
+
+			std::string frameId = frameNode->GetAttribute("Id").AttributeValue;
+
+			newDescriptor->Frames->Add(frameId);
+
+			spriteFramesIterator++;
+		}
+
+		auto spriteFramelists = node->GetNodes("framelist");
+
+		auto framelistsIterator = spriteFramelists->GetContainer()->begin();
+		while (framelistsIterator != spriteFramelists->GetContainer()->end())
+		{
+			XmlNode* frameListNode = (*framelistsIterator);
+
+			Framelist* spriteFramelist = new Framelist();
+			spriteFramelist->startIndex = atoi(frameListNode->GetAttribute("start").AttributeValue);
+			spriteFramelist->endIndex = atoi(frameListNode->GetAttribute("end").AttributeValue);
+			spriteFramelist->step = atoi(frameListNode->GetAttribute("step").AttributeValue);
+			spriteFramelist->pattern = frameListNode->GetAttribute("pattern").AttributeValue;
+
+			newDescriptor->FrameLists->Add(spriteFramelist);
+
+			framelistsIterator++;
+		}
+
 		descriptors->Add(newDescriptor);
+
+		spriteFrames->Release();
+		delete(spriteFrames);
+
+		spriteFramelists->Release();
+		delete(spriteFramelists);
 
 		delete(sizeNode);
 		delete(posNode);
