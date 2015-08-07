@@ -34,4 +34,15 @@ int main()
 	GameResources = eng->Resources;
 
 	BaseSprite* sprt = eng->GetSprite("Raven");
+
+	eng->Graphics->AddObject(sprt);
+
+	eng->Graphics->Start();
+
+	while (eng->Graphics->IsRunning())
+	{
+		eng->Graphics->ProcessEvents();
+
+		eng->Graphics->Draw();
+	}
 }
