@@ -18,6 +18,8 @@ DSprite::DSprite()
 	isVisible = true;
 	position = new FPosition();
 	size = new FSize();
+	spriteTextures = new PointerList<DTexture*>();
+	spriteTexture = NULL;
 }
 
 DSprite::~DSprite()
@@ -54,7 +56,9 @@ void DSprite::SetFrame(int index)
 
 void DSprite::SetTextures(PointerList<BaseTexture*>* textures)
 {
-    delete(spriteTextures);
+	if(spriteTextures != NULL)
+		delete(spriteTextures);
+
     spriteTextures = new PointerList<DTexture*>();
 
     auto it = textures->GetContainer()->begin();
@@ -63,9 +67,17 @@ void DSprite::SetTextures(PointerList<BaseTexture*>* textures)
         BaseTexture* texture = (*it);
 
         spriteTextures->Add((DTexture*)texture);
+
+		it++;
     }
 
     FramesCount = spriteTextures->Count();
+
+	if (FramesCount > 0)
+	{
+		SetTexture(textures->Get(0));
+	}
+	
 }
 
 
@@ -76,7 +88,8 @@ void DSprite::SetTextures(PointerList<BaseTexture*>* textures)
 //
 void DSprite::SetTexture(BaseTexture * texture)
 {
-    delete(spriteTexture); // Ok to delete ?
+	if(spriteTexture != NULL)
+		delete(spriteTexture); // Ok to delete ?
 
 	DTexture* dtxr = dynamic_cast<DTexture*>(texture);
 

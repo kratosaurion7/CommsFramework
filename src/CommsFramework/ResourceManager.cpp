@@ -206,6 +206,8 @@ Resource * ResourceManager::GetResource(std::string name, GameModule * targetMod
         {
             return res;
         }
+
+		it++;
     }
 
     return NULL;
@@ -213,21 +215,22 @@ Resource * ResourceManager::GetResource(std::string name, GameModule * targetMod
 
 PointerList<Resource*>* ResourceManager::GetSpriteResources(std::string spriteName, GameModule * targetModule)
 {
-    PointerList<Resource*>* spriteResources = new PointerList<Resource*>();
+    //PointerList<Resource*>* spriteResources = new PointerList<Resource*>();
 
     auto it = SpritesInfo->GetContainer()->begin();
     while (it != SpritesInfo->GetContainer()->end())
     {
         SpriteDescriptor* item = (*it);
 
-        Resource* targetRes = GetResource(item->SpriteName, targetModule);
-
-        spriteResources->Add(targetRes);
+		if (strcmp(item->SpriteName.c_str(), spriteName.c_str()) == 0)
+		{
+			return item->FrameResources;
+		}
 
         it++;
     }
 
-    return spriteResources;
+    return NULL;
 }
 
 void ResourceManager::SetupSprites()
@@ -237,7 +240,27 @@ void ResourceManager::SetupSprites()
     {
         SpriteDescriptor* item = (*it);
 
-        
+		if (item->Frames->Count() > 0)
+		{
+			// Look at each frames and get the resource for each
+			auto framesIterator = item->Frames->GetContainer()->begin();
+			while (framesIterator != item->Frames->GetContainer()->end())
+			{
+				std::string frameName = (*framesIterator);
+
+				Resource* res = GetResource(frameName);
+				
+				item->FrameResources->Add(res);
+
+				framesIterator++;
+			}
+		}
+
+		if (item->FrameLists->Count() > 0)
+		{
+			// Look at the framelists and generate resources
+
+		}
 
         it++;
     }
@@ -327,6 +350,8 @@ PointerList<SpriteDescriptor*>* ResourceManager::CreateSpritesFromXmlNodes(Point
 
 		SpriteDescriptor* newDescriptor = new SpriteDescriptor();
 		
+		newDescriptor->SpriteName = node->GetAttribute("name").AttributeValue;
+
 		auto posNode = node->GetNode("position");
 		auto posX = atof(posNode->GetAttribute("X").AttributeValue);
 		auto posY = atof(posNode->GetAttribute("Y").AttributeValue);

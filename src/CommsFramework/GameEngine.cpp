@@ -79,6 +79,8 @@ PointerList<BaseTexture*>* GameEngine::CreateTexturesFromResources(PointerList<R
 
 		newTexture->LoadFromMemory(resourceData, dataSize);
 
+		textureList->Add(newTexture);
+
 		it++;
 	}
 

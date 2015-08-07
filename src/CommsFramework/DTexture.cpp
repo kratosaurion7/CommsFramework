@@ -6,6 +6,7 @@
 
 #include <cstdint>
 
+#include "Utilities.h"
 
 DTexture::DTexture()
 {
@@ -58,7 +59,7 @@ void DTexture::LoadFromMemory(char * data, int dataSize)
         FSize* mySize = new FSize(vec.y, vec.x);
 
         size = mySize;
-    }
+	}
 }
 
 FSize* DTexture::GetSize()

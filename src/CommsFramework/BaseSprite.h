@@ -10,7 +10,7 @@
 class BaseSprite : public DrawObject
 {
 public:
-    int CurrentFrameIndex;
+    int CurrentFrameIndex = 0;
 
     int FramesCount = 0;
 

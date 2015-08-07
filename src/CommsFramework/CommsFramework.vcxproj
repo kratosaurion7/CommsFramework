@@ -38,14 +38,12 @@
     <ProjectGuid>{BB1C3245-05C5-4512-93DB-E12D2ECD26E4}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>CommsFramework</RootNamespace>
-    <TargetPlatformVersion>10.0.10069.0</TargetPlatformVersion>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Static|Win32'" Label="Configuration">
@@ -332,6 +330,7 @@ XCOPY /y "E:\Prog\lib\sfml\SFML-2.3_x64\bin\*.dll" "$(TargetDir)"
     <ClCompile Include="SFMLKeyboard.cpp" />
     <ClCompile Include="SFMLText.cpp" />
     <ClCompile Include="TestRunner.cpp" />
+    <ClCompile Include="Utilities.cpp" />
     <ClCompile Include="XmlReader.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -369,6 +368,7 @@ XCOPY /y "E:\Prog\lib\sfml\SFML-2.3_x64\bin\*.dll" "$(TargetDir)"
     <ClInclude Include="SFMLKeyboard.h" />
     <ClInclude Include="SFMLText.h" />
     <ClInclude Include="TestRunner.h" />
+    <ClInclude Include="Utilities.h" />
     <ClInclude Include="Vectors.h" />
     <ClInclude Include="XmlReader.h" />
   </ItemGroup>

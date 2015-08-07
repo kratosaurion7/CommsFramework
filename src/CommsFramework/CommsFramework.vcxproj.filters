@@ -135,6 +135,9 @@
     <ClCompile Include="SpriteDescriptor.cpp">
       <Filter>Framework\Game</Filter>
     </ClCompile>
+    <ClCompile Include="Utilities.cpp">
+      <Filter>Framework\System</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="XmlReader.h">
@@ -244,6 +247,9 @@
     </ClInclude>
     <ClInclude Include="SpriteDescriptor.h">
       <Filter>Framework\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities.h">
+      <Filter>Framework\System</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

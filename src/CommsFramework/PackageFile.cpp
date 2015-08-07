@@ -10,6 +10,8 @@
 
 #include <fstream>
 
+#include "Utilities.h"
+
 PackageFile::PackageFile()
 {
 	packageHeader = new Header;
@@ -45,7 +47,7 @@ PackageFile::~PackageFile()
 
 const char * PackageFile::GetFile(std::string filename, int& fileSize)
 {
-	std::ifstream packageStream = std::ifstream(TargetPackage);
+	std::ifstream packageStream = std::ifstream(TargetPackage, std::ios::in | std::ios::binary);
 
 	char buf[256];
 	char* fileContents = NULL;
@@ -75,7 +77,7 @@ const char * PackageFile::GetFile(std::string filename, int& fileSize)
 
 			packageStream.seekg(targetFilePos);
 			fileContents = new char[targetFileLength];
-			packageStream.get(fileContents, targetFileLength, EOF);
+			packageStream.read(fileContents, targetFileLength);
 
 			fileSize = targetFileLength;
 			fileFound = true;
@@ -126,7 +128,12 @@ void PackageFile::Save(std::string savePath)
 		strcpy(newFileEntry->fileName, const_cast<char*>(fileName.c_str()));
 		newFileEntry->fileLength = contents->fileSize;
 		newFileEntry->filePosition = bufPos;
-		newFileEntry->fileContents = contents->buffer;
+		//newFileEntry->fileContents = contents->buffer;
+
+		newFileEntry->fileContents = new char[contents->fileSize];
+		memcpy(newFileEntry->fileContents, contents->buffer, contents->fileSize);
+
+		//DumpData(newFileEntry->fileContents, contents->fileSize);
 
 		bufPos += contents->fileSize;
 

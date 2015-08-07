@@ -1,6 +1,6 @@
 #include "ResourceContainer.h"
 
-
+#include "Utilities.h"
 
 ResourceContainer::ResourceContainer()
 {

@@ -9,6 +9,10 @@ SpriteDescriptor::SpriteDescriptor()
 	FrameLists = new PointerList<Framelist*>();
 
     FrameResources = new PointerList<Resource*>();
+
+	Module = NULL;
+	position = NULL;
+	size = NULL;
 }
 
 SpriteDescriptor::~SpriteDescriptor()

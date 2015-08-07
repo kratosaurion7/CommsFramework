@@ -12,6 +12,15 @@ ResourceManager* GameResources;
 
 int main()
 {
+	PackageFile* pack = new PackageFile();
+	pack->AddFile("assets\\raven_idle_0.png");
+	pack->AddFile("assets\\raven_idle_1.png");
+	pack->AddFile("assets\\raven_idle_2.png");
+	pack->AddFile("assets\\raven_idle_3.png");
+	pack->AddFile("assets\\raven_idle_4.png");
+	pack->Save("package.pack");
+
+
 	GameEngine* eng = new GameEngine();
 
 	GameEngineInitParams* params = GameEngineInitParams::CreateDefaultParams();
@@ -24,5 +33,5 @@ int main()
 	GameGraphics = eng->Graphics;
 	GameResources = eng->Resources;
 
-	BaseSprite* sprt = eng->GetSprite("test");
+	BaseSprite* sprt = eng->GetSprite("Raven");
 }
