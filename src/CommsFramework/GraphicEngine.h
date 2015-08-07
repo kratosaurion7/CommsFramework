@@ -50,17 +50,10 @@ public:
 	sf::RenderWindow* MainWindow;
 
 private:
-	
-
 	bool isRunning;
 
 	void ProcessWindowsEvents(sf::RenderWindow* targetWindow);
 
 	void ProcessDraw(sf::RenderWindow* targetWindow);
-
-	
-
-
-
 };
 

@@ -13,7 +13,6 @@ GameEngine::GameEngine()
 	Resources = new ResourceManager();
 }
 
-
 GameEngine::~GameEngine()
 {
 	delete(engineInitParams);
@@ -30,18 +29,26 @@ void GameEngine::Init(GameEngineInitParams * params)
 	Graphics->Initialize(params->GraphicsParams);
 
 	Resources->Init(params->ResourceParams);
-
-
 }
 
 BaseSprite * GameEngine::GetSprite(std::string name)
 {
-	BaseSprite* spriteObject = Graphics->CreateSprite();
-	
-    
-    
-    PointerList<Resource*>* spriteResource = Resources->GetSpriteResources(name);
+	// Check first if it exists ? Or create a copy
 
+	// Get sprite
+	BaseSprite* spriteObject = Graphics->CreateSprite();
+    
+	// Get resources
+    PointerList<Resource*>* spriteResources = Resources->GetSpriteResources(name);
+
+	// Transform resources to textures
+	PointerList<BaseTexture*>* spriteTextures = CreateTexturesFromResources(spriteResources);
+
+	// Assign textures to sprite
+	spriteObject->SetTextures(spriteTextures);
+
+	delete(spriteResources);
+	delete(spriteTextures);
 
 	return spriteObject;
 }
@@ -56,6 +63,28 @@ void GameEngine::CreateSpritesFromConfig()
 
 }
 
+PointerList<BaseTexture*>* GameEngine::CreateTexturesFromResources(PointerList<Resource*>* resources)
+{
+	PointerList<BaseTexture*>* textureList = new PointerList<BaseTexture*>();
+
+	auto it = resources->GetContainer()->begin();
+	while (it != resources->GetContainer()->end())
+	{
+		Resource* res = (*it);
+
+		BaseTexture* newTexture = Graphics->CreateTexture();
+		
+		int dataSize = 0;
+		char* resourceData = res->GetData(dataSize);
+
+		newTexture->LoadFromMemory(resourceData, dataSize);
+
+		it++;
+	}
+
+	return textureList;
+}
+
 GameEngineInitParams * GameEngineInitParams::CreateDefaultParams()
 {
 	GameEngineInitParams* newParams = new GameEngineInitParams();
@@ -68,7 +97,7 @@ GameEngineInitParams * GameEngineInitParams::CreateDefaultParams()
 	GraphicEngineInitParams* newEngineParams = new GraphicEngineInitParams();
 	newEngineParams->EnableVerticalSync = true;
 	newEngineParams->WindowSize = new FSize(600, 600);
-	newEngineParams->WindowTitle = new std::string("DEFAULT WINDOW TITLE");
+	newEngineParams->WindowTitle = "DEFAULT WINDOW TITLE";
 	newParams->GraphicsParams = newEngineParams;
 
 	return newParams;

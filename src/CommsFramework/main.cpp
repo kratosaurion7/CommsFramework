@@ -93,7 +93,7 @@ int main4()
 	GraphicEngineInitParams* params = new GraphicEngineInitParams();
 	params->EnableVerticalSync = true;
 	params->WindowSize = new FSize(600, 600);
-	params->WindowTitle = new std::string("WINNING!");
+	params->WindowTitle = "WINNING!";
 
 	eng->Initialize(params);
 

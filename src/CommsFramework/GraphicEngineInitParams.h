@@ -3,10 +3,11 @@
 #include "FSize.h"
 #include <string>
 
-struct GraphicEngineInitParams
+class GraphicEngineInitParams
 {
+public:
 	FSize* WindowSize;
-	std::string* WindowTitle;
+	std::string WindowTitle;
 
 	bool EnableVerticalSync = true;
 };

@@ -91,7 +91,7 @@ int main()
     GraphicEngineInitParams* params = new GraphicEngineInitParams();
     params->EnableVerticalSync = true;
     params->WindowSize = new FSize(WINDOW_HEIGHT, WINDOW_WIDTH);
-    params->WindowTitle = new std::string("PONG");
+    params->WindowTitle = "PONG";
 
     int PlayerOneScore = 0;
     int PlayerTwoScore = 0;

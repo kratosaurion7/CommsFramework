@@ -35,5 +35,7 @@ private:
 	GameEngineInitParams* engineInitParams;
 
 	void CreateSpritesFromConfig();
+
+	PointerList<BaseTexture*>* CreateTexturesFromResources(PointerList<Resource*>* resources);
 };
 
