@@ -25,13 +25,18 @@ DSprite::DSprite()
 DSprite::~DSprite()
 {
 	// Don't delete the sprite texture when deleting a sprite, the texture might be shared around.
-	delete innerImpl;
-	delete position;
-	delete size;
+	delete(innerImpl);
+	delete(position);
+	delete(size);
 
 	if (spriteTextures != NULL)
+	{
+		spriteTextures->Release();
 		delete(spriteTextures);
+	}
+		
 
+	//delete(spriteTexture);
 }
 
 DTexture* DSprite::GetCurrentTexture()

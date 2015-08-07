@@ -47,7 +47,7 @@ void GraphicEngine::Initialize(GraphicEngineInitParams* params)
 	sf::VideoMode vid = sf::VideoMode(params->WindowSize->Height, params->WindowSize->Width);
 
 	const char* title = params->WindowTitle.c_str();
-	MainWindow = new sf::RenderWindow(sf::VideoMode(params->WindowSize->Height, params->WindowSize->Width), title);
+	MainWindow = new sf::RenderWindow(vid, title);
 
 	MainWindow->setVerticalSyncEnabled(params->EnableVerticalSync);
 }

@@ -31,7 +31,7 @@ void GameEngine::Init(GameEngineInitParams * params)
 	Resources->Init(params->ResourceParams);
 }
 
-BaseSprite * GameEngine::GetSprite(std::string name)
+BaseSprite* GameEngine::GetSprite(std::string name)
 {
 	// Check first if it exists ? Or create a copy
 
@@ -46,9 +46,9 @@ BaseSprite * GameEngine::GetSprite(std::string name)
 
 	// Assign textures to sprite
 	spriteObject->SetTextures(spriteTextures);
-
-	delete(spriteResources);
+	
 	delete(spriteTextures);
+	delete(spriteResources);
 
 	return spriteObject;
 }

@@ -10,6 +10,7 @@
 
 DTexture::DTexture()
 {
+	size = new FSize();
     innerImpl = new sf::Texture();
 	innerImpl->setSmooth(false);
 }
@@ -26,12 +27,8 @@ DTexture::~DTexture()
 
 void DTexture::Initalize(int width, int height)
 {
-	FSize* mySize = new FSize();
-
-	mySize->Height = height;
-	mySize->Width = width;
-
-	size = mySize;
+	size->Height = height;
+	size->Width = width;
 }
 
 void DTexture::Load(std::string path)
@@ -42,9 +39,8 @@ void DTexture::Load(std::string path)
 	{
 		sf::Vector2u vec = innerImpl->getSize();
 
-		FSize* mySize = new FSize(vec.y, vec.x);
-
-		size = mySize;
+		size->Height = vec.y;
+		size->Width = vec.x;
 	}
 }
 
@@ -54,11 +50,10 @@ void DTexture::LoadFromMemory(char * data, int dataSize)
 
     if (res)
     {
-        sf::Vector2u vec = innerImpl->getSize();
+		sf::Vector2u vec = innerImpl->getSize();
 
-        FSize* mySize = new FSize(vec.y, vec.x);
-
-        size = mySize;
+		size->Height = vec.y;
+		size->Width = vec.x;
 	}
 }
 
