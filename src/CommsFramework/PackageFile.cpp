@@ -44,7 +44,7 @@ PackageFile::~PackageFile()
 	entries->Release();
 	delete(entries);
 }
-
+ 
 const char * PackageFile::GetFile(std::string filename, int& fileSize)
 {
 	std::ifstream packageStream = std::ifstream(TargetPackage, std::ios::in | std::ios::binary);
@@ -81,6 +81,11 @@ const char * PackageFile::GetFile(std::string filename, int& fileSize)
 
 			fileSize = targetFileLength;
 			fileFound = true;
+		}
+
+		if (strcmp(buf, "") == 0)
+		{
+			hasNextFile = false;
 		}
 		
 		filesIndex++;
