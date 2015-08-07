@@ -23,6 +23,8 @@ public:
 
     virtual PointerList<BaseTexture*>* GetTextures();
 
+	virtual void NextFrame();
+	
     virtual void SetFrame(int index);
 
     virtual void SetTexture(BaseTexture* texture);
@@ -39,5 +41,7 @@ private:
     PointerList<DTexture*>* spriteTextures;
 
 	void UpdateInnerImpl();
+
+	void ApplyCurrentTexture();
 };
 

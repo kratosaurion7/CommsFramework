@@ -43,6 +43,8 @@ int main()
 	{
 		eng->Graphics->ProcessEvents();
 
+		sprt->NextFrame();
+
 		eng->Graphics->Draw();
 	}
 }

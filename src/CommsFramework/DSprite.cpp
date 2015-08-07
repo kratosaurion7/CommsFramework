@@ -49,6 +49,13 @@ PointerList<BaseTexture*>* DSprite::GetTextures()
     return returnTextures;
 }
 
+void DSprite::NextFrame()
+{
+	CurrentFrameIndex = (CurrentFrameIndex + 1) % FramesCount;
+
+	ApplyCurrentTexture();
+}
+
 void DSprite::SetFrame(int index)
 {
     spriteTexture = spriteTextures->Get(CurrentFrameIndex % FramesCount); // Modulo for safety.
@@ -80,17 +87,8 @@ void DSprite::SetTextures(PointerList<BaseTexture*>* textures)
 	
 }
 
-
-//DTexture* DSprite::GetTexture()
-//{
-//	return spriteTexture;
-//}
-//
 void DSprite::SetTexture(BaseTexture * texture)
 {
-	if(spriteTexture != NULL)
-		delete(spriteTexture); // Ok to delete ?
-
 	DTexture* dtxr = dynamic_cast<DTexture*>(texture);
 
 	if (dtxr != NULL)
@@ -109,4 +107,9 @@ sf::Drawable * DSprite::GetDrawableImplementation()
 void DSprite::UpdateInnerImpl()
 {
 	innerImpl->setPosition(position->X, position->Y);
+}
+
+void DSprite::ApplyCurrentTexture()
+{
+	SetTexture(spriteTextures->Get(CurrentFrameIndex));
 }
