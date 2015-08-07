@@ -46,6 +46,8 @@ void ResourceManager::Init(ResourceManagerInitParams* initParams)
 	startingParams = initParams;
 
 	ParseConfigFiles();
+
+    SetupSprites();
 }
 
 void ResourceManager::ParseConfigFiles()
@@ -195,12 +197,50 @@ char* ResourceManager::GetResourceDataFromStore(Resource* res, int& dataLenght, 
 
 Resource * ResourceManager::GetResource(std::string name, GameModule * targetModule)
 {
-	return nullptr;
+    auto it = Resources->GetContainer()->begin();
+    while (it != Resources->GetContainer()->end())
+    {
+        Resource* res = (*it);
+
+        if (strcmp(res->Name.c_str(), name.c_str()) == 0)
+        {
+            return res;
+        }
+    }
+
+    return NULL;
 }
 
-PointerList<Resource*> ResourceManager::GetSpriteResources(std::string spriteName, GameModule * targetModule)
+PointerList<Resource*>* ResourceManager::GetSpriteResources(std::string spriteName, GameModule * targetModule)
 {
-	return PointerList<Resource*>();
+    PointerList<Resource*>* spriteResources = new PointerList<Resource*>();
+
+    auto it = SpritesInfo->GetContainer()->begin();
+    while (it != SpritesInfo->GetContainer()->end())
+    {
+        SpriteDescriptor* item = (*it);
+
+        Resource* targetRes = GetResource(item->SpriteName, targetModule);
+
+        spriteResources->Add(targetRes);
+
+        it++;
+    }
+
+    return spriteResources;
+}
+
+void ResourceManager::SetupSprites()
+{
+    auto it = SpritesInfo->GetContainer()->begin();
+    while (it != SpritesInfo->GetContainer()->end())
+    {
+        SpriteDescriptor* item = (*it);
+
+        
+
+        it++;
+    }
 }
 
 PointerList<Resource*>* ResourceManager::CreateListOfResourcesFromXmlNodes(PointerList<XmlNode*> &resourceNodes)

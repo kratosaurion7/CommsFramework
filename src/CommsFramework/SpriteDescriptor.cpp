@@ -7,6 +7,8 @@ SpriteDescriptor::SpriteDescriptor()
 	Frames = new BaseList<std::string>();
 
 	FrameLists = new PointerList<Framelist*>();
+
+    FrameResources = new PointerList<Resource*>();
 }
 
 SpriteDescriptor::~SpriteDescriptor()
@@ -15,7 +17,8 @@ SpriteDescriptor::~SpriteDescriptor()
 	delete(size);
 
 	delete(Frames);
-
+    delete(FrameResources);
+    
 	FrameLists->Release();
 	delete(FrameLists);
 }

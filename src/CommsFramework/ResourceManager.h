@@ -44,7 +44,7 @@ public:
 
 	Resource* GetResource(std::string name, GameModule* targetModule = NULL);
 
-	PointerList<Resource*> GetSpriteResources(std::string spriteName, GameModule* targetModule = NULL);
+	PointerList<Resource*>* GetSpriteResources(std::string spriteName, GameModule* targetModule = NULL);
 
 	PointerList<Resource*>* Resources;
 
@@ -56,6 +56,8 @@ private:
 	ResourceManagerInitParams* startingParams;
 
     BaseList<std::string>* secondaryConfigFiles;
+
+    void SetupSprites();
 
 	PointerList<GameModule*>* Modules;
 	PointerList<ResourceContainer*>* ResourceContainers;

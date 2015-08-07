@@ -101,7 +101,7 @@ int main4()
 
 	BaseTexture* txr = eng->CreateTexture();
 	txr->Load("Assets/Texture.png");
-	spr->SetTexture(txr);
+	//spr->SetTexture(txr);
 	spr->Show(true);
 
 	eng->AddObject(spr);

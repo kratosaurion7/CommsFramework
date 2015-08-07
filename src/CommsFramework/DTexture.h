@@ -20,7 +20,11 @@ public:
 
 	void Load(std::string path);
 
+    virtual void LoadFromMemory(char* data, int dataSize);
+
 	virtual FSize* GetSize();
+
+    
 
 	virtual void SetSolidColor(uint32_t pixelColor);
 

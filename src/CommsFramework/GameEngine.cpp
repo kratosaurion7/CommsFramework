@@ -3,6 +3,9 @@
 #include "GraphicEngine.h"
 #include "FSize.h"
 
+#include "Resource.h"
+
+#include "PointerList.h"
 
 GameEngine::GameEngine()
 {
@@ -33,9 +36,14 @@ void GameEngine::Init(GameEngineInitParams * params)
 
 BaseSprite * GameEngine::GetSprite(std::string name)
 {
-	auto x = Graphics->CreateSprite();
+	BaseSprite* spriteObject = Graphics->CreateSprite();
 	
-	return NULL;
+    
+    
+    PointerList<Resource*>* spriteResource = Resources->GetSpriteResources(name);
+
+
+	return spriteObject;
 }
 
 void GameEngine::Load()

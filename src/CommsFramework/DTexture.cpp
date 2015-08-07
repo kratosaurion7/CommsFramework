@@ -47,6 +47,20 @@ void DTexture::Load(std::string path)
 	}
 }
 
+void DTexture::LoadFromMemory(char * data, int dataSize)
+{
+    bool res = innerImpl->loadFromMemory(data, dataSize);
+
+    if (res)
+    {
+        sf::Vector2u vec = innerImpl->getSize();
+
+        FSize* mySize = new FSize(vec.y, vec.x);
+
+        size = mySize;
+    }
+}
+
 FSize* DTexture::GetSize()
 {
 	return size;

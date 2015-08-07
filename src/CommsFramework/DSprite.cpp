@@ -28,13 +28,56 @@ DSprite::~DSprite()
 	delete size;
 }
 
-DTexture* DSprite::GetTexture()
+DTexture* DSprite::GetCurrentTexture()
 {
-	return spriteTexture;
+    return spriteTexture;
 }
 
+PointerList<BaseTexture*>* DSprite::GetTextures()
+{
+    PointerList<BaseTexture*>* returnTextures = new PointerList<BaseTexture*>();
+
+    auto it = spriteTextures->GetContainer()->begin();
+    while (it != spriteTextures->GetContainer()->end())
+    {
+        DTexture* texture = (*it);
+        returnTextures->Add(texture);
+    }
+
+    return returnTextures;
+}
+
+void DSprite::SetFrame(int index)
+{
+    spriteTexture = spriteTextures->Get(CurrentFrameIndex % FramesCount); // Modulo for safety.
+}
+
+void DSprite::SetTextures(PointerList<BaseTexture*>* textures)
+{
+    delete(spriteTextures);
+    spriteTextures = new PointerList<DTexture*>();
+
+    auto it = textures->GetContainer()->begin();
+    while (it != textures->GetContainer()->end())
+    {
+        BaseTexture* texture = (*it);
+
+        spriteTextures->Add((DTexture*)texture);
+    }
+
+    FramesCount = spriteTextures->Count();
+}
+
+
+//DTexture* DSprite::GetTexture()
+//{
+//	return spriteTexture;
+//}
+//
 void DSprite::SetTexture(BaseTexture * texture)
 {
+    delete(spriteTexture); // Ok to delete ?
+
 	DTexture* dtxr = dynamic_cast<DTexture*>(texture);
 
 	if (dtxr != NULL)
@@ -43,7 +86,6 @@ void DSprite::SetTexture(BaseTexture * texture)
 		spriteTexture = dtxr;
 		size = texture->GetSize();
 	}
-		
 }
 
 sf::Drawable * DSprite::GetDrawableImplementation()

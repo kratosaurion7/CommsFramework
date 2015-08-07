@@ -37,5 +37,7 @@ public:
 	BaseList<std::string>* Frames;
 
 	PointerList<Framelist*>* FrameLists;
+
+    PointerList<Resource*>* FrameResources;
 };
 
