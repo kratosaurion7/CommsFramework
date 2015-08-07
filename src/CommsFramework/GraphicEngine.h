@@ -20,6 +20,9 @@ public:
 	GraphicEngine();
 	~GraphicEngine();
 
+	PointerList<DrawObject*>* Sprites;
+	sf::RenderWindow* MainWindow;
+
 	void Initialize(GraphicEngineInitParams* params);
 
 	void AddObject(BaseSprite* obj);
@@ -43,11 +46,8 @@ public:
 
 	void Stop();
 
-	BaseList<DrawObject*>* Sprites;
-
 	bool IsRunning();
 
-	sf::RenderWindow* MainWindow;
 
 private:
 	bool isRunning;

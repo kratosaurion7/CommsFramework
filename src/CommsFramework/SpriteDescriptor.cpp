@@ -21,7 +21,7 @@ SpriteDescriptor::~SpriteDescriptor()
 	delete(size);
 
 	delete(Frames);
-    delete(FrameResources);
+    //delete(FrameResources);
     
 	FrameLists->Release();
 	delete(FrameLists);

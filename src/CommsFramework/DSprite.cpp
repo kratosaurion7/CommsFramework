@@ -18,8 +18,8 @@ DSprite::DSprite()
 	isVisible = true;
 	position = new FPosition();
 	size = new FSize();
-	spriteTextures = new PointerList<DTexture*>();
 	spriteTexture = NULL;
+	spriteTextures = new PointerList<DTexture*>();
 }
 
 DSprite::~DSprite()
@@ -28,6 +28,10 @@ DSprite::~DSprite()
 	delete innerImpl;
 	delete position;
 	delete size;
+
+	if (spriteTextures != NULL)
+		delete(spriteTextures);
+
 }
 
 DTexture* DSprite::GetCurrentTexture()
@@ -84,7 +88,6 @@ void DSprite::SetTextures(PointerList<BaseTexture*>* textures)
 	{
 		SetTexture(textures->Get(0));
 	}
-	
 }
 
 void DSprite::SetTexture(BaseTexture * texture)

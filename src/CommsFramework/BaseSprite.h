@@ -21,11 +21,8 @@ public:
 	virtual void NextFrame() = 0;
 
     virtual void SetFrame(int index) = 0;
-	
 
     virtual void SetTexture(BaseTexture* texture) = 0;
     virtual void SetTextures(PointerList<BaseTexture*>* textures) = 0;
-	
-	//virtual void UpdateInnerImpl() = 0;
 };
 

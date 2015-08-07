@@ -26,7 +26,11 @@ GraphicEngine::~GraphicEngine()
 		delete MainWindow;
 
 	if (Sprites != NULL)
-		Sprites;
+	{
+		Sprites->Release();
+		delete(Sprites);
+	}
+		
 }
 
 void GraphicEngine::Initialize(GraphicEngineInitParams* params)
