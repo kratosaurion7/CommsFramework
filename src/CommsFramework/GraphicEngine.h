@@ -33,7 +33,7 @@ public:
 
 	DrawObject* GetObject(std::string identifier);
 
-	BaseSprite* CreateSprite();
+	BaseSprite* CreateSprite(std::string identifier = "");
 	BaseTexture* CreateTexture();
 	BaseFont* CreateFont();
 	BaseText* CreateText();
@@ -51,6 +51,8 @@ public:
 
 private:
 	bool isRunning;
+
+	GraphicEngineInitParams* startParams;
 
 	void ProcessWindowsEvents(sf::RenderWindow* targetWindow);
 

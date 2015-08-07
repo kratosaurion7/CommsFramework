@@ -24,7 +24,7 @@ public:
 
 	virtual DrawObject* GetObject(std::string identifier) = 0;
 
-	virtual BaseSprite* CreateSprite() = 0;
+	virtual BaseSprite* CreateSprite(std::string identifier = "") = 0;
 
 	virtual BaseTexture* CreateTexture() = 0;
 

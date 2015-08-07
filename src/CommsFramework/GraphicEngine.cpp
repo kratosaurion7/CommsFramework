@@ -18,36 +18,46 @@ GraphicEngine::GraphicEngine()
 	isRunning = false;
 	Sprites = new PointerList<DrawObject*>();
 	Keyboard = new SFMLKeyboard();
+	startParams = NULL;
 }
 
 GraphicEngine::~GraphicEngine()
 {
-	if (MainWindow == NULL)
-		delete MainWindow;
-
+	if (MainWindow != NULL)
+	{
+		MainWindow->close();
+		delete(MainWindow);
+	}
+		
+	
 	if (Sprites != NULL)
 	{
 		Sprites->Release();
 		delete(Sprites);
 	}
+	
+	delete(startParams);
 		
 }
 
 void GraphicEngine::Initialize(GraphicEngineInitParams* params)
 {
+	startParams = params;
+
 	sf::VideoMode vid = sf::VideoMode(params->WindowSize->Height, params->WindowSize->Width);
 
 	const char* title = params->WindowTitle.c_str();
-
 	MainWindow = new sf::RenderWindow(sf::VideoMode(params->WindowSize->Height, params->WindowSize->Width), title);
 
 	MainWindow->setVerticalSyncEnabled(params->EnableVerticalSync);
 }
 
-BaseSprite* GraphicEngine::CreateSprite()
+BaseSprite* GraphicEngine::CreateSprite(std::string identifier)
 {
 	DSprite* spr = new DSprite();
 	
+	spr->Ident = identifier;
+
 	return spr;
 }
 
@@ -104,7 +114,7 @@ DrawObject * GraphicEngine::GetObject(std::string identifier)
 	{
 		DrawObject* targetSprite = (*iter);
 
-		if (targetSprite->Ident == &identifier)
+		if (strcmp(targetSprite->Ident.c_str(), identifier.c_str()) == 0)
 		{
 			return targetSprite;
 		}
@@ -154,8 +164,7 @@ void GraphicEngine::ProcessDraw(sf::RenderWindow* targetWindow)
 {
 	targetWindow->clear();
 	
-	std::list<DrawObject*>::iterator iter = Sprites->GetContainer()->begin();
-
+	auto iter = Sprites->GetContainer()->begin();
 	while (iter != Sprites->GetContainer()->end())
 	{
 		DrawObject* targetSprite = (*iter);
