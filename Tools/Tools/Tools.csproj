@@ -47,6 +47,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Builder\AddConfigControls.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Builder\AddConfigControls.Designer.cs">
+      <DependentUpon>AddConfigControls.cs</DependentUpon>
+    </Compile>
     <Compile Include="Builder\AddNewResourceDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -76,6 +82,9 @@
     <Compile Include="Models\Sprite.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Builder\AddConfigControls.resx">
+      <DependentUpon>AddConfigControls.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Builder\AddNewResourceDialog.resx">
       <DependentUpon>AddNewResourceDialog.cs</DependentUpon>
     </EmbeddedResource>

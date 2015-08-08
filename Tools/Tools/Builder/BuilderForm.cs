@@ -20,101 +20,32 @@ namespace Tools.Builder
             InitializeComponent();
 
             _CurrentConfig = new BuilderConfig();
-
-            
         }
 
         private void BuilderForm_Load(object sender, EventArgs e)
         {
-
+            configTabControl.TabPages.Add(CreateNewConfigTabPage());
         }
 
-        private Panel CreateResourcePanelForResource()
+        public TabPage CreateNewConfigTabPage()
         {
-            var pnl = new TableLayoutPanel();
+            AddConfigControls newTabContents = new AddConfigControls();
 
-            pnl.AutoSize = true;
-            
+            TabPage newPage = new TabPage();
+            newPage.Controls.Add(newTabContents);
+            newPage.BackColor = Color.White;
 
-            pnl.Controls.Add(new Label() { Text = "Resource : " , AutoSize = true}, 0, 0);
-            pnl.Controls.Add(new TextBox() { Text = "buttan", Dock = DockStyle.Fill, AutoSize = true }, 1, 0);
-            pnl.Controls.Add(new TextBox() { Text = "buttan2", Dock = DockStyle.Fill, AutoSize = true }, 2, 0);
-            pnl.Controls.Add(new TextBox() { Text = "lol", ForeColor = Color.OrangeRed, Dock = DockStyle.Fill, AutoSize = true }, 3, 0);
-            pnl.Controls.Add(new CheckBox() { Checked = false, Dock = DockStyle.Fill }, 4, 0);
+            newPage.Text = "Config";
 
-            pnl.Height = 25;
-            pnl.Width = 400;
+            newTabContents.ParentPage = newPage;
 
-            return pnl;
+            return newPage;
         }
 
-        public void AddResourceToList(Resource res)
+        private void btnAddConfig_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            AddNewResourceDialog newResDialog = new AddNewResourceDialog();
-
-            newResDialog.ShowDialog();
-
-            if(newResDialog.DialogResult == DialogResult.OK)
-            {
-                foreach (var item in newResDialog.NewResources)
-                {
-                    _CurrentConfig.Resources.Add(item);
-
-                    resourcesListbox.Items.Add(item);
-                }
-
-                if(newResDialog.NewSprite != null)
-                {
-                    _CurrentConfig.Sprites.Add(newResDialog.NewSprite);
-
-                    resourcesListbox.Items.Add(newResDialog.NewSprite);
-                }
-
-            }
-
-            selectAllCheckbox.Checked = false;
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            var itemsToDelete = new List<object>();
-
-            foreach (var box in resourcesListbox.CheckedItems)
-            {
-                if (box is Resource)
-                {
-                    var boxItem = box as Resource;
-
-                    _CurrentConfig.Resources.Remove(boxItem);
-
-                }
-
-                if(box is Sprite)
-                {
-                    var boxItem = box as Sprite;
-
-                    _CurrentConfig.Sprites.Remove(boxItem);
-                }
-
-                itemsToDelete.Add(box);
-            }
-
-            itemsToDelete.ForEach(p => resourcesListbox.Items.Remove(p));
-
-            selectAllCheckbox.Checked = false;
-        }
-
-        private void selectAllCheckbox_CheckedChanged(object sender, EventArgs e)
-        {
-            for(int i = 0; i < resourcesListbox.Items.Count; i++)
-            {
-                resourcesListbox.SetItemChecked(i, selectAllCheckbox.Checked);
-            }
+           
+            configTabControl.TabPages.Add(CreateNewConfigTabPage());
         }
     }
 }
