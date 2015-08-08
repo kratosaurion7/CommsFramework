@@ -13,7 +13,7 @@ namespace Tools.Builder
 {
     public partial class AddConfigControls : UserControl
     {
-        private BuilderConfig _CurrentConfig;
+        public BuilderConfig CurrentConfig;
 
         public TabPage ParentPage;
 
@@ -21,7 +21,7 @@ namespace Tools.Builder
         {
             InitializeComponent();
 
-            _CurrentConfig = new BuilderConfig();
+            CurrentConfig = new BuilderConfig();
         }
 
         private void selectAllCheckbox_CheckedChanged(object sender, EventArgs e)
@@ -42,7 +42,7 @@ namespace Tools.Builder
                 {
                     var boxItem = box as Resource;
 
-                    _CurrentConfig.Resources.Remove(boxItem);
+                    CurrentConfig.Resources.Remove(boxItem);
 
                 }
 
@@ -50,7 +50,7 @@ namespace Tools.Builder
                 {
                     var boxItem = box as Sprite;
 
-                    _CurrentConfig.Sprites.Remove(boxItem);
+                    CurrentConfig.Sprites.Remove(boxItem);
                 }
 
                 itemsToDelete.Add(box);
@@ -71,14 +71,14 @@ namespace Tools.Builder
             {
                 foreach (var item in newResDialog.NewResources)
                 {
-                    _CurrentConfig.Resources.Add(item);
+                    CurrentConfig.Resources.Add(item);
 
                     resourcesListbox.Items.Add(item);
                 }
 
                 if (newResDialog.NewSprite != null)
                 {
-                    _CurrentConfig.Sprites.Add(newResDialog.NewSprite);
+                    CurrentConfig.Sprites.Add(newResDialog.NewSprite);
 
                     resourcesListbox.Items.Add(newResDialog.NewSprite);
                 }
@@ -92,6 +92,9 @@ namespace Tools.Builder
         {
             if (ParentPage != null)
                 ParentPage.Text = txtConfigName.Text;
+
+            if (CurrentConfig != null)
+                CurrentConfig.ConfigName = txtConfigName.Text;
 
         }
     }

@@ -31,7 +31,15 @@ namespace Tools.Builder
             {
                 framesListbox.Items.Clear();
 
-                NewSprite.SpriteFrames = diag.FileNames.Select(p => new FileInfo(p));
+                NewSprite.SpriteFrames = diag.FileNames.Select(p => new FileInfo(p)).ToList();
+
+                NewSprite.SpriteFramesResources.AddRange(NewSprite.SpriteFrames.Select(p => new Resource()
+                {
+                    ResourceFile = p,
+                    ResourceFileExtension = p.Extension,
+                    ResourceName = p.Name
+                }).ToList());
+
 
                 var imageFiles = NewSprite.SpriteFrames.Where(p => p.Extension == ".png" || p.Extension == ".jpg");
 

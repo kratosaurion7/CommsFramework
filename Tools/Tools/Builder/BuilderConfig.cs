@@ -9,6 +9,8 @@ namespace Tools.Builder
 {
     public class BuilderConfig
     {
+        public string ConfigName { get; set; }
+
         public List<Resource> Resources = new List<Resource>();
 
         public List<Sprite> Sprites = new List<Sprite>();

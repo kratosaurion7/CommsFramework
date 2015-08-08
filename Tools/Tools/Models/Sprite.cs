@@ -19,7 +19,9 @@ namespace Tools.Models
         public int Height;
         public int Width;
         
-        public IEnumerable<FileInfo> SpriteFrames = new List<FileInfo>();
+        public List<FileInfo> SpriteFrames = new List<FileInfo>();
+
+        public List<Resource> SpriteFramesResources = new List<Resource>();
 
         public override string ToString()
         {
