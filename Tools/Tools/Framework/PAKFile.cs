@@ -141,7 +141,7 @@ namespace Tools.Framework
 
         private void RecalculateHeader()
         {
-            DirectoryOffset = 4;
+            DirectoryOffset = 12;
             DirectoryLength = PakDirectory.GetDirectoryLength();
         }
 

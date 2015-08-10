@@ -27,14 +27,14 @@ namespace Tools.Framework
         {
             byte[] results;
 
-            if (!BitConverter.IsLittleEndian)
-            {
-                results = BitConverter.GetBytes(contents);
-            }
-            else
-            {
-                results = BitConverter.GetBytes(contents).Reverse().ToArray();
-            }
+            //if (!BitConverter.IsLittleEndian)
+            //{
+            results = BitConverter.GetBytes(contents);
+            //}
+            //else
+            //{
+            //    results = BitConverter.GetBytes(contents).Reverse().ToArray();
+            //}
 
             return results;
         }
