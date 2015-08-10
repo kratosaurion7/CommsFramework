@@ -12,14 +12,20 @@ ResourceManager* GameResources;
 
 int main()
 {
-	while (true)
-	{
+	//while (true)
+	//{
 		PackageFile* pack = new PackageFile();
-		pack->AddFile("assets\\raven_idle_0.png");
-		pack->AddFile("assets\\raven_idle_1.png");
-		pack->AddFile("assets\\raven_idle_2.png");
-		pack->AddFile("assets\\raven_idle_3.png");
-		pack->AddFile("assets\\raven_idle_4.png");
+		//pack->AddFile("assets\\raven_idle_0.png");
+		//pack->AddFile("assets\\raven_idle_1.png");
+		//pack->AddFile("assets\\raven_idle_2.png");
+		//pack->AddFile("assets\\raven_idle_3.png");
+		//pack->AddFile("assets\\raven_idle_4.png");
+
+		for (int i = 0; i < 40; i++)
+		{
+			pack->AddFile("assets\\win_" + std::to_string(i) + ".png");
+		}
+
 		pack->Save("package.pack");
 
 
@@ -35,7 +41,7 @@ int main()
 		GameGraphics = eng->Graphics;
 		GameResources = eng->Resources;
 
-		BaseSprite* sprt = eng->GetSprite("Raven");
+		BaseSprite* sprt = eng->GetSprite("Coin");
 
 		eng->Graphics->AddObject(sprt);
 
@@ -51,17 +57,17 @@ int main()
 
 			eng->Graphics->Draw();
 
-			if (counter > 60)
-			{
-				break;
-			}
-			else {
-				counter++;
-			}
+			//if (counter > 60)
+			//{
+			//	break;
+			//}
+			//else {
+			//	counter++;
+			//}
 		}
 
 		delete(pack);
 		delete(eng);
-	}
+	//}
 
 }

@@ -30,14 +30,20 @@
         {
             this.btnAddConfig = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnRemoveConfig = new System.Windows.Forms.Button();
             this.configTabControl = new System.Windows.Forms.TabControl();
             this.button2 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnSaveConfig = new System.Windows.Forms.Button();
-            this.btnRemoveConfig = new System.Windows.Forms.Button();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.rdbAssets = new System.Windows.Forms.RadioButton();
+            this.rdbPackageFile = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnAddConfig
@@ -61,6 +67,16 @@
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Config Files";
+            // 
+            // btnRemoveConfig
+            // 
+            this.btnRemoveConfig.Location = new System.Drawing.Point(424, 19);
+            this.btnRemoveConfig.Name = "btnRemoveConfig";
+            this.btnRemoveConfig.Size = new System.Drawing.Size(75, 23);
+            this.btnRemoveConfig.TabIndex = 2;
+            this.btnRemoveConfig.Text = "Remove";
+            this.btnRemoveConfig.UseVisualStyleBackColor = true;
+            this.btnRemoveConfig.Click += new System.EventHandler(this.btnRemoveConfig_Click);
             // 
             // configTabControl
             // 
@@ -103,7 +119,7 @@
             // 
             // btnSaveConfig
             // 
-            this.btnSaveConfig.Location = new System.Drawing.Point(519, 527);
+            this.btnSaveConfig.Location = new System.Drawing.Point(541, 547);
             this.btnSaveConfig.Name = "btnSaveConfig";
             this.btnSaveConfig.Size = new System.Drawing.Size(75, 23);
             this.btnSaveConfig.TabIndex = 6;
@@ -111,21 +127,55 @@
             this.btnSaveConfig.UseVisualStyleBackColor = true;
             this.btnSaveConfig.Click += new System.EventHandler(this.btnSaveConfig_Click);
             // 
-            // btnRemoveConfig
+            // groupBox3
             // 
-            this.btnRemoveConfig.Location = new System.Drawing.Point(424, 19);
-            this.btnRemoveConfig.Name = "btnRemoveConfig";
-            this.btnRemoveConfig.Size = new System.Drawing.Size(75, 23);
-            this.btnRemoveConfig.TabIndex = 2;
-            this.btnRemoveConfig.Text = "Remove";
-            this.btnRemoveConfig.UseVisualStyleBackColor = true;
-            this.btnRemoveConfig.Click += new System.EventHandler(this.btnRemoveConfig_Click);
+            this.groupBox3.Controls.Add(this.panel1);
+            this.groupBox3.Location = new System.Drawing.Point(12, 499);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(505, 71);
+            this.groupBox3.TabIndex = 7;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Save Options";
+            // 
+            // panel1
+            // 
+            this.panel1.AutoSize = true;
+            this.panel1.Controls.Add(this.rdbAssets);
+            this.panel1.Controls.Add(this.rdbPackageFile);
+            this.panel1.Location = new System.Drawing.Point(6, 19);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(193, 24);
+            this.panel1.TabIndex = 0;
+            // 
+            // rdbAssets
+            // 
+            this.rdbAssets.AutoSize = true;
+            this.rdbAssets.Location = new System.Drawing.Point(102, 3);
+            this.rdbAssets.Name = "rdbAssets";
+            this.rdbAssets.Size = new System.Drawing.Size(88, 17);
+            this.rdbAssets.TabIndex = 3;
+            this.rdbAssets.TabStop = true;
+            this.rdbAssets.Text = "Assets Folder";
+            this.rdbAssets.UseVisualStyleBackColor = true;
+            // 
+            // rdbPackageFile
+            // 
+            this.rdbPackageFile.AutoSize = true;
+            this.rdbPackageFile.Checked = true;
+            this.rdbPackageFile.Location = new System.Drawing.Point(3, 3);
+            this.rdbPackageFile.Name = "rdbPackageFile";
+            this.rdbPackageFile.Size = new System.Drawing.Size(93, 17);
+            this.rdbPackageFile.TabIndex = 2;
+            this.rdbPackageFile.TabStop = true;
+            this.rdbPackageFile.Text = "Packaged File";
+            this.rdbPackageFile.UseVisualStyleBackColor = true;
             // 
             // BuilderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(606, 562);
+            this.ClientSize = new System.Drawing.Size(628, 586);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.btnSaveConfig);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -134,6 +184,10 @@
             this.Load += new System.EventHandler(this.BuilderForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -147,5 +201,9 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button btnSaveConfig;
         private System.Windows.Forms.Button btnRemoveConfig;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.RadioButton rdbAssets;
+        private System.Windows.Forms.RadioButton rdbPackageFile;
     }
 }

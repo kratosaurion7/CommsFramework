@@ -3,15 +3,23 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using Tools.Framework;
 using Tools.Models;
 
 namespace Tools.Builder
 {
+    public enum OutputFormat
+    {
+        Package,
+        Folder
+    }
+
     public partial class BuilderForm : Form
     {
         public Dictionary<TabPage, AddConfigControls> ConfigMappings = new Dictionary<TabPage, AddConfigControls>();
@@ -54,16 +62,98 @@ namespace Tools.Builder
 
         private void btnSaveConfig_Click(object sender, EventArgs e)
         {
+            FolderBrowserDialog folderDiag = new FolderBrowserDialog();
+            folderDiag.ShowNewFolderButton = true;
+            folderDiag.RootFolder = Environment.SpecialFolder.MyComputer;
+            folderDiag.Description = "Choose destination for the build.";
+
+            var res = folderDiag.ShowDialog();
+
+            if(res == DialogResult.OK)
+            {
+                var filesToSave = GetCurrentAssetFiles();
+                var directory = new DirectoryInfo(folderDiag.SelectedPath);
+                var format = rdbPackageFile.Checked == true ? OutputFormat.Package : OutputFormat.Folder;
+
+                bool saveSuccess = SaveAssetsAndConfig(filesToSave, directory, format);
+
+                if(saveSuccess)
+                {
+                    MessageBox.Show("Success !");
+                }
+                else
+                {
+                    MessageBox.Show("Failure !");
+                }
+            }
+        }
+
+        public IEnumerable<FileInfo> GetCurrentAssetFiles()
+        {
+            var files = ConfigMappings
+                .SelectMany(p => p.Value.CurrentConfig.Resources
+                                                      .Select(t => t.ResourceFile)
+                                                      .Concat(p.Value.CurrentConfig.Sprites
+                                                                                   .SelectMany(q => q.SpriteFrames))
+                );
+
+            return files;
+        }
+
+        public bool SaveAssetsAndConfig(IEnumerable<FileInfo> inputFiles, DirectoryInfo outputFolder, OutputFormat saveFormat)
+        {
             var configs = ConfigMappings.Select(p => p.Value.CurrentConfig);
 
             var rootConfig = configs.First();
+
+            bool success = true;
 
             foreach (var item in configs)
             {
                 XElement configFile = SerializeBuilderConfig(item);
 
-                configFile.Save(item.ConfigName + ".xml");
+                try
+                {
+                    configFile.Save(Path.Combine(outputFolder.FullName, item.ConfigName + ".xml"));
+                }
+                catch (Exception)
+                {
+                    success = false;
+                }
             }
+
+            if (saveFormat == OutputFormat.Folder)
+            {
+                try
+                {
+                    foreach (var item in inputFiles)
+                    {
+                        item.CopyTo(Path.Combine(outputFolder.FullName, item.Name), true);
+                    }
+                }
+                catch (Exception)
+                {
+                    success = false;
+                }
+
+            }
+            else if (saveFormat == OutputFormat.Package)
+            {
+                try
+                {
+                    PAKFile package = new PAKFile();
+                    package.AddFiles(inputFiles);
+
+                    package.Save(new FileInfo(Path.Combine(outputFolder.FullName, "package.pak")));
+                }
+                catch (Exception)
+                {
+                    success = false;
+                }
+
+            }
+
+            return success;
         }
 
         public XElement SerializeBuilderConfig(BuilderConfig config)

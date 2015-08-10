@@ -78,6 +78,8 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Framework\BinaryHelper.cs" />
+    <Compile Include="Framework\PAKFile.cs" />
     <Compile Include="Models\Resource.cs" />
     <Compile Include="Models\Sprite.cs" />
     <Compile Include="Program.cs" />
