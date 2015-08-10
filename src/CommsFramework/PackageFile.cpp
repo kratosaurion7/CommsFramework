@@ -94,6 +94,11 @@ const char * PackageFile::GetFile(std::string filename, int& fileSize)
 	return fileContents;
 }
 
+PointerList<FileContents*> PackageFile::GetAllFiles()
+{
+	return PointerList<FileContents*>();
+}
+
 void PackageFile::AddFile(std::string filename)
 {
 	filesList->Add(filename);
@@ -198,4 +203,55 @@ void PackageFile::Save(std::string savePath)
 	}
 
 	fileStream.close();
+}
+
+void PackageFile::ReadPackage()
+{
+	std::ifstream packageStream = std::ifstream(TargetPackage, std::ios::in | std::ios::binary);
+
+	char buf[256];
+	char* fileContents = NULL;
+
+	packageStream.read(buf, PACK_FILE_SIG_LENGTH + 1); // get(n) method returns at most n-1 elements. Signature is 4
+
+													  // Step 1. Check it the file is the correct format
+	if (strncmp(buf, "PACK", PACK_FILE_SIG_LENGTH) != 0)
+		return;
+
+	packageStream.get(buf, sizeof(int));
+
+	int dirOffset = BytesToInt(buf);
+
+	bool hasNextFile = true;
+	bool fileFound = false;
+	packageStream.seekg(dirOffset);
+
+	int filesIndex = 0;
+	while (hasNextFile && !fileFound)
+	{
+		packageStream.get(buf, DIRECTORY_ENTRY_SIZE + 1);
+
+		if (strcmp(buf, "") == 0)
+		{
+			hasNextFile = false;
+			break;
+		}
+
+		DirectoryEntry* newEntry = new DirectoryEntry();
+
+		int targetFilePos = BytesToInt(&buf[FILENAME_MAX_LENGTH]);
+		int targetFileLength = BytesToInt(&buf[FILENAME_MAX_LENGTH + sizeof(int)]);
+
+		packageStream.seekg(targetFilePos);
+		fileContents = new char[targetFileLength];
+		packageStream.read(fileContents, targetFileLength);
+
+		newEntry->fileLength = targetFileLength;
+		newEntry->filePosition = targetFileLength;
+
+		fileFound = true;
+
+
+		filesIndex++;
+	}
 }

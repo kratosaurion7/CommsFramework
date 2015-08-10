@@ -19,7 +19,7 @@
 	(4 bytes, int) directory lenght
 
 	Directory
-	(56 bytes, char) file name
+	(32 bytes, char) file name
 	(4 bytes, int) file position
 	(4 bytes, int) file lenght
 
@@ -53,6 +53,8 @@ public:
 
 	const char* GetFile(std::string filename, int& fileSize);
 
+	PointerList<FileContents*> GetAllFiles();
+
 	void AddFile(std::string filename);
 
 	void RemoveFile(std::string filename);
@@ -71,5 +73,9 @@ private:
 	std::string TargetPackage;
 
 	std::string OutputFileName;
+
+	/**
+	Reads the package file and fills the entries member with the files inside the package. */
+	void ReadPackage();
 };
 
