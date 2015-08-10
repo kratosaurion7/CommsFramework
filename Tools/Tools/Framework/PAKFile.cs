@@ -64,7 +64,7 @@ namespace Tools.Framework
                 }
                 
                 entry.FileLength = (int)file.Length;
-                entry.FilePosition = bytesCount + 4 + 4; // file size + file length + file offset
+                entry.FilePosition = bytesCount; // file size + file length + file offset
 
                 entry.FileData = file;
 
@@ -89,7 +89,7 @@ namespace Tools.Framework
                 var entry = new PackDirectoryEntry();
                 entry.FileName = file.FullName.Replace(dir.FullName, "");
                 entry.FileLength = (int)file.Length;
-                entry.FilePosition = bytesCount + 4 + 4;
+                entry.FilePosition = bytesCount;
 
                 entry.FileData = file;
 
