@@ -80,6 +80,7 @@
     </Compile>
     <Compile Include="Framework\BinaryHelper.cs" />
     <Compile Include="Framework\PAKFile.cs" />
+    <Compile Include="Models\Container.cs" />
     <Compile Include="Models\Resource.cs" />
     <Compile Include="Models\Sprite.cs" />
     <Compile Include="Program.cs" />

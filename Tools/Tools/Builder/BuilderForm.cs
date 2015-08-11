@@ -219,5 +219,33 @@ namespace Tools.Builder
 
             configTabControl.TabPages.RemoveAt(configTabControl.SelectedIndex);
         }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog diag = new OpenFileDialog();
+
+            diag.CheckFileExists = true;
+            diag.DefaultExt = ".xml";
+            diag.Multiselect = false;
+            diag.Title = "Select the root xml file.";
+            var result = diag.ShowDialog();
+
+            if(result == DialogResult.OK)
+            {
+                FileInfo inputFilename = new FileInfo(diag.FileName);
+            }
+        }
+
+        public BuilderConfig[] CreateBuilderConfigFromFile(FileInfo rootConfigFile)
+        {
+            return null;
+        }
+
+        private IEnumerable<Resource> GetResourcesOfConfigFile(XElement configElement)
+        {
+            return configElement.Elements().Where(p => p.Name == "resource").Select(p => new Resource(p));
+        }
+
+        
     }
 }
