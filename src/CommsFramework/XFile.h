@@ -49,6 +49,7 @@ public:
     ~XFile();
 
 	bool FileValid;
+	int FileSize;
 
 	// Opens a file with the given open mode and share mode. If the file does not exist, function goes in error
 	void Open(std::string filePath, FILE_OPEN_MODE openMode, FILE_SHARE_MODE shareMode = XSHARE_MODE_NONE);
@@ -60,8 +61,6 @@ public:
 	FileContents* Read();
 	void Read(char* &buf, int &size);
 	void Write(char* buf, int size);
-
-	int FileSize();
 
 	XDirectory* ParentDirectory();
 
@@ -80,6 +79,9 @@ protected:
 	int TranslateFileShareMode(FILE_SHARE_MODE mode);
 	int TranslateOpenCreateMode(FILE_OPEN_CREATE_MODE mode);
 
+	bool Check();
+
+	void SetFileSize();
 
 #ifdef _WINDOWS
 	HANDLE winFileHandle;

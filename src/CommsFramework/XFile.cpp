@@ -5,10 +5,12 @@
 XFile::XFile()
 {
 	FileValid = false;
+	FileSize = -1;
 }
 
 XFile::XFile(std::string name)
 {
+	FileSize = -1;
 	FileValid = false;
 	this->Open(name, XFILE_READ_WRITE);
 }
@@ -37,7 +39,11 @@ void XFile::Open(std::string filePath, FILE_OPEN_MODE openMode, FILE_SHARE_MODE 
 	}
 
 	winFileHandle = res;
+
+	this->SetFileSize();
 #endif
+
+	
 }
 
 void XFile::OpenCreate(std::string filePath, FILE_OPEN_CREATE_MODE createMode, FILE_SHARE_MODE shareMode)
@@ -59,6 +65,8 @@ void XFile::OpenCreate(std::string filePath, FILE_OPEN_CREATE_MODE createMode, F
 	}
 
 	winFileHandle = res;
+
+	this->SetFileSize();
 #endif
 }
 
@@ -67,6 +75,42 @@ void XFile::Close()
 #ifdef _WINDOWS
 	CloseHandle(winFileHandle);
 #endif
+}
+
+bool XFile::IsOpen()
+{
+#ifdef _WINDOWS
+	return winFileHandle != INVALID_HANDLE_VALUE && FileValid;
+#endif
+}
+
+FileContents * XFile::Read()
+{
+	if (!this->Check())
+		return NULL;
+
+	FileContents* contents = new FileContents();
+
+#ifdef _WINDOWS
+	char* buf = new char[FileSize];
+	bool res = ReadFile(winFileHandle, buf, FileSize, NULL, NULL);
+	
+	if (res)
+	{
+		contents->buffer = buf;
+		contents->fileSize = FileSize;
+	}
+	else 
+	{
+		DWORD err = GetLastError();
+		// Error condition
+		delete(contents);
+		contents = NULL;
+	}
+
+#endif
+
+	return contents;
 }
 
 int XFile::TranslateFileOpenMode(FILE_OPEN_MODE mode)
@@ -122,4 +166,36 @@ int XFile::TranslateOpenCreateMode(FILE_OPEN_CREATE_MODE mode)
 		return CREATE_NEW;
 	}
 #endif
+}
+
+bool XFile::Check()
+{
+#ifdef _WINDOWS
+	return winFileHandle != INVALID_HANDLE_VALUE && FileValid;
+#endif
+}
+
+void XFile::SetFileSize()
+{
+	if (this->Check())
+	{
+#ifdef _WINDOWS
+		DWORD res = GetFileSize(winFileHandle, NULL);
+
+		if (res == INVALID_FILE_SIZE)
+		{
+			FileSize = -1;
+		}
+		else
+		{
+			FileSize = res;
+		}
+#endif
+	}
+	else 
+	{
+		FileSize = -1;
+	}
+
+
 }
