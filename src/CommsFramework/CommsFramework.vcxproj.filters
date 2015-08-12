@@ -145,10 +145,10 @@
       <Filter>Framework\System</Filter>
     </ClCompile>
     <ClCompile Include="XDirectory.cpp">
-      <Filter>Framework\Filesystem\Windows</Filter>
+      <Filter>Framework\Filesystem</Filter>
     </ClCompile>
     <ClCompile Include="XFile.cpp">
-      <Filter>Framework\Filesystem\Windows</Filter>
+      <Filter>Framework\Filesystem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -267,10 +267,10 @@
       <Filter>Framework\Filesystem</Filter>
     </ClInclude>
     <ClInclude Include="XDirectory.h">
-      <Filter>Framework\Filesystem\Windows</Filter>
+      <Filter>Framework\Filesystem</Filter>
     </ClInclude>
     <ClInclude Include="XFile.h">
-      <Filter>Framework\Filesystem\Windows</Filter>
+      <Filter>Framework\Filesystem</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

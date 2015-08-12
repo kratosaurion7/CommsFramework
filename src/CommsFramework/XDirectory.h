@@ -30,6 +30,7 @@ enum DIRECTORY_CREATE_RESULT
     DIR_PATH_NOT_FOUND
 };
 
+class XFile;
 
 class XDirectory
 {
