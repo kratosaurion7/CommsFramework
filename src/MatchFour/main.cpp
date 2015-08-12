@@ -18,6 +18,8 @@ int main()
 {
 	XFile* wasd = new XFile();
 	
+	XDirectory* x = new XDirectory();
+
 	//while (true)
 	//{
 		PackageFile* pack = new PackageFile();

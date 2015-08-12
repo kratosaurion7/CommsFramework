@@ -14,13 +14,19 @@ XFile::XFile(std::string name)
 	FileSize = -1;
 	FileValid = false;
 	FilePath = name;
-
-	this->Open(name, XFILE_READ_WRITE);
 }
 
 
 XFile::~XFile()
 {
+}
+
+void XFile::Open()
+{
+	if (FilePath != "")
+	{
+		this->Open(FilePath, XFILE_READ_WRITE);
+	}
 }
 
 void XFile::Open(std::string filePath, FILE_OPEN_MODE openMode, FILE_SHARE_MODE shareMode)
@@ -274,7 +280,7 @@ int XFile::TranslateOpenCreateMode(FILE_OPEN_CREATE_MODE mode)
 bool XFile::Check()
 {
 #ifdef _WINDOWS
-	return winFileHandle != INVALID_HANDLE_VALUE && FileValid;
+	return winFileHandle != INVALID_HANDLE_VALUE && FileValid && FileSize >= 0;
 #endif
 }
 
@@ -299,6 +305,4 @@ void XFile::SetFileSize()
 	{
 		FileSize = -1;
 	}
-
-
 }

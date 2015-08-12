@@ -51,7 +51,9 @@ public:
 	bool FileValid;
 	int FileSize;
 	std::string FilePath;
+	std::string FileName; // Need to extract the file name from the path
 
+	void Open();
 	// Opens a file with the given open mode and share mode. If the file does not exist, function goes in error
 	void Open(std::string filePath, FILE_OPEN_MODE openMode, FILE_SHARE_MODE shareMode = XSHARE_MODE_NONE);
 	// Opens a file with the given open mode and share mode. If the file does not exist, it is created and opened as READ_WRITE

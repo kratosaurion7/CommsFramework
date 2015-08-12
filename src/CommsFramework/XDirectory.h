@@ -36,13 +36,13 @@ class XDirectory
 {
 public:
     XDirectory();
+	XDirectory(std::string path);
     ~XDirectory();
 
+	std::string Name;
+	std::string FullPath;
+
     static XDirectory* OpenDirectory(std::string path);
-
-    std::string Name();
-
-    std::string FullPath();
 
     PointerList<XFile*>* GetFiles(bool recursive = false);
 
@@ -50,7 +50,13 @@ public:
 
 protected:
 
+	bool Check();
+
+	void OpenDirectory();
+
 #ifdef _WINDOWS
+	HANDLE winDirHandle;
+
 	TCHAR dirPath[MAX_PATH]; // Path to the directory
 #endif
 };
