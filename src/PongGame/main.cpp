@@ -157,7 +157,7 @@ int main()
         ball->Update();
 
         // Check for game exit
-        if (engine->Keyboard->IsKeyPressed(Escape))
+        if (engine->Keyboard->IsKeyPressed(_Escape))
             engine->Stop();
 
         // Check for player paddles movements

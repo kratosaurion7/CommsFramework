@@ -15,11 +15,11 @@ enum FILE_SHARE_MODE
 };
 
 
-class WindowsFile
+class XFile
 {
 public:
-    WindowsFile();
-    ~WindowsFile();
+    XFile();
+    ~XFile();
 
     
 };

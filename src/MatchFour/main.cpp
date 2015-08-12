@@ -16,8 +16,8 @@ ResourceManager* GameResources;
 
 int main()
 {
-    File* x = new File();
-
+	XFile* wasd = new XFile();
+	
 	//while (true)
 	//{
 		PackageFile* pack = new PackageFile();
@@ -26,7 +26,7 @@ int main()
 		//pack->AddFile("assets\\raven_idle_2.png");
 		//pack->AddFile("assets\\raven_idle_3.png");
 		//pack->AddFile("assets\\raven_idle_4.png");
-
+		
 		for (int i = 0; i < 40; i++)
 		{
 			pack->AddFile("assets\\win_" + std::to_string(i) + ".png");
