@@ -4,14 +4,20 @@
 
 #include <BaseSprite.h>
 
+#include <FileSystem.h>
+
 GameEngine* eng;
 
 BaseGraphicEngine* GameGraphics;
 
 ResourceManager* GameResources;
 
+#include <Windows.h>
+
 int main()
 {
+    File* x = new File();
+
 	//while (true)
 	//{
 		PackageFile* pack = new PackageFile();

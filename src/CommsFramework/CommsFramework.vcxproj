@@ -158,7 +158,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -331,6 +331,8 @@ XCOPY /y "E:\Prog\lib\sfml\SFML-2.3_x64\bin\*.dll" "$(TargetDir)"
     <ClCompile Include="SFMLText.cpp" />
     <ClCompile Include="TestRunner.cpp" />
     <ClCompile Include="Utilities.cpp" />
+    <ClCompile Include="WindowsDirectory.cpp" />
+    <ClCompile Include="WindowsFile.cpp" />
     <ClCompile Include="XmlReader.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -343,6 +345,7 @@ XCOPY /y "E:\Prog\lib\sfml\SFML-2.3_x64\bin\*.dll" "$(TargetDir)"
     <ClInclude Include="BaseTexture.h" />
     <ClInclude Include="BitHelper.h" />
     <ClInclude Include="DrawObject.h" />
+    <ClInclude Include="FileSystem.h" />
     <ClInclude Include="FRectangle.h" />
     <ClInclude Include="GameEngine.h" />
     <ClInclude Include="GameObject.h" />
@@ -370,6 +373,8 @@ XCOPY /y "E:\Prog\lib\sfml\SFML-2.3_x64\bin\*.dll" "$(TargetDir)"
     <ClInclude Include="TestRunner.h" />
     <ClInclude Include="Utilities.h" />
     <ClInclude Include="Vectors.h" />
+    <ClInclude Include="WindowsDirectory.h" />
+    <ClInclude Include="WindowsFile.h" />
     <ClInclude Include="XmlReader.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -61,6 +61,12 @@
     <Filter Include="Framework\Engine">
       <UniqueIdentifier>{c5e0ac05-eff1-4a07-b8dc-9c1b1baec60f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Framework\Filesystem\Windows">
+      <UniqueIdentifier>{a33351cc-8dbc-44a6-a75d-937f2572f1f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Filesystem\Linux">
+      <UniqueIdentifier>{c0ee2877-48c3-42ea-804f-8c236eba4082}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -137,6 +143,12 @@
     </ClCompile>
     <ClCompile Include="Utilities.cpp">
       <Filter>Framework\System</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowsFile.cpp">
+      <Filter>Framework\Filesystem\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowsDirectory.cpp">
+      <Filter>Framework\Filesystem\Windows</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -250,6 +262,15 @@
     </ClInclude>
     <ClInclude Include="Utilities.h">
       <Filter>Framework\System</Filter>
+    </ClInclude>
+    <ClInclude Include="FileSystem.h">
+      <Filter>Framework\Filesystem</Filter>
+    </ClInclude>
+    <ClInclude Include="WindowsFile.h">
+      <Filter>Framework\Filesystem\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="WindowsDirectory.h">
+      <Filter>Framework\Filesystem\Windows</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
