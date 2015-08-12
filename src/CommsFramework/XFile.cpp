@@ -156,6 +156,50 @@ void XFile::Write(char * buf, int size)
 	}
 }
 
+void XFile::CopyTo(std::string filePath)
+{
+	if (this->Check())
+	{
+#ifdef _WINDOWS
+		wchar_t copyFromPath[MAX_PATH];
+		mbstowcs(copyFromPath, FilePath.c_str(), FilePath.length());
+
+		wchar_t copyToPath[MAX_PATH];
+		mbstowcs(copyToPath, filePath.c_str(), filePath.length());
+
+		bool res = CopyFile(copyFromPath, copyToPath, false);
+
+		if (!res)
+		{
+			DWORD err = GetLastError();
+			// Do error management
+		}
+#endif
+	}
+}
+
+void XFile::MoveTo(std::string newPath)
+{
+	if (this->Check())
+	{
+#ifdef _WINDOWS
+		wchar_t moveFromPath[MAX_PATH];
+		mbstowcs(moveFromPath, FilePath.c_str(), FilePath.length());
+
+		wchar_t moveToPath[MAX_PATH];
+		mbstowcs(moveToPath, newPath.c_str(), newPath.length());
+
+		bool res = MoveFile(moveFromPath, moveToPath);
+
+		if (!res)
+		{
+			DWORD err = GetLastError();
+			// Do error management
+		}
+#endif
+	}
+}
+
 void XFile::Delete()
 {
 	if (this->Check())
