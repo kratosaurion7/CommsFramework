@@ -1,7 +1,7 @@
 #pragma once
 
 enum  Key{
-	Unknown = -1,
+	_Unknown = -1,
 	A = 0, B, C,
 	D, E, F, G,
 	H, I, J, K,
@@ -11,7 +11,7 @@ enum  Key{
 	X, Y, Z, Num0,
 	Num1, Num2, Num3, Num4,
 	Num5, Num6, Num7, Num8,
-	Num9, Escape, LControl, LShift,
+	Num9, _Escape, LControl, LShift,
 	LAlt, LSystem, RControl, RShift,
 	RAlt, RSystem, Menu, LBracket,
 	RBracket, SemiColon, Comma, Period,
