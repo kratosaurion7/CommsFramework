@@ -6,12 +6,15 @@ XFile::XFile()
 {
 	FileValid = false;
 	FileSize = -1;
+	FilePath = "";
 }
 
 XFile::XFile(std::string name)
 {
 	FileSize = -1;
 	FileValid = false;
+	FilePath = name;
+
 	this->Open(name, XFILE_READ_WRITE);
 }
 
@@ -24,6 +27,8 @@ void XFile::Open(std::string filePath, FILE_OPEN_MODE openMode, FILE_SHARE_MODE 
 {
 	int _accessMode = this->TranslateFileOpenMode(openMode);
 	int _shareMode = this->TranslateFileShareMode(shareMode);
+
+	FilePath = filePath;
 
 #ifdef _WINDOWS
 	wchar_t wText[MAX_PATH];
@@ -111,6 +116,60 @@ FileContents * XFile::Read()
 #endif
 
 	return contents;
+}
+
+void XFile::Read(char* &buf, int & size)
+{
+	if (!this->Check())
+		return;
+
+#ifdef _WINDOWS
+	char* fileBuf = new char[FileSize];
+	bool res = ReadFile(winFileHandle, fileBuf, FileSize, NULL, NULL);
+
+	if (res)
+	{
+		buf = &(*fileBuf);
+		size = FileSize;
+	}
+	else
+	{
+		DWORD err = GetLastError();
+		// Error condition
+	}
+
+#endif
+}
+
+void XFile::Write(char * buf, int size)
+{
+	if (this->Check())
+	{
+#ifdef _WINDOWS
+		bool res = WriteFile(winFileHandle, buf, size, NULL, NULL);
+
+		if (!res)
+		{
+			DWORD err = GetLastError();
+		}
+#endif
+	}
+}
+
+void XFile::Delete()
+{
+	if (this->Check())
+	{
+#ifdef _WINDOWS
+		wchar_t wText[MAX_PATH];
+		mbstowcs(wText, FilePath.c_str(), FilePath.length());
+
+		this->Close();
+		bool res = DeleteFile(wText);
+		winFileHandle = NULL;
+		FileValid = false;
+#endif
+	}
 }
 
 int XFile::TranslateFileOpenMode(FILE_OPEN_MODE mode)

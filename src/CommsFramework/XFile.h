@@ -50,6 +50,7 @@ public:
 
 	bool FileValid;
 	int FileSize;
+	std::string FilePath;
 
 	// Opens a file with the given open mode and share mode. If the file does not exist, function goes in error
 	void Open(std::string filePath, FILE_OPEN_MODE openMode, FILE_SHARE_MODE shareMode = XSHARE_MODE_NONE);
@@ -73,6 +74,7 @@ public:
 	// Move the file to a new directory, keeping the same file name.
 	void MoveTo(XDirectory* newPath);
 
+	void Delete();
 protected:
 
 	int TranslateFileOpenMode(FILE_OPEN_MODE mode);
@@ -88,4 +90,3 @@ protected:
 
 #endif
 };
-
