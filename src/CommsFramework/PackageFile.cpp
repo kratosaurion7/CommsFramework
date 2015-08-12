@@ -238,6 +238,8 @@ void PackageFile::ReadPackage()
 		}
 
 		DirectoryEntry* newEntry = new DirectoryEntry();
+        
+        memcpy(newEntry->fileName, buf, DIRECTORY_ENTRY_SIZE + 1);
 
 		int targetFilePos = BytesToInt(&buf[FILENAME_MAX_LENGTH]);
 		int targetFileLength = BytesToInt(&buf[FILENAME_MAX_LENGTH + sizeof(int)]);
