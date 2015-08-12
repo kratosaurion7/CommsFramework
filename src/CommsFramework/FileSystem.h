@@ -2,11 +2,12 @@
 
 #ifdef _WINDOWS
 
+#define File WindowsFile
+#define Directory WindowsDirectory
+
 #include "WindowsFile.h"
 #include "WindowsDirectory.h"
 
-typedef WindowsFile File;
-typedef WindowsDirectory Directory;
 
 //using File = WindowsFile;
 //using Directory = WindowsDirectory;

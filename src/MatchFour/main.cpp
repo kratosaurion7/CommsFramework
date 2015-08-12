@@ -16,7 +16,8 @@ ResourceManager* GameResources;
 
 int main()
 {
-    File* x = new File();
+    File* aaaaax = new File();
+	
 
 	//while (true)
 	//{

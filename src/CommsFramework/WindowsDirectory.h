@@ -16,6 +16,9 @@
 
 #include "FileSystem.h"
 
+class WindowsDirectory;
+class WindowsFile;
+
 enum DIRECTORY_CREATE_RESULT
 {
     DIR_ALREADY_EXIST,
