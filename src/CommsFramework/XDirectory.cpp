@@ -48,6 +48,7 @@ PointerList<XDirectory*>* XDirectory::GetDirectories(bool recursive)
     return NULL;
 }
 
+#ifdef _WINDOWS
 XDirectory::XDirectory(std::wstring path)
 {
 	const wchar_t* buf = path.c_str();
@@ -76,6 +77,7 @@ XDirectory * XDirectory::OpenDirectory(std::wstring path)
 		return NULL;
 	}
 }
+#endif
 
 bool XDirectory::Check()
 {
@@ -166,7 +168,9 @@ void ChangeWorkingDir(std::string newPath)
 	}
 }
 
+#ifdef _WINDOWS
 bool IsDotFile(WIN32_FIND_DATA dir)
 {
 	return lstrcmpW(currentDotDirName, dir.cFileName) == 0 || lstrcmpW(parentDotDirName, dir.cFileName) == 0;
 }
+#endif

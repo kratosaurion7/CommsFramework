@@ -74,4 +74,6 @@ XDirectory* GetWorkingDir();
 
 void ChangeWorkingDir(std::string newPath);
 
+#ifdef _WINDOWS
 bool IsDotFile(WIN32_FIND_DATA name);
+#endif
