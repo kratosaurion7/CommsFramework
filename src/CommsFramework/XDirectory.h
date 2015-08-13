@@ -32,6 +32,10 @@ enum DIRECTORY_CREATE_RESULT
 
 class XFile;
 
+static const wchar_t* currentDirName = _T(".");
+static const wchar_t* parentDirName = _T("..");
+
+
 class XDirectory
 {
 public:
@@ -48,17 +52,20 @@ public:
 
     PointerList<XDirectory*>* GetDirectories(bool recursive = false);
 
+
+
 protected:
 
 	bool Check();
-
-	void OpenDirectory();
 
 #ifdef _WINDOWS
 	HANDLE winDirHandle;
 
 	TCHAR dirPath[MAX_PATH]; // Path to the directory
 #endif
+
+private:
+    void FindFilesInDirectory(wchar_t* directoryPath, PointerList<XFile*> &filesAggregate, bool recursive = false);
 };
 
 XDirectory* GetWorkingDir();

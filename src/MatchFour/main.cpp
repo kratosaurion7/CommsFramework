@@ -18,7 +18,9 @@ int main()
 {
 	XFile* wasd = new XFile();
 	
-	XDirectory* x = new XDirectory();
+	XDirectory* x = new XDirectory("C:\\temp\0");
+
+    auto files = x->GetFiles(true);
 
 	//while (true)
 	//{
