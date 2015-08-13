@@ -1,5 +1,6 @@
 #include "XDirectory.h"
 
+#include <memory>
 
 
 XDirectory::XDirectory()
@@ -50,7 +51,7 @@ PointerList<XDirectory*>* XDirectory::GetDirectories(bool recursive)
 bool XDirectory::Check()
 {
 #ifdef _WINDOWS
-	return FullPath != "" && winDirHandle != INVALID_HANDLE_VALUE;
+	return FullPath != "";
 #endif
 }
 
@@ -59,11 +60,10 @@ void XDirectory::FindFilesInDirectory(wchar_t* directoryPath, PointerList<XFile*
 #ifdef _WINDOWS
     WIN32_FIND_DATA ffd;
 
-    wchar_t* directorySearchAlias = new wchar_t[lstrlenW(directoryPath) + 4];
+	std::wstring directorySearchAlias = directoryPath;
+	directorySearchAlias.append(_T("\\*"));
 
-    wsprintfW(directorySearchAlias, _T("%s\\*"), directoryPath);
-
-    HANDLE hFind = FindFirstFile(directorySearchAlias, &ffd);
+    HANDLE hFind = FindFirstFile(directorySearchAlias.c_str(), &ffd);
 
     if (hFind == INVALID_HANDLE_VALUE)
     {
@@ -73,7 +73,7 @@ void XDirectory::FindFilesInDirectory(wchar_t* directoryPath, PointerList<XFile*
     }
 
     do {
-        if (lstrcmpW(ffd.cFileName, currentDirName) == 0 || lstrcmpW(ffd.cFileName, parentDirName) == 0)
+		if (IsDotFile(ffd));
             continue;
 
         bool isDirectory = ffd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY;
@@ -113,4 +113,9 @@ XDirectory * GetWorkingDir()
 
 void ChangeWorkingDir(std::string newPath)
 {
+}
+
+bool IsDotFile(WIN32_FIND_DATA dir)
+{
+	return lstrcmpW(currentDotDirName, dir.cFileName) == 0 || lstrcmpW(parentDotDirName, dir.cFileName) == 0;
 }

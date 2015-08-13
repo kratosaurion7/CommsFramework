@@ -32,9 +32,8 @@ enum DIRECTORY_CREATE_RESULT
 
 class XFile;
 
-static const wchar_t* currentDirName = _T(".");
-static const wchar_t* parentDirName = _T("..");
-
+static const wchar_t* currentDotDirName = _T(".");
+static const wchar_t* parentDotDirName = _T("..");
 
 class XDirectory
 {
@@ -51,9 +50,6 @@ public:
     PointerList<XFile*>* GetFiles(bool recursive = false);
 
     PointerList<XDirectory*>* GetDirectories(bool recursive = false);
-
-
-
 protected:
 
 	bool Check();
@@ -71,3 +67,5 @@ private:
 XDirectory* GetWorkingDir();
 
 void ChangeWorkingDir(std::string newPath);
+
+bool IsDotFile(WIN32_FIND_DATA name);
