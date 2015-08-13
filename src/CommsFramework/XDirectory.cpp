@@ -61,9 +61,10 @@ void XDirectory::FindFilesInDirectory(wchar_t* directoryPath, PointerList<XFile*
 
     wchar_t* directorySearchAlias = new wchar_t[lstrlenW(directoryPath) + 4];
 
-    //auto aliasDirectoryName = lstrcatW(directorySearchAlias, _T("\\*"));
-    lstrcpyW(directorySearchAlias, directoryPath);
-    lstrcatW(directorySearchAlias, _T("\\*"));
+    wsprintfW(directorySearchAlias, _T("%s\\*"), directoryPath);
+
+    //lstrcpyW(directorySearchAlias, directoryPath);
+    //lstrcatW(directorySearchAlias, _T("\\*"));
 
     HANDLE hFind = FindFirstFile(directorySearchAlias, &ffd);
 
@@ -82,18 +83,9 @@ void XDirectory::FindFilesInDirectory(wchar_t* directoryPath, PointerList<XFile*
         
         if (isDirectory && recursive)
         {
-            //wchar_t* buf = new wchar_t[MAX_PATH];
-            //DWORD res = GetFinalPathNameByHandle(hFind, buf, MAX_PATH, FILE_NAME_NORMALIZED);
-
             wchar_t* subDirectoryPath = new wchar_t[lstrlenW(directoryPath) + lstrlenW(ffd.cFileName) + 5];
-            lstrcpyW(subDirectoryPath, directoryPath);
-            lstrcatW(subDirectoryPath, _T("\\"));
-            lstrcatW(subDirectoryPath, ffd.cFileName);
-            lstrcatW(subDirectoryPath, _T("\0"));
 
-            //wchar_t* expanded = lstrcatW(ffd.cFileName, _T("\\*"));
-
-            //wchar_t* dirWithSlash = lstrcatW(directoryPath, _T("\\"));
+            wsprintfW(subDirectoryPath, _T("%s\\%s"), directoryPath, ffd.cFileName);
 
             FindFilesInDirectory(subDirectoryPath, filesAggregate, recursive);
         }
