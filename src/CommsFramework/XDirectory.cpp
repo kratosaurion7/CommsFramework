@@ -63,9 +63,6 @@ void XDirectory::FindFilesInDirectory(wchar_t* directoryPath, PointerList<XFile*
 
     wsprintfW(directorySearchAlias, _T("%s\\*"), directoryPath);
 
-    //lstrcpyW(directorySearchAlias, directoryPath);
-    //lstrcatW(directorySearchAlias, _T("\\*"));
-
     HANDLE hFind = FindFirstFile(directorySearchAlias, &ffd);
 
     if (hFind == INVALID_HANDLE_VALUE)
