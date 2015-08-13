@@ -48,6 +48,35 @@ PointerList<XDirectory*>* XDirectory::GetDirectories(bool recursive)
     return NULL;
 }
 
+XDirectory::XDirectory(std::wstring path)
+{
+	const wchar_t* buf = path.c_str();
+	
+	lstrcatW(dirPath, buf);
+
+	char* buf2 = new char[MAX_PATH];
+
+	wcstombs(buf2, buf, path.length());
+
+	FullPath = std::string(buf2);
+	
+
+}
+
+XDirectory * XDirectory::OpenDirectory(std::wstring path)
+{
+	XDirectory* dir = new XDirectory(path);
+
+	if (dir->Check())
+	{
+		return dir;
+	}
+	else
+	{
+		return NULL;
+	}
+}
+
 bool XDirectory::Check()
 {
 #ifdef _WINDOWS
@@ -106,13 +135,35 @@ void XDirectory::FindFilesInDirectory(wchar_t* directoryPath, PointerList<XFile*
 #endif
 }
 
-XDirectory * GetWorkingDir()
+XDirectory* GetWorkingDir()
 {
-	return nullptr;
+	wchar_t* buf[MAX_PATH];
+	DWORD res = GetCurrentDirectory(MAX_PATH, *buf);
+
+	if (res == 0)
+	{
+		DWORD err = GetLastError();
+
+		return NULL;
+	}
+
+
+	XDirectory* currentDir = XDirectory::OpenDirectory(*buf);
+
+	return currentDir;
 }
 
 void ChangeWorkingDir(std::string newPath)
 {
+	wchar_t* dirPath[MAX_PATH];
+	mbstowcs(*dirPath, newPath.c_str(), newPath.length() + 1);
+
+	bool res = SetCurrentDirectory(*dirPath);
+
+	if (res == 0)
+	{
+		DWORD err = GetLastError();
+	}
 }
 
 bool IsDotFile(WIN32_FIND_DATA dir)

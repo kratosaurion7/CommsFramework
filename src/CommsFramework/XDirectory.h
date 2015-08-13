@@ -46,10 +46,16 @@ public:
 	std::string FullPath;
 
     static XDirectory* OpenDirectory(std::string path);
-
     PointerList<XFile*>* GetFiles(bool recursive = false);
-
     PointerList<XDirectory*>* GetDirectories(bool recursive = false);
+
+#ifdef _WINDOWS
+	XDirectory(std::wstring path);
+
+	static XDirectory* OpenDirectory(std::wstring path);
+#endif
+
+
 protected:
 
 	bool Check();
