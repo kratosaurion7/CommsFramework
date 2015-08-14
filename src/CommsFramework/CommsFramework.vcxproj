@@ -331,6 +331,7 @@ XCOPY /y "E:\Prog\lib\sfml\SFML-2.3_x64\bin\*.dll" "$(TargetDir)"
     <ClCompile Include="SFMLText.cpp" />
     <ClCompile Include="TestRunner.cpp" />
     <ClCompile Include="Utilities.cpp" />
+    <ClCompile Include="WindowsHelpers.cpp" />
     <ClCompile Include="XDirectory.cpp" />
     <ClCompile Include="XFile.cpp" />
     <ClCompile Include="XmlReader.cpp" />
@@ -373,6 +374,7 @@ XCOPY /y "E:\Prog\lib\sfml\SFML-2.3_x64\bin\*.dll" "$(TargetDir)"
     <ClInclude Include="TestRunner.h" />
     <ClInclude Include="Utilities.h" />
     <ClInclude Include="Vectors.h" />
+    <ClInclude Include="WindowsHelpers.h" />
     <ClInclude Include="XDirectory.h" />
     <ClInclude Include="XFile.h" />
     <ClInclude Include="XmlReader.h" />

@@ -150,6 +150,9 @@
     <ClCompile Include="XFile.cpp">
       <Filter>Framework\Filesystem</Filter>
     </ClCompile>
+    <ClCompile Include="WindowsHelpers.cpp">
+      <Filter>Framework\Filesystem\Windows</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="XmlReader.h">
@@ -271,6 +274,9 @@
     </ClInclude>
     <ClInclude Include="XFile.h">
       <Filter>Framework\Filesystem</Filter>
+    </ClInclude>
+    <ClInclude Include="WindowsHelpers.h">
+      <Filter>Framework\Filesystem\Windows</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
