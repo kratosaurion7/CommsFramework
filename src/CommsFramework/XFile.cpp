@@ -1,6 +1,6 @@
 #include "XFile.h"
 
-
+#include "WindowsHelpers.h"
 
 XFile::XFile()
 {
@@ -16,7 +16,6 @@ XFile::XFile(std::string name)
 	FilePath = name;
 }
 
-
 XFile::~XFile()
 {
 }
@@ -29,8 +28,6 @@ void XFile::Open()
 	}
 }
 
-
-
 void XFile::Open(std::string filePath, FILE_OPEN_MODE openMode, FILE_SHARE_MODE shareMode)
 {
 	int _accessMode = this->TranslateFileOpenMode(openMode);
@@ -39,11 +36,9 @@ void XFile::Open(std::string filePath, FILE_OPEN_MODE openMode, FILE_SHARE_MODE 
 	FilePath = filePath;
 
 #ifdef _WINDOWS
-	//std::wstring wText = filePath.c_str();
-	wchar_t* wText = new wchar_t[filePath.length() + 1];
-	mbstowcs(wText, filePath.c_str(), filePath.length() + 1);
+	std::wstring wText = CStringToWideString(filePath);
 
-	HANDLE res = CreateFile(wText, _accessMode, _shareMode, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+	HANDLE res = CreateFile(wText.c_str(), _accessMode, _shareMode, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 
 	if (res == INVALID_HANDLE_VALUE)
 	{
@@ -114,7 +109,9 @@ FileContents * XFile::Read()
 
 #ifdef _WINDOWS
 	char* buf = new char[FileSize];
-	bool res = ReadFile(winFileHandle, buf, FileSize, NULL, NULL);
+	LPDWORD nbBytesRead = 0;
+	LPOVERLAPPED overlap = new _OVERLAPPED();
+	bool res = ReadFile(winFileHandle, buf, FileSize, nbBytesRead, overlap);
 	
 	if (res)
 	{
