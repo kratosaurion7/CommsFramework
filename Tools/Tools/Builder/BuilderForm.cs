@@ -57,14 +57,13 @@ namespace Tools.Builder
 
         public TabPage CreateNewConfigTabPage(BuilderConfig config)
         {
-            // TODO : POPULATE FIELDS
             AddConfigControls newTabContents = new AddConfigControls(config);
 
             TabPage newPage = new TabPage();
             newPage.Controls.Add(newTabContents);
             newPage.BackColor = Color.White;
 
-            newPage.Text = "Config";
+            newPage.Text = config.ConfigName;
 
             newTabContents.ParentPage = newPage;
 
@@ -145,7 +144,12 @@ namespace Tools.Builder
 
                 try
                 {
-                    configFile.Save(Path.Combine(outputFolder.FullName, item.ConfigName + ".xml"));
+                    var fileName = item.ConfigName;
+
+                    if(string.IsNullOrWhiteSpace(fileName))
+                        fileName = "rootConfig";
+
+                    configFile.Save(Path.Combine(outputFolder.FullName, fileName + ".xml"));
                 }
                 catch (Exception)
                 {
@@ -190,6 +194,8 @@ namespace Tools.Builder
         public XElement SerializeBuilderConfig(BuilderConfig config)
         {
             XElement configNode = new XElement("config");
+            if(!string.IsNullOrWhiteSpace(config.ConfigName))
+                configNode.Add(new XAttribute("name", config.ConfigName));
 
             foreach (var res in config.Resources)
             {
@@ -291,6 +297,11 @@ namespace Tools.Builder
             BuilderConfig newConfig = new BuilderConfig();
 
             XElement element = XElement.Load(configFile.FullName, LoadOptions.None);
+
+            if (element.Attribute("name") != null)
+            {
+                newConfig.ConfigName = element.Attribute("name").Value;
+            }
 
             var resources = GetResourcesOfConfigFile(element);
             var containers = GetContainersOfConfigFile(element);

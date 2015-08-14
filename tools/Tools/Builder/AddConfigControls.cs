@@ -32,7 +32,7 @@ namespace Tools.Builder
 
             if(string.IsNullOrEmpty(config.ConfigName))
             {
-                txtConfigName.Text = "";
+                txtConfigName.Text = "RootConfig";
             }
             else
             {
