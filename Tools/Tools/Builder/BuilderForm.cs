@@ -130,6 +130,19 @@ namespace Tools.Builder
             {
                 XElement configFile = SerializeBuilderConfig(item);
 
+                if(item == configs.First()) // First config is the root config file, all links to sub configs
+                {
+                    var subConfigNames = configs.Where(p => p != item).Select(p => p.ConfigName);
+
+                    foreach (var subConfig in subConfigNames)
+                    {
+                        var configFileElement = new XElement("configFile");
+                        configFileElement.Add(new XAttribute("path", subConfig + ".xml")); // TODO : Add extension type by config
+
+                        configFile.Add(configFileElement);
+                    }
+                }
+
                 try
                 {
                     configFile.Save(Path.Combine(outputFolder.FullName, item.ConfigName + ".xml"));
