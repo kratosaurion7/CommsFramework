@@ -29,6 +29,8 @@ void XFile::Open()
 	}
 }
 
+
+
 void XFile::Open(std::string filePath, FILE_OPEN_MODE openMode, FILE_SHARE_MODE shareMode)
 {
 	int _accessMode = this->TranslateFileOpenMode(openMode);
@@ -37,8 +39,9 @@ void XFile::Open(std::string filePath, FILE_OPEN_MODE openMode, FILE_SHARE_MODE 
 	FilePath = filePath;
 
 #ifdef _WINDOWS
-	wchar_t wText[MAX_PATH];
-	mbstowcs(wText, filePath.c_str(), filePath.length());
+	//std::wstring wText = filePath.c_str();
+	wchar_t* wText = new wchar_t[filePath.length() + 1];
+	mbstowcs(wText, filePath.c_str(), filePath.length() + 1);
 
 	HANDLE res = CreateFile(wText, _accessMode, _shareMode, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 
@@ -57,14 +60,23 @@ void XFile::Open(std::string filePath, FILE_OPEN_MODE openMode, FILE_SHARE_MODE 
 	
 }
 
+void XFile::OpenCreate()
+{
+	if (FilePath != "")
+	{
+		this->OpenCreate(FilePath, XCREATE_ALWAYS);
+	}
+
+}
+
 void XFile::OpenCreate(std::string filePath, FILE_OPEN_CREATE_MODE createMode, FILE_SHARE_MODE shareMode)
 {
 	int _createMode = this->TranslateOpenCreateMode(createMode);
 	int _shareMode = this->TranslateFileShareMode(shareMode);
 
 #ifdef _WINDOWS
-	wchar_t wText[MAX_PATH];
-	mbstowcs(wText, filePath.c_str(), filePath.length());
+	wchar_t* wText = new wchar_t[filePath.length() + 1];
+	mbstowcs(wText, filePath.c_str(), filePath.length() + 1);
 
 	HANDLE res = CreateFile(wText, GENERIC_READ | GENERIC_WRITE, _shareMode, NULL, _createMode, FILE_ATTRIBUTE_NORMAL, NULL);
 

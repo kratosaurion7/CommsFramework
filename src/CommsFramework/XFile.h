@@ -56,6 +56,8 @@ public:
 	void Open();
 	// Opens a file with the given open mode and share mode. If the file does not exist, function goes in error
 	void Open(std::string filePath, FILE_OPEN_MODE openMode, FILE_SHARE_MODE shareMode = XSHARE_MODE_NONE);
+
+	void OpenCreate();
 	// Opens a file with the given open mode and share mode. If the file does not exist, it is created and opened as READ_WRITE
 	void OpenCreate(std::string filePath, FILE_OPEN_CREATE_MODE createMode, FILE_SHARE_MODE shareMode = XSHARE_MODE_NONE);
 	void Close();
