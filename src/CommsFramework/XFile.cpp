@@ -125,6 +125,8 @@ FileContents * XFile::Read()
 		delete(contents);
 		contents = NULL;
 	}
+	
+	delete(overlap);
 
 #endif
 
@@ -138,7 +140,9 @@ void XFile::Read(char* &buf, int & size)
 
 #ifdef _WINDOWS
 	char* fileBuf = new char[FileSize];
-	bool res = ReadFile(winFileHandle, fileBuf, FileSize, NULL, NULL);
+	LPDWORD nbBytesRead = 0;
+	LPOVERLAPPED overlap = new _OVERLAPPED();
+	bool res = ReadFile(winFileHandle, fileBuf, FileSize, nbBytesRead, overlap);
 
 	if (res)
 	{
@@ -150,6 +154,8 @@ void XFile::Read(char* &buf, int & size)
 		DWORD err = GetLastError();
 		// Error condition
 	}
+
+	delete(overlap);
 
 #endif
 }
