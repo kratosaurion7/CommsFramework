@@ -60,8 +60,6 @@ XDirectory::XDirectory(std::wstring path)
 	wcstombs(buf2, buf, path.length());
 
 	FullPath = std::string(buf2);
-	
-
 }
 
 XDirectory * XDirectory::OpenDirectory(std::wstring path)
@@ -104,7 +102,7 @@ void XDirectory::FindFilesInDirectory(wchar_t* directoryPath, PointerList<XFile*
     }
 
     do {
-		if (IsDotFile(ffd));
+		if (IsDotFile(ffd))
             continue;
 
         bool isDirectory = ffd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY;
@@ -171,6 +169,9 @@ void ChangeWorkingDir(std::string newPath)
 #ifdef _WINDOWS
 bool IsDotFile(WIN32_FIND_DATA dir)
 {
-	return lstrcmpW(currentDotDirName, dir.cFileName) == 0 || lstrcmpW(parentDotDirName, dir.cFileName) == 0;
+	auto x = lstrcmpW(currentDotDirName, dir.cFileName);
+	auto y = lstrcmpW(parentDotDirName, dir.cFileName);
+
+	return (x == 0) || (y == 0);
 }
 #endif
