@@ -24,6 +24,32 @@ namespace Tools.Builder
             CurrentConfig = new BuilderConfig();
         }
 
+        public AddConfigControls(BuilderConfig config)
+        {
+            InitializeComponent();
+
+            CurrentConfig = config;
+
+            if(string.IsNullOrEmpty(config.ConfigName))
+            {
+                txtConfigName.Text = "";
+            }
+            else
+            {
+                txtConfigName.Text = config.ConfigName;
+            }
+
+            foreach (var res in config.Resources)
+            {
+                resourcesListbox.Items.Add(res);
+            }
+
+            foreach (var sprite in config.Sprites)
+            {
+                resourcesListbox.Items.Add(sprite);
+            }
+        }
+
         private void selectAllCheckbox_CheckedChanged(object sender, EventArgs e)
         {
             for (int i = 0; i < resourcesListbox.Items.Count; i++)

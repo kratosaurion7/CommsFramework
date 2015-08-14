@@ -17,11 +17,16 @@ namespace Tools.Models
 
         public Resource(XElement element)
         {
-            ResourceName = element.Attribute("name").Value;
-            ResourceType = element.Attribute("type").Value;
-            ResourceFileExtension = element.Attribute("format").Value;
+            if (element.Attribute("name") != null)
+                ResourceName = element.Attribute("name").Value;
 
-            ResourceFile = null;
+            if (element.Attribute("type") != null)
+                ResourceType = element.Attribute("type").Value;
+
+            if (element.Attribute("format") != null)
+                ResourceFileExtension = element.Attribute("format").Value; 
+
+            ResourceFile = new FileInfo(ResourceName);
         }
 
         public FileInfo ResourceFile;

@@ -55,6 +55,24 @@ namespace Tools.Builder
             return newPage;
         }
 
+        public TabPage CreateNewConfigTabPage(BuilderConfig config)
+        {
+            // TODO : POPULATE FIELDS
+            AddConfigControls newTabContents = new AddConfigControls(config);
+
+            TabPage newPage = new TabPage();
+            newPage.Controls.Add(newTabContents);
+            newPage.BackColor = Color.White;
+
+            newPage.Text = "Config";
+
+            newTabContents.ParentPage = newPage;
+
+            ConfigMappings.Add(newPage, newTabContents);
+
+            return newPage;
+        }
+
         private void btnAddConfig_Click(object sender, EventArgs e)
         {
             configTabControl.TabPages.Add(CreateNewConfigTabPage());
@@ -232,19 +250,70 @@ namespace Tools.Builder
 
             if(result == DialogResult.OK)
             {
+                configTabControl.TabPages.Clear();
+                ConfigMappings.Clear();
                 FileInfo inputFilename = new FileInfo(diag.FileName);
+
+                var builderConfigs = CreateBuilderConfigFromFile(inputFilename);
+
+                foreach (var config in builderConfigs)
+                {
+                    var newTab = CreateNewConfigTabPage(config);
+
+                    configTabControl.TabPages.Add(newTab);
+                }
             }
         }
 
-        public BuilderConfig[] CreateBuilderConfigFromFile(FileInfo rootConfigFile)
+        public List<BuilderConfig> CreateBuilderConfigFromFile(FileInfo configFile)
         {
-            return null;
+            List<BuilderConfig> configs = new List<BuilderConfig>();
+
+            BuilderConfig newConfig = new BuilderConfig();
+
+            XElement element = XElement.Load(configFile.FullName, LoadOptions.None);
+
+            var resources = GetResourcesOfConfigFile(element);
+            var containers = GetContainersOfConfigFile(element);
+            var subConfigs = GetSubConfifFiles(element);
+            var sprites = GetSpritesOfConfigFile(element);
+
+            newConfig.Resources = resources.ToList();
+            newConfig.Sprites = sprites.ToList();
+
+            configs.Add(newConfig);
+
+            foreach (var sub in subConfigs)
+            {
+                var newConfigs = CreateBuilderConfigFromFile(sub);
+
+                configs.AddRange(newConfigs);
+            }
+
+            return configs;
         }
 
         private IEnumerable<Resource> GetResourcesOfConfigFile(XElement configElement)
         {
             return configElement.Elements().Where(p => p.Name == "resource").Select(p => new Resource(p));
         }
+
+        private IEnumerable<Models.Container> GetContainersOfConfigFile(XElement configElement)
+        {
+            return configElement.Elements().Where(p => p.Name == "config").Select(p => new Models.Container(p));
+        }
+
+        private IEnumerable<FileInfo> GetSubConfifFiles(XElement configElement)
+        {
+            return configElement.Elements().Where(p => p.Name == "configFile").Select(p => new FileInfo(p.Attribute("path").Value));
+        }
+
+        private IEnumerable<Sprite> GetSpritesOfConfigFile(XElement configElement)
+        {
+            return configElement.Elements().Where(p => p.Name == "sprite").Select(p => new Sprite(p));
+        }
+
+        
 
         
     }

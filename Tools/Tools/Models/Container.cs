@@ -23,24 +23,30 @@ namespace Tools.Models
 
         public Container(XElement element)
         {
-            ContainerName = element.Attribute("name").Value;
+            if(element.Attribute("name") != null)
+                ContainerName = element.Attribute("name").Value;
 
-            var containerFormatString = element.Attribute("format").Value;
-
-            switch(containerFormatString)
+            if(element.Attribute("format") != null)
             {
-                case "folder":
-                    ContainerFormat = ContainerFormats.Folder;
-                    ContainerFolder = new DirectoryInfo(Path.Combine(Environment.CurrentDirectory, ContainerName));
-                    break;
-                case "package":
-                    ContainerFormat = ContainerFormats.Package;
-                    ContainerPackage = new FileInfo(Path.Combine(Environment.CurrentDirectory, ContainerName + ".pack")); // TODO : Get .pack extension by config or static const
-                    break;
+                var containerFormatString = element.Attribute("format").Value;
+
+                switch (containerFormatString)
+                {
+                    case "folder":
+                        ContainerFormat = ContainerFormats.Folder;
+                        ContainerFolder = new DirectoryInfo(Path.Combine(Environment.CurrentDirectory, ContainerName));
+                        break;
+                    case "package":
+                        ContainerFormat = ContainerFormats.Package;
+                        ContainerPackage = new FileInfo(Path.Combine(Environment.CurrentDirectory, ContainerName + ".pack")); // TODO : Get .pack extension by config or static const
+                        break;
+                }
+            }else
+            {
+                // Default case is package.
+                ContainerFormat = ContainerFormats.Package;
+                ContainerPackage = new FileInfo(Path.Combine(Environment.CurrentDirectory, ContainerName + ".pack")); // TODO : Get .pack extension by config or static const
             }
-
-
-
         }
 
         public string ContainerName { get; set; }
