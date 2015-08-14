@@ -94,3 +94,5 @@ protected:
 
 #endif
 };
+
+std::string GetFileNameFromFilePath(std::string filePath);
