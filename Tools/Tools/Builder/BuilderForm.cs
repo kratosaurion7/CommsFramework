@@ -267,6 +267,12 @@ namespace Tools.Builder
                 ConfigMappings.Clear();
                 FileInfo inputFilename = new FileInfo(diag.FileName);
 
+                if (!inputFilename.Exists)
+                {
+                    MessageBox.Show("Cannot find " + inputFilename.FullName);
+                    return;
+                }
+
                 var builderConfigs = CreateBuilderConfigFromFile(inputFilename);
 
                 foreach (var config in builderConfigs)
@@ -288,7 +294,7 @@ namespace Tools.Builder
 
             var resources = GetResourcesOfConfigFile(element);
             var containers = GetContainersOfConfigFile(element);
-            var subConfigs = GetSubConfifFiles(element);
+            var subConfigs = GetSubConfifFiles(element, configFile.Directory);
             var sprites = GetSpritesOfConfigFile(element);
 
             newConfig.Resources = resources.ToList();
@@ -316,18 +322,14 @@ namespace Tools.Builder
             return configElement.Elements().Where(p => p.Name == "config").Select(p => new Models.Container(p));
         }
 
-        private IEnumerable<FileInfo> GetSubConfifFiles(XElement configElement)
+        private IEnumerable<FileInfo> GetSubConfifFiles(XElement configElement, DirectoryInfo assetDirectory)
         {
-            return configElement.Elements().Where(p => p.Name == "configFile").Select(p => new FileInfo(p.Attribute("path").Value));
+            return configElement.Elements().Where(p => p.Name == "configFile").Select(p => new FileInfo(Path.Combine(assetDirectory.FullName, p.Attribute("path").Value)));
         }
 
         private IEnumerable<Sprite> GetSpritesOfConfigFile(XElement configElement)
         {
             return configElement.Elements().Where(p => p.Name == "sprite").Select(p => new Sprite(p));
         }
-
-        
-
-        
     }
 }

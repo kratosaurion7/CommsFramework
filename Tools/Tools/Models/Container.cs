@@ -34,18 +34,18 @@ namespace Tools.Models
                 {
                     case "folder":
                         ContainerFormat = ContainerFormats.Folder;
-                        ContainerFolder = new DirectoryInfo(Path.Combine(Environment.CurrentDirectory, ContainerName));
+                        ContainerFolder = new DirectoryInfo(ContainerName);
                         break;
                     case "package":
                         ContainerFormat = ContainerFormats.Package;
-                        ContainerPackage = new FileInfo(Path.Combine(Environment.CurrentDirectory, ContainerName + ".pack")); // TODO : Get .pack extension by config or static const
+                        ContainerPackage = new FileInfo(ContainerName + ".pack"); // TODO : Get .pack extension by config or static const
                         break;
                 }
             }else
             {
                 // Default case is package.
                 ContainerFormat = ContainerFormats.Package;
-                ContainerPackage = new FileInfo(Path.Combine(Environment.CurrentDirectory, ContainerName + ".pack")); // TODO : Get .pack extension by config or static const
+                ContainerPackage = new FileInfo(ContainerName + ".pack"); // TODO : Get .pack extension by config or static const
             }
         }
 

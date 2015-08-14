@@ -26,7 +26,7 @@ namespace Tools.Models
             if (element.Attribute("format") != null)
                 ResourceFileExtension = element.Attribute("format").Value; 
 
-            ResourceFile = new FileInfo(ResourceName);
+            ResourceFile = new FileInfo(ResourceName); // TODO : REmove the extension from the res name and append the res type here
         }
 
         public FileInfo ResourceFile;
