@@ -22,6 +22,8 @@ namespace Tools.Builder
 
     public partial class BuilderForm : Form
     {
+        bool IsOpeningExistingConfig;
+
         public Dictionary<TabPage, AddConfigControls> ConfigMappings = new Dictionary<TabPage, AddConfigControls>();
 
         public BuilderForm()
@@ -33,7 +35,7 @@ namespace Tools.Builder
         {
             var rootPage = CreateNewConfigTabPage();
 
-            
+            IsOpeningExistingConfig = false;
 
             configTabControl.TabPages.Add(rootPage);
         }
@@ -157,35 +159,70 @@ namespace Tools.Builder
                 }
             }
 
-            if (saveFormat == OutputFormat.Folder)
+            if (!IsOpeningExistingConfig) // Don't re-save the package after opening it.
             {
-                try
+                if (saveFormat == OutputFormat.Folder)
                 {
-                    foreach (var item in inputFiles)
+                    try
                     {
-                        item.CopyTo(Path.Combine(outputFolder.FullName, item.Name), true);
+                        foreach (var item in inputFiles)
+                        {
+                            item.CopyTo(Path.Combine(outputFolder.FullName, item.Name), true);
+                        }
                     }
-                }
-                catch (Exception)
-                {
-                    success = false;
-                }
+                    catch (Exception)
+                    {
+                        success = false;
+                    }
 
-            }
-            else if (saveFormat == OutputFormat.Package)
+                }
+                else if (saveFormat == OutputFormat.Package)
+                {
+                    try
+                    {
+                        PAKFile package = new PAKFile();
+                        package.AddFiles(inputFiles);
+
+                        package.Save(new FileInfo(Path.Combine(outputFolder.FullName, "package.pak")));
+                    }
+                    catch (Exception)
+                    {
+                        success = false;
+                    }
+
+                }
+            }else
             {
-                try
+                if (saveFormat == OutputFormat.Folder)
                 {
-                    PAKFile package = new PAKFile();
-                    package.AddFiles(inputFiles);
+                    try
+                    {
+                        foreach (var item in inputFiles)
+                        {
+                            item.CopyTo(Path.Combine(outputFolder.FullName, item.Name), true);
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        success = false;
+                    }
 
-                    package.Save(new FileInfo(Path.Combine(outputFolder.FullName, "package.pak")));
                 }
-                catch (Exception)
+                else if (saveFormat == OutputFormat.Package)
                 {
-                    success = false;
-                }
+                    try
+                    {
+                        PAKFile package = new PAKFile();
+                        package.AddFiles(inputFiles);
 
+                        package.Save(new FileInfo(Path.Combine(outputFolder.FullName, "package.pak")));
+                    }
+                    catch (Exception)
+                    {
+                        success = false;
+                    }
+
+                }
             }
 
             return success;
@@ -259,6 +296,8 @@ namespace Tools.Builder
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            IsOpeningExistingConfig = true;
+
             OpenFileDialog diag = new OpenFileDialog();
 
             diag.CheckFileExists = true;
