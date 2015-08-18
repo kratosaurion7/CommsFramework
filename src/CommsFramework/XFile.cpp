@@ -2,41 +2,47 @@
 
 #include "WindowsHelpers.h"
 
-XFile::XFile()
-{
-	FileValid = false;
-	FileSize = -1;
-	FilePath = "";
-}
+#include <assert.h>
 
 XFile::XFile(std::string name)
 {
 	FileSize = -1;
 	FileValid = false;
 	FilePath = name;
+
+	if (this->Open())
+	{
+		this->Exists = true;
+		this->FileValid = true;
+
+		this->CreateAndAssignPathInfo();
+	}
+	
 }
 
 XFile::~XFile()
 {
 }
 
-void XFile::Open()
+bool XFile::Open()
 {
 	if (FilePath != "")
 	{
-		this->Open(FilePath, XFILE_READ_WRITE);
+		return this->Open(XFILE_READ_WRITE);
+	}
+	else 
+	{
+		return false;
 	}
 }
 
-void XFile::Open(std::string filePath, FILE_OPEN_MODE openMode, FILE_SHARE_MODE shareMode)
+bool XFile::Open(FILE_OPEN_MODE openMode, FILE_SHARE_MODE shareMode)
 {
 	int _accessMode = this->TranslateFileOpenMode(openMode);
 	int _shareMode = this->TranslateFileShareMode(shareMode);
 
-	FilePath = filePath;
-
 #ifdef _WINDOWS
-	std::wstring wText = CStringToWideString(filePath);
+	std::wstring wText = CStringToWideString(FilePath);
 
 	HANDLE res = CreateFile(wText.c_str(), _accessMode, _shareMode, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 
@@ -44,32 +50,37 @@ void XFile::Open(std::string filePath, FILE_OPEN_MODE openMode, FILE_SHARE_MODE 
 	{
 		// Set error state or do stuff.
 		FileValid = false;
-		return;
+		return false;
 	}
 
 	winFileHandle = res;
 
-	this->SetFileSize();
+	this->AssignFileSize();
 #endif
+
+	return true;
 }
 
-void XFile::OpenCreate()
+bool XFile::OpenCreate()
 {
 	if (FilePath != "")
 	{
-		this->OpenCreate(FilePath, XCREATE_ALWAYS);
+		return this->OpenCreate(XCREATE_ALWAYS);
 	}
-
+	else
+	{
+		return false;
+	}
 }
 
-void XFile::OpenCreate(std::string filePath, FILE_OPEN_CREATE_MODE createMode, FILE_SHARE_MODE shareMode)
+bool XFile::OpenCreate(FILE_OPEN_CREATE_MODE createMode, FILE_SHARE_MODE shareMode)
 {
 	int _createMode = this->TranslateOpenCreateMode(createMode);
 	int _shareMode = this->TranslateFileShareMode(shareMode);
 
 #ifdef _WINDOWS
-	wchar_t* wText = new wchar_t[filePath.length() + 1];
-	mbstowcs(wText, filePath.c_str(), filePath.length() + 1);
+	wchar_t* wText = new wchar_t[FilePath.length() + 1];
+	mbstowcs(wText, FilePath.c_str(), FilePath.length() + 1);
 
 	HANDLE res = CreateFile(wText, GENERIC_READ | GENERIC_WRITE, _shareMode, NULL, _createMode, FILE_ATTRIBUTE_NORMAL, NULL);
 
@@ -77,13 +88,15 @@ void XFile::OpenCreate(std::string filePath, FILE_OPEN_CREATE_MODE createMode, F
 	{
 		// Set error state or do stuff.
 		FileValid = false;
-		return;
+		return false;
 	}
 
 	winFileHandle = res;
 
-	this->SetFileSize();
+	this->AssignFileSize();
 #endif
+
+	return true;
 }
 
 void XFile::Close()
@@ -98,6 +111,10 @@ bool XFile::IsOpen()
 #ifdef _WINDOWS
 	return winFileHandle != INVALID_HANDLE_VALUE && FileValid;
 #endif
+}
+
+void XFile::AppendText(char * text, int size)
+{
 }
 
 FileContents * XFile::Read()
@@ -197,6 +214,10 @@ void XFile::CopyTo(std::string filePath)
 	}
 }
 
+void XFile::CopyTo(XDirectory * targetDir)
+{
+}
+
 void XFile::MoveTo(std::string newPath)
 {
 	if (this->Check())
@@ -217,6 +238,10 @@ void XFile::MoveTo(std::string newPath)
 		}
 #endif
 	}
+}
+
+void XFile::MoveTo(XDirectory * newPath)
+{
 }
 
 void XFile::Delete()
@@ -290,6 +315,55 @@ int XFile::TranslateOpenCreateMode(FILE_OPEN_CREATE_MODE mode)
 #endif
 }
 
+void XFile::CreateAndAssignPathInfo()
+{
+	if (this->IsOpen() && this->Exists)
+	{
+#ifdef _WINDOWS
+		// Here I have a valid handle and the file exists
+		TCHAR path[MAX_PATH];
+		DWORD res;
+
+		res = GetFinalPathNameByHandle(winFileHandle, path, MAX_PATH, VOLUME_NAME_DOS);
+
+		if (res < MAX_PATH)
+		{
+			std::string _fileName;
+			std::string _parentDirPath;
+			std::string _fileExt;
+
+
+			std::wstring x = path;
+			std::string y = WideStringToCString(x);
+
+			int lastSlash = y.find_last_of("\\");
+
+			_fileName = y.substr(lastSlash + 1, y.length() - lastSlash);
+
+			_parentDirPath = y.substr(0, lastSlash);
+
+			int fileNameExtensionDot = _fileName.find_last_of(".");
+			_fileExt = _fileName.substr(fileNameExtensionDot, _fileName.length() - fileNameExtensionDot);
+
+			FileName = _fileName;
+			FileExt = _fileExt;
+			
+			ParentDirectoryPath = _parentDirPath;
+		}
+		else
+		{
+			// Path too big ?
+			assert(true);
+		}
+
+#endif
+	}
+	else 
+	{
+		// Path is relative,probably
+	}
+}
+
 bool XFile::Check()
 {
 #ifdef _WINDOWS
@@ -297,7 +371,31 @@ bool XFile::Check()
 #endif
 }
 
-void XFile::SetFileSize()
+__int64 XFile::GetSize()
+{
+	if (this->Check())
+	{
+#ifdef _WINDOWS
+		PLARGE_INTEGER fileSize;
+
+		bool res = GetFileSizeEx(winFileHandle, fileSize);
+
+		if (res != 0)
+		{
+			return fileSize->QuadPart;
+		}
+		else {
+			DWORD err = GetLastError();
+
+			// Check error
+		}
+#endif
+	}
+
+	return -1;
+}
+
+void XFile::AssignFileSize()
 {
 	if (this->Check())
 	{

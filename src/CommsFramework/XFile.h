@@ -44,24 +44,30 @@ class XDirectory;
 class XFile
 {
 public:
-    XFile();
 	XFile(std::string name); // Automatically opens the file using the Open() function
     ~XFile();
 
 	bool FileValid;
 	int FileSize;
+	bool Exists;
+
 	std::string FilePath;
-	std::string FileName; // Need to extract the file name from the path
+	std::string FileName;
+	std::string FileExt;
+	std::string ParentDirectoryPath;
 
-	void Open();
+	// Open with READ mode and SHARE NONE
+	bool Open();
 	// Opens a file with the given open mode and share mode. If the file does not exist, function goes in error
-	void Open(std::string filePath, FILE_OPEN_MODE openMode, FILE_SHARE_MODE shareMode = XSHARE_MODE_NONE);
-
-	void OpenCreate();
+	bool Open(FILE_OPEN_MODE openMode, FILE_SHARE_MODE shareMode = XSHARE_MODE_NONE);
+	// Open a file, if the file does not exist create it with READ WRITE and get a lock on it.
+	bool OpenCreate();
 	// Opens a file with the given open mode and share mode. If the file does not exist, it is created and opened as READ_WRITE
-	void OpenCreate(std::string filePath, FILE_OPEN_CREATE_MODE createMode, FILE_SHARE_MODE shareMode = XSHARE_MODE_NONE);
+	bool OpenCreate(FILE_OPEN_CREATE_MODE createMode, FILE_SHARE_MODE shareMode = XSHARE_MODE_NONE);
 	void Close();
 	bool IsOpen();
+
+	void AppendText(char* text, int size);
 
 	FileContents* Read();
 	void Read(char* &buf, int &size);
@@ -85,9 +91,13 @@ protected:
 	int TranslateFileShareMode(FILE_SHARE_MODE mode);
 	int TranslateOpenCreateMode(FILE_OPEN_CREATE_MODE mode);
 
+	void CreateAndAssignPathInfo();
+
 	bool Check();
 
-	void SetFileSize();
+	__int64 GetSize();
+
+	void AssignFileSize();
 
 #ifdef _WINDOWS
 	HANDLE winFileHandle;
