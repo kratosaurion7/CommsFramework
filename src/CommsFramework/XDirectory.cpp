@@ -2,15 +2,16 @@
 
 #include <memory>
 
+#include "WindowsHelpers.h" // TODO : REplace that by a generic header, these functions are not specific to windows
 
-XDirectory::XDirectory()
-{
-}
 
 XDirectory::XDirectory(std::string path)
 {
 	FullPath = path;
-    mbstowcs(dirPath, path.c_str(), path.length() + 1);
+
+	DirectoryPath = CStringToWideString(path);
+
+	mbstowcs(dirPath, path.c_str(), path.length() + 1);
 }
 
 

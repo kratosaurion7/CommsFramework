@@ -40,7 +40,6 @@ static const wchar_t* parentDotDirName = _T("..");
 class XDirectory
 {
 public:
-    XDirectory();
 	XDirectory(std::string path);
     ~XDirectory();
 
@@ -61,6 +60,8 @@ public:
 protected:
 
 	bool Check();
+
+	std::wstring DirectoryPath;
 
 #ifdef _WINDOWS
 	HANDLE winDirHandle;
