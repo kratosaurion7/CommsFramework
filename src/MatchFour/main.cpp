@@ -16,9 +16,9 @@ ResourceManager* GameResources;
 
 int main()
 {
-	XFile* wasd = new XFile();
+	XFile* wasd = new XFile("C:\\Temp\\test.txt");
 	
-	XDirectory* x = new XDirectory("C:\\temp");
+	XDirectory* x = wasd->ParentDirectory();
 
     auto files = x->GetFiles(true);
 

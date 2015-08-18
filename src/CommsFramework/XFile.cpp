@@ -9,6 +9,7 @@ XFile::XFile(std::string name)
 	FileSize = -1;
 	FileValid = false;
 	FilePath = name;
+	parentDir = NULL;
 
 	if (this->Open())
 	{
@@ -22,6 +23,7 @@ XFile::XFile(std::string name)
 
 XFile::~XFile()
 {
+	delete(parentDir);
 }
 
 bool XFile::Open()
@@ -192,6 +194,27 @@ void XFile::Write(char * buf, int size)
 	}
 }
 
+XDirectory * XFile::ParentDirectory()
+{
+	if (parentDir == NULL)
+	{
+		if (ParentDirectoryPath != "")
+		{
+			XDirectory* parent = new XDirectory(ParentDirectoryPath);
+			
+			parentDir = parent;
+
+			return parentDir;
+		}
+	}
+	else
+	{
+		return parentDir;
+	}
+
+	return NULL;
+}
+
 void XFile::CopyTo(std::string filePath)
 {
 	if (this->Check())
@@ -348,7 +371,7 @@ void XFile::CreateAndAssignPathInfo()
 			FileName = _fileName;
 			FileExt = _fileExt;
 			
-			ParentDirectoryPath = _parentDirPath;
+			ParentDirectoryPath = CleanupDirectoryName(_parentDirPath);
 		}
 		else
 		{
@@ -362,6 +385,12 @@ void XFile::CreateAndAssignPathInfo()
 	{
 		// Path is relative,probably
 	}
+}
+
+std::string XFile::CleanupDirectoryName(std::string stringToClean)
+{
+	// On windows, the GetFinalPathNameByHandle return the path using the \\?\ (convention to mark the path as unicode to support 32k char paths)
+	return stringToClean.substr(4, stringToClean.length() - 4);
 }
 
 bool XFile::Check()

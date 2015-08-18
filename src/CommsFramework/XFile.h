@@ -93,6 +93,9 @@ protected:
 
 	void CreateAndAssignPathInfo();
 
+	XDirectory* parentDir;
+	std::string CleanupDirectoryName(std::string stringToClean);
+
 	bool Check();
 
 	__int64 GetSize();
