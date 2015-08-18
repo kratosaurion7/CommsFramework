@@ -76,13 +76,13 @@ public:
 	XDirectory* ParentDirectory();
 
 	// Copy the file to another location
-	void CopyTo(std::string filePath);
+	void CopyTo(std::string filePath, bool overwrite = false);
 	// Copy the file to another location, keeping the same file name.
-	void CopyTo(XDirectory* targetDir);
+	void CopyTo(XDirectory* targetDir, bool overwrite = false);
 	// Move the file to a new location
-	void MoveTo(std::string filePath);
+	void MoveTo(std::string filePath, bool overwrite = false);
 	// Move the file to a new directory, keeping the same file name.
-	void MoveTo(XDirectory* targetDir);
+	void MoveTo(XDirectory* targetDir, bool overwrite = false);
 
 	void Delete();
 protected:

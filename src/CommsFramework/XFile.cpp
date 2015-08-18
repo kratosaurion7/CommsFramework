@@ -215,18 +215,18 @@ XDirectory * XFile::ParentDirectory()
 	return NULL;
 }
 
-void XFile::CopyTo(std::string filePath)
+void XFile::CopyTo(std::string filePath, bool overwrite)
 {
 	if (this->Check())
 	{
 #ifdef _WINDOWS
-		wchar_t copyFromPath[MAX_PATH];
-		mbstowcs(copyFromPath, FilePath.c_str(), FilePath.length());
+		std::wstring copyFromPath = CStringToWideString(FilePath);
 
-		wchar_t copyToPath[MAX_PATH];
-		mbstowcs(copyToPath, filePath.c_str(), filePath.length());
+		std::wstring copyToPath = CStringToWideString(filePath);
 
-		bool res = CopyFile(copyFromPath, copyToPath, false);
+		this->Close();
+
+		bool res = CopyFile(copyFromPath.c_str(), copyToPath.c_str(), overwrite);
 
 		if (!res)
 		{
@@ -237,27 +237,35 @@ void XFile::CopyTo(std::string filePath)
 	}
 }
 
-void XFile::CopyTo(XDirectory * targetDir)
+void XFile::CopyTo(XDirectory * targetDir, bool overwrite)
 {
 	std::string destination = targetDir->FullPath.append("//").append(this->FileName);
 
-	this->CopyTo(destination);
+	this->CopyTo(destination, overwrite);
 }
 
-void XFile::MoveTo(std::string filePath)
+void XFile::MoveTo(std::string filePath, bool overwrite)
 {
 	if (this->Check())
 	{
 #ifdef _WINDOWS
-		wchar_t moveFromPath[MAX_PATH];
-		mbstowcs(moveFromPath, FilePath.c_str(), FilePath.length());
+		std::wstring moveFromPath = CStringToWideString(FilePath);
 
-		wchar_t moveToPath[MAX_PATH];
-		mbstowcs(moveToPath, filePath.c_str(), filePath.length());
+		std::wstring moveToPath = CStringToWideString(filePath);
 
-		bool res = MoveFile(moveFromPath, moveToPath);
+		DWORD moveOptions = overwrite == true ? MOVEFILE_REPLACE_EXISTING : 0;
 
-		if (!res)
+		this->Close();
+
+		bool res = MoveFileEx(moveFromPath.c_str(), moveToPath.c_str(), moveOptions);
+
+		if (res)
+		{
+			FilePath = filePath;
+
+			this->Open();
+		}
+		else 
 		{
 			DWORD err = GetLastError();
 			// Do error management
@@ -266,12 +274,11 @@ void XFile::MoveTo(std::string filePath)
 	}
 }
 
-void XFile::MoveTo(XDirectory * targetDir)
+void XFile::MoveTo(XDirectory * targetDir, bool overwrite)
 {
 	std::string destination = targetDir->FullPath.append("//").append(this->FileName);
 
-	this->MoveTo(destination);
-
+	this->MoveTo(destination, overwrite);
 }
 
 void XFile::Delete()
