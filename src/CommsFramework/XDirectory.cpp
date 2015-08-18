@@ -10,8 +10,6 @@ XDirectory::XDirectory(std::string path)
 	FullPath = path;
 
 	DirectoryPath = CStringToWideString(path);
-
-	mbstowcs(dirPath, path.c_str(), path.length() + 1);
 }
 
 
@@ -38,7 +36,7 @@ PointerList<XFile*>* XDirectory::GetFiles(bool recursive)
 
 #ifdef _WINDOWS
 
-    this->FindFilesInDirectory(dirPath, *ret, recursive);
+    this->FindFilesInDirectory(DirectoryPath.c_str(), *ret, recursive);
 
 #endif
     return ret;
@@ -52,15 +50,7 @@ PointerList<XDirectory*>* XDirectory::GetDirectories(bool recursive)
 #ifdef _WINDOWS
 XDirectory::XDirectory(std::wstring path)
 {
-	const wchar_t* buf = path.c_str();
-	
-	lstrcatW(dirPath, buf);
-
-	char* buf2 = new char[MAX_PATH];
-
-	wcstombs(buf2, buf, path.length());
-
-	FullPath = std::string(buf2);
+	FullPath = WideStringToCString(path);
 }
 
 XDirectory * XDirectory::OpenDirectory(std::wstring path)
@@ -87,7 +77,7 @@ bool XDirectory::Check()
 #endif
 }
 
-void XDirectory::FindFilesInDirectory(wchar_t* directoryPath, PointerList<XFile*> &filesAggregate, bool recursive)
+void XDirectory::FindFilesInDirectory(std::wstring directoryPath, PointerList<XFile*> &filesAggregate, bool recursive)
 {
 #ifdef _WINDOWS
     WIN32_FIND_DATA ffd;
@@ -112,9 +102,12 @@ void XDirectory::FindFilesInDirectory(wchar_t* directoryPath, PointerList<XFile*
         
         if (isDirectory && recursive)
         {
-            wchar_t* subDirectoryPath = new wchar_t[lstrlenW(directoryPath) + lstrlenW(ffd.cFileName) + 5];
+			// Fix line to not append directly to the same string buffer.
+			//std::wstring subDirectoryPath = directoryPath.append(_T("\\")).append(ffd.cFileName);
 
-            wsprintfW(subDirectoryPath, _T("%s\\%s"), directoryPath, ffd.cFileName);
+            wchar_t* subDirectoryPath = new wchar_t[directoryPath.length() + lstrlenW(ffd.cFileName) + 5];
+
+            wsprintfW(subDirectoryPath, _T("%s\\%s"), directoryPath.c_str(), ffd.cFileName);
 
             FindFilesInDirectory(subDirectoryPath, filesAggregate, recursive);
         }

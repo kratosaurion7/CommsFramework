@@ -61,16 +61,16 @@ protected:
 
 	bool Check();
 
-	std::wstring DirectoryPath;
+	
 
 #ifdef _WINDOWS
 	HANDLE winDirHandle;
 
-	TCHAR dirPath[MAX_PATH]; // Path to the directory
+	std::wstring DirectoryPath; // Path to the directory, including the \\* characters at the end
 #endif
 
 private:
-    void FindFilesInDirectory(wchar_t* directoryPath, PointerList<XFile*> &filesAggregate, bool recursive = false);
+    void FindFilesInDirectory(std::wstring directoryPath, PointerList<XFile*> &filesAggregate, bool recursive = false);
 };
 
 XDirectory* GetWorkingDir();
