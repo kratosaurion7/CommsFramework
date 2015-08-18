@@ -43,7 +43,7 @@ public:
     ~XDirectory();
 
 	std::string Name;
-	std::string FullPath;
+	std::string FullPath; // The FullPath must NEVER have a trailing slash.
 
     static XDirectory* OpenDirectory(std::string path);
     PointerList<XFile*>* GetFiles(bool recursive = false);

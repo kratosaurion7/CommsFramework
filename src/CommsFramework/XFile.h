@@ -80,9 +80,9 @@ public:
 	// Copy the file to another location, keeping the same file name.
 	void CopyTo(XDirectory* targetDir);
 	// Move the file to a new location
-	void MoveTo(std::string newPath);
+	void MoveTo(std::string filePath);
 	// Move the file to a new directory, keeping the same file name.
-	void MoveTo(XDirectory* newPath);
+	void MoveTo(XDirectory* targetDir);
 
 	void Delete();
 protected:

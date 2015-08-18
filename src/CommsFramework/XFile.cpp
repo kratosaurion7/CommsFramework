@@ -239,9 +239,12 @@ void XFile::CopyTo(std::string filePath)
 
 void XFile::CopyTo(XDirectory * targetDir)
 {
+	std::string destination = targetDir->FullPath.append("//").append(this->FileName);
+
+	this->CopyTo(destination);
 }
 
-void XFile::MoveTo(std::string newPath)
+void XFile::MoveTo(std::string filePath)
 {
 	if (this->Check())
 	{
@@ -250,7 +253,7 @@ void XFile::MoveTo(std::string newPath)
 		mbstowcs(moveFromPath, FilePath.c_str(), FilePath.length());
 
 		wchar_t moveToPath[MAX_PATH];
-		mbstowcs(moveToPath, newPath.c_str(), newPath.length());
+		mbstowcs(moveToPath, filePath.c_str(), filePath.length());
 
 		bool res = MoveFile(moveFromPath, moveToPath);
 
@@ -263,8 +266,12 @@ void XFile::MoveTo(std::string newPath)
 	}
 }
 
-void XFile::MoveTo(XDirectory * newPath)
+void XFile::MoveTo(XDirectory * targetDir)
 {
+	std::string destination = targetDir->FullPath.append("//").append(this->FileName);
+
+	this->MoveTo(destination);
+
 }
 
 void XFile::Delete()
