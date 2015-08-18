@@ -403,8 +403,12 @@ void XFile::CreateAndAssignPathInfo()
 
 std::string XFile::CleanupDirectoryName(std::string stringToClean)
 {
+#ifdef _WINDOWS
 	// On windows, the GetFinalPathNameByHandle return the path using the \\?\ (convention to mark the path as unicode to support 32k char paths)
 	return stringToClean.substr(4, stringToClean.length() - 4);
+#elif
+	return stringToClean;
+#endif
 }
 
 bool XFile::Check()
