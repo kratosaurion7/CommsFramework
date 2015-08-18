@@ -1,8 +1,13 @@
 #include "XFile.h"
 
+#ifdef _WINDOWS
+
 #include "WindowsHelpers.h"
 
+#endif
+
 #include <assert.h>
+
 
 XFile::XFile(std::string name)
 {
@@ -112,6 +117,8 @@ bool XFile::IsOpen()
 {
 #ifdef _WINDOWS
 	return winFileHandle != INVALID_HANDLE_VALUE && FileValid;
+#elif
+	return false;
 #endif
 }
 
@@ -311,6 +318,8 @@ int XFile::TranslateFileOpenMode(FILE_OPEN_MODE mode)
 	default:
 		return GENERIC_READ;
 	}
+#elif
+	return GENERIC_READ;
 #endif
 }
 
@@ -328,6 +337,8 @@ int XFile::TranslateFileShareMode(FILE_SHARE_MODE mode)
 	default:
 		return 0;
 	}
+#elif
+	return 0;
 #endif
 }
 
@@ -349,6 +360,8 @@ int XFile::TranslateOpenCreateMode(FILE_OPEN_CREATE_MODE mode)
 	default:
 		return CREATE_NEW;
 	}
+#elif
+	return CREATE_NEW;
 #endif
 }
 
@@ -415,6 +428,8 @@ bool XFile::Check()
 {
 #ifdef _WINDOWS
 	return winFileHandle != INVALID_HANDLE_VALUE;
+#elif
+	return false;
 #endif
 }
 

@@ -32,8 +32,10 @@ enum DIRECTORY_CREATE_RESULT
 
 class XFile;
 
+#ifdef _WINDOWS
 static const wchar_t* currentDotDirName = _T(".");
 static const wchar_t* parentDotDirName = _T("..");
+#endif
 
 class XDirectory
 {

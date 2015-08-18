@@ -81,6 +81,8 @@ bool XDirectory::Check()
 {
 #ifdef _WINDOWS
 	return FullPath != "";
+#elif
+	return false;
 #endif
 }
 
@@ -137,6 +139,7 @@ void XDirectory::FindFilesInDirectory(wchar_t* directoryPath, PointerList<XFile*
 
 XDirectory* GetWorkingDir()
 {
+#ifdef _WINDOWS
 	wchar_t* buf[MAX_PATH];
 	DWORD res = GetCurrentDirectory(MAX_PATH, *buf);
 
@@ -151,10 +154,14 @@ XDirectory* GetWorkingDir()
 	XDirectory* currentDir = XDirectory::OpenDirectory(*buf);
 
 	return currentDir;
+#elif
+	return NULL;
+#endif
 }
 
 void ChangeWorkingDir(std::string newPath)
 {
+#ifdef _WINDOWS
 	wchar_t* dirPath[MAX_PATH];
 	mbstowcs(*dirPath, newPath.c_str(), newPath.length() + 1);
 
@@ -164,6 +171,7 @@ void ChangeWorkingDir(std::string newPath)
 	{
 		DWORD err = GetLastError();
 	}
+#endif
 }
 
 #ifdef _WINDOWS
