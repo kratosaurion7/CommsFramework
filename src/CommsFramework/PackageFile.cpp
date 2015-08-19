@@ -14,246 +14,249 @@
 
 PackageFile::PackageFile()
 {
-	packageHeader = new Header;
-	contents = NULL;
-	entries = new PointerList<DirectoryEntry*>;
+    packageHeader = new Header;
+    contents = NULL;
+    entries = new PointerList<DirectoryEntry*>;
 
-	filesList = new BaseList<std::string>();
+    filesList = new BaseList<std::string>();
 }
 
 PackageFile::PackageFile(std::string packageFilePath)
 {
-	packageHeader = new Header;
-	contents = NULL;
-	entries = new PointerList<DirectoryEntry*>;
+    packageHeader = new Header;
+    contents = NULL;
+    entries = new PointerList<DirectoryEntry*>;
 
-	filesList = new BaseList<std::string>();
+    filesList = new BaseList<std::string>();
 
-	TargetPackage = packageFilePath;
+    TargetPackage = packageFilePath;
 }
 
 
 PackageFile::~PackageFile()
 {
-	delete(packageHeader);
-	
-	delete(contents);
+    delete(packageHeader);
 
-	delete(filesList);
+    delete(contents);
 
-	entries->Release();
-	delete(entries);
+    delete(filesList);
+
+    entries->Release();
+    delete(entries);
 }
- 
+
 const char * PackageFile::GetFile(std::string filename, int& fileSize)
 {
-	std::ifstream packageStream = std::ifstream(TargetPackage, std::ios::in | std::ios::binary);
+    std::ifstream packageStream = std::ifstream(TargetPackage, std::ios::in | std::ios::binary);
 
-	char buf[256];
-	char* fileContents = NULL;
+    char buf[256];
+    char* fileContents = NULL;
 
-	packageStream.get(buf, PACK_FILE_SIG_LENGTH + 1); // get(n) method returns at most n-1 elements. Signature is 4
-	
-	// Step 1. Check it the file is the correct format
-	if (strncmp(buf, "PACK", PACK_FILE_SIG_LENGTH) != 0)
-		return NULL;
+    packageStream.get(buf, PACK_FILE_SIG_LENGTH + 1); // get(n) method returns at most n-1 elements. Signature is 4
 
-	packageStream.get(buf, sizeof(int));
+    // Step 1. Check it the file is the correct format
+    if (strncmp(buf, "PACK", PACK_FILE_SIG_LENGTH) != 0)
+        return NULL;
 
-	int dirOffset = BytesToInt(buf);
+    packageStream.get(buf, sizeof(int));
 
-	bool hasNextFile = true;
-	bool fileFound = false;
-	packageStream.seekg(dirOffset);
+    int dirOffset = BytesToInt(buf);
 
-	int filesIndex = 0;
-	while (hasNextFile && !fileFound)
-	{
-		packageStream.get(buf, DIRECTORY_ENTRY_SIZE + 1);
-		if (strncmp(filename.c_str(), buf, FILENAME_MAX_LENGTH) == 0)
-		{
-			int targetFilePos = BytesToInt(&buf[FILENAME_MAX_LENGTH]);
-			int targetFileLength = BytesToInt(&buf[FILENAME_MAX_LENGTH + sizeof(int)]);
+    bool hasNextFile = true;
+    bool fileFound = false;
+    packageStream.seekg(dirOffset);
 
-			packageStream.seekg(targetFilePos);
-			fileContents = new char[targetFileLength];
-			packageStream.read(fileContents, targetFileLength);
+    int filesIndex = 0;
+    while (hasNextFile && !fileFound)
+    {
+        packageStream.get(buf, DIRECTORY_ENTRY_SIZE + 1);
+        if (strncmp(filename.c_str(), buf, FILENAME_MAX_LENGTH) == 0)
+        {
+            int targetFilePos = BytesToInt(&buf[FILENAME_MAX_LENGTH]);
+            int targetFileLength = BytesToInt(&buf[FILENAME_MAX_LENGTH + sizeof(int)]);
 
-			fileSize = targetFileLength;
-			fileFound = true;
-		}
+            packageStream.seekg(targetFilePos);
+            fileContents = new char[targetFileLength];
+            packageStream.read(fileContents, targetFileLength);
 
-		if (strcmp(buf, "") == 0)
-		{
-			hasNextFile = false;
-		}
-		
-		filesIndex++;
-	}
+            fileSize = targetFileLength;
+            fileFound = true;
+        }
 
-	return fileContents;
+        if (strcmp(buf, "") == 0)
+        {
+            hasNextFile = false;
+        }
+
+        filesIndex++;
+    }
+
+    return fileContents;
 }
 
-PointerList<FileContents*> PackageFile::GetAllFiles()
+PointerList<std::string>* PackageFile::GetAllFiles()
 {
-	return PointerList<FileContents*>();
+    PointerList<std::string>* ret = new PointerList<std::string>();
+
+    this->ReadPackage();
+
+    auto it = entries->GetContainer()->begin();
+    while (it != entries->GetContainer()->end())
+    {
+        DirectoryEntry* entry = (*it);
+
+        ret->Add(entry->fileName);
+
+        it++;
+    }
+
+    return ret;
 }
 
 void PackageFile::AddFile(std::string filename)
 {
-	filesList->Add(filename);
+    filesList->Add(filename);
 }
 
 void PackageFile::RemoveFile(std::string filename)
 {
-	filesList->RemoveObject(filename);
+    filesList->RemoveObject(filename);
 }
 
 void PackageFile::Save(std::string savePath)
 {
-	OutputFileName = savePath;
+    OutputFileName = savePath;
 
-	FileReader rdr;
+    FileReader rdr;
 
-	int headerSize = HEADER_SIZE; // Header Size
-	int directorySize = 0; // Directory size
-	int bufPos = 0; // Data section size
-	
+    int headerSize = HEADER_SIZE; // Header Size
+    int directorySize = 0; // Directory size
+    int bufPos = 0; // Data section size
 
-	auto it = filesList->GetContainer()->begin();
+    auto it = filesList->GetContainer()->begin();
 
-	while (it != filesList->GetContainer()->end())
-	{
-		std::string fileName = *it;
+    while (it != filesList->GetContainer()->end())
+    {
+        std::string fileName = *it;
 
-		rdr.OpenFile(fileName.c_str());
-		
-		if (contents != NULL)
-			delete(contents);
+        rdr.OpenFile(fileName.c_str());
 
-		contents = rdr.GetFileContents();
+        if (contents != NULL)
+            delete(contents);
 
-		DirectoryEntry* newFileEntry = new DirectoryEntry();
+        contents = rdr.GetFileContents();
 
-		strcpy(newFileEntry->fileName, const_cast<char*>(fileName.c_str()));
-		newFileEntry->fileLength = contents->fileSize;
-		newFileEntry->filePosition = bufPos;
-		//newFileEntry->fileContents = contents->buffer;
+        DirectoryEntry* newFileEntry = new DirectoryEntry();
 
-		newFileEntry->fileContents = new char[contents->fileSize];
-		memcpy(newFileEntry->fileContents, contents->buffer, contents->fileSize);
+        strcpy(newFileEntry->fileName, const_cast<char*>(fileName.c_str()));
+        newFileEntry->fileLength = contents->fileSize;
+        newFileEntry->filePosition = bufPos;
+        //newFileEntry->fileContents = contents->buffer;
 
-		//DumpData(newFileEntry->fileContents, contents->fileSize);
+        newFileEntry->fileContents = new char[contents->fileSize];
+        memcpy(newFileEntry->fileContents, contents->buffer, contents->fileSize);
 
-		bufPos += contents->fileSize;
+        bufPos += contents->fileSize;
 
-		directorySize += sizeof(newFileEntry->fileName) + sizeof(newFileEntry->fileLength) + sizeof(newFileEntry->filePosition);
+        directorySize += sizeof(newFileEntry->fileName) + sizeof(newFileEntry->fileLength) + sizeof(newFileEntry->filePosition);
 
-		entries->Add(newFileEntry);
+        entries->Add(newFileEntry);
 
-		rdr.Close();
+        rdr.Close();
 
-		it++;
-	}
+        it++;
+    }
 
-	int fileSize = headerSize + bufPos + directorySize;
+    int fileSize = headerSize + bufPos + directorySize;
 
-	std::ofstream fileStream;
-	fileStream.open(OutputFileName.c_str(), std::ios::out | std::ios::binary | std::ios::trunc);
+    std::ofstream fileStream;
+    fileStream.open(OutputFileName.c_str(), std::ios::out | std::ios::binary | std::ios::trunc);
 
-	Header *packHeader = new Header();
-	strcpy(packHeader->sig, "PACK");
-	packHeader->dirOffset = headerSize;
-	packHeader->dirLength = directorySize;
+    Header *packHeader = new Header();
+    strcpy(packHeader->sig, "PACK");
+    packHeader->dirOffset = headerSize;
+    packHeader->dirLength = directorySize;
 
 
-	fileStream.write(packHeader->sig, 4);
-	fileStream.write((char*)&packHeader->dirOffset, 4);
-	fileStream.write((char*)&packHeader->dirLength, 4);
+    fileStream.write(packHeader->sig, 4);
+    fileStream.write((char*)&packHeader->dirOffset, 4);
+    fileStream.write((char*)&packHeader->dirLength, 4);
 
-	delete(packHeader);
+    delete(packHeader);
 
-	auto it2 = entries->GetContainer()->begin();
+    auto it2 = entries->GetContainer()->begin();
 
-	int currentDirectoryOffset = 0;
-	int currentDataSize = 0;
+    int currentDirectoryOffset = 0;
+    int currentDataSize = 0;
 
-	while (it2 != entries->GetContainer()->end())
-	{
-		DirectoryEntry* entry = *it2;
+    while (it2 != entries->GetContainer()->end())
+    {
+        DirectoryEntry* entry = *it2;
 
-		fileStream.write(entry->fileName, sizeof(entry->fileName));
-		int currPos = headerSize + directorySize + currentDataSize;
-		fileStream.write((char*)&currPos, sizeof(entry->filePosition));
-		fileStream.write((char*)&entry->fileLength, sizeof(entry->fileLength));
-		
-		currentDataSize += entry->fileLength;
-		it2++;
-	}
+        fileStream.write(entry->fileName, sizeof(entry->fileName));
+        int currPos = headerSize + directorySize + currentDataSize;
+        fileStream.write((char*)&currPos, sizeof(entry->filePosition));
+        fileStream.write((char*)&entry->fileLength, sizeof(entry->fileLength));
 
-	auto it3 = entries->GetContainer()->begin();
+        currentDataSize += entry->fileLength;
+        it2++;
+    }
 
-	while (it3 != entries->GetContainer()->end())
-	{
-		DirectoryEntry* entry = *it3;
+    auto it3 = entries->GetContainer()->begin();
 
-		fileStream.write(entry->fileContents, entry->fileLength);
+    while (it3 != entries->GetContainer()->end())
+    {
+        DirectoryEntry* entry = *it3;
 
-		it3++;
-	}
+        fileStream.write(entry->fileContents, entry->fileLength);
 
-	fileStream.close();
+        it3++;
+    }
+
+    fileStream.close();
 }
 
 void PackageFile::ReadPackage()
 {
-	std::ifstream packageStream = std::ifstream(TargetPackage, std::ios::in | std::ios::binary);
+    std::ifstream packageStream = std::ifstream(TargetPackage, std::ios::in | std::ios::binary);
 
-	char buf[256];
-	char* fileContents = NULL;
+    char buf[256];
+    char* fileContents = NULL;
 
-	packageStream.read(buf, PACK_FILE_SIG_LENGTH + 1); // get(n) method returns at most n-1 elements. Signature is 4
+    packageStream.get(buf, PACK_FILE_SIG_LENGTH + 1);	// get(n) method returns at most n-1 elements. Signature is 4
 
-													  // Step 1. Check it the file is the correct format
-	if (strncmp(buf, "PACK", PACK_FILE_SIG_LENGTH) != 0)
-		return;
+    if (strncmp(buf, "PACK", PACK_FILE_SIG_LENGTH) != 0)
+        return;
 
-	packageStream.get(buf, sizeof(int));
+    packageStream.get(buf, sizeof(int));
 
-	int dirOffset = BytesToInt(buf);
+    int dirOffset = BytesToInt(buf);
 
-	bool hasNextFile = true;
-	bool fileFound = false;
-	packageStream.seekg(dirOffset);
+    bool hasNextFile = true;
+    packageStream.seekg(dirOffset);
 
-	int filesIndex = 0;
-	while (hasNextFile && !fileFound)
-	{
-		packageStream.get(buf, DIRECTORY_ENTRY_SIZE + 1);
+    entries->Release();
 
-		if (strcmp(buf, "") == 0)
-		{
-			hasNextFile = false;
-			break;
-		}
+    while (hasNextFile)
+    {
+        packageStream.get(buf, DIRECTORY_ENTRY_SIZE + 1);
 
-		DirectoryEntry* newEntry = new DirectoryEntry();
-        
-        memcpy(newEntry->fileName, buf, DIRECTORY_ENTRY_SIZE + 1);
+        if (strcmp(buf, "") == 0)
+        {
+            hasNextFile = false;
+            break;
+        }
 
-		int targetFilePos = BytesToInt(&buf[FILENAME_MAX_LENGTH]);
-		int targetFileLength = BytesToInt(&buf[FILENAME_MAX_LENGTH + sizeof(int)]);
+        DirectoryEntry* newEntry = new DirectoryEntry();
 
-		packageStream.seekg(targetFilePos);
-		fileContents = new char[targetFileLength];
-		packageStream.read(fileContents, targetFileLength);
+        strncpy(newEntry->fileName, buf, strlen(buf));
 
-		newEntry->fileLength = targetFileLength;
-		newEntry->filePosition = targetFileLength;
+        int targetFilePos = BytesToInt(&buf[FILENAME_MAX_LENGTH]);
+        int targetFileLength = BytesToInt(&buf[FILENAME_MAX_LENGTH + sizeof(int)]);
 
-		fileFound = true;
+        newEntry->fileLength = targetFileLength;
+        newEntry->filePosition = targetFileLength;
 
-
-		filesIndex++;
-	}
+        entries->Add(newEntry);
+    }
 }

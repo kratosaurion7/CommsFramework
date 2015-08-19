@@ -12,70 +12,70 @@
 #define PACK_FILE_SIG_LENGTH 4
 
 /*
-	=Format=
-	Header
-	(4 bytes) signature = 'PACK'
-	(4 bytes, int) directory offeset
-	(4 bytes, int) directory lenght
+    =Format=
+    Header
+    (4 bytes) signature = 'PACK'
+    (4 bytes, int) directory offeset
+    (4 bytes, int) directory lenght
 
-	Directory
-	(32 bytes, char) file name
-	(4 bytes, int) file position
-	(4 bytes, int) file lenght
+    Directory
+    (32 bytes, char) file name
+    (4 bytes, int) file position
+    (4 bytes, int) file lenght
 
-	File at each position (? bytes, char) file data
+    File at each position (? bytes, char) file data
 */
 
 #define HEADER_SIZE 12
 struct Header {
-	char sig[PACK_FILE_SIG_LENGTH];
-	int dirOffset;
-	int dirLength;
+    char sig[PACK_FILE_SIG_LENGTH];
+    int dirOffset;
+    int dirLength;
 };
 
 #define DIRECTORY_ENTRY_SIZE 40
 struct DirectoryEntry {
-	char fileName[FILENAME_MAX_LENGTH];
-	int filePosition;
-	int fileLength;
+    char fileName[FILENAME_MAX_LENGTH];
+    int filePosition;
+    int fileLength;
 
-	char* fileContents;
+    char* fileContents;
 };
 
 class PackageFile
 {
 public:
-	PackageFile();
+    PackageFile();
 
-	PackageFile(std::string packageFilePath);
-	
-	~PackageFile();
+    PackageFile(std::string packageFilePath);
 
-	const char* GetFile(std::string filename, int& fileSize);
+    ~PackageFile();
 
-	PointerList<FileContents*> GetAllFiles();
+    const char* GetFile(std::string filename, int& fileSize);
 
-	void AddFile(std::string filename);
+    PointerList<std::string>* GetAllFiles();
 
-	void RemoveFile(std::string filename);
+    void AddFile(std::string filename);
 
-	void Save(std::string savePath);
-	
+    void RemoveFile(std::string filename);
+
+    void Save(std::string savePath);
+
 private:
-	Header* packageHeader;
+    Header* packageHeader;
 
-	BaseList<std::string>* filesList;
+    BaseList<std::string>* filesList;
 
-	PointerList<DirectoryEntry*>* entries;
+    PointerList<DirectoryEntry*>* entries;
 
-	FileContents* contents;
+    FileContents* contents;
 
-	std::string TargetPackage;
+    std::string TargetPackage;
 
-	std::string OutputFileName;
+    std::string OutputFileName;
 
-	/**
-	Reads the package file and fills the entries member with the files inside the package. */
-	void ReadPackage();
+    /**
+    Reads the package file and fills the entries member with the files inside the package. */
+    void ReadPackage();
 };
 
