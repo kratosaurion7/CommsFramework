@@ -134,8 +134,8 @@ void XDirectory::FindFilesInDirectory(std::wstring directoryPath, PointerList<XF
 XDirectory* GetWorkingDir()
 {
 #ifdef _WINDOWS
-	wchar_t* buf[MAX_PATH];
-	DWORD res = GetCurrentDirectory(MAX_PATH, *buf);
+	LPWSTR buf = new wchar_t[MAX_PATH];
+	DWORD res = GetCurrentDirectory(MAX_PATH, buf);
 
 	if (res == 0)
 	{
@@ -144,8 +144,7 @@ XDirectory* GetWorkingDir()
 		return NULL;
 	}
 
-
-	XDirectory* currentDir = XDirectory::OpenDirectory(*buf);
+	XDirectory* currentDir = XDirectory::OpenDirectory(buf);
 
 	return currentDir;
 #elif
