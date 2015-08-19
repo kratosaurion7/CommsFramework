@@ -18,7 +18,7 @@ public:
     };
 
     void PointerList::Release()
-    {        
+    {
         for (std::list<T>::iterator it = _container->begin(); it != _container->end(); it++)
         {
             delete *it;

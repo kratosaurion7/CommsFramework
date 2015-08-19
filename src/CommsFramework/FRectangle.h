@@ -5,34 +5,34 @@
 #include "Vectors.h"
 
 enum DistanceFromType {
-	OriginToOrigin,
-	CenterToCenter
+    OriginToOrigin,
+    CenterToCenter
 };
 
 class FRectangle
 {
 public:
-	FRectangle(float x, float y, float h, float w);
-	~FRectangle();
+    FRectangle(float x, float y, float h, float w);
+    ~FRectangle();
 
-	float Width();
-	float Height();
+    float Width();
+    float Height();
 
-	float Left;
-	float Top;
-	float Right;
-	float Bottom;
+    float Left;
+    float Top;
+    float Right;
+    float Bottom;
 
-	FPosition* Origin();
-	FPosition* Center();
+    FPosition* Origin();
+    FPosition* Center();
 
-	FSize* Size();
+    FSize* Size();
 
-	// Geometry methods
+    // Geometry methods
 
-	bool IsPointInside(FPosition* pos);
-	bool IsPointInside(float x, float y);
-	bool Intersect(FRectangle* rec);
+    bool IsPointInside(FPosition* pos);
+    bool IsPointInside(float x, float y);
+    bool Intersect(FRectangle* rec);
 
-	Vector2<float>* DistanceFrom(FRectangle* rec, DistanceFromType comparaisonType = OriginToOrigin);
+    Vector2<float>* DistanceFrom(FRectangle* rec, DistanceFromType comparaisonType = OriginToOrigin);
 };

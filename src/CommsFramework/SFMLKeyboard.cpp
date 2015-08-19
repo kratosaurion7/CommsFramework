@@ -14,9 +14,9 @@ SFMLKeyboard::~SFMLKeyboard()
 
 bool SFMLKeyboard::IsKeyPressed(Key key)
 {
-	sf::Keyboard::Key convert = (sf::Keyboard::Key)key;
+    sf::Keyboard::Key convert = (sf::Keyboard::Key)key;
 
-	bool res =  sf::Keyboard::isKeyPressed(convert);
+    bool res = sf::Keyboard::isKeyPressed(convert);
 
-	return res;
+    return res;
 }

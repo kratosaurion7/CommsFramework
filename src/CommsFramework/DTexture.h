@@ -16,22 +16,22 @@ public:
     DTexture();
     ~DTexture();
 
-	virtual void Initalize(int width, int height);
+    virtual void Initalize(int width, int height);
 
-	void Load(std::string path);
+    void Load(std::string path);
 
     virtual void LoadFromMemory(char* data, int dataSize);
 
-	virtual FSize* GetSize();
+    virtual FSize* GetSize();
 
-    
 
-	virtual void SetSolidColor(uint32_t pixelColor);
 
-	sf::Texture* innerImpl;
+    virtual void SetSolidColor(uint32_t pixelColor);
+
+    sf::Texture* innerImpl;
 
 private:
-	FSize* size;
+    FSize* size;
 
 };
 

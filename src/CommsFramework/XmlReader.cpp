@@ -19,7 +19,7 @@ XmlReader::XmlReader()
 XmlReader::~XmlReader()
 {
     delete(rootDoc);
-	delete(rootNode);
+    delete(rootNode);
     delete(xmlFile);
 }
 
@@ -36,197 +36,197 @@ void XmlReader::LoadFile(std::string filePath)
     {
         rootDoc->parse<0>(xmlFile->buffer); // TODO : Unsafe conversion from const to non-const
 
-		rootNode = new XmlNode(rootDoc);
+        rootNode = new XmlNode(rootDoc);
     }
 }
 
 XmlNode* XmlReader::GetNode(std::string nodeName)
 {
-	return rootNode->GetNode(nodeName);
+    return rootNode->GetNode(nodeName);
 }
 
 
 PointerList<XmlNode*>* XmlReader::GetNodes(std::string nodeName)
 {
-	return rootNode->GetNodes(nodeName);
+    return rootNode->GetNodes(nodeName);
 }
 
 XmlNode::XmlNode(xml_node<>* xmlData)
 {
-	data_node = xmlData;
+    data_node = xmlData;
 }
 
 XmlNode::~XmlNode()
 {
-	//NodeAttributes->Release(); // TODO : Create a Delete() method.
-	//delete(NodeAttributes);
+    //NodeAttributes->Release(); // TODO : Create a Delete() method.
+    //delete(NodeAttributes);
 }
 
 std::string XmlNode::NodeName()
 {
-	if (data_node != NULL)
-	{
-		return data_node->name();
-	}
-	else 
-	{
-		return "";
-	}
+    if (data_node != NULL)
+    {
+        return data_node->name();
+    }
+    else
+    {
+        return "";
+    }
 }
 
 std::string XmlNode::Contents()
 {
-	if (data_node != NULL)
-	{
-		return data_node->value();
-	}
-	else
-	{
-		return "";
-	}
+    if (data_node != NULL)
+    {
+        return data_node->value();
+    }
+    else
+    {
+        return "";
+    }
 }
 
 XmlNodeAttribute XmlNode::GetAttribute(std::string attributeName)
 {
-	if (data_node != NULL)
-	{
+    if (data_node != NULL)
+    {
         XmlNodeAttribute returnAttr;
 
-		auto attr = data_node->first_attribute(attributeName.c_str());
+        auto attr = data_node->first_attribute(attributeName.c_str());
 
-		if (attr != NULL)
-		{
-			returnAttr.AttributeName = attr->name();
-			returnAttr.AttributeValue = attr->value();
-			returnAttr.valueSize = attr->value_size();
+        if (attr != NULL)
+        {
+            returnAttr.AttributeName = attr->name();
+            returnAttr.AttributeValue = attr->value();
+            returnAttr.valueSize = attr->value_size();
 
-			return returnAttr;
-		}
-		else 
-		{
-			return XmlNodeAttribute();
-		}
-	}
-	else 
-	{
-		return XmlNodeAttribute();
-	}
+            return returnAttr;
+        }
+        else
+        {
+            return XmlNodeAttribute();
+        }
+    }
+    else
+    {
+        return XmlNodeAttribute();
+    }
 }
 
 XmlNode* XmlNode::GetNode(std::string nodeName)
 {
-	auto pred = [nodeName](rapidxml::xml_node<>*node) -> bool {
-		return strcmp(node->name(), nodeName.c_str()) == 0;
-	};
+    auto pred = [nodeName](rapidxml::xml_node<>*node) -> bool {
+        return strcmp(node->name(), nodeName.c_str()) == 0;
+    };
 
-	auto ret = FindNode(data_node, pred);
+    auto ret = FindNode(data_node, pred);
 
-	if (ret != NULL)
-	{
-		XmlNode* foundNode = new XmlNode(ret);
+    if (ret != NULL)
+    {
+        XmlNode* foundNode = new XmlNode(ret);
 
-		return foundNode;
-	}
-	else
-	{
-		return NULL;
-	}
+        return foundNode;
+    }
+    else
+    {
+        return NULL;
+    }
 }
 
 
 PointerList<XmlNode*>* XmlNode::GetNodes(std::string nodeName)
 {
-	auto pred = [nodeName](rapidxml::xml_node<>*node) -> bool {
-		return strcmp(node->name(), nodeName.c_str()) == 0;
-	};
+    auto pred = [nodeName](rapidxml::xml_node<>*node) -> bool {
+        return strcmp(node->name(), nodeName.c_str()) == 0;
+    };
 
-	PointerList<xml_node<>*> listOfStuff;
-	PointerList<XmlNode*>* nodeList = new PointerList<XmlNode*>();
+    PointerList<xml_node<>*> listOfStuff;
+    PointerList<XmlNode*>* nodeList = new PointerList<XmlNode*>();
 
-	FindNodeList(data_node, pred, listOfStuff);
+    FindNodeList(data_node, pred, listOfStuff);
 
-	auto stuff = listOfStuff.GetContainer();
+    auto stuff = listOfStuff.GetContainer();
 
-	auto it = stuff->begin();
+    auto it = stuff->begin();
 
-	while (it != listOfStuff.GetContainer()->end())
-	{
-		auto item = *it;
+    while (it != listOfStuff.GetContainer()->end())
+    {
+        auto item = *it;
 
-		XmlNode* foundNode = new XmlNode(item);
+        XmlNode* foundNode = new XmlNode(item);
 
-		nodeList->Add(foundNode);
+        nodeList->Add(foundNode);
 
-		it++;
-	}
+        it++;
+    }
 
-	return nodeList;
+    return nodeList;
 }
 
 
 xml_node<>* XmlNode::FindNode(xml_node<>* node, std::function<bool(rapidxml::xml_node<>*)> predicate)
 {
-	if (node == NULL)
-		return NULL;
+    if (node == NULL)
+        return NULL;
 
-	if (predicate(node))
-	{
-		return node;
-	}
-	else
-	{
-		rapidxml::xml_node<>* nextNode = node->first_node();
+    if (predicate(node))
+    {
+        return node;
+    }
+    else
+    {
+        rapidxml::xml_node<>* nextNode = node->first_node();
 
-		if (nextNode == NULL || nextNode->type() == node_data)
-			nextNode = node->next_sibling();
+        if (nextNode == NULL || nextNode->type() == node_data)
+            nextNode = node->next_sibling();
 
-		if (nextNode == NULL && node->parent())
-			nextNode = node->parent()->next_sibling();
+        if (nextNode == NULL && node->parent())
+            nextNode = node->parent()->next_sibling();
 
-		rapidxml::xml_node<>* nextParent = node;
-		while (nextNode == NULL)
-		{
-			nextParent = nextParent->parent();
+        rapidxml::xml_node<>* nextParent = node;
+        while (nextNode == NULL)
+        {
+            nextParent = nextParent->parent();
 
-			if (nextParent->type() == node_document)
-				return NULL;
+            if (nextParent->type() == node_document)
+                return NULL;
 
-			nextNode = nextParent->next_sibling();
-		}
+            nextNode = nextParent->next_sibling();
+        }
 
-		return FindNode(nextNode, predicate);
-	}
+        return FindNode(nextNode, predicate);
+    }
 }
 
 void XmlNode::FindNodeList(xml_node<>* node, std::function<bool(rapidxml::xml_node<>*)> predicate, PointerList<xml_node<>*> &aggregate)
 {
-	if (node == NULL)
-		return;
+    if (node == NULL)
+        return;
 
-	if (predicate(node))
-	{
-		aggregate.Add(node);
-	}
+    if (predicate(node))
+    {
+        aggregate.Add(node);
+    }
 
-	rapidxml::xml_node<>* nextNode = node->first_node();
+    rapidxml::xml_node<>* nextNode = node->first_node();
 
-	if (nextNode == NULL || nextNode->type() == node_data)
-		nextNode = node->next_sibling();
+    if (nextNode == NULL || nextNode->type() == node_data)
+        nextNode = node->next_sibling();
 
-	if (nextNode == NULL && node->parent())
-		nextNode = node->parent()->next_sibling();
+    if (nextNode == NULL && node->parent())
+        nextNode = node->parent()->next_sibling();
 
-	rapidxml::xml_node<>* nextParent = node;
-	while (nextNode == NULL)
-	{
-		nextParent = nextParent->parent();
+    rapidxml::xml_node<>* nextParent = node;
+    while (nextNode == NULL)
+    {
+        nextParent = nextParent->parent();
 
-		if (nextParent->type() == node_document)
-			return;
+        if (nextParent->type() == node_document)
+            return;
 
-		nextNode = nextParent->next_sibling();
-	}
+        nextNode = nextParent->next_sibling();
+    }
 
-	FindNodeList(nextNode, predicate, aggregate);
+    FindNodeList(nextNode, predicate, aggregate);
 }
 

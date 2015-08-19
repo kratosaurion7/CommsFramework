@@ -5,5 +5,5 @@
 class BaseKeyboard
 {
 public:
-	virtual bool IsKeyPressed(Key key) = 0;
+    virtual bool IsKeyPressed(Key key) = 0;
 };

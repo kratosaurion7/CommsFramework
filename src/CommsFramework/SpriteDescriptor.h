@@ -11,32 +11,32 @@
 
 class Framelist {
 public:
-	int startIndex;
-	int endIndex;
-	int step;
-	std::string pattern;
+    int startIndex;
+    int endIndex;
+    int step;
+    std::string pattern;
 
-	BaseList<std::string>* GetFrames();
+    BaseList<std::string>* GetFrames();
 };
 
 class GameModule;
 
 class SpriteDescriptor {
 public:
-	SpriteDescriptor();
+    SpriteDescriptor();
 
-	~SpriteDescriptor();
+    ~SpriteDescriptor();
 
-	std::string SpriteName;
-	
-	GameModule* Module;
+    std::string SpriteName;
 
-	FPosition* position;
-	FSize* size;
+    GameModule* Module;
 
-	BaseList<std::string>* Frames;
+    FPosition* position;
+    FSize* size;
 
-	PointerList<Framelist*>* FrameLists;
+    BaseList<std::string>* Frames;
+
+    PointerList<Framelist*>* FrameLists;
 
     PointerList<Resource*>* FrameResources;
 };

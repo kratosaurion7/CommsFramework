@@ -2,25 +2,25 @@
 
 Resource::Resource(ResourceManager* resourceManagerPointer)
 {
-	_resourceManager = resourceManagerPointer;
-	_dataCache = NULL;
-	_dataSize = 0;
+    _resourceManager = resourceManagerPointer;
+    _dataCache = NULL;
+    _dataSize = 0;
 }
 
 Resource::~Resource()
 {
-	// Delete the data when deleting the Resource ?
+    // Delete the data when deleting the Resource ?
 }
 
 char* Resource::GetData(int& dataSize, GameModule* targetModule)
 {
     if (_dataCache == NULL)
     {
-		_dataCache = _resourceManager->GetResourceDataFromStore(this, dataSize, targetModule);
+        _dataCache = _resourceManager->GetResourceDataFromStore(this, dataSize, targetModule);
 
         return _dataCache;
     }
-    else 
+    else
     {
         // And check if invalid cache I guess.
         dataSize = dataSize;

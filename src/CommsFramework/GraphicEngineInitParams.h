@@ -6,9 +6,9 @@
 class GraphicEngineInitParams
 {
 public:
-	FSize* WindowSize;
-	std::string WindowTitle;
+    FSize* WindowSize;
+    std::string WindowTitle;
 
-	bool EnableVerticalSync = true;
+    bool EnableVerticalSync = true;
 };
 

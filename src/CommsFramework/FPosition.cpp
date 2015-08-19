@@ -9,8 +9,8 @@ FPosition::FPosition()
 
 FPosition::FPosition(float x, float y)
 {
-	X = x;
-	Y = y;
+    X = x;
+    Y = y;
 }
 
 
@@ -20,6 +20,6 @@ FPosition::~FPosition()
 
 void FPosition::Set(float x, float y)
 {
-	X = x;
-	Y = y;
+    X = x;
+    Y = y;
 }

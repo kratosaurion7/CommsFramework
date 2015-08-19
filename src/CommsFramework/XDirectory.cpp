@@ -7,9 +7,9 @@
 
 XDirectory::XDirectory(std::string path)
 {
-	FullPath = path;
+    FullPath = path;
 
-	DirectoryPath = CStringToWideString(path);
+    DirectoryPath = CStringToWideString(path);
 }
 
 
@@ -19,15 +19,16 @@ XDirectory::~XDirectory()
 
 XDirectory * XDirectory::OpenDirectory(std::string path)
 {
-	XDirectory* dir = new XDirectory(path);
+    XDirectory* dir = new XDirectory(path);
 
-	if (dir->Check())
-	{
-		return dir;
-	} else
-	{
-		return NULL;
-	}
+    if (dir->Check())
+    {
+        return dir;
+    }
+    else
+    {
+        return NULL;
+    }
 }
 
 PointerList<XFile*>* XDirectory::GetFiles(bool recursive)
@@ -50,30 +51,30 @@ PointerList<XDirectory*>* XDirectory::GetDirectories(bool recursive)
 #ifdef _WINDOWS
 XDirectory::XDirectory(std::wstring path)
 {
-	FullPath = WideStringToCString(path);
+    FullPath = WideStringToCString(path);
 }
 
 XDirectory * XDirectory::OpenDirectory(std::wstring path)
 {
-	XDirectory* dir = new XDirectory(path);
+    XDirectory* dir = new XDirectory(path);
 
-	if (dir->Check())
-	{
-		return dir;
-	}
-	else
-	{
-		return NULL;
-	}
+    if (dir->Check())
+    {
+        return dir;
+    }
+    else
+    {
+        return NULL;
+    }
 }
 #endif
 
 bool XDirectory::Check()
 {
 #ifdef _WINDOWS
-	return FullPath != "";
+    return FullPath != "";
 #elif
-	return false;
+    return false;
 #endif
 }
 
@@ -82,8 +83,8 @@ void XDirectory::FindFilesInDirectory(std::wstring directoryPath, PointerList<XF
 #ifdef _WINDOWS
     WIN32_FIND_DATA ffd;
 
-	std::wstring directorySearchAlias = directoryPath;
-	directorySearchAlias.append(_T("\\*"));
+    std::wstring directorySearchAlias = directoryPath;
+    directorySearchAlias.append(_T("\\*"));
 
     HANDLE hFind = FindFirstFile(directorySearchAlias.c_str(), &ffd);
 
@@ -95,15 +96,15 @@ void XDirectory::FindFilesInDirectory(std::wstring directoryPath, PointerList<XF
     }
 
     do {
-		if (IsDotFile(ffd))
+        if (IsDotFile(ffd))
             continue;
 
         bool isDirectory = ffd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY;
-        
+
         if (isDirectory && recursive)
         {
-			// Fix line to not append directly to the same string buffer.
-			//std::wstring subDirectoryPath = directoryPath.append(_T("\\")).append(ffd.cFileName);
+            // Fix line to not append directly to the same string buffer.
+            //std::wstring subDirectoryPath = directoryPath.append(_T("\\")).append(ffd.cFileName);
 
             wchar_t* subDirectoryPath = new wchar_t[directoryPath.length() + lstrlenW(ffd.cFileName)];
 
@@ -134,45 +135,45 @@ void XDirectory::FindFilesInDirectory(std::wstring directoryPath, PointerList<XF
 XDirectory* GetWorkingDir()
 {
 #ifdef _WINDOWS
-	LPWSTR buf = new wchar_t[MAX_PATH];
-	DWORD res = GetCurrentDirectory(MAX_PATH, buf);
+    LPWSTR buf = new wchar_t[MAX_PATH];
+    DWORD res = GetCurrentDirectory(MAX_PATH, buf);
 
-	if (res == 0)
-	{
-		DWORD err = GetLastError();
+    if (res == 0)
+    {
+        DWORD err = GetLastError();
 
-		return NULL;
-	}
+        return NULL;
+    }
 
-	XDirectory* currentDir = XDirectory::OpenDirectory(buf);
+    XDirectory* currentDir = XDirectory::OpenDirectory(buf);
 
-	return currentDir;
+    return currentDir;
 #elif
-	return NULL;
+    return NULL;
 #endif
 }
 
 void ChangeWorkingDir(std::string newPath)
 {
 #ifdef _WINDOWS
-	wchar_t* dirPath[MAX_PATH];
-	mbstowcs(*dirPath, newPath.c_str(), newPath.length() + 1);
+    wchar_t* dirPath[MAX_PATH];
+    mbstowcs(*dirPath, newPath.c_str(), newPath.length() + 1);
 
-	bool res = SetCurrentDirectory(*dirPath);
+    bool res = SetCurrentDirectory(*dirPath);
 
-	if (res == 0)
-	{
-		DWORD err = GetLastError();
-	}
+    if (res == 0)
+    {
+        DWORD err = GetLastError();
+    }
 #endif
 }
 
 #ifdef _WINDOWS
 bool IsDotFile(WIN32_FIND_DATA dir)
 {
-	auto x = lstrcmpW(currentDotDirName, dir.cFileName);
-	auto y = lstrcmpW(parentDotDirName, dir.cFileName);
+    auto x = lstrcmpW(currentDotDirName, dir.cFileName);
+    auto y = lstrcmpW(parentDotDirName, dir.cFileName);
 
-	return (x == 0) || (y == 0);
+    return (x == 0) || (y == 0);
 }
 #endif

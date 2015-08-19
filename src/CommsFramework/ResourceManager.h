@@ -21,20 +21,20 @@ class SpriteDescriptor;
 
 struct ResourceManagerInitParams {
 
-	std::string AssetRootFolder;
+    std::string AssetRootFolder;
 
-	std::string ConfigFileLocation;
+    std::string ConfigFileLocation;
 
-	static ResourceManagerInitParams* GetDefaultParams();
+    static ResourceManagerInitParams* GetDefaultParams();
 };
 
 class ResourceManager
 {
 public:
-	ResourceManager();
-	~ResourceManager();
+    ResourceManager();
+    ~ResourceManager();
 
-	void Init(ResourceManagerInitParams* initParams);
+    void Init(ResourceManagerInitParams* initParams);
 
     void ParseConfigFiles();
 
@@ -42,30 +42,30 @@ public:
 
     std::string configFileLocation;
 
-	Resource* GetResource(std::string name, GameModule* targetModule = NULL);
+    Resource* GetResource(std::string name, GameModule* targetModule = NULL);
 
-	PointerList<Resource*>* GetSpriteResources(std::string spriteName, GameModule* targetModule = NULL);
+    PointerList<Resource*>* GetSpriteResources(std::string spriteName, GameModule* targetModule = NULL);
 
-	PointerList<Resource*>* Resources;
+    PointerList<Resource*>* Resources;
 
-	PointerList<SpriteDescriptor*>* SpritesInfo;
-    
-	char* GetResourceDataFromStore(Resource* res, int& dataLenght, GameModule* targetModule = NULL);
+    PointerList<SpriteDescriptor*>* SpritesInfo;
+
+    char* GetResourceDataFromStore(Resource* res, int& dataLenght, GameModule* targetModule = NULL);
 
 private:
-	ResourceManagerInitParams* startingParams;
+    ResourceManagerInitParams* startingParams;
 
     BaseList<std::string>* secondaryConfigFiles;
 
     void SetupSprites();
 
-	PointerList<GameModule*>* Modules;
-	PointerList<ResourceContainer*>* ResourceContainers;
+    PointerList<GameModule*>* Modules;
+    PointerList<ResourceContainer*>* ResourceContainers;
 
-	PointerList<Resource*>* CreateListOfResourcesFromXmlNodes(PointerList<XmlNode*> &resourceNodes);
-	PointerList<ResourceContainer*>* CreateListOfContainersFromXmlNodes(PointerList<XmlNode*> &resourceNodes);
+    PointerList<Resource*>* CreateListOfResourcesFromXmlNodes(PointerList<XmlNode*> &resourceNodes);
+    PointerList<ResourceContainer*>* CreateListOfContainersFromXmlNodes(PointerList<XmlNode*> &resourceNodes);
 
-	PointerList<SpriteDescriptor*>* CreateSpritesFromXmlNodes(PointerList<XmlNode*> &spriteNodes);
+    PointerList<SpriteDescriptor*>* CreateSpritesFromXmlNodes(PointerList<XmlNode*> &spriteNodes);
 
 };
 

@@ -7,13 +7,13 @@
 class SFMLFont : public BaseFont
 {
 public:
-	SFMLFont();
-	~SFMLFont();
+    SFMLFont();
+    ~SFMLFont();
 
-	void Load(std::string path);
+    void Load(std::string path);
 
-	sf::Font* innerImpl;
+    sf::Font* innerImpl;
 private:
-	
+
 };
 

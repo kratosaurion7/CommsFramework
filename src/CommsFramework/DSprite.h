@@ -23,25 +23,25 @@ public:
 
     virtual PointerList<BaseTexture*>* GetTextures();
 
-	virtual void NextFrame();
-	
+    virtual void NextFrame();
+
     virtual void SetFrame(int index);
 
     virtual void SetTexture(BaseTexture* texture);
     virtual void SetTextures(PointerList<BaseTexture*>* textures);
 
-	sf::Sprite* innerImpl;
+    sf::Sprite* innerImpl;
 
-	sf::Drawable* GetDrawableImplementation();
+    sf::Drawable* GetDrawableImplementation();
 
 private:
 
-	DTexture* spriteTexture; // Texture currently on sprite.
+    DTexture* spriteTexture; // Texture currently on sprite.
 
     PointerList<DTexture*>* spriteTextures;
 
-	void UpdateInnerImpl();
+    void UpdateInnerImpl();
 
-	void ApplyCurrentTexture();
+    void ApplyCurrentTexture();
 };
 

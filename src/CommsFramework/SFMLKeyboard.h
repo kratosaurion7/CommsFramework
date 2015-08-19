@@ -7,9 +7,9 @@
 class SFMLKeyboard : public BaseKeyboard
 {
 public:
-	SFMLKeyboard();
-	~SFMLKeyboard();
+    SFMLKeyboard();
+    ~SFMLKeyboard();
 
-	bool IsKeyPressed(Key key);
+    bool IsKeyPressed(Key key);
 };
 

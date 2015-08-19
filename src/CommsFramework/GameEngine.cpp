@@ -9,53 +9,53 @@
 
 GameEngine::GameEngine()
 {
-	Graphics = new GraphicEngine();
-	Resources = new ResourceManager();
+    Graphics = new GraphicEngine();
+    Resources = new ResourceManager();
 }
 
 GameEngine::~GameEngine()
 {
-	delete(engineInitParams);
+    delete(engineInitParams);
 
-	delete(Graphics);
+    delete(Graphics);
 
-	delete(Resources);
+    delete(Resources);
 }
 
 void GameEngine::Init(GameEngineInitParams * params)
 {
-	engineInitParams = params;
+    engineInitParams = params;
 
-	Graphics->Initialize(params->GraphicsParams);
+    Graphics->Initialize(params->GraphicsParams);
 
-	Resources->Init(params->ResourceParams);
+    Resources->Init(params->ResourceParams);
 }
 
 BaseSprite* GameEngine::GetSprite(std::string name)
 {
-	// Check first if it exists ? Or create a copy
+    // Check first if it exists ? Or create a copy
 
-	// Get sprite
-	BaseSprite* spriteObject = Graphics->CreateSprite();
-    
-	// Get resources
+    // Get sprite
+    BaseSprite* spriteObject = Graphics->CreateSprite();
+
+    // Get resources
     PointerList<Resource*>* spriteResources = Resources->GetSpriteResources(name);
 
-	// Transform resources to textures
-	PointerList<BaseTexture*>* spriteTextures = CreateTexturesFromResources(spriteResources);
+    // Transform resources to textures
+    PointerList<BaseTexture*>* spriteTextures = CreateTexturesFromResources(spriteResources);
 
-	// Assign textures to sprite
-	spriteObject->SetTextures(spriteTextures);
-	
-	delete(spriteTextures);
-	delete(spriteResources);
+    // Assign textures to sprite
+    spriteObject->SetTextures(spriteTextures);
 
-	return spriteObject;
+    delete(spriteTextures);
+    delete(spriteResources);
+
+    return spriteObject;
 }
 
 void GameEngine::Load()
 {
-	CreateSpritesFromConfig();
+    CreateSpritesFromConfig();
 }
 
 void GameEngine::CreateSpritesFromConfig()
@@ -65,42 +65,42 @@ void GameEngine::CreateSpritesFromConfig()
 
 PointerList<BaseTexture*>* GameEngine::CreateTexturesFromResources(PointerList<Resource*>* resources)
 {
-	PointerList<BaseTexture*>* textureList = new PointerList<BaseTexture*>();
+    PointerList<BaseTexture*>* textureList = new PointerList<BaseTexture*>();
 
-	auto it = resources->GetContainer()->begin();
-	while (it != resources->GetContainer()->end())
-	{
-		Resource* res = (*it);
+    auto it = resources->GetContainer()->begin();
+    while (it != resources->GetContainer()->end())
+    {
+        Resource* res = (*it);
 
-		BaseTexture* newTexture = Graphics->CreateTexture();
-		
-		int dataSize = 0;
-		char* resourceData = res->GetData(dataSize);
+        BaseTexture* newTexture = Graphics->CreateTexture();
 
-		newTexture->LoadFromMemory(resourceData, dataSize);
+        int dataSize = 0;
+        char* resourceData = res->GetData(dataSize);
 
-		textureList->Add(newTexture);
+        newTexture->LoadFromMemory(resourceData, dataSize);
 
-		it++;
-	}
+        textureList->Add(newTexture);
 
-	return textureList;
+        it++;
+    }
+
+    return textureList;
 }
 
 GameEngineInitParams * GameEngineInitParams::CreateDefaultParams()
 {
-	GameEngineInitParams* newParams = new GameEngineInitParams();
-	
-	ResourceManagerInitParams* newResourceParams = new ResourceManagerInitParams();
-	newResourceParams->AssetRootFolder = "Assets\\";
-	newResourceParams->ConfigFileLocation = "config.xml";
-	newParams->ResourceParams = newResourceParams;
+    GameEngineInitParams* newParams = new GameEngineInitParams();
 
-	GraphicEngineInitParams* newEngineParams = new GraphicEngineInitParams();
-	newEngineParams->EnableVerticalSync = true;
-	newEngineParams->WindowSize = new FSize(600, 600);
-	newEngineParams->WindowTitle = "DEFAULT WINDOW TITLE";
-	newParams->GraphicsParams = newEngineParams;
+    ResourceManagerInitParams* newResourceParams = new ResourceManagerInitParams();
+    newResourceParams->AssetRootFolder = "Assets\\";
+    newResourceParams->ConfigFileLocation = "config.xml";
+    newParams->ResourceParams = newResourceParams;
 
-	return newParams;
+    GraphicEngineInitParams* newEngineParams = new GraphicEngineInitParams();
+    newEngineParams->EnableVerticalSync = true;
+    newEngineParams->WindowSize = new FSize(600, 600);
+    newEngineParams->WindowTitle = "DEFAULT WINDOW TITLE";
+    newParams->GraphicsParams = newEngineParams;
+
+    return newParams;
 }

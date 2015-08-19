@@ -14,7 +14,7 @@ public:
 
     ~BaseList()
     {
-		_container->clear();
+        _container->clear();
         delete(_container);
     };
 
@@ -23,19 +23,19 @@ public:
         _container->push_back(item);
     };
 
-	void BaseList::AddRange(BaseList<T>* items)
-	{
-		auto it = items->GetContainer()->begin();
+    void BaseList::AddRange(BaseList<T>* items)
+    {
+        auto it = items->GetContainer()->begin();
 
-		while (it != items->GetContainer()->end())
-		{
-			T listItem = *it;
+        while (it != items->GetContainer()->end())
+        {
+            T listItem = *it;
 
-			_container->push_back(listItem);
+            _container->push_back(listItem);
 
-			it++;
-		}
-	};
+            it++;
+        }
+    };
 
     T BaseList::Get(int index)
     {
@@ -54,66 +54,66 @@ public:
         return NULL;
     };
 
-	BaseList<T>* BaseList::Where(std::function<bool(T)> predicate)
-	{
-		BaseList<T>* retList = new BaseList<T>();
+    BaseList<T>* BaseList::Where(std::function<bool(T)> predicate)
+    {
+        BaseList<T>* retList = new BaseList<T>();
 
-		for (std::list<T>::iterator it = _container->begin(); it != _container->end(); it++)
-		{
-			auto test = predicate(*it);
+        for (std::list<T>::iterator it = _container->begin(); it != _container->end(); it++)
+        {
+            auto test = predicate(*it);
 
-			if (test)
-			{
-				retList->Add(*it);
-			}
+            if (test)
+            {
+                retList->Add(*it);
+            }
 
-			it++;
-		}
+            it++;
+        }
 
-		return retList;
-	};
+        return retList;
+    };
 
-	int BaseList::IndexOf(T item)
-	{
-		int i = 0;
+    int BaseList::IndexOf(T item)
+    {
+        int i = 0;
 
-		for (std::list<T>::iterator it = _container->begin(); it != _container->end(); it++)
-		{
-			T current = (*it);
+        for (std::list<T>::iterator it = _container->begin(); it != _container->end(); it++)
+        {
+            T current = (*it);
 
-			if (current == item)
-			{
-				return i;
-			}
+            if (current == item)
+            {
+                return i;
+            }
 
-			i++;
-		}
+            i++;
+        }
 
-		return NULL;
-	};
+        return NULL;
+    };
 
     void BaseList::RemoveAt(int index)
     {
         _container->erase(index);
     };
-	
-	void BaseList::RemoveObject(T object)
-	{
-		for (std::list<T>::iterator it = _container->begin(); it != _container->end(); it++)
-		{
-			T current = (*it);
 
-			if (current == object)
-			{
-				_container->erase(it);
-			}
-		}
-	};
+    void BaseList::RemoveObject(T object)
+    {
+        for (std::list<T>::iterator it = _container->begin(); it != _container->end(); it++)
+        {
+            T current = (*it);
 
-	void Clear()
-	{
-		_container->clear();
-	};
+            if (current == object)
+            {
+                _container->erase(it);
+            }
+        }
+    };
+
+    void Clear()
+    {
+        _container->clear();
+    };
 
     int BaseList::Count()
     {

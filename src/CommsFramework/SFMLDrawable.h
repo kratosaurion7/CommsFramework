@@ -7,5 +7,5 @@
 class SFMLDrawable
 {
 public:
-	virtual sf::Drawable* GetDrawableImplementation() = 0;
+    virtual sf::Drawable* GetDrawableImplementation() = 0;
 };

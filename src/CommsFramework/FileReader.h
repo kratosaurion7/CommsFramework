@@ -23,17 +23,17 @@ public:
 
     void OpenFile(char* fileName);
 
-	void OpenFile(const char* fileName);
+    void OpenFile(const char* fileName);
 
-	FileContents* GetFileContents(bool ensureNullTerminated = false);
+    FileContents* GetFileContents(bool ensureNullTerminated = false);
 
-	void Close();
+    void Close();
 
-	void DumpFile(std::string outFileName);
+    void DumpFile(std::string outFileName);
 
 private:
-	std::fstream* fileStream;
-	
-	int GetFileSize();
+    std::fstream* fileStream;
+
+    int GetFileSize();
 };
 

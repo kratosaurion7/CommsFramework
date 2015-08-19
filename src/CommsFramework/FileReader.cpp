@@ -8,95 +8,95 @@
 
 FileReader::FileReader()
 {
-	fileStream = new std::fstream();
+    fileStream = new std::fstream();
 }
 
 FileReader::~FileReader()
 {
-	if (fileStream != NULL)
-		fileStream->close();
+    if (fileStream != NULL)
+        fileStream->close();
 
-	delete(fileStream);
+    delete(fileStream);
 }
 
 void FileReader::OpenFile(char* fileName)
 {
-	fileStream->open(fileName, std::ios::in | std::ios::binary);
+    fileStream->open(fileName, std::ios::in | std::ios::binary);
 }
 
 void FileReader::OpenFile(const char* fileName)
 {
-	fileStream->open(fileName, std::ios::in | std::ios::binary);
+    fileStream->open(fileName, std::ios::in | std::ios::binary);
 }
 
 FileContents* FileReader::GetFileContents(bool ensureNullTerminated)
 {
     if (fileStream == NULL || !fileStream->good())
         return NULL;
-	
-	int fileSize = GetFileSize();
 
-	auto newContent = new char[fileSize + 1];
+    int fileSize = GetFileSize();
 
-	fileStream->read(newContent, fileSize);
+    auto newContent = new char[fileSize + 1];
 
-	FileContents *fileContents = new FileContents();
-	fileContents->fileSize = fileSize;
-	if (ensureNullTerminated)
-	{
-		newContent[fileSize] = '\0';
-	}
-	fileContents->buffer = newContent;
+    fileStream->read(newContent, fileSize);
+
+    FileContents *fileContents = new FileContents();
+    fileContents->fileSize = fileSize;
+    if (ensureNullTerminated)
+    {
+        newContent[fileSize] = '\0';
+    }
+    fileContents->buffer = newContent;
 
     return fileContents;
 }
 
 void FileReader::Close()
 {
-	if (fileStream != NULL)
-		fileStream->close();
+    if (fileStream != NULL)
+        fileStream->close();
 }
 void FileReader::DumpFile(std::string outFileName)
 {
-	fileStream->seekg(0, 0);
+    fileStream->seekg(0, 0);
 
-	std::ofstream outStream = std::ofstream(outFileName.c_str(), std::ofstream::out | std::ofstream::binary);
+    std::ofstream outStream = std::ofstream(outFileName.c_str(), std::ofstream::out | std::ofstream::binary);
 
-	int fileSize = GetFileSize();
+    int fileSize = GetFileSize();
 
-	char* contents = new char[fileSize];
+    char* contents = new char[fileSize];
 
-	fileStream->read(contents, fileSize);
+    fileStream->read(contents, fileSize);
 
-	outStream.write(contents, fileSize);
+    outStream.write(contents, fileSize);
 
-	delete(contents);
+    delete(contents);
 
-	outStream.close();
+    outStream.close();
 
-	fileStream->seekg(0, 0);
+    fileStream->seekg(0, 0);
 }
 
 int FileReader::GetFileSize()
 {
-	int fileSize = 0;
+    int fileSize = 0;
 
-	if (fileStream->good())
-	{
-		int currentPos = fileStream->tellg();
+    if (fileStream->good())
+    {
+        int currentPos = fileStream->tellg();
 
-		fileStream->seekg(0, std::ios::end);
+        fileStream->seekg(0, std::ios::end);
 
-		fileSize = fileStream->tellg();
+        fileSize = fileStream->tellg();
 
-		fileStream->seekg(150);
+        fileStream->seekg(150);
 
 
-		fileStream->seekg(currentPos);
+        fileStream->seekg(currentPos);
 
-	}
+    }
 
-	return fileSize;
+    return fileSize;
 }
 
 FileContents::FileContents()

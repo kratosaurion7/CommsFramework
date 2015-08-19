@@ -1,5 +1,3 @@
-- Add helpers for managing the Windows API filesystem functions.
-    - Formatting a directory name for files enumeration with \\*
-    
-- State Machine with a stack of states.
-    
+Tasks to add to PM :
+
+Plugging SpriteDescriptor somewhere in the sprite class.

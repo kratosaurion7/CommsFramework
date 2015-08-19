@@ -9,8 +9,8 @@ FSize::FSize()
 
 FSize::FSize(float height, float width)
 {
-	Height = height;
-	Width = width;
+    Height = height;
+    Width = width;
 }
 
 
@@ -20,6 +20,6 @@ FSize::~FSize()
 
 void FSize::Set(float h, float w)
 {
-	Height = h;
-	Width = w;
+    Height = h;
+    Width = w;
 }

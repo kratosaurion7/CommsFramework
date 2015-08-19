@@ -10,32 +10,32 @@
 
 struct GameEngineInitParams
 {
-	GraphicEngineInitParams* GraphicsParams;
+    GraphicEngineInitParams* GraphicsParams;
 
-	ResourceManagerInitParams* ResourceParams;
+    ResourceManagerInitParams* ResourceParams;
 
-	static GameEngineInitParams* CreateDefaultParams();
+    static GameEngineInitParams* CreateDefaultParams();
 };
 
 class GameEngine
 {
 public:
-	GameEngine();
-	~GameEngine();
+    GameEngine();
+    ~GameEngine();
 
-	GraphicEngine* Graphics;
-	ResourceManager* Resources;
+    GraphicEngine* Graphics;
+    ResourceManager* Resources;
 
-	void Init(GameEngineInitParams* params);
+    void Init(GameEngineInitParams* params);
 
-	void Load();
+    void Load();
 
-	BaseSprite* GetSprite(std::string name);
+    BaseSprite* GetSprite(std::string name);
 private:
-	GameEngineInitParams* engineInitParams;
+    GameEngineInitParams* engineInitParams;
 
-	void CreateSpritesFromConfig();
+    void CreateSpritesFromConfig();
 
-	PointerList<BaseTexture*>* CreateTexturesFromResources(PointerList<Resource*>* resources);
+    PointerList<BaseTexture*>* CreateTexturesFromResources(PointerList<Resource*>* resources);
 };
 

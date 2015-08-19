@@ -17,45 +17,45 @@
 class GraphicEngine : public BaseGraphicEngine
 {
 public:
-	GraphicEngine();
-	~GraphicEngine();
+    GraphicEngine();
+    ~GraphicEngine();
 
-	PointerList<DrawObject*>* Sprites;
-	sf::RenderWindow* MainWindow;
+    PointerList<DrawObject*>* Sprites;
+    sf::RenderWindow* MainWindow;
 
-	void Initialize(GraphicEngineInitParams* params);
+    void Initialize(GraphicEngineInitParams* params);
 
-	void AddObject(BaseSprite* obj);
+    void AddObject(BaseSprite* obj);
 
-	void AddObject(BaseText* obj);
+    void AddObject(BaseText* obj);
 
-	void RemoveObject(DrawObject* obj);
+    void RemoveObject(DrawObject* obj);
 
-	DrawObject* GetObject(std::string identifier);
+    DrawObject* GetObject(std::string identifier);
 
-	BaseSprite* CreateSprite(std::string identifier = "");
-	BaseTexture* CreateTexture();
-	BaseFont* CreateFont();
-	BaseText* CreateText();
+    BaseSprite* CreateSprite(std::string identifier = "");
+    BaseTexture* CreateTexture();
+    BaseFont* CreateFont();
+    BaseText* CreateText();
 
-	void Start();
+    void Start();
 
-	void Draw();
+    void Draw();
 
-	void ProcessEvents();
+    void ProcessEvents();
 
-	void Stop();
+    void Stop();
 
-	bool IsRunning();
+    bool IsRunning();
 
 
 private:
-	bool isRunning;
+    bool isRunning;
 
-	GraphicEngineInitParams* startParams;
+    GraphicEngineInitParams* startParams;
 
-	void ProcessWindowsEvents(sf::RenderWindow* targetWindow);
+    void ProcessWindowsEvents(sf::RenderWindow* targetWindow);
 
-	void ProcessDraw(sf::RenderWindow* targetWindow);
+    void ProcessDraw(sf::RenderWindow* targetWindow);
 };
 

@@ -5,10 +5,10 @@
 class GameObject
 {
 public:
-	GameObject();
-	~GameObject();
+    GameObject();
+    ~GameObject();
 
-	std::string Ident;
+    std::string Ident;
 
 };
 

@@ -16,8 +16,8 @@ enum ResourceType
 class ResourceManager;
 
 /**
-	This class stores the data and metadata related to a game asset. The file data is loaded on demand
-	and is kept as long as needed.
+    This class stores the data and metadata related to a game asset. The file data is loaded on demand
+    and is kept as long as needed.
 
 */
 class Resource
@@ -32,13 +32,13 @@ public:
 
     std::string Format;
 
-	char* GetData(int& dataSize, GameModule* targetModule = NULL);
+    char* GetData(int& dataSize, GameModule* targetModule = NULL);
 
 private:
-	int _dataSize;
-	char* _dataCache;
+    int _dataSize;
+    char* _dataCache;
 
-	ResourceManager* _resourceManager;
+    ResourceManager* _resourceManager;
 
     bool IsDataLoaded();
 

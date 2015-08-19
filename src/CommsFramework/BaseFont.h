@@ -5,5 +5,5 @@
 class BaseFont
 {
 public:
-	virtual void Load(std::string path) = 0;
+    virtual void Load(std::string path) = 0;
 };

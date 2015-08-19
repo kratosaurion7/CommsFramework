@@ -8,30 +8,30 @@
 class Resource;
 
 enum ContainerTypes {
-	CONTAINER_TYPE_PACKAGE,
-	CONTAINER_TYPE_FOLDER
+    CONTAINER_TYPE_PACKAGE,
+    CONTAINER_TYPE_FOLDER
 };
 
 class ResourceContainer
 {
 public:
-	ResourceContainer();
-	~ResourceContainer();
+    ResourceContainer();
+    ~ResourceContainer();
 
-	std::string Name;
+    std::string Name;
 
-	ContainerTypes ContainerType;
+    ContainerTypes ContainerType;
 
-	bool Contains(Resource* resource);
+    bool Contains(Resource* resource);
 
-	const char* LoadData(Resource* resource, int& size);
+    const char* LoadData(Resource* resource, int& size);
 
 private:
-	//PackageFile* pack;
+    //PackageFile* pack;
 
-	bool Package_Contains(Resource* res);
+    bool Package_Contains(Resource* res);
 
-	bool Folder_Contains(Resource* res);
+    bool Folder_Contains(Resource* res);
 
 };
 

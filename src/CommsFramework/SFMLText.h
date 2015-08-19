@@ -15,39 +15,39 @@
 class SFMLText : public BaseText, public SFMLDrawable
 {
 public:
-	SFMLText();
-	~SFMLText();
+    SFMLText();
+    ~SFMLText();
 
-	// BaseText
-	std::string GetText();
-	void SetText(std::string text);
+    // BaseText
+    std::string GetText();
+    void SetText(std::string text);
 
-	BaseFont* GetFont();
-	void SetFont(BaseFont* font);
+    BaseFont* GetFont();
+    void SetFont(BaseFont* font);
 
-	int GetCharacterSize();
-	void SetCharacterSize(int size);
+    int GetCharacterSize();
+    void SetCharacterSize(int size);
 
-	TextStyle GetStyle();
-	void SetStyle(TextStyle style = TEXT_STYLE_REGULAR);
+    TextStyle GetStyle();
+    void SetStyle(TextStyle style = TEXT_STYLE_REGULAR);
 
-	uint32_t GetColor();
-	void SetColor(uint32_t color);
+    uint32_t GetColor();
+    void SetColor(uint32_t color);
 
-	sf::Text* innerImpl;
+    sf::Text* innerImpl;
 
-	sf::Drawable* GetDrawableImplementation();
+    sf::Drawable* GetDrawableImplementation();
 
 private:
-	BaseFont* textFont;
+    BaseFont* textFont;
 
-	int characterSize;
+    int characterSize;
 
-	sf::Color* textColorImpl;
-	uint32_t textColor;
+    sf::Color* textColorImpl;
+    uint32_t textColor;
 
-	TextStyle currentStyle;
+    TextStyle currentStyle;
 
-	void UpdateInnerImpl();
+    void UpdateInnerImpl();
 };
 

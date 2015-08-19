@@ -14,177 +14,177 @@
 
 GraphicEngine::GraphicEngine()
 {
-	MainWindow = NULL;
-	isRunning = false;
-	Sprites = new PointerList<DrawObject*>();
-	Keyboard = new SFMLKeyboard();
-	startParams = NULL;
+    MainWindow = NULL;
+    isRunning = false;
+    Sprites = new PointerList<DrawObject*>();
+    Keyboard = new SFMLKeyboard();
+    startParams = NULL;
 }
 
 GraphicEngine::~GraphicEngine()
 {
-	if (MainWindow != NULL)
-	{
-		MainWindow->close();
-		delete(MainWindow);
-	}
-		
-	
-	if (Sprites != NULL)
-	{
-		Sprites->Release();
-		delete(Sprites);
-	}
-	
-	delete(startParams);
-		
+    if (MainWindow != NULL)
+    {
+        MainWindow->close();
+        delete(MainWindow);
+    }
+
+
+    if (Sprites != NULL)
+    {
+        Sprites->Release();
+        delete(Sprites);
+    }
+
+    delete(startParams);
+
 }
 
 void GraphicEngine::Initialize(GraphicEngineInitParams* params)
 {
-	startParams = params;
+    startParams = params;
 
-	sf::VideoMode vid = sf::VideoMode(params->WindowSize->Height, params->WindowSize->Width);
+    sf::VideoMode vid = sf::VideoMode(params->WindowSize->Height, params->WindowSize->Width);
 
-	const char* title = params->WindowTitle.c_str();
-	MainWindow = new sf::RenderWindow(vid, title);
+    const char* title = params->WindowTitle.c_str();
+    MainWindow = new sf::RenderWindow(vid, title);
 
-	MainWindow->setVerticalSyncEnabled(params->EnableVerticalSync);
+    MainWindow->setVerticalSyncEnabled(params->EnableVerticalSync);
 }
 
 BaseSprite* GraphicEngine::CreateSprite(std::string identifier)
 {
-	DSprite* spr = new DSprite();
-	
-	spr->Ident = identifier;
+    DSprite* spr = new DSprite();
 
-	return spr;
+    spr->Ident = identifier;
+
+    return spr;
 }
 
 BaseTexture * GraphicEngine::CreateTexture()
 {
-	DTexture* tex = new DTexture();
+    DTexture* tex = new DTexture();
 
-	return tex;
+    return tex;
 }
 
 BaseFont * GraphicEngine::CreateFont()
 {
-	SFMLFont* font = new SFMLFont();
+    SFMLFont* font = new SFMLFont();
 
-	return font;
+    return font;
 }
 
 BaseText * GraphicEngine::CreateText()
 {
-	SFMLText* text = new SFMLText();
+    SFMLText* text = new SFMLText();
 
-	return text;
+    return text;
 }
 
 void GraphicEngine::AddObject(BaseSprite* obj)
 {
-	DSprite* dspr = dynamic_cast<DSprite*>(obj);
+    DSprite* dspr = dynamic_cast<DSprite*>(obj);
 
-	if(dspr != NULL)
-		Sprites->Add(dspr);
+    if (dspr != NULL)
+        Sprites->Add(dspr);
 }
 
 void GraphicEngine::AddObject(BaseText* obj)
 {
-	SFMLText* txt = dynamic_cast<SFMLText*>(obj);
+    SFMLText* txt = dynamic_cast<SFMLText*>(obj);
 
-	if (txt != NULL)
-		Sprites->Add(txt);
+    if (txt != NULL)
+        Sprites->Add(txt);
 }
 
 void GraphicEngine::RemoveObject(DrawObject* obj)
 {
-	DSprite* dspr = dynamic_cast<DSprite*>(obj);
+    DSprite* dspr = dynamic_cast<DSprite*>(obj);
 
-	if (dspr != NULL)
-		Sprites->RemoveObject(dspr);
+    if (dspr != NULL)
+        Sprites->RemoveObject(dspr);
 }
 
 DrawObject * GraphicEngine::GetObject(std::string identifier)
 {
-	std::list<DrawObject*>::iterator iter = Sprites->GetContainer()->begin();
+    std::list<DrawObject*>::iterator iter = Sprites->GetContainer()->begin();
 
-	while (iter != Sprites->GetContainer()->end())
-	{
-		DrawObject* targetSprite = (*iter);
+    while (iter != Sprites->GetContainer()->end())
+    {
+        DrawObject* targetSprite = (*iter);
 
-		if (strcmp(targetSprite->Ident.c_str(), identifier.c_str()) == 0)
-		{
-			return targetSprite;
-		}
-		
-		iter++;
-	}
+        if (strcmp(targetSprite->Ident.c_str(), identifier.c_str()) == 0)
+        {
+            return targetSprite;
+        }
 
-	return NULL;
+        iter++;
+    }
+
+    return NULL;
 }
 
 void GraphicEngine::Start()
 {
-	isRunning = true;
+    isRunning = true;
 }
 
 void GraphicEngine::Draw()
 {
-	ProcessDraw(MainWindow);
+    ProcessDraw(MainWindow);
 }
 
 void GraphicEngine::ProcessEvents()
 {
-	ProcessWindowsEvents(MainWindow);
+    ProcessWindowsEvents(MainWindow);
 }
 
 void GraphicEngine::Stop()
 {
-	isRunning = false;
+    isRunning = false;
 }
 
 bool GraphicEngine::IsRunning()
 {
-	return isRunning;
+    return isRunning;
 }
 
 void GraphicEngine::ProcessWindowsEvents(sf::RenderWindow* targetWindow)
 {
-	sf::Event event;
-	while (targetWindow->pollEvent(event))
-	{
-		if (event.type == sf::Event::Closed)
-			targetWindow->close();
-	}
+    sf::Event event;
+    while (targetWindow->pollEvent(event))
+    {
+        if (event.type == sf::Event::Closed)
+            targetWindow->close();
+    }
 }
 
 void GraphicEngine::ProcessDraw(sf::RenderWindow* targetWindow)
 {
-	targetWindow->clear();
-	
-	auto iter = Sprites->GetContainer()->begin();
-	while (iter != Sprites->GetContainer()->end())
-	{
-		DrawObject* targetSprite = (*iter);
+    targetWindow->clear();
 
-		if (targetSprite->IsVisible())
-		{
-			sf::Drawable* targetDrawable;
-				
-			SFMLDrawable* drawbleObject = dynamic_cast<SFMLDrawable*>(targetSprite);
+    auto iter = Sprites->GetContainer()->begin();
+    while (iter != Sprites->GetContainer()->end())
+    {
+        DrawObject* targetSprite = (*iter);
 
-			if (drawbleObject != NULL)
-			{
-				targetDrawable = drawbleObject->GetDrawableImplementation();
-			}
+        if (targetSprite->IsVisible())
+        {
+            sf::Drawable* targetDrawable;
 
-			targetWindow->draw(*targetDrawable);
-		}
+            SFMLDrawable* drawbleObject = dynamic_cast<SFMLDrawable*>(targetSprite);
 
-		iter++;
-	}
+            if (drawbleObject != NULL)
+            {
+                targetDrawable = drawbleObject->GetDrawableImplementation();
+            }
 
-	targetWindow->display();
+            targetWindow->draw(*targetDrawable);
+        }
+
+        iter++;
+    }
+
+    targetWindow->display();
 }

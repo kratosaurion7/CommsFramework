@@ -18,7 +18,7 @@ public:
 
     virtual PointerList<BaseTexture*>* GetTextures() = 0;
 
-	virtual void NextFrame() = 0;
+    virtual void NextFrame() = 0;
 
     virtual void SetFrame(int index) = 0;
 

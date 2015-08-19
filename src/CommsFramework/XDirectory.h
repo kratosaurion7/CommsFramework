@@ -40,33 +40,33 @@ static const wchar_t* parentDotDirName = _T("..");
 class XDirectory
 {
 public:
-	XDirectory(std::string path);
+    XDirectory(std::string path);
     ~XDirectory();
 
-	std::string Name;
-	std::string FullPath; // The FullPath must NEVER have a trailing slash.
+    std::string Name;
+    std::string FullPath; // The FullPath must NEVER have a trailing slash.
 
     static XDirectory* OpenDirectory(std::string path);
     PointerList<XFile*>* GetFiles(bool recursive = false);
     PointerList<XDirectory*>* GetDirectories(bool recursive = false);
 
 #ifdef _WINDOWS
-	XDirectory(std::wstring path);
+    XDirectory(std::wstring path);
 
-	static XDirectory* OpenDirectory(std::wstring path);
+    static XDirectory* OpenDirectory(std::wstring path);
 #endif
 
 
 protected:
 
-	bool Check();
+    bool Check();
 
-	
+
 
 #ifdef _WINDOWS
-	HANDLE winDirHandle;
+    HANDLE winDirHandle;
 
-	std::wstring DirectoryPath; // Path to the directory, including the \\* characters at the end
+    std::wstring DirectoryPath; // Path to the directory, including the \\* characters at the end
 #endif
 
 private:
