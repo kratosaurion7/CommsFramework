@@ -4,7 +4,10 @@
 
 #include <functional>
 
-template <class T> class BaseList
+#include <algorithm>
+
+template <class T> 
+class BaseList
 {
 public:
     BaseList()
@@ -72,6 +75,14 @@ public:
 
         return retList;
     };
+
+    //template<class T, class QWER>
+    //BaseList<T>* BaseList::Select(QWER arg)
+    //{
+    //    BaseList<QWER>* list = new BaseList<QWER>();
+
+    //    return NULL;
+    //};
 
     int BaseList::IndexOf(T item)
     {

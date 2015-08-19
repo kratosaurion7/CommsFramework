@@ -4,7 +4,8 @@
 
 #include "Macros.h"
 
-template <class T> class PointerList : public BaseList<T>
+template <class T> 
+class PointerList : public BaseList<T>
 {
 public:
     PointerList()
