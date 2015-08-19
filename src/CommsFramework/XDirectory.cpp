@@ -105,7 +105,7 @@ void XDirectory::FindFilesInDirectory(std::wstring directoryPath, PointerList<XF
 			// Fix line to not append directly to the same string buffer.
 			//std::wstring subDirectoryPath = directoryPath.append(_T("\\")).append(ffd.cFileName);
 
-            wchar_t* subDirectoryPath = new wchar_t[directoryPath.length() + lstrlenW(ffd.cFileName) + 5];
+            wchar_t* subDirectoryPath = new wchar_t[directoryPath.length() + lstrlenW(ffd.cFileName)];
 
             wsprintfW(subDirectoryPath, _T("%s\\%s"), directoryPath.c_str(), ffd.cFileName);
 
