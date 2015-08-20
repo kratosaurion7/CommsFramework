@@ -5,4 +5,4 @@
 
 #include <string>
 
-void DumpData(const char* data, int size);
+void DumpData(const char* data, int size, std::string outputName = "output.png");
