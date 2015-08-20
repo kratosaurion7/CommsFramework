@@ -8,6 +8,8 @@
 
 #include "Utilities.h"
 
+#include <cassert>
+
 DTexture::DTexture()
 {
     size = new FSize();
@@ -47,6 +49,8 @@ void DTexture::Load(std::string path)
 void DTexture::LoadFromMemory(char * data, int dataSize)
 {
     bool res = innerImpl->loadFromMemory(data, dataSize);
+
+    assert(res != NULL);
 
     if (res)
     {

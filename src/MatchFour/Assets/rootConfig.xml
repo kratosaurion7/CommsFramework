@@ -1,8 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <config>
-
   <container name="package" format="package" />
-
   <resource name="win_00000" type="image" format="png" />
   <resource name="win_00001" type="image" format="png" />
   <resource name="win_00002" type="image" format="png" />

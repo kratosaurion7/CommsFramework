@@ -16,68 +16,45 @@ ResourceManager* GameResources;
 
 int main()
 {
-	XFile* wasd = new XFile("C:\\Temp\\test.txt");
-	
-	XDirectory* x = wasd->ParentDirectory();
+    while (true)
+    {
+        GameEngine* eng = new GameEngine();
 
-    auto files = x->GetFiles(true);
+        GameEngineInitParams* params = GameEngineInitParams::CreateDefaultParams();
+        params->ResourceParams->ConfigFileLocation = "rootConfig.xml";
 
-	//while (true)
-	//{
-		PackageFile* pack = new PackageFile();
-		//pack->AddFile("assets\\raven_idle_0.png");
-		//pack->AddFile("assets\\raven_idle_1.png");
-		//pack->AddFile("assets\\raven_idle_2.png");
-		//pack->AddFile("assets\\raven_idle_3.png");
-		//pack->AddFile("assets\\raven_idle_4.png");
-		
-		for (int i = 0; i < 40; i++)
-		{
-			pack->AddFile("assets\\win_" + std::to_string(i) + ".png");
-		}
+        eng->Init(params);
 
-		pack->Save("package.pack");
+        eng->Load();
 
+        GameGraphics = eng->Graphics;
+        GameResources = eng->Resources;
 
-		GameEngine* eng = new GameEngine();
+        BaseSprite* sprt = eng->GetSprite("Coin");
 
-		GameEngineInitParams* params = GameEngineInitParams::CreateDefaultParams();
-		params->ResourceParams->ConfigFileLocation = "match_four_config.xml";
+        eng->Graphics->AddObject(sprt);
 
-		eng->Init(params);
+        eng->Graphics->Start();
 
-		eng->Load();
+        int counter = 0;
 
-		GameGraphics = eng->Graphics;
-		GameResources = eng->Resources;
+        while (eng->Graphics->IsRunning())
+        {
+            eng->Graphics->ProcessEvents();
 
-		BaseSprite* sprt = eng->GetSprite("Coin");
+            sprt->NextFrame();
 
-		eng->Graphics->AddObject(sprt);
+            eng->Graphics->Draw();
 
-		eng->Graphics->Start();
+            if (counter > 60)
+            {
+                break;
+            }
+            else {
+                counter++;
+            }
+        }
 
-		int counter = 0;
-
-		while (eng->Graphics->IsRunning())
-		{
-			eng->Graphics->ProcessEvents();
-
-			sprt->NextFrame();
-
-			eng->Graphics->Draw();
-
-			//if (counter > 60)
-			//{
-			//	break;
-			//}
-			//else {
-			//	counter++;
-			//}
-		}
-
-		delete(pack);
-		delete(eng);
-	//}
-
+        delete(eng);
+    }
 }

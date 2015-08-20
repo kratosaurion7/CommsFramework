@@ -31,7 +31,9 @@ const char * ResourceContainer::LoadData(Resource * resource, int& dataSize)
 {
     PackageFile pack(Name);
 
-    std::string fileName = "assets\\" + resource->Name + "." + resource->Format;
+    // TODO : SUPPORT RELATIVE PATH NAMES ?
+    //std::string fileName = "assets\\" + resource->Name + "." + resource->Format;
+    std::string fileName = resource->Name + "." + resource->Format;
     const char* x = pack.GetFile(fileName, dataSize);
 
     return x;
@@ -42,7 +44,9 @@ bool ResourceContainer::Package_Contains(Resource * res)
     PackageFile pack(Name);
 
     int fileSize = 0;
-    std::string fileName = "assets\\" + res->Name + "." + res->Format;
+    // TODO : SUPPORT RELATIVE FILE NAMES
+    //std::string fileName = "assets\\" + res->Name + "." + res->Format;
+    std::string fileName = res->Name + "." + res->Format;
     const char* x = pack.GetFile(fileName, fileSize);
 
     bool result = x != NULL;
