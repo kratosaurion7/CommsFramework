@@ -47,7 +47,7 @@ PackageFile::~PackageFile()
 
 const char * PackageFile::GetFile(std::string filename, int& fileSize)
 {
-    std::ifstream packageStream = std::ifstream("assets\\package.pak", std::ios::in | std::ios::binary);
+    std::ifstream packageStream = std::ifstream(TargetPackage, std::ios::in | std::ios::binary);
 
     char buf[256];
     char* fileContents = NULL;
