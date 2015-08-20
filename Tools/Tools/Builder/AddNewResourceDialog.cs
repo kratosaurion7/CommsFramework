@@ -49,8 +49,9 @@ namespace Tools.Builder
 
                 NewResources.AddRange(files.Select(p => new Resource() {
                     ResourceFile = p,
-                    ResourceFileExtension = p.Extension,
-                    ResourceName = p.Name.Replace(p.Extension, "")
+                    ResourceFileExtension = p.Extension.Substring(1),
+                    ResourceName = p.Name.Replace(p.Extension, ""),
+                    ResourceType = p.Extension == ".png" ? "image" : "other" // Set the image type if the file is a png, set it to other for now.
                 }));
 
                 this.DialogResult = DialogResult.OK;
