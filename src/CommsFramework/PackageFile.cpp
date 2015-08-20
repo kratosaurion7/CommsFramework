@@ -69,7 +69,7 @@ const char * PackageFile::GetFile(std::string filename, int& fileSize)
     int filesIndex = 0;
     while (hasNextFile && !fileFound)
     {
-        packageStream.get(buf, DIRECTORY_ENTRY_SIZE + 1);
+        packageStream.read(buf, DIRECTORY_ENTRY_SIZE);
         if (strncmp(filename.c_str(), buf, FILENAME_MAX_LENGTH) == 0)
         {
             int targetFilePos = BytesToInt(&buf[FILENAME_MAX_LENGTH]);
