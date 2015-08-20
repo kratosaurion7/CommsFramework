@@ -1,9 +1,0 @@
-<config ModuleName="dungeon1">
-    <!-- Resource reference -->
-    <resource name="poop" type="image" format="png" />
-    <resource name="mouse" type="image" format="png" />
-    <resource name="screen" type="image" format="png" />
-    <resource name="sword" type="image" format="png" />
-    <resource name="brick" type="image" format="png" /> <!-- overwriting the common aset Brick -->
-    <resource name="keyboard" type="image" format="png" />
-</config>
