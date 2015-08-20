@@ -229,8 +229,20 @@ void PackageFile::ReadPackage()
         return;
 
     packageStream.get(buf, sizeof(int));
-
     int dirOffset = BytesToInt(buf);
+
+    packageStream.get(buf, sizeof(int));
+    int directorySize = BytesToInt(buf);
+
+    Header *packHeader = new Header();
+    strcpy(packHeader->sig, "PACK");
+    packHeader->dirOffset = dirOffset;
+    packHeader->dirLength = directorySize;
+
+    if (packageHeader)
+        delete(packageHeader);
+
+    packageHeader = packHeader;
 
     bool hasNextFile = true;
     packageStream.seekg(dirOffset);

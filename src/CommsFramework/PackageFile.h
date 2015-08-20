@@ -15,15 +15,16 @@
     =Format=
     Header
     (4 bytes) signature = 'PACK'
-    (4 bytes, int) directory offeset
+    (4 bytes, int) offset to start of directory (offset is absolute)
     (4 bytes, int) directory lenght
 
-    Directory
+    Directory entries
     (32 bytes, char) file name
-    (4 bytes, int) file position
+    (4 bytes, int) file position (position is absolute)
     (4 bytes, int) file lenght
 
-    File at each position (? bytes, char) file data
+    Data Store
+    (N bytes, char) File data
 */
 
 #define HEADER_SIZE 12
@@ -42,6 +43,12 @@ struct DirectoryEntry {
     char* fileContents;
 };
 
+/**
+* The PackageFile class is used to bundle files together in a single file on disk.
+* 
+* 
+*
+*/
 class PackageFile
 {
 public:
@@ -75,7 +82,9 @@ private:
     std::string OutputFileName;
 
     /**
-    Reads the package file and fills the entries member with the files inside the package. */
+    * Read the package's directory and puts the list of Entries in the entries list.
+    *
+    * The data is not read at this point, only the file names and offsets. */
     void ReadPackage();
 };
 
