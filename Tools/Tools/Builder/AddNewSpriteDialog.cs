@@ -37,7 +37,7 @@ namespace Tools.Builder
                 {
                     ResourceFile = p,
                     ResourceFileExtension = p.Extension,
-                    ResourceName = p.Name
+                    ResourceName = p.Name.Replace(p.Extension, "")
                 }).ToList());
 
 

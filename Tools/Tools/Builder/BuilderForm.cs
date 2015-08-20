@@ -269,7 +269,6 @@ namespace Tools.Builder
                     XElement frameNode = new XElement("frame");
                     frameNode.SetAttributeValue("Id", frame.ResourceName);
 
-
                     spriteElement.Add(frameNode);
 
                     // Make sure to add a resource entry to the main config node for each frame added.

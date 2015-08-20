@@ -50,7 +50,7 @@ namespace Tools.Builder
                 NewResources.AddRange(files.Select(p => new Resource() {
                     ResourceFile = p,
                     ResourceFileExtension = p.Extension,
-                    ResourceName = p.Name
+                    ResourceName = p.Name.Replace(p.Extension, "")
                 }));
 
                 this.DialogResult = DialogResult.OK;
