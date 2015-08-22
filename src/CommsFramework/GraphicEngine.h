@@ -38,6 +38,12 @@ public:
     BaseFont* CreateFont();
     BaseText* CreateText();
 
+    int GetFramerate();
+
+    void SetFramerate(int framerate);
+
+    void SetAutoManagedFramerate(bool isSet = true);
+
     void Start();
 
     void Draw();
@@ -51,6 +57,8 @@ public:
 
 private:
     bool isRunning;
+
+    int _sfmlFramerate;
 
     GraphicEngineInitParams* startParams;
 

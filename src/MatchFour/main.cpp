@@ -25,6 +25,8 @@ int main()
 
         eng->Init(params);
 
+        eng->Graphics->SetFramerate(15);
+
         eng->Load();
 
         GameGraphics = eng->Graphics;

@@ -82,6 +82,28 @@ BaseText * GraphicEngine::CreateText()
     return text;
 }
 
+int GraphicEngine::GetFramerate()
+{
+    return _sfmlFramerate;
+}
+
+void GraphicEngine::SetFramerate(int framerate)
+{
+    _sfmlFramerate = framerate;
+
+    MainWindow->setVerticalSyncEnabled(false);
+    MainWindow->setFramerateLimit(_sfmlFramerate);
+
+}
+
+void GraphicEngine::SetAutoManagedFramerate(bool isSet)
+{
+    if(isSet)
+        MainWindow->setFramerateLimit(0);
+
+    MainWindow->setVerticalSyncEnabled(isSet);
+}
+
 void GraphicEngine::AddObject(BaseSprite* obj)
 {
     DSprite* dspr = dynamic_cast<DSprite*>(obj);
