@@ -26,12 +26,12 @@ public:
     virtual void Draw();
 
     virtual void Play(bool loop = false);
-
     virtual void Stop();
+    virtual void Reset();
 
     virtual void NextFrame();
-
     virtual void SetFrame(int index);
+    virtual bool IsLastFrame();
 
     virtual void SetTexture(BaseTexture* texture);
     virtual void SetTextures(PointerList<BaseTexture*>* textures);
@@ -49,7 +49,6 @@ private:
     bool IsPlaying;
     bool LoopAnimation;
     
-    bool IsLastFrame();
 
 
     DTexture* spriteTexture; // Texture currently on sprite.

@@ -68,18 +68,15 @@ void DSprite::Draw()
 {
     if (this->IsVisible())
     {
-        if (this->IsPlaying)
+        if (this->IsFrameReady())
         {
-            if (this->IsFrameReady())
+            if (!LoopAnimation && IsLastFrame())
             {
-                if (!LoopAnimation && IsLastFrame())
-                {
-                    this->SetFrame(0);
-                }
-                else
-                {
-                    this->NextFrame();
-                }
+                this->SetFrame(0);
+            }
+            else
+            {
+                this->NextFrame();
             }
         }
     }
@@ -96,10 +93,13 @@ void DSprite::Stop()
     IsPlaying = false;
 }
 
+void DSprite::Reset()
+{
+    this->SetFrame(0);
+}
+
 void DSprite::NextFrame()
 {
-    //CurrentFrameIndex++;
-    
     CurrentFrameIndex = (CurrentFrameIndex + 1) % FramesCount;
     
     lastFrameTick = GetTicks();
@@ -109,6 +109,8 @@ void DSprite::NextFrame()
 
 void DSprite::SetFrame(int index)
 {
+    CurrentFrameIndex = index % FramesCount;
+
     spriteTexture = spriteTextures->Get(index % FramesCount); // Modulo for safety.
 }
 

@@ -14,6 +14,8 @@ ResourceManager* GameResources;
 
 #include <Windows.h>
 
+#include "Coin.h"
+
 int main()
 {
     while (true)
@@ -41,11 +43,16 @@ int main()
 
         int counter = 0;
 
-        sprt->Play(true);
+        //sprt->Play(true);
+
+        Coin* coinSprite = new Coin();
+        coinSprite->CoinSprite = sprt;
 
         while (eng->Graphics->IsRunning())
         {
             eng->Graphics->ProcessEvents();
+
+            coinSprite->Update();
 
             sprt->Draw();
 

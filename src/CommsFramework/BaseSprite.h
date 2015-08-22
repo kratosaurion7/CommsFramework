@@ -23,12 +23,12 @@ public:
     virtual void Draw() = 0;
 
     virtual void Play(bool loop = false) = 0;
-
     virtual void Stop() = 0;
+    virtual void Reset() = 0;
 
     virtual void NextFrame() = 0;
-
     virtual void SetFrame(int index) = 0;
+    virtual bool IsLastFrame() = 0;
 
     virtual void SetTexture(BaseTexture* texture) = 0;
     virtual void SetTextures(PointerList<BaseTexture*>* textures) = 0;
