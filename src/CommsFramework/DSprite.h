@@ -23,6 +23,12 @@ public:
 
     virtual PointerList<BaseTexture*>* GetTextures();
 
+    virtual void Draw();
+
+    virtual void Play();
+
+    virtual void Stop();
+
     virtual void NextFrame();
 
     virtual void SetFrame(int index);
@@ -39,6 +45,8 @@ private:
     bool IsFrameReady();
 
     int lastFrameTick;
+
+    bool IsPlaying;
 
     DTexture* spriteTexture; // Texture currently on sprite.
 

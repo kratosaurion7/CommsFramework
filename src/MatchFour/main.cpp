@@ -41,11 +41,13 @@ int main()
 
         int counter = 0;
 
+        sprt->Play();
+
         while (eng->Graphics->IsRunning())
         {
             eng->Graphics->ProcessEvents();
 
-            sprt->NextFrame();
+            sprt->Draw();
 
             eng->Graphics->Draw();
 

@@ -23,6 +23,8 @@ DSprite::DSprite()
     spriteTexture = NULL;
     spriteTextures = new PointerList<DTexture*>();
 
+    IsPlaying = false;
+
     SpriteFPS = 60; // TODO : Get monitor FPS
 }
 
@@ -62,16 +64,37 @@ PointerList<BaseTexture*>* DSprite::GetTextures()
     return returnTextures;
 }
 
+void DSprite::Draw()
+{
+    if (this->IsVisible())
+    {
+        if (this->IsPlaying)
+        {
+            if (this->IsFrameReady())
+            {
+                this->NextFrame();
+            }
+        }
+    }
+}
+
+void DSprite::Play()
+{
+    IsPlaying = true;
+}
+
+void DSprite::Stop()
+{
+    IsPlaying = false;
+}
+
 void DSprite::NextFrame()
 {
-    if (IsFrameReady())
-    {
-        CurrentFrameIndex = (CurrentFrameIndex + 1) % FramesCount;
+    CurrentFrameIndex = (CurrentFrameIndex + 1) % FramesCount;
 
-        lastFrameTick = GetTicks();
+    lastFrameTick = GetTicks();
 
-        ApplyCurrentTexture();
-    }
+    ApplyCurrentTexture();
 }
 
 void DSprite::SetFrame(int index)

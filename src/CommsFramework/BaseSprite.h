@@ -14,11 +14,17 @@ public:
 
     int FramesCount = 0;
 
-    int SpriteFPS;
+    int SpriteFPS = 0;
 
     virtual BaseTexture* GetCurrentTexture() = 0;
 
     virtual PointerList<BaseTexture*>* GetTextures() = 0;
+
+    virtual void Draw() = 0;
+
+    virtual void Play() = 0;
+
+    virtual void Stop() = 0;
 
     virtual void NextFrame() = 0;
 
