@@ -22,7 +22,7 @@ public:
 
     virtual void Draw() = 0;
 
-    virtual void Play() = 0;
+    virtual void Play(bool loop = false) = 0;
 
     virtual void Stop() = 0;
 

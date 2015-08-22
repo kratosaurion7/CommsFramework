@@ -72,15 +72,24 @@ void DSprite::Draw()
         {
             if (this->IsFrameReady())
             {
-                this->NextFrame();
+                if (!LoopAnimation && IsLastFrame())
+                {
+                    this->SetFrame(0);
+                }
+                else
+                {
+                    this->NextFrame();
+                }
+
             }
         }
     }
 }
 
-void DSprite::Play()
+void DSprite::Play(bool loop)
 {
     IsPlaying = true;
+    LoopAnimation = loop;
 }
 
 void DSprite::Stop()
@@ -90,8 +99,10 @@ void DSprite::Stop()
 
 void DSprite::NextFrame()
 {
+    //CurrentFrameIndex++;
+    
     CurrentFrameIndex = (CurrentFrameIndex + 1) % FramesCount;
-
+    
     lastFrameTick = GetTicks();
 
     ApplyCurrentTexture();
@@ -99,7 +110,7 @@ void DSprite::NextFrame()
 
 void DSprite::SetFrame(int index)
 {
-    spriteTexture = spriteTextures->Get(CurrentFrameIndex % FramesCount); // Modulo for safety.
+    spriteTexture = spriteTextures->Get(index % FramesCount); // Modulo for safety.
 }
 
 void DSprite::SetTextures(PointerList<BaseTexture*>* textures)
@@ -154,6 +165,11 @@ bool DSprite::IsFrameReady()
     }
 
     return false;
+}
+
+bool DSprite::IsLastFrame()
+{
+    return CurrentFrameIndex >= FramesCount - 1;
 }
 
 void DSprite::UpdateInnerImpl()

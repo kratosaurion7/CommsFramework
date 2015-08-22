@@ -41,7 +41,7 @@ int main()
 
         int counter = 0;
 
-        sprt->Play();
+        sprt->Play(true);
 
         while (eng->Graphics->IsRunning())
         {

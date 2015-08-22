@@ -25,7 +25,7 @@ public:
 
     virtual void Draw();
 
-    virtual void Play();
+    virtual void Play(bool loop = false);
 
     virtual void Stop();
 
@@ -47,6 +47,10 @@ private:
     int lastFrameTick;
 
     bool IsPlaying;
+    bool LoopAnimation;
+    
+    bool IsLastFrame();
+
 
     DTexture* spriteTexture; // Texture currently on sprite.
 
