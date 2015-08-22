@@ -93,7 +93,6 @@ void GraphicEngine::SetFramerate(int framerate)
 
     MainWindow->setVerticalSyncEnabled(false);
     MainWindow->setFramerateLimit(_sfmlFramerate);
-
 }
 
 void GraphicEngine::SetAutoManagedFramerate(bool isSet)

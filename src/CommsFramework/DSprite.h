@@ -36,6 +36,10 @@ public:
 
 private:
 
+    bool IsFrameReady();
+
+    int lastFrameTick;
+
     DTexture* spriteTexture; // Texture currently on sprite.
 
     PointerList<DTexture*>* spriteTextures;

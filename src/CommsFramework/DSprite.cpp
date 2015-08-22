@@ -11,6 +11,8 @@
 #include "FSize.h"
 #include "FRectangle.h"
 
+#include "Utilities.h"
+
 DSprite::DSprite()
 {
     innerImpl = new sf::Sprite();
@@ -20,6 +22,8 @@ DSprite::DSprite()
     size = new FSize();
     spriteTexture = NULL;
     spriteTextures = new PointerList<DTexture*>();
+
+    SpriteFPS = 60; // TODO : Get monitor FPS
 }
 
 DSprite::~DSprite()
@@ -60,9 +64,14 @@ PointerList<BaseTexture*>* DSprite::GetTextures()
 
 void DSprite::NextFrame()
 {
-    CurrentFrameIndex = (CurrentFrameIndex + 1) % FramesCount;
+    if (IsFrameReady())
+    {
+        CurrentFrameIndex = (CurrentFrameIndex + 1) % FramesCount;
 
-    ApplyCurrentTexture();
+        lastFrameTick = GetTicks();
+
+        ApplyCurrentTexture();
+    }
 }
 
 void DSprite::SetFrame(int index)
@@ -110,6 +119,18 @@ void DSprite::SetTexture(BaseTexture * texture)
 sf::Drawable * DSprite::GetDrawableImplementation()
 {
     return innerImpl;
+}
+
+bool DSprite::IsFrameReady()
+{
+    int currentTickTime = GetTicks();
+
+    if (currentTickTime - lastFrameTick > (1000 / SpriteFPS))
+    {
+        return true;
+    }
+
+    return false;
 }
 
 void DSprite::UpdateInnerImpl()

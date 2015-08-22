@@ -25,7 +25,7 @@ int main()
 
         eng->Init(params);
 
-        eng->Graphics->SetFramerate(15);
+        //eng->Graphics->SetFramerate(15);
 
         eng->Load();
 
@@ -33,6 +33,7 @@ int main()
         GameResources = eng->Resources;
 
         BaseSprite* sprt = eng->GetSprite("Coin");
+        sprt->SpriteFPS = 15;
 
         eng->Graphics->AddObject(sprt);
 
@@ -48,13 +49,13 @@ int main()
 
             eng->Graphics->Draw();
 
-            if (counter > 60)
-            {
-                break;
-            }
-            else {
-                counter++;
-            }
+            //if (counter > 60)
+            //{
+            //    break;
+            //}
+            //else {
+            //    counter++;
+            //}
         }
 
         delete(eng);

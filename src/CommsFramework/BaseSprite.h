@@ -14,6 +14,8 @@ public:
 
     int FramesCount = 0;
 
+    int SpriteFPS;
+
     virtual BaseTexture* GetCurrentTexture() = 0;
 
     virtual PointerList<BaseTexture*>* GetTextures() = 0;
