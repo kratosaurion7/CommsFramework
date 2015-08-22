@@ -80,7 +80,6 @@ void DSprite::Draw()
                 {
                     this->NextFrame();
                 }
-
             }
         }
     }

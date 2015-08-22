@@ -53,7 +53,7 @@ int main()
 
             //if (counter > 60)
             //{
-            //    break;
+            //    sprt->Stop();
             //}
             //else {
             //    counter++;
