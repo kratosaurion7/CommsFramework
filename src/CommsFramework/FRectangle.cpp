@@ -7,7 +7,7 @@
 FRectangle::FRectangle(float x, float y, float h, float w)
 {
     Left = x;
-    Top = h;
+    Top = y;
     Right = x + w;
     Bottom = y + h;
 };
@@ -50,14 +50,21 @@ FSize * FRectangle::Size()
     return siz;
 };
 
-bool FRectangle::IsPointInside(FPosition * pos)
+
+
+bool FRectangle::IsPointInside(Vector2<float> vec)
+{
+    return IsPointInside(vec.X, vec.Y);
+}
+
+bool FRectangle::IsPointInside(FPosition* pos)
 {
     return IsPointInside(pos->X, pos->Y);
 };
 
 bool FRectangle::IsPointInside(float x, float y)
 {
-    if (x < Right && x > Left && y < Bottom && y > Top)
+    if (x <= Right && x >= Left && y <= Bottom && y >= Top)
     {
         return true;
     }
@@ -65,7 +72,7 @@ bool FRectangle::IsPointInside(float x, float y)
     return false;
 };
 
-bool FRectangle::Intersect(FRectangle * rec)
+bool FRectangle::Intersect(FRectangle* rec)
 {
     // Checks if any corners of the target rectangle is inside my area
     if (IsPointInside(rec->Left, rec->Top) || IsPointInside(rec->Right, rec->Top) ||
@@ -77,7 +84,7 @@ bool FRectangle::Intersect(FRectangle * rec)
     return false;
 };
 
-Vector2<float>* FRectangle::DistanceFrom(FRectangle * rec, DistanceFromType comparaisonType)
+Vector2<float>* FRectangle::DistanceFrom(FRectangle* rec, DistanceFromType comparaisonType)
 {
     Vector2<float>* distance = new Vector2<float>();
 

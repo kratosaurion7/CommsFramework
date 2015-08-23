@@ -2,7 +2,7 @@
 
 #include "BaseKeyboard.h"
 
-
+#include "GraphicEngine.h"
 
 class SFMLKeyboard : public BaseKeyboard
 {
@@ -11,5 +11,7 @@ public:
     ~SFMLKeyboard();
 
     bool IsKeyPressed(Key key);
+
+    GraphicEngine* graphicsRef;
 };
 

@@ -21,8 +21,15 @@ GameEngine::GameEngine()
     Graphics = new GraphicEngine();
     Resources = new ResourceManager();
 
-    GameEngine::Keyboard = new SFMLKeyboard();
-    GameEngine::Mouse = new SFMLMouse();
+    SFMLKeyboard* sfKeyboard = new SFMLKeyboard();
+    sfKeyboard->graphicsRef = this->Graphics;
+
+    SFMLMouse* sfMouse = new SFMLMouse();
+    sfMouse->engineRef = this->Graphics;
+
+    GameEngine::Keyboard = sfKeyboard;
+    GameEngine::Mouse = sfMouse;
+    
 }
 
 GameEngine::~GameEngine()

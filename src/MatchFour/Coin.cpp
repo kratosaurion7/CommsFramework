@@ -1,6 +1,6 @@
 #include "Coin.h"
 
-
+#include <GameEngine.h>
 
 Coin::Coin()
 {
@@ -27,10 +27,7 @@ void Coin::Update()
         case COIN_IDLE:
         {
             // Check is coin is clicked
-
-            idleCounter++;
-
-            if (idleCounter >= 300)
+            if (this->CoinSprite->GetRectangle().IsPointInside(GameEngine::Mouse->GetMousePosition()) && GameEngine::Mouse->IsClicked(LEFT))
             {
                 CoinSprite->Show(true);
                 this->CurrentState = COIN_START_SPIN;

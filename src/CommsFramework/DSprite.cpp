@@ -68,15 +68,18 @@ void DSprite::Draw()
 {
     if (this->IsVisible())
     {
-        if (this->IsFrameReady())
+        if (this->IsPlaying)
         {
-            if (!LoopAnimation && IsLastFrame())
+            if (this->IsFrameReady())
             {
-                this->SetFrame(0);
-            }
-            else
-            {
-                this->NextFrame();
+                if (!LoopAnimation && IsLastFrame())
+                {
+                    this->SetFrame(0);
+                }
+                else
+                {
+                    this->NextFrame();
+                }
             }
         }
     }

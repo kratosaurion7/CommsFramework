@@ -26,7 +26,7 @@ public:
     virtual void SetPos(FPosition* value);
     virtual void SetCenterPos(FPosition* value);
 
-    virtual FRectangle* GetRectangle();
+    virtual FRectangle GetRectangle();
 
     virtual float GetHeight();
     virtual float GetWidth();

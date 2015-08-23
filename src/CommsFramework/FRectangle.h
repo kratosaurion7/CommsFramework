@@ -29,10 +29,12 @@ public:
     FSize* Size();
 
     // Geometry methods
-
+    bool IsPointInside(Vector2<float> vec);
     bool IsPointInside(FPosition* pos);
     bool IsPointInside(float x, float y);
+
     bool Intersect(FRectangle* rec);
 
     Vector2<float>* DistanceFrom(FRectangle* rec, DistanceFromType comparaisonType = OriginToOrigin);
 };
+
