@@ -50,21 +50,19 @@ int main()
 
         while (eng->Graphics->IsRunning())
         {
+            eng->Pre_Update(); // Update at start of loop
+
             eng->Graphics->ProcessEvents();
 
             coinSprite->Update();
 
             sprt->Draw();
 
+            eng->Update(); // Update just before draw
+
             eng->Graphics->Draw();
 
-            //if (counter > 60)
-            //{
-            //    sprt->Stop();
-            //}
-            //else {
-            //    counter++;
-            //}
+            eng->Post_Update(); // Update just before end of loop
         }
 
         delete(eng);

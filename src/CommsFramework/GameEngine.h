@@ -36,6 +36,12 @@ public:
 
     void Load();
 
+    void Pre_Update();
+
+    void Update();
+
+    void Post_Update();
+
     BaseSprite* GetSprite(std::string name);
 private:
     GameEngineInitParams* engineInitParams;

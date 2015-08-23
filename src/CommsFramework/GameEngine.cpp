@@ -77,6 +77,19 @@ void GameEngine::Load()
     CreateSpritesFromConfig();
 }
 
+void GameEngine::Pre_Update()
+{
+}
+
+void GameEngine::Update()
+{
+}
+
+void GameEngine::Post_Update()
+{
+    GameEngine::Mouse->UpdateMouseState();
+}
+
 void GameEngine::CreateSpritesFromConfig()
 {
 
