@@ -12,8 +12,6 @@
 class BaseGraphicEngine
 {
 public:
-    BaseKeyboard* Keyboard;
-
     virtual void Initialize(GraphicEngineInitParams* params) = 0;
 
     virtual void AddObject(BaseSprite* obj) = 0;

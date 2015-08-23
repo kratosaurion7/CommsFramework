@@ -17,7 +17,6 @@ GraphicEngine::GraphicEngine()
     MainWindow = NULL;
     isRunning = false;
     Sprites = new PointerList<DrawObject*>();
-    Keyboard = new SFMLKeyboard();
     startParams = NULL;
 }
 

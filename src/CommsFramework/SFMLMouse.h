@@ -2,8 +2,7 @@
 
 #include "BaseMouse.h"
 
-class SFMLMouse :
-    public BaseMouse
+class SFMLMouse : public BaseMouse
 {
 public:
     SFMLMouse();

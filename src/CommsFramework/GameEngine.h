@@ -6,6 +6,9 @@
 
 #include "BaseSprite.h"
 
+#include "BaseKeyboard.h"
+#include "BaseMouse.h"
+
 #include <string>
 
 struct GameEngineInitParams
@@ -25,6 +28,9 @@ public:
 
     GraphicEngine* Graphics;
     ResourceManager* Resources;
+
+    static BaseKeyboard* Keyboard;
+    static BaseMouse* Mouse;
 
     void Init(GameEngineInitParams* params);
 

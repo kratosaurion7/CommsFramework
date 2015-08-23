@@ -7,10 +7,22 @@
 
 #include "PointerList.h"
 
+#include "BaseKeyboard.h"
+#include "BaseMouse.h"
+
+#include "SFMLKeyboard.h"
+#include "SFMLMouse.h"
+
+BaseKeyboard* GameEngine::Keyboard = 0;
+BaseMouse* GameEngine::Mouse = 0;
+
 GameEngine::GameEngine()
 {
     Graphics = new GraphicEngine();
     Resources = new ResourceManager();
+
+    GameEngine::Keyboard = new SFMLKeyboard();
+    GameEngine::Mouse = new SFMLMouse();
 }
 
 GameEngine::~GameEngine()
