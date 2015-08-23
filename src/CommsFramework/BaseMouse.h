@@ -16,6 +16,9 @@ public:
 
     virtual bool IsClicked(MouseButtons button) = 0;
 
+    bool LeftButtonClicked();
+    bool RightButtonClicked();
+
     virtual Vector2<float> GetMousePosition() = 0;
 
 };

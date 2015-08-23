@@ -2,12 +2,9 @@
 
 #include <SFML/Graphics.hpp>
 
-
-
 SFMLMouse::SFMLMouse()
 {
 }
-
 
 SFMLMouse::~SFMLMouse()
 {

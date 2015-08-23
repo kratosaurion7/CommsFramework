@@ -151,7 +151,10 @@
       <Filter>Framework\Filesystem\Windows</Filter>
     </ClCompile>
     <ClCompile Include="SFMLMouse.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Framework\Graphic\SFML</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseMouse.cpp">
+      <Filter>Framework\Graphic\Base Classes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -282,7 +285,7 @@
       <Filter>Framework\Graphic\Base Classes</Filter>
     </ClInclude>
     <ClInclude Include="SFMLMouse.h">
-      <Filter>Header Files</Filter>
+      <Filter>Framework\Graphic\SFML</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
