@@ -150,6 +150,9 @@
     <ClCompile Include="WindowsHelpers.cpp">
       <Filter>Framework\Filesystem\Windows</Filter>
     </ClCompile>
+    <ClCompile Include="SFMLMouse.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="XmlReader.h">
@@ -274,6 +277,12 @@
     </ClInclude>
     <ClInclude Include="WindowsHelpers.h">
       <Filter>Framework\Filesystem\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseMouse.h">
+      <Filter>Framework\Graphic\Base Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="SFMLMouse.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
