@@ -19,7 +19,7 @@ DSprite::DSprite()
     spriteTexture = NULL;
     isVisible = true;
     spriteTexture = NULL;
-    spriteTextures = new PointerList<DTexture*>();
+    spriteTexturesList = new PointerList<DTexture*>();
 
     IsPlaying = false;
 
@@ -31,10 +31,10 @@ DSprite::~DSprite()
     // Don't delete the sprite texture when deleting a sprite, the texture might be shared around.
     delete(innerImpl);
 
-    if (spriteTextures != NULL)
+    if (spriteTexturesList != NULL)
     {
-        spriteTextures->Release();
-        delete(spriteTextures);
+        spriteTexturesList->Release();
+        delete(spriteTexturesList);
     }
 
 
@@ -50,8 +50,8 @@ PointerList<BaseTexture*>* DSprite::GetTextures()
 {
     PointerList<BaseTexture*>* returnTextures = new PointerList<BaseTexture*>();
 
-    auto it = spriteTextures->GetContainer()->begin();
-    while (it != spriteTextures->GetContainer()->end())
+    auto it = spriteTexturesList->GetContainer()->begin();
+    while (it != spriteTexturesList->GetContainer()->end())
     {
         DTexture* texture = (*it);
         returnTextures->Add(texture);
@@ -71,6 +71,8 @@ void DSprite::Draw()
                 if (!LoopAnimation && IsLastFrame())
                 {
                     this->SetFrame(0);
+
+                    IsPlaying = false;
                 }
                 else
                 {
@@ -110,27 +112,27 @@ void DSprite::SetFrame(int index)
 {
     CurrentFrameIndex = index % FramesCount;
 
-    spriteTexture = spriteTextures->Get(index % FramesCount); // Modulo for safety.
+    spriteTexture = spriteTexturesList->Get(index % FramesCount); // Modulo for safety.
 }
 
 void DSprite::SetTextures(PointerList<BaseTexture*>* textures)
 {
-    if (spriteTextures != NULL)
-        delete(spriteTextures);
+    if (spriteTexturesList != NULL)
+        delete(spriteTexturesList);
 
-    spriteTextures = new PointerList<DTexture*>();
+    spriteTexturesList = new PointerList<DTexture*>();
 
     auto it = textures->GetContainer()->begin();
     while (it != textures->GetContainer()->end())
     {
         BaseTexture* texture = (*it);
 
-        spriteTextures->Add((DTexture*)texture);
+        spriteTexturesList->Add((DTexture*)texture);
 
         it++;
     }
 
-    FramesCount = spriteTextures->Count();
+    FramesCount = spriteTexturesList->Count();
 
     if (FramesCount > 0)
     {
@@ -179,5 +181,5 @@ void DSprite::UpdateInnerImpl()
 
 void DSprite::ApplyCurrentTexture()
 {
-    SetTexture(spriteTextures->Get(CurrentFrameIndex));
+    SetTexture(spriteTexturesList->Get(CurrentFrameIndex));
 }

@@ -37,7 +37,6 @@ public:
     virtual void SetTextures(PointerList<BaseTexture*>* textures);
 
     sf::Sprite* innerImpl;
-
     sf::Drawable* GetDrawableImplementation();
 
 private:
@@ -46,17 +45,10 @@ private:
 
     int lastFrameTick;
 
-    bool IsPlaying;
-    bool LoopAnimation;
-    
-
-
     DTexture* spriteTexture; // Texture currently on sprite.
-
-    PointerList<DTexture*>* spriteTextures;
+    PointerList<DTexture*>* spriteTexturesList;
 
     void UpdateInnerImpl();
-
     void ApplyCurrentTexture();
 };
 

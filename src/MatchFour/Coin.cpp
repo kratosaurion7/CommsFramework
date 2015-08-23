@@ -37,7 +37,7 @@ void Coin::Update()
         }
         case COIN_START_SPIN:
         {
-            CoinSprite->Play(true);
+            CoinSprite->Play(false);
 
             this->CurrentState = COIN_SPIN;
 
@@ -45,11 +45,8 @@ void Coin::Update()
         }
         case COIN_SPIN:
         {
-            coinSpinCounter++;
-
-            if (coinSpinCounter >= 300)
+            if (!CoinSprite->IsPlaying)
             {
-                coinSpinCounter = 0;
                 this->CurrentState = COIN_END_SPIN;
             }
 
