@@ -23,3 +23,5 @@ public:
         Y = y;
     };
 };
+
+typedef Vector2<float> FloatVec;

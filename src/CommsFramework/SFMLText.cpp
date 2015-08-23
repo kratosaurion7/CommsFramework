@@ -90,4 +90,3 @@ sf::Drawable* SFMLText::GetDrawableImplementation()
 void SFMLText::UpdateInnerImpl()
 {
 }
-
