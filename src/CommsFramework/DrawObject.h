@@ -21,10 +21,10 @@ public:
     virtual void IncrementX(float value);
     virtual void IncrementY(float value);
 
-    virtual FPosition* GetPos();
+    virtual FPosition GetPos();
     virtual void SetPos(float x, float y);
-    virtual void SetPos(FPosition* value);
-    virtual void SetCenterPos(FPosition* value);
+    virtual void SetPos(FPosition value);
+    virtual void SetCenterPos(FPosition value);
 
     virtual FRectangle GetRectangle();
 
@@ -34,15 +34,15 @@ public:
     virtual void SetHeight(float height);
     virtual void SetWidth(float width);
 
-    virtual FSize* GetSize();
+    virtual FSize GetSize();
     virtual void SetSize(float height, float width);
-    virtual void SetSize(FSize* value);
+    virtual void SetSize(FSize value);
 
 protected:
     bool isVisible;
 
-    FPosition* position;
-    FSize* size;
+    FPosition position;
+    FSize size;
 
     virtual void UpdateInnerImpl() = 0;
 };

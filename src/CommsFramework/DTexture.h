@@ -22,7 +22,7 @@ public:
 
     virtual void LoadFromMemory(char* data, int dataSize);
 
-    virtual FSize* GetSize();
+    virtual FSize GetSize();
 
 
 
@@ -31,7 +31,7 @@ public:
     sf::Texture* innerImpl;
 
 private:
-    FSize* size;
+    FSize size;
 
 };
 

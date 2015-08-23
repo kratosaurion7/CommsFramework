@@ -18,8 +18,6 @@ DSprite::DSprite()
     innerImpl = new sf::Sprite();
     spriteTexture = NULL;
     isVisible = true;
-    position = new FPosition();
-    size = new FSize();
     spriteTexture = NULL;
     spriteTextures = new PointerList<DTexture*>();
 
@@ -32,8 +30,6 @@ DSprite::~DSprite()
 {
     // Don't delete the sprite texture when deleting a sprite, the texture might be shared around.
     delete(innerImpl);
-    delete(position);
-    delete(size);
 
     if (spriteTextures != NULL)
     {
@@ -178,7 +174,7 @@ bool DSprite::IsLastFrame()
 
 void DSprite::UpdateInnerImpl()
 {
-    innerImpl->setPosition(position->X, position->Y);
+    innerImpl->setPosition(position.X, position.Y);
 }
 
 void DSprite::ApplyCurrentTexture()

@@ -12,8 +12,6 @@ SFMLText::SFMLText()
     textFont = NULL;
     textColorImpl = NULL;
     isVisible = true;
-    position = new FPosition();
-    size = new FSize();
     currentStyle = TEXT_STYLE_REGULAR;
 }
 
@@ -21,8 +19,6 @@ SFMLText::SFMLText()
 SFMLText::~SFMLText()
 {
     delete innerImpl;
-    delete position;
-    delete size;
 }
 
 std::string SFMLText::GetText()

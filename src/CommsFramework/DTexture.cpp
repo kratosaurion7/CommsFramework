@@ -12,7 +12,6 @@
 
 DTexture::DTexture()
 {
-    size = new FSize();
     innerImpl = new sf::Texture();
     innerImpl->setSmooth(false);
 }
@@ -22,15 +21,12 @@ DTexture::~DTexture()
 {
     if (innerImpl != NULL)
         delete innerImpl;
-
-    if (size != NULL)
-        delete size;
 }
 
 void DTexture::Initalize(int width, int height)
 {
-    size->Height = height;
-    size->Width = width;
+    size.Height = height;
+    size.Width = width;
 }
 
 void DTexture::Load(std::string path)
@@ -41,8 +37,8 @@ void DTexture::Load(std::string path)
     {
         sf::Vector2u vec = innerImpl->getSize();
 
-        size->Height = vec.y;
-        size->Width = vec.x;
+        size.Height = vec.y;
+        size.Width = vec.x;
     }
 }
 
@@ -56,12 +52,12 @@ void DTexture::LoadFromMemory(char * data, int dataSize)
     {
         sf::Vector2u vec = innerImpl->getSize();
 
-        size->Height = vec.y;
-        size->Width = vec.x;
+        size.Height = vec.y;
+        size.Width = vec.x;
     }
 }
 
-FSize* DTexture::GetSize()
+FSize DTexture::GetSize()
 {
     return size;
 }
@@ -69,7 +65,7 @@ FSize* DTexture::GetSize()
 void DTexture::SetSolidColor(uint32_t pixelColor)
 {
     sf::Image* image = new sf::Image();
-    image->create(size->Width, size->Height, sf::Color(pixelColor));
+    image->create(size.Width, size.Height, sf::Color(pixelColor));
 
     innerImpl->loadFromImage((*image)); // Should declare the image as stack local ?
 }

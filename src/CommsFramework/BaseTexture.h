@@ -13,7 +13,7 @@ public:
 
     virtual void LoadFromMemory(char* data, int dataSize) = 0;
 
-    virtual FSize* GetSize() = 0;
+    virtual FSize GetSize() = 0;
 
     virtual void SetSolidColor(uint32_t pixelColor) = 0;
 };
