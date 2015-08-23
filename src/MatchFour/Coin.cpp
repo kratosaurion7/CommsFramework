@@ -27,7 +27,7 @@ void Coin::Update()
         case COIN_IDLE:
         {
             // Check is coin is clicked
-            if (this->CoinSprite->GetRectangle().IsPointInside(GameEngine::Mouse->GetMousePosition()) && GameEngine::Mouse->LeftButtonClicked())
+            if (this->CoinSprite->Clicked())
             {
                 CoinSprite->Show(true);
                 this->CurrentState = COIN_START_SPIN;

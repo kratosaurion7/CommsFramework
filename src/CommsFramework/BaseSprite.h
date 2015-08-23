@@ -11,13 +11,16 @@ class BaseSprite : public DrawObject
 {
 public:
     int CurrentFrameIndex = 0;
-
     int FramesCount = 0;
-
     int SpriteFPS = 0;
+    bool LoopAnimation;
+    bool IsPlaying;
+
+    bool Clicked();
+
+    bool MouseOver();
 
     virtual BaseTexture* GetCurrentTexture() = 0;
-
     virtual PointerList<BaseTexture*>* GetTextures() = 0;
 
     virtual void Draw() = 0;
@@ -30,8 +33,6 @@ public:
     virtual void SetFrame(int index) = 0;
     virtual bool IsLastFrame() = 0;
 
-    bool LoopAnimation;
-    bool IsPlaying;
     virtual void SetTexture(BaseTexture* texture) = 0;
     virtual void SetTextures(PointerList<BaseTexture*>* textures) = 0;
 };
