@@ -7,6 +7,8 @@
 
 #include "XmlReader.h"
 
+#include "Utilities.h"
+
 ResourceManager::ResourceManager()
 {
     secondaryConfigFiles = new BaseList<std::string>();
@@ -350,49 +352,100 @@ PointerList<SpriteDescriptor*>* ResourceManager::CreateSpritesFromXmlNodes(Point
 
         SpriteDescriptor* newDescriptor = new SpriteDescriptor();
 
-        newDescriptor->SpriteName = node->GetAttribute("name").AttributeValue;
+        char* spriteNameAttribute = node->GetAttribute("name").AttributeValue;
+        if (spriteNameAttribute == NULL)
+        {
+            // Sprite without names are a NO NO.
+            // TODO : Log something to let the user know this sprite will not be created.
+            break;
+        }
+
+        newDescriptor->SpriteName = spriteNameAttribute;
 
         auto posNode = node->GetNode("position");
-        auto posX = atof(posNode->GetAttribute("X").AttributeValue);
-        auto posY = atof(posNode->GetAttribute("Y").AttributeValue);
-        newDescriptor->position = new FPosition(posX, posY);
+        if (posNode != NULL)
+        {
+            auto posX = SafeCharToFloat(posNode->GetAttribute("X").AttributeValue);
+            auto posY = SafeCharToFloat(posNode->GetAttribute("Y").AttributeValue);
+            newDescriptor->position = new FPosition(posX, posY);
+        }
+        else
+        {
+            // TODO : Get default from somewhere
+            int posX = 0;
+            int posY = 0;
 
+            newDescriptor->position = new FPosition(posX, posY);
+        }
+        int i = 5;
         auto sizeNode = node->GetNode("size");
-        auto sizeH = atof(sizeNode->GetAttribute("Height").AttributeValue);
-        auto sizeW = atof(sizeNode->GetAttribute("Width").AttributeValue);
-        newDescriptor->size = new FSize(sizeH, sizeW);
+        if (sizeNode != NULL)
+        {
+            auto sizeH = SafeCharToFloat(sizeNode->GetAttribute("Height").AttributeValue, 1);
+            auto sizeW = SafeCharToFloat(sizeNode->GetAttribute("Width").AttributeValue, 1);
+            newDescriptor->size = new FSize(sizeH, sizeW);
+        }
+        else
+        {
+            int sizeH = 1;
+            int sizeW = 1;
+            newDescriptor->size = new FSize(sizeH, sizeW);
+        }
 
         auto spriteFrames = node->GetNodes("frame");
-
-        auto spriteFramesIterator = spriteFrames->GetContainer()->begin();
-        while (spriteFramesIterator != spriteFrames->GetContainer()->end())
+        if (spriteFrames != NULL)
         {
-            XmlNode* frameNode = (*spriteFramesIterator);
+            auto spriteFramesIterator = spriteFrames->GetContainer()->begin();
+            while (spriteFramesIterator != spriteFrames->GetContainer()->end())
+            {
+                XmlNode* frameNode = (*spriteFramesIterator);
 
-            std::string frameId = frameNode->GetAttribute("Id").AttributeValue;
+                char* idAttribute = frameNode->GetAttribute("Id").AttributeValue;
+                if (idAttribute != NULL)
+                {
+                    // If the frame does not have an Id attribute to link to a resource, do not add the frame.
+                    std::string frameId = frameNode->GetAttribute("Id").AttributeValue;
 
-            newDescriptor->Frames->Add(frameId);
+                    newDescriptor->Frames->Add(frameId);
+                }
 
-            spriteFramesIterator++;
+                spriteFramesIterator++;
+            }
         }
+
 
         auto spriteFramelists = node->GetNodes("framelist");
-
-        auto framelistsIterator = spriteFramelists->GetContainer()->begin();
-        while (framelistsIterator != spriteFramelists->GetContainer()->end())
+        if (spriteFramelists != NULL)
         {
-            XmlNode* frameListNode = (*framelistsIterator);
+            auto framelistsIterator = spriteFramelists->GetContainer()->begin();
+            while (framelistsIterator != spriteFramelists->GetContainer()->end())
+            {
+                XmlNode* frameListNode = (*framelistsIterator);
 
-            Framelist* spriteFramelist = new Framelist();
-            spriteFramelist->startIndex = atoi(frameListNode->GetAttribute("start").AttributeValue);
-            spriteFramelist->endIndex = atoi(frameListNode->GetAttribute("end").AttributeValue);
-            spriteFramelist->step = atoi(frameListNode->GetAttribute("step").AttributeValue);
-            spriteFramelist->pattern = frameListNode->GetAttribute("pattern").AttributeValue;
+                Framelist* spriteFramelist = new Framelist();
 
-            newDescriptor->FrameLists->Add(spriteFramelist);
+                char* startAttribute = frameListNode->GetAttribute("start").AttributeValue;
+                char* endAttribute = frameListNode->GetAttribute("end").AttributeValue;
+                char* stepAttribute = frameListNode->GetAttribute("step").AttributeValue;
+                char* patternAttribute = frameListNode->GetAttribute("pattern").AttributeValue;
 
-            framelistsIterator++;
+                if (startAttribute == NULL || endAttribute == NULL || stepAttribute == NULL || patternAttribute == NULL)
+                {
+                    // Do not even try to create a framelist with missing values.
+                    break;
+                }
+
+                spriteFramelist->startIndex = atoi(frameListNode->GetAttribute("start").AttributeValue);
+                spriteFramelist->endIndex = atoi(frameListNode->GetAttribute("end").AttributeValue);
+                spriteFramelist->step = atoi(frameListNode->GetAttribute("step").AttributeValue);
+                spriteFramelist->pattern = frameListNode->GetAttribute("pattern").AttributeValue;
+
+                newDescriptor->FrameLists->Add(spriteFramelist);
+
+                framelistsIterator++;
+            }
         }
+
 
         descriptors->Add(newDescriptor);
 

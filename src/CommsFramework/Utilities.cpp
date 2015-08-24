@@ -27,3 +27,17 @@ int GetTicks()
     return 0;
 #endif
 }
+
+float SafeCharToFloat(char * data, float defaultValue)
+{
+    if (data == NULL)
+    {
+        return defaultValue;
+    }
+    else
+    {
+        float ret = atof(data); // Do additional checks ?
+
+        return ret;
+    }
+}
