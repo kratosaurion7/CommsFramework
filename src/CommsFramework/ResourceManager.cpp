@@ -312,25 +312,45 @@ PointerList<ResourceContainer*>* ResourceManager::CreateListOfContainersFromXmlN
     PointerList<ResourceContainer*>* containersList = new PointerList<ResourceContainer*>();
 
     auto it = containerNodes.GetContainer()->begin();
-
     while (it != containerNodes.GetContainer()->end())
     {
         ResourceContainer* res = new ResourceContainer();
 
         XmlNode* node = (*it);
 
-        res->Name = node->GetAttribute("name").AttributeValue;
+        char* nameAttribute = node->GetAttribute("name").AttributeValue;
+
+        if (nameAttribute == NULL)
+        {
+            // TODO : Add feedback
+            break;
+        }
+
+        res->Name = nameAttribute;
 
         auto resformat = node->GetAttribute("format").AttributeValue;
 
-        if (strcmp(resformat, "package") == 0)
+        if (resformat != NULL)
         {
+            if (strcmp(resformat, "package") == 0)
+            {
+                res->ContainerType = CONTAINER_TYPE_PACKAGE;
+            }
+            else if (strcmp(resformat, "folder") == 0)
+            {
+                res->ContainerType = CONTAINER_TYPE_FOLDER;
+            }
+            else
+            {
+                res->ContainerType = CONTAINER_TYPE_PACKAGE;
+            }
+        }
+        else
+        {
+            // TODO : Get default from somewhere
             res->ContainerType = CONTAINER_TYPE_PACKAGE;
         }
-        else if (strcmp(resformat, "folder") == 0)
-        {
-            res->ContainerType = CONTAINER_TYPE_FOLDER;
-        }
+
 
         containersList->Add(res);
 
