@@ -43,8 +43,6 @@ int main()
 
         int counter = 0;
 
-        //sprt->Play(true);
-
         Coin* coinSprite = new Coin();
         coinSprite->CoinSprite = sprt;
 

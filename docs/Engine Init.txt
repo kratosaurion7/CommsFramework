@@ -29,4 +29,4 @@ Game Engine Loading
 
 GameEngine.Load()
 
-	- Create sprites objects from the Sprite Descriptors
+	- Create sprites objects from the Sprite Descriptors 
