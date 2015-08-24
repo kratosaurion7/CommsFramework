@@ -280,24 +280,48 @@ PointerList<Resource*>* ResourceManager::CreateListOfResourcesFromXmlNodes(Point
 
         XmlNode* node = (*it);
 
-        res->Name = node->GetAttribute("name").AttributeValue;
+        char* nameAttribute = node->GetAttribute("name").AttributeValue;
+
+        if (nameAttribute == NULL)
+        {
+            // Add feedback
+            break;
+        }
+
+        res->Name = nameAttribute;
 
         auto resType = node->GetAttribute("type").AttributeValue;
 
-        if (strcmp(resType, "image") == 0)
+        if (resType != NULL)
         {
-            res->Type = RES_IMG;
+            if (strcmp(resType, "image") == 0)
+            {
+                res->Type = RES_IMG;
+            }
+            else if (strcmp(resType, "font") == 0)
+            {
+                res->Type = RES_FONT;
+            }
+            else if (strcmp(resType, "audio") == 0)
+            {
+                res->Type = RES_AUDIO;
+            }
+            else
+            {
+                res->Type = RES_UNKNOWN;
+            }
         }
-        else if (strcmp(resType, "font") == 0)
+        else
         {
-            res->Type = RES_FONT;
-        }
-        else if (strcmp(resType, "audio") == 0)
-        {
-            res->Type = RES_AUDIO;
+            res->Type = RES_UNKNOWN;
         }
 
-        res->Format = node->GetAttribute("format").AttributeValue;
+        char* formatAttribute = node->GetAttribute("format").AttributeValue;
+
+        if (formatAttribute == NULL)
+            formatAttribute = "";
+
+        res->Format = formatAttribute;
 
         resourceList->Add(res);
 

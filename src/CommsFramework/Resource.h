@@ -10,7 +10,8 @@ enum ResourceType
 {
     RES_IMG,
     RES_FONT,
-    RES_AUDIO
+    RES_AUDIO,
+    RES_UNKNOWN
 };
 
 class ResourceManager;
