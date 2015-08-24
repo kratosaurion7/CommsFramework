@@ -1,0 +1,32 @@
+Engine Init sequence
+
+- Init Graphic Engine
+	- Set VideoMode
+	- Setup vertical sync
+
+- Init Resource Manager
+	- Parse config files
+		- Read main config file from asset root directory
+		- For each resource in config, create a Resource object and store in resourceList
+			- Create a module of the current config and add resources into that module.
+			- If a module with that name already exist, add resources to that one instead.
+
+		- For each container, create a Container object. Add it to the containersList.
+		- For each sprite
+			- Create a Sprite Descriptor with attributes describing the starting state of 
+			a sprite.
+			- Build a list of image frames representing the animation for the Sprite.
+
+
+	- Setup sprites
+		- For each Sprite Descriptor
+			- Look at each frames of the Sprite and get a resource from the resourceList and 
+			affect it to the sprite descriptor FrameResources list.
+
+* Engine Init End *
+
+Game Engine Loading
+
+GameEngine.Load()
+
+	- Create sprites objects from the Sprite Descriptors
