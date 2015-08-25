@@ -4,14 +4,15 @@
         <position X="150" Y="200" /> <!-- Optional, set to 0,0 if absent -->
         <size Height="200" Width="300" /> <!-- Optional, set size according to bitmap data if absent. -->
         
-        <!-- form 1 -->
-        <frames>
-            <frame Id="raven_idle_0" />
-            <frame Id="raven_idle_1" />
-            <frame Id="raven_idle_2" />
-            <frame Id="raven_idle_3" />
-            <frame Id="raven_idle_4" />
-        </frames>
+        <animation name="Jump">
+            <frames>
+                <frame Id="raven_idle_0" />
+                <frame Id="raven_idle_1" />
+                <frame Id="raven_idle_2" />
+                <frame Id="raven_idle_3" />
+                <frame Id="raven_idle_4" />
+            </frames>
+        </animation>
         
         <!-- form 2 -->
         <frames> <!-- inclusive start and exclusive end -->

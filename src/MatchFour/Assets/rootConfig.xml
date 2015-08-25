@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <config>
   <container name="assets\\package.pak" format="package" />
+  
   <resource name="win_00000" type="image" format="png" />
   <resource name="win_00001" type="image" format="png" />
   <resource name="win_00002" type="image" format="png" />
@@ -41,48 +42,53 @@
   <resource name="win_00037" type="image" format="png" />
   <resource name="win_00038" type="image" format="png" />
   <resource name="win_00039" type="image" format="png" />
+  
   <sprite name="Coin" module="">
     <position X="0" Y="0" />
     <size Height="0" Width="0" />
-    <frame Id="win_00000" />
-    <frame Id="win_00001" />
-    <frame Id="win_00002" />
-    <frame Id="win_00003" />
-    <frame Id="win_00004" />
-    <frame Id="win_00005" />
-    <frame Id="win_00006" />
-    <frame Id="win_00007" />
-    <frame Id="win_00008" />
-    <frame Id="win_00009" />
-    <frame Id="win_00010" />
-    <frame Id="win_00011" />
-    <frame Id="win_00012" />
-    <frame Id="win_00013" />
-    <frame Id="win_00014" />
-    <frame Id="win_00015" />
-    <frame Id="win_00016" />
-    <frame Id="win_00017" />
-    <frame Id="win_00018" />
-    <frame Id="win_00019" />
-    <frame Id="win_00020" />
-    <frame Id="win_00021" />
-    <frame Id="win_00022" />
-    <frame Id="win_00023" />
-    <frame Id="win_00024" />
-    <frame Id="win_00025" />
-    <frame Id="win_00026" />
-    <frame Id="win_00027" />
-    <frame Id="win_00028" />
-    <frame Id="win_00029" />
-    <frame Id="win_00030" />
-    <frame Id="win_00031" />
-    <frame Id="win_00032" />
-    <frame Id="win_00033" />
-    <frame Id="win_00034" />
-    <frame Id="win_00035" />
-    <frame Id="win_00036" />
-    <frame Id="win_00037" />
-    <frame Id="win_00038" />
-    <frame Id="win_00039" />
+    
+    <animation name="Flip">
+        <frame Id="win_00000" />
+        <frame Id="win_00001" />
+        <frame Id="win_00002" />
+        <frame Id="win_00003" />
+        <frame Id="win_00004" />
+        <frame Id="win_00005" />
+        <frame Id="win_00006" />
+        <frame Id="win_00007" />
+        <frame Id="win_00008" />
+        <frame Id="win_00009" />
+        <frame Id="win_00010" />
+        <frame Id="win_00011" />
+        <frame Id="win_00012" />
+        <frame Id="win_00013" />
+        <frame Id="win_00014" />
+        <frame Id="win_00015" />
+        <frame Id="win_00016" />
+        <frame Id="win_00017" />
+        <frame Id="win_00018" />
+        <frame Id="win_00019" />
+        <frame Id="win_00020" />
+        <frame Id="win_00021" />
+        <frame Id="win_00022" />
+        <frame Id="win_00023" />
+        <frame Id="win_00024" />
+        <frame Id="win_00025" />
+        <frame Id="win_00026" />
+        <frame Id="win_00027" />
+        <frame Id="win_00028" />
+        <frame Id="win_00029" />
+        <frame Id="win_00030" />
+        <frame Id="win_00031" />
+        <frame Id="win_00032" />
+        <frame Id="win_00033" />
+        <frame Id="win_00034" />
+        <frame Id="win_00035" />
+        <frame Id="win_00036" />
+        <frame Id="win_00037" />
+        <frame Id="win_00038" />
+        <frame Id="win_00039" />
+    </animation>
+    
   </sprite>
 </config>

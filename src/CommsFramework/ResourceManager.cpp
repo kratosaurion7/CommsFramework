@@ -435,28 +435,44 @@ PointerList<SpriteDescriptor*>* ResourceManager::CreateSpritesFromXmlNodes(Point
             int sizeW = 1;
             newDescriptor->size = new FSize(sizeH, sizeW);
         }
-
-        auto spriteFrames = node->GetNodes("frame");
-        if (spriteFrames != NULL)
+        
+        auto spriteAnimations = node->GetNodes("animation");
+        if (spriteAnimations != NULL)
         {
-            auto spriteFramesIterator = spriteFrames->GetContainer()->begin();
-            while (spriteFramesIterator != spriteFrames->GetContainer()->end())
+            auto spriteAnimationFramesIterator = spriteAnimations->GetContainer()->begin();
+            while (spriteAnimationFramesIterator != spriteAnimations->GetContainer()->end())
             {
-                XmlNode* frameNode = (*spriteFramesIterator);
+                XmlNode* animNode = (*spriteAnimationFramesIterator);
 
-                char* idAttribute = frameNode->GetAttribute("Id").AttributeValue;
-                if (idAttribute != NULL)
+                // Todo : Create an anim from node
+
+                auto spriteFrames = animNode->GetNodes("frame");
+                if (spriteFrames != NULL)
                 {
-                    // If the frame does not have an Id attribute to link to a resource, do not add the frame.
-                    std::string frameId = frameNode->GetAttribute("Id").AttributeValue;
+                    auto spriteFramesIterator = spriteFrames->GetContainer()->begin();
+                    while (spriteFramesIterator != spriteFrames->GetContainer()->end())
+                    {
+                        XmlNode* frameNode = (*spriteFramesIterator);
 
-                    newDescriptor->Frames->Add(frameId);
+                        char* idAttribute = frameNode->GetAttribute("Id").AttributeValue;
+                        if (idAttribute != NULL)
+                        {
+                            // If the frame does not have an Id attribute to link to a resource, do not add the frame.
+                            std::string frameId = frameNode->GetAttribute("Id").AttributeValue;
+
+                            newDescriptor->Frames->Add(frameId);
+                        }
+
+                        spriteFramesIterator++;
+                    }
                 }
 
-                spriteFramesIterator++;
+                spriteFrames->Release();
+                delete(spriteFrames);
+
+                spriteAnimationFramesIterator++;
             }
         }
-
 
         auto spriteFramelists = node->GetNodes("framelist");
         if (spriteFramelists != NULL)
@@ -493,8 +509,8 @@ PointerList<SpriteDescriptor*>* ResourceManager::CreateSpritesFromXmlNodes(Point
 
         descriptors->Add(newDescriptor);
 
-        spriteFrames->Release();
-        delete(spriteFrames);
+        spriteAnimations->Release();
+        delete(spriteAnimations);
 
         spriteFramelists->Release();
         delete(spriteFramelists);
