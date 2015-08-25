@@ -26,6 +26,7 @@ public:
     virtual void Draw() = 0;
 
     virtual void Play(bool loop = false) = 0;
+    virtual void Play(std::string animName, bool loop = false) = 0;
     virtual void Stop() = 0;
     virtual void Reset() = 0;
 

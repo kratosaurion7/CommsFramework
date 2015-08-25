@@ -321,6 +321,7 @@ XCOPY /y "E:\Prog\lib\sfml\SFML-2.3_x64\bin\*.dll" "$(TargetDir)"
     <ClCompile Include="DSprite.cpp" />
     <ClCompile Include="FileReader.cpp" />
     <ClCompile Include="SFMLMouse.cpp" />
+    <ClCompile Include="SpriteAnimation.cpp" />
     <ClCompile Include="SpriteDescriptor.cpp" />
     <ClCompile Include="PackageFile.cpp" />
     <ClCompile Include="Resource.cpp" />
@@ -355,6 +356,7 @@ XCOPY /y "E:\Prog\lib\sfml\SFML-2.3_x64\bin\*.dll" "$(TargetDir)"
     <ClInclude Include="Graphical.h" />
     <ClInclude Include="Keys.h" />
     <ClInclude Include="SFMLMouse.h" />
+    <ClInclude Include="SpriteAnimation.h" />
     <ClInclude Include="SpriteDescriptor.h" />
     <ClInclude Include="PackageFile.h" />
     <ClInclude Include="PointerList.h" />

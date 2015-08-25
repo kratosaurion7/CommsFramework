@@ -9,6 +9,8 @@
 
 #include "BaseList.h"
 
+#include "SpriteAnimation.h"
+
 class Framelist {
 public:
     int startIndex;
@@ -33,6 +35,8 @@ public:
 
     FPosition* position;
     FSize* size;
+
+    PointerList<SpriteAnimation*>* Animations;
 
     BaseList<std::string>* Frames;
 

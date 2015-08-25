@@ -4,6 +4,8 @@
 
 SpriteDescriptor::SpriteDescriptor()
 {
+    Animations = new PointerList<SpriteAnimation*>();
+
     Frames = new BaseList<std::string>();
 
     FrameLists = new PointerList<Framelist*>();
@@ -25,6 +27,9 @@ SpriteDescriptor::~SpriteDescriptor()
 
     FrameLists->Release();
     delete(FrameLists);
+
+    Animations->Clear();
+    delete(Animations);
 }
 
 BaseList<std::string>* Framelist::GetFrames()

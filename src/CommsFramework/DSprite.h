@@ -13,6 +13,8 @@
 #include "FRectangle.h"
 #include "FSize.h"
 
+#include "SpriteAnimation.h"
+
 class DSprite : public BaseSprite, public SFMLDrawable
 {
 public:
@@ -26,6 +28,7 @@ public:
     virtual void Draw();
 
     virtual void Play(bool loop = false);
+    virtual void Play(std::string animName, bool loop = false);
     virtual void Stop();
     virtual void Reset();
 
@@ -46,7 +49,8 @@ private:
     int lastFrameTick;
 
     DTexture* spriteTexture; // Texture currently on sprite.
-    PointerList<DTexture*>* spriteTexturesList;
+    //PointerList<DTexture*>* spriteTexturesList;
+    PointerList<SpriteAnimation*>* spriteAnimationList;
 
     void UpdateInnerImpl();
     void ApplyCurrentTexture();

@@ -19,7 +19,7 @@ DSprite::DSprite()
     spriteTexture = NULL;
     isVisible = true;
     spriteTexture = NULL;
-    spriteTexturesList = new PointerList<DTexture*>();
+    spriteAnimationList = new PointerList<SpriteAnimation*>();
 
     IsPlaying = false;
 
@@ -31,12 +31,12 @@ DSprite::~DSprite()
     // Don't delete the sprite texture when deleting a sprite, the texture might be shared around.
     delete(innerImpl);
 
-    if (spriteTexturesList != NULL)
-    {
-        spriteTexturesList->Release();
-        delete(spriteTexturesList);
-    }
 
+    if (spriteAnimationList != NULL)
+    {
+        spriteAnimationList->Release();
+        delete(spriteAnimationList);
+    }
 
     //delete(spriteTexture);
 }
@@ -50,11 +50,20 @@ PointerList<BaseTexture*>* DSprite::GetTextures()
 {
     PointerList<BaseTexture*>* returnTextures = new PointerList<BaseTexture*>();
 
-    auto it = spriteTexturesList->GetContainer()->begin();
-    while (it != spriteTexturesList->GetContainer()->end())
+    auto it = spriteAnimationList->GetContainer()->begin();
+    while (it != spriteAnimationList->GetContainer()->end())
     {
-        DTexture* texture = (*it);
-        returnTextures->Add(texture);
+        SpriteAnimation* anim = (*it);
+        
+        auto itAnim = anim->AnimationResources->GetContainer()->begin();
+        while (itAnim != anim->AnimationResources->GetContainer()->end())
+        {
+            // TODO : Get a texture from a Resource
+            itAnim++;
+        }
+
+
+        it++;
     }
 
     return returnTextures;
@@ -87,6 +96,10 @@ void DSprite::Play(bool loop)
 {
     IsPlaying = true;
     LoopAnimation = loop;
+}
+
+void DSprite::Play(std::string animName, bool loop)
+{
 }
 
 void DSprite::Stop()

@@ -156,6 +156,9 @@
     <ClCompile Include="BaseSprite.cpp">
       <Filter>Framework\Graphic\Base Classes</Filter>
     </ClCompile>
+    <ClCompile Include="SpriteAnimation.cpp">
+      <Filter>Framework\Graphic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="XmlReader.h">
@@ -286,6 +289,9 @@
     </ClInclude>
     <ClInclude Include="SFMLMouse.h">
       <Filter>Framework\Graphic\SFML</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteAnimation.h">
+      <Filter>Framework\Graphic</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

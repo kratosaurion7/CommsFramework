@@ -9,6 +9,8 @@
 
 #include "Utilities.h"
 
+#include "SpriteAnimation.h"
+
 ResourceManager::ResourceManager()
 {
     secondaryConfigFiles = new BaseList<std::string>();
@@ -445,31 +447,76 @@ PointerList<SpriteDescriptor*>* ResourceManager::CreateSpritesFromXmlNodes(Point
                 XmlNode* animNode = (*spriteAnimationFramesIterator);
 
                 // Todo : Create an anim from node
+                char* animName = animNode->GetAttribute("name").AttributeValue;
 
-                auto spriteFrames = animNode->GetNodes("frame");
-                if (spriteFrames != NULL)
+                if (animName != NULL)
                 {
-                    auto spriteFramesIterator = spriteFrames->GetContainer()->begin();
-                    while (spriteFramesIterator != spriteFrames->GetContainer()->end())
+                    SpriteAnimation* newAnim = new SpriteAnimation();
+
+                    newAnim->AnimName = animName;
+
+                    auto spriteFrames = animNode->GetNodes("frame");
+                    if (spriteFrames != NULL)
                     {
-                        XmlNode* frameNode = (*spriteFramesIterator);
-
-                        char* idAttribute = frameNode->GetAttribute("Id").AttributeValue;
-                        if (idAttribute != NULL)
+                        auto spriteFramesIterator = spriteFrames->GetContainer()->begin();
+                        while (spriteFramesIterator != spriteFrames->GetContainer()->end())
                         {
-                            // If the frame does not have an Id attribute to link to a resource, do not add the frame.
-                            std::string frameId = frameNode->GetAttribute("Id").AttributeValue;
+                            XmlNode* frameNode = (*spriteFramesIterator);
 
-                            newDescriptor->Frames->Add(frameId);
+                            char* idAttribute = frameNode->GetAttribute("Id").AttributeValue;
+                            if (idAttribute != NULL)
+                            {
+                                // If the frame does not have an Id attribute to link to a resource, do not add the frame.
+                                std::string frameId = frameNode->GetAttribute("Id").AttributeValue;
+
+                                Resource* animFrameResource = GetResource(frameId);
+                                newAnim->AnimationResources->Add(animFrameResource);
+                            }
+
+                            spriteFramesIterator++;
                         }
-
-                        spriteFramesIterator++;
                     }
+
+                    auto spriteFramelists = animNode->GetNodes("framelist");
+                    if (spriteFramelists != NULL)
+                    {
+                        auto framelistsIterator = spriteFramelists->GetContainer()->begin();
+                        while (framelistsIterator != spriteFramelists->GetContainer()->end())
+                        {
+                            XmlNode* frameListNode = (*framelistsIterator);
+
+                            Framelist* spriteFramelist = new Framelist();
+
+                            char* startAttribute = frameListNode->GetAttribute("start").AttributeValue;
+                            char* endAttribute = frameListNode->GetAttribute("end").AttributeValue;
+                            char* stepAttribute = frameListNode->GetAttribute("step").AttributeValue;
+                            char* patternAttribute = frameListNode->GetAttribute("pattern").AttributeValue;
+
+                            if (startAttribute == NULL || endAttribute == NULL || stepAttribute == NULL || patternAttribute == NULL)
+                            {
+                                // Do not even try to create a framelist with missing values.
+                                break;
+                            }
+
+                            spriteFramelist->startIndex = atoi(frameListNode->GetAttribute("start").AttributeValue);
+                            spriteFramelist->endIndex = atoi(frameListNode->GetAttribute("end").AttributeValue);
+                            spriteFramelist->step = atoi(frameListNode->GetAttribute("step").AttributeValue);
+                            spriteFramelist->pattern = frameListNode->GetAttribute("pattern").AttributeValue;
+
+                            newDescriptor->FrameLists->Add(spriteFramelist);
+
+                            framelistsIterator++;
+                        }
+                    }
+
+                    spriteFramelists->Release();
+                    delete(spriteFramelists);
+                    spriteFrames->Release();
+                    delete(spriteFrames);
+
+                    newDescriptor->Animations->Add(newAnim);
                 }
-
-                spriteFrames->Release();
-                delete(spriteFrames);
-
+                
                 spriteAnimationFramesIterator++;
             }
         }
@@ -498,51 +545,51 @@ PointerList<SpriteDescriptor*>* ResourceManager::CreateSpritesFromXmlNodes(Point
                 }
             }
 
+            auto spriteFramelists = node->GetNodes("framelist");
+            if (spriteFramelists != NULL)
+            {
+                auto framelistsIterator = spriteFramelists->GetContainer()->begin();
+                while (framelistsIterator != spriteFramelists->GetContainer()->end())
+                {
+                    XmlNode* frameListNode = (*framelistsIterator);
+
+                    Framelist* spriteFramelist = new Framelist();
+
+                    char* startAttribute = frameListNode->GetAttribute("start").AttributeValue;
+                    char* endAttribute = frameListNode->GetAttribute("end").AttributeValue;
+                    char* stepAttribute = frameListNode->GetAttribute("step").AttributeValue;
+                    char* patternAttribute = frameListNode->GetAttribute("pattern").AttributeValue;
+
+                    if (startAttribute == NULL || endAttribute == NULL || stepAttribute == NULL || patternAttribute == NULL)
+                    {
+                        // Do not even try to create a framelist with missing values.
+                        break;
+                    }
+
+                    spriteFramelist->startIndex = atoi(frameListNode->GetAttribute("start").AttributeValue);
+                    spriteFramelist->endIndex = atoi(frameListNode->GetAttribute("end").AttributeValue);
+                    spriteFramelist->step = atoi(frameListNode->GetAttribute("step").AttributeValue);
+                    spriteFramelist->pattern = frameListNode->GetAttribute("pattern").AttributeValue;
+
+                    newDescriptor->FrameLists->Add(spriteFramelist);
+
+                    framelistsIterator++;
+                }
+            }
+
+
             spriteFrames->Release();
             delete(spriteFrames);
-
+            spriteFramelists->Release();
+            delete(spriteFramelists);
         }
 
-        auto spriteFramelists = node->GetNodes("framelist");
-        if (spriteFramelists != NULL)
-        {
-            auto framelistsIterator = spriteFramelists->GetContainer()->begin();
-            while (framelistsIterator != spriteFramelists->GetContainer()->end())
-            {
-                XmlNode* frameListNode = (*framelistsIterator);
-
-                Framelist* spriteFramelist = new Framelist();
-
-                char* startAttribute = frameListNode->GetAttribute("start").AttributeValue;
-                char* endAttribute = frameListNode->GetAttribute("end").AttributeValue;
-                char* stepAttribute = frameListNode->GetAttribute("step").AttributeValue;
-                char* patternAttribute = frameListNode->GetAttribute("pattern").AttributeValue;
-
-                if (startAttribute == NULL || endAttribute == NULL || stepAttribute == NULL || patternAttribute == NULL)
-                {
-                    // Do not even try to create a framelist with missing values.
-                    break;
-                }
-
-                spriteFramelist->startIndex = atoi(frameListNode->GetAttribute("start").AttributeValue);
-                spriteFramelist->endIndex = atoi(frameListNode->GetAttribute("end").AttributeValue);
-                spriteFramelist->step = atoi(frameListNode->GetAttribute("step").AttributeValue);
-                spriteFramelist->pattern = frameListNode->GetAttribute("pattern").AttributeValue;
-
-                newDescriptor->FrameLists->Add(spriteFramelist);
-
-                framelistsIterator++;
-            }
-        }
 
 
         descriptors->Add(newDescriptor);
 
         spriteAnimations->Release();
         delete(spriteAnimations);
-
-        spriteFramelists->Release();
-        delete(spriteFramelists);
 
         delete(sizeNode);
         delete(posNode);
