@@ -32,15 +32,17 @@ public:
     virtual void Stop();
     virtual void Reset();
 
-    virtual void NextFrame();
-    virtual void SetFrame(int index);
-    virtual bool IsLastFrame();
+    virtual void NextFrame(std::string animName = "");
+    virtual void SetFrame(int index, std::string animName = "");
+    virtual bool IsLastFrame(std::string animName = "");
 
     virtual void SetTexture(BaseTexture* texture);
     virtual void SetTextures(PointerList<BaseTexture*>* textures);
 
     sf::Sprite* innerImpl;
     sf::Drawable* GetDrawableImplementation();
+
+    SpriteAnimation* CurrentAnimation;
 
 private:
 

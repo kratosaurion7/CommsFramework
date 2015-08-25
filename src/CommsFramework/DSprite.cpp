@@ -112,7 +112,7 @@ void DSprite::Reset()
     this->SetFrame(0);
 }
 
-void DSprite::NextFrame()
+void DSprite::NextFrame(std::string animName)
 {
     CurrentFrameIndex = (CurrentFrameIndex + 1) % FramesCount;
     
@@ -121,11 +121,23 @@ void DSprite::NextFrame()
     ApplyCurrentTexture();
 }
 
-void DSprite::SetFrame(int index)
+void DSprite::SetFrame(int index, std::string animName)
 {
     CurrentFrameIndex = index % FramesCount;
 
-    spriteTexture = spriteTexturesList->Get(index % FramesCount); // Modulo for safety.
+    if (animName != "")
+    {
+
+    }
+    else
+    {
+        SpriteAnimation* anim = spriteAnimationList->Get(0);
+
+        this->spriteTexture = anim->AnimationResources->Get(index % FramesCount); // Modulo for safety.
+
+    }
+
+    spriteTexture = spriteTexturesList->Get(index % FramesCount); 
 }
 
 void DSprite::SetTextures(PointerList<BaseTexture*>* textures)
@@ -182,7 +194,7 @@ bool DSprite::IsFrameReady()
     return false;
 }
 
-bool DSprite::IsLastFrame()
+bool DSprite::IsLastFrame(std::string animName)
 {
     return CurrentFrameIndex >= FramesCount - 1;
 }
