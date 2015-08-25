@@ -437,7 +437,7 @@ PointerList<SpriteDescriptor*>* ResourceManager::CreateSpritesFromXmlNodes(Point
         }
         
         auto spriteAnimations = node->GetNodes("animation");
-        if (spriteAnimations != NULL)
+        if (spriteAnimations->Count() > 0)
         {
             auto spriteAnimationFramesIterator = spriteAnimations->GetContainer()->begin();
             while (spriteAnimationFramesIterator != spriteAnimations->GetContainer()->end())
@@ -472,6 +472,35 @@ PointerList<SpriteDescriptor*>* ResourceManager::CreateSpritesFromXmlNodes(Point
 
                 spriteAnimationFramesIterator++;
             }
+        }
+        else
+        {
+            // Temporary fix if a Sprite does not have his frames inside an animation tag.
+
+            auto spriteFrames = node->GetNodes("frame");
+            if (spriteFrames != NULL)
+            {
+                auto spriteFramesIterator = spriteFrames->GetContainer()->begin();
+                while (spriteFramesIterator != spriteFrames->GetContainer()->end())
+                {
+                    XmlNode* frameNode = (*spriteFramesIterator);
+
+                    char* idAttribute = frameNode->GetAttribute("Id").AttributeValue;
+                    if (idAttribute != NULL)
+                    {
+                        // If the frame does not have an Id attribute to link to a resource, do not add the frame.
+                        std::string frameId = frameNode->GetAttribute("Id").AttributeValue;
+
+                        newDescriptor->Frames->Add(frameId);
+                    }
+
+                    spriteFramesIterator++;
+                }
+            }
+
+            spriteFrames->Release();
+            delete(spriteFrames);
+
         }
 
         auto spriteFramelists = node->GetNodes("framelist");
