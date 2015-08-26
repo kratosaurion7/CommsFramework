@@ -20,7 +20,6 @@ public:
     SpriteAnimation* DefaultAnimation;
 
     bool Clicked();
-
     bool MouseOver();
 
     virtual PointerList<SpriteAnimation*>* GetAnimations() = 0;
@@ -40,6 +39,5 @@ public:
     virtual bool IsLastFrame(std::string animName = "") = 0;
 
     virtual void SetTexture(BaseTexture* texture) = 0;
-    //virtual void SetTextures(PointerList<BaseTexture*>* textures) = 0;
 };
 
