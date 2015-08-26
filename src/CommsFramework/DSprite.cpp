@@ -49,6 +49,10 @@ PointerList<SpriteAnimation*>* DSprite::GetAnimations()
 void DSprite::SetAnimations(PointerList<SpriteAnimation*>* newAnims)
 {
     spriteAnimationList = newAnims;
+
+    // TODO : Get default animation from config
+    this->DefaultAnimation = newAnims->Get(0);
+    this->SetTexture(this->DefaultAnimation->AnimationFrames->Get(0));
 }
 
 DTexture* DSprite::GetCurrentTexture()
@@ -152,11 +156,11 @@ void DSprite::NextFrame()
 
 void DSprite::SetFrame(int index, std::string animName)
 {
-    CurrentFrameIndex = index % FramesCount;
-
     if (animName != "")
     {
         SpriteAnimation* anim = FindAnim(animName);
+
+        CurrentFrameIndex = index % anim->AnimationFrames->Count();
 
         CurrentAnimation = anim;
 
@@ -165,6 +169,8 @@ void DSprite::SetFrame(int index, std::string animName)
     else
     {
         SpriteAnimation* anim = DefaultAnimation;
+
+        CurrentFrameIndex = index % anim->AnimationFrames->Count();
 
         this->SetTexture(anim->AnimationFrames->Get(CurrentFrameIndex));
     }

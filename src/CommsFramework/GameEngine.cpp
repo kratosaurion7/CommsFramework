@@ -55,7 +55,7 @@ BaseSprite* GameEngine::GetSprite(std::string name)
     // Check first if it exists ? Or create a copy
 
     // Get sprite
-    BaseSprite* spriteObject = Graphics->CreateSprite();
+    BaseSprite* spriteObject = Graphics->CreateSprite(name);
     
     PointerList<SpriteAnimation*>* spriteAnimations = Resources->GetAnimationsForSprite(spriteObject);
 
@@ -64,7 +64,7 @@ BaseSprite* GameEngine::GetSprite(std::string name)
     // At this point, the sprite anims have created their textures.
     spriteObject->SetAnimations(spriteAnimations);
 
-    delete(spriteAnimations);
+    //delete(spriteAnimations);
 
     return spriteObject;
 }
@@ -124,6 +124,8 @@ void GameEngine::BuildAnimationTextures(PointerList<SpriteAnimation*>* anims)
         SpriteAnimation* anim = *it;
 
         anim->AnimationFrames = CreateTexturesFromResources(anim->AnimationResources);
+
+        it++;
     }
 }
 
