@@ -24,6 +24,8 @@ public:
     DSprite();
     ~DSprite();
 
+    sf::Sprite* innerImpl;
+
     // Get the list of animations of the Sprite.
     virtual PointerList<SpriteAnimation*>* GetAnimations();
     // Set a list of animation that the sprite can Play.
@@ -65,9 +67,6 @@ public:
      */
     virtual void SetTexture(BaseTexture* texture);
 
-    // SFML Inner object
-    sf::Sprite* innerImpl;
-    
     /**
      * Function called by the graphic engine to retrieve the inner
      * SFML object implementation */
@@ -77,22 +76,21 @@ public:
     SpriteAnimation* CurrentAnimation;
 
 private:
+    // System tick count of the last frame update, in milisecond.
+    int lastFrameTick;
+    // Texture currently on sprite.
+    DTexture* spriteTexture;
+    // List of animations containing textures for the sprite.
+    PointerList<SpriteAnimation*>* spriteAnimationList;
+
     /**
      * Check if the sprite is ready for another frame switch
      * given the sprite FPS */
     bool IsFrameReady();
 
-    // System tick count of the last frame update, in milisecond.
-    int lastFrameTick;
-
     /**
      * Shorthand function to search in the spriteAnimationList */
     SpriteAnimation* FindAnim(std::string name);
-
-    // Texture currently on sprite.
-    DTexture* spriteTexture; 
-    // List of animations containing textures for the sprite.
-    PointerList<SpriteAnimation*>* spriteAnimationList;
 
     /**
      *  Update the SFML sprite values, position, etc. */
