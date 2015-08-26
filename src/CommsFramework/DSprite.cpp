@@ -55,8 +55,8 @@ PointerList<BaseTexture*>* DSprite::GetTextures()
     {
         SpriteAnimation* anim = (*it);
         
-        auto itAnim = anim->AnimationResources->GetContainer()->begin();
-        while (itAnim != anim->AnimationResources->GetContainer()->end())
+        auto itAnim = anim->AnimationFrames->GetContainer()->begin();
+        while (itAnim != anim->AnimationFrames->GetContainer()->end())
         {
             // TODO : Get a texture from a Resource
             itAnim++;
@@ -133,7 +133,7 @@ void DSprite::SetFrame(int index, std::string animName)
     {
         SpriteAnimation* anim = spriteAnimationList->Get(0);
 
-        this->spriteTexture = anim->AnimationResources->Get(index % FramesCount); // Modulo for safety.
+        this->spriteTexture = anim->AnimationFrames->Get(index % FramesCount); // Modulo for safety.
 
     }
 

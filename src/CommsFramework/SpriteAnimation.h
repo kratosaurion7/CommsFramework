@@ -11,6 +11,6 @@ public:
 
     std::string AnimName;
 
-    PointerList<Resource*>* AnimationResources;
+    PointerList<BaseTexture*>* AnimationFrames;
 };
 
