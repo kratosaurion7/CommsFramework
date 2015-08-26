@@ -11,6 +11,8 @@
 
 #include "SpriteAnimation.h"
 
+#include "BaseSprite.h"
+
 ResourceManager::ResourceManager()
 {
     secondaryConfigFiles = new BaseList<std::string>();
@@ -217,25 +219,57 @@ Resource * ResourceManager::GetResource(std::string name, GameModule * targetMod
     return NULL;
 }
 
-PointerList<Resource*>* ResourceManager::GetSpriteResources(std::string spriteName, GameModule * targetModule)
+PointerList<SpriteAnimation*>* ResourceManager::GetAnimationsForSprite(BaseSprite * sprite)
 {
-    //PointerList<Resource*>* spriteResources = new PointerList<Resource*>();
+    PointerList<SpriteAnimation*>* anims;
 
-    auto it = SpritesInfo->GetContainer()->begin();
-    while (it != SpritesInfo->GetContainer()->end())
+    auto it = this->SpritesInfo->GetContainer()->begin();
+    while (it != this->SpritesInfo->GetContainer()->end())
     {
-        SpriteDescriptor* item = (*it);
+        SpriteDescriptor* sprd = *it;
 
-        if (strcmp(item->SpriteName.c_str(), spriteName.c_str()) == 0)
+        if (sprd->SpriteName.compare(sprite->Ident) == 0)
         {
-            return item->FrameResources;
+            anims = sprd->Animations;
+
+            break;
         }
 
         it++;
     }
 
-    return NULL;
+    auto itAnim = anims->GetContainer()->begin();
+    while (itAnim != anims->GetContainer()->end())
+    {
+        SpriteAnimation* anim = *itAnim;
+
+        anim->LoadAllResources();
+
+        itAnim++;
+    }
+
+    return anims;
 }
+
+//PointerList<Resource*>* ResourceManager::GetSpriteResources(std::string spriteName, GameModule * targetModule)
+//{
+//    //PointerList<Resource*>* spriteResources = new PointerList<Resource*>();
+//
+//    auto it = SpritesInfo->GetContainer()->begin();
+//    while (it != SpritesInfo->GetContainer()->end())
+//    {
+//        SpriteDescriptor* item = (*it);
+//
+//        if (strcmp(item->SpriteName.c_str(), spriteName.c_str()) == 0)
+//        {
+//            return item->FrameResources;
+//        }
+//
+//        it++;
+//    }
+//
+//    return NULL;
+//}
 
 void ResourceManager::SetupSprites()
 {

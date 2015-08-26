@@ -49,5 +49,7 @@ private:
     void CreateSpritesFromConfig();
 
     PointerList<BaseTexture*>* CreateTexturesFromResources(PointerList<Resource*>* resources);
+
+    void BuildAnimationTextures(PointerList<SpriteAnimation*>* anims);
 };
 

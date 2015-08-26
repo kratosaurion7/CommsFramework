@@ -41,6 +41,16 @@ DSprite::~DSprite()
     //delete(spriteTexture);
 }
 
+PointerList<SpriteAnimation*>* DSprite::GetAnimations()
+{
+    return spriteAnimationList;
+}
+
+void DSprite::SetAnimations(PointerList<SpriteAnimation*>* newAnims)
+{
+    spriteAnimationList = newAnims;
+}
+
 DTexture* DSprite::GetCurrentTexture()
 {
     return spriteTexture;
@@ -94,27 +104,46 @@ void DSprite::Draw()
 
 void DSprite::Play(bool loop)
 {
+    CurrentAnimation = DefaultAnimation;
+
     IsPlaying = true;
     LoopAnimation = loop;
 }
 
 void DSprite::Play(std::string animName, bool loop)
 {
+    SpriteAnimation* targetAnimation = NULL;
+
+    targetAnimation = FindAnim(animName);
+
+    if (targetAnimation != NULL)
+    {
+        CurrentAnimation = targetAnimation;
+
+        IsPlaying = true;
+        LoopAnimation = loop;
+    }
+    else
+    {
+        // Anim not found.
+    }
 }
 
 void DSprite::Stop()
 {
     IsPlaying = false;
+    CurrentAnimation = NULL;
 }
 
 void DSprite::Reset()
 {
+    // TODO : Reset to default anim ?
     this->SetFrame(0);
 }
 
-void DSprite::NextFrame(std::string animName)
+void DSprite::NextFrame()
 {
-    CurrentFrameIndex = (CurrentFrameIndex + 1) % FramesCount;
+    CurrentFrameIndex = (CurrentFrameIndex + 1) % CurrentAnimation->AnimationFrames->Count();
     
     lastFrameTick = GetTicks();
 
@@ -127,19 +156,21 @@ void DSprite::SetFrame(int index, std::string animName)
 
     if (animName != "")
     {
+        SpriteAnimation* anim = FindAnim(animName);
 
+        CurrentAnimation = anim;
+
+        this->SetTexture(CurrentAnimation->AnimationFrames->Get(CurrentFrameIndex));
     }
     else
     {
-        SpriteAnimation* anim = spriteAnimationList->Get(0);
+        SpriteAnimation* anim = DefaultAnimation;
 
-        this->spriteTexture = anim->AnimationFrames->Get(index % FramesCount); // Modulo for safety.
-
+        this->SetTexture(anim->AnimationFrames->Get(CurrentFrameIndex));
     }
-
-    spriteTexture = spriteTexturesList->Get(index % FramesCount); 
 }
 
+/*
 void DSprite::SetTextures(PointerList<BaseTexture*>* textures)
 {
     if (spriteTexturesList != NULL)
@@ -164,6 +195,7 @@ void DSprite::SetTextures(PointerList<BaseTexture*>* textures)
         SetTexture(textures->Get(0));
     }
 }
+*/
 
 void DSprite::SetTexture(BaseTexture * texture)
 {
@@ -176,6 +208,7 @@ void DSprite::SetTexture(BaseTexture * texture)
         size = texture->GetSize();
     }
 }
+
 
 sf::Drawable * DSprite::GetDrawableImplementation()
 {
@@ -194,9 +227,28 @@ bool DSprite::IsFrameReady()
     return false;
 }
 
+SpriteAnimation * DSprite::FindAnim(std::string name)
+{
+    SpriteAnimation* targetAnimation = NULL;
+
+    auto it = this->spriteAnimationList->GetContainer()->begin();
+    while (it != this->spriteAnimationList->GetContainer()->end())
+    {
+        SpriteAnimation* anim = *it;
+
+        if (anim->AnimName.compare(name) == 0)
+        {
+            targetAnimation = anim;
+            break;
+        }
+    }
+
+    return targetAnimation;
+}
+
 bool DSprite::IsLastFrame(std::string animName)
 {
-    return CurrentFrameIndex >= FramesCount - 1;
+    return CurrentFrameIndex >= CurrentAnimation->AnimationFrames->Count() - 1;
 }
 
 void DSprite::UpdateInnerImpl()
@@ -206,5 +258,7 @@ void DSprite::UpdateInnerImpl()
 
 void DSprite::ApplyCurrentTexture()
 {
-    SetTexture(spriteTexturesList->Get(CurrentFrameIndex));
+    BaseTexture* myTex = CurrentAnimation->AnimationFrames->Get(this->CurrentFrameIndex);
+
+    SetTexture(myTex);
 }

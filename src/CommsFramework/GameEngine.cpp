@@ -56,18 +56,15 @@ BaseSprite* GameEngine::GetSprite(std::string name)
 
     // Get sprite
     BaseSprite* spriteObject = Graphics->CreateSprite();
+    
+    PointerList<SpriteAnimation*>* spriteAnimations = Resources->GetAnimationsForSprite(spriteObject);
 
-    // Get resources
-    PointerList<Resource*>* spriteResources = Resources->GetSpriteResources(name);
+    BuildAnimationTextures(spriteAnimations);
 
-    // Transform resources to textures
-    PointerList<BaseTexture*>* spriteTextures = CreateTexturesFromResources(spriteResources);
+    // At this point, the sprite anims have created their textures.
+    spriteObject->SetAnimations(spriteAnimations);
 
-    // Assign textures to sprite
-    spriteObject->SetTextures(spriteTextures);
-
-    delete(spriteTextures);
-    delete(spriteResources);
+    delete(spriteAnimations);
 
     return spriteObject;
 }
@@ -117,6 +114,17 @@ PointerList<BaseTexture*>* GameEngine::CreateTexturesFromResources(PointerList<R
     }
 
     return textureList;
+}
+
+void GameEngine::BuildAnimationTextures(PointerList<SpriteAnimation*>* anims)
+{
+    auto it = anims->GetContainer()->begin();
+    while (it != anims->GetContainer()->end())
+    {
+        SpriteAnimation* anim = *it;
+
+        anim->AnimationFrames = CreateTexturesFromResources(anim->AnimationResources);
+    }
 }
 
 GameEngineInitParams * GameEngineInitParams::CreateDefaultParams()

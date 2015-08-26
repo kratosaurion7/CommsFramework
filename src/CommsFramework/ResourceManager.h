@@ -14,10 +14,15 @@
 #include "XmlReader.h"
 #include "SpriteDescriptor.h"
 
+#include "SpriteAnimation.h"
+#include "BaseSprite.h"
+
 class Resource;
 class GameModule;
 class ResourceContainer;
 class SpriteDescriptor;
+class BaseSprite;
+class SpriteAnimation;
 
 struct ResourceManagerInitParams {
 
@@ -44,7 +49,9 @@ public:
 
     Resource* GetResource(std::string name, GameModule* targetModule = NULL);
 
-    PointerList<Resource*>* GetSpriteResources(std::string spriteName, GameModule* targetModule = NULL);
+    PointerList<SpriteAnimation*>* GetAnimationsForSprite(BaseSprite* sprite);
+
+    //PointerList<Resource*>* GetSpriteResources(std::string spriteName, GameModule* targetModule = NULL);
 
     PointerList<Resource*>* Resources;
 

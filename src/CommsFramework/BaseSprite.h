@@ -4,6 +4,7 @@
 #include "BaseTexture.h"
 
 #include "PointerList.h"
+#include "SpriteAnimation.h"
 
 #include <string>
 
@@ -15,11 +16,15 @@ public:
     int SpriteFPS = 0;
     bool LoopAnimation;
     bool IsPlaying;
+    SpriteAnimation* CurrentAnimation;
+    SpriteAnimation* DefaultAnimation;
 
     bool Clicked();
 
     bool MouseOver();
 
+    virtual PointerList<SpriteAnimation*>* GetAnimations() = 0;
+    virtual void SetAnimations(PointerList<SpriteAnimation*>* newAnims) = 0;
     virtual BaseTexture* GetCurrentTexture() = 0;
     virtual PointerList<BaseTexture*>* GetTextures() = 0;
 
@@ -30,11 +35,11 @@ public:
     virtual void Stop() = 0;
     virtual void Reset() = 0;
 
-    virtual void NextFrame(std::string animName = "") = 0;
+    virtual void NextFrame() = 0;
     virtual void SetFrame(int index, std::string animName = "") = 0;
     virtual bool IsLastFrame(std::string animName = "") = 0;
 
     virtual void SetTexture(BaseTexture* texture) = 0;
-    virtual void SetTextures(PointerList<BaseTexture*>* textures) = 0;
+    //virtual void SetTextures(PointerList<BaseTexture*>* textures) = 0;
 };
 

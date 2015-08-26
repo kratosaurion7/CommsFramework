@@ -21,8 +21,9 @@ public:
     DSprite();
     ~DSprite();
 
+    virtual PointerList<SpriteAnimation*>* GetAnimations();
+    virtual void SetAnimations(PointerList<SpriteAnimation*>* newAnims);
     virtual DTexture* GetCurrentTexture();
-
     virtual PointerList<BaseTexture*>* GetTextures();
 
     virtual void Draw();
@@ -32,12 +33,12 @@ public:
     virtual void Stop();
     virtual void Reset();
 
-    virtual void NextFrame(std::string animName = "");
+    virtual void NextFrame();
     virtual void SetFrame(int index, std::string animName = "");
     virtual bool IsLastFrame(std::string animName = "");
 
     virtual void SetTexture(BaseTexture* texture);
-    virtual void SetTextures(PointerList<BaseTexture*>* textures);
+    //virtual void SetTextures(PointerList<BaseTexture*>* textures);
 
     sf::Sprite* innerImpl;
     sf::Drawable* GetDrawableImplementation();
@@ -50,9 +51,12 @@ private:
 
     int lastFrameTick;
 
+    SpriteAnimation* FindAnim(std::string name);
+
     DTexture* spriteTexture; // Texture currently on sprite.
     //PointerList<DTexture*>* spriteTexturesList;
     PointerList<SpriteAnimation*>* spriteAnimationList;
+
 
     void UpdateInnerImpl();
     void ApplyCurrentTexture();

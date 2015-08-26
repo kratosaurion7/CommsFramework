@@ -22,6 +22,7 @@ public:
 };
 
 class GameModule;
+class SpriteAnimation;
 
 class SpriteDescriptor {
 public:
