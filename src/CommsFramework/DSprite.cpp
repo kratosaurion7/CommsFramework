@@ -247,6 +247,8 @@ SpriteAnimation * DSprite::FindAnim(std::string name)
             targetAnimation = anim;
             break;
         }
+
+        it++;
     }
 
     return targetAnimation;
