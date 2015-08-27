@@ -489,7 +489,7 @@ PointerList<SpriteDescriptor*>* ResourceManager::CreateSpritesFromXmlNodes(Point
 
                     newAnim->AnimName = animName;
 
-                    auto spriteFrames = animNode->GetNodes("frame");
+                    auto spriteFrames = animNode->GetNodes("frame", true);
                     if (spriteFrames != NULL)
                     {
                         auto spriteFramesIterator = spriteFrames->GetContainer()->begin();

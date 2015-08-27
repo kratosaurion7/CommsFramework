@@ -50,18 +50,18 @@ public:
 
     std::string Contents();
 
-    XmlNode* GetNode(std::string nodeName);
+    XmlNode* GetNode(std::string nodeName, bool searchInChildOnly = false);
 
-    PointerList<XmlNode*>* GetNodes(std::string nodeName);
+    PointerList<XmlNode*>* GetNodes(std::string nodeName, bool searchInChildOnly = false);
 
     XmlNodeAttribute GetAttribute(std::string attributeName);
 
 private:
     xml_node<>* data_node;
 
-    xml_node<>* FindNode(xml_node<>* node, std::function<bool(rapidxml::xml_node<>*)> predicate);
+    xml_node<>* FindNode(xml_node<>* node, std::function<bool(rapidxml::xml_node<>*)> predicate, bool searchInChildOnly);
 
-    void FindNodeList(xml_node<>* node, std::function<bool(rapidxml::xml_node<>*)> predicate, PointerList<xml_node<>*> &aggregate);
+    void FindNodeList(xml_node<>* node, std::function<bool(rapidxml::xml_node<>*)> predicate, PointerList<xml_node<>*> &aggregate, bool searchInChildOnly);
 };
 
 class XmlNodeAttribute

@@ -113,13 +113,13 @@ XmlNodeAttribute XmlNode::GetAttribute(std::string attributeName)
     }
 }
 
-XmlNode* XmlNode::GetNode(std::string nodeName)
+XmlNode* XmlNode::GetNode(std::string nodeName, bool searchInChildOnly)
 {
     auto pred = [nodeName](rapidxml::xml_node<>*node) -> bool {
         return strcmp(node->name(), nodeName.c_str()) == 0;
     };
 
-    auto ret = FindNode(data_node, pred);
+    auto ret = FindNode(data_node, pred, searchInChildOnly);
 
     if (ret != NULL)
     {
@@ -134,7 +134,7 @@ XmlNode* XmlNode::GetNode(std::string nodeName)
 }
 
 
-PointerList<XmlNode*>* XmlNode::GetNodes(std::string nodeName)
+PointerList<XmlNode*>* XmlNode::GetNodes(std::string nodeName, bool searchInChildOnly)
 {
     auto pred = [nodeName](rapidxml::xml_node<>*node) -> bool {
         return strcmp(node->name(), nodeName.c_str()) == 0;
@@ -143,7 +143,7 @@ PointerList<XmlNode*>* XmlNode::GetNodes(std::string nodeName)
     PointerList<xml_node<>*> listOfStuff;
     PointerList<XmlNode*>* nodeList = new PointerList<XmlNode*>();
 
-    FindNodeList(data_node, pred, listOfStuff);
+    FindNodeList(data_node, pred, listOfStuff, searchInChildOnly);
 
     auto stuff = listOfStuff.GetContainer();
 
@@ -164,7 +164,7 @@ PointerList<XmlNode*>* XmlNode::GetNodes(std::string nodeName)
 }
 
 
-xml_node<>* XmlNode::FindNode(xml_node<>* node, std::function<bool(rapidxml::xml_node<>*)> predicate)
+xml_node<>* XmlNode::FindNode(xml_node<>* node, std::function<bool(rapidxml::xml_node<>*)> predicate, bool searchInChildOnly)
 {
     if (node == NULL)
         return NULL;
@@ -180,25 +180,28 @@ xml_node<>* XmlNode::FindNode(xml_node<>* node, std::function<bool(rapidxml::xml
         if (nextNode == NULL || nextNode->type() == node_data)
             nextNode = node->next_sibling();
 
-        if (nextNode == NULL && node->parent())
-            nextNode = node->parent()->next_sibling();
-
-        rapidxml::xml_node<>* nextParent = node;
-        while (nextNode == NULL)
+        if (!searchInChildOnly)
         {
-            nextParent = nextParent->parent();
+            if (nextNode == NULL && node->parent())
+                nextNode = node->parent()->next_sibling();
 
-            if (nextParent->type() == node_document)
-                return NULL;
+            rapidxml::xml_node<>* nextParent = node;
+            while (nextNode == NULL)
+            {
+                nextParent = nextParent->parent();
 
-            nextNode = nextParent->next_sibling();
+                if (nextParent->type() == node_document)
+                    return NULL;
+
+                nextNode = nextParent->next_sibling();
+            }
         }
 
-        return FindNode(nextNode, predicate);
+        return FindNode(nextNode, predicate, searchInChildOnly);
     }
 }
 
-void XmlNode::FindNodeList(xml_node<>* node, std::function<bool(rapidxml::xml_node<>*)> predicate, PointerList<xml_node<>*> &aggregate)
+void XmlNode::FindNodeList(xml_node<>* node, std::function<bool(rapidxml::xml_node<>*)> predicate, PointerList<xml_node<>*> &aggregate, bool searchInChildOnly)
 {
     if (node == NULL)
         return;
@@ -213,20 +216,23 @@ void XmlNode::FindNodeList(xml_node<>* node, std::function<bool(rapidxml::xml_no
     if (nextNode == NULL || nextNode->type() == node_data)
         nextNode = node->next_sibling();
 
-    if (nextNode == NULL && node->parent())
-        nextNode = node->parent()->next_sibling();
-
-    rapidxml::xml_node<>* nextParent = node;
-    while (nextNode == NULL)
+    if (!searchInChildOnly)
     {
-        nextParent = nextParent->parent();
+        if (nextNode == NULL && node->parent())
+            nextNode = node->parent()->next_sibling();
 
-        if (nextParent->type() == node_document)
-            return;
+        rapidxml::xml_node<>* nextParent = node;
+        while (nextNode == NULL)
+        {
+            nextParent = nextParent->parent();
 
-        nextNode = nextParent->next_sibling();
+            if (nextParent->type() == node_document)
+                return;
+
+            nextNode = nextParent->next_sibling();
+        }
     }
 
-    FindNodeList(nextNode, predicate, aggregate);
+    FindNodeList(nextNode, predicate, aggregate, searchInChildOnly);
 }
 
