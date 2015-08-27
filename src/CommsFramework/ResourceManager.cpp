@@ -501,7 +501,7 @@ PointerList<SpriteDescriptor*>* ResourceManager::CreateSpritesFromXmlNodes(Point
                             if (idAttribute != NULL)
                             {
                                 // If the frame does not have an Id attribute to link to a resource, do not add the frame.
-                                std::string frameId = frameNode->GetAttribute("Id").AttributeValue;
+                                std::string frameId = idAttribute;
 
                                 Resource* animFrameResource = GetResource(frameId);
                                 newAnim->AnimationResources->Add(animFrameResource);

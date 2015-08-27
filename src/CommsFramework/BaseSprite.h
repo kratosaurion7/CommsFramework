@@ -5,6 +5,7 @@
 
 #include "PointerList.h"
 #include "SpriteAnimation.h"
+#include "BaseMouse.h"
 
 #include <string>
 
@@ -19,7 +20,7 @@ public:
     SpriteAnimation* CurrentAnimation;
     SpriteAnimation* DefaultAnimation;
 
-    bool Clicked();
+    bool Clicked(MouseButtons targetButton = LEFT);
     bool MouseOver();
 
     virtual PointerList<SpriteAnimation*>* GetAnimations() = 0;

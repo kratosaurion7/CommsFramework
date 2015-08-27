@@ -2,6 +2,8 @@
 
 #include <GameEngine.h>
 
+#include <BaseMouse.h>
+
 Coin::Coin()
 {
     this->CurrentState = COIN_IDLE;
@@ -12,14 +14,6 @@ Coin::~Coin()
 {
 }
 
-void Coin::Clicked()
-{
-    if (this->CurrentState == COIN_IDLE)
-    {
-        this->CurrentState = COIN_START_SPIN;
-    }
-}
-
 void Coin::Update()
 {
     switch (this->CurrentState)
@@ -27,17 +21,24 @@ void Coin::Update()
         case COIN_IDLE:
         {
             // Check is coin is clicked
-            if (this->CoinSprite->Clicked())
+            if (this->CoinSprite->Clicked(LEFT))
             {
                 CoinSprite->Show(true);
                 this->CurrentState = COIN_START_SPIN;
+                animationToStart = "Spin";
+            }
+            else if (this->CoinSprite->Clicked(RIGHT))
+            {
+                CoinSprite->Show(true);
+                this->CurrentState = COIN_START_SPIN;
+                animationToStart = "Bonus";
             }
 
             break;
         }
         case COIN_START_SPIN:
         {
-            CoinSprite->Play(false);
+            CoinSprite->Play(animationToStart, false);
 
             this->CurrentState = COIN_SPIN;
 

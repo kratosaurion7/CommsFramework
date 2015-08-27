@@ -1,7 +1,37 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <config>
   <container name="assets\\package.pak" format="package" />
-  
+
+  <resource name="bonus_0" type="image" format="png" />
+  <resource name="bonus_1" type="image" format="png" />
+  <resource name="bonus_2" type="image" format="png" />
+  <resource name="bonus_3" type="image" format="png" />
+  <resource name="bonus_4" type="image" format="png" />
+  <resource name="bonus_5" type="image" format="png" />
+  <resource name="bonus_6" type="image" format="png" />
+  <resource name="bonus_7" type="image" format="png" />
+  <resource name="bonus_8" type="image" format="png" />
+  <resource name="bonus_9" type="image" format="png" />
+  <resource name="bonus_10" type="image" format="png" />
+  <resource name="bonus_11" type="image" format="png" />
+  <resource name="bonus_12" type="image" format="png" />
+  <resource name="bonus_13" type="image" format="png" />
+  <resource name="bonus_14" type="image" format="png" />
+  <resource name="bonus_15" type="image" format="png" />
+  <resource name="bonus_16" type="image" format="png" />
+  <resource name="bonus_17" type="image" format="png" />
+  <resource name="bonus_18" type="image" format="png" />
+  <resource name="bonus_19" type="image" format="png" />
+  <resource name="bonus_20" type="image" format="png" />
+  <resource name="bonus_21" type="image" format="png" />
+  <resource name="bonus_22" type="image" format="png" />
+  <resource name="bonus_23" type="image" format="png" />
+  <resource name="bonus_24" type="image" format="png" />
+  <resource name="bonus_25" type="image" format="png" />
+  <resource name="bonus_26" type="image" format="png" />
+  <resource name="bonus_27" type="image" format="png" />
+  <resource name="bonus_28" type="image" format="png" />
+  <resource name="bonus_29" type="image" format="png" />
   <resource name="win_00000" type="image" format="png" />
   <resource name="win_00001" type="image" format="png" />
   <resource name="win_00002" type="image" format="png" />
@@ -47,7 +77,7 @@
     <position X="0" Y="0" />
     <size Height="0" Width="0" />
     
-    <animation name="Flip">
+    <animation name="Spin">
         <frame Id="win_00000" />
         <frame Id="win_00001" />
         <frame Id="win_00002" />
@@ -90,5 +120,37 @@
         <frame Id="win_00039" />
     </animation>
     
+    <animation name="Bonus">
+        <frame Id="bonus_0" />
+        <frame Id="bonus_1" />
+        <frame Id="bonus_2" />
+        <frame Id="bonus_3" />
+        <frame Id="bonus_4" />
+        <frame Id="bonus_5" />
+        <frame Id="bonus_6" />
+        <frame Id="bonus_7" />
+        <frame Id="bonus_8" />
+        <frame Id="bonus_9" />
+        <frame Id="bonus_10" />
+        <frame Id="bonus_11" />
+        <frame Id="bonus_12" />
+        <frame Id="bonus_13" />
+        <frame Id="bonus_14" />
+        <frame Id="bonus_15" />
+        <frame Id="bonus_16" />
+        <frame Id="bonus_17" />
+        <frame Id="bonus_18" />
+        <frame Id="bonus_19" />
+        <frame Id="bonus_20" />
+        <frame Id="bonus_21" />
+        <frame Id="bonus_22" />
+        <frame Id="bonus_23" />
+        <frame Id="bonus_24" />
+        <frame Id="bonus_25" />
+        <frame Id="bonus_26" />
+        <frame Id="bonus_27" />
+        <frame Id="bonus_28" />
+        <frame Id="bonus_29" />
+    </animation>
   </sprite>
 </config>

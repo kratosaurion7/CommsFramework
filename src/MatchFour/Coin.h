@@ -22,12 +22,12 @@ public:
 
     BaseSprite* CoinSprite;
 
-    void Clicked();
-
     void Update(); // Pass state parameter ?
 private:
     int coinSpinCounter = 0;
 
     int idleCounter = 0;
+
+    std::string animationToStart;
 };
 

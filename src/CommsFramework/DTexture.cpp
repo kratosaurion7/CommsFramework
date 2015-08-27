@@ -46,7 +46,7 @@ void DTexture::LoadFromMemory(char * data, int dataSize)
 {
     bool res = innerImpl->loadFromMemory(data, dataSize);
 
-    assert(res != NULL);
+    
 
     if (res)
     {

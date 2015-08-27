@@ -96,6 +96,8 @@ PointerList<BaseTexture*>* GameEngine::CreateTexturesFromResources(PointerList<R
 {
     PointerList<BaseTexture*>* textureList = new PointerList<BaseTexture*>();
 
+    int counter = 0;
+
     auto it = resources->GetContainer()->begin();
     while (it != resources->GetContainer()->end())
     {
@@ -109,7 +111,7 @@ PointerList<BaseTexture*>* GameEngine::CreateTexturesFromResources(PointerList<R
         newTexture->LoadFromMemory(resourceData, dataSize);
 
         textureList->Add(newTexture);
-
+        counter++;
         it++;
     }
 
