@@ -158,7 +158,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;_WINDOWS;SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -166,8 +166,7 @@
       <AdditionalDependencies>libzmq-v120-mt-4_0_4.lib;sfml-graphics-d.lib;sfml-system-d.lib;sfml-window-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>XCOPY /Y "$(ProjectDir)..\..\libs\SFML\x32\bin\*.dll" "$(TargetDir)"
-XCOPY /Y "$(ProjectDir)..\..\libs\ZeroMQ\x32\bin\libzmq-v120-mt-4_0_4.dll" "$(TargetDir)"
+      <Command>XCOPY /Y "$(ProjectDir)..\..\libs\ZeroMQ\x32\bin\libzmq-v120-mt-4_0_4.dll" "$(TargetDir)"
 
 mkdir "$(TargetDir)Assets"
 
@@ -175,6 +174,8 @@ XCOPY /Y /E "Assets\*" "$(TargetDir)Assets"</Command>
     </PostBuildEvent>
     <Lib>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+      <AdditionalDependencies>sfml-audio-s-d.lib;sfml-graphics-s-d.lib;sfml-main-d.lib;sfml-network-s-d.lib;sfml-system-s-d.lib;sfml-window-s-d.lib;openal32.lib;jpeg.lib;OpenGL32.Lib;WinMM.Lib;gdi32.lib;freetype.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <Verbose>true</Verbose>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Static|Win32'">
