@@ -69,8 +69,6 @@ public:
             {
                 retList->Add(*it);
             }
-
-            it++;
         }
 
         return retList;
