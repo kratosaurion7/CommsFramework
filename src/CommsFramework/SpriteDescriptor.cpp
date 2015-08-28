@@ -13,15 +13,10 @@ SpriteDescriptor::SpriteDescriptor()
     FrameResources = new PointerList<Resource*>();
 
     Module = NULL;
-    position = NULL;
-    size = NULL;
 }
 
 SpriteDescriptor::~SpriteDescriptor()
 {
-    delete(position);
-    delete(size);
-
     delete(Frames);
     //delete(FrameResources);
 

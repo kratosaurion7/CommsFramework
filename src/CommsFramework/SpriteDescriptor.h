@@ -34,8 +34,8 @@ public:
 
     GameModule* Module;
 
-    FPosition* position;
-    FSize* size;
+    FPosition Position;
+    FSize Size;
 
     PointerList<SpriteAnimation*>* Animations;
 

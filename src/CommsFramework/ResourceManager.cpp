@@ -251,26 +251,6 @@ PointerList<SpriteAnimation*>* ResourceManager::GetAnimationsForSprite(BaseSprit
     return anims;
 }
 
-//PointerList<Resource*>* ResourceManager::GetSpriteResources(std::string spriteName, GameModule * targetModule)
-//{
-//    //PointerList<Resource*>* spriteResources = new PointerList<Resource*>();
-//
-//    auto it = SpritesInfo->GetContainer()->begin();
-//    while (it != SpritesInfo->GetContainer()->end())
-//    {
-//        SpriteDescriptor* item = (*it);
-//
-//        if (strcmp(item->SpriteName.c_str(), spriteName.c_str()) == 0)
-//        {
-//            return item->FrameResources;
-//        }
-//
-//        it++;
-//    }
-//
-//    return NULL;
-//}
-
 void ResourceManager::SetupSprites()
 {
     auto it = SpritesInfo->GetContainer()->begin();
@@ -447,7 +427,7 @@ PointerList<SpriteDescriptor*>* ResourceManager::CreateSpritesFromXmlNodes(Point
         {
             auto posX = SafeCharToFloat(posNode->GetAttribute("X").AttributeValue);
             auto posY = SafeCharToFloat(posNode->GetAttribute("Y").AttributeValue);
-            newDescriptor->position = new FPosition(posX, posY);
+            newDescriptor->Position = FPosition(posX, posY);
         }
         else
         {
@@ -455,7 +435,7 @@ PointerList<SpriteDescriptor*>* ResourceManager::CreateSpritesFromXmlNodes(Point
             int posX = 0;
             int posY = 0;
 
-            newDescriptor->position = new FPosition(posX, posY);
+            newDescriptor->Position = FPosition(posX, posY);
         }
         int i = 5;
         auto sizeNode = node->GetNode("size");
@@ -463,13 +443,13 @@ PointerList<SpriteDescriptor*>* ResourceManager::CreateSpritesFromXmlNodes(Point
         {
             auto sizeH = SafeCharToFloat(sizeNode->GetAttribute("Height").AttributeValue, 1);
             auto sizeW = SafeCharToFloat(sizeNode->GetAttribute("Width").AttributeValue, 1);
-            newDescriptor->size = new FSize(sizeH, sizeW);
+            newDescriptor->Size = FSize(sizeH, sizeW);
         }
         else
         {
             int sizeH = 1;
             int sizeW = 1;
-            newDescriptor->size = new FSize(sizeH, sizeW);
+            newDescriptor->Size = FSize(sizeH, sizeW);
         }
         
         auto spriteAnimations = node->GetNodes("animation");
