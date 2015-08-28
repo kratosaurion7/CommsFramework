@@ -74,6 +74,25 @@ public:
         return retList;
     };
 
+    T BaseList::Single(std::function<bool(T)> predicate)
+    {
+        T retValue = NULL;
+
+        for (std::list<T>::iterator it = _container->begin(); it != _container->end(); it++)
+        {
+            T val = *it;
+
+            auto test = predicate(*it);
+
+            if (test)
+            {
+                retValue = val;
+            }
+        }
+
+        return retValue;
+    };
+
     //template<class T, class QWER>
     //BaseList<T>* BaseList::Select(QWER arg)
     //{
