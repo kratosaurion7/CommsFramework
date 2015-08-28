@@ -22,3 +22,9 @@ bool BaseSprite::MouseOver()
 
     return myRec.IsPointInside(mousePos);
 }
+
+void BaseSprite::ApplyDescriptor(SpriteDescriptor* descriptor)
+{
+    this->SetPos(descriptor->Position);
+    //this->SetSize(descriptor->Size);
+}

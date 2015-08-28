@@ -56,7 +56,10 @@ BaseSprite* GameEngine::GetSprite(std::string name)
 
     // Get sprite
     BaseSprite* spriteObject = Graphics->CreateSprite(name);
+    SpriteDescriptor* desc = Resources->SpritesInfo->Single([name](SpriteDescriptor* descriptor) { return descriptor->SpriteName.compare(name) == 0; });
     
+    spriteObject->ApplyDescriptor(desc);
+
     PointerList<SpriteAnimation*>* spriteAnimations = Resources->GetAnimationsForSprite(spriteObject);
 
     BuildAnimationTextures(spriteAnimations);

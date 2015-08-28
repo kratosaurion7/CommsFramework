@@ -6,8 +6,11 @@
 #include "PointerList.h"
 #include "SpriteAnimation.h"
 #include "BaseMouse.h"
+#include "SpriteDescriptor.h"
 
 #include <string>
+
+class SpriteDescriptor;
 
 class BaseSprite : public DrawObject
 {
@@ -22,6 +25,8 @@ public:
 
     bool Clicked(MouseButtons targetButton = LEFT);
     bool MouseOver();
+
+    void ApplyDescriptor(SpriteDescriptor* descriptor);
 
     virtual PointerList<SpriteAnimation*>* GetAnimations() = 0;
     virtual void SetAnimations(PointerList<SpriteAnimation*>* newAnims) = 0;
