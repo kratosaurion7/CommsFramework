@@ -6,6 +6,8 @@
 
 #include <FileSystem.h>
 
+#include <stdio.h>
+
 GameEngine* eng;
 
 BaseGraphicEngine* GameGraphics;
@@ -18,6 +20,18 @@ ResourceManager* GameResources;
 
 int main()
 {
+    auto x = new BaseList<Coin*>();
+    x->Add(new Coin());
+
+    //x->Select<BaseSprite*>([](Coin* param1) { return new BaseSprite()});
+
+    auto y = ListSelect<Coin*, FSize*>(x, [](Coin* param) { return new FSize();});
+
+
+    y->ForEach([](FSize* siz) { siz->Height = 60; });
+
+    auto z = ListAggregate<FSize*, int>(y, 120, [](int val, FSize* siz) { return val + siz->Height; });
+
     while (true)
     {
         GameEngine* eng = new GameEngine();
