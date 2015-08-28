@@ -6,7 +6,7 @@
 
 #include <algorithm>
 
-template <class T> 
+template <class T>
 class BaseList
 {
 public:
@@ -93,10 +93,10 @@ public:
         return retValue;
     };
 
-    //template<class T, class QWER>
-    //BaseList<T>* BaseList::Select(QWER arg)
+    //template<class T, class Out = int>
+    //BaseList<Out>* BaseList::Select(std::function<Out(T)> selector)
     //{
-    //    BaseList<QWER>* list = new BaseList<QWER>();
+    //    
 
     //    return NULL;
     //};
@@ -158,3 +158,17 @@ protected:
     std::list<T> *_container;
 };
 
+template <class T, class U>
+BaseList<U>* ListSelect(BaseList<T>* input, std::function<U(T)> selector)
+{
+    BaseList<U>* outList = new BaseList<U>();
+
+    for (std::list<T>::iterator it = input->GetContainer()->begin(); it != input->GetContainer()->end(); it++)
+    {
+        auto projected = selector(*it);
+
+        outList->Add(projected);
+    }
+
+    return outList;
+};
