@@ -174,3 +174,18 @@ BaseList<U>* ListSelect(BaseList<T>* input, std::function<U(T)> selector)
 
     return outList;
 };
+
+template <class T, class Agg>
+Agg ListAggregate(BaseList<T>* input, Agg initial, std::function<Agg(Agg, T)> func)
+{
+    Agg aggregateValue = initial;
+
+    for (std::list<T>::iterator it = input->GetContainer()->begin(); it != input->GetContainer()->end(); it++)
+    {
+        T element = *it;
+
+        aggregateValue = func(aggregateValue, element);
+    }
+
+    return aggregateValue;
+}
