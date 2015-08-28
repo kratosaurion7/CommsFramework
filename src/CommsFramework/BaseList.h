@@ -93,13 +93,15 @@ public:
         return retValue;
     };
 
-    //template<class T, class Out = int>
-    //BaseList<Out>* BaseList::Select(std::function<Out(T)> selector)
-    //{
-    //    
+    void BaseList::ForEach(std::function<void(T)> func)
+    {
+        for (std::list<T>::iterator it = _container->begin(); it != _container->end(); it++)
+        {
+            T val = *it;
 
-    //    return NULL;
-    //};
+            func(val);
+        }
+    }
 
     int BaseList::IndexOf(T item)
     {
