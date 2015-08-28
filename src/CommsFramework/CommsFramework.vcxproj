@@ -127,8 +127,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Static|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>E:\Prog\lib\sfml\SFML-2.3_x32\include;E:\Prog\lib\zeromq\ZeroMQ 4.0.4_x32\include;$(ProjectDir)..\..\libs\rapidxml;$(IncludePath)</IncludePath>
-    <LibraryPath>E:\Prog\lib\sfml\SFML-2.3_x32\lib;E:\Prog\lib\zeromq\ZeroMQ 4.0.4_x32\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)..\..\libs\SFML\x32\include;$(ProjectDir)..\..\libs\ZeroMQ\x32\include;$(ProjectDir)..\..\libs\rapidxml;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)..\..\libs\sfml\x32\lib;$(ProjectDir)..\..\libs\ZeroMQ\x32\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
