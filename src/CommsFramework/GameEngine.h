@@ -43,6 +43,9 @@ public:
     void Post_Update();
 
     BaseSprite* GetSprite(std::string name, bool copyOnly = true);
+
+    BaseList<BaseSprite*>* GetSpriteList(std::string name);
+
 private:
     GameEngineInitParams* engineInitParams;
 

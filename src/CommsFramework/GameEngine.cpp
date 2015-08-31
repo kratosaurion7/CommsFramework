@@ -80,9 +80,17 @@ BaseSprite* GameEngine::GetSprite(std::string name, bool copyOnly)
     // At this point, the sprite anims have created their textures.
     spriteObject->SetAnimations(spriteAnimations);
 
-    //delete(spriteAnimations);
+    if (spriteObject != NULL)
+    {
+        GameSprites->Add(spriteObject);
+    }
 
     return spriteObject;
+}
+
+BaseList<BaseSprite*>* GameEngine::GetSpriteList(std::string name)
+{
+    return GameSprites->Where([name](BaseSprite* sprite) { return sprite->Ident == name; });
 }
 
 void GameEngine::Load()
