@@ -57,6 +57,21 @@ public:
         return NULL;
     };
 
+    T BaseList::GetBy(std::function<bool(T)> predicate)
+    {
+        for (std::list<T>::iterator it = _container->begin(); it != _container->end(); it++)
+        {
+            T element = *it;
+            
+            if (predicate(element))
+            {
+                return element;
+            }
+        }
+
+        return NULL;
+    };
+
     BaseList<T>* BaseList::Where(std::function<bool(T)> predicate)
     {
         BaseList<T>* retList = new BaseList<T>();
@@ -93,6 +108,23 @@ public:
         return retValue;
     };
 
+    bool BaseList::Contains(std::function<bool(T)> predicate)
+    {
+        for (std::list<T>::iterator it = _container->begin(); it != _container->end(); it++)
+        {
+            T element = *it;
+
+            if (predicate(element))
+            {
+                return true;
+            }
+
+            i++;
+        }
+
+        return false;
+    };
+
     void BaseList::ForEach(std::function<void(T)> func)
     {
         for (std::list<T>::iterator it = _container->begin(); it != _container->end(); it++)
@@ -101,7 +133,7 @@ public:
 
             func(val);
         }
-    }
+    };
 
     int BaseList::IndexOf(T item)
     {
