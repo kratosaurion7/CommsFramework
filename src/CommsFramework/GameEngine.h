@@ -42,9 +42,11 @@ public:
 
     void Post_Update();
 
-    BaseSprite* GetSprite(std::string name);
+    BaseSprite* GetSprite(std::string name, bool copyOnly = true);
 private:
     GameEngineInitParams* engineInitParams;
+
+    PointerList<BaseSprite*>* GameSprites;
 
     void CreateSpritesFromConfig();
 

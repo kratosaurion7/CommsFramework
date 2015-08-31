@@ -21,6 +21,8 @@ GameEngine::GameEngine()
     Graphics = new GraphicEngine();
     Resources = new ResourceManager();
 
+    GameSprites = new PointerList<BaseSprite*>();
+
     SFMLKeyboard* sfKeyboard = new SFMLKeyboard();
     sfKeyboard->graphicsRef = this->Graphics;
 
@@ -39,6 +41,9 @@ GameEngine::~GameEngine()
     delete(Graphics);
 
     delete(Resources);
+
+    GameSprites->Release();
+    delete(GameSprites);
 }
 
 void GameEngine::Init(GameEngineInitParams * params)
@@ -50,9 +55,17 @@ void GameEngine::Init(GameEngineInitParams * params)
     Resources->Init(params->ResourceParams);
 }
 
-BaseSprite* GameEngine::GetSprite(std::string name)
+BaseSprite* GameEngine::GetSprite(std::string name, bool copyOnly)
 {
-    // Check first if it exists ? Or create a copy
+    //if (!copyOnly)
+    //{
+    //    auto element = GameSprites->GetBy([name](BaseSprite* sprite) { return sprite->Ident.compare(name) == 0; });
+
+    //    if (element != NULL)
+    //    {
+    //        return element;
+    //    }
+    //}
 
     // Get sprite
     BaseSprite* spriteObject = Graphics->CreateSprite(name);
