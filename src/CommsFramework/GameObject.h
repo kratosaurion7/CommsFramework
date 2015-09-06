@@ -8,7 +8,5 @@ public:
     GameObject();
     ~GameObject();
 
-    std::string Ident;
-
 };
 

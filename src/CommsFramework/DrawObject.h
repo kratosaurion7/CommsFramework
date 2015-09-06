@@ -1,14 +1,16 @@
 #pragma once
 
-#include "GameObject.h"
-
 #include "FPosition.h"
 #include "FRectangle.h"
 #include "FSize.h"
 
-class DrawObject : public GameObject
+#include <string>
+
+class DrawObject
 {
 public:
+    std::string Ident;
+
     virtual void Show(bool show);
     virtual bool IsVisible();
 
