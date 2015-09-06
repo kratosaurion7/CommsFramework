@@ -60,12 +60,15 @@ public:
     // Check if the current frame is pointing to the last frame index
     virtual bool IsLastFrame(std::string animName = "");
 
+
     /**
      * Set the current sprite texture to the specified texture.
      * The new texture will be casted to DTexture to be send to the 
      * innerImpl
      */
     virtual void SetTexture(BaseTexture* texture);
+
+    virtual BaseSprite* Clone();
 
     /**
      * Function called by the graphic engine to retrieve the inner
@@ -74,6 +77,8 @@ public:
 
     // Current playing animation of the Sprite.
     SpriteAnimation* CurrentAnimation;
+
+
 
 private:
     // System tick count of the last frame update, in milisecond.

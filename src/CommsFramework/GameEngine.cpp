@@ -55,17 +55,14 @@ void GameEngine::Init(GameEngineInitParams * params)
     Resources->Init(params->ResourceParams);
 }
 
-BaseSprite* GameEngine::GetSprite(std::string name, bool copyOnly)
+BaseSprite* GameEngine::GetSprite(std::string name)
 {
-    //if (!copyOnly)
-    //{
-    //    auto element = GameSprites->GetBy([name](BaseSprite* sprite) { return sprite->Ident.compare(name) == 0; });
+    BaseSprite* existingSprite = GameSprites->Single([name](BaseSprite* sprt) { return sprt->Ident == name; });
 
-    //    if (element != NULL)
-    //    {
-    //        return element;
-    //    }
-    //}
+    if (existingSprite != NULL)
+    {
+        return existingSprite;
+    }
 
     // Get sprite
     BaseSprite* spriteObject = Graphics->CreateSprite(name);
@@ -91,6 +88,22 @@ BaseSprite* GameEngine::GetSprite(std::string name, bool copyOnly)
 BaseList<BaseSprite*>* GameEngine::GetSpriteList(std::string name)
 {
     return GameSprites->Where([name](BaseSprite* sprite) { return sprite->Ident == name; });
+}
+
+BaseSprite * GameEngine::CopySprite(std::string targetSpriteName, std::string newName)
+{
+    BaseSprite* orig = GetSprite(targetSpriteName);
+
+    BaseSprite* newSprite = orig->Clone();
+
+    if (newSprite != NULL)
+    {
+        newSprite->Ident = newName;
+
+        GameSprites->Add(newSprite);
+    }
+
+    return newSprite;
 }
 
 void GameEngine::Load()

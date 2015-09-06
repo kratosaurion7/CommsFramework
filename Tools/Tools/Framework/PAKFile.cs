@@ -20,7 +20,6 @@ namespace Tools.Framework
 
         private const int FILENAME_MAX_LENGTH = 32;
 
-
         public PAKFile()
         {
             PakDirectory = new PAKFileDirectory();
