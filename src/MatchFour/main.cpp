@@ -20,18 +20,6 @@ ResourceManager* GameResources;
 
 int main()
 {
-    auto x = new BaseList<Coin*>();
-    x->Add(new Coin());
-
-    //x->Select<BaseSprite*>([](Coin* param1) { return new BaseSprite()});
-
-    auto y = ListSelect<Coin*, FSize*>(x, [](Coin* param) { return new FSize();});
-
-
-    y->ForEach([](FSize* siz) { siz->Height = 60; });
-
-    auto z = ListAggregate<FSize*, int>(y, 120, [](int val, FSize* siz) { return val + siz->Height; });
-
     while (true)
     {
         GameEngine* eng = new GameEngine();
@@ -40,8 +28,6 @@ int main()
         params->ResourceParams->ConfigFileLocation = "rootConfig.xml";
 
         eng->Init(params);
-
-        //eng->Graphics->SetFramerate(15);
 
         eng->Load();
 
@@ -60,6 +46,10 @@ int main()
         Coin* coinSprite = new Coin();
         coinSprite->CoinSprite = sprt;
 
+        BaseSprite* newSprite = eng->CopySprite("Coin", "Coin2");
+        newSprite->SetPos(200, 200);
+        eng->Graphics->AddObject(newSprite);
+
         while (eng->Graphics->IsRunning())
         {
             eng->Pre_Update(); // Update at start of loop
@@ -69,6 +59,7 @@ int main()
             coinSprite->Update();
 
             sprt->Draw();
+            newSprite->Draw();
 
             eng->Update(); // Update just before draw
 

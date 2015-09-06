@@ -187,6 +187,20 @@ void DSprite::SetTexture(BaseTexture * texture)
     }
 }
 
+BaseSprite* DSprite::Clone()
+{
+    DSprite* test = new DSprite();
+
+    memcpy(test, this, sizeof(DSprite));
+
+    test->innerImpl = new sf::Sprite();
+
+    this->SetTexture(this->DefaultAnimation->AnimationFrames->Get(0));
+
+    UpdateInnerImpl();
+
+    return test;
+}
 
 sf::Drawable * DSprite::GetDrawableImplementation()
 {
