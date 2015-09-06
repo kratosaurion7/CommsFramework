@@ -90,12 +90,24 @@ BaseSprite* GameEngine::GetSprite(std::string name, bool copyOnly)
 
 BaseList<BaseSprite*>* GameEngine::GetSpriteList(std::string name)
 {
-    return GameSprites->Where([name](BaseSprite* sprite) { return sprite->Ident == name; });
+    return this->Graphics->Sprites->Where([name](BaseSprite* sprite) { return sprite->Ident == name; });
 }
 
 void GameEngine::Load()
 {
     CreateSpritesFromConfig();
+}
+
+void GameEngine::AddGameObject(GameObject * obj)
+{
+    this->GameObjects->Add(obj);
+
+    for (int i = 0; i < obj->ObjectSprites->Count(); i++)
+    {
+        BaseSprite* sprite = obj->ObjectSprites->Get(i);
+
+        this->Graphics->AddObject(sprite);
+    }
 }
 
 void GameEngine::Pre_Update()

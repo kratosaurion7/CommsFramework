@@ -4,12 +4,15 @@
 
 #include "ResourceManager.h"
 
+#include "GameObject.h"
 #include "BaseSprite.h"
 
 #include "BaseKeyboard.h"
 #include "BaseMouse.h"
 
 #include <string>
+
+class GameObject;
 
 struct GameEngineInitParams
 {
@@ -36,6 +39,8 @@ public:
 
     void Load();
 
+    void AddGameObject(GameObject* obj);
+
     void Pre_Update();
 
     void Update();
@@ -49,7 +54,8 @@ public:
 private:
     GameEngineInitParams* engineInitParams;
 
-    PointerList<BaseSprite*>* GameSprites;
+    PointerList<GameObject*>* GameObjects;
+    //PointerList<BaseSprite*>* GameSprites;
 
     void CreateSpritesFromConfig();
 
