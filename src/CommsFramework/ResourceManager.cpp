@@ -50,7 +50,10 @@ void ResourceManager::Init(ResourceManagerInitParams* initParams)
     PathToAssetsFolder = initParams->AssetRootFolder;
 
     startingParams = initParams;
+}
 
+void ResourceManager::Load()
+{
     ParseConfigFiles();
 
     SetupSprites();

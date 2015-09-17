@@ -32,9 +32,13 @@ public:
     static BaseKeyboard* Keyboard;
     static BaseMouse* Mouse;
 
+    void Init();
+
     void Init(GameEngineInitParams* params);
 
     void Load();
+
+    void Play();
 
     void Pre_Update();
 

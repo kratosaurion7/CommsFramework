@@ -41,6 +41,8 @@ public:
 
     void Init(ResourceManagerInitParams* initParams);
 
+    void Load();
+
     void ParseConfigFiles();
 
     std::string PathToAssetsFolder;

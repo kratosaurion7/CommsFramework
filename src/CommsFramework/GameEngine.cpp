@@ -46,6 +46,13 @@ GameEngine::~GameEngine()
     delete(GameSprites);
 }
 
+void GameEngine::Init()
+{
+    GameEngineInitParams* defaultParams = GameEngineInitParams::CreateDefaultParams();
+    
+    this->Init(defaultParams);
+}
+
 void GameEngine::Init(GameEngineInitParams * params)
 {
     engineInitParams = params;
@@ -109,6 +116,22 @@ BaseSprite * GameEngine::CopySprite(std::string targetSpriteName, std::string ne
 void GameEngine::Load()
 {
     CreateSpritesFromConfig();
+
+    Resources->Load();
+}
+
+void GameEngine::Play()
+{
+    this->Pre_Update(); // Update at start of loop
+
+    this->Graphics->ProcessEvents();
+
+    this->Update(); // Update just before draw
+
+    this->Graphics->Draw();
+
+    this->Post_Update(); // Update just before end of loop
+
 }
 
 void GameEngine::Pre_Update()

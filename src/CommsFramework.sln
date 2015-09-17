@@ -10,6 +10,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MatchFour", "MatchFour\Matc
 		{BB1C3245-05C5-4512-93DB-E12D2ECD26E4} = {BB1C3245-05C5-4512-93DB-E12D2ECD26E4}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Platformer", "Platformer\Platformer.vcxproj", "{6C9C1B72-4A3B-4824-8147-23A2C8624391}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BB1C3245-05C5-4512-93DB-E12D2ECD26E4} = {BB1C3245-05C5-4512-93DB-E12D2ECD26E4}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -44,6 +49,18 @@ Global
 		{31972B06-958F-4716-B8CB-131CAEBAFAF8}.Release|Win32.Build.0 = Release|Win32
 		{31972B06-958F-4716-B8CB-131CAEBAFAF8}.Release|x64.ActiveCfg = Release|x64
 		{31972B06-958F-4716-B8CB-131CAEBAFAF8}.Release|x64.Build.0 = Release|x64
+		{6C9C1B72-4A3B-4824-8147-23A2C8624391}.Debug|Win32.ActiveCfg = Debug|Win32
+		{6C9C1B72-4A3B-4824-8147-23A2C8624391}.Debug|Win32.Build.0 = Debug|Win32
+		{6C9C1B72-4A3B-4824-8147-23A2C8624391}.Debug|x64.ActiveCfg = Debug|x64
+		{6C9C1B72-4A3B-4824-8147-23A2C8624391}.Debug|x64.Build.0 = Debug|x64
+		{6C9C1B72-4A3B-4824-8147-23A2C8624391}.Debug-Static|Win32.ActiveCfg = Debug|Win32
+		{6C9C1B72-4A3B-4824-8147-23A2C8624391}.Debug-Static|Win32.Build.0 = Debug|Win32
+		{6C9C1B72-4A3B-4824-8147-23A2C8624391}.Debug-Static|x64.ActiveCfg = Debug|x64
+		{6C9C1B72-4A3B-4824-8147-23A2C8624391}.Debug-Static|x64.Build.0 = Debug|x64
+		{6C9C1B72-4A3B-4824-8147-23A2C8624391}.Release|Win32.ActiveCfg = Release|Win32
+		{6C9C1B72-4A3B-4824-8147-23A2C8624391}.Release|Win32.Build.0 = Release|Win32
+		{6C9C1B72-4A3B-4824-8147-23A2C8624391}.Release|x64.ActiveCfg = Release|x64
+		{6C9C1B72-4A3B-4824-8147-23A2C8624391}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
