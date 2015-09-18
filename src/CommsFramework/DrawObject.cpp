@@ -114,3 +114,23 @@ void DrawObject::SetSize(FSize value)
 {
     size = value;
 }
+
+FloatVec DrawObject::GetScale()
+{
+    return this->scale;
+}
+
+void DrawObject::SetScale(float factor)
+{
+    this->scale.X = factor;
+    this->scale.Y = factor;
+
+    UpdateInnerImpl();
+}
+
+void DrawObject::SetScale(FloatVec factor)
+{
+    this->scale = factor;
+
+    UpdateInnerImpl();
+}

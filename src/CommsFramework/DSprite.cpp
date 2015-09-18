@@ -248,6 +248,8 @@ bool DSprite::IsLastFrame(std::string animName)
 void DSprite::UpdateInnerImpl()
 {
     innerImpl->setPosition(position.X, position.Y);
+
+    innerImpl->setScale(this->scale.X, this->scale.Y);
 }
 
 void DSprite::ApplyCurrentTexture()

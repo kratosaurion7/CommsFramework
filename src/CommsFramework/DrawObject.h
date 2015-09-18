@@ -38,11 +38,16 @@ public:
     virtual void SetSize(float height, float width);
     virtual void SetSize(FSize value);
 
+    virtual FloatVec GetScale();
+    virtual void SetScale(float factor);
+    virtual void SetScale(FloatVec factor);
+
 protected:
     bool isVisible;
 
     FPosition position;
     FSize size;
+    FloatVec scale;
 
     virtual void UpdateInnerImpl() = 0;
 };
