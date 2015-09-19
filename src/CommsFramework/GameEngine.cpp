@@ -147,6 +147,13 @@ void GameEngine::Post_Update()
     GameEngine::Mouse->UpdateMouseState();
 }
 
+BaseSprite * GameEngine::CreateSprite(std::string spriteName)
+{
+    BaseSprite* sprt = this->Graphics->CreateSprite(spriteName);
+
+    return sprt;
+}
+
 BaseSprite * GameEngine::CreateSprite(std::string spriteName, std::string spriteTexturePath)
 {
     BaseSprite* sprt = this->Graphics->CreateSprite(spriteName);

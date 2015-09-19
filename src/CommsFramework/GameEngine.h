@@ -46,6 +46,8 @@ public:
 
     void Post_Update();
     
+    BaseSprite* CreateSprite(std::string spriteName);
+
     BaseSprite* CreateSprite(std::string spriteName, std::string spriteTexturePath);
 
     BaseSprite* GetSprite(std::string name);
