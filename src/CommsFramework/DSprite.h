@@ -67,7 +67,7 @@ private:
     // Texture currently on sprite.
     DTexture* spriteTexture;
     // List of animations containing textures for the sprite.
-    PointerList<SpriteAnimation*>* spriteAnimationList;
+    
 
     /**
      * Check if the sprite is ready for another frame switch

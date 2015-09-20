@@ -34,5 +34,7 @@ SpriteAnimation * BaseSprite::CreateAnimation(std::string name)
     SpriteAnimation* newAnim = new SpriteAnimation();
     newAnim->AnimName = name;
 
+    spriteAnimationList->Add(newAnim);
+
     return newAnim;
 }

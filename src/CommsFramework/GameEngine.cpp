@@ -140,6 +140,14 @@ void GameEngine::Pre_Update()
 
 void GameEngine::Update()
 {
+    auto it = GameSprites->GetContainer()->begin();
+    while (it != GameSprites->GetContainer()->end())
+    {
+        BaseSprite* sprite = *it;
+        sprite->Draw();
+
+        it++;
+    }
 }
 
 void GameEngine::Post_Update()
@@ -150,6 +158,8 @@ void GameEngine::Post_Update()
 BaseSprite * GameEngine::CreateSprite(std::string spriteName)
 {
     BaseSprite* sprt = this->Graphics->CreateSprite(spriteName);
+    
+    GameSprites->Add(sprt);
 
     return sprt;
 }
@@ -163,6 +173,8 @@ BaseSprite * GameEngine::CreateSprite(std::string spriteName, std::string sprite
 
     if(tex != NULL)
         sprt->SetTexture(tex);
+
+    GameSprites->Add(sprt);
 
     return sprt;
 }

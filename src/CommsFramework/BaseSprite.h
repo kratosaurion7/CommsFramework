@@ -22,6 +22,7 @@ public:
     bool IsPlaying;
     SpriteAnimation* CurrentAnimation;
     SpriteAnimation* DefaultAnimation;
+    PointerList<SpriteAnimation*>* spriteAnimationList;
 
     bool Clicked(MouseButtons targetButton = LEFT);
     bool MouseOver();

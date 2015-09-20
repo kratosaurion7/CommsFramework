@@ -24,6 +24,9 @@ int main()
     anim->AnimationFrames->Add(tex03);
 
     x->Graphics->AddObject(marioSprt);
+    
+    marioSprt->SpriteFPS = 5;
+    marioSprt->Play("walk", true);
 
     while (true)
     {
