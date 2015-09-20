@@ -207,6 +207,14 @@ sf::Drawable * DSprite::GetDrawableImplementation()
     return innerImpl;
 }
 
+//bool DSprite::IsVisible()
+//{
+//    return BaseSprite::IsVisible() && 
+//        this->CurrentAnimation != NULL && 
+//        this->CurrentAnimation->AnimationFrames != NULL && 
+//        this->CurrentAnimation->AnimationFrames->Get(this->CurrentFrameIndex) != NULL;
+//}
+
 bool DSprite::IsFrameReady()
 {
     int currentTickTime = GetTicks();

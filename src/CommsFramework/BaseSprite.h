@@ -28,8 +28,10 @@ public:
 
     void ApplyDescriptor(SpriteDescriptor* descriptor);
 
+    virtual SpriteAnimation* CreateAnimation(std::string name);
     virtual PointerList<SpriteAnimation*>* GetAnimations() = 0;
     virtual void SetAnimations(PointerList<SpriteAnimation*>* newAnims) = 0;
+
     virtual BaseTexture* GetCurrentTexture() = 0;
     virtual PointerList<BaseTexture*>* GetTextures() = 0;
 

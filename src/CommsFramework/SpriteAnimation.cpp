@@ -5,6 +5,7 @@
 SpriteAnimation::SpriteAnimation()
 {
     AnimationResources = new PointerList<Resource*>();
+    AnimationFrames = new PointerList<BaseTexture*>();
 }
 
 

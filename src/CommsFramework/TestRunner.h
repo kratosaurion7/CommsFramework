@@ -4,7 +4,6 @@
 #include "BaseList.h"
 #include "PointerList.h"
 #include "ResourceManager.h"
-#include "GameObject.h"
 #include "FPosition.h"
 #include "FRectangle.h"
 #include "FSize.h"

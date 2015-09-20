@@ -28,3 +28,11 @@ void BaseSprite::ApplyDescriptor(SpriteDescriptor* descriptor)
     this->SetPos(descriptor->Position);
     //this->SetSize(descriptor->Size);
 }
+
+SpriteAnimation * BaseSprite::CreateAnimation(std::string name)
+{
+    SpriteAnimation* newAnim = new SpriteAnimation();
+    newAnim->AnimName = name;
+
+    return newAnim;
+}

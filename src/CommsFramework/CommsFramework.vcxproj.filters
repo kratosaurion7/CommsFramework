@@ -75,9 +75,6 @@
     <ClCompile Include="FileReader.cpp">
       <Filter>Framework\IO</Filter>
     </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>Framework\Game</Filter>
-    </ClCompile>
     <ClCompile Include="DSprite.cpp">
       <Filter>Framework\Graphic\SFML</Filter>
     </ClCompile>
@@ -184,9 +181,6 @@
     </ClInclude>
     <ClInclude Include="DrawObject.h">
       <Filter>Framework\Graphic</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>Framework\Game</Filter>
     </ClInclude>
     <ClInclude Include="BaseTexture.h">
       <Filter>Framework\Graphic\Base Classes</Filter>

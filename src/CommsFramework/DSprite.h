@@ -26,13 +26,9 @@ public:
 
     sf::Sprite* innerImpl;
 
-    // Get the list of animations of the Sprite.
     virtual PointerList<SpriteAnimation*>* GetAnimations();
-    // Set a list of animation that the sprite can Play.
     virtual void SetAnimations(PointerList<SpriteAnimation*>* newAnims);
-    // Get the current texture on the sprite.
     virtual DTexture* GetCurrentTexture();
-    // Get all textures used by the sprite.
     virtual PointerList<BaseTexture*>* GetTextures();
 
     // Called when a Sprite is set to draw. This will advance to the next
@@ -41,31 +37,16 @@ public:
     // will not draw.
     virtual void Draw();
 
-    // Play the default animation, optionally set it to loop.
     virtual void Play(bool loop = false);
-    // Play the animation with the given name, optionally set it to loop
     virtual void Play(std::string animName, bool loop = false);
-    // Stop the current animation
     virtual void Stop();
-    // Stop the animation and set the current frame to 0, of the default anim.
     virtual void Reset();
 
-    /**
-     * Move to the next frame of the current animation, then 
-     * apply the new current texture. This also sets the lastFrameTick */
     virtual void NextFrame();
-    /** Set the current frame to the target index, optionally
-     *  giving an anim name to change the current animation. */
     virtual void SetFrame(int index, std::string animName = "");
-    // Check if the current frame is pointing to the last frame index
     virtual bool IsLastFrame(std::string animName = "");
 
 
-    /**
-     * Set the current sprite texture to the specified texture.
-     * The new texture will be casted to DTexture to be send to the 
-     * innerImpl
-     */
     virtual void SetTexture(BaseTexture* texture);
 
     virtual BaseSprite* Clone();
@@ -75,11 +56,11 @@ public:
      * SFML object implementation */
     sf::Drawable* GetDrawableImplementation();
 
-    // Current playing animation of the Sprite.
     SpriteAnimation* CurrentAnimation;
 
 
 
+    //virtual bool IsVisible();
 private:
     // System tick count of the last frame update, in milisecond.
     int lastFrameTick;

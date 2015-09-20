@@ -319,7 +319,6 @@ XCOPY /y "E:\Prog\lib\sfml\SFML-2.3_x64\bin\*.dll" "$(TargetDir)"
     <ClCompile Include="DrawObject.cpp" />
     <ClCompile Include="FRectangle.cpp" />
     <ClCompile Include="GameEngine.cpp" />
-    <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GraphicEngine.cpp" />
     <ClCompile Include="FSize.cpp" />
     <ClCompile Include="FPosition.cpp" />
@@ -358,7 +357,6 @@ XCOPY /y "E:\Prog\lib\sfml\SFML-2.3_x64\bin\*.dll" "$(TargetDir)"
     <ClInclude Include="FileSystem.h" />
     <ClInclude Include="FRectangle.h" />
     <ClInclude Include="GameEngine.h" />
-    <ClInclude Include="GameObject.h" />
     <ClInclude Include="Graphical.h" />
     <ClInclude Include="Keys.h" />
     <ClInclude Include="SFMLMouse.h" />

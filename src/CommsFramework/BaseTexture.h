@@ -2,6 +2,8 @@
 
 #include <cstdint>
 
+#include <string>
+
 #include "FSize.h"
 
 class BaseTexture
