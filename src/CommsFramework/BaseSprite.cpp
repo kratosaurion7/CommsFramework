@@ -36,5 +36,10 @@ SpriteAnimation * BaseSprite::CreateAnimation(std::string name)
 
     spriteAnimationList->Add(newAnim);
 
+    if (DefaultAnimation == NULL)
+    {
+        DefaultAnimation = newAnim;
+    }
+
     return newAnim;
 }

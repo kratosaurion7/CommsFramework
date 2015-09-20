@@ -1,5 +1,7 @@
 #include <GameEngine.h>
 
+#include "MarioPlayer.h"
+
 int main()
 {
     GameEngine* x = new GameEngine();
@@ -23,11 +25,17 @@ int main()
     x->Graphics->AddObject(marioSprt);
     
     marioSprt->SpriteFPS = 5;
-    marioSprt->Play("walk", true);
+    //marioSprt->Play("walk", true);
+
+    MarioPlayer* player = new MarioPlayer();
+    player->engine = x;
+    player->sprt = marioSprt;
 
     while (true)
     {
         x->Play();
+
+        player->Update();
     }
     
 
