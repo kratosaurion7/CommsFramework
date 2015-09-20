@@ -101,7 +101,6 @@
     <LibraryPath>$(ProjectDir)..\..\libs\SFML\x32\lib;$(ProjectDir)..\..\libs\ZeroMQ\x32\lib;$(SolutionDir)$(Configuration);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Static|Win32'">
-    <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(ProjectDir)..\..\libs\SFML\x32\include;$(ProjectDir)..\..\libs\ZeroMQ\x32\include;$(ProjectDir)..\..\libs\rapidxml;$(SolutionDir)CommsFramework\;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)..\..\libs\SFML\x32\lib;$(ProjectDir)..\..\libs\ZeroMQ\x32\lib;$(SolutionDir)$(Configuration);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
