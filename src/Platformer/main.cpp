@@ -14,14 +14,11 @@ int main()
     SpriteAnimation* anim = marioSprt->CreateAnimation("walk");
     BaseTexture* tex01 = x->Graphics->CreateTexture();
     BaseTexture* tex02 = x->Graphics->CreateTexture();
-    BaseTexture* tex03 = x->Graphics->CreateTexture();
     tex01->Load("mario_01.png");
     tex02->Load("mario_02.png");
-    tex03->Load("mario_03.png");
 
     anim->AnimationFrames->Add(tex01);
     anim->AnimationFrames->Add(tex02);
-    anim->AnimationFrames->Add(tex03);
 
     x->Graphics->AddObject(marioSprt);
     
