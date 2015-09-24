@@ -156,6 +156,9 @@
     <ClCompile Include="SpriteAnimation.cpp">
       <Filter>Framework\Graphic</Filter>
     </ClCompile>
+    <ClCompile Include="GameRule.cpp">
+      <Filter>Framework\Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="XmlReader.h">
@@ -286,6 +289,9 @@
     </ClInclude>
     <ClInclude Include="SpriteAnimation.h">
       <Filter>Framework\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="GameRule.h">
+      <Filter>Framework\Game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

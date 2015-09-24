@@ -32,6 +32,7 @@ GameEngine::GameEngine()
     GameEngine::Keyboard = sfKeyboard;
     GameEngine::Mouse = sfMouse;
     
+    GameRules = new PointerList<GameRule*>();
 }
 
 GameEngine::~GameEngine()
@@ -44,6 +45,9 @@ GameEngine::~GameEngine()
 
     GameSprites->Release();
     delete(GameSprites);
+
+    GameRules->Release();
+    delete(GameRules);
 }
 
 void GameEngine::Init()
@@ -153,6 +157,16 @@ void GameEngine::Update()
 void GameEngine::Post_Update()
 {
     GameEngine::Mouse->UpdateMouseState();
+
+    // ===== Update Game rules =====
+    auto it = GameRules->GetContainer()->begin();
+    while (it != GameRules->GetContainer()->end())
+    {
+        GameRule* rule = (*it);
+        rule->Update(this);
+
+        it++;
+    }
 }
 
 BaseSprite * GameEngine::CreateSprite(std::string spriteName)

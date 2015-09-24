@@ -9,6 +9,8 @@
 #include "BaseKeyboard.h"
 #include "BaseMouse.h"
 
+#include "GameRule.h"
+
 #include <string>
 
 struct GameEngineInitParams
@@ -60,6 +62,8 @@ private:
     GameEngineInitParams* engineInitParams;
 
     PointerList<BaseSprite*>* GameSprites;
+
+    PointerList<GameRule*>* GameRules;
 
     void CreateSpritesFromConfig();
 
