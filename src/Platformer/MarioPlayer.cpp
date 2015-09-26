@@ -41,7 +41,7 @@ void MarioPlayer::Update()
                 sprt->Stop();
             }
 
-            sprt->IncrementY(-3);
+            sprt->IncrementY(-5);
 
             break;
     }
@@ -71,7 +71,7 @@ void MarioPlayer::HandleKeyboardInput()
     }
     if (engine->Keyboard->IsKeyPressed(Right))
     {
-        sprt->IncrementX(2);
+        sprt->IncrementX(5);
 
         MarioDirection = W_RIGHT;
 
@@ -82,7 +82,7 @@ void MarioPlayer::HandleKeyboardInput()
     }
     if (engine->Keyboard->IsKeyPressed(Left))
     {
-        sprt->IncrementX(-2);
+        sprt->IncrementX(-5);
 
         MarioDirection = W_LEFT;
 

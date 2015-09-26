@@ -43,7 +43,7 @@ void GravityObjectsFallDownRule::Update(GameEngine * engine)
             // Need to check collisions for bottom only
             if (!hasCollision)
             {
-                sprt->IncrementY(1); // TODO : Get gravity direction and velocity
+                sprt->IncrementY(5); // TODO : Get gravity direction and velocity
             }
         }
 

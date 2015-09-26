@@ -134,3 +134,13 @@ void DrawObject::SetScale(FloatVec factor)
 
     UpdateInnerImpl();
 }
+
+float DrawObject::GetZIndex()
+{
+    return zIndex;
+}
+
+void DrawObject::SetZIndex(float z)
+{
+    zIndex = z;
+}

@@ -44,12 +44,16 @@ public:
     virtual void SetScale(float factor);
     virtual void SetScale(FloatVec factor);
 
+    virtual float GetZIndex();
+    virtual void SetZIndex(float z);
 protected:
     bool isVisible;
 
     FPosition position;
     FSize size;
     FloatVec scale;
+
+    float zIndex;
 
     virtual void UpdateInnerImpl() = 0;
 };

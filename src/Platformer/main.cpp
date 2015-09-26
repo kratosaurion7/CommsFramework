@@ -7,7 +7,7 @@
 int main()
 {
     GameEngine* x = new GameEngine();
-
+    
     // ===== INIT GAME RULES =====
     auto r_grav = new GravityObjectsFallDownRule();
     x->GameRules->Add(r_grav);
@@ -41,6 +41,30 @@ int main()
 
     anim->AnimationFrames->Add(tex01);
     anim->AnimationFrames->Add(tex02);
+
+    // ===== CREATE Z INDEX BLOCK =====
+    BaseSprite* qBlock = x->CreateSprite("block", "qmark_block_01.png");
+    qBlock->SetScale(4.0);
+    qBlock->SpriteFPS = 5;
+
+    SpriteAnimation* qBlockAnim = qBlock->CreateAnimation("idle");
+    BaseTexture* qTex01 = x->Graphics->CreateTexture();
+    BaseTexture* qTex02 = x->Graphics->CreateTexture();
+    BaseTexture* qTex03 = x->Graphics->CreateTexture();
+    BaseTexture* qTex04 = x->Graphics->CreateTexture();
+
+    qTex01->Load("qmark_block_01.png");
+    qTex02->Load("qmark_block_02.png");
+    qTex03->Load("qmark_block_03.png");
+    qTex04->Load("qmark_block_04.png");
+
+    qBlockAnim->AnimationFrames->Add(qTex01);
+    qBlockAnim->AnimationFrames->Add(qTex02);
+    qBlockAnim->AnimationFrames->Add(qTex03);
+    qBlockAnim->AnimationFrames->Add(qTex04);
+
+    qBlock->SetPos(50, 400);
+    qBlock->Play(true);
 
     // ===== INIT LOGIC OBJECT =====
     MarioPlayer* player = new MarioPlayer();
