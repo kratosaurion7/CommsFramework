@@ -31,7 +31,10 @@ void BaseSprite::ApplyDescriptor(SpriteDescriptor* descriptor)
 
 bool BaseSprite::CollisionWith(BaseSprite * other)
 {
-    if (other->GetRectangle().Intersect(&this->GetRectangle()))
+    auto myRec = &this->GetRectangle();
+    auto otherRec = other->GetRectangle();
+
+    if (otherRec.Intersect(myRec))
     {
         return true;
     }

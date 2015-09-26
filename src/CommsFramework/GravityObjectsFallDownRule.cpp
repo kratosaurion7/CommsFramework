@@ -26,19 +26,21 @@ void GravityObjectsFallDownRule::Update(GameEngine * engine)
             auto it2 = engine->GameSprites->GetContainer()->begin();
             while (it2 != engine->GameSprites->GetContainer()->end())
             {
-                BaseSprite* otherSprite = (*it);
+                BaseSprite* otherSprite = (*it2);
 
-                if (sprt == otherSprite)
-                    break;
-
-                if (sprt->CollisionWith(otherSprite))
+                if (sprt != otherSprite)
                 {
-                    hasCollision = true;
-                    break;
+                    if (sprt->CollisionWith(otherSprite))
+                    {
+                        hasCollision = true;
+                        break;
+                    }
                 }
 
+                it2++;
             }
 
+            // Need to check collisions for bottom only
             if (!hasCollision)
             {
                 sprt->IncrementY(1); // TODO : Get gravity direction and velocity
