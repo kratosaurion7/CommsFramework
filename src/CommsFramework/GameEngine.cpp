@@ -132,10 +132,9 @@ void GameEngine::Play()
 
     this->Update(); // Update just before draw
 
-    this->Graphics->Draw();
+    this->Draw();
 
     this->Post_Update(); // Update just before end of loop
-
 }
 
 void GameEngine::Pre_Update()
@@ -144,6 +143,12 @@ void GameEngine::Pre_Update()
 
 void GameEngine::Update()
 {
+}
+
+void GameEngine::Draw()
+{
+    this->Graphics->Draw();
+
     auto it = GameSprites->GetContainer()->begin();
     while (it != GameSprites->GetContainer()->end())
     {

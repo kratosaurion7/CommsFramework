@@ -20,6 +20,9 @@ DSprite::DSprite()
     spriteTexture = NULL;
     spriteAnimationList = new PointerList<SpriteAnimation*>();
 
+    CurrentAnimation = NULL;
+    DefaultAnimation = NULL;
+
     IsPlaying = false;
     GravityEnabled = false;
 
@@ -114,7 +117,7 @@ void DSprite::Play(bool loop)
 
 void DSprite::Play(std::string animName, bool loop)
 {
-    SpriteAnimation* targetAnimation = NULL;
+     SpriteAnimation* targetAnimation = NULL;
 
     targetAnimation = FindAnim(animName);
 

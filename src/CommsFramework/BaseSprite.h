@@ -23,6 +23,7 @@ public:
     bool GravityEnabled;
     SpriteAnimation* CurrentAnimation;
     SpriteAnimation* DefaultAnimation;
+
     PointerList<SpriteAnimation*>* spriteAnimationList;
 
     bool Clicked(MouseButtons targetButton = LEFT);

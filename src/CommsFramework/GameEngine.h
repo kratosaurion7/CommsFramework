@@ -48,6 +48,8 @@ public:
 
     void Update();
 
+    void Draw();
+
     void Post_Update();
     
     BaseSprite* CreateSprite(std::string spriteName);

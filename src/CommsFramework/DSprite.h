@@ -56,9 +56,6 @@ public:
      * SFML object implementation */
     sf::Drawable* GetDrawableImplementation();
 
-    SpriteAnimation* CurrentAnimation;
-
-
 
     //virtual bool IsVisible();
 private:
