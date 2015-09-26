@@ -35,5 +35,7 @@ public:
 
 private:
     void HandleKeyboardInput();
+
+    void HandleCollisions();
 };
 

@@ -222,7 +222,7 @@ sf::Drawable * DSprite::GetDrawableImplementation()
 
 bool DSprite::IsAnimatedSprite()
 {
-    return false;
+    return this->DefaultAnimation != NULL;
 }
 
 //bool DSprite::IsVisible()

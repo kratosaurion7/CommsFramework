@@ -7,7 +7,6 @@ MarioPlayer::MarioPlayer()
 {
 }
 
-
 MarioPlayer::~MarioPlayer()
 {
 }
@@ -16,14 +15,14 @@ void MarioPlayer::Update()
 {
     HandleKeyboardInput();
 
+    HandleCollisions();
+
     switch (CurrentState)
     {
         default:
         case IDLE:
             break;
         case WALKING:
-
-
             break;
         case JUMPING_START:
             sprt->Play("jump", false);
@@ -80,4 +79,19 @@ void MarioPlayer::HandleKeyboardInput()
     {
         sprt->Stop();
     }
+}
+
+void MarioPlayer::HandleCollisions()
+{
+    //auto it = engine->GameSprites->GetContainer()->begin();
+    //while (it != engine->GameSprites->GetContainer()->end())
+    //{
+    //    BaseSprite* sprt = (*it);
+
+    //    if (this->sprt->CollisionWith(sprt))
+    //    {
+
+    //    }
+
+    //}
 }
