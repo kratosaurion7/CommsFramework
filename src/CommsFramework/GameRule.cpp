@@ -2,16 +2,18 @@
 
 
 
-GameRule::GameRule()
+GameRule::GameRule(std::string identifier)
 {
+    RuleIdentifier = identifier;
 }
 
 
 GameRule::~GameRule()
 {
+
 }
 
-void GameRule::Update(GameEngine * engine)
+void GameRule::Update(GameEngine* engine)
 {
 
 }

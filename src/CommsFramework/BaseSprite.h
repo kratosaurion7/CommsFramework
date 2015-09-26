@@ -20,6 +20,7 @@ public:
     int SpriteFPS = 0;
     bool LoopAnimation;
     bool IsPlaying;
+    bool GravityEnabled;
     SpriteAnimation* CurrentAnimation;
     SpriteAnimation* DefaultAnimation;
     PointerList<SpriteAnimation*>* spriteAnimationList;

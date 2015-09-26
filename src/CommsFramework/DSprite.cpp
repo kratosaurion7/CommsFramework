@@ -21,6 +21,7 @@ DSprite::DSprite()
     spriteAnimationList = new PointerList<SpriteAnimation*>();
 
     IsPlaying = false;
+    GravityEnabled = false;
 
     SpriteFPS = 60; // TODO : Get monitor FPS
 }

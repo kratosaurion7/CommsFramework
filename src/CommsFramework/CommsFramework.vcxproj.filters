@@ -67,6 +67,12 @@
     <Filter Include="Framework\Filesystem\Linux">
       <UniqueIdentifier>{c0ee2877-48c3-42ea-804f-8c236eba4082}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Framework\Game\Rules">
+      <UniqueIdentifier>{5f0b3ef9-0e31-4455-860e-f2d879bd7cf4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Game\Rules\Physics">
+      <UniqueIdentifier>{000faec8-137c-4c27-984d-c1c9fb428eff}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="XmlReader.cpp">
@@ -158,6 +164,9 @@
     </ClCompile>
     <ClCompile Include="GameRule.cpp">
       <Filter>Framework\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="GravityObjectsFallDownRule.cpp">
+      <Filter>Framework\Game\Rules\Physics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -292,6 +301,9 @@
     </ClInclude>
     <ClInclude Include="GameRule.h">
       <Filter>Framework\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="GravityObjectsFallDownRule.h">
+      <Filter>Framework\Game\Rules\Physics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

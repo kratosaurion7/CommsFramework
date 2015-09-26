@@ -13,6 +13,8 @@
 
 #include <string>
 
+class GameRule;
+
 struct GameEngineInitParams
 {
     GraphicEngineInitParams* GraphicsParams;
@@ -58,12 +60,11 @@ public:
 
     BaseSprite* CopySprite(std::string name, std::string newName);
 
-private:
-    GameEngineInitParams* engineInitParams;
-
     PointerList<BaseSprite*>* GameSprites;
 
     PointerList<GameRule*>* GameRules;
+private:
+    GameEngineInitParams* engineInitParams;
 
     void CreateSpritesFromConfig();
 
