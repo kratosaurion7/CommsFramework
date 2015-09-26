@@ -74,7 +74,7 @@ void DrawObject::SetCenterPos(FPosition value)
 
 FRectangle DrawObject::GetRectangle()
 {
-    FRectangle rec = FRectangle(GetX(), GetY(), GetHeight(), GetWidth());
+    FRectangle rec = FRectangle(GetX(), GetY(), GetHeight() * this->scale.Y, GetWidth() * this->scale.X);
 
     return rec;
 }
