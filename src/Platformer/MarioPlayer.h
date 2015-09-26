@@ -8,6 +8,7 @@ enum MarioPlayerStates
 {
     IDLE,
     WALKING,
+    JUMPING_START,
     JUMPING
 };
 

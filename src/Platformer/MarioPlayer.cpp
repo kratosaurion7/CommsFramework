@@ -20,7 +20,7 @@ void MarioPlayer::Update()
         case IDLE:
             if (engine->Keyboard->IsKeyPressed(Space))
             {
-                this->CurrentState = JUMPING;
+                this->CurrentState = JUMPING_START;
             }
 
             if (engine->Keyboard->IsKeyPressed(Right))
@@ -61,16 +61,24 @@ void MarioPlayer::Update()
             }
 
             break;
-        case JUMPING:
-
-            sprt->IncrementY(1);
-
+        case JUMPING_START:
             sprt->Play("jump", false);
 
-            //if (engine->Keyboard->IsKeyPressed(Space) == false)
-            //{
-            //    this->CurrentState = IDLE;
-            //}
+            sprt->GravityEnabled = false;
+
+            this->CurrentState = JUMPING;
+
+            break;
+        case JUMPING:
+
+            if (engine->Keyboard->IsKeyPressed(Space) == false)
+            {
+                sprt->GravityEnabled = true;
+                this->CurrentState = IDLE;
+                sprt->Stop();
+            }
+
+            sprt->IncrementY(-3);
 
             break;
     }
