@@ -12,8 +12,6 @@ int main()
     auto r_grav = new GravityObjectsFallDownRule();
     x->GameRules->Add(r_grav);
 
-    //x->LoadFromXml("rootConfig.xml");
-
     x->Init();
 
     // ===== INIT GAME SPRITE =====
@@ -57,7 +55,7 @@ int main()
 
         x->Play();
 
-        player->Update();
+        player->Update(); // TODO : Should really be in the GameEngine, requires base classe of LogicObject
     }
     
 

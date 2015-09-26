@@ -31,6 +31,8 @@ public:
 
     void ApplyDescriptor(SpriteDescriptor* descriptor);
 
+    bool CollisionWith(BaseSprite* other);
+
     virtual SpriteAnimation* CreateAnimation(std::string name);
     virtual PointerList<SpriteAnimation*>* GetAnimations() = 0;
     virtual void SetAnimations(PointerList<SpriteAnimation*>* newAnims) = 0;

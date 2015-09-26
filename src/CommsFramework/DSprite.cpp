@@ -108,10 +108,10 @@ void DSprite::Draw()
                     }
                 }
             }
-        }
-        else
-        {
-            this->SetFrame(0);
+            else
+            {
+                this->SetFrame(0);
+            }
         }
     }
 }

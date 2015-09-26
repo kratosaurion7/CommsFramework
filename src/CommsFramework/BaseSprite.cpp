@@ -29,6 +29,18 @@ void BaseSprite::ApplyDescriptor(SpriteDescriptor* descriptor)
     //this->SetSize(descriptor->Size);
 }
 
+bool BaseSprite::CollisionWith(BaseSprite * other)
+{
+    if (other->GetRectangle().Intersect(&this->GetRectangle()))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
 SpriteAnimation * BaseSprite::CreateAnimation(std::string name)
 {
     SpriteAnimation* newAnim = new SpriteAnimation();
