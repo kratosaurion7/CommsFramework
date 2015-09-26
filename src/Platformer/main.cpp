@@ -50,6 +50,9 @@ int main()
 
     while (true)
     {
+        if (x->Keyboard->IsKeyPressed(_Escape))
+            break;
+
         x->Play();
 
         player->Update();

@@ -14,51 +14,15 @@ MarioPlayer::~MarioPlayer()
 
 void MarioPlayer::Update()
 {
+    HandleKeyboardInput();
+
     switch (CurrentState)
     {
         default:
         case IDLE:
-            if (engine->Keyboard->IsKeyPressed(Space))
-            {
-                this->CurrentState = JUMPING_START;
-            }
-
-            if (engine->Keyboard->IsKeyPressed(Right))
-            {
-                this->CurrentState = WALKING;
-
-                MarioDirection = W_RIGHT;
-
-                sprt->Play("walk", true);
-
-            }else if (engine->Keyboard->IsKeyPressed(Left))
-            {
-                this->CurrentState = WALKING;
-
-                MarioDirection = W_LEFT;
-
-                sprt->Play("walk", true);
-            }
             break;
         case WALKING:
 
-            switch (MarioDirection)
-            {
-                case W_LEFT:
-                    sprt->IncrementX(-2);
-                    break;
-                case W_RIGHT:
-                    sprt->IncrementX(2);
-                    break;
-                default:
-                    break;
-            }
-
-            if (engine->Keyboard->IsKeyPressed(Left) == false && engine->Keyboard->IsKeyPressed(Right) == false)
-            {
-                this->CurrentState = IDLE;
-                sprt->Stop();
-            }
 
             break;
         case JUMPING_START:
@@ -81,5 +45,39 @@ void MarioPlayer::Update()
             sprt->IncrementY(-3);
 
             break;
+    }
+}
+
+void MarioPlayer::HandleKeyboardInput()
+{
+    if (engine->Keyboard->IsKeyPressed(Space) && this->CurrentState != JUMPING)
+    {
+        this->CurrentState = JUMPING_START;
+    }
+    if (engine->Keyboard->IsKeyPressed(Right))
+    {
+        sprt->IncrementX(2);
+
+        MarioDirection = W_RIGHT;
+
+        if (!sprt->IsPlaying)
+        {
+            sprt->Play("walk", true);
+        }
+    }
+    if (engine->Keyboard->IsKeyPressed(Left))
+    {
+        sprt->IncrementX(-2);
+
+        MarioDirection = W_LEFT;
+
+        if (!sprt->IsPlaying)
+        {
+            sprt->Play("walk", true);
+        }
+    }
+    if (engine->Keyboard->IsKeyPressed(Left) == false && engine->Keyboard->IsKeyPressed(Right) == false)
+    {
+        sprt->Stop();
     }
 }

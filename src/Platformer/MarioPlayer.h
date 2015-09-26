@@ -32,5 +32,8 @@ public:
     WalkingDirection MarioDirection;
 
     void Update();
+
+private:
+    void HandleKeyboardInput();
 };
 
