@@ -25,6 +25,8 @@ DSprite::DSprite()
 
     IsPlaying = false;
     GravityEnabled = false;
+    scale = FloatVec();
+    scale.Set(1, 1);
 
     SpriteFPS = 60; // TODO : Get monitor FPS
 }
@@ -86,23 +88,30 @@ void DSprite::Draw()
 {
     if (this->IsVisible())
     {
-        if (this->IsPlaying)
+        if (this->IsAnimatedSprite())
         {
-            if (this->IsFrameReady())
+            if (this->IsPlaying)
             {
-                if (!LoopAnimation && IsLastFrame())
+                if (this->IsFrameReady())
                 {
-                    this->SetFrame(0);
+                    if (!LoopAnimation && IsLastFrame())
+                    {
+                        this->SetFrame(0);
 
-                    IsPlaying = false;
+                        IsPlaying = false;
 
-                    CurrentAnimation = NULL;
-                }
-                else
-                {
-                    this->NextFrame();
+                        CurrentAnimation = NULL;
+                    }
+                    else
+                    {
+                        this->NextFrame();
+                    }
                 }
             }
+        }
+        else
+        {
+            this->SetFrame(0);
         }
     }
 }
@@ -209,6 +218,11 @@ BaseSprite* DSprite::Clone()
 sf::Drawable * DSprite::GetDrawableImplementation()
 {
     return innerImpl;
+}
+
+bool DSprite::IsAnimatedSprite()
+{
+    return false;
 }
 
 //bool DSprite::IsVisible()

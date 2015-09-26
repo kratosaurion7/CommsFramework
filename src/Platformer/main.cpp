@@ -16,36 +16,40 @@ int main()
 
     x->Init();
 
+    // ===== INIT GAME SPRITE =====
     BaseSprite* marioSprt = x->CreateSprite("Mario", "mario_01.png"); // Sprite name, sprite texture
     marioSprt->GravityEnabled = true;
     marioSprt->SetScale(4.0);
     marioSprt->SetPos(50, 50);
+    marioSprt->SpriteFPS = 5;
 
+    // ===== CREATE GROUND =====
+    BaseSprite* groundSprt = x->CreateSprite("Ground");
+    BaseTexture* groundTex = x->Graphics->CreateTexture();
+    groundTex->Initalize(600, 50);
+    groundTex->SetSolidColor(0xFA5858FF);
+
+    groundSprt->IsPlaying = true;
+    groundSprt->SetTexture(groundTex);
+    groundSprt->SetPos(0, 550);
+
+    // ===== CREATE SPRITE ANIMATION =====
     SpriteAnimation* anim = marioSprt->CreateAnimation("walk");
     BaseTexture* tex01 = x->Graphics->CreateTexture();
     BaseTexture* tex02 = x->Graphics->CreateTexture();
-    //BaseTexture* tex03 = x->Graphics->CreateTexture();
-    //BaseTexture* tex04 = x->Graphics->CreateTexture();
-    //BaseTexture* tex05 = x->Graphics->CreateTexture();
+
     tex01->Load("mario_01.png");
     tex02->Load("mario_02.png");
-    //tex03->Load("mario_03.png");
-    //tex04->Load("mario_04.png");
-    //tex05->Load("mario_05.png");
 
     anim->AnimationFrames->Add(tex01);
     anim->AnimationFrames->Add(tex02);
-    //anim->AnimationFrames->Add(tex03);
-    //anim->AnimationFrames->Add(tex04);
-    //anim->AnimationFrames->Add(tex05);
 
-    marioSprt->SpriteFPS = 5;
-    //marioSprt->Play("walk", true);
-
+    // ===== INIT LOGIC OBJECT =====
     MarioPlayer* player = new MarioPlayer();
     player->engine = x;
     player->sprt = marioSprt;
 
+    // ===== START GAMEPLAY =====
     while (true)
     {
         if (x->Keyboard->IsKeyPressed(_Escape))
