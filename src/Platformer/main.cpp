@@ -39,8 +39,6 @@ int main()
     //anim->AnimationFrames->Add(tex04);
     //anim->AnimationFrames->Add(tex05);
 
-    x->Graphics->AddObject(marioSprt);
-    
     marioSprt->SpriteFPS = 5;
     //marioSprt->Play("walk", true);
 

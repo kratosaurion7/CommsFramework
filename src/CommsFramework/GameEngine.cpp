@@ -179,6 +179,7 @@ BaseSprite * GameEngine::CreateSprite(std::string spriteName)
     BaseSprite* sprt = this->Graphics->CreateSprite(spriteName);
     
     GameSprites->Add(sprt);
+    this->Graphics->AddObject(sprt);
 
     return sprt;
 }
@@ -194,6 +195,7 @@ BaseSprite * GameEngine::CreateSprite(std::string spriteName, std::string sprite
         sprt->SetTexture(tex);
 
     GameSprites->Add(sprt);
+    this->Graphics->AddObject(sprt);
 
     return sprt;
 }
