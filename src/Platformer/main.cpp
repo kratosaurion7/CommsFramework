@@ -18,7 +18,7 @@ int main()
     BaseSprite* marioSprt = x->CreateSprite("Mario", "mario_01.png"); // Sprite name, sprite texture
     marioSprt->GravityEnabled = true;
     marioSprt->SetScale(4.0);
-    marioSprt->SetPos(50, 50);
+    //marioSprt->SetPos(50, 50);
     marioSprt->SpriteFPS = 5;
 
     // ===== CREATE GROUND =====
@@ -46,6 +46,7 @@ int main()
     MarioPlayer* player = new MarioPlayer();
     player->engine = x;
     player->sprt = marioSprt;
+    player->DropOnGround();
 
     // ===== START GAMEPLAY =====
     while (true)

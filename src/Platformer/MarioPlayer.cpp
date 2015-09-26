@@ -47,6 +47,22 @@ void MarioPlayer::Update()
     }
 }
 
+void MarioPlayer::DropOnGround()
+{
+    auto it = engine->GameSprites->GetContainer()->begin();
+    while (it != engine->GameSprites->GetContainer()->end())
+    {
+        BaseSprite* sprt = (*it);
+
+        if (sprt->Ident.compare("Ground") == 0)
+        {
+            this->sprt->SetY(sprt->GetY() - this->sprt->GetHeight());
+        }
+
+        it++;
+    }
+}
+
 void MarioPlayer::HandleKeyboardInput()
 {
     if (engine->Keyboard->IsKeyPressed(Space) && this->CurrentState != JUMPING)

@@ -33,6 +33,8 @@ public:
 
     void Update();
 
+    void DropOnGround();
+
 private:
     void HandleKeyboardInput();
 
