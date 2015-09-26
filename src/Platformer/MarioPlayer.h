@@ -39,5 +39,7 @@ private:
     void HandleKeyboardInput();
 
     void HandleCollisions();
+
+    void SwitchPlayerOrientation(WalkingDirection direction);
 };
 

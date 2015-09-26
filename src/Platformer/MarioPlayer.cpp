@@ -3,6 +3,8 @@
 #include <BaseKeyboard.h>
 #include <Keys.h>
 
+#include <cstdlib>
+
 MarioPlayer::MarioPlayer()
 {
 }
@@ -73,6 +75,9 @@ void MarioPlayer::HandleKeyboardInput()
     {
         sprt->IncrementX(5);
 
+        if (MarioDirection == W_LEFT)
+            SwitchPlayerOrientation(W_RIGHT);
+
         MarioDirection = W_RIGHT;
 
         if (!sprt->IsPlaying)
@@ -83,6 +88,9 @@ void MarioPlayer::HandleKeyboardInput()
     if (engine->Keyboard->IsKeyPressed(Left))
     {
         sprt->IncrementX(-5);
+
+        if (MarioDirection == W_RIGHT)
+            SwitchPlayerOrientation(W_LEFT);
 
         MarioDirection = W_LEFT;
 
@@ -110,4 +118,22 @@ void MarioPlayer::HandleCollisions()
     //    }
 
     //}
+}
+
+void MarioPlayer::SwitchPlayerOrientation(WalkingDirection direction)
+{
+    FloatVec orientationScaleVector = sprt->GetScale();
+
+    switch (direction)
+    {
+        case W_LEFT:
+            orientationScaleVector.X = std::abs(sprt->GetScale().X) * -1;
+            break;
+        case W_RIGHT:
+        default:
+            orientationScaleVector.X = std::abs(sprt->GetScale().X);
+            break;
+    }
+
+    sprt->SetScale(orientationScaleVector);
 }
