@@ -36,9 +36,13 @@ public:
     void DropOnGround();
 
 private:
+    int jumpImpulse = 0;
+
     void HandleKeyboardInput();
 
     void HandleCollisions();
+
+    bool HasGroundBelow();
 
     void SwitchPlayerOrientation(WalkingDirection direction);
 };

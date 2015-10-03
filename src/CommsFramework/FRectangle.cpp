@@ -82,7 +82,55 @@ bool FRectangle::Intersect(FRectangle* rec)
     }
 
     return false;
-};
+}
+bool FRectangle::Intersect(FRectangle * rec, int thisRectangleEdge)
+{
+    bool result = false;
+
+    if (LeftEdge & thisRectangleEdge)
+    {
+        bool leftEdgeCollide = false;
+
+
+        result = result || leftEdgeCollide;
+    }
+    if (TopEdge & thisRectangleEdge)
+    {
+        bool topEdgeCollide = false;
+
+
+
+        result = result || topEdgeCollide;
+    }
+    if (RightEdge & thisRectangleEdge)
+    {
+        bool rightEdgeCollision = false;
+
+
+
+        result = result || rightEdgeCollision;
+    }
+    if (BottomEdge & thisRectangleEdge)
+    {
+        bool bottomEdgeCollision = false;
+
+        if (this->Bottom >= rec->Top &&
+            this->Left >= rec->Left &&
+            this->Right <= rec->Right)
+        {
+            bottomEdgeCollision = true;
+        }
+
+        result = result || bottomEdgeCollision;
+    }
+
+    return result;
+}
+bool FRectangle::Intersect(FRectangle * rec, int thisRectangleEdge, int otherRectangleEdge)
+{
+    return false;
+}
+;
 
 Vector2<float>* FRectangle::DistanceFrom(FRectangle* rec, DistanceFromType comparaisonType)
 {

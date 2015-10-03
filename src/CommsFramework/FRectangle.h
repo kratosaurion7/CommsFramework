@@ -15,6 +15,15 @@ public:
     FRectangle(float x, float y, float h, float w);
     ~FRectangle();
 
+    enum RectangleEdge
+    {
+        LeftEdge = 1,
+        TopEdge = 2,
+        RightEdge = 4,
+        BottomEdge = 8,
+    };
+
+
     float Width();
     float Height();
 
@@ -34,6 +43,8 @@ public:
     bool IsPointInside(float x, float y);
 
     bool Intersect(FRectangle* rec);
+    bool Intersect(FRectangle* rec, int thisRectangleEdge);
+    bool Intersect(FRectangle* rec, int thisRectangleEdge, int otherRectangleEdge);
 
     Vector2<float>* DistanceFrom(FRectangle* rec, DistanceFromType comparaisonType = OriginToOrigin);
 };

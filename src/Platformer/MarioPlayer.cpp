@@ -36,14 +36,33 @@ void MarioPlayer::Update()
             break;
         case JUMPING:
 
-            if (engine->Keyboard->IsKeyPressed(Space) == false)
+            /*if (engine->Keyboard->IsKeyPressed(Space) == false)
             {
                 sprt->GravityEnabled = true;
                 this->CurrentState = IDLE;
                 sprt->Stop();
+            }*/
+
+            if (this->jumpImpulse > 0)
+            {
+                sprt->IncrementY(-20);
+
+                jumpImpulse -= 20;
+            }
+            else
+            {
+                this->sprt->GravityEnabled = true;
+
+                if (HasGroundBelow())
+                {
+                    this->CurrentState = IDLE;
+                    
+                    break;
+                }
+
             }
 
-            sprt->IncrementY(-5);
+            
 
             break;
     }
@@ -54,9 +73,9 @@ void MarioPlayer::DropOnGround()
     auto it = engine->GameSprites->GetContainer()->begin();
     while (it != engine->GameSprites->GetContainer()->end())
     {
-        BaseSprite* sprt = (*it);
+        BaseSprite* other = (*it);
 
-        if (sprt->Ident.compare("Ground") == 0)
+        if (other->Ident.compare("Ground") == 0)
         {
             this->sprt->SetY(sprt->GetY() - this->sprt->GetHeight());
         }
@@ -67,9 +86,15 @@ void MarioPlayer::DropOnGround()
 
 void MarioPlayer::HandleKeyboardInput()
 {
-    if (engine->Keyboard->IsKeyPressed(Space) && this->CurrentState != JUMPING)
+    if (engine->Keyboard->IsKeyPressed(Space))
     {
-        this->CurrentState = JUMPING_START;
+        if (HasGroundBelow())
+        {
+            this->jumpImpulse = 200;
+
+            this->sprt->GravityEnabled = false;
+            this->CurrentState = JUMPING;
+        }
     }
     if (engine->Keyboard->IsKeyPressed(Right))
     {
@@ -118,6 +143,30 @@ void MarioPlayer::HandleCollisions()
     //    }
 
     //}
+}
+
+bool MarioPlayer::HasGroundBelow()
+{
+    auto it = engine->GameSprites->GetContainer()->begin();
+    while (it != engine->GameSprites->GetContainer()->end())
+    {
+        BaseSprite* other = (*it);
+
+        FRectangle otherRec = other->GetRectangle();
+
+        if (this->sprt != other)
+        {
+            if (sprt->GetRectangle().Intersect(&otherRec, FRectangle::BottomEdge))
+            {
+                return true;
+            }
+        }
+        
+
+        it++;
+    }
+
+    return false;
 }
 
 void MarioPlayer::SwitchPlayerOrientation(WalkingDirection direction)
