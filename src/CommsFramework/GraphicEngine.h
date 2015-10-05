@@ -44,6 +44,10 @@ public:
 
     void SetAutoManagedFramerate(bool isSet = true);
 
+    void SetBackgroundColor(uint32_t color);
+
+    void SetBackgroundTexture(BaseTexture* texture);
+
     void Start();
 
     void Draw();
@@ -59,6 +63,8 @@ private:
     bool isRunning;
 
     int _sfmlFramerate;
+
+    sf::Color backgroundColor;
 
     GraphicEngineInitParams* startParams;
 

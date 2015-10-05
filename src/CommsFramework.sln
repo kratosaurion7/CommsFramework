@@ -15,6 +15,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Platformer", "Platformer\Pl
 		{BB1C3245-05C5-4512-93DB-E12D2ECD26E4} = {BB1C3245-05C5-4512-93DB-E12D2ECD26E4}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DownAcross", "DownAcross\DownAcross.vcxproj", "{A9060719-2001-46A4-99B6-BB9A0DA85C73}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BB1C3245-05C5-4512-93DB-E12D2ECD26E4} = {BB1C3245-05C5-4512-93DB-E12D2ECD26E4}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -61,6 +66,18 @@ Global
 		{6C9C1B72-4A3B-4824-8147-23A2C8624391}.Release|Win32.Build.0 = Release|Win32
 		{6C9C1B72-4A3B-4824-8147-23A2C8624391}.Release|x64.ActiveCfg = Release|x64
 		{6C9C1B72-4A3B-4824-8147-23A2C8624391}.Release|x64.Build.0 = Release|x64
+		{A9060719-2001-46A4-99B6-BB9A0DA85C73}.Debug|Win32.ActiveCfg = Debug|Win32
+		{A9060719-2001-46A4-99B6-BB9A0DA85C73}.Debug|Win32.Build.0 = Debug|Win32
+		{A9060719-2001-46A4-99B6-BB9A0DA85C73}.Debug|x64.ActiveCfg = Debug|x64
+		{A9060719-2001-46A4-99B6-BB9A0DA85C73}.Debug|x64.Build.0 = Debug|x64
+		{A9060719-2001-46A4-99B6-BB9A0DA85C73}.Debug-Static|Win32.ActiveCfg = Debug-Static|Win32
+		{A9060719-2001-46A4-99B6-BB9A0DA85C73}.Debug-Static|Win32.Build.0 = Debug-Static|Win32
+		{A9060719-2001-46A4-99B6-BB9A0DA85C73}.Debug-Static|x64.ActiveCfg = Debug|x64
+		{A9060719-2001-46A4-99B6-BB9A0DA85C73}.Debug-Static|x64.Build.0 = Debug|x64
+		{A9060719-2001-46A4-99B6-BB9A0DA85C73}.Release|Win32.ActiveCfg = Release|Win32
+		{A9060719-2001-46A4-99B6-BB9A0DA85C73}.Release|Win32.Build.0 = Release|Win32
+		{A9060719-2001-46A4-99B6-BB9A0DA85C73}.Release|x64.ActiveCfg = Release|x64
+		{A9060719-2001-46A4-99B6-BB9A0DA85C73}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

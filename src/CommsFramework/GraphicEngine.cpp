@@ -18,6 +18,7 @@ GraphicEngine::GraphicEngine()
     isRunning = false;
     Sprites = new PointerList<DrawObject*>();
     startParams = NULL;
+    backgroundColor = sf::Color();
 }
 
 GraphicEngine::~GraphicEngine()
@@ -102,6 +103,15 @@ void GraphicEngine::SetAutoManagedFramerate(bool isSet)
     MainWindow->setVerticalSyncEnabled(isSet);
 }
 
+void GraphicEngine::SetBackgroundColor(uint32_t color)
+{
+    backgroundColor = sf::Color(color);
+}
+
+void GraphicEngine::SetBackgroundTexture(BaseTexture * texture)
+{
+}
+
 void GraphicEngine::AddObject(BaseSprite* obj)
 {
     DSprite* dspr = dynamic_cast<DSprite*>(obj);
@@ -182,7 +192,7 @@ void GraphicEngine::ProcessWindowsEvents(sf::RenderWindow* targetWindow)
 
 void GraphicEngine::ProcessDraw(sf::RenderWindow* targetWindow)
 {
-    targetWindow->clear();
+    targetWindow->clear(backgroundColor);
 
     auto iter = Sprites->GetContainer()->begin();
     while (iter != Sprites->GetContainer()->end())
