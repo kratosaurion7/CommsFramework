@@ -1,4 +1,5 @@
 #include "BaseSprite.h"
+#include "BaseSprite.h"
 
 #include "GameEngine.h"
 
@@ -21,6 +22,11 @@ bool BaseSprite::MouseOver()
     Vector2<float> mousePos = GameEngine::Mouse->GetMousePosition();
 
     return myRec.IsPointInside(mousePos);
+}
+
+void BaseSprite::BindControls(SpriteControls controlScheme)
+{
+
 }
 
 void BaseSprite::ApplyDescriptor(SpriteDescriptor* descriptor)

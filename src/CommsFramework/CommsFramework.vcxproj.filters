@@ -73,6 +73,9 @@
     <Filter Include="Framework\Game\Rules\Physics">
       <UniqueIdentifier>{000faec8-137c-4c27-984d-c1c9fb428eff}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Framework\Game\Actors">
+      <UniqueIdentifier>{2355bdf5-fc5a-4705-b3f5-60528bd462b6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="XmlReader.cpp">
@@ -167,6 +170,9 @@
     </ClCompile>
     <ClCompile Include="GravityObjectsFallDownRule.cpp">
       <Filter>Framework\Game\Rules\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseActor.cpp">
+      <Filter>Framework\Game\Actors</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -304,6 +310,9 @@
     </ClInclude>
     <ClInclude Include="GravityObjectsFallDownRule.h">
       <Filter>Framework\Game\Rules\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseActor.h">
+      <Filter>Framework\Game\Actors</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -38,6 +38,8 @@ public:
 
     void Init();
 
+    void Init(int windowWidth, int windowHeight);
+
     void Init(GameEngineInitParams* params);
 
     void Load();

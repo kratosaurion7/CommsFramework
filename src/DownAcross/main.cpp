@@ -4,7 +4,13 @@ int main()
 {
     GameEngine* x = new GameEngine();
 
-    x->Init();
+    x->Init(1200, 720);
+
+    BaseSprite* blockSprite = x->CreateSprite("Block_01");
+    BaseTexture* tex = x->Graphics->CreateTexture();
+    tex->Initalize(128, 128);
+    tex->SetSolidColor(0xFF0000FF);
+    blockSprite->SetTexture(tex);
 
     x->Graphics->SetBackgroundColor(0x00FFFFFF);
 
@@ -12,6 +18,8 @@ int main()
     {
         if (x->Keyboard->IsKeyPressed(_Escape))
             break;
+
+        blockSprite->BindControls();
 
         x->Play();
     }

@@ -57,6 +57,15 @@ void GameEngine::Init()
     this->Init(defaultParams);
 }
 
+void GameEngine::Init(int windowWidth, int windowHeight)
+{
+    GameEngineInitParams* defaultParams = GameEngineInitParams::CreateDefaultParams();
+
+    defaultParams->GraphicsParams->WindowSize->Set(windowHeight, windowWidth);
+
+    this->Init(defaultParams);
+}
+
 void GameEngine::Init(GameEngineInitParams * params)
 {
     engineInitParams = params;
