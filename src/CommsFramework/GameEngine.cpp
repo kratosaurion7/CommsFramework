@@ -250,6 +250,30 @@ void GameEngine::CreateSpritesFromConfig()
 
 }
 
+void GameEngine::UpdateGraphicEngineSpritesFromActors()
+{
+    auto it = GameActors->GetContainer()->begin();
+    while (it != GameActors->GetContainer()->end())
+    {
+        BaseActor* act = (*it);
+        
+        auto actorIt = act->Sprites->GetContainer()->begin();
+        while (actorIt != act->Sprites->GetContainer()->end())
+        {
+            BaseSprite* sprt = (*actorIt);
+
+            if (!Graphics->Sprites->Contains(sprt))
+            {
+
+            }
+
+            actorIt++;
+        }
+
+        it++;
+    }
+}
+
 PointerList<BaseTexture*>* GameEngine::CreateTexturesFromResources(PointerList<Resource*>* resources)
 {
     PointerList<BaseTexture*>* textureList = new PointerList<BaseTexture*>();

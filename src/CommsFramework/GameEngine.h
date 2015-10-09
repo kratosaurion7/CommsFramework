@@ -70,6 +70,8 @@ public:
 
     BaseSprite* CopySprite(std::string name, std::string newName);
 
+    PointerList<BaseActor*>* GameActors;
+
     PointerList<BaseSprite*>* GameSprites;
 
     PointerList<BaseActor*>* GameActors;
@@ -79,6 +81,8 @@ private:
     GameEngineInitParams* engineInitParams;
 
     void CreateSpritesFromConfig();
+
+    void UpdateGraphicEngineSpritesFromActors();
 
     PointerList<BaseTexture*>* CreateTexturesFromResources(PointerList<Resource*>* resources);
 

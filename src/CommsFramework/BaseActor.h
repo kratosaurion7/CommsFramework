@@ -35,9 +35,9 @@ public:
     void MoveTo(float x, float y);
     void MoveTo(FloatVec vec);
 
-    void Update();
+    virtual void Update();
 
-    void BindControls(SpriteControls controlScheme = None);
+    virtual void BindControls(SpriteControls controlScheme = None);
 
 private:
     SpriteControls spriteControlScheme;
