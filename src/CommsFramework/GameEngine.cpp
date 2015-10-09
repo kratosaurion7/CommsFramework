@@ -22,7 +22,7 @@ GameEngine::GameEngine()
     Resources = new ResourceManager();
 
     GameSprites = new PointerList<BaseSprite*>();
-
+    GameActors = new PointerList<BaseActor*>();
     SFMLKeyboard* sfKeyboard = new SFMLKeyboard();
     sfKeyboard->graphicsRef = this->Graphics;
 
@@ -152,6 +152,15 @@ void GameEngine::Pre_Update()
 
 void GameEngine::Update()
 {
+    auto it = this->GameActors->GetContainer()->begin();
+    while (it != this->GameActors->GetContainer()->end())
+    {
+        BaseActor* act = (*it);
+
+        act->Update();
+
+        it++;
+    }
 }
 
 void GameEngine::Draw()
@@ -181,6 +190,33 @@ void GameEngine::Post_Update()
 
         it++;
     }
+}
+
+BaseActor * GameEngine::CreateActor()
+{
+    BaseActor* newActor = new BaseActor();
+
+    
+
+    return newActor;
+}
+
+BaseActor * GameEngine::CreateActor(BaseSprite * actorSprite)
+{
+    BaseActor* newActor = new BaseActor();
+
+    newActor->Sprites->Add(actorSprite);
+
+    return newActor;
+}
+
+BaseActor * GameEngine::CreateActor(PointerList<BaseSprite*>* spriteList)
+{
+    BaseActor* newActor = new BaseActor();
+
+    newActor->Sprites = spriteList;
+
+    return newActor;
 }
 
 BaseSprite * GameEngine::CreateSprite(std::string spriteName)

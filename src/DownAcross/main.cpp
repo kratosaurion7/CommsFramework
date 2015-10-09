@@ -1,10 +1,15 @@
 #include <GameEngine.h>
 
+#include <BaseActor.h>
+
 int main()
 {
     GameEngine* x = new GameEngine();
 
     x->Init(1200, 720);
+
+    x->Graphics->SetBackgroundColor(0x00FFFFFF);
+
 
     BaseSprite* blockSprite = x->CreateSprite("Block_01");
     BaseTexture* tex = x->Graphics->CreateTexture();
@@ -12,14 +17,13 @@ int main()
     tex->SetSolidColor(0xFF0000FF);
     blockSprite->SetTexture(tex);
 
-    x->Graphics->SetBackgroundColor(0x00FFFFFF);
+    BaseActor* act = x->CreateActor(blockSprite);
+    act->BindControls();
 
     while (true)
     {
         if (x->Keyboard->IsKeyPressed(_Escape))
             break;
-
-        blockSprite->BindControls();
 
         x->Play();
     }

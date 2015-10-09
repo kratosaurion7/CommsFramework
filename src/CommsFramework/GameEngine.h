@@ -4,6 +4,7 @@
 
 #include "ResourceManager.h"
 
+#include "BaseActor.h"
 #include "BaseSprite.h"
 
 #include "BaseKeyboard.h"
@@ -14,6 +15,7 @@
 #include <string>
 
 class GameRule;
+class BaseActor;
 
 struct GameEngineInitParams
 {
@@ -53,6 +55,10 @@ public:
     void Draw();
 
     void Post_Update();
+
+    BaseActor* CreateActor();
+    BaseActor* CreateActor(BaseSprite* actorSprite);
+    BaseActor* CreateActor(PointerList<BaseSprite*>* spriteList);
     
     BaseSprite* CreateSprite(std::string spriteName);
 
@@ -65,6 +71,8 @@ public:
     BaseSprite* CopySprite(std::string name, std::string newName);
 
     PointerList<BaseSprite*>* GameSprites;
+
+    PointerList<BaseActor*>* GameActors;
 
     PointerList<GameRule*>* GameRules;
 private:

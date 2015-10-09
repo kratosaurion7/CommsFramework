@@ -4,6 +4,12 @@
 #include "BaseSprite.h"
 #include "PointerList.h"
 
+#include "Vectors.h"
+#include "FRectangle.h"
+#include "FSize.h"
+
+class GameEngine;
+
 enum SpriteControls
 {
     None,
@@ -21,7 +27,13 @@ public:
 
     GameEngine* Engine;
 
-    PointerList<BaseSprite*> Sprites;
+    PointerList<BaseSprite*>* Sprites;
+
+    void Move(float incrementX, float incrementY);
+    void Move(FloatVec incrementVector);
+
+    void MoveTo(float x, float y);
+    void MoveTo(FloatVec vec);
 
     void Update();
 
@@ -29,6 +41,8 @@ public:
 
 private:
     SpriteControls spriteControlScheme;
+
+    void HandleKeyboardInput();
 
 };
 
