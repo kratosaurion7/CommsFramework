@@ -119,7 +119,7 @@ public:
                 return true;
             }
 
-            i++;
+            it++;
         }
 
         return false;

@@ -61,11 +61,9 @@ public:
     BaseActor* CreateActor(PointerList<BaseSprite*>* spriteList);
     
     BaseSprite* CreateSprite(std::string spriteName);
-
     BaseSprite* CreateSprite(std::string spriteName, std::string spriteTexturePath);
 
     BaseSprite* GetSprite(std::string name);
-
     BaseList<BaseSprite*>* GetSpriteList(std::string name);
 
     BaseSprite* CopySprite(std::string name, std::string newName);
@@ -73,8 +71,6 @@ public:
     PointerList<BaseActor*>* GameActors;
 
     PointerList<BaseSprite*>* GameSprites;
-
-    PointerList<BaseActor*>* GameActors;
 
     PointerList<GameRule*>* GameRules;
 private:

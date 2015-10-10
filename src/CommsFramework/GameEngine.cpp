@@ -262,10 +262,10 @@ void GameEngine::UpdateGraphicEngineSpritesFromActors()
         {
             BaseSprite* sprt = (*actorIt);
 
-            if (!Graphics->Sprites->Contains(sprt))
-            {
+            //if (!Graphics->Sprites->Contains(sprt))
+            //{
 
-            }
+            //}
 
             actorIt++;
         }
