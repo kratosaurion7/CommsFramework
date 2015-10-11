@@ -225,6 +225,12 @@ BaseActor * GameEngine::CreateActor(PointerList<BaseSprite*>* spriteList)
     return newActor;
 }
 
+void GameEngine::AttachActor(BaseActor* actor)
+{
+    this->GameActors->Add(actor);
+    actor->Engine = this;
+}
+
 BaseSprite * GameEngine::CreateSprite(std::string spriteName)
 {
     BaseSprite* sprt = this->Graphics->CreateSprite(spriteName);

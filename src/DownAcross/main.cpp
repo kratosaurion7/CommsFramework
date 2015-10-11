@@ -31,6 +31,5 @@ int main()
         x->Play();
     }
 
-
     return 0;
 }
