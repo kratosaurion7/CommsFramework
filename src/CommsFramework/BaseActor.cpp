@@ -23,8 +23,8 @@ void BaseActor::Move(float incrementX, float incrementY)
     {
         BaseSprite* sprt = (*it);
 
-        sprt->IncrementX(incrementX);
-        sprt->IncrementY(incrementY);
+        sprt->IncrementOffsetX(incrementX);
+        sprt->IncrementOffsetY(incrementY);
 
         it++;
     }
@@ -33,6 +33,25 @@ void BaseActor::Move(float incrementX, float incrementY)
 void BaseActor::Move(FloatVec incrementVector)
 {
     this->Move(incrementVector.X, incrementVector.Y);
+}
+
+void BaseActor::MoveTo(float x, float y)
+{
+    auto it = this->Sprites->GetContainer()->begin();
+    while (it != this->Sprites->GetContainer()->end())
+    {
+        BaseSprite* sprt = (*it);
+
+        sprt->SetOffsetX(x);
+        sprt->SetOffsetY(y);
+
+        it++;
+    }
+}
+
+void BaseActor::MoveTo(FloatVec vec)
+{
+    this->MoveTo(vec.X, vec.Y);
 }
 
 void BaseActor::Update()

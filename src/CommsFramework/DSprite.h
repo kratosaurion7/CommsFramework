@@ -15,9 +15,6 @@
 
 #include "SpriteAnimation.h"
 
-/*
- *
- */
 class DSprite : public BaseSprite, public SFMLDrawable
 {
 public:

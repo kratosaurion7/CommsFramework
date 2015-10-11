@@ -25,6 +25,9 @@ int main()
         if (x->Keyboard->IsKeyPressed(_Escape))
             break;
 
+        if (x->Keyboard->IsKeyPressed(Space))
+            act->Sprites->Get(0)->ResetOffsets();
+
         x->Play();
     }
 

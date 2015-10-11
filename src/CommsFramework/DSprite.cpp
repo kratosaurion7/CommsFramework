@@ -273,7 +273,7 @@ bool DSprite::IsLastFrame(std::string animName)
 
 void DSprite::UpdateInnerImpl()
 {
-    innerImpl->setPosition(position.X, position.Y);
+    innerImpl->setPosition(position.X + positionOffset.X, position.Y + positionOffset.Y);
 
     innerImpl->setScale(this->scale.X, this->scale.Y);
 }
