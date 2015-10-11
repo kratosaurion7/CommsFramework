@@ -6,7 +6,7 @@ int main()
 {
     GameEngine* x = new GameEngine();
 
-    x->Init(1200, 720);
+    x->Init(600, 600);
 
     x->Graphics->SetBackgroundColor(0x00FFFFFF);
 
@@ -18,7 +18,7 @@ int main()
     blockSprite->SetTexture(tex);
 
     BaseActor* act = x->CreateActor(blockSprite);
-    act->BindControls();
+    act->BindControls(WASD);
 
     while (true)
     {

@@ -44,5 +44,8 @@ private:
 
     void HandleKeyboardInput();
 
+    void HandleArrows();
+    void HandleWASD();
+
 };
 

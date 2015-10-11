@@ -195,8 +195,9 @@ void GameEngine::Post_Update()
 BaseActor * GameEngine::CreateActor()
 {
     BaseActor* newActor = new BaseActor();
+    newActor->Engine = this;
 
-    
+    this->GameActors->Add(newActor);
 
     return newActor;
 }
@@ -204,8 +205,11 @@ BaseActor * GameEngine::CreateActor()
 BaseActor * GameEngine::CreateActor(BaseSprite * actorSprite)
 {
     BaseActor* newActor = new BaseActor();
+    newActor->Engine = this;
 
     newActor->Sprites->Add(actorSprite);
+
+    this->GameActors->Add(newActor);
 
     return newActor;
 }
@@ -213,8 +217,10 @@ BaseActor * GameEngine::CreateActor(BaseSprite * actorSprite)
 BaseActor * GameEngine::CreateActor(PointerList<BaseSprite*>* spriteList)
 {
     BaseActor* newActor = new BaseActor();
-
+    delete(newActor->Sprites); // TODO : Maybe find a better way to do that.
     newActor->Sprites = spriteList;
+
+    this->GameActors->Add(newActor);
 
     return newActor;
 }
