@@ -48,6 +48,47 @@ void DrawObject::IncrementY(float value)
     UpdateInnerImpl();    
 }
 
+float DrawObject::GetOffsetX()
+{
+    return this->positionOffset.X;
+}
+
+float DrawObject::GetOffsetY()
+{
+    return this->positionOffset.Y;
+}
+
+void DrawObject::SetOffsetX(float value)
+{
+    this->positionOffset.X = value;
+}
+
+void DrawObject::SetOffsetY(float value)
+{
+    this->positionOffset.Y = value;
+}
+
+void DrawObject::IncrementOffsetX(float value)
+{
+    this->positionOffset.X += value;
+
+    this->UpdateInnerImpl();
+}
+
+void DrawObject::IncrementOffsetY(float value)
+{
+    this->positionOffset.Y += value;
+
+    this->UpdateInnerImpl();
+}
+
+void DrawObject::ResetOffsets()
+{
+    this->positionOffset.Set(0, 0);
+
+    this->UpdateInnerImpl();
+}
+
 FPosition DrawObject::GetPos()
 {
     return position;

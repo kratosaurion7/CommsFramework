@@ -23,6 +23,17 @@ public:
     virtual void IncrementX(float value);
     virtual void IncrementY(float value);
 
+    virtual float GetOffsetX();
+    virtual float GetOffsetY();
+
+    virtual void SetOffsetX(float value);
+    virtual void SetOffsetY(float value);
+
+    virtual void IncrementOffsetX(float value);
+    virtual void IncrementOffsetY(float value);
+
+    virtual void ResetOffsets();
+
     virtual FPosition GetPos();
     virtual void SetPos(float x, float y);
     virtual void SetPos(FPosition value);
@@ -50,6 +61,7 @@ protected:
     bool isVisible;
 
     FPosition position;
+    FPosition positionOffset;
     FSize size;
     FloatVec scale;
 
