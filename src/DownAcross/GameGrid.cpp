@@ -28,19 +28,8 @@ void GameGrid::Setup()
         {
             GridTile* newTile = new GridTile((i + j) % 10, this->Engine);
 
-            std::string elementName = "Block_";
-            elementName.append(std::to_string(j));
-            elementName.append("_");
-            elementName.append(std::to_string(i));
+            newTile->MoveTo(j * BlockSize + (j * SpaceSize), i * BlockSize + (i * SpaceSize));
 
-            BaseSprite* gridElement = this->Engine->CreateSprite(elementName);
-
-            gridElement->SetTexture(blockTexture);
-
-            gridElement->SetPos(j * BlockSize + (j * SpaceSize), i * BlockSize + (i * SpaceSize));
-
-            newTile->CoveredSprite = gridElement;
-            newTile->TileSprite->SetPos(j * BlockSize + (j * SpaceSize), i * BlockSize + (i * SpaceSize));
             this->Tiles->Add(newTile);
 
             this->Engine->AttachActor(newTile);
@@ -52,16 +41,18 @@ void GameGrid::Setup()
     {
         BaseSprite* rightMostTile = this->Tiles->Get(i * SquareSize + SquareSize - 1)->TileSprite;
 
-        FPosition rightMostPosition = rightMostTile->GetPos();
+        FPosition rightMostPosition = rightMostTile->GetOffsetPos();
 
         FPosition posOffset = rightMostPosition;
         posOffset.X += rightMostTile->GetWidth() + 10;
 
         InfoTile* info = new InfoTile(GetZeroesOfRow(i), GetSumOfRow(i), this->Engine);
         InfoTiles->Add(info);
+        
         Engine->AttachActor(info);
 
-        info->BackgroundSprite->SetPos(posOffset);
+        //info->BackgroundSprite->SetPos(posOffset);
+        info->MoveTo(posOffset.X, posOffset.Y);
     }
 
     // Placing the InfoTiles for the columns (at the bottom)
@@ -69,7 +60,7 @@ void GameGrid::Setup()
     {
         BaseSprite* bottomMostTile = this->Tiles->Get(SquareSize * SquareSize - SquareSize + j)->TileSprite;
 
-        FPosition bottomMostPosition = bottomMostTile->GetPos();
+        FPosition bottomMostPosition = bottomMostTile->GetOffsetPos();
         
         FPosition posOffset = bottomMostPosition;
         posOffset.Y += bottomMostTile->GetHeight() + 10;

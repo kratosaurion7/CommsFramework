@@ -98,6 +98,15 @@ FPosition DrawObject::GetPos()
     return position;
 }
 
+FPosition DrawObject::GetOffsetPos()
+{
+    FPosition pos = GetPos();
+    pos.X += GetOffsetX();
+    pos.Y += GetOffsetY();
+
+    return pos;
+}
+
 void DrawObject::SetPos(float x, float y)
 {
     position.Set(x, y);

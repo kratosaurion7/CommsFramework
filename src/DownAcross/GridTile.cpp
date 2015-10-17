@@ -6,12 +6,23 @@ GridTile::GridTile(int number, GameEngine* engine)
 {
     this->tileState = Covered;
 
+    this->Engine = engine;
+
     char blockName[255];
     sprintf(blockName, "assets/Tile_0%d.png\0", number);
 
     this->TileSprite = engine->CreateSprite("", blockName);
-    
     this->TileSprite->SetScale(0.5);
+    this->Sprites->Add(TileSprite);
+
+    // TODO : Find that texture from somewhere
+    BaseTexture* blockTexture = engine->Graphics->CreateTexture();
+    blockTexture->Initalize(64, 64);
+    blockTexture->SetSolidColor(0xFF0000FF);
+
+    this->CoveredSprite = engine->CreateSprite("Covered_Tile");
+    this->CoveredSprite->SetTexture(blockTexture);
+    this->Sprites->Add(this->CoveredSprite);
 }
 
 GridTile::~GridTile()

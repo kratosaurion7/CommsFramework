@@ -28,11 +28,11 @@ public:
 
     PointerList<BaseSprite*>* Sprites;
 
-    void Move(float incrementX, float incrementY);
-    void Move(FloatVec incrementVector);
+    virtual void Move(float incrementX, float incrementY);
+    virtual void Move(FloatVec incrementVector);
 
-    void MoveTo(float x, float y);
-    void MoveTo(FloatVec vec);
+    virtual void MoveTo(float x, float y);
+    virtual void MoveTo(FloatVec vec);
 
     virtual void Update();
 

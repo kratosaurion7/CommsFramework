@@ -35,6 +35,7 @@ public:
     virtual void ResetOffsets();
 
     virtual FPosition GetPos();
+    virtual FPosition GetOffsetPos();
     virtual void SetPos(float x, float y);
     virtual void SetPos(FPosition value);
     virtual void SetCenterPos(FPosition value);

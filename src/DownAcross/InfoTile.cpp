@@ -1,7 +1,5 @@
 #include "InfoTile.h"
 
-
-
 InfoTile::InfoTile(int zeroesAmount, int sumAmount, GameEngine* engine)
 {
     this->Engine = engine;
@@ -11,8 +9,8 @@ InfoTile::InfoTile(int zeroesAmount, int sumAmount, GameEngine* engine)
     backgroundTex->SetSolidColor(0x0000FFFF);
 
     BackgroundSprite = engine->CreateSprite("InfoTileBackground");
-
     BackgroundSprite->SetTexture(backgroundTex);
+    this->Sprites->Add(BackgroundSprite);
 
     textFont = engine->Graphics->CreateFont();
     textFont->Load("assets/arial.ttf");
