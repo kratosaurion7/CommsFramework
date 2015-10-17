@@ -168,6 +168,8 @@ public:
             if (current == object)
             {
                 _container->erase(it);
+
+                break;
             }
         }
     };
