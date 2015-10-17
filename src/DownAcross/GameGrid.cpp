@@ -69,7 +69,8 @@ void GameGrid::Setup()
         InfoTiles->Add(info);
         Engine->AttachActor(info);
 
-        info->BackgroundSprite->SetPos(posOffset);
+        //info->BackgroundSprite->SetPos(posOffset);
+        info->MoveTo(posOffset.X, posOffset.Y);
     }
 
 

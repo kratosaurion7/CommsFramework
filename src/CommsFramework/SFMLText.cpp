@@ -13,6 +13,8 @@ SFMLText::SFMLText()
     textColorImpl = NULL;
     isVisible = true;
     currentStyle = TEXT_STYLE_REGULAR;
+    scale.Set(1, 1);
+
 }
 
 
@@ -89,4 +91,6 @@ sf::Drawable* SFMLText::GetDrawableImplementation()
 
 void SFMLText::UpdateInnerImpl()
 {
+    this->innerImpl->setPosition(GetX() + GetOffsetX(), GetY() + GetOffsetY());
+    this->innerImpl->setScale(GetScale().X, GetScale().Y);
 }

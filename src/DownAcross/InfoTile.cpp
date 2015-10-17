@@ -18,12 +18,15 @@ InfoTile::InfoTile(int zeroesAmount, int sumAmount, GameEngine* engine)
     std::string zeroesAmountString = std::to_string(zeroesAmount);
 
     nbOfZeroesText = engine->CreateText(zeroesAmountString);
-    nbOfZeroesText->SetCharacterSize(72);
+    nbOfZeroesText->SetCharacterSize(18);
+    this->Sprites->Add(nbOfZeroesText);
 
     std::string amountString = std::to_string(sumAmount);
 
     sumOfColumnOrRowText = engine->CreateText(amountString);
-    sumOfColumnOrRowText->SetCharacterSize(72);
+    sumOfColumnOrRowText->SetCharacterSize(18);
+    sumOfColumnOrRowText->SetY(20);
+    this->Sprites->Add(sumOfColumnOrRowText);
 }
 
 

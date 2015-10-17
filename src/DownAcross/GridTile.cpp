@@ -6,6 +6,8 @@ GridTile::GridTile(int number, GameEngine* engine)
 {
     this->tileState = Covered;
 
+    this->tileNumber = number;
+
     this->Engine = engine;
 
     char blockName[255];
