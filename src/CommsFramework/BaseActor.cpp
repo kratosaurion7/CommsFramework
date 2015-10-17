@@ -4,7 +4,7 @@
 
 BaseActor::BaseActor()
 {
-    Sprites = new PointerList<BaseSprite*>();
+    Sprites = new PointerList<DrawObject*>();
 }
 
 BaseActor::~BaseActor()
@@ -17,7 +17,7 @@ void BaseActor::Move(float incrementX, float incrementY)
     auto it = this->Sprites->GetContainer()->begin();
     while (it != this->Sprites->GetContainer()->end())
     {
-        BaseSprite* sprt = (*it);
+        DrawObject* sprt = (*it);
 
         sprt->IncrementOffsetX(incrementX);
         sprt->IncrementOffsetY(incrementY);
@@ -36,7 +36,7 @@ void BaseActor::MoveTo(float x, float y)
     auto it = this->Sprites->GetContainer()->begin();
     while (it != this->Sprites->GetContainer()->end())
     {
-        BaseSprite* sprt = (*it);
+        DrawObject* sprt = (*it);
 
         sprt->SetOffsetX(x);
         sprt->SetOffsetY(y);

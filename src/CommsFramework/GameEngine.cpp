@@ -218,7 +218,7 @@ BaseActor * GameEngine::CreateActor(BaseSprite * actorSprite)
     return newActor;
 }
 
-BaseActor * GameEngine::CreateActor(PointerList<BaseSprite*>* spriteList)
+BaseActor * GameEngine::CreateActor(PointerList<DrawObject*>* spriteList)
 {
     BaseActor* newActor = new BaseActor();
     delete(newActor->Sprites); // TODO : Maybe find a better way to do that.
@@ -329,7 +329,7 @@ void GameEngine::UpdateGraphicEngineSpritesFromActors()
         auto actorIt = act->Sprites->GetContainer()->begin();
         while (actorIt != act->Sprites->GetContainer()->end())
         {
-            BaseSprite* sprt = (*actorIt);
+            DrawObject* sprt = (*actorIt);
 
             //if (!Graphics->Sprites->Contains(sprt))
             //{

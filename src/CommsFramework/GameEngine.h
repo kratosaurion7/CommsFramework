@@ -58,7 +58,7 @@ public:
 
     BaseActor* CreateActor();
     BaseActor* CreateActor(BaseSprite* actorSprite);
-    BaseActor* CreateActor(PointerList<BaseSprite*>* spriteList);
+    BaseActor* CreateActor(PointerList<DrawObject*>* spriteList);
     void AttachActor(BaseActor* actor);
 
     BaseSprite* CreateSprite(std::string spriteName);

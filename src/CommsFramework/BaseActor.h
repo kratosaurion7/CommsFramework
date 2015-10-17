@@ -26,7 +26,7 @@ public:
 
     GameEngine* Engine;
 
-    PointerList<BaseSprite*>* Sprites;
+    PointerList<DrawObject*>* Sprites;
 
     virtual void Move(float incrementX, float incrementY);
     virtual void Move(FloatVec incrementVector);
