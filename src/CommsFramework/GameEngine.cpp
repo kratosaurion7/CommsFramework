@@ -34,6 +34,8 @@ GameEngine::GameEngine()
     GameEngine::Keyboard = sfKeyboard;
     GameEngine::Mouse = sfMouse;
 
+    Rng = new RandomGen();
+
     engineDefaultFont = NULL;
     
     GameRules = new PointerList<GameRule*>();

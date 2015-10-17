@@ -12,6 +12,8 @@
 
 #include "GameRule.h"
 
+#include "RandomGen.h"
+
 #include <string>
 
 class GameRule;
@@ -37,6 +39,8 @@ public:
 
     static BaseKeyboard* Keyboard;
     static BaseMouse* Mouse;
+
+    RandomGen* Rng;
 
     void Init();
 
