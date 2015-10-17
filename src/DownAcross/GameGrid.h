@@ -1,11 +1,14 @@
 #pragma once
 
+#include <PointerList.h>
 #include <BaseActor.h>
+
+#include "GridTile.h"
 
 class GameGrid : public BaseActor
 {
 public:
-    GameGrid(int squareSize);
+    GameGrid(int squareSize, GameEngine* engine);
     ~GameGrid();
 
     void Setup();
@@ -15,5 +18,8 @@ public:
     int BlockSize = 64;
 
     int SpaceSize = 20;
+private:
+
+    PointerList<GridTile*>* Tiles;
 };
 

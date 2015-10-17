@@ -1,10 +1,14 @@
 #include "GameGrid.h"
 
-GameGrid::GameGrid(int squareSize)
+GameGrid::GameGrid(int squareSize, GameEngine* engine)
 {
     Sprites = new PointerList<BaseSprite*>();
 
+    Tiles = new PointerList<GridTile*>();
+
     this->SquareSize = squareSize;
+
+    this->Engine = engine;
 }
 
 GameGrid::~GameGrid()
@@ -22,17 +26,24 @@ void GameGrid::Setup()
     {
         for (int j = 0; j < SquareSize; j++) // X
         {
+            GridTile* newTile = new GridTile((i + j) % 10, this->Engine);
+
             std::string elementName = "Block_";
             elementName.append(std::to_string(j));
             elementName.append("_");
             elementName.append(std::to_string(i));
 
             BaseSprite* gridElement = this->Engine->CreateSprite(elementName);
-            this->Sprites->Add(gridElement);
 
             gridElement->SetTexture(blockTexture);
 
             gridElement->SetPos(j * BlockSize + (j * SpaceSize), i * BlockSize + (i * SpaceSize));
+
+            newTile->CoveredSprite = gridElement;
+            newTile->TileSprite->SetPos(j * BlockSize + (j * SpaceSize), i * BlockSize + (i * SpaceSize));
+            this->Tiles->Add(newTile);
+
+            this->Engine->AttachActor(newTile);
         }
     }
 

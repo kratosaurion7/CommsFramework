@@ -22,7 +22,6 @@ class BaseActor
 {
 public:
     BaseActor();
-    BaseActor(BaseSprite* sprite);
     ~BaseActor();
 
     GameEngine* Engine;

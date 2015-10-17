@@ -1,19 +1,15 @@
 #include "BaseActor.h"
+#include "BaseActor.h"
+#include "BaseActor.h"
 
 BaseActor::BaseActor()
 {
     Sprites = new PointerList<BaseSprite*>();
 }
 
-BaseActor::BaseActor(BaseSprite * sprite)
-{
-    Sprites = new PointerList<BaseSprite*>();
-    Sprites->Add(sprite);
-}
-
-
 BaseActor::~BaseActor()
 {
+    delete(Sprites);
 }
 
 void BaseActor::Move(float incrementX, float incrementY)

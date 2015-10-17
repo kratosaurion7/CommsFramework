@@ -21,9 +21,15 @@
     <ClCompile Include="GameGrid.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GridTile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameGrid.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GridTile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -12,17 +12,7 @@ int main()
 
     x->Graphics->SetBackgroundColor(0x00FFFFFF);
 
-
-    //BaseSprite* blockSprite = x->CreateSprite("Block_01");
-    //BaseTexture* tex = x->Graphics->CreateTexture();
-    //tex->Initalize(128, 128);
-    //tex->SetSolidColor(0xFF0000FF);
-    //blockSprite->SetTexture(tex);
-
-    //BaseActor* act = x->CreateActor(blockSprite);
-    //act->BindControls(WASD);
-
-    GameGrid* grid = new GameGrid(5);
+    GameGrid* grid = new GameGrid(5, x);
     x->AttachActor(grid);
 
     grid->Setup();
