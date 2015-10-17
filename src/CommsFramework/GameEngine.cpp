@@ -23,6 +23,8 @@ GameEngine::GameEngine()
 
     GameSprites = new PointerList<BaseSprite*>();
     GameActors = new PointerList<BaseActor*>();
+    GameTexts = new PointerList<BaseText*>();
+
     SFMLKeyboard* sfKeyboard = new SFMLKeyboard();
     sfKeyboard->graphicsRef = this->Graphics;
 
@@ -31,6 +33,8 @@ GameEngine::GameEngine()
 
     GameEngine::Keyboard = sfKeyboard;
     GameEngine::Mouse = sfMouse;
+
+    engineDefaultFont = NULL;
     
     GameRules = new PointerList<GameRule*>();
 }
@@ -255,6 +259,59 @@ BaseSprite * GameEngine::CreateSprite(std::string spriteName, std::string sprite
     this->Graphics->AddObject(sprt);
 
     return sprt;
+}
+
+BaseFont * GameEngine::GetGameDefaultFont()
+{
+    if (engineDefaultFont == NULL)
+    {
+        engineDefaultFont = this->Graphics->CreateFont();
+        engineDefaultFont->Load("assets/arial.ttf");
+    }
+
+    return engineDefaultFont;
+}
+
+BaseText* GameEngine::CreateText(std::string text)
+{
+    BaseText* ret = this->Graphics->CreateText();
+    ret->SetText(text);
+    ret->SetCharacterSize(36);
+    ret->SetColor(0x000000FF);
+    ret->SetFont(this->GetGameDefaultFont());
+
+    this->Graphics->Sprites->Add(ret);
+    this->GameTexts->Add(ret);
+
+    return ret;
+}
+
+BaseText* GameEngine::CreateText(std::string text, BaseFont* typo)
+{
+    BaseText* ret = this->Graphics->CreateText();
+    ret->SetText(text);
+    ret->SetCharacterSize(36);
+    ret->SetColor(0x000000FF);
+    ret->SetFont(typo);
+
+    this->Graphics->Sprites->Add(ret);
+    this->GameTexts->Add(ret);
+
+    return ret;
+}
+
+BaseText* GameEngine::CreateText(std::string text, BaseFont* typo, int textSize)
+{
+    BaseText* ret = this->Graphics->CreateText();
+    ret->SetText(text);
+    ret->SetCharacterSize(textSize);
+    ret->SetColor(0x000000FF);
+    ret->SetFont(typo);
+
+    this->Graphics->Sprites->Add(ret);
+    this->GameTexts->Add(ret);
+
+    return ret;
 }
 
 void GameEngine::CreateSpritesFromConfig()

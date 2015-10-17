@@ -12,7 +12,6 @@ GridTile::GridTile(int number, GameEngine* engine)
     this->TileSprite = engine->CreateSprite("", blockName);
     
     this->TileSprite->SetScale(0.5);
-
 }
 
 GridTile::~GridTile()

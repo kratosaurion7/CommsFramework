@@ -64,6 +64,12 @@ public:
     BaseSprite* CreateSprite(std::string spriteName);
     BaseSprite* CreateSprite(std::string spriteName, std::string spriteTexturePath);
 
+    BaseFont* GetGameDefaultFont();
+
+    BaseText* CreateText(std::string text);
+    BaseText* CreateText(std::string text, BaseFont* typo);
+    BaseText* CreateText(std::string text, BaseFont* typo, int textSize);
+
     BaseSprite* GetSprite(std::string name);
     BaseList<BaseSprite*>* GetSpriteList(std::string name);
 
@@ -73,9 +79,13 @@ public:
 
     PointerList<BaseSprite*>* GameSprites;
 
+    PointerList<BaseText*>* GameTexts;
+
     PointerList<GameRule*>* GameRules;
 private:
     GameEngineInitParams* engineInitParams;
+
+    BaseFont* engineDefaultFont;
 
     void CreateSpritesFromConfig();
 

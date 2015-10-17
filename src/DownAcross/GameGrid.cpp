@@ -2,9 +2,9 @@
 
 GameGrid::GameGrid(int squareSize, GameEngine* engine)
 {
-    Sprites = new PointerList<BaseSprite*>();
-
     Tiles = new PointerList<GridTile*>();
+
+    InfoTiles = new PointerList<InfoTile*>();
 
     this->SquareSize = squareSize;
 
@@ -46,5 +46,9 @@ void GameGrid::Setup()
             this->Engine->AttachActor(newTile);
         }
     }
+
+    InfoTile* info = new InfoTile(3, 3, this->Engine);
+    InfoTiles->Add(info);
+    Engine->AttachActor(info);
 
 }

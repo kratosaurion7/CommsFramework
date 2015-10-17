@@ -4,6 +4,7 @@
 #include <BaseActor.h>
 
 #include "GridTile.h"
+#include "InfoTile.h"
 
 class GameGrid : public BaseActor
 {
@@ -21,5 +22,7 @@ public:
 private:
 
     PointerList<GridTile*>* Tiles;
+
+    PointerList<InfoTile*>* InfoTiles;
 };
 
