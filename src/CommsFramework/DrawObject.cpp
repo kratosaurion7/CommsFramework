@@ -61,11 +61,15 @@ float DrawObject::GetOffsetY()
 void DrawObject::SetOffsetX(float value)
 {
     this->positionOffset.X = value;
+
+    UpdateInnerImpl();
 }
 
 void DrawObject::SetOffsetY(float value)
 {
     this->positionOffset.Y = value;
+
+    UpdateInnerImpl();
 }
 
 void DrawObject::IncrementOffsetX(float value)
@@ -115,7 +119,7 @@ void DrawObject::SetCenterPos(FPosition value)
 
 FRectangle DrawObject::GetRectangle()
 {
-    FRectangle rec = FRectangle(GetX(), GetY(), GetHeight(), GetWidth());
+    FRectangle rec = FRectangle(GetX() + GetOffsetX(), GetY() + GetOffsetY(), GetHeight(), GetWidth());
 
     return rec;
 }
