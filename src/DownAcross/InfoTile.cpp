@@ -17,8 +17,15 @@ InfoTile::InfoTile(int zeroesAmount, int sumAmount, GameEngine* engine)
     textFont = engine->Graphics->CreateFont();
     textFont->Load("assets/arial.ttf");
 
-    nbOfZeroesText = engine->CreateText("Hello !");
+    std::string zeroesAmountString = std::to_string(zeroesAmount);
+
+    nbOfZeroesText = engine->CreateText(zeroesAmountString);
     nbOfZeroesText->SetCharacterSize(72);
+
+    std::string amountString = std::to_string(sumAmount);
+
+    sumOfColumnOrRowText = engine->CreateText(amountString);
+    sumOfColumnOrRowText->SetCharacterSize(72);
 }
 
 

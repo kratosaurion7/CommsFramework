@@ -24,5 +24,11 @@ private:
     PointerList<GridTile*>* Tiles;
 
     PointerList<InfoTile*>* InfoTiles;
+
+    int GetZeroesOfRow(int rowNb);
+    int GetSumOfRow(int rowNb);
+
+    int GetZeroesOfColumn(int colNb);
+    int GetSumOfColumn(int colNb);
 };
 

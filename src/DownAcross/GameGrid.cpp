@@ -57,7 +57,7 @@ void GameGrid::Setup()
         FPosition posOffset = rightMostPosition;
         posOffset.X += rightMostTile->GetWidth() + 10;
 
-        InfoTile* info = new InfoTile(3, 3, this->Engine);
+        InfoTile* info = new InfoTile(GetZeroesOfRow(i), GetSumOfRow(i), this->Engine);
         InfoTiles->Add(info);
         Engine->AttachActor(info);
 
@@ -74,7 +74,7 @@ void GameGrid::Setup()
         FPosition posOffset = bottomMostPosition;
         posOffset.Y += bottomMostTile->GetHeight() + 10;
 
-        InfoTile* info = new InfoTile(3, 3, this->Engine);
+        InfoTile* info = new InfoTile(GetZeroesOfColumn(j), GetSumOfColumn(j), this->Engine);
         InfoTiles->Add(info);
         Engine->AttachActor(info);
 
@@ -82,4 +82,62 @@ void GameGrid::Setup()
     }
 
 
+}
+
+int GameGrid::GetZeroesOfRow(int rowNb)
+{
+    int zeroesTotal = 0;
+
+    for (int i = 0; i < SquareSize; i++)
+    {
+        GridTile* rowTile = this->Tiles->Get((SquareSize * rowNb) + i);
+
+        if (rowTile->tileNumber == 0)
+            zeroesTotal++;
+    }
+
+    return zeroesTotal;
+}
+
+int GameGrid::GetSumOfRow(int rowNb)
+{
+    int sum = 0;
+
+    for (int i = 0; i < SquareSize; i++)
+    {
+        GridTile* rowTile = this->Tiles->Get((SquareSize * rowNb) + i);
+
+        sum += rowTile->tileNumber;
+    }
+
+    return sum;
+}
+
+int GameGrid::GetZeroesOfColumn(int colNb)
+{
+    int zeroesTotal = 0;
+
+    for (int i = 0; i < SquareSize; i++)
+    {
+        GridTile* columnTile = this->Tiles->Get(i * SquareSize + colNb);
+
+        if (columnTile->tileNumber == 0)
+            zeroesTotal++;
+    }
+    
+    return zeroesTotal;
+}
+
+int GameGrid::GetSumOfColumn(int colNb)
+{
+    int sum = 0;
+
+    for (int i = 0; i < SquareSize; i++)
+    {
+        GridTile* columnTile = this->Tiles->Get(i * SquareSize + colNb);
+
+        sum += columnTile->tileNumber;
+    }
+
+    return sum;
 }
