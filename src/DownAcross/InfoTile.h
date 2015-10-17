@@ -19,5 +19,7 @@ public:
     BaseFont* textFont;
     BaseText* nbOfZeroesText;
     BaseText* sumOfColumnOrRowText;
+
+    BaseSprite* BackgroundSprite;
 };
 
