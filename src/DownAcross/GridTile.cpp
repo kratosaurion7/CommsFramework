@@ -4,7 +4,8 @@
 
 GridTile::GridTile(int number, GameEngine* engine)
 {
-    this->tileState = Covered;
+    //this->tileState = Covered;
+    this->tileState = Revealed;
 
     this->tileNumber = number;
 
@@ -29,6 +30,22 @@ GridTile::GridTile(int number, GameEngine* engine)
 
 GridTile::~GridTile()
 {
+}
+
+void GridTile::SetNewNumber(int newNumber)
+{
+    char blockName[255];
+    sprintf(blockName, "assets/Tile_0%d.png\0", newNumber);
+
+    BaseTexture* oldTexture = this->TileSprite->GetCurrentTexture();
+
+    BaseTexture* newTex = this->Engine->Graphics->CreateTexture();
+    newTex->Load(blockName);
+    this->TileSprite->SetTexture(newTex);
+
+    delete(oldTexture);
+
+    this->tileNumber = newNumber;
 }
 
 void GridTile::Update()

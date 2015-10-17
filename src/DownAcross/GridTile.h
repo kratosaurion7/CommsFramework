@@ -22,6 +22,8 @@ public:
 
     int tileNumber;
 
+    void SetNewNumber(int newNumber);
+
     GridTileState tileState;
 
     void Update();

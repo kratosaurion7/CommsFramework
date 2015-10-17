@@ -19,6 +19,12 @@ public:
     int BlockSize = 64;
 
     int SpaceSize = 20;
+
+    void RefreshGridTileInformations();
+
+protected:
+    virtual void Update();
+
 private:
 
     PointerList<GridTile*>* Tiles;

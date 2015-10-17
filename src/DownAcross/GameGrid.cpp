@@ -26,7 +26,7 @@ void GameGrid::Setup()
     {
         for (int j = 0; j < SquareSize; j++) // X
         {
-            GridTile* newTile = new GridTile((i + j) % 10, this->Engine);
+            GridTile* newTile = new GridTile(this->Engine->Rng->GetRandom(10), this->Engine);
 
             newTile->MoveTo(j * BlockSize + (j * SpaceSize), i * BlockSize + (i * SpaceSize));
 
@@ -72,7 +72,61 @@ void GameGrid::Setup()
         //info->BackgroundSprite->SetPos(posOffset);
         info->MoveTo(posOffset.X, posOffset.Y);
     }
+}
 
+
+
+void GameGrid::RefreshGridTileInformations()
+{
+    for (int i = 0; i < 5; i++)
+    {
+        InfoTile* tile = this->InfoTiles->Get(i);
+        tile->nbOfZeroes = this->GetZeroesOfRow(i);
+        std::string zeroText = std::to_string(tile->nbOfZeroes);
+        tile->nbOfZeroesText->SetText(zeroText);
+
+        tile->sumOfColumnOrRow = this->GetSumOfRow(i);
+        std::string sumText = std::to_string(tile->sumOfColumnOrRow);
+        tile->sumOfColumnOrRowText->SetText(sumText);
+
+    }
+
+    for (int i = 0; i < 5; i++)
+    {
+        InfoTile* tile = this->InfoTiles->Get(i+5);
+        tile->nbOfZeroes = this->GetZeroesOfColumn(i);
+        std::string zeroText = std::to_string(tile->nbOfZeroes);
+        tile->nbOfZeroesText->SetText(zeroText);
+
+        tile->sumOfColumnOrRow = this->GetSumOfColumn(i);
+        std::string sumText = std::to_string(tile->sumOfColumnOrRow);
+        tile->sumOfColumnOrRowText->SetText(sumText);
+    }
+
+}
+
+
+void GameGrid::Update()
+{
+    BaseActor::Update();
+
+
+    if (this->Engine->Mouse->RightButtonClicked())
+    {
+        auto it = this->Tiles->GetContainer()->begin();
+        while (it != this->Tiles->GetContainer()->end())
+        {
+            GridTile* tile = (*it);
+
+            int newNumber = this->Engine->Rng->GetRandom(10);
+
+            tile->SetNewNumber(newNumber);
+
+            it++;
+        }
+
+        this->RefreshGridTileInformations();
+    }
 
 }
 
