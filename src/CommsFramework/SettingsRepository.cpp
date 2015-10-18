@@ -15,6 +15,7 @@ void SettingsRepository::RegisterSetting(void * value, std::string name)
 {
 }
 
-void SettingsRepository::ReadSetting(std::string name)
+void* SettingsRepository::ReadSetting(std::string name)
 {
+    return 0;
 }

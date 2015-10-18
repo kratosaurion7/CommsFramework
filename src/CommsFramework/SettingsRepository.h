@@ -13,5 +13,6 @@ public:
 
     void RegisterSetting(void* value, std::string name);
 
-    virtual void ReadSetting(std::string name);
+protected:
+    virtual void* ReadSetting(std::string name);
 };

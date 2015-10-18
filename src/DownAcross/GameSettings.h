@@ -9,6 +9,7 @@ class GameSettings : public SettingsRepository
 public:
     GameSettings();
     ~GameSettings();
+
     
     // GAME WINDOW SETTINGS
     const int GameWindowHeight = 600;
@@ -24,5 +25,9 @@ public:
     const int GridColumnsCount = 5;
 
     const bool GridIsSquare = true;
+
+protected:
+    void* ReadSetting(std::string name);
+
 };
 
