@@ -284,12 +284,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="GameGrid.cpp" />
+    <ClCompile Include="GameSettings.cpp" />
     <ClCompile Include="GridTile.cpp" />
     <ClCompile Include="InfoTile.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameGrid.h" />
+    <ClInclude Include="GameSettings.h" />
     <ClInclude Include="GridTile.h" />
     <ClInclude Include="InfoTile.h" />
   </ItemGroup>

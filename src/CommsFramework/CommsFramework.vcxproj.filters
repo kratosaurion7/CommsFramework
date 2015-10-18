@@ -76,6 +76,9 @@
     <Filter Include="Framework\Game\Actors">
       <UniqueIdentifier>{2355bdf5-fc5a-4705-b3f5-60528bd462b6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Framework\Configuration">
+      <UniqueIdentifier>{ba956427-a2bc-4144-9f1a-f29a0ba933ea}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="XmlReader.cpp">
@@ -176,6 +179,9 @@
     </ClCompile>
     <ClCompile Include="RandomGen.cpp">
       <Filter>Framework\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="SettingsRepository.cpp">
+      <Filter>Framework\Configuration</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -319,6 +325,9 @@
     </ClInclude>
     <ClInclude Include="RandomGen.h">
       <Filter>Framework\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="SettingsRepository.h">
+      <Filter>Framework\Configuration</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
