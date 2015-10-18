@@ -14,6 +14,12 @@ GameGrid::GameGrid(int squareSize, GameEngine* engine)
 GameGrid::~GameGrid()
 {
     delete(Sprites);
+
+    Tiles->Release();
+    delete(Tiles);
+
+    InfoTiles->Release();
+    delete(InfoTiles);
 }
 
 void GameGrid::Setup()
@@ -109,7 +115,6 @@ void GameGrid::RefreshGridTileInformations()
 void GameGrid::Update()
 {
     BaseActor::Update();
-
 
     if (this->Engine->Mouse->RightButtonClicked())
     {

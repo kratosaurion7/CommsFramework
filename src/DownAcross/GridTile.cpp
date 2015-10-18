@@ -4,8 +4,8 @@
 
 GridTile::GridTile(int number, GameEngine* engine)
 {
-    //this->tileState = Covered;
-    this->tileState = Revealed;
+    this->tileState = Covered;
+    //this->tileState = Revealed;
 
     this->tileNumber = number;
 
