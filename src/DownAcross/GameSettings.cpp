@@ -1,7 +1,5 @@
 #include "GameSettings.h"
 
-
-
 GameSettings::GameSettings()
 {
     GameWindowTitle = "Down_Across";
@@ -17,12 +15,23 @@ GameSettings::GameSettings()
     RegisterSetting((void*)&GridColumnsCount, "Grid_Column_Count");
 }
 
-
 GameSettings::~GameSettings()
 {
 }
 
-void* GameSettings::ReadSetting(std::string name)
+PointerList<std::string>* GameSettings::GetSettingsList()
 {
-    return 0;
+    PointerList<std::string>* settings = new PointerList<std::string>();
+
+    settings->Add(std::to_string(GameWindowHeight));
+    settings->Add(std::to_string(GameWindowHeight));
+    settings->Add(std::to_string(GameWindowHeight));
+
+    settings->Add(std::to_string(TileHeight));
+    settings->Add(std::to_string(TileWidth));
+
+    settings->Add(std::to_string(GridRowsCount));
+    settings->Add(std::to_string(GridColumnsCount));
+
+    return settings;
 }

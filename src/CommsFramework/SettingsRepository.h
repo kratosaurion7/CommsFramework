@@ -14,5 +14,5 @@ public:
     void RegisterSetting(void* value, std::string name);
 
 protected:
-    virtual void* ReadSetting(std::string name);
+    virtual PointerList<std::string>* GetSettingsList();
 };

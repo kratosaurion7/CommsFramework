@@ -27,7 +27,7 @@ public:
     const bool GridIsSquare = true;
 
 protected:
-    void* ReadSetting(std::string name);
+    PointerList<std::string>* GetSettingsList();
 
 };
 
