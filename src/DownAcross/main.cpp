@@ -10,7 +10,7 @@ int main()
 
     x->Init(600, 600);
 
-    x->Graphics->SetBackgroundColor(0x00FFFFFF);
+    x->Graphics->SetBackgroundColor(0x6495EDFF);
 
     GameGrid* grid = new GameGrid(5, x);
     x->AttachActor(grid);

@@ -6,7 +6,7 @@ InfoTile::InfoTile(int zeroesAmount, int sumAmount, GameEngine* engine)
 
     BaseTexture* backgroundTex = engine->Graphics->CreateTexture();
     backgroundTex->Initalize(64, 64);
-    backgroundTex->SetSolidColor(0x0000FFFF);
+    backgroundTex->SetSolidColor(0x95ed64FF);
 
     BackgroundSprite = engine->CreateSprite("InfoTileBackground");
     BackgroundSprite->SetTexture(backgroundTex);

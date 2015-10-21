@@ -21,7 +21,7 @@ GridTile::GridTile(int number, GameEngine* engine)
     // TODO : Find that texture from somewhere
     BaseTexture* blockTexture = engine->Graphics->CreateTexture();
     blockTexture->Initalize(64, 64);
-    blockTexture->SetSolidColor(0xFF0000FF);
+    blockTexture->SetSolidColor(0xed6495FF);
 
     this->CoveredSprite = engine->CreateSprite("Covered_Tile");
     this->CoveredSprite->SetTexture(blockTexture);
