@@ -44,13 +44,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Static|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -125,8 +125,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir)..\..\libs\SFML\2015\x86\include;$(ProjectDir)..\..\libs\ZeroMQ\x32\include;$(ProjectDir)..\..\libs\rapidxml;$(SolutionDir)CommsFramework\;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDir)..\..\libs\SFML\2015\x86\lib;$(ProjectDir)..\..\libs\ZeroMQ\x32\lib;$(SolutionDir)$(Configuration);$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)..\..\libs\SFML\x32\include;$(ProjectDir)..\..\libs\ZeroMQ\x32\include;$(ProjectDir)..\..\libs\rapidxml;$(SolutionDir)CommsFramework\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)..\..\libs\SFML\x32\lib;$(ProjectDir)..\..\libs\ZeroMQ\x32\lib;$(SolutionDir)$(Configuration);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Static|Win32'">
     <LinkIncremental>true</LinkIncremental>

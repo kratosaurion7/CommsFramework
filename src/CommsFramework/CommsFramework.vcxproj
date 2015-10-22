@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug-Static|Win32">
       <Configuration>Debug-Static</Configuration>
@@ -38,58 +38,57 @@
     <ProjectGuid>{BB1C3245-05C5-4512-93DB-E12D2ECD26E4}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>CommsFramework</RootNamespace>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Static|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Static|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-Static|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-Static|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -123,13 +122,13 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir)..\..\libs\SFML\2015\x86\include;$(ProjectDir)..\..\libs\ZeroMQ\x32\include;$(ProjectDir)..\..\libs\rapidxml;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDir)..\..\libs\SFML\2015\x86\lib;$(ProjectDir)..\..\libs\ZeroMQ\x32\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)..\..\libs\SFML\x32\include;$(ProjectDir)..\..\libs\ZeroMQ\x32\include;$(ProjectDir)..\..\libs\rapidxml;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)..\..\libs\SFML\x32\lib;$(ProjectDir)..\..\libs\ZeroMQ\x32\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Static|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir)..\..\libs\SFML\2015\x32\include;$(ProjectDir)..\..\libs\ZeroMQ\x32\include;$(ProjectDir)..\..\libs\rapidxml;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDir)..\..\libs\sfml\2015\x32\lib;$(ProjectDir)..\..\libs\ZeroMQ\x32\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)..\..\libs\SFML\x32\include;$(ProjectDir)..\..\libs\ZeroMQ\x32\include;$(ProjectDir)..\..\libs\rapidxml;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)..\..\libs\sfml\x32\lib;$(ProjectDir)..\..\libs\ZeroMQ\x32\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -167,7 +166,7 @@
       <AdditionalDependencies>libzmq-v120-mt-4_0_4.lib;sfml-graphics-d.lib;sfml-system-d.lib;sfml-window-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>XCOPY /Y "$(ProjectDir)..\..\libs\SFML\2015\x86\bin\*.dll" "$(TargetDir)"
+      <Command>XCOPY /Y "$(ProjectDir)..\..\libs\SFML\x32\bin\*.dll" "$(TargetDir)"
 XCOPY /Y "$(ProjectDir)..\..\libs\ZeroMQ\x32\bin\libzmq-v120-mt-4_0_4.dll" "$(TargetDir)"
 
 mkdir "$(TargetDir)Assets"
