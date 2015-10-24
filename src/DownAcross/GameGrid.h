@@ -36,5 +36,7 @@ private:
 
     int GetZeroesOfColumn(int colNb);
     int GetSumOfColumn(int colNb);
+
+    GridTileState cheatAppliedState = Covered;
 };
 

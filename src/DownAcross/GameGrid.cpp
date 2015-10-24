@@ -133,6 +133,39 @@ void GameGrid::Update()
         this->RefreshGridTileInformations();
     }
 
+    if (this->Engine->Keyboard->IsKeyClicked(R))
+    {
+        if (cheatAppliedState == Covered)
+        {
+            auto it = this->Tiles->GetContainer()->begin();
+            while (it != this->Tiles->GetContainer()->end())
+            {
+                GridTile* tile = (*it);
+
+                tile->tileState = Revealed;
+
+                it++;
+            }
+
+            cheatAppliedState = Revealed;
+        }
+        else
+        {
+            auto it = this->Tiles->GetContainer()->begin();
+            while (it != this->Tiles->GetContainer()->end())
+            {
+                GridTile* tile = (*it);
+
+                tile->tileState = Covered;
+
+                it++;
+            }
+
+            cheatAppliedState = Covered;
+        }
+
+    }
+
 }
 
 int GameGrid::GetZeroesOfRow(int rowNb)
