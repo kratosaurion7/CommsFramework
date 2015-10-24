@@ -12,6 +12,15 @@ public:
 
     bool IsKeyPressed(Key key);
 
+    bool IsKeyClicked(Key key);
+
     GraphicEngine* graphicsRef;
+
+    void UpdateKeyboardState();
+
+private:
+    BaseList<Key>* previousFramePressedKeys;
+    BaseList<Key>* currentFramePressedKeys;
+    
 };
 

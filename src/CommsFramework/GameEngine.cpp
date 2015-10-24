@@ -186,6 +186,7 @@ void GameEngine::Draw()
 void GameEngine::Post_Update()
 {
     GameEngine::Mouse->UpdateMouseState();
+    GameEngine::Keyboard->UpdateKeyboardState();
 
     // ===== Update Game rules =====
     auto it = GameRules->GetContainer()->begin();

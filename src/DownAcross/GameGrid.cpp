@@ -116,7 +116,7 @@ void GameGrid::Update()
 {
     BaseActor::Update();
 
-    if (this->Engine->Mouse->RightButtonClicked())
+    if (this->Engine->Keyboard->IsKeyClicked(Space))
     {
         auto it = this->Tiles->GetContainer()->begin();
         while (it != this->Tiles->GetContainer()->end())

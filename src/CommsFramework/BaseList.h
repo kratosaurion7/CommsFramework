@@ -125,6 +125,23 @@ public:
         return false;
     };
 
+    bool BaseList::ContainsItem(T item)
+    {
+        for (std::list<T>::iterator it = _container->begin(); it != _container->end(); it++)
+        {
+            T element = *it;
+
+            if (element == item)
+            {
+                return true;
+            }
+                        
+            it++;
+        }
+
+        return false;
+    }
+
     void BaseList::ForEach(std::function<void(T)> func)
     {
         for (std::list<T>::iterator it = _container->begin(); it != _container->end(); it++)
