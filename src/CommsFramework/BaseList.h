@@ -50,7 +50,7 @@ public:
             {
                 return *it;
             }
-
+            
             i++;
         }
 
@@ -118,8 +118,6 @@ public:
             {
                 return true;
             }
-
-            it++;
         }
 
         return false;
@@ -135,8 +133,6 @@ public:
             {
                 return true;
             }
-                        
-            it++;
         }
 
         return false;
@@ -164,8 +160,6 @@ public:
             {
                 return i;
             }
-
-            i++;
         }
 
         return NULL;
