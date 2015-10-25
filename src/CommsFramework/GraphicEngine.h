@@ -58,9 +58,14 @@ public:
 
     bool IsRunning();
 
+    void ReorderSpritesByZIndex();
+
+    void FlagForZIndexSorting();
 
 private:
     bool isRunning;
+
+    bool zIndexNeedsReordering = false;
 
     int _sfmlFramerate;
 

@@ -2,6 +2,8 @@
 
 #include <SFML\Graphics.hpp>
 
+#include "GameEngine.h"
+
 #include "BaseSprite.h"
 
 #include "BaseTexture.h"
@@ -269,6 +271,13 @@ SpriteAnimation * DSprite::FindAnim(std::string name)
 bool DSprite::IsLastFrame(std::string animName)
 {
     return CurrentFrameIndex >= CurrentAnimation->AnimationFrames->Count() - 1;
+}
+
+void DSprite::SetZIndex(float z)
+{
+    DrawObject::SetZIndex(z);
+
+    this->Engine->FlagForZIndexSorting();
 }
 
 void DSprite::UpdateInnerImpl()

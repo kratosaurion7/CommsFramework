@@ -154,6 +154,7 @@ void GameEngine::Play()
 
 void GameEngine::Pre_Update()
 {
+    this->Graphics->ReorderSpritesByZIndex();
 }
 
 void GameEngine::Update()

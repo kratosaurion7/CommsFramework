@@ -45,5 +45,9 @@ public:
     virtual void Stop() = 0;
 
     virtual bool IsRunning() = 0;
+
+    virtual void ReorderSpritesByZIndex() = 0;
+
+    virtual void FlagForZIndexSorting() = 0;
 };
 

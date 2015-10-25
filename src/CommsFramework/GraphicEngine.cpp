@@ -7,6 +7,7 @@
 
 #include <list>
 #include <iterator>
+#include <algorithm>
 
 #include <SFML\Graphics.hpp>
 
@@ -55,6 +56,7 @@ void GraphicEngine::Initialize(GraphicEngineInitParams* params)
 BaseSprite* GraphicEngine::CreateSprite(std::string identifier)
 {
     DSprite* spr = new DSprite();
+    spr->Engine = this;
 
     spr->Ident = identifier;
 
@@ -178,6 +180,26 @@ void GraphicEngine::Stop()
 bool GraphicEngine::IsRunning()
 {
     return isRunning;
+}
+
+void GraphicEngine::ReorderSpritesByZIndex()
+{
+    if (this->zIndexNeedsReordering)
+    {
+        auto spritesStart = this->Sprites->GetContainer()->begin();
+        auto spritesEnd = this->Sprites->GetContainer()->end();
+
+        Sprites->GetContainer()->sort([](DrawObject* a, DrawObject* b) {
+            return b->GetZIndex() < a->GetZIndex();
+        });
+
+        this->zIndexNeedsReordering = false;
+    }
+}
+
+void GraphicEngine::FlagForZIndexSorting()
+{
+    zIndexNeedsReordering;
 }
 
 void GraphicEngine::ProcessWindowsEvents(sf::RenderWindow* targetWindow)
