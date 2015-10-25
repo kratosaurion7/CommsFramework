@@ -3,6 +3,8 @@
 #include <PointerList.h>
 #include <BaseActor.h>
 
+#include <BaseText.h>
+
 #include "GridTile.h"
 #include "InfoTile.h"
 
@@ -26,6 +28,7 @@ protected:
     virtual void Update();
 
 private:
+    BaseText* scoreText;
 
     PointerList<GridTile*>* Tiles;
 
@@ -36,6 +39,8 @@ private:
 
     int GetZeroesOfColumn(int colNb);
     int GetSumOfColumn(int colNb);
+
+    void UpdateGameScore();
 
     GridTileState cheatAppliedState = Covered;
 };

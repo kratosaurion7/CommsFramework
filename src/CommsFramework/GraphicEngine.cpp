@@ -30,7 +30,6 @@ GraphicEngine::~GraphicEngine()
         delete(MainWindow);
     }
 
-
     if (Sprites != NULL)
     {
         Sprites->Release();

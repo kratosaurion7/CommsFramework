@@ -32,7 +32,7 @@ void GameGrid::Setup()
     {
         for (int j = 0; j < SquareSize; j++) // X
         {
-            GridTile* newTile = new GridTile(this->Engine->Rng->GetRandom(10), this->Engine);
+            GridTile* newTile = new GridTile(this->Engine->Rng->GetRandom(4), this->Engine);
 
             newTile->MoveTo(j * BlockSize + (j * SpaceSize), i * BlockSize + (i * SpaceSize));
 
@@ -57,7 +57,6 @@ void GameGrid::Setup()
         
         Engine->AttachActor(info);
 
-        //info->BackgroundSprite->SetPos(posOffset);
         info->MoveTo(posOffset.X, posOffset.Y);
     }
 
@@ -75,9 +74,13 @@ void GameGrid::Setup()
         InfoTiles->Add(info);
         Engine->AttachActor(info);
 
-        //info->BackgroundSprite->SetPos(posOffset);
         info->MoveTo(posOffset.X, posOffset.Y);
     }
+
+    scoreText = Engine->CreateText("0");
+    scoreText->SetCharacterSize(72);
+    scoreText->SetPos(0, 520);
+    scoreText->SetColor(0xFFFFFFFF);
 }
 
 
@@ -108,7 +111,6 @@ void GameGrid::RefreshGridTileInformations()
         std::string sumText = std::to_string(tile->sumOfColumnOrRow);
         tile->sumOfColumnOrRowText->SetText(sumText);
     }
-
 }
 
 
@@ -123,7 +125,7 @@ void GameGrid::Update()
         {
             GridTile* tile = (*it);
 
-            int newNumber = this->Engine->Rng->GetRandom(10);
+            int newNumber = this->Engine->Rng->GetRandom(4);
 
             tile->SetNewNumber(newNumber);
 
@@ -163,9 +165,9 @@ void GameGrid::Update()
 
             cheatAppliedState = Covered;
         }
-
     }
 
+    UpdateGameScore();
 }
 
 int GameGrid::GetZeroesOfRow(int rowNb)
@@ -224,4 +226,24 @@ int GameGrid::GetSumOfColumn(int colNb)
     }
 
     return sum;
+}
+
+void GameGrid::UpdateGameScore()
+{
+    int totalScore = 1;
+
+    auto it = this->Tiles->GetContainer()->begin();
+    while (it != this->Tiles->GetContainer()->end())
+    {
+        GridTile* tile = (*it);
+
+        if (tile->tileState == Revealed)
+        {
+            totalScore *= tile->tileNumber;
+        }
+
+        it++;
+    }
+
+    scoreText->SetText(std::to_string(totalScore));
 }
