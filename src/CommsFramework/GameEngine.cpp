@@ -49,8 +49,14 @@ GameEngine::~GameEngine()
 
     delete(Resources);
 
-    GameSprites->Release();
+    //GameSprites->Release();
     delete(GameSprites);
+
+    GameActors->Release();
+    delete(GameActors);
+
+    //GameTexts->Release();
+    delete(GameTexts);
 
     GameRules->Release();
     delete(GameRules);

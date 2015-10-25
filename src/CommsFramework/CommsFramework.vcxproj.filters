@@ -55,9 +55,6 @@
     <Filter Include="Framework\Game\DataManager">
       <UniqueIdentifier>{5d2c28c0-dc28-46f9-8edb-85632129d98b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Tests">
-      <UniqueIdentifier>{e2ffb807-6bbb-4c9e-83bb-a3ff7bd46a95}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Framework\Engine">
       <UniqueIdentifier>{c5e0ac05-eff1-4a07-b8dc-9c1b1baec60f}</UniqueIdentifier>
     </Filter>
@@ -125,9 +122,6 @@
     </ClCompile>
     <ClCompile Include="ResourceManager.cpp">
       <Filter>Framework\Game\DataManager</Filter>
-    </ClCompile>
-    <ClCompile Include="TestRunner.cpp">
-      <Filter>Tests</Filter>
     </ClCompile>
     <ClCompile Include="Resource.cpp">
       <Filter>Framework\Game\DataManager</Filter>
@@ -268,9 +262,6 @@
     </ClInclude>
     <ClInclude Include="ResourceManager.h">
       <Filter>Framework\Game\DataManager</Filter>
-    </ClInclude>
-    <ClInclude Include="TestRunner.h">
-      <Filter>Tests</Filter>
     </ClInclude>
     <ClInclude Include="Resource.h">
       <Filter>Framework\Game\DataManager</Filter>

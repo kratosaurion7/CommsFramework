@@ -28,5 +28,7 @@ int main()
         x->Play();
     }
 
+    delete(x);
+
     return 0;
 }
