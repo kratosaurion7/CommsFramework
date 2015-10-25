@@ -9,7 +9,7 @@
 class BaseTexture
 {
 public:
-    virtual void Initalize(int width, int height) = 0;
+    virtual void Initalize(float width, float height) = 0;
 
     virtual void Load(std::string path) = 0;
 

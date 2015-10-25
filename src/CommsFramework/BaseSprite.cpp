@@ -13,6 +13,10 @@ bool BaseSprite::Clicked(MouseButtons targetButton)
     {
         return this->MouseOver() && GameEngine::Mouse->RightButtonClicked();
     }
+    else
+    {
+        return false;
+    }
 }
 
 bool BaseSprite::MouseOver()

@@ -16,7 +16,7 @@ public:
     DTexture();
     ~DTexture();
 
-    virtual void Initalize(int width, int height);
+    virtual void Initalize(float width, float height);
 
     void Load(std::string path);
 

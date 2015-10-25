@@ -23,7 +23,7 @@ DTexture::~DTexture()
         delete innerImpl;
 }
 
-void DTexture::Initalize(int width, int height)
+void DTexture::Initalize(float width, float height)
 {
     size.Height = height;
     size.Width = width;
