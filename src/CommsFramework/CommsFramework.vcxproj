@@ -266,7 +266,12 @@ XCOPY /y "E:\Prog\lib\sfml\SFML-2.3_x64\bin\*.dll" "$(TargetDir)"
       <AdditionalDependencies>libzmq-v120-mt-4_0_4.lib;sfml-graphics.lib;sfml-system.lib;sfml-window.lib;sfml-main-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <PostBuildEvent>
-      <Command>XCOPY /Y "$(ProjectDir)..\..\libs\SFML\x32\bin\*.dll" "$(TargetDir)"</Command>
+      <Command>XCOPY /Y "$(ProjectDir)..\..\libs\SFML\x32\bin\*.dll" "$(TargetDir)"
+XCOPY /Y "$(ProjectDir)..\..\libs\ZeroMQ\x32\bin\libzmq-v120-mt-4_0_4.dll" "$(TargetDir)"
+
+mkdir "$(TargetDir)Assets"
+
+XCOPY /Y /E "Assets\*" "$(TargetDir)Assets"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release-Static|Win32'">

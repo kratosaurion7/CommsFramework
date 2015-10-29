@@ -235,6 +235,9 @@
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>libzmq-v120-mt-4_0_4.lib;sfml-graphics.lib;sfml-system.lib;sfml-window.lib;CommsFramework.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>XCOPY /Y /E "$(ProjectDir)assets\*" "$(TargetDir)Assets"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release-Static|Win32'">
     <ClCompile>
