@@ -9,6 +9,7 @@ GameGrid::GameGrid(int squareSize, GameEngine* engine)
     this->SquareSize = squareSize;
 
     this->Engine = engine;
+
 }
 
 GameGrid::~GameGrid()
@@ -24,7 +25,7 @@ GameGrid::~GameGrid()
 
 void GameGrid::Setup()
 {
-    BaseTexture* blockTexture = Engine->Graphics->CreateTexture();
+    blockTexture = Engine->Graphics->CreateTexture();
     blockTexture->Initalize(BlockSize, BlockSize);
     blockTexture->SetSolidColor(0xFF0000FF);
 
@@ -34,7 +35,7 @@ void GameGrid::Setup()
         {
             GridTile* newTile = new GridTile(this->Engine->Rng->GetRandom(4), this->Engine);
 
-            newTile->MoveTo(j * BlockSize + (j * SpaceSize), i * BlockSize + (i * SpaceSize));
+            newTile->MoveTo(j * BlockSize + (j * SpaceSize) + GridOffsetPosX, i * BlockSize + (i * SpaceSize) + GridOffsetPosY);
 
             this->Tiles->Add(newTile);
 
@@ -77,13 +78,41 @@ void GameGrid::Setup()
         info->MoveTo(posOffset.X, posOffset.Y);
     }
 
-    scoreText = Engine->CreateText("0");
-    scoreText->SetCharacterSize(72);
-    scoreText->SetPos(0, 520);
-    scoreText->SetColor(0xFFFFFFFF);
+    //BaseText* gameTitleText;
+    //BaseText* currentLevelLabel;
+    //BaseText* currentLevelScore;
+    //BaseText* totalScoreText;
+
+    gameTitleText = Engine->CreateText("Down & Across");
+    gameTitleText->SetCharacterSize(32);
+    gameTitleText->SetPos(10, 0);
+    gameTitleText->SetColor(0xFFFFFFFF);
+
+    currentLevelLabel = Engine->CreateText("Level 1");
+    currentLevelLabel->SetCharacterSize(32);
+    currentLevelLabel->SetPos(300, 0);
+    currentLevelLabel->SetColor(0xFFFFFFFF);
+
+    currentLevelScore = Engine->CreateText("0");
+    currentLevelScore->SetCharacterSize(72);
+    currentLevelScore->SetPos(0, 520);
+    currentLevelScore->SetColor(0xFFFFFFFF);
+
+    totalScoreText = Engine->CreateText("0");
+    totalScoreText->SetCharacterSize(72);
+    totalScoreText->SetPos(300, 520);
+    totalScoreText->SetColor(0xFFFFFFFF);
+
+    btnNextLevel = Engine->CreateSprite("btnNextLevel");
+    btnNextLevelTexture = Engine->Graphics->CreateTexture();
+    btnNextLevelTexture->Load("assets\\Button_NextLevel.png");
+    
+    btnNextLevel->SetTexture(btnNextLevelTexture);
+    btnNextLevel->SetScale(0.5);
+    FPosition targetPos = InfoTiles->Get(InfoTiles->Count() - 1)->BackgroundSprite->GetOffsetPos();
+    targetPos.X += 64 + 10;
+    btnNextLevel->SetPos(targetPos);
 }
-
-
 
 void GameGrid::RefreshGridTileInformations()
 {
@@ -120,17 +149,7 @@ void GameGrid::Update()
 
     if (this->Engine->Keyboard->IsKeyClicked(Space))
     {
-        auto it = this->Tiles->GetContainer()->begin();
-        while (it != this->Tiles->GetContainer()->end())
-        {
-            GridTile* tile = (*it);
-
-            int newNumber = this->Engine->Rng->GetRandom(4);
-
-            tile->SetNewNumber(newNumber);
-
-            it++;
-        }
+        this->RandomizeBoardNumbers(4);
 
         this->RefreshGridTileInformations();
     }
@@ -167,7 +186,17 @@ void GameGrid::Update()
         }
     }
 
-    UpdateGameScore();
+    this->UpdateGameScore();
+
+    if (this->btnNextLevel->Clicked())
+    {
+        this->SkipBoard();
+    }
+
+    if (this->BoardIsCleared())
+    {
+        this->FinishBoard();
+    }
 }
 
 int GameGrid::GetZeroesOfRow(int rowNb)
@@ -228,9 +257,25 @@ int GameGrid::GetSumOfColumn(int colNb)
     return sum;
 }
 
+void GameGrid::RandomizeBoardNumbers(int maxPossibleNumber)
+{
+    auto it = this->Tiles->GetContainer()->begin();
+    while (it != this->Tiles->GetContainer()->end())
+    {
+        GridTile* tile = (*it);
+
+        int newNumber = this->Engine->Rng->GetRandom(4);
+
+        tile->SetNewNumber(newNumber);
+
+        it++;
+    }
+
+}
+
 void GameGrid::UpdateGameScore()
 {
-    int totalScore = 1;
+    int boardScore = 1;
 
     auto it = this->Tiles->GetContainer()->begin();
     while (it != this->Tiles->GetContainer()->end())
@@ -239,11 +284,84 @@ void GameGrid::UpdateGameScore()
 
         if (tile->tileState == Revealed)
         {
-            totalScore *= tile->tileNumber;
+            boardScore *= tile->tileNumber;
         }
 
         it++;
     }
 
-    scoreText->SetText(std::to_string(totalScore));
+    CurrentLevelScore = boardScore;
+
+    currentLevelScore->SetText(std::to_string(CurrentLevelScore));
+
+    totalScoreText->SetText(std::to_string(TotalScore));
+}
+
+void GameGrid::FinishBoard()
+{
+    CurrentLevelNumber++;
+
+    std::string levelString = std::to_string(CurrentLevelNumber);
+    std::string levelLabel = "Level " + levelString;
+    currentLevelLabel->SetText(levelLabel);
+
+    auto it = this->Tiles->GetContainer()->begin();
+    while (it != this->Tiles->GetContainer()->end())
+    {
+        GridTile* tile = (*it);
+
+        tile->tileState = Covered;
+
+        it++;
+    }
+
+    TotalScore += CurrentLevelScore;
+
+    CurrentLevelScore = 1;
+
+    this->RandomizeBoardNumbers(CurrentLevelNumber);
+
+    this->RefreshGridTileInformations();
+}
+
+void GameGrid::SkipBoard()
+{
+    auto it = this->Tiles->GetContainer()->begin();
+    while (it != this->Tiles->GetContainer()->end())
+    {
+        GridTile* tile = (*it);
+
+        tile->tileState = Covered;
+
+        it++;
+    }
+
+    TotalScore += CurrentLevelScore;
+
+    CurrentLevelScore = 1;
+
+    this->RandomizeBoardNumbers(CurrentLevelNumber);
+
+    this->RefreshGridTileInformations();
+
+}
+
+bool GameGrid::BoardIsCleared()
+{
+    bool boardCleared = true;
+
+    auto it = this->Tiles->GetContainer()->begin();
+    while (it != this->Tiles->GetContainer()->end())
+    {
+        GridTile* tile = (*it);
+
+        if ((tile->tileNumber > 0 && tile->tileState == Covered) || (tile->tileNumber == 0 && tile->tileState == Revealed))
+        {
+            boardCleared = false;
+        }
+
+        it++;
+    }
+
+    return boardCleared;
 }

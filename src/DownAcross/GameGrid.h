@@ -22,13 +22,32 @@ public:
 
     int SpaceSize = 20;
 
+    int GridOffsetPosX = 50;
+    int GridOffsetPosY = 50;
+
+    int CurrentLevelScore = 0;
+    int TotalScore = 0;
+
+    int CurrentLevelNumber = 1;
+
     void RefreshGridTileInformations();
 
 protected:
     virtual void Update();
 
 private:
-    BaseText* scoreText;
+    // Textures
+    BaseTexture* blockTexture;
+    BaseTexture* btnNextLevelTexture;
+
+    // Game Texts
+    BaseText* gameTitleText;
+    BaseText* currentLevelLabel;
+    BaseText* currentLevelScore;
+    BaseText* totalScoreText;
+
+    // Button Sprite
+    BaseSprite* btnNextLevel;
 
     PointerList<GridTile*>* Tiles;
 
@@ -40,7 +59,15 @@ private:
     int GetZeroesOfColumn(int colNb);
     int GetSumOfColumn(int colNb);
 
+    void RandomizeBoardNumbers(int maxPossibleNumber);
+
     void UpdateGameScore();
+
+    void FinishBoard();
+
+    void SkipBoard();
+
+    bool BoardIsCleared();
 
     GridTileState cheatAppliedState = Covered;
 };
