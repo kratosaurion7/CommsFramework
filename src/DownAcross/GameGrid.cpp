@@ -98,10 +98,21 @@ void GameGrid::Setup()
     currentLevelScore->SetPos(0, 520);
     currentLevelScore->SetColor(0xFFFFFFFF);
 
+    currentLevelScoreExplain = Engine->CreateText("Current Level Score");
+    currentLevelScoreExplain->SetCharacterSize(12);
+    currentLevelScoreExplain->SetPos(5, 525);
+    currentLevelScoreExplain->SetColor(0xFFFFFFFF);
+
     totalScoreText = Engine->CreateText("0");
     totalScoreText->SetCharacterSize(72);
     totalScoreText->SetPos(300, 520);
     totalScoreText->SetColor(0xFFFFFFFF);
+
+    totalScoreExplain = Engine->CreateText("Total Score");
+    totalScoreExplain->SetCharacterSize(12);
+    totalScoreExplain->SetPos(305, 525);
+    totalScoreExplain->SetColor(0xFFFFFFFF);
+
 
     btnNextLevel = Engine->CreateSprite("btnNextLevel");
     btnNextLevelTexture = Engine->Graphics->CreateTexture();

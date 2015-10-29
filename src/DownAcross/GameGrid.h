@@ -43,7 +43,11 @@ private:
     // Game Texts
     BaseText* gameTitleText;
     BaseText* currentLevelLabel;
+
+    BaseText* currentLevelScoreExplain;
     BaseText* currentLevelScore;
+
+    BaseText* totalScoreExplain;
     BaseText* totalScoreText;
 
     // Button Sprite
