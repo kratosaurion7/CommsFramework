@@ -82,6 +82,8 @@ void GameEngine::Init(GameEngineInitParams * params)
 {
     engineInitParams = params;
 
+    this->GameAreaSize = params->GraphicsParams->WindowSize;
+
     Graphics->Initialize(params->GraphicsParams);
 
     Resources->Init(params->ResourceParams);

@@ -44,6 +44,8 @@ public:
 
     RandomGen* Rng;
 
+    FSize* GameAreaSize;
+
     void Init();
 
     void Init(int windowWidth, int windowHeight);
