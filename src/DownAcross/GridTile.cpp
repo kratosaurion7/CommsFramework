@@ -16,6 +16,7 @@ GridTile::GridTile(int number, GameEngine* engine)
 
     this->TileSprite = engine->CreateSprite("", blockName);
     this->TileSprite->SetScale(0.5);
+    this->TileSprite->PropagateClicks = true;
     this->Sprites->Add(TileSprite);
 
     // TODO : Find that texture from somewhere
@@ -25,6 +26,7 @@ GridTile::GridTile(int number, GameEngine* engine)
 
     this->CoveredSprite = engine->CreateSprite("Covered_Tile");
     this->CoveredSprite->SetTexture(blockTexture);
+    this->CoveredSprite->PropagateClicks = true;
     this->Sprites->Add(this->CoveredSprite);
 }
 
@@ -73,14 +75,10 @@ void GridTile::Update()
 
     if (this->CoveredSprite->Clicked())
     {
-        if (this->tileState == Covered)
-        {
-            this->tileState = Revealed;
-        }
-        else if (this->tileState == Revealed)
-        {
-            this->tileState = Covered;
-        }
-            
+        this->tileState = Revealed;
+    }
+    else if (this->TileSprite->Clicked())
+    {
+        this->tileState = Covered;
     }
 }
