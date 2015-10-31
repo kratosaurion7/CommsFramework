@@ -62,11 +62,10 @@ public:
 
     void FlagForZIndexSorting();
 
+    bool zIndexNeedsReordering = false;
 private:
     bool isRunning;
-
-    bool zIndexNeedsReordering = false;
-
+    
     int _sfmlFramerate;
 
     sf::Color backgroundColor;

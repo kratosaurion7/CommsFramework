@@ -160,7 +160,11 @@ void GameEngine::Play()
 
 void GameEngine::Pre_Update()
 {
-    this->Graphics->ReorderSpritesByZIndex();
+    if (this->Graphics->zIndexNeedsReordering)
+    {
+        this->Graphics->ReorderSpritesByZIndex();
+    }
+
     this->FlagClickedSprites();
 }
 

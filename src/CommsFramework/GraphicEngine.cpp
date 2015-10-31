@@ -183,22 +183,19 @@ bool GraphicEngine::IsRunning()
 
 void GraphicEngine::ReorderSpritesByZIndex()
 {
-    if (this->zIndexNeedsReordering)
-    {
-        auto spritesStart = this->Sprites->GetContainer()->begin();
-        auto spritesEnd = this->Sprites->GetContainer()->end();
+    auto spritesStart = this->Sprites->GetContainer()->begin();
+    auto spritesEnd = this->Sprites->GetContainer()->end();
 
-        Sprites->GetContainer()->sort([](DrawObject* a, DrawObject* b) {
-            return b->GetZIndex() < a->GetZIndex();
-        });
+    Sprites->GetContainer()->sort([](DrawObject* a, DrawObject* b) {
+        return b->GetZIndex() < a->GetZIndex();
+    });
 
-        this->zIndexNeedsReordering = false;
-    }
+    this->zIndexNeedsReordering = false;
 }
 
 void GraphicEngine::FlagForZIndexSorting()
 {
-    zIndexNeedsReordering;
+    zIndexNeedsReordering = true;
 }
 
 void GraphicEngine::ProcessWindowsEvents(sf::RenderWindow* targetWindow)
