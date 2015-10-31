@@ -15,6 +15,7 @@ class DrawObject
 public:
     std::string Ident;
 
+    bool PropagateClicks = false;
     bool isClicked = false;
 
     virtual void Show(bool show);

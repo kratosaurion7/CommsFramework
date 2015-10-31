@@ -351,9 +351,7 @@ void GameEngine::FlagClickedSprites()
                 {
                     sprt->isClicked = true;
 
-                    bool eventHandled = true;
-
-                    if (eventHandled)
+                    if (!sprt->PropagateClicks)
                     {
                         break;
                     }
