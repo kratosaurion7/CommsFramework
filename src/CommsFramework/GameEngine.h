@@ -18,6 +18,8 @@
 
 class GameRule;
 class BaseActor;
+class DrawObject;
+class BaseSprite;
 
 struct GameEngineInitParams
 {
@@ -87,6 +89,9 @@ public:
 
     PointerList<GameRule*>* GameRules;
 private:
+    void FlagClickedSprites();
+    void RemoveSpriteClickedFlag();
+
     GameEngineInitParams* engineInitParams;
 
     BaseFont* engineDefaultFont;

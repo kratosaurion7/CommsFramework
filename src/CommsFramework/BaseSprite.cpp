@@ -3,21 +3,6 @@
 
 #include "GameEngine.h"
 
-bool BaseSprite::Clicked(MouseButtons targetButton)
-{
-    if (targetButton == LEFT)
-    {
-        return this->MouseOver() && GameEngine::Mouse->LeftButtonClicked();
-    }
-    else if (targetButton == RIGHT)
-    {
-        return this->MouseOver() && GameEngine::Mouse->RightButtonClicked();
-    }
-    else
-    {
-        return false;
-    }
-}
 
 bool BaseSprite::MouseOver()
 {

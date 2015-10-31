@@ -12,6 +12,8 @@ public:
 
     GraphicEngine* engineRef;
 
+    virtual bool IsClicked();
+
     virtual bool IsClicked(MouseButtons button);
 
     virtual Vector2<float> GetMousePosition();

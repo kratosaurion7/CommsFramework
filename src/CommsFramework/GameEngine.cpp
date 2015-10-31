@@ -161,6 +161,7 @@ void GameEngine::Play()
 void GameEngine::Pre_Update()
 {
     this->Graphics->ReorderSpritesByZIndex();
+    this->FlagClickedSprites();
 }
 
 void GameEngine::Update()
@@ -204,6 +205,8 @@ void GameEngine::Post_Update()
 
         it++;
     }
+
+    RemoveSpriteClickedFlag();
 }
 
 BaseActor * GameEngine::CreateActor()
@@ -322,6 +325,54 @@ BaseText* GameEngine::CreateText(std::string text, BaseFont* typo, int textSize)
     this->GameTexts->Add(ret);
 
     return ret;
+}
+
+void GameEngine::FlagClickedSprites()
+{
+    if (this->Mouse->IsClicked())
+    {
+        FloatVec mousePos = this->Mouse->GetMousePosition();
+
+        auto it = this->Graphics->Sprites->GetContainer()->begin();
+        while (it != this->Graphics->Sprites->GetContainer()->end())
+        {
+            DrawObject* sprt = (*it);
+
+            if (sprt->IsVisible())
+            {
+                FRectangle bounds = sprt->GetRectangle();
+                bool containmentTest = bounds.IsPointInside(mousePos);
+
+                if (containmentTest)
+                {
+                    sprt->isClicked = true;
+
+                    bool eventHandled = true;
+
+                    if (eventHandled)
+                    {
+                        break;
+                    }
+                }
+            }
+
+            it++;
+        }
+    }
+    
+}
+
+void GameEngine::RemoveSpriteClickedFlag()
+{
+    auto it = this->Graphics->Sprites->GetContainer()->begin();
+    while (it != this->Graphics->Sprites->GetContainer()->end())
+    {
+        DrawObject* sprt = (*it);
+
+        sprt->isClicked = false;
+
+        it++;
+    }
 }
 
 void GameEngine::CreateSpritesFromConfig()

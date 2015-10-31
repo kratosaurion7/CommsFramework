@@ -9,6 +9,7 @@
 #include "FSize.h"
 
 class GameEngine;
+class DrawObject;
 
 enum SpriteControls
 {

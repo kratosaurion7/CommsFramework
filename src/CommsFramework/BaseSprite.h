@@ -12,6 +12,7 @@
 
 class SpriteDescriptor;
 class GraphicEngine;
+class DrawObject;
 
 class BaseSprite : public DrawObject
 {
@@ -29,7 +30,6 @@ public:
 
     PointerList<SpriteAnimation*>* spriteAnimationList;
 
-    bool Clicked(MouseButtons targetButton = LEFT);
     bool MouseOver();
 
     void ApplyDescriptor(SpriteDescriptor* descriptor);

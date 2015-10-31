@@ -3,13 +3,19 @@
 #include "FPosition.h"
 #include "FRectangle.h"
 #include "FSize.h"
+#include "BaseMouse.h"
 
 #include <string>
+
+class GameEngine;
+class BaseMouse;
 
 class DrawObject
 {
 public:
     std::string Ident;
+
+    bool isClicked = false;
 
     virtual void Show(bool show);
     virtual bool IsVisible();
@@ -58,6 +64,9 @@ public:
 
     virtual float GetZIndex();
     virtual void SetZIndex(float z);
+
+    virtual bool Clicked(MouseButtons targetButton = LEFT);
+
 protected:
     bool isVisible;
 

@@ -1,5 +1,7 @@
 #include "DrawObject.h"
 
+#include "GameEngine.h"
+
 void DrawObject::Show(bool show)
 {
     isVisible = show;
@@ -197,4 +199,21 @@ float DrawObject::GetZIndex()
 void DrawObject::SetZIndex(float z)
 {
     zIndex = z;
+}
+
+bool DrawObject::Clicked(MouseButtons targetButton)
+{
+    if (isClicked)
+    {
+        if (targetButton == LEFT)
+        {
+            return GameEngine::Mouse->LeftButtonClicked();
+        }
+        else if (targetButton == RIGHT)
+        {
+            return GameEngine::Mouse->RightButtonClicked();
+        }
+    }
+
+    return false;
 }

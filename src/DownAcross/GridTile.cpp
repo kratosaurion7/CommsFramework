@@ -71,7 +71,7 @@ void GridTile::Update()
         }
     }
 
-    if (this->TileSprite->Clicked())
+    if (this->CoveredSprite->Clicked())
     {
         if (this->tileState == Covered)
         {

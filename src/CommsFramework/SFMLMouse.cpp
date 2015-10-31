@@ -10,6 +10,19 @@ SFMLMouse::~SFMLMouse()
 {
 }
 
+bool SFMLMouse::IsClicked()
+{
+    for (int i = 0; i < sf::Mouse::ButtonCount; i++)
+    {
+        if (sf::Mouse::isButtonPressed((sf::Mouse::Button)i))
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 bool SFMLMouse::IsClicked(MouseButtons button)
 {
     return sf::Mouse::isButtonPressed((sf::Mouse::Button)button);

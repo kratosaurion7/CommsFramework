@@ -15,6 +15,11 @@
 
 #include "SpriteAnimation.h"
 
+class BaseSprite;
+class SFMLDrawable;
+class DrawObject;
+
+
 class DSprite : public BaseSprite, public SFMLDrawable
 {
 public:

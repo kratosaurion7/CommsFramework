@@ -19,7 +19,7 @@ enum ButtonState
 
 class BaseMouse {
 public:
-
+    virtual bool IsClicked() = 0;
     virtual bool IsClicked(MouseButtons button) = 0;
 
     ButtonState Left_Previous_State;
