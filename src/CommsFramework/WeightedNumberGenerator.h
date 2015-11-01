@@ -16,5 +16,7 @@ public:
 private:
     PointerList<Pair<int, float>*>* NumberProbabilities;
     RandomGen* _rng;
+
+    bool TotalEqualsOne();
 };
 
