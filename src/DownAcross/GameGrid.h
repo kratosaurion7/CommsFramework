@@ -5,6 +5,7 @@
 #include <BaseText.h>
 #include <BaseSprite.h>
 #include <GameMessageWindow.h>
+#include <WeightedNumberGenerator.h>
 
 #include "GridTile.h"
 #include "InfoTile.h"

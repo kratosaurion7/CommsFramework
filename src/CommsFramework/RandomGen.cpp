@@ -15,3 +15,8 @@ int RandomGen::GetRandom(int max)
 {
     return rand() % max;
 }
+
+float RandomGen::GetRandomPercentage()
+{
+    return (rand() % 100) / 100.0;
+}

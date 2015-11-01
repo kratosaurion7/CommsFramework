@@ -359,6 +359,7 @@ XCOPY /Y /E "Assets\*" "$(TargetDir)Assets"</Command>
     <ClCompile Include="SFMLKeyboard.cpp" />
     <ClCompile Include="SFMLText.cpp" />
     <ClCompile Include="Utilities.cpp" />
+    <ClCompile Include="WeightedNumberGenerator.cpp" />
     <ClCompile Include="WindowsHelpers.cpp" />
     <ClCompile Include="XDirectory.cpp" />
     <ClCompile Include="XFile.cpp" />
@@ -386,6 +387,7 @@ XCOPY /Y /E "Assets\*" "$(TargetDir)Assets"</Command>
     <ClInclude Include="Graphical.h" />
     <ClInclude Include="GravityObjectsFallDownRule.h" />
     <ClInclude Include="Keys.h" />
+    <ClInclude Include="Pair.h" />
     <ClInclude Include="RandomGen.h" />
     <ClInclude Include="SettingsRepository.h" />
     <ClInclude Include="SFMLMouse.h" />
@@ -411,6 +413,7 @@ XCOPY /Y /E "Assets\*" "$(TargetDir)Assets"</Command>
     <ClInclude Include="SFMLText.h" />
     <ClInclude Include="Utilities.h" />
     <ClInclude Include="Vectors.h" />
+    <ClInclude Include="WeightedNumberGenerator.h" />
     <ClInclude Include="WindowsHelpers.h" />
     <ClInclude Include="XDirectory.h" />
     <ClInclude Include="XFile.h" />

@@ -79,6 +79,9 @@
     <Filter Include="Framework\Engine\Dialogs">
       <UniqueIdentifier>{fb4aa101-99dc-438e-abfd-29d96362f56e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Framework\Types">
+      <UniqueIdentifier>{19ef528d-5a54-4c3c-9a07-b157f63709fe}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="XmlReader.cpp">
@@ -188,6 +191,9 @@
     </ClCompile>
     <ClCompile Include="GameMessageWindow.cpp">
       <Filter>Framework\Engine\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="WeightedNumberGenerator.cpp">
+      <Filter>Framework\Math</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -340,6 +346,12 @@
     </ClInclude>
     <ClInclude Include="GameMessageWindow.h">
       <Filter>Framework\Engine\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="WeightedNumberGenerator.h">
+      <Filter>Framework\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Pair.h">
+      <Filter>Framework\Types</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

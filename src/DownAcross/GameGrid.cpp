@@ -30,11 +30,16 @@ void GameGrid::Setup()
     blockTexture->Initalize(BlockSize, BlockSize);
     blockTexture->SetSolidColor(0xFF0000FF);
 
+    WeightedNumberGenerator* rng = new WeightedNumberGenerator();
+    rng->AddBucket(0, 0.1);
+    rng->AddBucket(1, 0.85);
+    rng->AddBucket(2, 0.05);
+
     for (int i = 0; i < SquareSize; i++) // Y
     {
         for (int j = 0; j < SquareSize; j++) // X
         {
-            GridTile* newTile = new GridTile(this->Engine->Rng->GetRandom(4), this->Engine);
+            GridTile* newTile = new GridTile(rng->GetNext(), this->Engine);
 
             newTile->MoveTo(j * BlockSize + (j * SpaceSize) + GridOffsetPosX, i * BlockSize + (i * SpaceSize) + GridOffsetPosY);
 

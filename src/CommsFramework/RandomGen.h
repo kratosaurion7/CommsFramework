@@ -10,6 +10,7 @@ public:
 
     int GetRandom(int max = RAND_MAX);
 
+    float GetRandomPercentage();
 private:
     
 };
