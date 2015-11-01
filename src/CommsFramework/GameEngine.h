@@ -14,12 +14,15 @@
 
 #include "RandomGen.h"
 
+#include "EngineDialogMessage.h"
+
 #include <string>
 
 class GameRule;
 class BaseActor;
 class DrawObject;
 class BaseSprite;
+class EngineDialogMessage;
 
 struct GameEngineInitParams
 {
@@ -84,12 +87,11 @@ public:
     BaseSprite* CopySprite(std::string name, std::string newName);
 
     PointerList<BaseActor*>* GameActors;
-
     PointerList<BaseSprite*>* GameSprites;
-
     PointerList<BaseText*>* GameTexts;
-
     PointerList<GameRule*>* GameRules;
+
+    void ShowEngineDialog();
 private:
     void FlagClickedSprites();
     void RemoveSpriteClickedFlag();

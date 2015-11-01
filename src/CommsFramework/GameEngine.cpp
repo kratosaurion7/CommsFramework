@@ -333,6 +333,11 @@ BaseText* GameEngine::CreateText(std::string text, BaseFont* typo, int textSize)
     return ret;
 }
 
+void GameEngine::ShowEngineDialog()
+{
+
+}
+
 void GameEngine::FlagClickedSprites()
 {
     if (this->Mouse->IsClicked())

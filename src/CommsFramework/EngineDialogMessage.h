@@ -16,8 +16,8 @@ public:
 
     BaseText* DialogText;
 
-    void Show();
-    void Show(FPosition pos);
+    void Show(std::string message);
+    void Show(std::string message, FPosition pos);
 
     void Close();
 

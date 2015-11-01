@@ -15,7 +15,6 @@ EngineDialogMessage::EngineDialogMessage(GameEngine* engine)
     DialogSprite->Show(false);
     
     DialogText = this->Engine->CreateText("");
-    
 }
 
 
@@ -23,7 +22,7 @@ EngineDialogMessage::~EngineDialogMessage()
 {
 }
 
-void EngineDialogMessage::Show()
+void EngineDialogMessage::Show(std::string message)
 {
     FPosition gameCenterPosition = FPosition();
     gameCenterPosition.X = (this->Engine->GameAreaSize->Width / 2) - (DialogSprite->GetWidth() / 2);
@@ -36,7 +35,7 @@ void EngineDialogMessage::Show()
     DialogText->Show(true);
 }
 
-void EngineDialogMessage::Show(FPosition pos)
+void EngineDialogMessage::Show(std::string message, FPosition pos)
 {
     isOpen = true;
 
