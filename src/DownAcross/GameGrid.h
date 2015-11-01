@@ -9,11 +9,21 @@
 #include "GridTile.h"
 #include "InfoTile.h"
 
+struct GameGridState {
+    enum GridState
+    {
+        PLAYING,
+        BOARD_FINISHED
+    };
+};
+
 class GameGrid : public BaseActor
 {
 public:
     GameGrid(int squareSize, GameEngine* engine);
     ~GameGrid();
+
+    GameGridState::GridState CurrentState;
 
     void Setup();
 

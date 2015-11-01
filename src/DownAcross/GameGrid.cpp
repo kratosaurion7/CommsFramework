@@ -6,6 +6,8 @@ GameGrid::GameGrid(int squareSize, GameEngine* engine)
 
     InfoTiles = new PointerList<InfoTile*>();
 
+    CurrentState = GameGridState::PLAYING;
+
     this->SquareSize = squareSize;
 
     this->Engine = engine;
