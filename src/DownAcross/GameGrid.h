@@ -2,8 +2,9 @@
 
 #include <PointerList.h>
 #include <BaseActor.h>
-
 #include <BaseText.h>
+#include <BaseSprite.h>
+#include <GameMessageWindow.h>
 
 #include "GridTile.h"
 #include "InfoTile.h"
@@ -52,6 +53,9 @@ private:
 
     // Button Sprite
     BaseSprite* btnNextLevel;
+
+    // Messages
+    GameMessageWindow* LevelCompleteMessage;
 
     PointerList<GridTile*>* Tiles;
 

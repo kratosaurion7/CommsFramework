@@ -336,6 +336,7 @@ XCOPY /Y /E "Assets\*" "$(TargetDir)Assets"</Command>
     <ClCompile Include="EngineDialogMessage.cpp" />
     <ClCompile Include="FRectangle.cpp" />
     <ClCompile Include="GameEngine.cpp" />
+    <ClCompile Include="GameMessageWindow.cpp" />
     <ClCompile Include="GameRule.cpp" />
     <ClCompile Include="GraphicEngine.cpp" />
     <ClCompile Include="FSize.cpp" />
@@ -380,6 +381,7 @@ XCOPY /Y /E "Assets\*" "$(TargetDir)Assets"</Command>
     <ClInclude Include="FileSystem.h" />
     <ClInclude Include="FRectangle.h" />
     <ClInclude Include="GameEngine.h" />
+    <ClInclude Include="GameMessageWindow.h" />
     <ClInclude Include="GameRule.h" />
     <ClInclude Include="Graphical.h" />
     <ClInclude Include="GravityObjectsFallDownRule.h" />

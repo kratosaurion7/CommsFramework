@@ -9,7 +9,6 @@ GameGrid::GameGrid(int squareSize, GameEngine* engine)
     this->SquareSize = squareSize;
 
     this->Engine = engine;
-
 }
 
 GameGrid::~GameGrid()
@@ -78,11 +77,6 @@ void GameGrid::Setup()
         info->MoveTo(posOffset.X, posOffset.Y);
     }
 
-    //BaseText* gameTitleText;
-    //BaseText* currentLevelLabel;
-    //BaseText* currentLevelScore;
-    //BaseText* totalScoreText;
-
     gameTitleText = Engine->CreateText("Down & Across");
     gameTitleText->SetCharacterSize(32);
     gameTitleText->SetPos(10, 0);
@@ -114,15 +108,20 @@ void GameGrid::Setup()
     totalScoreExplain->SetColor(0xFFFFFFFF);
 
 
-    btnNextLevel = Engine->CreateSprite("btnNextLevel");
-    btnNextLevelTexture = Engine->Graphics->CreateTexture();
-    btnNextLevelTexture->Load("assets\\Button_NextLevel.png");
-    
-    btnNextLevel->SetTexture(btnNextLevelTexture);
+    btnNextLevel = Engine->CreateSprite("btnNextLevel", "assets\\Button_NextLevel.png");
     btnNextLevel->SetScale(0.5);
+
     FPosition targetPos = InfoTiles->Get(InfoTiles->Count() - 1)->BackgroundSprite->GetOffsetPos();
     targetPos.X += 64 + 10;
     btnNextLevel->SetPos(targetPos);
+
+    // Message setup
+    LevelCompleteMessage = new GameMessageWindow();
+    LevelCompleteMessage->WindowSprite = Engine->CreateSprite("LevelCompleteMsg", "assets\\DefaultDialogBackground.png");
+    LevelCompleteMessage->WindowSprite->SetScale(2.0);
+    LevelCompleteMessage->WindowText = Engine->CreateText("Level Complete !");
+    LevelCompleteMessage->SetDialogPosition(FPosition(200, 200));
+    LevelCompleteMessage->Close();
 }
 
 void GameGrid::RefreshGridTileInformations()
@@ -204,9 +203,18 @@ void GameGrid::Update()
         this->SkipBoard();
     }
 
-    if (this->BoardIsCleared())
+    if (this->BoardIsCleared() && LevelCompleteMessage->IsOpen == false)
     {
-        this->FinishBoard();
+        LevelCompleteMessage->Show();
+    }
+    if (this->BoardIsCleared() && LevelCompleteMessage->IsOpen == true)
+    {
+        if (LevelCompleteMessage->WindowSprite->Clicked())
+        {
+            LevelCompleteMessage->Close();
+
+            this->FinishBoard();
+        }
     }
 }
 
