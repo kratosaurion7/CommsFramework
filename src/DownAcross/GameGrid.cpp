@@ -159,65 +159,79 @@ void GameGrid::Update()
 {
     BaseActor::Update();
 
-    if (this->Engine->Keyboard->IsKeyClicked(Space))
+    if (this->CurrentState == GameGridState::PLAYING)
     {
-        this->RandomizeBoardNumbers(4);
-
-        this->RefreshGridTileInformations();
-    }
-
-    if (this->Engine->Keyboard->IsKeyClicked(R))
-    {
-        if (cheatAppliedState == Covered)
+        if (this->Engine->Keyboard->IsKeyClicked(Space))
         {
-            auto it = this->Tiles->GetContainer()->begin();
-            while (it != this->Tiles->GetContainer()->end())
+            this->RandomizeBoardNumbers(4);
+
+            this->RefreshGridTileInformations();
+        }
+
+        if (this->Engine->Keyboard->IsKeyClicked(R))
+        {
+            if (cheatAppliedState == Covered)
             {
-                GridTile* tile = (*it);
+                auto it = this->Tiles->GetContainer()->begin();
+                while (it != this->Tiles->GetContainer()->end())
+                {
+                    GridTile* tile = (*it);
 
-                tile->tileState = Revealed;
+                    tile->tileState = Revealed;
 
-                it++;
+                    it++;
+                }
+
+                cheatAppliedState = Revealed;
             }
+            else
+            {
+                auto it = this->Tiles->GetContainer()->begin();
+                while (it != this->Tiles->GetContainer()->end())
+                {
+                    GridTile* tile = (*it);
 
-            cheatAppliedState = Revealed;
+                    tile->tileState = Covered;
+
+                    it++;
+                }
+
+                cheatAppliedState = Covered;
+            }
+        }
+
+        this->UpdateGameScore();
+
+        if (this->btnNextLevel->Clicked())
+        {
+            this->SkipBoard();
+        }
+
+        if (this->BoardIsCleared())
+        {
+            this->CurrentState = GameGridState::BOARD_FINISHED;
+
+        }
+    }
+    else if (this->CurrentState == GameGridState::BOARD_FINISHED)
+    {
+        if (LevelCompleteMessage->IsOpen == false)
+        {
+            LevelCompleteMessage->Show();
         }
         else
         {
-            auto it = this->Tiles->GetContainer()->begin();
-            while (it != this->Tiles->GetContainer()->end())
+            if (LevelCompleteMessage->WindowSprite->Clicked())
             {
-                GridTile* tile = (*it);
+                LevelCompleteMessage->Close();
 
-                tile->tileState = Covered;
+                this->FinishBoard();
 
-                it++;
+                this->CurrentState = GameGridState::PLAYING;
             }
-
-            cheatAppliedState = Covered;
         }
     }
 
-    this->UpdateGameScore();
-
-    if (this->btnNextLevel->Clicked())
-    {
-        this->SkipBoard();
-    }
-
-    if (this->BoardIsCleared() && LevelCompleteMessage->IsOpen == false)
-    {
-        LevelCompleteMessage->Show();
-    }
-    if (this->BoardIsCleared() && LevelCompleteMessage->IsOpen == true)
-    {
-        if (LevelCompleteMessage->WindowSprite->Clicked())
-        {
-            LevelCompleteMessage->Close();
-
-            this->FinishBoard();
-        }
-    }
 }
 
 int GameGrid::GetZeroesOfRow(int rowNb)
@@ -343,6 +357,8 @@ void GameGrid::FinishBoard()
     this->RandomizeBoardNumbers(CurrentLevelNumber);
 
     this->RefreshGridTileInformations();
+
+    cheatAppliedState = Covered;
 }
 
 void GameGrid::SkipBoard()
@@ -365,6 +381,7 @@ void GameGrid::SkipBoard()
 
     this->RefreshGridTileInformations();
 
+    cheatAppliedState = Covered;
 }
 
 bool GameGrid::BoardIsCleared()
