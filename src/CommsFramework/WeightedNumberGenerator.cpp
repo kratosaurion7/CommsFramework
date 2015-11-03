@@ -39,10 +39,9 @@ int WeightedNumberGenerator::GetNext()
         Pair<int, float>* bucket = NumberProbabilities->Get(i);
 
         if (percentage < bucket->Item2)
-            return percentage;
+            return bucket->Item1;
     }
 
-    // Not supposed to arrive here.
     return NumberProbabilities->Get(NumberProbabilities->Count() - 1)->Item1;
 }
 

@@ -31,8 +31,8 @@ void GameGrid::Setup()
     blockTexture->SetSolidColor(0xFF0000FF);
 
     rng = new WeightedNumberGenerator();
-    rng->AddBucket(0, 0.1);
-    rng->AddBucket(1, 0.85);
+    rng->AddBucket(0, 0.20);
+    rng->AddBucket(1, 0.75);
     rng->AddBucket(2, 0.05);
 
     for (int i = 0; i < SquareSize; i++) // Y
