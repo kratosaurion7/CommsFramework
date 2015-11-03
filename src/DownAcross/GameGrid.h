@@ -68,6 +68,8 @@ private:
     // Messages
     GameMessageWindow* LevelCompleteMessage;
 
+    WeightedNumberGenerator* rng;
+
     PointerList<GridTile*>* Tiles;
 
     PointerList<InfoTile*>* InfoTiles;

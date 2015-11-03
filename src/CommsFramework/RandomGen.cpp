@@ -1,9 +1,16 @@
 #include "RandomGen.h"
-
-
+#include "Utilities.h"
 
 RandomGen::RandomGen(int seed)
 {
+    if (seed == 0)
+    {
+        srand(GetTicks());
+    }
+    else
+    {
+        srand(seed);
+    }
 }
 
 

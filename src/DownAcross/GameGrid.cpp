@@ -30,7 +30,7 @@ void GameGrid::Setup()
     blockTexture->Initalize(BlockSize, BlockSize);
     blockTexture->SetSolidColor(0xFF0000FF);
 
-    WeightedNumberGenerator* rng = new WeightedNumberGenerator();
+    rng = new WeightedNumberGenerator();
     rng->AddBucket(0, 0.1);
     rng->AddBucket(1, 0.85);
     rng->AddBucket(2, 0.05);
@@ -304,7 +304,7 @@ void GameGrid::RandomizeBoardNumbers(int maxPossibleNumber)
     {
         GridTile* tile = (*it);
 
-        int newNumber = this->Engine->Rng->GetRandom(4);
+        int newNumber = rng->GetNext();
 
         tile->SetNewNumber(newNumber);
 
