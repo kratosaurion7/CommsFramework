@@ -45,9 +45,12 @@ public:
     virtual FPosition GetOffsetPos();
     virtual void SetPos(float x, float y);
     virtual void SetPos(FPosition value);
+    virtual void SetPos(FRectangle rec);
     virtual void SetCenterPos(FPosition value);
 
     virtual FRectangle GetRectangle();
+
+    virtual void DrawObject::SetClippingBounds(FRectangle rec);
 
     virtual float GetHeight();
     virtual float GetWidth();
@@ -75,6 +78,7 @@ protected:
     FPosition positionOffset;
     FSize size;
     FloatVec scale;
+    FRectangle clippingBounds;
 
     float zIndex;
 

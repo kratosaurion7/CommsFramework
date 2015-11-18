@@ -12,6 +12,7 @@ enum DistanceFromType {
 class FRectangle
 {
 public:
+    FRectangle();
     FRectangle(float x, float y, float h, float w);
     ~FRectangle();
 

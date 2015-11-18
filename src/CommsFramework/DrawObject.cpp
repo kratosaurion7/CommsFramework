@@ -123,6 +123,13 @@ void DrawObject::SetPos(FPosition value)
     UpdateInnerImpl();
 }
 
+void DrawObject::SetPos(FRectangle rec)
+{
+    SetClippingBounds(rec);
+    
+    SetPos(rec.Left, rec.Top);
+}
+
 void DrawObject::SetCenterPos(FPosition value)
 {
     SetPos(value.X - (GetWidth() / 2), value.Y - (GetHeight() / 2));
@@ -133,6 +140,11 @@ FRectangle DrawObject::GetRectangle()
     FRectangle rec = FRectangle(GetX() + GetOffsetX(), GetY() + GetOffsetY(), GetHeight(), GetWidth());
 
     return rec;
+}
+
+void DrawObject::SetClippingBounds(FRectangle rec)
+{
+    clippingBounds = rec;
 }
 
 float DrawObject::GetHeight()
@@ -153,7 +165,6 @@ void DrawObject::SetHeight(float height)
 void DrawObject::SetWidth(float width)
 {
     size.Width = width;
-    
 }
 
 FSize DrawObject::GetSize()

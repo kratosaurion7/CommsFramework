@@ -30,7 +30,12 @@ std::string SFMLText::GetText()
 
 void SFMLText::SetText(std::string text)
 {
-    innerImpl->setString(text);
+    if (strcmp(text.c_str(), this->textString.c_str()) != 0)
+    {
+        textString = text;
+
+        innerImpl->setString(text);
+    }
 }
 
 BaseFont * SFMLText::GetFont()

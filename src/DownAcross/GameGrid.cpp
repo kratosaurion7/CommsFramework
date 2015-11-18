@@ -126,7 +126,7 @@ void GameGrid::Setup()
     LevelCompleteMessage = new GameMessageWindow();
     LevelCompleteMessage->WindowSprite = Engine->CreateSprite("LevelCompleteMsg", "assets\\DefaultDialogBackground.png");
     LevelCompleteMessage->WindowSprite->SetScale(2.0);
-    LevelCompleteMessage->WindowText = Engine->CreateText("Level Complete !");
+    LevelCompleteMessage->WindowText = Engine->CreateText("Level Complete\n !");
     LevelCompleteMessage->SetDialogPosition(FPosition(200, 200));
     LevelCompleteMessage->Close();
 }

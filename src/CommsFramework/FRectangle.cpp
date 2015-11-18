@@ -4,6 +4,10 @@
 #include "FSize.h"
 #include "Vectors.h"
 
+FRectangle::FRectangle()
+{
+}
+
 FRectangle::FRectangle(float x, float y, float h, float w)
 {
     Left = x;

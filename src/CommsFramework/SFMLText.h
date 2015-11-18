@@ -39,6 +39,8 @@ public:
     sf::Drawable* GetDrawableImplementation();
 
 private:
+    std::string textString;
+
     BaseFont* textFont;
 
     int characterSize;
