@@ -18,8 +18,7 @@ public:
 
     enum CARD_VALUE
     {
-        Joker,
-        Ace,
+        Ace = 1,
         Two,
         Three,
         Four,

@@ -1,5 +1,7 @@
 #pragma once
 
+#include <GameEngine.h>
+
 #include <BaseSprite.h>
 #include <BaseActor.h>
 
@@ -12,7 +14,7 @@
 class Deck : public BaseActor
 {
 public:
-    Deck();
+    Deck(GameEngine* engine);
     ~Deck();
 
     BaseStack<Card*>* DeckCards;
@@ -22,4 +24,8 @@ public:
     void ShuffleDeck();
 
     Card* DrawCard();
+private:
+    GameEngine* Engine;
+
+    void SetupCardSprites(Card* targetCard);
 };

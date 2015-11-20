@@ -12,7 +12,7 @@ int main()
 
     eng->Graphics->SetBackgroundColor(0x6495EDFF);
 
-    Deck* x = new Deck();
+    Deck* x = new Deck(eng);
 
     x->SetupStandard52CardsDeck();
 
