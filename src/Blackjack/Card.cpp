@@ -14,4 +14,9 @@ Card::Card()
 
 Card::~Card()
 {
+    if (this->cardBack != NULL)
+        delete(cardBack);
+
+    if (this->cardFront != NULL)
+        delete(cardFront);
 }

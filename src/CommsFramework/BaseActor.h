@@ -23,7 +23,7 @@ class BaseActor
 {
 public:
     BaseActor();
-    ~BaseActor();
+    virtual ~BaseActor();
 
     GameEngine* Engine;
 

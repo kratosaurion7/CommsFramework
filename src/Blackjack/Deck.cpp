@@ -10,6 +10,9 @@ Deck::Deck()
 
 Deck::~Deck()
 {
+    this->DeckCards->Release();
+
+    delete(this->DeckCards);
 }
 
 void Deck::SetupStandard52CardsDeck()

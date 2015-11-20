@@ -14,7 +14,7 @@ public:
     Deck();
     ~Deck();
 
-    BaseList<Card*>* DeckCards;
+    PointerList<Card*>* DeckCards;
 
     void SetupStandard52CardsDeck();
 
