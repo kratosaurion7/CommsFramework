@@ -165,6 +165,29 @@ public:
         return NULL;
     };
 
+    void BaseList::Swap(int indexA, int indexB)
+    {
+        // I would like to know what type to put in instead of auto
+        auto elementA = std::next(_container->begin(), indexA);
+        auto elementB = std::next(_container->begin(), indexA);
+
+        std::iter_swap(elementA, elementB);
+    };
+
+    void BaseList::Shuffle()
+    {
+        int length = this->Count();
+        RandomGen rng;
+
+        for (int i = length - 1; 1; i--)
+        {
+            int randomIndex = rng.GetRandom(length);
+
+            this->Swap(length, randomIndex);
+        }
+    };
+
+
     void BaseList::RemoveAt(int index)
     {
         _container->erase(index);
@@ -202,7 +225,23 @@ public:
 
 
 protected:
-    std::list<T> *_container;
+    std::list<T>* _container;
+
+private:
+    // Explanation of the neccesary 'typename' keyword : http://pages.cs.wisc.edu/~driscoll/typename.html
+    typename std::list<T>::iterator* GetIterator(int index)
+    {
+        std::list<T>::iterator* current = _container->begin();
+
+        for (int i = 0; i < _container->size; i++)
+        {
+            if (i == index)
+                return current;
+
+            current++;
+        }
+    };
+
 };
 
 template <class T, class U>
