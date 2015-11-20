@@ -94,6 +94,10 @@ sf::Drawable* SFMLText::GetDrawableImplementation()
     return innerImpl;
 }
 
+void SFMLText::UpdateTextWrapping()
+{
+}
+
 void SFMLText::UpdateInnerImpl()
 {
     this->innerImpl->setPosition(GetX() + GetOffsetX(), GetY() + GetOffsetY());

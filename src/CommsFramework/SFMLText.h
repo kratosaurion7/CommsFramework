@@ -40,6 +40,7 @@ public:
 
 private:
     std::string textString;
+    std::string textStringWithLineWrappings;
 
     BaseFont* textFont;
 
@@ -49,6 +50,8 @@ private:
     uint32_t textColor;
 
     TextStyle currentStyle;
+
+    void UpdateTextWrapping();
 
     void UpdateInnerImpl();
 };
