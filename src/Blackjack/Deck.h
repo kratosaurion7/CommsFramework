@@ -5,6 +5,7 @@
 
 #include <BaseList.h>
 #include <PointerList.h>
+#include <BaseStack.h>
 
 #include "Card.h"
 
@@ -14,7 +15,7 @@ public:
     Deck();
     ~Deck();
 
-    PointerList<Card*>* DeckCards;
+    BaseStack<Card*>* DeckCards;
 
     void SetupStandard52CardsDeck();
 

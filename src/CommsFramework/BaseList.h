@@ -1,9 +1,7 @@
 #pragma once
 
 #include <list>
-
 #include <functional>
-
 #include <algorithm>
 
 template <class T>

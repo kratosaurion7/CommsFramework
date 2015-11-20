@@ -353,5 +353,8 @@
     <ClInclude Include="Pair.h">
       <Filter>Framework\Types</Filter>
     </ClInclude>
+    <ClInclude Include="BaseStack.h">
+      <Filter>Framework\Collections</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

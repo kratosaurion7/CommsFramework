@@ -373,6 +373,7 @@ XCOPY /Y /E "Assets\*" "$(TargetDir)Assets"</Command>
     <ClInclude Include="BaseList.h" />
     <ClInclude Include="BaseMouse.h" />
     <ClInclude Include="BaseSprite.h" />
+    <ClInclude Include="BaseStack.h" />
     <ClInclude Include="BaseText.h" />
     <ClInclude Include="BaseTexture.h" />
     <ClInclude Include="BitHelper.h" />

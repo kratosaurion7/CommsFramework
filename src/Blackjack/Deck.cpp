@@ -4,13 +4,13 @@
 
 Deck::Deck()
 {
-    this->DeckCards = new PointerList<Card*>();
+    this->DeckCards = new BaseStack<Card*>();
 }
 
 
 Deck::~Deck()
 {
-    this->DeckCards->Release();
+    //this->DeckCards->Release();
 
     delete(this->DeckCards);
 }
@@ -26,7 +26,7 @@ void Deck::SetupStandard52CardsDeck()
             newCard->CardSuit = (Card::CARD_SUITS)i;
             newCard->CardValue = (Card::CARD_VALUE)k;
 
-            this->DeckCards->Add(newCard);
+            this->DeckCards->Push(newCard);
         }
     }
 }
@@ -36,7 +36,9 @@ void Deck::ShuffleDeck()
     this->DeckCards->Shuffle();
 }
 
-Card * Deck::DrawCard()
+Card* Deck::DrawCard()
 {
-    return nullptr;
+    Card* drawn = this->DeckCards->Pop();
+
+    return drawn;
 }

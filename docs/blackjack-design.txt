@@ -1,0 +1,14 @@
+Blackjack game architecture
+
+BlackjackGame
+  - Player
+    - List<Card> : Current Hand
+    - Money amount
+  - Dealer
+    - List<Card> : Current Hand
+  - Stack<Deck>  <- List of decks that are in play, "queued cards".
+  
+  
+Deck
+  - Stack<Card>
+  
