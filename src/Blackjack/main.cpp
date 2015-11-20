@@ -14,6 +14,8 @@ int main()
 
     Deck* x = new Deck();
 
+    x->SetupStandard52CardsDeck();
+
     x->ShuffleDeck();
     
     return 0;

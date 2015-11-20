@@ -16,6 +16,8 @@ public:
 
     BaseList<Card*>* DeckCards;
 
+    void SetupStandard52CardsDeck();
+
     void ShuffleDeck();
 
     Card* DrawCard();
