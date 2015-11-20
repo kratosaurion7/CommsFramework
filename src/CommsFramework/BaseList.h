@@ -167,9 +167,11 @@ public:
 
     void BaseList::Swap(int indexA, int indexB)
     {
+        auto x = _container->begin();
+        auto y = _container->begin();
         // I would like to know what type to put in instead of auto
-        auto elementA = std::next(_container->begin(), indexA);
-        auto elementB = std::next(_container->begin(), indexA);
+        auto elementA = std::next(x, indexA);
+        auto elementB = std::next(y, indexB);
 
         std::iter_swap(elementA, elementB);
     };
@@ -179,11 +181,11 @@ public:
         int length = this->Count();
         RandomGen rng;
 
-        for (int i = length - 1; 1; i--)
+        for (int i = length - 1; i > 0; i--)
         {
-            int randomIndex = rng.GetRandom(length);
+            int randomIndex = rng.GetRandom(length-1);
 
-            this->Swap(length, randomIndex);
+            this->Swap(length -1, randomIndex);
         }
     };
 
