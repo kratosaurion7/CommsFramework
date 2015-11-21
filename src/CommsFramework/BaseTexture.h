@@ -18,4 +18,6 @@ public:
     virtual FSize GetSize() = 0;
 
     virtual void SetSolidColor(uint32_t pixelColor) = 0;
+
+    std::string TexturePath;
 };

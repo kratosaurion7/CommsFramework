@@ -48,3 +48,16 @@ SpriteAnimation * BaseSprite::CreateAnimation(std::string name)
 
     return newAnim;
 }
+
+void BaseSprite::SetTexture(std::string newTexturePath)
+{
+    BaseTexture* currentTexture = this->GetCurrentTexture();
+    
+    if (currentTexture != NULL)
+        delete(currentTexture);
+
+    BaseTexture* tex = Engine->CreateTexture();
+    tex->Load(newTexturePath);
+
+    this->SetTexture(tex);
+}

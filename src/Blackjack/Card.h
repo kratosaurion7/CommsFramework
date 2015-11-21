@@ -40,4 +40,6 @@ public:
 
     BaseSprite* cardFront;
     BaseSprite* cardBack;
+
+    void Update();
 };

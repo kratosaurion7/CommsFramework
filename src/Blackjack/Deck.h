@@ -28,4 +28,8 @@ private:
     GameEngine* Engine;
 
     void SetupCardSprites(Card* targetCard);
+
+    void AssignCardSprites();
+
+    void PositionCards();
 };

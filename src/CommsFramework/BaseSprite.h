@@ -55,6 +55,7 @@ public:
     virtual bool IsLastFrame(std::string animName = "") = 0;
 
     virtual void SetTexture(BaseTexture* texture) = 0;
+    virtual void SetTexture(std::string newTexturePath);
 
     virtual BaseSprite* Clone() = 0;
 };

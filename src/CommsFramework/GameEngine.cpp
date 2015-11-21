@@ -191,6 +191,7 @@ void GameEngine::Draw()
     while (it != GameSprites->GetContainer()->end())
     {
         BaseSprite* sprite = *it;
+
         sprite->Draw();
 
         it++;

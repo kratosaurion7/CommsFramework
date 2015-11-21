@@ -28,6 +28,8 @@ int main()
     {
         Card* item = (*it);
 
+        eng->AttachActor(item);
+
         item->cardFront->SetPos(nextX, nextY);
         item->cardBack->Show(false);
         item->cardFront->Show(true);
@@ -38,7 +40,7 @@ int main()
         if (index % 10 == 0)
         {
             nextX = 0;
-            nextY += 150;
+            nextY += 100;
         }
         
         it++;
@@ -47,6 +49,12 @@ int main()
     while (true)
     {
         eng->Play();
+
+        if (eng->Keyboard->IsKeyClicked(Key::Space))
+        {
+            x->ShuffleDeck();
+        }
+
     }
 
     return 0;

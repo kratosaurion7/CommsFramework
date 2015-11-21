@@ -20,3 +20,7 @@ Card::~Card()
     if (this->cardFront != NULL)
         delete(cardFront);
 }
+
+void Card::Update()
+{
+}

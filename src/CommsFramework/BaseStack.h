@@ -53,6 +53,11 @@ public:
         innerList->Shuffle();
     };
 
+    void BaseStack::Clear()
+    {
+        innerList->Clear();
+    }
+
     std::list<T>* BaseStack::GetContainer()
     {
         return innerList->GetContainer();

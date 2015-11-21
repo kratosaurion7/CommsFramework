@@ -16,6 +16,8 @@ Deck::~Deck()
 
 void Deck::SetupStandard52CardsDeck()
 {
+    this->DeckCards->Clear();
+
     for (int i = 0; i < Card::CARD_SUITS_COUNT; i++)
     {
         for (int k = 1; k < Card::CARD_VALUE_COUNT; k++)
@@ -24,6 +26,14 @@ void Deck::SetupStandard52CardsDeck()
 
             newCard->CardSuit = (Card::CARD_SUITS)i;
             newCard->CardValue = (Card::CARD_VALUE)k;
+
+            std::string cardFrontStringName;
+            cardFrontStringName.append(std::to_string(i));
+            cardFrontStringName.append("_");
+            cardFrontStringName.append(std::to_string(k));
+
+            newCard->cardBack = Engine->CreateSprite("CardBack");
+            newCard->cardFront = Engine->CreateSprite(cardFrontStringName);
 
             SetupCardSprites(newCard);
 
@@ -35,6 +45,10 @@ void Deck::SetupStandard52CardsDeck()
 void Deck::ShuffleDeck()
 {
     this->DeckCards->Shuffle();
+
+    this->AssignCardSprites();
+
+    this->PositionCards();
 }
 
 Card* Deck::DrawCard()
@@ -104,9 +118,10 @@ void Deck::SetupCardSprites(Card * targetCard)
             case Card::King:
             {
                 sprintf_s(cardValue, 256, "%s", "K");
+                break;
             }
-        default:
-            break;
+            default:
+                break;
         }
     }
 
@@ -118,7 +133,51 @@ void Deck::SetupCardSprites(Card * targetCard)
     std::string cardFrontFileName = "assets\\cards\\front\\";
     cardFrontFileName.append(cardFileName);
 
-    targetCard->cardBack = Engine->CreateSprite("CardBack", cardBackFileName);
-    targetCard->cardFront = Engine->CreateSprite("CardFront", cardFrontFileName);
+    targetCard->cardBack->SetTexture(cardBackFileName);
+    targetCard->cardFront->SetTexture(cardFrontFileName);
+}
+
+void Deck::AssignCardSprites()
+{
+    auto it = DeckCards->GetContainer()->begin();
+    auto end = DeckCards->GetContainer()->end();
+
+    while (it != end)
+    {
+        Card* item = (*it);
+
+        SetupCardSprites(item);
+
+        it++;
+    }
+}
+
+void Deck::PositionCards()
+{
+    auto end = this->DeckCards->GetContainer()->end();
+    auto it = this->DeckCards->GetContainer()->begin();
+
+    int index = 0;
+    int nextX = 0;
+    int nextY = 0;
+    while (it != end)
+    {
+        Card* item = (*it);
+
+        item->cardFront->SetPos(nextX, nextY);
+        item->cardBack->Show(false);
+        item->cardFront->Show(true);
+        item->cardFront->SetZIndex(index);
+        nextX += 50;
+
+        index++;
+        if (index % 10 == 0)
+        {
+            nextX = 0;
+            nextY += 100;
+        }
+
+        it++;
+    }
 
 }

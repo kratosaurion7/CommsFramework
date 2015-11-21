@@ -39,14 +39,14 @@ void DTexture::Load(std::string path)
 
         size.Height = vec.y;
         size.Width = vec.x;
+
+        TexturePath = path;
     }
 }
 
 void DTexture::LoadFromMemory(char * data, int dataSize)
 {
     bool res = innerImpl->loadFromMemory(data, dataSize);
-
-    
 
     if (res)
     {
