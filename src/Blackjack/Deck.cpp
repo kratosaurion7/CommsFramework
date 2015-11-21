@@ -47,7 +47,7 @@ Card* Deck::DrawCard()
 void Deck::SetupCardSprites(Card * targetCard)
 {
     char* cardBackName = "cardBack_blue1.png\0";
-    char* cardFileName;
+    char cardFileName[256];
     char* suitName;
     char* cardValue;
 
@@ -110,7 +110,6 @@ void Deck::SetupCardSprites(Card * targetCard)
         }
     }
 
-    cardFileName = new char[256];
     sprintf_s(cardFileName, 256, "card%s%s.png\0", suitName, cardValue);
 
     std::string cardBackFileName = "assets\\cards\\back\\";

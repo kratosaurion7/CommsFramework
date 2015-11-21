@@ -8,7 +8,7 @@ int main()
 {
     GameEngine* eng = new GameEngine();
 
-    eng->Init(600, 600);
+    eng->Init(800, 800);
 
     eng->Graphics->SetBackgroundColor(0x6495EDFF);
 
@@ -17,6 +17,37 @@ int main()
     x->SetupStandard52CardsDeck();
 
     x->ShuffleDeck();
-    
+
+    auto end = x->DeckCards->GetContainer()->end();
+    auto it = x->DeckCards->GetContainer()->begin();
+
+    int index = 0;
+    int nextX = 0;
+    int nextY = 0;
+    while (it != end)
+    {
+        Card* item = (*it);
+
+        item->cardFront->SetPos(nextX, nextY);
+        item->cardBack->Show(false);
+        item->cardFront->Show(true);
+        item->cardFront->SetZIndex(index);
+        nextX += 50;
+
+        index++;
+        if (index % 10 == 0)
+        {
+            nextX = 0;
+            nextY += 150;
+        }
+        
+        it++;
+    }
+
+    while (true)
+    {
+        eng->Play();
+    }
+
     return 0;
 }
