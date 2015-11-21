@@ -187,7 +187,7 @@ void GraphicEngine::ReorderSpritesByZIndex()
     auto spritesEnd = this->Sprites->GetContainer()->end();
 
     Sprites->GetContainer()->sort([](DrawObject* a, DrawObject* b) {
-        return b->GetZIndex() < a->GetZIndex();
+        return b->GetZIndex() > a->GetZIndex();
     });
 
     this->zIndexNeedsReordering = false;
