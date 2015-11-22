@@ -62,40 +62,42 @@ void Deck::SetupCardSprites(Card * targetCard)
 {
     char* cardBackName = "cardBack_blue1.png\0";
     char cardFileName[256];
-    char* suitName;
-    char* cardValue;
+    char suitName[256];
+    char cardValue[256];
 
     switch (targetCard->CardSuit)
     {
         case Card::SPADES:
         {
-            suitName = "Spades";
+            //suitName = "Spades";
+            sprintf_s(suitName, 256, "%s", "Spades");
             break;
         }
         case Card::HEARTS:
         {
-            suitName = "Hearts";
+            //suitName = "Hearts";
+            sprintf_s(suitName, 256, "%s", "Hearts");
             break;
         }
         case Card::DIAMOND:
         {
-            suitName = "Diamonds";
+            //suitName = "Diamonds";
+            sprintf_s(suitName, 256, "%s", "Diamonds");
             break;
         }
         case Card::CLUBS:
         {
-            suitName = "Clubs";
+            //suitName = "Clubs";
+            sprintf_s(suitName, 256, "%s", "Clubs");
             break;
         }
         default:
         {
-            suitName = "?SuitName?";
+            //suitName = "?SuitName?";
+            sprintf_s(suitName, 256, "%s", "?SuitName?");
             break;
         }
     }
-
-    cardValue = new char[256];
-    cardValue[0] = 0;
 
     if (targetCard->CardValue < Card::Jack)
     {
