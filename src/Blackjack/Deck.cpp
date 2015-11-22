@@ -38,6 +38,8 @@ void Deck::SetupStandard52CardsDeck()
             SetupCardSprites(newCard);
 
             this->DeckCards->Push(newCard);
+
+            Engine->AttachActor(newCard);
         }
     }
 }

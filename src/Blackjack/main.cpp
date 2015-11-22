@@ -18,34 +18,6 @@ int main()
 
     x->ShuffleDeck();
 
-    auto end = x->DeckCards->GetContainer()->end();
-    auto it = x->DeckCards->GetContainer()->begin();
-
-    int index = 0;
-    int nextX = 0;
-    int nextY = 0;
-    while (it != end)
-    {
-        Card* item = (*it);
-
-        eng->AttachActor(item);
-
-        item->cardFront->SetPos(nextX, nextY);
-        item->cardBack->Show(false);
-        item->cardFront->Show(true);
-        item->cardFront->SetZIndex(index);
-        nextX += 50;
-
-        index++;
-        if (index % 10 == 0)
-        {
-            nextX = 0;
-            nextY += 100;
-        }
-        
-        it++;
-    }
-
     while (true)
     {
         eng->Play();
