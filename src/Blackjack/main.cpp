@@ -4,6 +4,8 @@
 
 #include "Card.h"
 
+#include <LiteList.h>
+
 int main()
 {
     GameEngine* eng = new GameEngine();

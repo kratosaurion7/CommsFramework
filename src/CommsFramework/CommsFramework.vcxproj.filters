@@ -356,5 +356,8 @@
     <ClInclude Include="BaseStack.h">
       <Filter>Framework\Collections</Filter>
     </ClInclude>
+    <ClInclude Include="LiteList.h">
+      <Filter>Framework\Collections</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
