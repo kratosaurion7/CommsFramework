@@ -26,14 +26,22 @@ public:
 
     BaseText* TotalBet;
 
+    BaseSprite* ButtonAccept;
+    BaseSprite* ButtonCancel;
+
     BaseList<BetLevels>* BettedLevels;
 
     BetSelection();
     ~BetSelection();
 
     void PlaceBet(BetSelection::BetLevels level);
-
     void RemoveBet(BetSelection::BetLevels level);
+
+    void ShowBetSelection();
+    void HideBetSelection();
+
+    void ShowAll();
+    void HideAll();
 
 private:
     void UpdateTotalBet();
