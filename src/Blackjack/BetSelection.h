@@ -36,6 +36,7 @@ public:
 
     BaseSprite* ButtonAccept;
     BaseSprite* ButtonCancel;
+    BaseSprite* ButtonReset;
 
     BaseList<BetLevels>* BettedLevels;
 
@@ -46,6 +47,7 @@ public:
 
     void PlaceBet(BetSelection::BetLevels level);
     void RemoveBet(BetSelection::BetLevels level);
+    void ResetBet();
 
     void StartBetSelection();
     void StopBetSelection();

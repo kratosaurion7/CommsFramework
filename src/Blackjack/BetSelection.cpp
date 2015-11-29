@@ -20,6 +20,7 @@ BetSelection::BetSelection()
 
     this->ButtonAccept = this->Engine->CreateSprite("BetButtonAccept");
     this->ButtonCancel = this->Engine->CreateSprite("BetButtonCancel");
+    this->ButtonReset  = this->Engine->CreateSprite("BetButtonReset");
 
     BettedLevels = new BaseList<BetLevels>();
 
@@ -31,6 +32,7 @@ BetSelection::BetSelection()
     this->Sprites->Add(this->TotalBetText);
     this->Sprites->Add(this->ButtonAccept);
     this->Sprites->Add(this->ButtonCancel);
+    this->Sprites->Add(this->ButtonReset);
 
     this->BetOne->SetTexture("assets//tokens//1.png");
     this->BetOne->SetPos(0, 0);
@@ -52,6 +54,9 @@ BetSelection::BetSelection()
 
     this->ButtonCancel->SetTexture("assets//buttons//CancelBet.png");
     this->ButtonCancel->SetPos(155, 105);
+
+    this->ButtonReset->SetTexture("assets//buttons//ResetBet.png");
+    this->ButtonReset->SetPos(310, 105);
 
     this->BettingState = IDLE;
 }
@@ -94,6 +99,13 @@ void BetSelection::RemoveBet(BetSelection::BetLevels level)
     UpdateTotalBet();
 }
 
+void BetSelection::ResetBet()
+{
+    this->BettedLevels->Clear();
+
+    UpdateTotalBet();
+}
+
 void BetSelection::StartBetSelection()
 {
     BetOne->Show(true);
@@ -103,6 +115,7 @@ void BetSelection::StartBetSelection()
     BetOneHundred->Show(true);
     ButtonAccept->Show(true);
     ButtonCancel->Show(true);
+    ButtonReset->Show(true);
 
     this->BettingState = BetSelection::BetSelectState::NEED_SELECTION;
 }
@@ -116,6 +129,7 @@ void BetSelection::StopBetSelection()
     BetOneHundred->Show(false);
     ButtonAccept->Show(false);
     ButtonCancel->Show(false);
+    ButtonReset->Show(false);
 
     this->BettingState = BetSelection::BetSelectState::FINISHED;
 }
@@ -157,6 +171,9 @@ void BetSelection::Update()
 
             if (this->BetOneHundred->Clicked())
                 this->PlaceBet(BetSelection::BetLevels::OneHundred);
+
+            if (this->ButtonReset->Clicked())
+                this->ResetBet();
 
             break;
         }
