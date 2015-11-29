@@ -5,6 +5,10 @@
 BlackjackPlayer::BlackjackPlayer()
 {
     PlayerCards = new PointerList<Card*>();
+
+    this->CurrentBet = 0;
+    this->LastBet = 0;
+    this->Money = 0;
 }
 
 

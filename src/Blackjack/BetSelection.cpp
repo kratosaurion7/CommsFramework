@@ -6,6 +6,8 @@ BetSelection::BetSelection()
 {
     BaseActor::BaseActor();
 
+    this->TotalBet = 0;
+
     this->BetOne = this->Engine->CreateSprite("BetOneToken");
     this->BetFive = this->Engine->CreateSprite("BetFiveToken");
     this->BetTen = this->Engine->CreateSprite("BetTenToken");
@@ -21,7 +23,7 @@ BetSelection::BetSelection()
     this->ButtonAccept = this->Engine->CreateSprite("BetButtonAccept");
     this->ButtonReset  = this->Engine->CreateSprite("BetButtonReset");
 
-    BettedLevels = new BaseList<BetLevels>();
+    this->BettedLevels = new BaseList<BetLevels>();
 
     this->Sprites->Add(this->BetOne);
     this->Sprites->Add(this->BetFive);
@@ -193,5 +195,6 @@ void BetSelection::UpdateTotalBet()
         it++;
     }
 
+    this->TotalBet = total;
     this->TotalBetText->SetText(std::to_string(total));
 }

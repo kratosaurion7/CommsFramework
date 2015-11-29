@@ -10,6 +10,10 @@ BlackjackGame::BlackjackGame()
 
     BetSelector = new BetSelection();
 
+    Player = new BlackjackPlayer();
+    Player->Money = 99999;
+    Dealer = new BlackjackDealer();
+
     this->Engine->AttachActor(BetSelector);
 
     this->GameState = START;
@@ -37,7 +41,7 @@ void BlackjackGame::Update()
         {
             if (this->BetSelector->BettingState == BetSelection::BetSelectState::FINISHED)
             {
-                if (this->Player->Money >= this->BetSelector->TotalBet)
+                if (this->Player->Money >= this->BetSelector->TotalBet && this->BetSelector->TotalBet > 0)
                 {
                     this->Player->CurrentBet = this->BetSelector->TotalBet;
 
@@ -48,6 +52,7 @@ void BlackjackGame::Update()
                 else
                 {
                     // Insufficient funds. Show error message.
+                    this->BetSelector->BettingState = BetSelection::BetSelectState::NEED_SELECTION;
                 }
             }
             else if(this->BetSelector->BettingState == BetSelection::BetSelectState::IDLE)
