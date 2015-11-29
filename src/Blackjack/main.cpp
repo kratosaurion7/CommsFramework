@@ -1,10 +1,10 @@
 #include <GameEngine.h>
+#include <LiteList.h>
 
 #include "Deck.h"
-
 #include "Card.h"
 
-#include <LiteList.h>
+#include "BlackjackGame.h"
 
 int main()
 {
@@ -14,25 +14,28 @@ int main()
 
     eng->Graphics->SetBackgroundColor(0x6495EDFF);
 
-    Deck* x = new Deck(eng);
+    //Deck* x = new Deck(eng);
 
-    x->SetupStandard52CardsDeck();
+    //x->SetupStandard52CardsDeck();
 
-    x->ShuffleDeck();
+    //x->ShuffleDeck();
+
+    BlackjackGame* game = new BlackjackGame();
+    eng->AttachActor(game);
 
     while (true)
     {
         eng->Play();
 
-        if (eng->Keyboard->IsKeyClicked(Key::Space))
+        if (eng->Keyboard->IsKeyClicked(Key::_Escape))
         {
-            x->ShuffleDeck();
+            break;
         }
 
-        if (eng->Keyboard->IsKeyClicked(Key::E))
-        {
-            x->SpreadCardsOnScreen();
-        }
+        //if (eng->Keyboard->IsKeyClicked(Key::E))
+        //{
+        //    x->SpreadCardsOnScreen();
+        //}
 
     }
 

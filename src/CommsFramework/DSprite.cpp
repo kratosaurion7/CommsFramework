@@ -28,7 +28,7 @@ DSprite::DSprite()
     IsPlaying = false;
     GravityEnabled = false;
     scale = FloatVec();
-    this->zIndex = 0;
+    zIndex = 0;
     scale.Set(1, 1);
 
     SpriteFPS = 60; // TODO : Get monitor FPS

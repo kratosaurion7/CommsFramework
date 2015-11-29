@@ -13,6 +13,10 @@ BetSelection::BetSelection()
     this->BetOneHundred = this->Engine->CreateSprite("BetOneHundredToken");
 
     this->TotalBetText = this->Engine->CreateText("0");
+    this->TotalBetText->SetCharacterSize(36);
+    this->TotalBetText->SetColor(0xFFFFFFFF);
+    this->TotalBetText->SetPos(650, 0);
+    this->TotalBetText->Show(true); // May relocate this member elsewhere.
 
     this->ButtonAccept = this->Engine->CreateSprite("BetButtonAccept");
     this->ButtonCancel = this->Engine->CreateSprite("BetButtonCancel");
@@ -29,13 +33,27 @@ BetSelection::BetSelection()
     this->Sprites->Add(this->ButtonCancel);
 
     this->BetOne->SetTexture("assets//tokens//1.png");
-    this->BetFive->SetTexture("assets//tokens//5.png");
-    this->BetTen->SetTexture("assets//tokens//10.png");
-    this->BetTwentyFive->SetTexture("assets//tokens//25.png");
-    this->BetOneHundred->SetTexture("assets//tokens//100.png");
+    this->BetOne->SetPos(0, 0);
 
-    this->ButtonAccept->SetTexture("assets//buttons//AcceptBet");
-    this->ButtonCancel->SetTexture("assets//buttons//CancelBet");
+    this->BetFive->SetTexture("assets//tokens//5.png");
+    this->BetFive->SetPos(105, 0);
+
+    this->BetTen->SetTexture("assets//tokens//10.png");
+    this->BetTen->SetPos(210, 0);
+
+    this->BetTwentyFive->SetTexture("assets//tokens//25.png");
+    this->BetTwentyFive->SetPos(315, 0);
+
+    this->BetOneHundred->SetTexture("assets//tokens//100.png");
+    this->BetOneHundred->SetPos(420, 0);
+
+    this->ButtonAccept->SetTexture("assets//buttons//AcceptBet.png");
+    this->ButtonAccept->SetPos(0, 105);
+
+    this->ButtonCancel->SetTexture("assets//buttons//CancelBet.png");
+    this->ButtonCancel->SetPos(155, 105);
+
+    this->BettingState = IDLE;
 }
 
 
@@ -125,6 +143,21 @@ void BetSelection::Update()
                 this->BettingState = FINISHED;
             }
 
+            if (this->BetOne->Clicked())
+                this->PlaceBet(BetSelection::BetLevels::One);
+            
+            if (this->BetFive->Clicked())
+                this->PlaceBet(BetSelection::BetLevels::Five);
+
+            if (this->BetTen->Clicked())
+                this->PlaceBet(BetSelection::BetLevels::Ten);
+
+            if (this->BetTwentyFive->Clicked())
+                this->PlaceBet(BetSelection::BetLevels::TwentyFive);
+
+            if (this->BetOneHundred->Clicked())
+                this->PlaceBet(BetSelection::BetLevels::OneHundred);
+
             break;
         }
         case BetSelection::FINISHED:
@@ -138,7 +171,7 @@ void BetSelection::Update()
 
 void BetSelection::UpdateTotalBet()
 {
-    int total;
+    int total = 0;
 
     auto it = this->BettedLevels->GetContainer()->begin();
     while (it != this->BettedLevels->GetContainer()->end())

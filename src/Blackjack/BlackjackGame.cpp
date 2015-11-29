@@ -9,6 +9,10 @@ BlackjackGame::BlackjackGame()
     GameCards = new CardsShoe();
 
     BetSelector = new BetSelection();
+
+    this->Engine->AttachActor(BetSelector);
+
+    this->GameState = START;
 }
 
 
@@ -45,7 +49,10 @@ void BlackjackGame::Update()
                 {
                     // Insufficient funds. Show error message.
                 }
-
+            }
+            else if(this->BetSelector->BettingState == BetSelection::BetSelectState::IDLE)
+            {
+                this->BetSelector->StartBetSelection();
             }
 
             break;

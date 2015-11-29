@@ -295,7 +295,7 @@ BaseFont * GameEngine::GetGameDefaultFont()
     if (engineDefaultFont == NULL)
     {
         engineDefaultFont = this->Graphics->CreateFont();
-        engineDefaultFont->Load("assets/arial.ttf");
+        engineDefaultFont->Load("assets//arial.ttf");
     }
 
     return engineDefaultFont;

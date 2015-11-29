@@ -14,7 +14,7 @@ SFMLText::SFMLText()
     isVisible = true;
     currentStyle = TEXT_STYLE_REGULAR;
     scale.Set(1, 1);
-
+    zIndex = 0;
 }
 
 
