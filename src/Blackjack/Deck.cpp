@@ -71,31 +71,26 @@ void Deck::SetupCardSprites(Card * targetCard)
     {
         case Card::SPADES:
         {
-            //suitName = "Spades";
             sprintf_s(suitName, 256, "%s", "Spades");
             break;
         }
         case Card::HEARTS:
         {
-            //suitName = "Hearts";
             sprintf_s(suitName, 256, "%s", "Hearts");
             break;
         }
         case Card::DIAMOND:
         {
-            //suitName = "Diamonds";
             sprintf_s(suitName, 256, "%s", "Diamonds");
             break;
         }
         case Card::CLUBS:
         {
-            //suitName = "Clubs";
             sprintf_s(suitName, 256, "%s", "Clubs");
             break;
         }
         default:
         {
-            //suitName = "?SuitName?";
             sprintf_s(suitName, 256, "%s", "?SuitName?");
             break;
         }

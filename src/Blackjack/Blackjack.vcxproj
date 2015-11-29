@@ -148,6 +148,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BlackjackGame.cpp" />
+    <ClCompile Include="CardsShoe.cpp" />
     <ClCompile Include="Deck.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Card.cpp" />
@@ -158,6 +160,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BlackjackGame.h" />
+    <ClInclude Include="CardsShoe.h" />
     <ClInclude Include="Deck.h" />
     <ClInclude Include="Card.h" />
   </ItemGroup>

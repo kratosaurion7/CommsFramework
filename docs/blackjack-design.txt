@@ -12,3 +12,21 @@ BlackjackGame
 Deck
   - Stack<Card>
   
+  
+  
+  
+  
+Game Sequence
+:Start
+Choose bet
+Receive cards
+Check if splittable
+  -Split
+Check insurance
+  -Insure
+Receive new cards until stop or bust
+Dealer receives cards until 17+ or bust
+Compare scores, closest to 21 wins.
+If player wins, playerMoney += (wager * 2)
+If dealer wins, playerMoney -= wager
+goto :start
