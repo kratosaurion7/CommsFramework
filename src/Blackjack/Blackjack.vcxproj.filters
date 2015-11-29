@@ -33,6 +33,9 @@
     <ClCompile Include="CardsShoe.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
+    <ClCompile Include="BlackjackPlayer.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Deck.h">
@@ -45,6 +48,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CardsShoe.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackjackPlayer.h">
       <Filter>Objects</Filter>
     </ClInclude>
   </ItemGroup>

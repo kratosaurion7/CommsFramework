@@ -13,6 +13,7 @@ CardsShoe::CardsShoe()
 CardsShoe::~CardsShoe()
 {
     this->Decks->Release();
+    delete(this->Decks);
 }
 
 Card* CardsShoe::DrawCard()
@@ -24,6 +25,11 @@ Card* CardsShoe::DrawCard()
     if (firstDeck->DeckCards->Count() == 0)
     {
         this->Decks->RemoveAt(0);
+
+        if (this->Decks->Count() == 0)
+        {
+            this->ReSeedDeck();
+        }
     }
 
     return nextCard;

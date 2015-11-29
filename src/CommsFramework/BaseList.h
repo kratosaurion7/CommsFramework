@@ -190,7 +190,11 @@ public:
 
     void BaseList::RemoveAt(int index)
     {
-        _container->erase(index);
+        auto it = _container->begin();
+
+        std::advance(it, index);
+
+        _container->erase(it);
     };
 
     void BaseList::RemoveObject(T object)

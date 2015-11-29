@@ -24,6 +24,7 @@ public:
 
     };
 
+    CardsShoe* GameCards;
 
     BlackjackGame();
     ~BlackjackGame();
