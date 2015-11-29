@@ -24,12 +24,12 @@ public:
     void ShuffleDeck();
 
     Card* DrawCard();
+
+    void SpreadCardsOnScreen();
 private:
     GameEngine* Engine;
 
     void SetupCardSprites(Card* targetCard);
 
     void AssignCardSprites();
-
-    void PositionCards();
 };

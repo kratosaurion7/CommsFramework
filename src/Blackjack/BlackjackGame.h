@@ -7,6 +7,7 @@
 #include "CardsShoe.h"
 #include "BlackjackPlayer.h"
 #include "BlackjackDealer.h"
+#include "BetSelection.h"
 
 class BlackjackGame : public BaseActor
 {
@@ -31,6 +32,8 @@ public:
     BlackjackDealer* Dealer;
     BlackjackPlayer* Player;
 
+    BetSelection* BetSelector;
+    
     CardsShoe* GameCards;
 
     BlackjackGame();

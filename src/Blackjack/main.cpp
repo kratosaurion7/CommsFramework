@@ -29,6 +29,11 @@ int main()
             x->ShuffleDeck();
         }
 
+        if (eng->Keyboard->IsKeyClicked(Key::E))
+        {
+            x->SpreadCardsOnScreen();
+        }
+
     }
 
     return 0;

@@ -18,7 +18,7 @@
 DSprite::DSprite()
 {
     innerImpl = new sf::Sprite();
-    isVisible = true;
+    isVisible = false;
     spriteTexture = NULL;
     spriteAnimationList = new PointerList<SpriteAnimation*>();
 

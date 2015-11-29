@@ -12,7 +12,7 @@ BetSelection::BetSelection()
     this->BetTwentyFive = this->Engine->CreateSprite("BetTwentyFiveToken");
     this->BetOneHundred = this->Engine->CreateSprite("BetOneHundredToken");
 
-    this->TotalBet = this->Engine->CreateText("0");
+    this->TotalBetText = this->Engine->CreateText("0");
 
     this->ButtonAccept = this->Engine->CreateSprite("BetButtonAccept");
     this->ButtonCancel = this->Engine->CreateSprite("BetButtonCancel");
@@ -24,7 +24,7 @@ BetSelection::BetSelection()
     this->Sprites->Add(this->BetTen);
     this->Sprites->Add(this->BetTwentyFive);
     this->Sprites->Add(this->BetOneHundred);
-    this->Sprites->Add(this->TotalBet);
+    this->Sprites->Add(this->TotalBetText);
     this->Sprites->Add(this->ButtonAccept);
     this->Sprites->Add(this->ButtonCancel);
 
@@ -76,7 +76,7 @@ void BetSelection::RemoveBet(BetSelection::BetLevels level)
     UpdateTotalBet();
 }
 
-void BetSelection::ShowBetSelection()
+void BetSelection::StartBetSelection()
 {
     BetOne->Show(true);
     BetFive->Show(true);
@@ -85,9 +85,11 @@ void BetSelection::ShowBetSelection()
     BetOneHundred->Show(true);
     ButtonAccept->Show(true);
     ButtonCancel->Show(true);
+
+    this->BettingState = BetSelection::BetSelectState::NEED_SELECTION;
 }
 
-void BetSelection::HideBetSelection()
+void BetSelection::StopBetSelection()
 {
     BetOne->Show(false);
     BetFive->Show(false);
@@ -96,6 +98,8 @@ void BetSelection::HideBetSelection()
     BetOneHundred->Show(false);
     ButtonAccept->Show(false);
     ButtonCancel->Show(false);
+
+    this->BettingState = BetSelection::BetSelectState::FINISHED;
 }
 
 void BetSelection::ShowAll()
@@ -106,6 +110,30 @@ void BetSelection::ShowAll()
 void BetSelection::HideAll()
 {
     this->Sprites->ForEach([](DrawObject* p) { p->Show(false); });
+}
+
+void BetSelection::Update()
+{
+    switch (BettingState)
+    {
+        case BetSelection::IDLE:
+            break;
+        case BetSelection::NEED_SELECTION:
+        {
+            if (this->ButtonAccept->Clicked())
+            {
+                this->BettingState = FINISHED;
+            }
+
+            break;
+        }
+        case BetSelection::FINISHED:
+        {
+            break;
+        }
+        default:
+            break;
+    }
 }
 
 void BetSelection::UpdateTotalBet()
@@ -122,5 +150,5 @@ void BetSelection::UpdateTotalBet()
         it++;
     }
 
-    this->TotalBet->SetText(std::to_string(total));
+    this->TotalBetText->SetText(std::to_string(total));
 }

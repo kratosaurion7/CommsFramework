@@ -7,6 +7,8 @@ BlackjackGame::BlackjackGame()
     BaseActor::BaseActor();
 
     GameCards = new CardsShoe();
+
+    BetSelector = new BetSelection();
 }
 
 
@@ -29,6 +31,23 @@ void BlackjackGame::Update()
         }
         case CHOOSE_BET:
         {
+            if (this->BetSelector->BettingState == BetSelection::BetSelectState::FINISHED)
+            {
+                if (this->Player->Money >= this->BetSelector->TotalBet)
+                {
+                    this->Player->CurrentBet = this->BetSelector->TotalBet;
+
+                    this->BetSelector->StopBetSelection();
+
+                    this->GameState = RECEIVE_CARDS;
+                }
+                else
+                {
+                    // Insufficient funds. Show error message.
+                }
+
+            }
+
             break;
         }
 

@@ -9,6 +9,13 @@
 class BetSelection : public BaseActor
 {
 public:
+    enum BetSelectState
+    {
+        IDLE,
+        NEED_SELECTION,
+        FINISHED
+    };
+
     enum BetLevels
     {
         One = 1,
@@ -24,12 +31,15 @@ public:
     BaseSprite* BetTwentyFive;
     BaseSprite* BetOneHundred;
 
-    BaseText* TotalBet;
+    int TotalBet;
+    BaseText* TotalBetText;
 
     BaseSprite* ButtonAccept;
     BaseSprite* ButtonCancel;
 
     BaseList<BetLevels>* BettedLevels;
+
+    BetSelectState BettingState;
 
     BetSelection();
     ~BetSelection();
@@ -37,11 +47,13 @@ public:
     void PlaceBet(BetSelection::BetLevels level);
     void RemoveBet(BetSelection::BetLevels level);
 
-    void ShowBetSelection();
-    void HideBetSelection();
+    void StartBetSelection();
+    void StopBetSelection();
 
     void ShowAll();
     void HideAll();
+
+    void Update();
 
 private:
     void UpdateTotalBet();

@@ -34,6 +34,7 @@ void Deck::SetupStandard52CardsDeck()
 
             newCard->cardBack = Engine->CreateSprite("CardBack");
             newCard->cardFront = Engine->CreateSprite(cardFrontStringName);
+            
 
             SetupCardSprites(newCard);
 
@@ -49,8 +50,6 @@ void Deck::ShuffleDeck()
     this->DeckCards->Shuffle();
 
     this->AssignCardSprites();
-
-    this->PositionCards();
 }
 
 Card* Deck::DrawCard()
@@ -151,7 +150,7 @@ void Deck::AssignCardSprites()
     }
 }
 
-void Deck::PositionCards()
+void Deck::SpreadCardsOnScreen()
 {
     auto end = this->DeckCards->GetContainer()->end();
     auto it = this->DeckCards->GetContainer()->begin();
