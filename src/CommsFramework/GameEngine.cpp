@@ -16,6 +16,8 @@
 BaseKeyboard* GameEngine::Keyboard = 0;
 BaseMouse* GameEngine::Mouse = 0;
 
+GameEngine* GameEngine::_globalInstance;
+
 GameEngine::GameEngine()
 {
     Graphics = new GraphicEngine();
@@ -39,6 +41,8 @@ GameEngine::GameEngine()
     engineDefaultFont = NULL;
     
     GameRules = new PointerList<GameRule*>();
+
+    GameEngine::_globalInstance = this;
 }
 
 GameEngine::~GameEngine()
@@ -60,6 +64,11 @@ GameEngine::~GameEngine()
 
     GameRules->Release();
     delete(GameRules);
+}
+
+GameEngine * GameEngine::GetInstance()
+{
+    return GameEngine::_globalInstance;
 }
 
 void GameEngine::Init()

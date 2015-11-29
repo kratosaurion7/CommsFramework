@@ -45,6 +45,8 @@ public:
     static BaseKeyboard* Keyboard;
     static BaseMouse* Mouse;
 
+    static GameEngine* GetInstance();
+
     RandomGen* Rng;
 
     FSize* GameAreaSize;
@@ -93,6 +95,8 @@ public:
 
     void ShowEngineDialog();
 private:
+    static GameEngine* _globalInstance; // Ugh, TODO CHANGE STATIC TO SOMETHING NOT BULLSHIT
+
     void FlagClickedSprites();
     void RemoveSpriteClickedFlag();
 

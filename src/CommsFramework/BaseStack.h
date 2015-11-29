@@ -56,7 +56,12 @@ public:
     void BaseStack::Clear()
     {
         innerList->Clear();
-    }
+    };
+
+    int BaseStack::Count()
+    {
+        return innerList->Count();
+    };
 
     std::list<T>* BaseStack::GetContainer()
     {
