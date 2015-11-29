@@ -5,6 +5,8 @@
 #include <PointerList.h>
 
 #include "CardsShoe.h"
+#include "BlackjackPlayer.h"
+#include "BlackjackDealer.h"
 
 class BlackjackGame : public BaseActor
 {
@@ -20,15 +22,20 @@ public:
         DEALER_NEW_CARDS,
         GAME_FINISHED,
         PLAYER_WINS,
-        DEALER_WINS
+        DEALER_WINS,
+        RESET,
+        EXIT
 
-    };
+    } GameState;
+    
+    BlackjackDealer* Dealer;
+    BlackjackPlayer* Player;
 
     CardsShoe* GameCards;
 
     BlackjackGame();
     ~BlackjackGame();
 
-    void Process_State();
+    void Update();
 };
 

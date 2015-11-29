@@ -20,6 +20,8 @@ GameEngine* GameEngine::_globalInstance;
 
 GameEngine::GameEngine()
 {
+    GameEngine::_globalInstance = this;
+
     Graphics = new GraphicEngine();
     Resources = new ResourceManager();
 
@@ -41,8 +43,6 @@ GameEngine::GameEngine()
     engineDefaultFont = NULL;
     
     GameRules = new PointerList<GameRule*>();
-
-    GameEngine::_globalInstance = this;
 }
 
 GameEngine::~GameEngine()

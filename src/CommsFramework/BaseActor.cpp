@@ -4,6 +4,8 @@
 
 BaseActor::BaseActor()
 {
+    this->Engine = GameEngine::GetInstance();
+
     Sprites = new PointerList<DrawObject*>();
 }
 
