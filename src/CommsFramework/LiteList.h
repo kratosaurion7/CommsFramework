@@ -3,11 +3,76 @@
 #include <functional>
 #include <algorithm>
 
+template<class T>
+class LiteList;
+
+template<class T>
+class LiteListIterator;
+
+template<class T>
+class ITEM;
+
+template<class T>
+class ITEM
+{
+public:
+    T contents;
+    ITEM* next;
+
+    ITEM()
+    {
+        contents = NULL;
+        next = NULL;
+    }
+
+    ~ITEM()
+    {
+
+    }
+};
+
+template<class T>
+class LiteListIterator
+{
+public:
+    LiteListIterator(ITEM<T>* targetList)
+    {
+        currentItem = targetList;
+    };
+
+    ~LiteListIterator()
+    {
+
+    };
+
+    T GetNext()
+    {
+        if (currentItem == NULL)
+            return NULL;
+
+        T nextItem = currentItem->contents;
+
+        currentItem = currentItem->next;
+
+        return nextItem;
+    };
+
+    bool HasNext()
+    {
+        if (currentItem == NULL)
+            return false;
+
+        return currentItem != NULL;
+    }
+private:
+    ITEM<T>* currentItem;
+};
+
+
 template <class T>
 class LiteList
 {
 public:
-
     LiteList()
     {
         FirstItem = NULL;
@@ -18,9 +83,16 @@ public:
 
     };
 
+    LiteListIterator<T>* GetIterator()
+    {
+        LiteListIterator<T>* iter = new LiteListIterator<T>(this->FirstItem);
+
+        return iter;
+    };
+
     void LiteList::Add(T item)
     {
-        ITEM* newStruct = new ITEM;
+        ITEM<T>* newStruct = new ITEM<T>();
         newStruct->contents = item;
         newStruct->next = NULL;
 
@@ -29,13 +101,13 @@ public:
 
     void LiteList::AddRange(LiteList<T>* items)
     {
-
+        
     };
 
     T LiteList::Get(int index)
     {
         int current = 0;
-        ITEM* currentItem = FirstItem;
+        ITEM<T>* currentItem = FirstItem;
 
         while (current < index)
         {
@@ -101,8 +173,8 @@ public:
         if (FirstItem == NULL)
             return;
 
-        ITEM* previousItem = NULL;
-        ITEM* currentItem = FirstItem;
+        ITEM<T>* previousItem = NULL;
+        ITEM<T>* currentItem = FirstItem;
 
         while (current < index)
         {
@@ -135,7 +207,7 @@ public:
     int LiteList::Count()
     {
         int amount = 0;
-        ITEM* nextItem = FirstItem;
+        ITEM<T>* nextItem = FirstItem;
 
         while (nextItem != NULL)
         {
@@ -147,30 +219,24 @@ public:
     };
 
 private:
-    struct ITEM
-    {
-        T contents;
-        ITEM* next;
-    };
+    ITEM<T>* FirstItem;
 
-    ITEM* FirstItem;
-
-    void LiteList::AddItem(ITEM* item)
+    void LiteList::AddItem(ITEM<T>* item)
     {
         if (FirstItem == NULL)
         {
-            FirstItem = newItem;
+            FirstItem = item;
         }
         else
         {
-            ITEM* nextItem = FirstItem;
+            ITEM<T>* nextItem = FirstItem;
 
             while (nextItem->next != NULL)
             {
                 nextItem = nextItem->next;
             }
 
-            nextItem->next = newItem;
+            nextItem->next = item;
         }
     };
 };
