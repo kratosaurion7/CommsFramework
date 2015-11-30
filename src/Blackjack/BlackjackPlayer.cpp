@@ -33,3 +33,12 @@ int BlackjackPlayer::CardsTotal()
 
     return totalValue;
 }
+
+bool BlackjackPlayer::CanSplit()
+{
+    // Confirm if can split when card 0 = 10 and card 1 = Jack/Queen/King
+    if (this->PlayerCards->Get(0)->CardValue == this->PlayerCards->Get(1)->CardValue)
+        return true;
+
+    return false;
+}

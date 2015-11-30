@@ -20,5 +20,7 @@ public:
     PointerList<Card*>* PlayerCards;
 
     int CardsTotal();
+
+    bool CanSplit();
 };
 

@@ -9,6 +9,8 @@
 #include "BlackjackDealer.h"
 #include "BetSelection.h"
 
+#include "SplitCardDialog.h"
+
 class BlackjackGame : public BaseActor
 {
 public:
@@ -28,13 +30,16 @@ public:
         EXIT
 
     } GameState;
-    
+
     BlackjackDealer* Dealer;
     BlackjackPlayer* Player;
 
     BetSelection* BetSelector;
     
     CardsShoe* GameCards;
+
+    // Dialogs
+    SplitCardDialog* SplitCardsDialog;
 
     BlackjackGame();
     ~BlackjackGame();

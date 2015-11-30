@@ -156,6 +156,7 @@
     <ClCompile Include="Deck.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Card.cpp" />
+    <ClCompile Include="SplitCardDialog.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CommsFramework\CommsFramework.vcxproj">
@@ -170,6 +171,7 @@
     <ClInclude Include="CardsShoe.h" />
     <ClInclude Include="Deck.h" />
     <ClInclude Include="Card.h" />
+    <ClInclude Include="SplitCardDialog.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

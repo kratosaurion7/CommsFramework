@@ -16,6 +16,9 @@
     <Filter Include="Objects">
       <UniqueIdentifier>{2e008bea-2403-4af9-87d7-a1723b90f0b3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Dialogs">
+      <UniqueIdentifier>{2ff4f1d1-34f4-4c1f-aea8-9e5ff325b760}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -42,6 +45,9 @@
     <ClCompile Include="BlackjackDealer.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
+    <ClCompile Include="SplitCardDialog.cpp">
+      <Filter>Dialogs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Deck.h">
@@ -64,6 +70,9 @@
     </ClInclude>
     <ClInclude Include="BlackjackDealer.h">
       <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="SplitCardDialog.h">
+      <Filter>Dialogs</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

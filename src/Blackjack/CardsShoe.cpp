@@ -28,6 +28,7 @@ Card* CardsShoe::DrawCard()
 
         if (this->Decks->Count() == 0)
         {
+            // On each card draw, we check if the shoe is empty. This prevents ever trying to draw a card when there is none left.
             this->ReSeedDeck();
         }
     }

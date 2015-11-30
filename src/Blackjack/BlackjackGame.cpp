@@ -16,6 +16,8 @@ BlackjackGame::BlackjackGame()
 
     this->Engine->AttachActor(BetSelector);
 
+    SplitCardsDialog = new SplitCardDialog();
+
     this->GameState = START;
 }
 
@@ -32,7 +34,6 @@ void BlackjackGame::Update()
         case START:
         {
             // Do game presentation, prompts for options, only the RESET state comes back here
-
             this->GameState = CHOOSE_BET;
 
             break;
@@ -60,6 +61,70 @@ void BlackjackGame::Update()
                 this->BetSelector->StartBetSelection();
             }
 
+            break;
+        }
+        case RECEIVE_CARDS:
+        {
+            while (Player->PlayerCards->Count() <= 2)
+            {
+                Card* playerCard = GameCards->DrawCard();
+
+                Player->PlayerCards->Add(playerCard);
+            }
+
+            while (Dealer->DealerCards->Count() <= 2)
+            {
+                Card* dealerCard = GameCards->DrawCard();
+
+                Dealer->DealerCards->Add(dealerCard);
+            }
+
+            if (Player->CanSplit())
+            {
+                this->GameState = Game_State::ASK_SPLIT;
+            }
+
+            if (Dealer->BlackjackIsPossible())
+            {
+                this->GameState = Game_State::ASK_INSURANCE;
+            }
+
+            break;
+        }
+        case ASK_SPLIT:
+        {
+            if (this->SplitCardsDialog->IsOpen())
+            {
+                if (this->SplitCardsDialog->SplitDecision != SplitCardDialog::DialogResult::CHOOSING)
+                {
+                    if (this->SplitCardsDialog->SplitDecision != SplitCardDialog::DialogResult::YES)
+                    {
+                        // Split action not implemented
+                    }
+                    else if (this->SplitCardsDialog->SplitDecision != SplitCardDialog::DialogResult::NO)
+                    {
+                        // Split action not implemented
+                    }
+
+                    if (Dealer->BlackjackIsPossible())
+                    {
+                        this->GameState = Game_State::ASK_INSURANCE;
+                    }
+                    else
+                    {
+                        this->GameState = Game_State::PLAYER_NEW_CARDS;
+                    }
+                }
+            }
+            else
+            {
+                this->SplitCardsDialog->Open();
+            }
+
+            break;
+        }
+        case PLAYER_NEW_CARDS:
+        {
             break;
         }
 

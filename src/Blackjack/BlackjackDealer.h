@@ -12,5 +12,11 @@ class BlackjackDealer : public BaseActor
 public:
     BlackjackDealer();
     ~BlackjackDealer();
+
+    PointerList<Card*>* DealerCards;
+
+    int CardsTotal();
+
+    bool BlackjackIsPossible();
 };
 

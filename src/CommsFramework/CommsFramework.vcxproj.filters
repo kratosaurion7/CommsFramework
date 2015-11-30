@@ -359,5 +359,8 @@
     <ClInclude Include="LiteList.h">
       <Filter>Framework\Collections</Filter>
     </ClInclude>
+    <ClInclude Include="IDialog.h">
+      <Filter>Framework\Engine\Dialogs</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
