@@ -148,6 +148,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AskNewCardDialog.cpp" />
     <ClCompile Include="BetSelection.cpp" />
     <ClCompile Include="BlackjackDealer.cpp" />
     <ClCompile Include="BlackjackGame.cpp" />
@@ -164,6 +165,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AskNewCardDialog.h" />
     <ClInclude Include="BetSelection.h" />
     <ClInclude Include="BlackjackDealer.h" />
     <ClInclude Include="BlackjackGame.h" />

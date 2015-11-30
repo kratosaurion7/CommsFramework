@@ -18,6 +18,8 @@ BlackjackGame::BlackjackGame()
 
     SplitCardsDialog = new SplitCardDialog();
 
+    this->Engine->AttachActor(SplitCardsDialog);
+
     this->GameState = START;
 }
 
@@ -123,8 +125,15 @@ void BlackjackGame::Update()
 
             break;
         }
+        case ASK_INSURANCE:
+        {
+            this->GameState = Game_State::PLAYER_NEW_CARDS;
+
+            break;
+        }
         case PLAYER_NEW_CARDS:
         {
+
             break;
         }
 

@@ -48,6 +48,9 @@
     <ClCompile Include="SplitCardDialog.cpp">
       <Filter>Dialogs</Filter>
     </ClCompile>
+    <ClCompile Include="AskNewCardDialog.cpp">
+      <Filter>Dialogs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Deck.h">
@@ -72,6 +75,9 @@
       <Filter>Objects</Filter>
     </ClInclude>
     <ClInclude Include="SplitCardDialog.h">
+      <Filter>Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="AskNewCardDialog.h">
       <Filter>Dialogs</Filter>
     </ClInclude>
   </ItemGroup>

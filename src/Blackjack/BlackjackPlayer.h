@@ -9,8 +9,13 @@
 class BlackjackPlayer
 {
 public:
-    BlackjackPlayer();
-    ~BlackjackPlayer();
+    enum CardChoosing
+    {
+        IDLE,
+        ASKING_NEW_CARD,
+        ACCEPTED_CARD,
+        NO_NEW_CARD
+    } CardChoosingState;
 
     int Money;
 
@@ -18,6 +23,10 @@ public:
     int CurrentBet;
 
     PointerList<Card*>* PlayerCards;
+
+    BlackjackPlayer();
+    ~BlackjackPlayer();
+
 
     int CardsTotal();
 

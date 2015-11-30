@@ -9,6 +9,8 @@ BlackjackPlayer::BlackjackPlayer()
     this->CurrentBet = 0;
     this->LastBet = 0;
     this->Money = 0;
+
+    CardChoosingState = CardChoosing::IDLE;
 }
 
 
