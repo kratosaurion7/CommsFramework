@@ -37,3 +37,8 @@ bool BlackjackDealer::BlackjackIsPossible()
 
     return false;
 }
+
+void BlackjackDealer::ReceiveCard(Card * card)
+{
+    this->DealerCards->Add(card);
+}

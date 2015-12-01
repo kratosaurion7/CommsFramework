@@ -10,8 +10,6 @@
 #include "BlackjackDealer.h"
 #include "BetSelection.h"
 
-
-
 class BlackjackGame : public BaseActor
 {
 public:
@@ -41,6 +39,8 @@ public:
 
     // Dialogs
     YesNoDialog* SplitCardsDialog;
+
+    YesNoDialog* AskNewCardsDialog;
 
     BlackjackGame();
     ~BlackjackGame();

@@ -32,6 +32,7 @@ public:
     virtual bool IsOpen();
 
     virtual void Update();
+    virtual void ResetDialog();
 
 protected:
     bool _IsOpen;

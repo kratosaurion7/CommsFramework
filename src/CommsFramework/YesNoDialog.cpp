@@ -109,3 +109,10 @@ void YesNoDialog::Update()
         }
     }
 }
+
+void YesNoDialog::ResetDialog()
+{
+    this->Close();
+
+    this->DialogDecision = YesNoDialog::DialogResult::CHOOSING;
+}

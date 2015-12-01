@@ -18,5 +18,7 @@ public:
     int CardsTotal();
 
     bool BlackjackIsPossible();
+
+    void ReceiveCard(Card* card);
 };
 

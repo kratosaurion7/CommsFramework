@@ -17,6 +17,12 @@ public:
         NO_NEW_CARD
     } CardChoosingState;
 
+    enum PlayerStatus
+    {
+        OK,
+        BUSTED
+    } PlayerStatus;
+
     int Money;
 
     int LastBet;
@@ -27,9 +33,9 @@ public:
     BlackjackPlayer();
     ~BlackjackPlayer();
 
-
     int CardsTotal();
 
     bool CanSplit();
-};
 
+    void ReceiveCard(Card* card);
+};

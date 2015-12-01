@@ -17,8 +17,10 @@ BlackjackGame::BlackjackGame()
     this->Engine->AttachActor(BetSelector);
 
     SplitCardsDialog = new YesNoDialog("Split ?");
-
     this->Engine->AttachActor(SplitCardsDialog);
+
+    AskNewCardsDialog = new YesNoDialog("Another card ?");
+    this->Engine->AttachActor(AskNewCardsDialog);
 
     this->GameState = START;
 }
@@ -133,6 +135,33 @@ void BlackjackGame::Update()
         }
         case PLAYER_NEW_CARDS:
         {
+            if (this->AskNewCardsDialog->IsOpen())
+            {
+                if (this->AskNewCardsDialog->DialogDecision == YesNoDialog::DialogResult::YES)
+                {
+                    this->AskNewCardsDialog->ResetDialog();
+
+
+                    Card* newCard = this->GameCards->DrawCard();
+
+                    this->Player->ReceiveCard(newCard);
+
+                    if (this->Player->PlayerStatus == BlackjackPlayer::PlayerStatus::BUSTED)
+                    {
+                        // Show busted screen
+
+                        this->GameState = GAME_FINISHED;
+                    }
+                }
+                else if (this->AskNewCardsDialog->DialogDecision == YesNoDialog::DialogResult::NO)
+                {
+                    this->GameState = DEALER_NEW_CARDS;
+                }
+            }
+            else
+            {
+                this->AskNewCardsDialog->Open();
+            }
 
             break;
         }

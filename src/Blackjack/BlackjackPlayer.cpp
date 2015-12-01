@@ -44,3 +44,17 @@ bool BlackjackPlayer::CanSplit()
 
     return false;
 }
+
+void BlackjackPlayer::ReceiveCard(Card * card)
+{
+    this->PlayerCards->Add(card);
+
+    if (this->CardsTotal() > 21)
+    {
+        this->PlayerStatus = PlayerStatus::BUSTED;
+    }
+    else
+    {
+        this->PlayerStatus = PlayerStatus::OK;
+    }
+}
