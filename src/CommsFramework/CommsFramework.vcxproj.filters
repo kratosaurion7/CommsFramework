@@ -195,6 +195,9 @@
     <ClCompile Include="WeightedNumberGenerator.cpp">
       <Filter>Framework\Math</Filter>
     </ClCompile>
+    <ClCompile Include="YesNoDialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="XmlReader.h">
@@ -361,6 +364,9 @@
     </ClInclude>
     <ClInclude Include="IDialog.h">
       <Filter>Framework\Engine\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="YesNoDialog.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
