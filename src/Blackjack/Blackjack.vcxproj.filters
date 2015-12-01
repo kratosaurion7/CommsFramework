@@ -45,12 +45,6 @@
     <ClCompile Include="BlackjackDealer.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
-    <ClCompile Include="SplitCardDialog.cpp">
-      <Filter>Dialogs</Filter>
-    </ClCompile>
-    <ClCompile Include="AskNewCardDialog.cpp">
-      <Filter>Dialogs</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Deck.h">
@@ -73,12 +67,6 @@
     </ClInclude>
     <ClInclude Include="BlackjackDealer.h">
       <Filter>Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="SplitCardDialog.h">
-      <Filter>Dialogs</Filter>
-    </ClInclude>
-    <ClInclude Include="AskNewCardDialog.h">
-      <Filter>Dialogs</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

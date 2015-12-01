@@ -16,7 +16,7 @@ BlackjackGame::BlackjackGame()
 
     this->Engine->AttachActor(BetSelector);
 
-    SplitCardsDialog = new SplitCardDialog();
+    SplitCardsDialog = new YesNoDialog("Split ?");
 
     this->Engine->AttachActor(SplitCardsDialog);
 
@@ -97,13 +97,13 @@ void BlackjackGame::Update()
         {
             if (this->SplitCardsDialog->IsOpen())
             {
-                if (this->SplitCardsDialog->SplitDecision != SplitCardDialog::DialogResult::CHOOSING)
+                if (this->SplitCardsDialog->DialogDecision != YesNoDialog::DialogResult::CHOOSING)
                 {
-                    if (this->SplitCardsDialog->SplitDecision != SplitCardDialog::DialogResult::YES)
+                    if (this->SplitCardsDialog->DialogDecision != YesNoDialog::DialogResult::YES)
                     {
                         // Split action not implemented
                     }
-                    else if (this->SplitCardsDialog->SplitDecision != SplitCardDialog::DialogResult::NO)
+                    else if (this->SplitCardsDialog->DialogDecision != YesNoDialog::DialogResult::NO)
                     {
                         // Split action not implemented
                     }

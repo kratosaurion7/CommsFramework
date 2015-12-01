@@ -148,7 +148,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AskNewCardDialog.cpp" />
     <ClCompile Include="BetSelection.cpp" />
     <ClCompile Include="BlackjackDealer.cpp" />
     <ClCompile Include="BlackjackGame.cpp" />
@@ -157,7 +156,6 @@
     <ClCompile Include="Deck.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Card.cpp" />
-    <ClCompile Include="SplitCardDialog.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CommsFramework\CommsFramework.vcxproj">
@@ -165,7 +163,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AskNewCardDialog.h" />
     <ClInclude Include="BetSelection.h" />
     <ClInclude Include="BlackjackDealer.h" />
     <ClInclude Include="BlackjackGame.h" />
@@ -173,7 +170,6 @@
     <ClInclude Include="CardsShoe.h" />
     <ClInclude Include="Deck.h" />
     <ClInclude Include="Card.h" />
-    <ClInclude Include="SplitCardDialog.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

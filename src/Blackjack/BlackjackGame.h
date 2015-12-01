@@ -3,13 +3,14 @@
 #include <BaseActor.h>
 #include <BaseList.h>
 #include <PointerList.h>
+#include <YesNoDialog.h>
 
 #include "CardsShoe.h"
 #include "BlackjackPlayer.h"
 #include "BlackjackDealer.h"
 #include "BetSelection.h"
 
-#include "SplitCardDialog.h"
+
 
 class BlackjackGame : public BaseActor
 {
@@ -39,7 +40,7 @@ public:
     CardsShoe* GameCards;
 
     // Dialogs
-    SplitCardDialog* SplitCardsDialog;
+    YesNoDialog* SplitCardsDialog;
 
     BlackjackGame();
     ~BlackjackGame();
