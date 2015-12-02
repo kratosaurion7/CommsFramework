@@ -11,7 +11,7 @@ SFMLText::SFMLText()
     innerImpl = new sf::Text();
     textFont = NULL;
     textColorImpl = NULL;
-    isVisible = true;
+    isVisible = false;
     currentStyle = TEXT_STYLE_REGULAR;
     scale.Set(1, 1);
     zIndex = 0;

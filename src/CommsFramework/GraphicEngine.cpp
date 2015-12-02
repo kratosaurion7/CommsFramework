@@ -117,8 +117,13 @@ void GraphicEngine::AddObject(BaseSprite* obj)
 {
     DSprite* dspr = dynamic_cast<DSprite*>(obj);
 
-    if (dspr != NULL)
+    if (dspr != NULL) 
+    {
+        this->zIndexNeedsReordering = true;
+
         Sprites->Add(dspr);
+    }
+        
 }
 
 void GraphicEngine::AddObject(BaseText* obj)
@@ -126,7 +131,12 @@ void GraphicEngine::AddObject(BaseText* obj)
     SFMLText* txt = dynamic_cast<SFMLText*>(obj);
 
     if (txt != NULL)
+    {
+        this->zIndexNeedsReordering = true;
+
         Sprites->Add(txt);
+    }
+        
 }
 
 void GraphicEngine::RemoveObject(DrawObject* obj)

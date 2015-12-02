@@ -354,8 +354,8 @@ void GameEngine::FlagClickedSprites()
     {
         FloatVec mousePos = this->Mouse->GetMousePosition();
 
-        auto it = this->Graphics->Sprites->GetContainer()->begin();
-        while (it != this->Graphics->Sprites->GetContainer()->end())
+        auto it = this->Graphics->Sprites->GetContainer()->rbegin();
+        while (it != this->Graphics->Sprites->GetContainer()->rend())
         {
             DrawObject* sprt = (*it);
 

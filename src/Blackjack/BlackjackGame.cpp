@@ -37,6 +37,8 @@ void BlackjackGame::Update()
     {
         case START:
         {
+            this->GameCards->ReSeedDeck();
+
             // Do game presentation, prompts for options, only the RESET state comes back here
             this->GameState = CHOOSE_BET;
 
@@ -69,28 +71,37 @@ void BlackjackGame::Update()
         }
         case RECEIVE_CARDS:
         {
-            while (Player->PlayerCards->Count() <= 2)
+            while (Player->PlayerCards->Count() < 2)
             {
                 Card* playerCard = GameCards->DrawCard();
 
-                Player->PlayerCards->Add(playerCard);
+                Player->ReceiveCard(playerCard);
             }
 
-            while (Dealer->DealerCards->Count() <= 2)
+            while (Dealer->DealerCards->Count() < 2)
             {
                 Card* dealerCard = GameCards->DrawCard();
 
-                Dealer->DealerCards->Add(dealerCard);
+                Dealer->ReceiveCard(dealerCard);
             }
 
-            if (Player->CanSplit())
+
+            bool playerCanSplit = Player->CanSplit();
+            bool playerCanInsure = Dealer->BlackjackIsPossible();
+
+            if (playerCanSplit)
             {
                 this->GameState = Game_State::ASK_SPLIT;
             }
-
-            if (Dealer->BlackjackIsPossible())
+            
+            if (playerCanInsure)
             {
                 this->GameState = Game_State::ASK_INSURANCE;
+            }
+            
+            if (!playerCanSplit && !playerCanInsure)
+            {
+                this->GameState = Game_State::PLAYER_NEW_CARDS;
             }
 
             break;
