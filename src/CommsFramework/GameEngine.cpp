@@ -343,7 +343,16 @@ BaseText* GameEngine::CreateText(std::string text, int textSize, uint32_t textCo
 
 BaseText * GameEngine::CreateText(std::string text, int textSize, uint32_t textColor, BaseFont * typo)
 {
-    return nullptr;
+    BaseText* ret = this->Graphics->CreateText();
+    ret->SetText(text);
+    ret->SetCharacterSize(textSize);
+    ret->SetColor(textColor);
+    ret->SetFont(typo);
+
+    this->Graphics->Sprites->Add(ret);
+    this->GameTexts->Add(ret);
+
+    return ret;
 }
 
 void GameEngine::ShowEngineDialog()

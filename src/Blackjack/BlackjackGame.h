@@ -45,5 +45,7 @@ public:
     ~BlackjackGame();
 
     void Update();
+
+    void ResetGame();
 };
 

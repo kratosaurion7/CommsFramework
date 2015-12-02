@@ -22,5 +22,7 @@ private:
     GameEngine* Engine;
 
     PointerList<Deck*>* Decks;
+
+    PointerList<Card*>* DiscartPile;
 };
 

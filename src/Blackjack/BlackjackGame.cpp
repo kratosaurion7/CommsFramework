@@ -12,7 +12,11 @@ BlackjackGame::BlackjackGame()
 
     Player = new BlackjackPlayer();
     Player->Money = 99999;
+    Engine->AttachActor(Player);
+
     Dealer = new BlackjackDealer();
+    Engine->AttachActor(Dealer);
+    
 
     this->Engine->AttachActor(BetSelector);
 
@@ -32,13 +36,12 @@ BlackjackGame::~BlackjackGame()
 
 void BlackjackGame::Update()
 {
-    this->Player->UpdatePlayerStatusTexts();
-
     switch (this->GameState)
     {
         case START:
         {
             this->GameCards->ReSeedDeck();
+            this->BetSelector->ResetBet();
 
             // Do game presentation, prompts for options, only the RESET state comes back here
             this->GameState = CHOOSE_BET;
@@ -92,12 +95,14 @@ void BlackjackGame::Update()
 
             if (playerCanSplit)
             {
-                this->GameState = Game_State::ASK_SPLIT;
+                //this->GameState = Game_State::ASK_SPLIT;
+                this->GameState = Game_State::PLAYER_NEW_CARDS;
             }
             
             if (playerCanInsure)
             {
-                this->GameState = Game_State::ASK_INSURANCE;
+                //this->GameState = Game_State::ASK_INSURANCE;
+                this->GameState = Game_State::PLAYER_NEW_CARDS;
             }
             
             if (!playerCanSplit && !playerCanInsure)
@@ -177,7 +182,26 @@ void BlackjackGame::Update()
             break;
         }
 
+        case GAME_FINISHED:
+        {
+            ResetGame();
+            this->GameState = START;
+
+            break;
+        }
+
         default:
             break;
     }
+}
+
+void BlackjackGame::ResetGame()
+{
+    Player->PlayerCards->Clear();
+    Player->Money = 1000;
+    Player->LastBet = 0;
+    Player->CurrentBet = 0;
+
+    Dealer->DealerCards->Clear();
+    
 }

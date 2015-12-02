@@ -105,6 +105,13 @@ void BlackjackPlayer::ReceiveCard(Card * card)
     }
 }
 
+void BlackjackPlayer::Update()
+{
+    UpdatePlayerStatusTexts();
+
+    UpdateCardPositions();
+}
+
 void BlackjackPlayer::UpdatePlayerStatusTexts()
 {
     this->PlayerMoney->SetText(std::to_string(Money));
@@ -113,4 +120,26 @@ void BlackjackPlayer::UpdatePlayerStatusTexts()
     
     std::string playerCardsTotal = std::to_string(this->CardsTotal());
     this->PlayerTotalText->SetText(playerCardsTotal);
+}
+
+void BlackjackPlayer::UpdateCardPositions()
+{
+    int cardIndex = 0;
+
+    auto it = this->PlayerCards->GetContainer()->begin();
+    while (it != this->PlayerCards->GetContainer()->end())
+    {
+        Card* cardIter = (*it);
+
+        FPosition cardPos;
+        cardPos.X = 200 + (100 * cardIndex);
+        cardPos.Y = 400;
+
+        cardIter->cardFront->SetPos(cardPos);
+        cardIter->cardFront->Show(true);
+        cardIter->cardFront->SetZIndex(cardIndex);
+
+        it++;
+        cardIndex++;
+    }
 }

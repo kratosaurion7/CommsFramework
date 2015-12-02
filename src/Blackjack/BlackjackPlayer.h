@@ -7,7 +7,7 @@
 
 #include "Card.h"
 
-class BlackjackPlayer
+class BlackjackPlayer : public BaseActor
 {
 public:
     enum CardChoosing
@@ -52,7 +52,10 @@ public:
 
     void ReceiveCard(Card* card);
 
+    void Update();
+
     void UpdatePlayerStatusTexts();
+    void UpdateCardPositions();
 
 private:
     GameEngine* Engine;

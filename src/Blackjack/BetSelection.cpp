@@ -100,6 +100,8 @@ void BetSelection::ResetBet()
 {
     this->BettedLevels->Clear();
 
+    this->BettingState = BetSelectState::IDLE;
+
     UpdateTotalBet();
 }
 
