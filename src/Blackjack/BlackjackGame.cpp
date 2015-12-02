@@ -25,7 +25,6 @@ BlackjackGame::BlackjackGame()
     this->GameState = START;
 }
 
-
 BlackjackGame::~BlackjackGame()
 {
     delete(GameCards);
@@ -33,6 +32,8 @@ BlackjackGame::~BlackjackGame()
 
 void BlackjackGame::Update()
 {
+    this->Player->UpdatePlayerStatusTexts();
+
     switch (this->GameState)
     {
         case START:
@@ -151,7 +152,6 @@ void BlackjackGame::Update()
                 if (this->AskNewCardsDialog->DialogDecision == YesNoDialog::DialogResult::YES)
                 {
                     this->AskNewCardsDialog->ResetDialog();
-
 
                     Card* newCard = this->GameCards->DrawCard();
 

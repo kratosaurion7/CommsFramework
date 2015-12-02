@@ -39,7 +39,6 @@ public:
 
     // Dialogs
     YesNoDialog* SplitCardsDialog;
-
     YesNoDialog* AskNewCardsDialog;
 
     BlackjackGame();

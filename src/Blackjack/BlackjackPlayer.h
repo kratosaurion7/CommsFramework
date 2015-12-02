@@ -3,6 +3,7 @@
 #include <BaseList.h>
 #include <PointerList.h>
 #include <BaseActor.h>
+#include <GameEngine.h>
 
 #include "Card.h"
 
@@ -30,6 +31,18 @@ public:
 
     PointerList<Card*>* PlayerCards;
 
+    BaseText* PlayerMoneyLabel;
+    BaseText* PlayerMoney;
+
+    BaseText* PlayerLastBetLabel;
+    BaseText* PlayerLastBet;
+
+    BaseText* CurrentBetLabel;
+    BaseText* CurrentBetText;
+
+    BaseText* PlayerTotalLabel;
+    BaseText* PlayerTotalText;
+
     BlackjackPlayer();
     ~BlackjackPlayer();
 
@@ -38,4 +51,9 @@ public:
     bool CanSplit();
 
     void ReceiveCard(Card* card);
+
+    void UpdatePlayerStatusTexts();
+
+private:
+    GameEngine* Engine;
 };
