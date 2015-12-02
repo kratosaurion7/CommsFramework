@@ -196,7 +196,7 @@
       <Filter>Framework\Math</Filter>
     </ClCompile>
     <ClCompile Include="YesNoDialog.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Framework\Engine\Dialogs</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -366,7 +366,7 @@
       <Filter>Framework\Engine\Dialogs</Filter>
     </ClInclude>
     <ClInclude Include="YesNoDialog.h">
-      <Filter>Header Files</Filter>
+      <Filter>Framework\Engine\Dialogs</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
