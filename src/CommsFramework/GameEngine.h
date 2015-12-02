@@ -80,8 +80,9 @@ public:
     BaseFont* GetGameDefaultFont();
 
     BaseText* CreateText(std::string text);
-    BaseText* CreateText(std::string text, BaseFont* typo);
-    BaseText* CreateText(std::string text, BaseFont* typo, int textSize);
+    BaseText* CreateText(std::string text, int textSize);
+    BaseText* CreateText(std::string text, int textSize, uint32_t textColor);
+    BaseText* CreateText(std::string text, int textSize, uint32_t textColor, BaseFont* typo);
 
     BaseSprite* GetSprite(std::string name);
     BaseList<BaseSprite*>* GetSpriteList(std::string name);

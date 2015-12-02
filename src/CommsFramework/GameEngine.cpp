@@ -315,13 +315,12 @@ BaseText* GameEngine::CreateText(std::string text)
     return ret;
 }
 
-BaseText* GameEngine::CreateText(std::string text, BaseFont* typo)
+BaseText* GameEngine::CreateText(std::string text, int textSize)
 {
     BaseText* ret = this->Graphics->CreateText();
     ret->SetText(text);
-    ret->SetCharacterSize(36);
+    ret->SetCharacterSize(textSize);
     ret->SetColor(0x000000FF);
-    ret->SetFont(typo);
 
     this->Graphics->Sprites->Add(ret);
     this->GameTexts->Add(ret);
@@ -329,18 +328,22 @@ BaseText* GameEngine::CreateText(std::string text, BaseFont* typo)
     return ret;
 }
 
-BaseText* GameEngine::CreateText(std::string text, BaseFont* typo, int textSize)
+BaseText* GameEngine::CreateText(std::string text, int textSize, uint32_t textColor)
 {
     BaseText* ret = this->Graphics->CreateText();
     ret->SetText(text);
     ret->SetCharacterSize(textSize);
-    ret->SetColor(0x000000FF);
-    ret->SetFont(typo);
+    ret->SetColor(textColor);
 
     this->Graphics->Sprites->Add(ret);
     this->GameTexts->Add(ret);
 
     return ret;
+}
+
+BaseText * GameEngine::CreateText(std::string text, int textSize, uint32_t textColor, BaseFont * typo)
+{
+    return nullptr;
 }
 
 void GameEngine::ShowEngineDialog()
