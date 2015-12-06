@@ -368,5 +368,8 @@
     <ClInclude Include="YesNoDialog.h">
       <Filter>Framework\Engine\Dialogs</Filter>
     </ClInclude>
+    <ClInclude Include="MouseClickInfo.h">
+      <Filter>Framework\Input</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

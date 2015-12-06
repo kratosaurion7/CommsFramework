@@ -31,6 +31,8 @@ DSprite::DSprite()
     zIndex = 0;
     scale.Set(1, 1);
 
+    ClickInfo = NULL;
+
     SpriteFPS = 60; // TODO : Get monitor FPS
 }
 

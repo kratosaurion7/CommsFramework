@@ -214,15 +214,15 @@ void DrawObject::SetZIndex(float z)
 
 bool DrawObject::Clicked(MouseButtons targetButton)
 {
-    if (isClicked)
+    if (ClickInfo != NULL)
     {
         if (targetButton == LEFT)
         {
-            return GameEngine::Mouse->LeftButtonClicked();
+            return ClickInfo->LeftButtonClicked;
         }
         else if (targetButton == RIGHT)
         {
-            return GameEngine::Mouse->RightButtonClicked();
+            return ClickInfo->RightButtonClicked;
         }
     }
 

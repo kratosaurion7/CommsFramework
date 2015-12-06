@@ -9,6 +9,7 @@
 
 #include "BaseKeyboard.h"
 #include "BaseMouse.h"
+#include "MouseClickInfo.h"
 
 #include "SFMLKeyboard.h"
 #include "SFMLMouse.h"
@@ -37,6 +38,7 @@ GameEngine::GameEngine()
 
     GameEngine::Keyboard = sfKeyboard;
     GameEngine::Mouse = sfMouse;
+    this->FrameClickInfo = NULL;
 
     Rng = new RandomGen();
 
@@ -52,6 +54,8 @@ GameEngine::~GameEngine()
     delete(Graphics);
 
     delete(Resources);
+
+    delete(FrameClickInfo);
 
     //GameSprites->Release();
     delete(GameSprites);
@@ -171,6 +175,9 @@ void GameEngine::Play()
 
 void GameEngine::Pre_Update()
 {
+    GameEngine::Mouse->UpdateMouseState();
+    GameEngine::Keyboard->UpdateKeyboardState();
+
     if (this->Graphics->zIndexNeedsReordering)
     {
         this->Graphics->ReorderSpritesByZIndex();
@@ -209,9 +216,6 @@ void GameEngine::Draw()
 
 void GameEngine::Post_Update()
 {
-    GameEngine::Mouse->UpdateMouseState();
-    GameEngine::Keyboard->UpdateKeyboardState();
-
     // ===== Update Game rules =====
     auto it = GameRules->GetContainer()->begin();
     while (it != GameRules->GetContainer()->end())
@@ -366,6 +370,14 @@ void GameEngine::FlagClickedSprites()
     {
         FloatVec mousePos = this->Mouse->GetMousePosition();
 
+        MouseClickInfo* clickInfo = new MouseClickInfo();
+        clickInfo->LeftButtonClicked = this->Mouse->LeftButtonClicked();
+        clickInfo->RightButtonClicked = this->Mouse->RightButtonClicked();
+        clickInfo->MiddleButtonClicked = this->Mouse->MiddleButtonClicked();
+        clickInfo->clickPos = mousePos;
+        
+        this->FrameClickInfo = clickInfo;
+
         auto it = this->Graphics->Sprites->GetContainer()->rbegin();
         while (it != this->Graphics->Sprites->GetContainer()->rend())
         {
@@ -376,9 +388,14 @@ void GameEngine::FlagClickedSprites()
                 FRectangle bounds = sprt->GetRectangle();
                 bool containmentTest = bounds.IsPointInside(mousePos);
 
+                if (strcmp(sprt->Ident.c_str(), "YesNoDialogYesButton") == 0)
+                {
+                    int i = 0;
+                }
+
                 if (containmentTest)
                 {
-                    sprt->isClicked = true;
+                    sprt->ClickInfo = clickInfo;
 
                     if (!sprt->PropagateClicks)
                     {
@@ -400,10 +417,17 @@ void GameEngine::RemoveSpriteClickedFlag()
     {
         DrawObject* sprt = (*it);
 
-        sprt->isClicked = false;
+        sprt->ClickInfo = NULL;
 
         it++;
     }
+
+    if (this->FrameClickInfo != NULL)
+    {
+        delete(FrameClickInfo);
+        FrameClickInfo = NULL;
+    }
+        
 }
 
 void GameEngine::CreateSpritesFromConfig()

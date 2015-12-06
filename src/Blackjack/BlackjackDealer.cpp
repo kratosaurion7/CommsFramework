@@ -15,7 +15,6 @@ BlackjackDealer::BlackjackDealer()
 
     TotalLabel->Show(false);
     TotalText->Show(false);
-
 }
 
 
@@ -34,4 +33,24 @@ bool BlackjackDealer::BlackjackIsPossible()
 
 void BlackjackDealer::UpdateCardPositions()
 {
+    int cardIndex = 0;
+
+    auto it = this->Cards->GetContainer()->begin();
+    while (it != this->Cards->GetContainer()->end())
+    {
+        Card* cardIter = (*it);
+
+        FPosition cardPos;
+        cardPos.X = 200 + (100 * cardIndex);
+        cardPos.Y = 20;
+
+        cardIter->cardFront->SetPos(cardPos);
+        cardIter->cardFront->Show(true);
+        cardIter->cardFront->SetZIndex(cardIndex);
+
+        it++;
+        cardIndex++;
+    }
+
+
 }

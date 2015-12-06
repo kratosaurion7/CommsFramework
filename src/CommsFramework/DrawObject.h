@@ -4,6 +4,7 @@
 #include "FRectangle.h"
 #include "FSize.h"
 #include "BaseMouse.h"
+#include "MouseClickInfo.h"
 
 #include <string>
 
@@ -16,7 +17,7 @@ public:
     std::string Ident;
 
     bool PropagateClicks = false;
-    bool isClicked = false;
+    MouseClickInfo* ClickInfo;
 
     virtual void Show(bool show);
     virtual bool IsVisible();

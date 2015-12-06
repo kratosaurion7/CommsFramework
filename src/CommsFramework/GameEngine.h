@@ -9,6 +9,7 @@
 
 #include "BaseKeyboard.h"
 #include "BaseMouse.h"
+#include "MouseClickInfo.h"
 
 #include "GameRule.h"
 
@@ -100,6 +101,7 @@ private:
 
     void FlagClickedSprites();
     void RemoveSpriteClickedFlag();
+    MouseClickInfo* FrameClickInfo;
 
     GameEngineInitParams* engineInitParams;
 
