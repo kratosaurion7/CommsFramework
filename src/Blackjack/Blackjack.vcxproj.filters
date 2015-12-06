@@ -45,6 +45,9 @@
     <ClCompile Include="BlackjackDealer.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
+    <ClCompile Include="CardActor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Deck.h">
@@ -67,6 +70,9 @@
     </ClInclude>
     <ClInclude Include="BlackjackDealer.h">
       <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="CardActor.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

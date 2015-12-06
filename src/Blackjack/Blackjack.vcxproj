@@ -152,6 +152,7 @@
     <ClCompile Include="BlackjackDealer.cpp" />
     <ClCompile Include="BlackjackGame.cpp" />
     <ClCompile Include="BlackjackPlayer.cpp" />
+    <ClCompile Include="CardActor.cpp" />
     <ClCompile Include="CardsShoe.cpp" />
     <ClCompile Include="Deck.cpp" />
     <ClCompile Include="main.cpp" />
@@ -167,6 +168,7 @@
     <ClInclude Include="BlackjackDealer.h" />
     <ClInclude Include="BlackjackGame.h" />
     <ClInclude Include="BlackjackPlayer.h" />
+    <ClInclude Include="CardActor.h" />
     <ClInclude Include="CardsShoe.h" />
     <ClInclude Include="Deck.h" />
     <ClInclude Include="Card.h" />

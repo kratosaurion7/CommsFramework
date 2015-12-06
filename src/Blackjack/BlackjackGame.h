@@ -10,6 +10,8 @@
 #include "BlackjackDealer.h"
 #include "BetSelection.h"
 
+#include "CardActor.h"
+
 class BlackjackGame : public BaseActor
 {
 public:

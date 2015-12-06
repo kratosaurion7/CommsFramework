@@ -75,14 +75,14 @@ void BlackjackGame::Update()
         }
         case RECEIVE_CARDS:
         {
-            while (Player->PlayerCards->Count() < 2)
+            while (Player->Cards->Count() < 2)
             {
                 Card* playerCard = GameCards->DrawCard();
 
                 Player->ReceiveCard(playerCard);
             }
 
-            while (Dealer->DealerCards->Count() < 2)
+            while (Dealer->Cards->Count() < 2)
             {
                 Card* dealerCard = GameCards->DrawCard();
 
@@ -162,7 +162,7 @@ void BlackjackGame::Update()
 
                     this->Player->ReceiveCard(newCard);
 
-                    if (this->Player->PlayerStatus == BlackjackPlayer::PlayerStatus::BUSTED)
+                    if (this->Player->CardActorCurrentStatus == CardActor::CardPlayerStatus::BUSTED)
                     {
                         // Show busted screen
 
@@ -197,11 +197,11 @@ void BlackjackGame::Update()
 
 void BlackjackGame::ResetGame()
 {
-    Player->PlayerCards->Clear();
+    Player->Cards->Clear();
     Player->Money = 1000;
     Player->LastBet = 0;
     Player->CurrentBet = 0;
 
-    Dealer->DealerCards->Clear();
+    Dealer->Cards->Clear();
     
 }

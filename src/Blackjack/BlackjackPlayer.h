@@ -7,56 +7,21 @@
 
 #include "Card.h"
 
-class BlackjackPlayer : public BaseActor
+#include "CardActor.h"
+
+class BlackjackPlayer : public CardActor
 {
 public:
-    enum CardChoosing
-    {
-        IDLE,
-        ASKING_NEW_CARD,
-        ACCEPTED_CARD,
-        NO_NEW_CARD
-    } CardChoosingState;
-
-    enum PlayerStatus
-    {
-        OK,
-        BUSTED
-    } PlayerStatus;
-
     int Money;
 
     int LastBet;
     int CurrentBet;
 
-    PointerList<Card*>* PlayerCards;
-
-    BaseText* PlayerMoneyLabel;
-    BaseText* PlayerMoney;
-
-    BaseText* PlayerLastBetLabel;
-    BaseText* PlayerLastBet;
-
-    BaseText* CurrentBetLabel;
-    BaseText* CurrentBetText;
-
-    BaseText* PlayerTotalLabel;
-    BaseText* PlayerTotalText;
-
     BlackjackPlayer();
     ~BlackjackPlayer();
 
-    int CardsTotal();
-
     bool CanSplit();
 
-    void ReceiveCard(Card* card);
-
-    void Update();
-
-    void UpdatePlayerStatusTexts();
-    void UpdateCardPositions();
-
-private:
-    GameEngine* Engine;
+protected:
+    virtual void UpdateCardPositions();
 };

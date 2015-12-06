@@ -6,19 +6,18 @@
 
 #include "Card.h"
 
+#include "CardActor.h"
 
-class BlackjackDealer : public BaseActor
+class BlackjackDealer : public CardActor
 {
 public:
     BlackjackDealer();
     ~BlackjackDealer();
 
-    PointerList<Card*>* DealerCards;
-
-    int CardsTotal();
-
     bool BlackjackIsPossible();
 
-    void ReceiveCard(Card* card);
+protected:
+    virtual void UpdateCardPositions();
+
 };
 
