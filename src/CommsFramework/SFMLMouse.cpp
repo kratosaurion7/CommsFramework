@@ -12,6 +12,8 @@ SFMLMouse::~SFMLMouse()
 
 bool SFMLMouse::IsClicked()
 {
+    return this->LeftButtonClicked() || this->RightButtonClicked() || this->MiddleButtonClicked();
+
     for (int i = 0; i < sf::Mouse::ButtonCount; i++)
     {
         if (sf::Mouse::isButtonPressed((sf::Mouse::Button)i))
