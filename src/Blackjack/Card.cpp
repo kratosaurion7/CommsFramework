@@ -15,10 +15,20 @@ Card::Card()
 Card::~Card()
 {
     if (this->cardBack != NULL)
+    {
+        this->Engine->Graphics->RemoveObject(cardBack);
+
         delete(cardBack);
+    }
 
     if (this->cardFront != NULL)
+    {
+        this->Engine->Graphics->RemoveObject(cardFront);
+
         delete(cardFront);
+    }
+
+    Engine->DetachActor(this);
 }
 
 void Card::Update()

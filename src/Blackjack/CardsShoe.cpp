@@ -11,7 +11,6 @@ CardsShoe::CardsShoe()
     this->Engine = GameEngine::GetInstance();
 }
 
-
 CardsShoe::~CardsShoe()
 {
     this->Decks->Release();
@@ -58,21 +57,9 @@ int CardsShoe::CardsLeft()
 
 void CardsShoe::ReSeedDeck(int amountOfDecks)
 {
-    auto it = this->DiscartPile->GetContainer()->begin();
-    while (it != this->DiscartPile->GetContainer()->end())
-    {
-        Card* discartedCard = (*it);
+    this->DiscartPile->Release();
 
-        Engine->GameActors->RemoveObject(discartedCard);
-
-        delete(discartedCard);
-
-        it++;
-    }
-
-    this->DiscartPile->Clear();
-
-    //this->Decks->Clear();
+    this->Decks->Release();
 
     for (int i = 0; i < amountOfDecks; i++)
     {

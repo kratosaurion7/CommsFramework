@@ -268,6 +268,11 @@ void GameEngine::AttachActor(BaseActor* actor)
     actor->Engine = this;
 }
 
+void GameEngine::DetachActor(BaseActor* actor)
+{
+    this->GameActors->RemoveObject(actor);
+}
+
 BaseSprite * GameEngine::CreateSprite(std::string spriteName)
 {
     BaseSprite* sprt = this->Graphics->CreateSprite(spriteName);

@@ -43,6 +43,8 @@ public:
     YesNoDialog* SplitCardsDialog;
     YesNoDialog* AskNewCardsDialog;
 
+    int gameDelay = 0;
+
     BlackjackGame();
     ~BlackjackGame();
 

@@ -165,7 +165,7 @@ void BlackjackGame::Update()
                     if (this->Player->CardActorCurrentStatus == CardActor::CardPlayerStatus::BUSTED)
                     {
                         // Show busted screen
-
+                        gameDelay = 60;
                         this->GameState = GAME_FINISHED;
                     }
                 }
@@ -184,8 +184,17 @@ void BlackjackGame::Update()
 
         case GAME_FINISHED:
         {
-            ResetGame();
-            this->GameState = START;
+            if (gameDelay > 0)
+            {
+                gameDelay--;
+            }
+            else
+            {
+                ResetGame();
+                this->GameState = START;
+            }
+
+
 
             break;
         }
@@ -197,11 +206,12 @@ void BlackjackGame::Update()
 
 void BlackjackGame::ResetGame()
 {
+    GameCards->ReSeedDeck();
+
     Player->Cards->Clear();
+    Dealer->Cards->Clear();
+
     Player->Money = 1000;
     Player->LastBet = 0;
     Player->CurrentBet = 0;
-
-    Dealer->Cards->Clear();
-    
 }

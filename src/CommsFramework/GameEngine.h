@@ -74,6 +74,7 @@ public:
     BaseActor* CreateActor(BaseSprite* actorSprite);
     BaseActor* CreateActor(PointerList<DrawObject*>* spriteList);
     void AttachActor(BaseActor* actor);
+    void DetachActor(BaseActor* actor);
 
     BaseSprite* CreateSprite(std::string spriteName);
     BaseSprite* CreateSprite(std::string spriteName, std::string spriteTexturePath);

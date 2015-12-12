@@ -345,6 +345,9 @@ XCOPY /Y /E "Assets\*" "$(TargetDir)Assets"</Command>
     <ClCompile Include="DSprite.cpp" />
     <ClCompile Include="FileReader.cpp" />
     <ClCompile Include="GravityObjectsFallDownRule.cpp" />
+    <ClCompile Include="SocketClient.cpp" />
+    <ClCompile Include="SocketServer.cpp" />
+    <ClCompile Include="Utils.cpp" />
     <ClCompile Include="RandomGen.cpp" />
     <ClCompile Include="SettingsRepository.cpp" />
     <ClCompile Include="SFMLMouse.cpp" />
@@ -393,6 +396,9 @@ XCOPY /Y /E "Assets\*" "$(TargetDir)Assets"</Command>
     <ClInclude Include="LiteList.h" />
     <ClInclude Include="MouseClickInfo.h" />
     <ClInclude Include="Pair.h" />
+    <ClInclude Include="SocketClient.h" />
+    <ClInclude Include="SocketServer.h" />
+    <ClInclude Include="Utils.h" />
     <ClInclude Include="RandomGen.h" />
     <ClInclude Include="SettingsRepository.h" />
     <ClInclude Include="SFMLMouse.h" />

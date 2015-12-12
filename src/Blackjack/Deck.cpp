@@ -9,9 +9,16 @@ Deck::Deck(GameEngine* engine)
 
 Deck::~Deck()
 {
-    //this->DeckCards->Release();
+    //while (this->DeckCards->HasNext())
+    //{
+    //    Card* nextCard = this->DeckCards->Pop();
+
+    //    delete(nextCard);
+    //}
 
     delete(this->DeckCards);
+
+    Engine->DetachActor(this);
 }
 
 void Deck::SetupStandard52CardsDeck()

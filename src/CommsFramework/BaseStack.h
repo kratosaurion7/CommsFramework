@@ -30,23 +30,38 @@ public:
 
     T BaseStack::Pop()
     {
-        std::list<T>* x = innerList->GetContainer();
-        
-        T result = x->front();
+        //if (innerList->Count() > 0)
+        //{
+            std::list<T>* x = innerList->GetContainer();
 
-        x->pop_front();
+            T result = x->front();
 
-        return result;
+            x->pop_front();
+
+            return result;
+        //}
+
+        //return NULL;
     };
 
     T BaseStack::Peek()
     {
-        std::list<T>* x = innerList->GetContainer();
+        //if (innerList->Count() > 0)
+        //{
+            std::list<T>* x = innerList->GetContainer();
 
-        T result = x->front();
+            T result = x->front();
 
-        return result;
+            return result;
+        //}
+
+        //return NULL;
     };
+
+    //bool BaseStack::HasNext()
+    //{
+    //    return innerList->Count() > 0;
+    //}
 
     void BaseStack::Shuffle()
     {
