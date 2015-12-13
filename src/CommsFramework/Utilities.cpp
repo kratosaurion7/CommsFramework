@@ -23,7 +23,7 @@ int GetTicks()
 
     return res;
 
-#elif
+#else
     return 0;
 #endif
 }
