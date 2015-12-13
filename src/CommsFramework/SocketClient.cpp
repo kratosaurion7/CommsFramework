@@ -11,7 +11,7 @@ SocketClient::SocketClient(std::string serverAddress, std::string portNumber)
 
     StopSocket = false;
 
-    this->data = new BaseList<std::string>();
+    this->data = new BaseStack<std::string>();
 }
 
 
@@ -101,7 +101,27 @@ void SocketClient::Connect()
     StartReceiveData();
 }
 
-void SocketClient::SendData(std::string data)
+int SocketClient::SendByte(char data)
+{
+    return 0;
+}
+
+int SocketClient::SendWord(unsigned short data)
+{
+    return 0;
+}
+
+int SocketClient::SendDWord(unsigned int data)
+{
+    return 0;
+}
+
+int SocketClient::SendQWord(unsigned long data)
+{
+    return 0;
+}
+
+int SocketClient::SendData(std::string data)
 {
     int res = 0;
     int receiveBufLen = DEFAULT_BUFLEN;
@@ -116,10 +136,18 @@ void SocketClient::SendData(std::string data)
         closesocket(ConnectSocket);
         WSACleanup();
 
-        return;
+        return res;
     }
 
     PrintInfo("Sent %d bytes", res);
+
+    return res;
+}
+
+char* SocketClient::PopData(int &size)
+{
+
+
 }
 
 void SocketClient::Disconnect()
@@ -185,7 +213,7 @@ void SocketClient::ReceiveData()
     {
         PrintInfo("Bytes received: %d", res);
 
-        this->data->Add(recvBuf);
+        this->data->Push(recvBuf);
     }
     else if (res == 0)
     {

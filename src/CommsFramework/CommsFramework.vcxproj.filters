@@ -82,6 +82,12 @@
     <Filter Include="Framework\Types">
       <UniqueIdentifier>{19ef528d-5a54-4c3c-9a07-b157f63709fe}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Framework\Network">
+      <UniqueIdentifier>{9e15695d-0b7c-4011-87fa-341b0c2088f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Database">
+      <UniqueIdentifier>{5a9471e8-b235-40bc-a78c-c864a9d68148}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="XmlReader.cpp">
@@ -202,10 +208,13 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SocketClient.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Framework\Network</Filter>
     </ClCompile>
     <ClCompile Include="SocketServer.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Framework\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="RethinkDb.cpp">
+      <Filter>Framework\Database</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -384,10 +393,13 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SocketClient.h">
-      <Filter>Header Files</Filter>
+      <Filter>Framework\Network</Filter>
     </ClInclude>
     <ClInclude Include="SocketServer.h">
-      <Filter>Header Files</Filter>
+      <Filter>Framework\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="RethinkDb.h">
+      <Filter>Framework\Database</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

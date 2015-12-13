@@ -20,6 +20,7 @@
 #include <list>
 
 #include "BaseList.h"
+#include "BaseStack.h"
 #include "Utils.h"
 
 #define DEFAULT_BUFLEN 512
@@ -44,7 +45,14 @@ public:
 
     void Connect();
 
-    void SendData(std::string data);
+    int SendByte(char data);
+    int SendWord(unsigned short data);
+    int SendDWord(unsigned int data);
+    int SendQWord(unsigned long data);
+
+    int SendData(std::string data);
+
+    char* PopData(int &size);
 
     void ReceiveData();
     void StartReceiveData();
@@ -61,7 +69,7 @@ private:
 
     HANDLE readThread;
 
-    BaseList<std::string>* data;
+    BaseStack<std::string>* data;
 
     static DWORD WINAPI ClientReceiveFunc(LPVOID lpParam);
     
