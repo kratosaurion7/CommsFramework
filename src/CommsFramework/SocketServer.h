@@ -67,7 +67,7 @@ private:
     HANDLE serverListenThread;
 
     int clientThreadCount = 0;
-    HANDLE clientReadingThreads[MAX_THREADS];
+    BaseList<HANDLE>* clientThreads;
 
     BaseList<std::string>* messages;
 
@@ -83,11 +83,8 @@ private:
 
     SOCKET ListenSocket;
 
-    SOCKET ClientSockets[MAX_SOCK_CLIENTS];
+    BaseList<SOCKET>* ClientSockets;
     
     struct addrinfo *result = NULL;
     struct addrinfo hints;
-
-    int FindNextAvailableSlot();
 };
-

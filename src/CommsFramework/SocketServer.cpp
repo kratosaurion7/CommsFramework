@@ -8,10 +8,13 @@ SocketServer::SocketServer(std::string portNumber)
 
     messages = new BaseList<std::string>();
 
-    for (int i = 0; i < MAX_SOCK_CLIENTS;i++)
-    {
-        ClientSockets[i] = INVALID_SOCKET;
-    }
+    clientThreads = new BaseList<HANDLE>();
+    ClientSockets = new BaseList<SOCKET>();
+
+    //for (int i = 0; i < MAX_SOCK_CLIENTS;i++)
+    //{
+    //    ClientSockets[i] = INVALID_SOCKET;
+    //}
 
 }
 
@@ -96,11 +99,14 @@ void SocketServer::StartManaged()
 
 void SocketServer::Stop()
 {
-    for (int i = 0; i < MAX_SOCK_CLIENTS; i++)
+    auto it = this->ClientSockets->GetContainer()->begin();
+    while (it != this->ClientSockets->GetContainer()->end())
     {
-        SOCKET cliSock = ClientSockets[i];
+        SOCKET item = (*it);
 
-        StopReadingFromSocket(cliSock);
+        StopReadingFromSocket(item);
+
+        it++;
     }
 }
 
@@ -169,16 +175,7 @@ void SocketServer::ListenAndAccept()
         return;
     }
 
-    int nextClientSlot = FindNextAvailableSlot();
-
-    if (nextClientSlot == -1)
-    {
-        PrintInfo("No client slots available");
-
-        return;
-    }
-
-    SOCKET currentClientSocket = ClientSockets[nextClientSlot];
+    SOCKET currentClientSocket = INVALID_SOCKET;
 
     currentClientSocket = accept(ListenSocket, NULL, NULL);
     if (currentClientSocket == INVALID_SOCKET) {
@@ -190,8 +187,6 @@ void SocketServer::ListenAndAccept()
     }
 
     StartReadingFromSocket(currentClientSocket);
-
-    nextClientSlot++;
 }
 
 DWORD SocketServer::ReadFromSocketFunc(LPVOID lpParam)
@@ -216,9 +211,7 @@ void SocketServer::StartReadingFromSocket(SOCKET clientSocket)
 
     HANDLE threadHandle = CreateThread(NULL, 0, ReadFromSocketFunc, args, 0, &threadId);
 
-    clientReadingThreads[clientThreadCount] = threadHandle;
-    
-    clientThreadCount++;
+    clientThreads->Add(threadHandle);
 }
 
 void SocketServer::ReadFromSocket(SOCKET clientSocket)
@@ -276,17 +269,4 @@ void SocketServer::StopReadingFromSocket(SOCKET clientSocket)
             closesocket(clientSocket);
         }
     }
-}
-
-int SocketServer::FindNextAvailableSlot()
-{
-    for (int i = 0; i < MAX_SOCK_CLIENTS;i++)
-    {
-        SOCKET cliSock = ClientSockets[i];
-
-        if (cliSock == INVALID_SOCKET)
-            return i;
-    }
-
-    return -1;
 }

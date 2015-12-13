@@ -146,7 +146,7 @@ int SocketClient::SendData(std::string data)
 
 char* SocketClient::PopData(int &size)
 {
-
+    return NULL;
 
 }
 
