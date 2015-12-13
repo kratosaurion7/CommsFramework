@@ -16,6 +16,7 @@
 #include <string>
 #include <list>
 
+#include "BaseList.h"
 #include "Utils.h"
 
 #define MAX_SOCK_CLIENTS 5
@@ -38,8 +39,9 @@ class SocketServer
 {
 public:
     std::string ServerName;
+    std::string ServerPort;
 
-    SocketServer();
+    SocketServer(std::string portNumber);
     ~SocketServer();
 
     void Init();
@@ -67,7 +69,7 @@ private:
     int clientThreadCount = 0;
     HANDLE clientReadingThreads[MAX_THREADS];
 
-    std::list<std::string>* messages;
+    BaseList<std::string>* messages;
 
     static DWORD WINAPI ServerListenFunc(LPVOID lpParam);
     void StartListeningAndAccept();

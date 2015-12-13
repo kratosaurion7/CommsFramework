@@ -2,9 +2,11 @@
 
 
 
-SocketServer::SocketServer()
+SocketServer::SocketServer(std::string portNumber)
 {
-    messages = new std::list<std::string>();
+    ServerPort = portNumber;
+
+    messages = new BaseList<std::string>();
 
     for (int i = 0; i < MAX_SOCK_CLIENTS;i++)
     {
@@ -16,7 +18,7 @@ SocketServer::SocketServer()
 
 SocketServer::~SocketServer()
 {
-    messages->clear();
+    messages->Clear();
 
     delete(messages);
 }
@@ -43,7 +45,7 @@ void SocketServer::Init()
     hints.ai_protocol = IPPROTO_TCP;
     hints.ai_flags = AI_PASSIVE;
 
-    res = getaddrinfo(NULL, "27015", &hints, &result);
+    res = getaddrinfo(NULL, ServerPort.c_str(), &hints, &result);
     if (res != 0) {
         PrintInfo("getaddrinfo failed with error: %d", res);
         WSACleanup();
@@ -232,7 +234,7 @@ void SocketServer::ReadFromSocket(SOCKET clientSocket)
         if (res > 0) {
             PrintInfo("Bytes received: %d", res);
 
-            messages->push_back(recvbuf);
+            messages->Add(recvbuf);
 
             // Echo the buffer back to the sender
             res = send(clientSocket, recvbuf, res, 0);

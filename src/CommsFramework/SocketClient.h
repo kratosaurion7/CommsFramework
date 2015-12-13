@@ -19,6 +19,7 @@
 #include <string>
 #include <list>
 
+#include "BaseList.h"
 #include "Utils.h"
 
 #define DEFAULT_BUFLEN 512
@@ -34,8 +35,9 @@ class SocketClient
 public:
     std::string ClientName;
     std::string ServerAddress;
+    std::string ServerPort;
 
-    SocketClient(std::string serverAddress);
+    SocketClient(std::string serverAddress, std::string portNumber);
     ~SocketClient();
 
     void Init();
@@ -59,7 +61,7 @@ private:
 
     HANDLE readThread;
 
-    std::list<std::string>* data;
+    BaseList<std::string>* data;
 
     static DWORD WINAPI ClientReceiveFunc(LPVOID lpParam);
     

@@ -2,15 +2,16 @@
 
 
 
-SocketClient::SocketClient(std::string serverAddress)
+SocketClient::SocketClient(std::string serverAddress, std::string portNumber)
 {
     ServerAddress = serverAddress;
+    ServerPort = portNumber;
 
     ConnectSocket = INVALID_SOCKET;
 
     StopSocket = false;
 
-    this->data = new std::list<std::string>();
+    this->data = new BaseList<std::string>();
 }
 
 
@@ -40,7 +41,7 @@ void SocketClient::Init()
     hints.ai_socktype = SOCK_STREAM;
     hints.ai_protocol = IPPROTO_TCP;
 
-    res = getaddrinfo(ServerAddress.c_str(), "27015", &hints, &result);
+    res = getaddrinfo(ServerAddress.c_str(), ServerPort.c_str(), &hints, &result);
 
     if (res != 0)
     {
@@ -184,7 +185,7 @@ void SocketClient::ReceiveData()
     {
         PrintInfo("Bytes received: %d", res);
 
-        this->data->push_back(recvBuf);
+        this->data->Add(recvBuf);
     }
     else if (res == 0)
     {
