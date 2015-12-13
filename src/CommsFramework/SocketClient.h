@@ -50,9 +50,12 @@ public:
     int SendDWord(unsigned int data);
     int SendQWord(unsigned long data);
 
+    int SendData(char* data, int length);
     int SendData(std::string data);
 
+    char* PeekData(int &size);
     char* PopData(int &size);
+    bool HasData();
 
     void ReceiveData();
     void StartReceiveData();

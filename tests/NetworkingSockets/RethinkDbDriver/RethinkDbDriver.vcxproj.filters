@@ -27,6 +27,9 @@
     <ClCompile Include="..\..\..\src\CommsFramework\Utils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\CommsFramework\RethinkDb.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\CommsFramework\SocketClient.h">
@@ -36,6 +39,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\CommsFramework\Utils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\CommsFramework\RethinkDb.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -187,12 +187,32 @@ int SocketClient::SendQWord(unsigned long data)
     return res;
 }
 
+int SocketClient::SendData(char * data, int length)
+{
+    int res = 0;
+    const char* sendBuf = data;
+
+    res = send(ConnectSocket, sendBuf, length, 0);
+
+    if (res == SOCKET_ERROR)
+    {
+        PrintInfo("Send data failed %ld", WSAGetLastError());
+        closesocket(ConnectSocket);
+        WSACleanup();
+
+        return res;
+    }
+
+    PrintInfo("Sent %d bytes", res);
+
+    return res;
+}
+
 int SocketClient::SendData(std::string data)
 {
     int res = 0;
     int receiveBufLen = DEFAULT_BUFLEN;
     const char* sendBuf = data.c_str();
-    char recvBuf[DEFAULT_BUFLEN];
 
     res = send(ConnectSocket, sendBuf, strlen(sendBuf), 0);
 
@@ -210,10 +230,41 @@ int SocketClient::SendData(std::string data)
     return res;
 }
 
+char* SocketClient::PeekData(int & size)
+{
+    if (this->data->Count() > 0)
+    {
+        std::string data = this->data->Peek();
+
+        std::string* outData = new std::string(data.data());
+
+        size = outData->size();
+
+        return (char*)outData->data();
+    }
+
+    return NULL;
+}
+
 char* SocketClient::PopData(int &size)
 {
-    return NULL;
+    if (this->data->Count() > 0)
+    {
+        std::string data = this->data->Pop();
 
+        std::string* outData = new std::string(data.data());
+
+        size = outData->size();
+
+        return (char*)outData->data();
+    }
+
+    return NULL;
+}
+
+bool SocketClient::HasData()
+{
+    return this->data->Count() > 0;
 }
 
 void SocketClient::Disconnect()

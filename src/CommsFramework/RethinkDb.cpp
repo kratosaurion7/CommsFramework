@@ -21,6 +21,14 @@ void RethinkDb::Update()
     if (driverError == true)
         return;
 
+    if (this->sock->HasData())
+    {
+        int dataLength = 0;
+        char* messageData = sock->PeekData(dataLength);
+
+        printf("%s", messageData);
+    }
+
     switch (this->ClientState)
     {
         case HANDSHAKE:
@@ -32,6 +40,15 @@ void RethinkDb::Update()
         default:
             break;
     }
+}
+
+void RethinkDb::Connect()
+{
+    this->ClientState = HANDSHAKE;
+
+    this->sock->Init();
+
+    this->sock->Connect();
 }
 
 void RethinkDb::Execute_Handshake()
@@ -46,7 +63,13 @@ void RethinkDb::Execute_Handshake()
         }
         case RETHINKDB_HANDSHAKE::SEND_VERSION:
         {
-            int ret = sock->SendData("V_04");
+            //char* data = new char[4];
+            //data[0] = 0x20;
+            //data[1] = 0x2d;
+            //data[2] = 0x0c;
+            //data[3] = 0x40;
+
+            int ret = sock->SendData("\x20\x2d\x0c\x40", 4);
 
             if (ret == -1)
             {
@@ -62,7 +85,7 @@ void RethinkDb::Execute_Handshake()
         case RETHINKDB_HANDSHAKE::SEND_KEY_SIZE:
         {
             // Send Key
-            int ret = sock->SendDWord(0);
+            int ret = sock->SendData("\x00", 4);
 
             if (ret == -1)
             {
@@ -71,7 +94,7 @@ void RethinkDb::Execute_Handshake()
                 return;
             }
 
-            this->HandshakeState = RETHINKDB_HANDSHAKE::SEND_KEY_SIZE;
+            this->HandshakeState = RETHINKDB_HANDSHAKE::SEND_KEY;
 
             break;
         }
@@ -79,13 +102,13 @@ void RethinkDb::Execute_Handshake()
         {
             // Skip step since no auth key
 
-            this->HandshakeState = RETHINKDB_HANDSHAKE::SEND_KEY;
+            this->HandshakeState = RETHINKDB_HANDSHAKE::SEND_PROTOCOL;
 
             break;
         }
         case RETHINKDB_HANDSHAKE::SEND_PROTOCOL:
         {
-            int ret = sock->SendDWord(0x7e6970c7);
+            int ret = sock->SendData("\xc7\x70\x69\x7e", 4);
 
             if (ret == -1)
             {
@@ -100,7 +123,20 @@ void RethinkDb::Execute_Handshake()
         }
         case RETHINKDB_HANDSHAKE::RECEIVE_SUCCESS:
         {
-            
+            if (sock->HasData())
+            {
+                int dataSize = 0;
+                char* result = sock->PopData(dataSize);
+
+                if (strncmp(result, "SUCCESS", dataSize) == 0)
+                {
+                    this->ClientState = STOPPED;
+
+                    HandshakeComplete = true;
+
+
+                }
+            }
 
             break;
         }

@@ -148,12 +148,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\src\CommsFramework\RethinkDb.cpp" />
     <ClCompile Include="..\..\..\src\CommsFramework\SocketClient.cpp" />
     <ClCompile Include="..\..\..\src\CommsFramework\SocketServer.cpp" />
     <ClCompile Include="..\..\..\src\CommsFramework\Utils.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\src\CommsFramework\RethinkDb.h" />
     <ClInclude Include="..\..\..\src\CommsFramework\SocketClient.h" />
     <ClInclude Include="..\..\..\src\CommsFramework\SocketServer.h" />
     <ClInclude Include="..\..\..\src\CommsFramework\Utils.h" />

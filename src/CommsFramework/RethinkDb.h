@@ -32,10 +32,14 @@ public:
 
     bool driverError = false;
 
+    bool HandshakeComplete = false;
+
     RethinkDb();
     ~RethinkDb();
 
     void Update();
+
+    void Connect();
 
     void Execute_Handshake();
 
