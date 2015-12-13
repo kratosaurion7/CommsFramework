@@ -103,22 +103,88 @@ void SocketClient::Connect()
 
 int SocketClient::SendByte(char data)
 {
-    return 0;
+    int res = 0;
+
+    res = send(ConnectSocket, &data, 1, 0);
+
+    if (res == SOCKET_ERROR)
+    {
+        PrintInfo("Send data failed %ld", WSAGetLastError());
+        closesocket(ConnectSocket);
+        WSACleanup();
+
+        return res;
+    }
+
+    PrintInfo("Sent %d bytes", res);
+
+    return res;
 }
 
 int SocketClient::SendWord(unsigned short data)
 {
-    return 0;
+    int res = 0;
+
+    char bytes = (char)data;
+
+    res = send(ConnectSocket, &bytes, 2, 0);
+
+    if (res == SOCKET_ERROR)
+    {
+        PrintInfo("Send data failed %ld", WSAGetLastError());
+        closesocket(ConnectSocket);
+        WSACleanup();
+
+        return res;
+    }
+
+    PrintInfo("Sent %d bytes", res);
+
+    return res;
 }
 
 int SocketClient::SendDWord(unsigned int data)
 {
-    return 0;
+    int res = 0;
+
+    char bytes = (char)data;
+
+    res = send(ConnectSocket, &bytes, 4, 0);
+
+    if (res == SOCKET_ERROR)
+    {
+        PrintInfo("Send data failed %ld", WSAGetLastError());
+        closesocket(ConnectSocket);
+        WSACleanup();
+
+        return res;
+    }
+
+    PrintInfo("Sent %d bytes", res);
+
+    return res;
 }
 
 int SocketClient::SendQWord(unsigned long data)
 {
-    return 0;
+    int res = 0;
+
+    char bytes = (char)data;
+
+    res = send(ConnectSocket, &bytes, 8, 0);
+
+    if (res == SOCKET_ERROR)
+    {
+        PrintInfo("Send data failed %ld", WSAGetLastError());
+        closesocket(ConnectSocket);
+        WSACleanup();
+
+        return res;
+    }
+
+    PrintInfo("Sent %d bytes", res);
+
+    return res;
 }
 
 int SocketClient::SendData(std::string data)

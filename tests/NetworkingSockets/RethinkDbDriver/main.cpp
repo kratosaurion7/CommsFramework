@@ -61,14 +61,15 @@ int main()
     cli2->Init();
     cli2->Connect();
 
+    cli->SendWord('F');
 
-    while (true)
-    {
-        cli->SendData("Hello World");
-        cli2->SendData("Hello Space");
+    //while (true)
+    //{
+    //    cli->SendData("Hello World");
+    //    cli2->SendData("Hello Space");
 
-        Sleep(5000);
-    }
+    //    Sleep(5000);
+    //}
 
 
     cli->Disconnect();
