@@ -404,5 +404,8 @@
     <ClInclude Include="BaseQueue.h">
       <Filter>Framework\Collections</Filter>
     </ClInclude>
+    <ClInclude Include="Network.h">
+      <Filter>Framework\Network</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

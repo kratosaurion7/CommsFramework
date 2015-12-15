@@ -12,12 +12,15 @@
 
 #include <iostream>
 #include <cstdarg>
+#include <ctime>
 
 #pragma comment(lib, "Ws2_32.lib")
 
 
 #include <string>
 #include <list>
+
+#include "Network.h"
 
 #include "BaseList.h"
 #include "BaseQueue.h"
@@ -72,7 +75,7 @@ private:
 
     HANDLE readThread;
 
-    BaseQueue<std::string>* data;
+    BaseQueue<NetworkMessage*>* data;
 
     static DWORD WINAPI ClientReceiveFunc(LPVOID lpParam);
     

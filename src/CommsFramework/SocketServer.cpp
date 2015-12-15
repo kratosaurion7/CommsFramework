@@ -6,7 +6,7 @@ SocketServer::SocketServer(std::string portNumber)
 {
     ServerPort = portNumber;
 
-    messages = new BaseQueue<std::string>();
+    messages = new BaseQueue<NetworkMessage*>();
 
     clientThreads = new BaseList<HANDLE>();
     ClientSockets = new BaseList<SOCKET>();
@@ -226,7 +226,11 @@ void SocketServer::ReadFromSocket(SOCKET clientSocket)
         if (res > 0) {
             PrintInfo("Bytes received: %d", res);
 
-            messages->Push(recvbuf);
+            NetworkMessage* msg = new NetworkMessage();
+            msg->Message = recvbuf;
+            msg->TimeStamp = time(NULL);
+            
+            messages->Push(msg);
 
             // Echo the buffer back to the sender
             res = send(clientSocket, recvbuf, res, 0);

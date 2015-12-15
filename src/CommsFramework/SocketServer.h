@@ -16,6 +16,8 @@
 #include <string>
 #include <list>
 
+#include "Network.h"
+
 #include "BaseList.h"
 #include "BaseQueue.h"
 #include "Utils.h"
@@ -55,6 +57,8 @@ public:
 
     void ReadFromSocket(SOCKET clientSocket);
 
+    void SendToSocket(SOCKET clientSocket);
+
     void Stop();
 
     void Close();
@@ -70,7 +74,7 @@ private:
     int clientThreadCount = 0;
     BaseList<HANDLE>* clientThreads;
 
-    BaseQueue<std::string>* messages;
+    BaseQueue<NetworkMessage*>* messages;
 
     static DWORD WINAPI ServerListenFunc(LPVOID lpParam);
     void StartListeningAndAccept();

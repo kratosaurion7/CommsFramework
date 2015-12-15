@@ -11,7 +11,7 @@ SocketClient::SocketClient(std::string serverAddress, std::string portNumber)
 
     StopSocket = false;
 
-    this->data = new BaseQueue<std::string>();
+    this->data = new BaseQueue<NetworkMessage*>();
 }
 
 
@@ -234,7 +234,7 @@ char* SocketClient::PeekData(int & size)
 {
     if (this->data->Count() > 0)
     {
-        std::string data = this->data->Peek();
+        std::string data = this->data->Peek()->Message;
 
         std::string* outData = new std::string(data.data());
 
@@ -250,7 +250,7 @@ char* SocketClient::PopData(int &size)
 {
     if (this->data->Count() > 0)
     {
-        std::string data = this->data->Pop();
+        std::string data = this->data->Pop()->Message;
 
         std::string* outData = new std::string(data.data());
 
@@ -330,7 +330,11 @@ void SocketClient::ReceiveData()
     {
         PrintInfo("Bytes received: %d", res);
 
-        this->data->Push(recvBuf);
+        NetworkMessage* msg = new NetworkMessage();
+        msg->TimeStamp = time(NULL);
+        msg->Message = recvBuf;
+
+        this->data->Push(msg);
     }
     else if (res == 0)
     {
