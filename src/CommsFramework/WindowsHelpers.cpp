@@ -6,7 +6,7 @@ std::wstring CStringToWideString(std::string cstr)
     mbstowcs(wText, cstr.c_str(), cstr.length() + 1);
 
     std::wstring out = wText;
-    delete(wText);
+    delete[] wText;
 
     return out;
 }
@@ -17,7 +17,7 @@ std::string WideStringToCString(std::wstring wstr)
     wcstombs(cText, wstr.c_str(), wstr.length() + 1);
 
     std::string out = cText;
-    delete(cText);
+    delete[] cText;
 
     return out;
 }

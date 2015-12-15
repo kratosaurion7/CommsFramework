@@ -438,7 +438,7 @@ __int64 XFile::GetSize()
     if (this->Check())
     {
 #ifdef _WINDOWS
-        PLARGE_INTEGER fileSize;
+        PLARGE_INTEGER fileSize = NULL;
 
         bool res = GetFileSizeEx(winFileHandle, fileSize);
 

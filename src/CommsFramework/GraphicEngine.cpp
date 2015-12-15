@@ -229,16 +229,16 @@ void GraphicEngine::ProcessDraw(sf::RenderWindow* targetWindow)
 
         if (targetSprite->IsVisible())
         {
-            sf::Drawable* targetDrawable;
+            sf::Drawable* targetDrawable = NULL;
 
             SFMLDrawable* drawbleObject = dynamic_cast<SFMLDrawable*>(targetSprite);
 
             if (drawbleObject != NULL)
             {
                 targetDrawable = drawbleObject->GetDrawableImplementation();
-            }
 
-            targetWindow->draw(*targetDrawable);
+                targetWindow->draw(*targetDrawable);
+            }
         }
 
         iter++;

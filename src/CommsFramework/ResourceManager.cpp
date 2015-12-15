@@ -224,7 +224,7 @@ Resource * ResourceManager::GetResource(std::string name, GameModule * targetMod
 
 PointerList<SpriteAnimation*>* ResourceManager::GetAnimationsForSprite(BaseSprite * sprite)
 {
-    PointerList<SpriteAnimation*>* anims;
+    PointerList<SpriteAnimation*>* anims = NULL;
 
     auto it = this->SpritesInfo->GetContainer()->begin();
     while (it != this->SpritesInfo->GetContainer()->end())

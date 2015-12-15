@@ -156,10 +156,10 @@ XDirectory* GetWorkingDir()
 void ChangeWorkingDir(std::string newPath)
 {
 #ifdef _WINDOWS
-    wchar_t* dirPath[MAX_PATH];
-    mbstowcs(*dirPath, newPath.c_str(), newPath.length() + 1);
+    wchar_t dirPath[MAX_PATH];
+    mbstowcs(dirPath, newPath.c_str(), newPath.length() + 1);
 
-    bool res = SetCurrentDirectory(*dirPath);
+    bool res = SetCurrentDirectory(dirPath);
 
     if (res == 0)
     {

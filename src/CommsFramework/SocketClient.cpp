@@ -83,7 +83,7 @@ void SocketClient::Connect()
     if (res == SOCKET_ERROR)
     {
         closesocket(ConnectSocket);
-        ConnectSocket == INVALID_SOCKET;
+        ConnectSocket = INVALID_SOCKET;
     }
 
     freeaddrinfo(result);

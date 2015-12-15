@@ -173,7 +173,7 @@ void PackageFile::Save(std::string savePath)
     fileStream.open(OutputFileName.c_str(), std::ios::out | std::ios::binary | std::ios::trunc);
 
     Header *packHeader = new Header();
-    strcpy(packHeader->sig, "PACK");
+    strncpy(packHeader->sig, "PACK", 4);
     packHeader->dirOffset = headerSize;
     packHeader->dirLength = directorySize;
 
@@ -235,7 +235,7 @@ void PackageFile::ReadPackage()
     int directorySize = BytesToInt(buf);
 
     Header *packHeader = new Header();
-    strcpy(packHeader->sig, "PACK");
+    strncpy(packHeader->sig, "PACK", 4);
     packHeader->dirOffset = dirOffset;
     packHeader->dirLength = directorySize;
 

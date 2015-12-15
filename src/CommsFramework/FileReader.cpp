@@ -70,7 +70,7 @@ void FileReader::DumpFile(std::string outFileName)
 
     outStream.write(contents, fileSize);
 
-    delete(contents);
+    delete[] contents;
 
     outStream.close();
 
