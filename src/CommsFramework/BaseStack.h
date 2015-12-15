@@ -25,13 +25,12 @@ public:
         std::list<T>* x = innerList->GetContainer();
 
         x->push_front(item);
-        
     };
 
     T BaseStack::Pop()
     {
-        //if (innerList->Count() > 0)
-        //{
+        if (this->Count() > 0)
+        {
             std::list<T>* x = innerList->GetContainer();
 
             T result = x->front();
@@ -39,23 +38,23 @@ public:
             x->pop_front();
 
             return result;
-        //}
+        }
 
-        //return NULL;
+        return NULL;
     };
 
     T BaseStack::Peek()
     {
-        //if (innerList->Count() > 0)
-        //{
+        if (this->Count() > 0)
+        {
             std::list<T>* x = innerList->GetContainer();
 
             T result = x->front();
 
             return result;
-        //}
+        }
 
-        //return NULL;
+        return NULL;
     };
 
     //bool BaseStack::HasNext()
@@ -63,6 +62,7 @@ public:
     //    return innerList->Count() > 0;
     //}
 
+    // Stack should probably not have a Shuffle method.
     void BaseStack::Shuffle()
     {
         innerList->Shuffle();

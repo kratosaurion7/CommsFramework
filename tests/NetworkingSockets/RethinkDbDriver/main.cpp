@@ -50,44 +50,45 @@ int main()
 
     HANDLE serverThread = CreateThread(NULL, 0, ServerListenFunc, NULL, 0, &threadId);
 
-    RethinkDb* db = new RethinkDb();
+    //RethinkDb* db = new RethinkDb();
 
-    db->Connect();
-    
-    while (true)
-    {
-        db->Update();
-    }
+    //db->Connect();
+    //
+    //while (true)
+    //{
+    //    db->Update();
+    //}
 
+    //return 0;
 
 #ifdef test_CLIENT
 
-    //SocketClient* cli = new SocketClient("104.236.223.173", "28015");
-    //cli->ClientName = "OneClient";
-    //cli->Init();
-    //cli->Connect();
+    SocketClient* cli = new SocketClient("127.0.0.1", PORT_NB);
+    cli->ClientName = "OneClient";
+    cli->Init();
+    cli->Connect();
 
-    //SocketClient* cli2 = new SocketClient("127.0.0.1", PORT_NB);
-    //cli2->ClientName = "TwoClient";
-    //cli2->Init();
-    //cli2->Connect();
+    SocketClient* cli2 = new SocketClient("127.0.0.1", PORT_NB);
+    cli2->ClientName = "TwoClient";
+    cli2->Init();
+    cli2->Connect();
 
-    //cli->SendWord('F');
+    cli->SendWord('F');
 
-    ////while (true)
-    ////{
-    ////    cli->SendData("Hello World");
-    ////    cli2->SendData("Hello Space");
+    while (true)
+    {
+        cli->SendData("Hello World");
+        cli2->SendData("Hello Space");
 
-    ////    Sleep(5000);
-    ////}
+        Sleep(5000);
+    }
 
 
-    //cli->Disconnect();
-    //cli->Close();
+    cli->Disconnect();
+    cli->Close();
 
-    //cli2->Disconnect();
-    //cli2->Close();
+    cli2->Disconnect();
+    cli2->Close();
 
     return 0;
 #endif

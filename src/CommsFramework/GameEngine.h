@@ -19,6 +19,8 @@
 
 #include <string>
 
+#include "BaseQueue.h"
+
 class GameRule;
 class BaseActor;
 class DrawObject;

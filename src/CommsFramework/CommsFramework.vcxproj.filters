@@ -401,5 +401,8 @@
     <ClInclude Include="RethinkDb.h">
       <Filter>Framework\Database</Filter>
     </ClInclude>
+    <ClInclude Include="BaseQueue.h">
+      <Filter>Framework\Collections</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

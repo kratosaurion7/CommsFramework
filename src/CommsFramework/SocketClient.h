@@ -20,7 +20,7 @@
 #include <list>
 
 #include "BaseList.h"
-#include "BaseStack.h"
+#include "BaseQueue.h"
 #include "Utils.h"
 
 #define DEFAULT_BUFLEN 512
@@ -72,7 +72,7 @@ private:
 
     HANDLE readThread;
 
-    BaseStack<std::string>* data;
+    BaseQueue<std::string>* data;
 
     static DWORD WINAPI ClientReceiveFunc(LPVOID lpParam);
     

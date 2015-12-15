@@ -11,7 +11,7 @@ SocketClient::SocketClient(std::string serverAddress, std::string portNumber)
 
     StopSocket = false;
 
-    this->data = new BaseStack<std::string>();
+    this->data = new BaseQueue<std::string>();
 }
 
 

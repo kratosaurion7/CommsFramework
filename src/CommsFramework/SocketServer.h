@@ -17,6 +17,7 @@
 #include <list>
 
 #include "BaseList.h"
+#include "BaseQueue.h"
 #include "Utils.h"
 
 #define MAX_SOCK_CLIENTS 5
@@ -69,7 +70,7 @@ private:
     int clientThreadCount = 0;
     BaseList<HANDLE>* clientThreads;
 
-    BaseList<std::string>* messages;
+    BaseQueue<std::string>* messages;
 
     static DWORD WINAPI ServerListenFunc(LPVOID lpParam);
     void StartListeningAndAccept();
