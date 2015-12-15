@@ -1,22 +1,15 @@
 #pragma once
 
-#ifndef WIN32_LEAN_AND_MEAN
-#define WIN32_LEAN_AND_MEAN
-#endif
-
-#include <windows.h>
 #include <winsock2.h>
 #include <ws2tcpip.h>
 #include <iphlpapi.h>
-#include <stdio.h>
+#include <windows.h>
+#pragma comment(lib, "Ws2_32.lib")
 
+#include <stdio.h>
 #include <iostream>
 #include <cstdarg>
 #include <ctime>
-
-#pragma comment(lib, "Ws2_32.lib")
-
-
 #include <string>
 #include <list>
 
