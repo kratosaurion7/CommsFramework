@@ -50,7 +50,7 @@ void SocketServer::Init()
     res = getaddrinfo(NULL, ServerPort.c_str(), &hints, &result);
     if (res != 0) {
         PrintInfo("getaddrinfo failed with error: %d", res);
-        WSACleanup();
+        //WSACleanup();
 
         serverValid = false;
 
@@ -61,7 +61,7 @@ void SocketServer::Init()
     if (ListenSocket == INVALID_SOCKET) {
         PrintInfo("socket failed with error: %ld", WSAGetLastError());
         freeaddrinfo(result);
-        WSACleanup();
+        //WSACleanup();
         
         serverValid = false;
 
@@ -73,7 +73,7 @@ void SocketServer::Init()
         PrintInfo("bind failed with error: %d", WSAGetLastError());
         freeaddrinfo(result);
         closesocket(ListenSocket);
-        WSACleanup();
+        //WSACleanup();
         
         serverValid = false;
 
@@ -113,7 +113,7 @@ void SocketServer::Close()
 {
     Stop();
 
-    WSACleanup();
+    //WSACleanup();
 }
 
 HANDLE SocketServer::GetServerThread()
@@ -169,7 +169,7 @@ void SocketServer::ListenAndAccept()
 
         PrintInfo("listen failed with error: %d", err);
         closesocket(ListenSocket);
-        WSACleanup();
+        //WSACleanup();
 
         return;
     }
@@ -180,7 +180,7 @@ void SocketServer::ListenAndAccept()
     if (currentClientSocket == INVALID_SOCKET) {
         PrintInfo("accept failed with error: %d", WSAGetLastError());
         closesocket(ListenSocket);
-        WSACleanup();
+        //WSACleanup();
 
         return;
     }
@@ -237,7 +237,8 @@ void SocketServer::ReadFromSocket(SOCKET clientSocket)
             if (res == SOCKET_ERROR) {
                 PrintInfo("send failed with error: %d", WSAGetLastError());
                 closesocket(clientSocket);
-                WSACleanup();
+                
+                //WSACleanup();
 
                 return;
             }
@@ -248,12 +249,33 @@ void SocketServer::ReadFromSocket(SOCKET clientSocket)
         else {
             PrintInfo("recv failed with error: %d", WSAGetLastError());
             closesocket(clientSocket);
-            WSACleanup();
+            //WSACleanup();
 
             return;
         }
 
     } while (res > 0);
+
+}
+
+void SocketServer::SendToSocket(SOCKET clientSocket, std::string data)
+{
+    int res;
+
+    res = send(clientSocket, data.c_str(), data.length(), 0);
+
+    if (res == SOCKET_ERROR)
+    {
+        PrintInfo("Send failed with error %d", WSAGetLastError());
+
+        closesocket(clientSocket);
+
+        //WSACleanup();
+
+        return;
+    }
+
+    PrintInfo("Bytes sent: %d", res);
 
 }
 

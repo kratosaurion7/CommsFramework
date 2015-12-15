@@ -47,7 +47,7 @@ void SocketClient::Init()
     {
         DWORD err = GetLastError();
 
-        WSACleanup();
+        //WSACleanup();
 
         PrintInfo("WinSock GetAddrInfo error %d", res);
 
@@ -67,7 +67,7 @@ void SocketClient::Init()
         PrintInfo("Error at socket() %ld", res);
 
         freeaddrinfo(result);
-        WSACleanup();
+        //WSACleanup();
 
         return;
     }
@@ -91,7 +91,7 @@ void SocketClient::Connect()
     if (ConnectSocket == INVALID_SOCKET)
     {
         PrintInfo("Cannot connect to server.");
-        WSACleanup();
+        //WSACleanup();
 
         return;
     }
@@ -111,7 +111,7 @@ int SocketClient::SendByte(char data)
     {
         PrintInfo("Send data failed %ld", WSAGetLastError());
         closesocket(ConnectSocket);
-        WSACleanup();
+        //WSACleanup();
 
         return res;
     }
@@ -133,7 +133,7 @@ int SocketClient::SendWord(unsigned short data)
     {
         PrintInfo("Send data failed %ld", WSAGetLastError());
         closesocket(ConnectSocket);
-        WSACleanup();
+        //WSACleanup();
 
         return res;
     }
@@ -155,7 +155,7 @@ int SocketClient::SendDWord(unsigned int data)
     {
         PrintInfo("Send data failed %ld", WSAGetLastError());
         closesocket(ConnectSocket);
-        WSACleanup();
+        //WSACleanup();
 
         return res;
     }
@@ -177,7 +177,7 @@ int SocketClient::SendQWord(unsigned long data)
     {
         PrintInfo("Send data failed %ld", WSAGetLastError());
         closesocket(ConnectSocket);
-        WSACleanup();
+        //WSACleanup();
 
         return res;
     }
@@ -198,7 +198,7 @@ int SocketClient::SendData(char * data, int length)
     {
         PrintInfo("Send data failed %ld", WSAGetLastError());
         closesocket(ConnectSocket);
-        WSACleanup();
+        //WSACleanup();
 
         return res;
     }
@@ -220,7 +220,7 @@ int SocketClient::SendData(std::string data)
     {
         PrintInfo("Send data failed %ld", WSAGetLastError());
         closesocket(ConnectSocket);
-        WSACleanup();
+        //WSACleanup();
 
         return res;
     }
@@ -277,7 +277,7 @@ void SocketClient::Disconnect()
     {
         PrintInfo("Shutdown failed %ld !", WSAGetLastError());
         closesocket(ConnectSocket);
-        WSACleanup();
+        //WSACleanup();
 
         return;
     }
@@ -286,7 +286,7 @@ void SocketClient::Disconnect()
 void SocketClient::Close()
 {
     closesocket(ConnectSocket);
-    WSACleanup();
+    //WSACleanup();
 }
 
 void SocketClient::PrintInfo(char* formatStr, ...)

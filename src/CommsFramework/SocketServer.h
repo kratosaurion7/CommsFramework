@@ -57,7 +57,7 @@ public:
 
     void ReadFromSocket(SOCKET clientSocket);
 
-    void SendToSocket(SOCKET clientSocket);
+    void SendToSocket(SOCKET clientSocket, std::string data);
 
     void Stop();
 
