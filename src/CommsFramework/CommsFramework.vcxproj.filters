@@ -216,6 +216,9 @@
     <ClCompile Include="RethinkDb.cpp">
       <Filter>Framework\Database</Filter>
     </ClCompile>
+    <ClCompile Include="MessageDialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="XmlReader.h">
@@ -406,6 +409,9 @@
     </ClInclude>
     <ClInclude Include="Network.h">
       <Filter>Framework\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="MessageDialog.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
