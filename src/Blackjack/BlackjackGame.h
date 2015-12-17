@@ -4,6 +4,7 @@
 #include <BaseList.h>
 #include <PointerList.h>
 #include <YesNoDialog.h>
+#include <MessageDialog.h>
 
 #include "CardsShoe.h"
 #include "CardActor.h"
@@ -44,6 +45,11 @@ public:
     // Dialogs
     YesNoDialog* SplitCardsDialog;
     YesNoDialog* AskNewCardsDialog;
+
+    MessageDialog* playerWinDialog;
+    MessageDialog* playerLoseDialog;
+    MessageDialog* gameDrawDialog;
+
 
     int gameDelay = 0;
 

@@ -53,6 +53,10 @@ void MessageDialog::Open()
     DialogSprite->Show(true);
     DialogText->Show(true);
 
+    int ticks = GetTicks();
+    this->CurrentMsCount = ticks;
+    this->PreviousMsCount = ticks;
+
     DialogOpenedMilisecondAmount = 0;
 }
 
@@ -60,6 +64,8 @@ void MessageDialog::Close()
 {
     this->DialogSprite->Show(false);
     this->DialogText->Show(false);
+
+    DialogOpenedMilisecondAmount = 0;
 }
 
 bool MessageDialog::IsOpen()
