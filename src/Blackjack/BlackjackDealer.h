@@ -16,6 +16,8 @@ public:
 
     bool BlackjackIsPossible();
 
+    bool NeedsMoreCards();
+
 protected:
     virtual void UpdateCardPositions();
 

@@ -36,6 +36,13 @@ BlackjackGame::~BlackjackGame()
 
 void BlackjackGame::Update()
 {
+    if (gameDelay > 0)
+    {
+        gameDelay--;
+
+        return;
+    }
+
     switch (this->GameState)
     {
         case START:
@@ -181,20 +188,97 @@ void BlackjackGame::Update()
 
             break;
         }
+        case DEALER_NEW_CARDS:
+        {
+            if (this->Dealer->CardChoosingState == CardActor::CardChoosing::IDLE)
+            {
+                this->Dealer->CardChoosingState = CardActor::CardChoosing::ASKING_NEW_CARD;
+            }
 
+            if (this->Dealer->CardChoosingState == CardActor::CardChoosing::ACCEPTED_CARD)
+            {
+                Card* newCard = this->GameCards->DrawCard();
+
+                this->Dealer->ReceiveCard(newCard);
+
+                gameDelay = 20;
+            }
+
+            if (!this->Dealer->NeedsMoreCards())
+            {
+                this->GameState == GAME_FINISHED;
+            }
+
+            break;
+        }
         case GAME_FINISHED:
         {
-            if (gameDelay > 0)
+            if (this->Player->CardsTotal() > 21)
             {
-                gameDelay--;
+                // Player busted, show screen
+
+                this->GameState == DEALER_WINS;
+            }
+            else if (this->Dealer->CardsTotal() > 21)
+            {
+                // Dealer busted, player wins automatically
+
+                this->GameState == PLAYER_WINS;
             }
             else
             {
-                ResetGame();
-                this->GameState = START;
+                int playerCloseness = 21 - this->Player->CardsTotal();
+                int dealerCloseness = 21 - this->Dealer->CardsTotal();
+
+                if (playerCloseness > dealerCloseness)
+                {
+                    this->GameState == DEALER_WINS;
+
+                    // Player lose
+                    this->Player->Money -= this->Player->CurrentBet;
+                }
+                else if (playerCloseness == dealerCloseness)
+                {
+                    // Equal ?
+                    this->GameState == GAME_DRAW;
+                }
+                else
+                {
+                    this->GameState == PLAYER_WINS;
+
+                    // Player wins
+                    this->Player->Money += this->Player->CurrentBet * 2;
+                }
             }
 
+            gameDelay = 30;
 
+            // Show result
+
+
+
+            break;
+        }
+        case PLAYER_WINS:
+        {
+            // Show win celebration
+
+            this->GameState = RESET;
+
+            break;
+        }
+        case DEALER_WINS:
+        {
+            // Show lose
+
+            this->GameState = RESET;
+
+            break;
+        }
+        case RESET:
+        {
+            ResetGame();
+            this->GameState = START;
 
             break;
         }

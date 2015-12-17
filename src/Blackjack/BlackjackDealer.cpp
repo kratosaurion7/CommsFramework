@@ -31,6 +31,12 @@ bool BlackjackDealer::BlackjackIsPossible()
     return false;
 }
 
+bool BlackjackDealer::NeedsMoreCards()
+{
+    // Dealer stops on 17 & up.
+    return this->CardsTotal() <= 16; // TODO : Configurable
+}
+
 void BlackjackDealer::UpdateCardPositions()
 {
     int cardIndex = 0;

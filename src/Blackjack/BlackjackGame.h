@@ -6,6 +6,7 @@
 #include <YesNoDialog.h>
 
 #include "CardsShoe.h"
+#include "CardActor.h"
 #include "BlackjackPlayer.h"
 #include "BlackjackDealer.h"
 #include "BetSelection.h"
@@ -27,6 +28,7 @@ public:
         GAME_FINISHED,
         PLAYER_WINS,
         DEALER_WINS,
+        GAME_DRAW,
         RESET,
         EXIT
 
