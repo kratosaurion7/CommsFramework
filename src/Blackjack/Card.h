@@ -41,5 +41,9 @@ public:
     BaseSprite* cardFront;
     BaseSprite* cardBack;
 
+    void TurnUp();
+
+    void TurnDown(); // For what ??
+
     void Update();
 };

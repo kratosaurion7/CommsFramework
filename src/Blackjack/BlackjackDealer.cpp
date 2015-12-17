@@ -24,8 +24,8 @@ BlackjackDealer::~BlackjackDealer()
 
 bool BlackjackDealer::BlackjackIsPossible()
 {
-    // Let's say the first card is always the one shown to the player
-    if (this->Cards->Get(0)->CardValue == Card::CARD_VALUE::Ace)
+    // Let's say the second card is always the one shown to the player
+    if (this->Cards->Get(1)->CardValue == Card::CARD_VALUE::Ace)
         return true;
 
     return false;

@@ -96,6 +96,7 @@ void BlackjackGame::Update()
                 Dealer->ReceiveCard(dealerCard);
             }
 
+            Dealer->Cards->Get(0)->TurnDown();
 
             bool playerCanSplit = Player->CanSplit();
             bool playerCanInsure = Dealer->BlackjackIsPossible();
@@ -253,10 +254,6 @@ void BlackjackGame::Update()
 
             gameDelay = 30;
 
-            // Show result
-
-
-
             break;
         }
         case PLAYER_WINS:
@@ -295,7 +292,7 @@ void BlackjackGame::ResetGame()
     Player->Cards->Clear();
     Dealer->Cards->Clear();
 
-    Player->Money = 1000;
-    Player->LastBet = 0;
+    //Player->Money = 1000;
+    Player->LastBet = this->Player->CurrentBet;
     Player->CurrentBet = 0;
 }

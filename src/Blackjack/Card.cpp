@@ -31,6 +31,18 @@ Card::~Card()
     Engine->DetachActor(this);
 }
 
+void Card::TurnUp()
+{
+    this->cardBack->Show(false);
+    this->cardFront->Show(true);
+}
+
+void Card::TurnDown()
+{
+    this->cardBack->Show(true);
+    this->cardFront->Show(false);
+}
+
 void Card::Update()
 {
 }
