@@ -201,8 +201,6 @@ void GameEngine::Update()
 
 void GameEngine::Draw()
 {
-    this->Graphics->Draw();
-
     auto it = GameSprites->GetContainer()->begin();
     while (it != GameSprites->GetContainer()->end())
     {
@@ -212,6 +210,8 @@ void GameEngine::Draw()
 
         it++;
     }
+
+    this->Graphics->Draw();
 }
 
 void GameEngine::Post_Update()
