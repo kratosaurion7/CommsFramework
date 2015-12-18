@@ -27,8 +27,13 @@ BlackjackGame::BlackjackGame()
     this->Engine->AttachActor(AskNewCardsDialog);
 
     playerWinDialog = new MessageDialog("You win !", 5000);
+    this->Engine->AttachActor(playerWinDialog);
+
     playerLoseDialog = new MessageDialog("You lose.", 3000);
+    this->Engine->AttachActor(playerLoseDialog);
+
     gameDrawDialog = new MessageDialog("Draw.", 4000);
+    this->Engine->AttachActor(gameDrawDialog);
 
 
     this->GameState = START;
