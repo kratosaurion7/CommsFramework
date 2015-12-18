@@ -85,15 +85,15 @@ public:
     BaseSprite* CreateSprite(std::string spriteName);
     BaseSprite* CreateSprite(std::string spriteName, std::string spriteTexturePath);
 
+    BaseSprite* GetSprite(std::string name);
+    BaseList<BaseSprite*>* GetSpriteList(std::string name);
+
     BaseFont* GetGameDefaultFont();
 
     BaseText* CreateText(std::string text);
     BaseText* CreateText(std::string text, int textSize);
     BaseText* CreateText(std::string text, int textSize, uint32_t textColor);
     BaseText* CreateText(std::string text, int textSize, uint32_t textColor, BaseFont* typo);
-
-    BaseSprite* GetSprite(std::string name);
-    BaseList<BaseSprite*>* GetSpriteList(std::string name);
 
     BaseSprite* CopySprite(std::string name, std::string newName);
 
@@ -102,7 +102,7 @@ public:
     PointerList<BaseText*>* GameTexts;
     PointerList<GameRule*>* GameRules;
 
-    void ShowEngineDialog();
+    void ShowEngineDialog(std::string engineMessageForDialog);
 private:
     static GameEngine* _globalInstance; // Ugh, TODO CHANGE STATIC TO SOMETHING NOT BULLSHIT
 

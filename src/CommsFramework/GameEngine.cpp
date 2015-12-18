@@ -38,6 +38,7 @@ GameEngine::GameEngine()
 
     GameEngine::Keyboard = sfKeyboard;
     GameEngine::Mouse = sfMouse;
+
     this->FrameClickInfo = NULL;
 
     Rng = new RandomGen();
@@ -49,28 +50,22 @@ GameEngine::GameEngine()
 
 GameEngine::~GameEngine()
 {
-    delete(engineInitParams);
-
-    delete(Graphics);
-
-    delete(Resources);
-
-    delete(FrameClickInfo);
-
-    //GameSprites->Release();
-    delete(GameSprites);
-
+    // Deleted owned ressources
     GameActors->Release();
-    delete(GameActors);
-
-    //GameTexts->Release();
-    delete(GameTexts);
-
     GameRules->Release();
+
+    // Delete pointers
+    delete(engineInitParams);
+    delete(Graphics);
+    delete(Resources);
+    delete(FrameClickInfo);
+    delete(GameSprites);
+    delete(GameActors);
+    delete(GameTexts);
     delete(GameRules);
 }
 
-GameEngine * GameEngine::GetInstance()
+GameEngine* GameEngine::GetInstance()
 {
     return GameEngine::_globalInstance;
 }
@@ -91,7 +86,7 @@ void GameEngine::Init(int windowWidth, int windowHeight)
     this->Init(defaultParams);
 }
 
-void GameEngine::Init(GameEngineInitParams * params)
+void GameEngine::Init(GameEngineInitParams* params)
 {
     engineInitParams = params;
 
@@ -137,7 +132,7 @@ BaseList<BaseSprite*>* GameEngine::GetSpriteList(std::string name)
     return GameSprites->Where([name](BaseSprite* sprite) { return sprite->Ident == name; });
 }
 
-BaseSprite * GameEngine::CopySprite(std::string targetSpriteName, std::string newName)
+BaseSprite* GameEngine::CopySprite(std::string targetSpriteName, std::string newName)
 {
     BaseSprite* orig = GetSprite(targetSpriteName);
 
@@ -229,7 +224,7 @@ void GameEngine::Post_Update()
     RemoveSpriteClickedFlag();
 }
 
-BaseActor * GameEngine::CreateActor()
+BaseActor* GameEngine::CreateActor()
 {
     BaseActor* newActor = new BaseActor();
     newActor->Engine = this;
@@ -239,7 +234,7 @@ BaseActor * GameEngine::CreateActor()
     return newActor;
 }
 
-BaseActor * GameEngine::CreateActor(BaseSprite * actorSprite)
+BaseActor* GameEngine::CreateActor(BaseSprite * actorSprite)
 {
     BaseActor* newActor = new BaseActor();
     newActor->Engine = this;
@@ -251,7 +246,7 @@ BaseActor * GameEngine::CreateActor(BaseSprite * actorSprite)
     return newActor;
 }
 
-BaseActor * GameEngine::CreateActor(PointerList<DrawObject*>* spriteList)
+BaseActor* GameEngine::CreateActor(PointerList<DrawObject*>* spriteList)
 {
     BaseActor* newActor = new BaseActor();
     delete(newActor->Sprites); // TODO : Maybe find a better way to do that.
@@ -273,7 +268,7 @@ void GameEngine::DetachActor(BaseActor* actor)
     this->GameActors->RemoveObject(actor);
 }
 
-BaseSprite * GameEngine::CreateSprite(std::string spriteName)
+BaseSprite* GameEngine::CreateSprite(std::string spriteName)
 {
     BaseSprite* sprt = this->Graphics->CreateSprite(spriteName);
     
@@ -283,7 +278,7 @@ BaseSprite * GameEngine::CreateSprite(std::string spriteName)
     return sprt;
 }
 
-BaseSprite * GameEngine::CreateSprite(std::string spriteName, std::string spriteTexturePath)
+BaseSprite* GameEngine::CreateSprite(std::string spriteName, std::string spriteTexturePath)
 {
     BaseSprite* sprt = this->Graphics->CreateSprite(spriteName);
 
@@ -298,7 +293,7 @@ BaseSprite * GameEngine::CreateSprite(std::string spriteName, std::string sprite
     return sprt;
 }
 
-BaseFont * GameEngine::GetGameDefaultFont()
+BaseFont* GameEngine::GetGameDefaultFont()
 {
     if (engineDefaultFont == NULL)
     {
@@ -349,7 +344,7 @@ BaseText* GameEngine::CreateText(std::string text, int textSize, uint32_t textCo
     return ret;
 }
 
-BaseText * GameEngine::CreateText(std::string text, int textSize, uint32_t textColor, BaseFont * typo)
+BaseText* GameEngine::CreateText(std::string text, int textSize, uint32_t textColor, BaseFont * typo)
 {
     BaseText* ret = this->Graphics->CreateText();
     ret->SetText(text);
@@ -363,7 +358,7 @@ BaseText * GameEngine::CreateText(std::string text, int textSize, uint32_t textC
     return ret;
 }
 
-void GameEngine::ShowEngineDialog()
+void GameEngine::ShowEngineDialog(std::string engineMessageForDialog)
 {
 
 }
@@ -502,7 +497,7 @@ void GameEngine::BuildAnimationTextures(PointerList<SpriteAnimation*>* anims)
     }
 }
 
-GameEngineInitParams * GameEngineInitParams::CreateDefaultParams()
+GameEngineInitParams* GameEngineInitParams::CreateDefaultParams()
 {
     GameEngineInitParams* newParams = new GameEngineInitParams();
 
