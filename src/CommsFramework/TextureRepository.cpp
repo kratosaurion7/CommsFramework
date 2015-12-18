@@ -5,6 +5,8 @@
 TextureRepository::TextureRepository(GraphicEngine* engine)
 {
     this->Graphics = engine;
+
+    loadedTextures = new PointerList<BaseTexture*>();
 }
 
 
@@ -20,7 +22,8 @@ BaseTexture* TextureRepository::LoadTexture(std::string texturePath)
 
     if (loadedTexture == NULL)
     {
-        loadedTexture = this->Graphics->CreateTexture(texturePath);
+        loadedTexture = this->Graphics->CreateTexture();
+        loadedTexture->Load(texturePath);
 
         this->loadedTextures->Add(loadedTexture);
     }
@@ -37,6 +40,8 @@ BaseTexture* TextureRepository::GetLoadedTexture(std::string path)
 
         if (tex->TexturePath.compare(path) == 0)
             return tex;
+
+        it++;
     }
 
     return NULL;
