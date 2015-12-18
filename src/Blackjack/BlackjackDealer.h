@@ -18,6 +18,8 @@ public:
 
     bool NeedsMoreCards();
 
+    void Update();
+
 protected:
     virtual void UpdateCardPositions();
 

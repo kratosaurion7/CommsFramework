@@ -40,6 +40,10 @@ void BlackjackPlayer::UpdateCardPositions()
         cardIter->cardFront->Show(true);
         cardIter->cardFront->SetZIndex(cardIndex);
 
+        cardIter->cardBack->SetPos(cardPos);
+        cardIter->cardBack->Show(false);
+        cardIter->cardBack->SetZIndex(cardIndex);
+
         it++;
         cardIndex++;
     }

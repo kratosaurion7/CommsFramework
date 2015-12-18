@@ -184,6 +184,8 @@ void BlackjackGame::Update()
                 }
                 else if (this->AskNewCardsDialog->DialogDecision == YesNoDialog::DialogResult::NO)
                 {
+                    this->AskNewCardsDialog->ResetDialog();
+
                     this->GameState = DEALER_NEW_CARDS;
                 }
             }
@@ -207,12 +209,14 @@ void BlackjackGame::Update()
 
                 this->Dealer->ReceiveCard(newCard);
 
+                this->Dealer->CardChoosingState = CardActor::CardChoosing::ASKING_NEW_CARD;
+
                 gameDelay = 20;
             }
 
-            if (!this->Dealer->NeedsMoreCards())
+            if(this->Dealer->CardChoosingState == CardActor::CardChoosing::NO_NEW_CARD)
             {
-                this->GameState == GAME_FINISHED;
+                this->GameState = GAME_FINISHED;
             }
 
             break;
@@ -221,15 +225,11 @@ void BlackjackGame::Update()
         {
             if (this->Player->CardsTotal() > 21)
             {
-                // Player busted, show screen
-
-                this->GameState == DEALER_WINS;
+                this->GameState = DEALER_WINS;
             }
-            else if (this->Dealer->CardsTotal() > 21)
+            else if (this->Dealer->CardsTotal() >= 21)
             {
-                // Dealer busted, player wins automatically
-
-                this->GameState == PLAYER_WINS;
+                this->GameState = PLAYER_WINS;
             }
             else
             {
@@ -238,22 +238,15 @@ void BlackjackGame::Update()
 
                 if (playerCloseness > dealerCloseness)
                 {
-                    this->GameState == DEALER_WINS;
-
-                    // Player lose
-                    this->Player->Money -= this->Player->CurrentBet;
+                    this->GameState = DEALER_WINS;
                 }
                 else if (playerCloseness == dealerCloseness)
                 {
-                    // Equal ?
-                    this->GameState == GAME_DRAW;
+                    this->GameState = GAME_DRAW;
                 }
                 else
                 {
-                    this->GameState == PLAYER_WINS;
-
-                    // Player wins
-                    this->Player->Money += this->Player->CurrentBet * 2;
+                    this->GameState = PLAYER_WINS;
                 }
             }
 
@@ -264,6 +257,9 @@ void BlackjackGame::Update()
         case PLAYER_WINS:
         {
             // Show win celebration
+            this->Player->Money += this->Player->CurrentBet * 2;
+
+            playerWinDialog->Open();
 
             this->GameState = RESET;
 
@@ -272,6 +268,17 @@ void BlackjackGame::Update()
         case DEALER_WINS:
         {
             // Show lose
+            this->Player->Money -= this->Player->CurrentBet;
+
+            playerLoseDialog->Open();
+
+            this->GameState = RESET;
+
+            break;
+        }
+        case GAME_DRAW:
+        {
+            gameDrawDialog->Open();
 
             this->GameState = RESET;
 
@@ -300,4 +307,11 @@ void BlackjackGame::ResetGame()
     //Player->Money = 1000;
     Player->LastBet = this->Player->CurrentBet;
     Player->CurrentBet = 0;
+
+    Player->CardChoosingState = CardActor::CardChoosing::IDLE;
+    Dealer->CardChoosingState = CardActor::CardChoosing::IDLE;
+
+    playerWinDialog->Close();
+    playerLoseDialog->Close();
+    gameDrawDialog->Close();
 }

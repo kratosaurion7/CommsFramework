@@ -37,6 +37,23 @@ bool BlackjackDealer::NeedsMoreCards()
     return this->CardsTotal() <= 16; // TODO : Configurable
 }
 
+void BlackjackDealer::Update()
+{
+    CardActor::Update();
+
+    if (this->CardChoosingState == ASKING_NEW_CARD)
+    {
+        if (this->NeedsMoreCards())
+        {
+            this->CardChoosingState = ACCEPTED_CARD;
+        }
+        else
+        {
+            this->CardChoosingState = NO_NEW_CARD;
+        }
+    }
+}
+
 void BlackjackDealer::UpdateCardPositions()
 {
     int cardIndex = 0;
@@ -53,6 +70,10 @@ void BlackjackDealer::UpdateCardPositions()
         cardIter->cardFront->SetPos(cardPos);
         cardIter->cardFront->Show(true);
         cardIter->cardFront->SetZIndex(cardIndex);
+
+        cardIter->cardBack->SetPos(cardPos);
+        cardIter->cardBack->Show(false);
+        cardIter->cardBack->SetZIndex(cardIndex);
 
         it++;
         cardIndex++;
