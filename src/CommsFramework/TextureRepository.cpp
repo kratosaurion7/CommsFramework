@@ -20,9 +20,7 @@ BaseTexture* TextureRepository::LoadTexture(std::string texturePath)
 
     if (loadedTexture == NULL)
     {
-        loadedTexture = this->Graphics->CreateTexture();
-
-        loadedTexture->Load(texturePath);
+        loadedTexture = this->Graphics->CreateTexture(texturePath);
 
         this->loadedTextures->Add(loadedTexture);
     }

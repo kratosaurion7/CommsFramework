@@ -56,8 +56,7 @@ void BaseSprite::SetTexture(std::string newTexturePath)
     if (currentTexture != NULL)
         delete(currentTexture);
 
-    BaseTexture* tex = Engine->CreateTexture();
-    tex->Load(newTexturePath);
+    BaseTexture* tex = Engine->CreateTexture(newTexturePath);
 
     this->SetTexture(tex);
 }

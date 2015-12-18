@@ -41,8 +41,7 @@ void GridTile::SetNewNumber(int newNumber)
 
     BaseTexture* oldTexture = this->TileSprite->GetCurrentTexture();
 
-    BaseTexture* newTex = this->Engine->Graphics->CreateTexture();
-    newTex->Load(blockName);
+    BaseTexture* newTex = this->Engine->Graphics->CreateTexture(blockName);
     this->TileSprite->SetTexture(newTex);
 
     delete(oldTexture);
