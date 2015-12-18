@@ -9,9 +9,15 @@
 
 #include "GraphicEngineInitParams.h"
 
+#include "TextureRepository.h"
+
+class TextureRepository;
+
 class BaseGraphicEngine
 {
 public:
+    TextureRepository* TextureRepo;
+
     virtual void Initialize(GraphicEngineInitParams* params) = 0;
 
     virtual void AddObject(BaseSprite* obj) = 0;

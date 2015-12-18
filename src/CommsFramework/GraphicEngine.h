@@ -35,6 +35,7 @@ public:
 
     BaseSprite* CreateSprite(std::string identifier = "");
     BaseTexture* CreateTexture();
+    BaseTexture* CreateTexture(std::string texturePath);
     BaseFont* CreateFont();
     BaseText* CreateText();
 

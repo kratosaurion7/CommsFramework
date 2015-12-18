@@ -349,6 +349,7 @@ XCOPY /Y /E "Assets\*" "$(TargetDir)Assets"</Command>
     <ClCompile Include="RethinkDb.cpp" />
     <ClCompile Include="SocketClient.cpp" />
     <ClCompile Include="SocketServer.cpp" />
+    <ClCompile Include="TextureRepository.cpp" />
     <ClCompile Include="Utils.cpp" />
     <ClCompile Include="RandomGen.cpp" />
     <ClCompile Include="SettingsRepository.cpp" />
@@ -404,6 +405,7 @@ XCOPY /Y /E "Assets\*" "$(TargetDir)Assets"</Command>
     <ClInclude Include="RethinkDb.h" />
     <ClInclude Include="SocketClient.h" />
     <ClInclude Include="SocketServer.h" />
+    <ClInclude Include="TextureRepository.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="RandomGen.h" />
     <ClInclude Include="SettingsRepository.h" />

@@ -17,6 +17,7 @@ GraphicEngine::GraphicEngine()
 {
     MainWindow = NULL;
     isRunning = false;
+    TextureRepo = new TextureRepository(this);
     Sprites = new PointerList<DrawObject*>();
     startParams = NULL;
     backgroundColor = sf::Color();
@@ -65,6 +66,13 @@ BaseSprite* GraphicEngine::CreateSprite(std::string identifier)
 BaseTexture * GraphicEngine::CreateTexture()
 {
     DTexture* tex = new DTexture();
+
+    return tex;
+}
+
+BaseTexture * GraphicEngine::CreateTexture(std::string texturePath)
+{
+    BaseTexture* tex = this->TextureRepo->LoadTexture(texturePath);
 
     return tex;
 }

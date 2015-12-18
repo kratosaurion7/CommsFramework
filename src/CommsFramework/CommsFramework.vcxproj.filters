@@ -219,6 +219,9 @@
     <ClCompile Include="MessageDialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TextureRepository.cpp">
+      <Filter>Framework\Graphic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="XmlReader.h">
@@ -412,6 +415,9 @@
     </ClInclude>
     <ClInclude Include="MessageDialog.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureRepository.h">
+      <Filter>Framework\Graphic</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
