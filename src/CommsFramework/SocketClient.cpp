@@ -23,7 +23,7 @@ void SocketClient::Init()
 {
     int res = 0;
 
-    res = WSAStartup(MAKEWORD(2, 2), &wsaData);
+    res = StartNetworkComponent(&wsaData);
 
     if (res != 0)
     {
