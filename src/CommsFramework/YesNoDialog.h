@@ -6,8 +6,9 @@
 #include "BaseSprite.h"
 #include "BaseActor.h"
 #include "BaseText.h"
+#include "BaseDialog.h"
 
-class YesNoDialog : public BaseActor, public IDialog
+class YesNoDialog : public BaseDialog
 {
 public:
     enum DialogResult

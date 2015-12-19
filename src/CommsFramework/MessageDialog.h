@@ -7,9 +7,10 @@
 #include "BaseSprite.h"
 #include "BaseActor.h"
 #include "BaseText.h"
+#include "BaseDialog.h"
 
 // TODO : Add a BaseDialog class
-class MessageDialog : public BaseActor, public IDialog
+class MessageDialog : public BaseDialog
 {
 public:
     enum DialogCloseMechanism
@@ -30,14 +31,11 @@ public:
 
     void Open();
     void Close();
-    bool IsOpen();
 
 protected:
     void Update();
 
 private:
-    bool _isOpen;
-
     void SetupSprites();
 
     int PreviousMsCount;

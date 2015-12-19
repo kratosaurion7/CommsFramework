@@ -328,6 +328,7 @@ XCOPY /Y /E "Assets\*" "$(TargetDir)Assets"</Command>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BaseActor.cpp" />
+    <ClCompile Include="BaseDialog.cpp" />
     <ClCompile Include="BaseMouse.cpp" />
     <ClCompile Include="BaseSprite.cpp" />
     <ClCompile Include="BitHelper.cpp" />
@@ -374,6 +375,7 @@ XCOPY /Y /E "Assets\*" "$(TargetDir)Assets"</Command>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseActor.h" />
+    <ClInclude Include="BaseDialog.h" />
     <ClInclude Include="BaseFont.h" />
     <ClInclude Include="BaseGraphicEngine.h" />
     <ClInclude Include="BaseKeyboard.h" />

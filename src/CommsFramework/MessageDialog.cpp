@@ -4,13 +4,15 @@
 
 MessageDialog::MessageDialog()
 {
+    BaseDialog::BaseDialog();
+
 }
 
 MessageDialog::MessageDialog(std::string message)
 {
-    this->dialogMessage = message;
+    BaseDialog::BaseDialog();
 
-    _isOpen = false;
+    this->dialogMessage = message;
 
     ClosingMethod = CLICK;
 
@@ -25,9 +27,9 @@ MessageDialog::MessageDialog(std::string message)
 
 MessageDialog::MessageDialog(std::string message, int windowTimeoutMiliseconds)
 {
-    this->dialogMessage = message;
+    BaseDialog::BaseDialog();
 
-    _isOpen = false;
+    this->dialogMessage = message;
 
     this->MaxOpenTime = windowTimeoutMiliseconds;
 
@@ -50,8 +52,7 @@ MessageDialog::~MessageDialog()
 
 void MessageDialog::Open()
 {
-    DialogSprite->Show(true);
-    DialogText->Show(true);
+    BaseDialog::Open();
 
     int ticks = GetTicks();
     this->CurrentMsCount = ticks;
@@ -62,20 +63,19 @@ void MessageDialog::Open()
 
 void MessageDialog::Close()
 {
+    BaseDialog::Close();
+
     this->DialogSprite->Show(false);
     this->DialogText->Show(false);
 
     DialogOpenedMilisecondAmount = 0;
 }
 
-bool MessageDialog::IsOpen()
-{
-    return _isOpen;
-}
-
 void MessageDialog::Update()
 {
-    if (_isOpen == false)
+    BaseDialog::Update();
+
+    if (DialogState == BaseDialog::DIALOG_CLOSED)
         return;
 
     if (this->ClosingMethod | DialogCloseMechanism::TIME)

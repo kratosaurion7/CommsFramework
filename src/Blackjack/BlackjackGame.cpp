@@ -261,31 +261,46 @@ void BlackjackGame::Update()
         }
         case PLAYER_WINS:
         {
-            // Show win celebration
-            this->Player->Money += this->Player->CurrentBet * 2;
+            if (playerWinDialog->DialogState == BaseDialog::DIALOG_CLOSED)
+            {
+                // Show win celebration
+                this->Player->Money += this->Player->CurrentBet * 2;
 
-            playerWinDialog->Open();
-
-            this->GameState = RESET;
+                playerWinDialog->Open();
+            }
+            else if (playerWinDialog->DialogState == BaseDialog::DIALOG_DONE)
+            {
+                this->GameState = RESET;
+            }
 
             break;
         }
         case DEALER_WINS:
         {
-            // Show lose
-            this->Player->Money -= this->Player->CurrentBet;
+            if (playerLoseDialog->DialogState == BaseDialog::DIALOG_CLOSED)
+            {
+                // Show lose
+                this->Player->Money -= this->Player->CurrentBet;
 
-            playerLoseDialog->Open();
-
-            this->GameState = RESET;
+                playerLoseDialog->Open();
+            }
+            else if (playerLoseDialog->DialogState == BaseDialog::DIALOG_DONE)
+            {
+                this->GameState = RESET;
+            }
 
             break;
         }
         case GAME_DRAW:
         {
-            gameDrawDialog->Open();
-
-            this->GameState = RESET;
+            if (gameDrawDialog->DialogState == BaseDialog::DIALOG_CLOSED)
+            {
+                gameDrawDialog->Open();
+            }
+            else if (gameDrawDialog->DialogState == BaseDialog::DIALOG_DONE)
+            {
+                this->GameState = RESET;
+            }
 
             break;
         }
@@ -316,7 +331,7 @@ void BlackjackGame::ResetGame()
     Player->CardChoosingState = CardActor::CardChoosing::IDLE;
     Dealer->CardChoosingState = CardActor::CardChoosing::IDLE;
 
-    playerWinDialog->Close();
-    playerLoseDialog->Close();
-    gameDrawDialog->Close();
+    playerWinDialog->Reset();
+    playerLoseDialog->Reset();
+    gameDrawDialog->Reset();
 }

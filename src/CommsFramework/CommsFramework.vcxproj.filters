@@ -216,11 +216,14 @@
     <ClCompile Include="RethinkDb.cpp">
       <Filter>Framework\Database</Filter>
     </ClCompile>
-    <ClCompile Include="MessageDialog.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="TextureRepository.cpp">
       <Filter>Framework\Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="MessageDialog.cpp">
+      <Filter>Framework\Engine\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseDialog.cpp">
+      <Filter>Framework\Engine\Dialogs</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -413,11 +416,14 @@
     <ClInclude Include="Network.h">
       <Filter>Framework\Network</Filter>
     </ClInclude>
-    <ClInclude Include="MessageDialog.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="TextureRepository.h">
       <Filter>Framework\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="MessageDialog.h">
+      <Filter>Framework\Engine\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseDialog.h">
+      <Filter>Framework\Engine\Dialogs</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
