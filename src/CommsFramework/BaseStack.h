@@ -78,6 +78,16 @@ public:
         return innerList->Count();
     };
 
+    void BaseStack::Release()
+    {
+        //for (std::list<T>::iterator it = innerList->GetContainer()->begin(); it != innerList->GetContainer()->end(); it++)
+        //{
+        //    delete *it;
+        //}
+
+        //innerList->GetContainer()->clear();
+    };
+
     std::list<T>* BaseStack::GetContainer()
     {
         return innerList->GetContainer();

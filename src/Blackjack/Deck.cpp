@@ -9,13 +9,7 @@ Deck::Deck(GameEngine* engine)
 
 Deck::~Deck()
 {
-    //while (this->DeckCards->HasNext())
-    //{
-    //    Card* nextCard = this->DeckCards->Pop();
-
-    //    delete(nextCard);
-    //}
-
+    this->DeckCards->Release();
     delete(this->DeckCards);
 
     Engine->DetachActor(this);

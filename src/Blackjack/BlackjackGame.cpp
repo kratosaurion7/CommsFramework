@@ -324,7 +324,6 @@ void BlackjackGame::ResetGame()
     Player->Cards->Clear();
     Dealer->Cards->Clear();
 
-    //Player->Money = 1000;
     Player->LastBet = this->Player->CurrentBet;
     Player->CurrentBet = 0;
 
