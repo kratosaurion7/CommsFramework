@@ -38,11 +38,11 @@ void BlackjackPlayer::UpdateCardPositions()
 
         cardIter->cardFront->SetPos(cardPos);
         cardIter->cardFront->Show(true);
-        cardIter->cardFront->SetZIndex(cardIndex);
+        //cardIter->cardFront->SetZIndex(cardIndex);
 
         cardIter->cardBack->SetPos(cardPos);
         cardIter->cardBack->Show(false);
-        cardIter->cardBack->SetZIndex(cardIndex);
+        //cardIter->cardBack->SetZIndex(cardIndex);
 
         it++;
         cardIndex++;
