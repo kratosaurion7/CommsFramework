@@ -11,7 +11,7 @@ BlackjackGame::BlackjackGame()
     BetSelector = new BetSelection();
 
     Player = new BlackjackPlayer();
-    Player->Money = 99999;
+    Player->Money = 100;
     Engine->AttachActor(Player);
 
     Dealer = new BlackjackDealer();
@@ -46,6 +46,8 @@ BlackjackGame::~BlackjackGame()
 
 void BlackjackGame::Update()
 {
+    BaseActor::Update();
+
     if (gameDelay > 0)
     {
         gameDelay--;

@@ -45,4 +45,5 @@ void Card::TurnDown()
 
 void Card::Update()
 {
+    BaseActor::Update();
 }

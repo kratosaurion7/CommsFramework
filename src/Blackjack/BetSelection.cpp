@@ -143,6 +143,8 @@ void BetSelection::HideAll()
 
 void BetSelection::Update()
 {
+    BaseActor::Update();
+
     switch (BettingState)
     {
         case BetSelection::IDLE:

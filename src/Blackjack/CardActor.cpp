@@ -64,6 +64,8 @@ void CardActor::ReceiveCard(Card * card)
 
 void CardActor::Update()
 {
+    BaseActor::Update();
+
     UpdateStatusTexts();
 
     UpdateCardPositions();
