@@ -62,6 +62,14 @@ void BaseActor::BindControls(SpriteControls controlScheme)
     this->spriteControlScheme = controlScheme;
 }
 
+void BaseActor::WaitFrames(int nbFrames)
+{
+}
+
+void BaseActor::WaitTime(int millisecondsWait)
+{
+}
+
 void BaseActor::HandleKeyboardInput()
 {
     if (this->spriteControlScheme != None)

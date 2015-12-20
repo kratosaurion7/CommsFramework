@@ -39,6 +39,9 @@ public:
 
     virtual void BindControls(SpriteControls controlScheme = None);
 
+    void WaitFrames(int nbFrames);
+    void WaitTime(int millisecondsWait);
+
 private:
     SpriteControls spriteControlScheme;
 
