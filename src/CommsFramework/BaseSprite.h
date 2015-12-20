@@ -17,7 +17,7 @@ class DrawObject;
 class BaseSprite : public DrawObject
 {
 public:
-    GraphicEngine* Engine;
+    //GraphicEngine* Engine;
 
     int CurrentFrameIndex = 0;
     int FramesCount = 0;
@@ -59,4 +59,3 @@ public:
 
     virtual BaseSprite* Clone() = 0;
 };
-

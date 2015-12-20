@@ -212,6 +212,16 @@ void DrawObject::SetZIndex(float z)
     zIndex = z;
 }
 
+void DrawObject::SetZIndexOverObject(DrawObject* target)
+{
+    Engine->ReorderSprite(target, this);
+}
+
+void DrawObject::SetZIndexUnderObject(DrawObject* target)
+{
+    Engine->ReorderSprite(this, target);
+}
+
 bool DrawObject::Clicked(MouseButtons targetButton)
 {
     if (ClickInfo != NULL)

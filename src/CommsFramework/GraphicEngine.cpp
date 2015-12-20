@@ -216,6 +216,11 @@ void GraphicEngine::FlagForZIndexSorting()
     zIndexNeedsReordering = true;
 }
 
+void GraphicEngine::ReorderSprite(DrawObject* first, DrawObject* second)
+{
+
+}
+
 void GraphicEngine::ProcessWindowsEvents(sf::RenderWindow* targetWindow)
 {
     sf::Event event;

@@ -1,5 +1,11 @@
 #pragma once
 
+class BaseGraphicEngine;
+class DrawObject;
+class GraphicEngineInitParams;
+class SFMLText;
+class DSprite;
+
 #include <SFML\Graphics.hpp>
 
 #include "PointerList.h"
@@ -62,6 +68,8 @@ public:
     void ReorderSpritesByZIndex();
 
     void FlagForZIndexSorting();
+
+    void ReorderSprite(DrawObject* first, DrawObject* second);
 
     bool zIndexNeedsReordering = false;
 private:

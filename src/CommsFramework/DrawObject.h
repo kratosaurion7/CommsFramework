@@ -1,5 +1,6 @@
 #pragma once
 
+//#include "GraphicEngine.h"
 #include "FPosition.h"
 #include "FRectangle.h"
 #include "FSize.h"
@@ -8,12 +9,18 @@
 
 #include <string>
 
+class GraphicEngine;
+class FPosition;
+class FRectangle;
+class FSize;
 class GameEngine;
 class BaseMouse;
+struct MouseClickInfo;
 
 class DrawObject
 {
 public:
+    GraphicEngine* Engine;
     std::string Ident;
 
     bool PropagateClicks = false;
@@ -69,6 +76,8 @@ public:
 
     virtual float GetZIndex();
     virtual void SetZIndex(float z);
+    virtual void SetZIndexOverObject(DrawObject* target);
+    virtual void SetZIndexUnderObject(DrawObject* target);
 
     virtual bool Clicked(MouseButtons targetButton = LEFT);
 
