@@ -57,10 +57,10 @@ public:
         return NULL;
     };
 
-    //bool BaseStack::HasNext()
-    //{
-    //    return innerList->Count() > 0;
-    //}
+    bool BaseStack::HasNext()
+    {
+        return innerList->Count() > 0;
+    }
 
     // Stack should probably not have a Shuffle method.
     void BaseStack::Shuffle()

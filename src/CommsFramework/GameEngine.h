@@ -85,6 +85,8 @@ public:
     BaseSprite* CreateSprite(std::string spriteName);
     BaseSprite* CreateSprite(std::string spriteName, std::string spriteTexturePath);
 
+    void RemoveSprite(BaseSprite* sprite);
+
     BaseSprite* GetSprite(std::string name);
     BaseList<BaseSprite*>* GetSpriteList(std::string name);
 
@@ -94,6 +96,8 @@ public:
     BaseText* CreateText(std::string text, int textSize);
     BaseText* CreateText(std::string text, int textSize, uint32_t textColor);
     BaseText* CreateText(std::string text, int textSize, uint32_t textColor, BaseFont* typo);
+
+    void RemoveText(BaseText* text);
 
     BaseSprite* CopySprite(std::string name, std::string newName);
 

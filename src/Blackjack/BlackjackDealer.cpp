@@ -1,7 +1,5 @@
 #include "BlackjackDealer.h"
 
-
-
 BlackjackDealer::BlackjackDealer()
 {
     MoneyLabel->Show(false);

@@ -14,6 +14,8 @@
 #include "SFMLKeyboard.h"
 #include "SFMLMouse.h"
 
+// TODO : Why the fuck the GameEngine has includes in the cpp ??
+
 BaseKeyboard* GameEngine::Keyboard = 0;
 BaseMouse* GameEngine::Mouse = 0;
 
@@ -293,6 +295,12 @@ BaseSprite* GameEngine::CreateSprite(std::string spriteName, std::string spriteT
     return sprt;
 }
 
+void GameEngine::RemoveSprite(BaseSprite* sprite)
+{
+    this->GameSprites->RemoveObject(sprite);
+    this->Graphics->RemoveObject(sprite);
+}
+
 BaseFont* GameEngine::GetGameDefaultFont()
 {
     if (engineDefaultFont == NULL)
@@ -356,6 +364,12 @@ BaseText* GameEngine::CreateText(std::string text, int textSize, uint32_t textCo
     this->GameTexts->Add(ret);
 
     return ret;
+}
+
+void GameEngine::RemoveText(BaseText* text)
+{
+    this->GameTexts->RemoveObject(text);
+    this->Graphics->RemoveObject(text);
 }
 
 void GameEngine::ShowEngineDialog(std::string engineMessageForDialog)

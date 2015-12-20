@@ -16,14 +16,14 @@ Card::~Card()
 {
     if (this->cardBack != NULL)
     {
-        this->Engine->Graphics->RemoveObject(cardBack);
+        this->Engine->RemoveSprite(cardBack);
 
         delete(cardBack);
     }
 
     if (this->cardFront != NULL)
     {
-        this->Engine->Graphics->RemoveObject(cardFront);
+        this->Engine->RemoveSprite(cardFront);
 
         delete(cardFront);
     }

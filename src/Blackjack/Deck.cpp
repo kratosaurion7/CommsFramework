@@ -9,7 +9,17 @@ Deck::Deck(GameEngine* engine)
 
 Deck::~Deck()
 {
-    this->DeckCards->Release();
+    //this->DeckCards->Release();
+
+    auto it = this->DeckCards->GetContainer()->begin();
+    while (it != this->DeckCards->GetContainer()->end())
+    {
+        delete *it;
+
+        it++;
+    }
+    
+    this->DeckCards->Clear();
     delete(this->DeckCards);
 
     Engine->DetachActor(this);
