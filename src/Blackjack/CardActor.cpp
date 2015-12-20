@@ -77,6 +77,13 @@ int CardActor::CardsTotal()
 
 void CardActor::ReceiveCard(Card * card)
 {
+    if (this->Cards->Count() > 0)
+    {
+        Card* lastCard = this->Cards->Last();
+        card->cardBack->SetZIndexOverObject(lastCard->cardBack); // Card is the same as lastCard
+        card->cardFront->SetZIndexOverObject(lastCard->cardFront);
+    }
+
     this->Cards->Add(card);
 
     if (this->CardsTotal() > 21)

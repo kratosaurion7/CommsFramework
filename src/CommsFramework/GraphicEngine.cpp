@@ -38,7 +38,6 @@ GraphicEngine::~GraphicEngine()
     }
 
     delete(startParams);
-
 }
 
 void GraphicEngine::Initialize(GraphicEngineInitParams* params)
@@ -218,7 +217,43 @@ void GraphicEngine::FlagForZIndexSorting()
 
 void GraphicEngine::ReorderSprite(DrawObject* first, DrawObject* second)
 {
+    std::list<DrawObject*>* spriteslist = this->Sprites->GetContainer();
+    bool foundFirst = false;
+    bool foundSecond = false;
+    std::list<DrawObject*>::iterator iterFirst;
+    std::list<DrawObject*>::iterator iterSecond;
 
+    int loops = 0;
+
+    auto it = spriteslist->begin();
+    while (it != spriteslist->end())
+    {
+        DrawObject* iter = (*it);
+
+        if (iter == first) 
+        {
+            iterFirst = it;
+            foundFirst = true;
+        }
+        else if (iter == second)
+        {
+            iterSecond = it;
+            foundSecond = true;
+        }
+
+        if (foundFirst && foundSecond) // Early break
+            break;
+
+        it++;
+        loops++;
+    }
+
+    if (foundFirst && foundSecond)
+    {
+        spriteslist->erase(iterSecond);
+
+        spriteslist->insert(iterFirst, second);
+    }
 }
 
 void GraphicEngine::ProcessWindowsEvents(sf::RenderWindow* targetWindow)

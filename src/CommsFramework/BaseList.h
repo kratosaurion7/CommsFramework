@@ -70,6 +70,22 @@ public:
         return NULL;
     };
 
+    T BaseList::First()
+    {
+        auto it = _container->begin();
+
+        return (*it);
+    };
+
+    T BaseList::Last()
+    {
+        auto it = _container->end();
+
+        it--;
+
+        return (*it);
+    };
+
     BaseList<T>* BaseList::Where(std::function<bool(T)> predicate)
     {
         BaseList<T>* retList = new BaseList<T>();
