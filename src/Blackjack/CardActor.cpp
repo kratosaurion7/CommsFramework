@@ -4,40 +4,6 @@ CardActor::CardActor()
 {
     Cards = new PointerList<Card*>();
 
-    MoneyLabel = Engine->CreateText(" Money");
-    MoneyLabel->SetPos(0, 680);
-    MoneyLabel->SetColor(0xFFFFFFFF);
-    MoneyLabel->SetCharacterSize(16);
-
-    Money = Engine->CreateText("0");
-    Money->SetPos(0, 700);
-    MoneyLabel->Show(true);
-    Money->Show(true);
-
-
-    LastBetLabel = Engine->CreateText("Last bet");
-    LastBetLabel->SetPos(150, 680);
-    LastBetLabel->SetColor(0xFFFFFFFF);
-    LastBetLabel->SetCharacterSize(16);
-
-
-    LastBet = Engine->CreateText("0");
-    LastBet->SetPos(150, 700);
-    LastBetLabel->Show(true);
-    LastBet->Show(true);
-
-
-    CurrentBetLabel = Engine->CreateText("Current Bet");
-    CurrentBetLabel->SetPos(300, 680);
-    CurrentBetLabel->SetColor(0xFFFFFFFF);
-    CurrentBetLabel->SetCharacterSize(16);
-
-    CurrentBetText = Engine->CreateText("0");
-    CurrentBetText->SetPos(300, 700);
-    CurrentBetLabel->Show(true);
-    CurrentBetText->Show(true);
-
-
     TotalLabel = Engine->CreateText("Card Total");
     TotalLabel->SetPos(450, 680);
     TotalLabel->SetColor(0xFFFFFFFF);

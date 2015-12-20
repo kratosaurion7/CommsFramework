@@ -33,14 +33,6 @@ public:
 
     PointerList<Card*>* Cards;
 
-    BaseText* MoneyLabel;
-    BaseText* Money;
-
-    BaseText* LastBetLabel;
-    BaseText* LastBet;
-
-    BaseText* CurrentBetLabel;
-    BaseText* CurrentBetText;
 
     BaseText* TotalLabel;
     BaseText* TotalText;

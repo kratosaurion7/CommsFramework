@@ -2,15 +2,6 @@
 
 BlackjackDealer::BlackjackDealer()
 {
-    MoneyLabel->Show(false);
-    Money->Show(false);
-
-    LastBetLabel->Show(false);
-    LastBet->Show(false);
-
-    CurrentBetLabel->Show(false);
-    CurrentBetText->Show(false);
-
     TotalLabel->Show(false);
     TotalText->Show(false);
 }
