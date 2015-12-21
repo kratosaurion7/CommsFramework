@@ -428,10 +428,10 @@
     <ClInclude Include="BaseDialog.h">
       <Filter>Framework\Engine\Dialogs</Filter>
     </ClInclude>
-    <ClInclude Include="IObservable.h">
+    <ClInclude Include="IObserver.h">
       <Filter>Framework\Patterns</Filter>
     </ClInclude>
-    <ClInclude Include="IObserver.h">
+    <ClInclude Include="IObservable.h">
       <Filter>Framework\Patterns</Filter>
     </ClInclude>
   </ItemGroup>

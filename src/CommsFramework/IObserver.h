@@ -1,7 +1,7 @@
 #pragma once
 
 template <class TNotifyArg>
-class IObserver<TNotifyArg>
+class IObserver
 {
 public:
     IObserver()

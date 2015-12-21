@@ -4,7 +4,7 @@
 #include "PointerList.h"
 
 template <class TNotifyArg>
-class IObservable<TNotifyArg>
+class IObservable
 {
 public:
     IObservable()
