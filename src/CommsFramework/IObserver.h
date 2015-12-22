@@ -14,6 +14,9 @@ public:
 
     };
 
-    virtual void Notify(TNotifyArg* arg) = 0;
+    virtual void IObserver::Notify(TNotifyArg* arg)
+    {
+
+    };
 };
 

@@ -28,7 +28,7 @@ public:
         subjects->Remove(observer);
     };
 
-    void NotifyObservers(TNotifyArg* args)
+    void IObservable::NotifyObservers(TNotifyArg* args)
     {
         auto it = subjects->GetContainer()->begin();
         while (it != subjects->GetContainer()->end())
