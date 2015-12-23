@@ -69,4 +69,3 @@ public:
     virtual void ReorderSprite(DrawObject* first, DrawObject* second) = 0;
 
 };
-

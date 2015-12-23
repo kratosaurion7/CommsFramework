@@ -17,8 +17,6 @@ class SpriteDescriptor;
 class BaseSprite : public DrawObject
 {
 public:
-    //GraphicEngine* Engine;
-
     int CurrentFrameIndex = 0;
     int FramesCount = 0;
     int SpriteFPS = 0;
