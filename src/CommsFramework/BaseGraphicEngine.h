@@ -1,39 +1,47 @@
 #pragma once
 
-#include "BaseSprite.h"
+class DrawObject;
+class BaseSprite;
+class BaseText;
+class BaseTexture;
+class BaseFont;
+
+class GraphicEngineInitParams;
+class TextureRepository;
+
 #include "DrawObject.h"
+#include "BaseSprite.h"
+#include "BaseText.h"
+#include "BaseFont.h"
 #include "BaseTexture.h"
 #include "BaseKeyboard.h"
-#include "BaseFont.h"
-#include "BaseText.h"
 
 #include "GraphicEngineInitParams.h"
 
 #include "TextureRepository.h"
 
-class TextureRepository;
+#include <string>
 
 class BaseGraphicEngine
 {
 public:
     TextureRepository* TextureRepo;
 
+    bool zIndexNeedsReordering = false;
+
     virtual void Initialize(GraphicEngineInitParams* params) = 0;
 
     virtual void AddObject(BaseSprite* obj) = 0;
-
     virtual void AddObject(BaseText* obj) = 0;
-
     virtual void RemoveObject(DrawObject* obj) = 0;
 
+    virtual PointerList<DrawObject*>* GetDrawableList() = 0;
     virtual DrawObject* GetObject(std::string identifier) = 0;
 
     virtual BaseSprite* CreateSprite(std::string identifier = "") = 0;
-
     virtual BaseTexture* CreateTexture() = 0;
-
+    virtual BaseTexture* CreateTexture(std::string texturePath) = 0;
     virtual BaseFont* CreateFont() = 0;
-
     virtual BaseText* CreateText() = 0;
 
     virtual int GetFramerate() = 0;
@@ -41,6 +49,10 @@ public:
     virtual void SetFramerate(int framerate) = 0;
 
     virtual void SetAutoManagedFramerate(bool isSet) = 0;
+
+    virtual  void SetBackgroundColor(uint32_t color) = 0;
+
+    virtual void SetBackgroundTexture(BaseTexture* texture) = 0;
 
     virtual void Start() = 0;
 
@@ -55,5 +67,8 @@ public:
     virtual void ReorderSpritesByZIndex() = 0;
 
     virtual void FlagForZIndexSorting() = 0;
+
+    virtual void ReorderSprite(DrawObject* first, DrawObject* second) = 0;
+
 };
 

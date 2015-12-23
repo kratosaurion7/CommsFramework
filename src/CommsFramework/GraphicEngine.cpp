@@ -154,6 +154,11 @@ void GraphicEngine::RemoveObject(DrawObject* obj)
         Sprites->RemoveObject(dspr);
 }
 
+PointerList<DrawObject*>* GraphicEngine::GetDrawableList()
+{
+    return Sprites;
+}
+
 DrawObject * GraphicEngine::GetObject(std::string identifier)
 {
     std::list<DrawObject*>::iterator iter = Sprites->GetContainer()->begin();

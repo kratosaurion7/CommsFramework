@@ -32,11 +32,10 @@ public:
     void Initialize(GraphicEngineInitParams* params);
 
     void AddObject(BaseSprite* obj);
-
     void AddObject(BaseText* obj);
-
     void RemoveObject(DrawObject* obj);
 
+    PointerList<DrawObject*>* GetDrawableList();
     DrawObject* GetObject(std::string identifier);
 
     BaseSprite* CreateSprite(std::string identifier = "");
@@ -71,7 +70,6 @@ public:
 
     void ReorderSprite(DrawObject* first, DrawObject* second);
 
-    bool zIndexNeedsReordering = false;
 private:
     bool isRunning;
     
