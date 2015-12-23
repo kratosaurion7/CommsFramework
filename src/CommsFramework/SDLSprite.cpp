@@ -1,13 +1,12 @@
 #include "SDLSprite.h"
 
+#include <SDL_render.h>
+
 #include "BaseSprite.h"
 #include "BaseText.h"
 #include "BaseTexture.h"
-
 #include "SDLTexture.h"
-
 #include "SpriteAnimation.h"
-
 #include "SDLGraphicEngine.h"
 
 SDLSprite::SDLSprite()
@@ -101,6 +100,11 @@ void SDLSprite::SetTexture(BaseTexture* texture)
 BaseSprite* SDLSprite::Clone()
 {
     return nullptr;
+}
+
+SDL_Texture* SDLSprite::GetDrawableTexture()
+{
+    return currentSpriteTexture->texture;
 }
 
 void SDLSprite::UpdateInnerImpl()

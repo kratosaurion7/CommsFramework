@@ -9,6 +9,7 @@
 #include "BaseText.h"
 #include "BaseTexture.h"
 
+#include "SDLDrawable.h"
 #include "SDLSprite.h"
 #include "SDLTexture.h"
 
@@ -186,20 +187,106 @@ bool SDLGraphicEngine::IsRunning()
 
 void SDLGraphicEngine::ReorderSpritesByZIndex()
 {
+    // TODO : Implement in base class
+    auto spritesStart = this->drawables->GetContainer()->begin();
+    auto spritesEnd = this->drawables->GetContainer()->end();
+
+    drawables->GetContainer()->sort([](DrawObject* a, DrawObject* b) {
+        return b->GetZIndex() > a->GetZIndex();
+    });
+
+    this->zIndexNeedsReordering = false;
 }
 
 void SDLGraphicEngine::FlagForZIndexSorting()
 {
+    // TODO : Implement in base class
+    zIndexNeedsReordering = true;
 }
 
 void SDLGraphicEngine::ReorderSprite(DrawObject* first, DrawObject* second)
 {
+    // TODO : Implement in base class
+    std::list<DrawObject*>* spriteslist = this->drawables->GetContainer();
+    bool foundFirst = false;
+    bool foundSecond = false;
+    std::list<DrawObject*>::iterator iterFirst;
+    std::list<DrawObject*>::iterator iterSecond;
+
+    int loops = 0;
+
+    auto it = spriteslist->begin();
+    while (it != spriteslist->end())
+    {
+        DrawObject* iter = (*it);
+
+        if (iter == first)
+        {
+            iterFirst = it;
+            foundFirst = true;
+        }
+        else if (iter == second)
+        {
+            iterSecond = it;
+            foundSecond = true;
+        }
+
+        if (foundFirst && foundSecond) // Early break
+            break;
+
+        it++;
+        loops++;
+    }
+
+    if (foundFirst && foundSecond)
+    {
+        spriteslist->erase(iterSecond);
+
+        spriteslist->insert(iterFirst, second);
+    }
+
 }
 
-void SDLGraphicEngine::ProcessDraw(SDL_Window * targetWindow)
+void SDLGraphicEngine::ProcessDraw(SDL_Window* targetWindow)
 {
+    SDL_RenderClear(gameRenderer); // First step
+
+    auto iter = this->drawables->GetContainer()->begin();
+    while (iter != this->drawables->GetContainer()->end())
+    {
+        DrawObject* target = (*iter);
+
+        if (target->IsVisible())
+        {
+            SDLDrawable* drawImpl = dynamic_cast<SDLDrawable*>(target);
+
+            if (drawImpl != NULL)
+            {
+                SDL_Rect destinationRect = this->GetSpriteRect(target);
+                SDL_Texture* tex = drawImpl->GetDrawableTexture();
+
+                SDL_RenderCopy(gameRenderer, tex, NULL, &destinationRect);
+            }
+        }
+
+        iter++;
+    }
+
+    SDL_RenderPresent(gameRenderer); // Final step
 }
 
-void SDLGraphicEngine::ProcessEvents(SDL_Window * targetWindow)
+void SDLGraphicEngine::ProcessEvents(SDL_Window* targetWindow)
 {
+
+}
+
+SDL_Rect SDLGraphicEngine::GetSpriteRect(DrawObject* object)
+{
+    SDL_Rect rec;
+    rec.h = object->GetHeight();
+    rec.w = object->GetWidth();
+    rec.x = object->GetX();
+    rec.y = object->GetY();
+
+    return rec;
 }

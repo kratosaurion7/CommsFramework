@@ -452,5 +452,8 @@
     <ClInclude Include="SDLTexture.h">
       <Filter>Framework\Graphic\SDL</Filter>
     </ClInclude>
+    <ClInclude Include="SDLDrawable.h">
+      <Filter>Framework\Graphic\SDL</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

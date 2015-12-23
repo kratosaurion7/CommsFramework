@@ -8,6 +8,7 @@ class BaseTexture;
 class BaseFont;
 class BaseText;
 
+struct SDL_Rect;
 struct SDL_Window;
 struct SDL_Renderer;
 
@@ -70,5 +71,7 @@ public:
 private:
     void ProcessDraw(SDL_Window* targetWindow);
     void ProcessEvents(SDL_Window* targetWindow);
+
+    SDL_Rect GetSpriteRect(DrawObject* object);
 };
 
