@@ -1,11 +1,22 @@
 #include "SDLGraphicEngine.h"
 
+#include <SDL.h>
 
+#include "TextureRepository.h"
+#include "DrawObject.h"
+#include "GraphicEngineInitParams.h"
+#include "BaseSprite.h"
+#include "BaseText.h"
+#include "BaseTexture.h"
+
+#include "SDLSprite.h"
+#include "SDLTexture.h"
 
 SDLGraphicEngine::SDLGraphicEngine()
 {
     mainWindow = NULL;
-    TextureRepo = NULL;
+    TextureRepo = new TextureRepository(this);
+    drawables = new PointerList<DrawObject*>();
     gameRenderer = NULL;
 }
 
@@ -23,6 +34,8 @@ SDLGraphicEngine::~SDLGraphicEngine()
 
 void SDLGraphicEngine::Initialize(GraphicEngineInitParams* params)
 {
+    startParams = params;
+
     int res = 0;
     const char* errorString;
 
@@ -56,52 +69,73 @@ void SDLGraphicEngine::Initialize(GraphicEngineInitParams* params)
         return;
     }
 
+    SDL_ShowWindow(mainWindow);
+
     engineValid = true;
 }
 
-void SDLGraphicEngine::AddObject(BaseSprite * obj)
+void SDLGraphicEngine::AddObject(BaseSprite* obj)
 {
+    drawables->Add(obj);
+
+    //SDLSprite* spr = dynamic_cast<SDLSprite*>(obj);
+
+    //if (spr != NULL)
+    //{
+    //    this->zIndexNeedsReordering = true;
+
+    //    drawables->Add(spr);
+    //}
 }
 
-void SDLGraphicEngine::AddObject(BaseText * obj)
+void SDLGraphicEngine::AddObject(BaseText* obj)
 {
 }
 
 void SDLGraphicEngine::RemoveObject(DrawObject * obj)
 {
+    drawables->RemoveObject(obj);
 }
 
 PointerList<DrawObject*>* SDLGraphicEngine::GetDrawableList()
 {
-    return nullptr;
+    return drawables;
 }
 
-DrawObject * SDLGraphicEngine::GetObject(std::string identifier)
+DrawObject* SDLGraphicEngine::GetObject(std::string identifier)
 {
     return nullptr;
 }
 
-BaseSprite * SDLGraphicEngine::CreateSprite(std::string identifier)
+BaseSprite* SDLGraphicEngine::CreateSprite(std::string identifier)
+{
+    SDLSprite* spr = new SDLSprite();
+    spr->Engine = this;
+    spr->Ident = identifier;
+
+    return spr;
+}
+
+BaseTexture* SDLGraphicEngine::CreateTexture()
+{
+    SDLTexture* tex = new SDLTexture();
+    
+    return tex;
+}
+
+BaseTexture* SDLGraphicEngine::CreateTexture(std::string texturePath)
+{
+    BaseTexture* tex = this->TextureRepo->LoadTexture(texturePath);
+
+    return tex;
+}
+
+BaseFont* SDLGraphicEngine::CreateFont()
 {
     return nullptr;
 }
 
-BaseTexture * SDLGraphicEngine::CreateTexture()
-{
-    return nullptr;
-}
-
-BaseTexture * SDLGraphicEngine::CreateTexture(std::string texturePath)
-{
-    return nullptr;
-}
-
-BaseFont * SDLGraphicEngine::CreateFont()
-{
-    return nullptr;
-}
-
-BaseText * SDLGraphicEngine::CreateText()
+BaseText* SDLGraphicEngine::CreateText()
 {
     return nullptr;
 }
@@ -156,6 +190,6 @@ void SDLGraphicEngine::FlagForZIndexSorting()
 {
 }
 
-void SDLGraphicEngine::ReorderSprite(DrawObject * first, DrawObject * second)
+void SDLGraphicEngine::ReorderSprite(DrawObject* first, DrawObject* second)
 {
 }

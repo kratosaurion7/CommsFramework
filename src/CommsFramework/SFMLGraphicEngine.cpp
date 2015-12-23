@@ -161,7 +161,7 @@ PointerList<DrawObject*>* SFMLGraphicEngine::GetDrawableList()
     return Sprites;
 }
 
-DrawObject * SFMLGraphicEngine::GetObject(std::string identifier)
+DrawObject* SFMLGraphicEngine::GetObject(std::string identifier)
 {
     std::list<DrawObject*>::iterator iter = Sprites->GetContainer()->begin();
 

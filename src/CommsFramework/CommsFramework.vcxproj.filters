@@ -234,6 +234,12 @@
     <ClCompile Include="SDLGraphicEngine.cpp">
       <Filter>Framework\Graphic\SDL</Filter>
     </ClCompile>
+    <ClCompile Include="SDLSprite.cpp">
+      <Filter>Framework\Graphic\SDL</Filter>
+    </ClCompile>
+    <ClCompile Include="SDLTexture.cpp">
+      <Filter>Framework\Graphic\SDL</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="XmlReader.h">
@@ -438,6 +444,12 @@
       <Filter>Framework\Graphic\SFML</Filter>
     </ClInclude>
     <ClInclude Include="SDLGraphicEngine.h">
+      <Filter>Framework\Graphic\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="SDLSprite.h">
+      <Filter>Framework\Graphic\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="SDLTexture.h">
       <Filter>Framework\Graphic\SDL</Filter>
     </ClInclude>
   </ItemGroup>
