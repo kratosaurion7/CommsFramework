@@ -61,6 +61,7 @@ void SDLTexture::Load(std::string path)
 
     // TODO : Check if we keep both the Texture and Surface in memory
     // SDL_FreeSurface(surface);
+    TexturePath = path;
 }
 
 void SDLTexture::LoadFromMemory(char* data, int dataSize)
@@ -83,4 +84,43 @@ FSize SDLTexture::GetSize()
 
 void SDLTexture::SetSolidColor(uint32_t pixelColor)
 {
+    int res = 0;
+    const char* errorString;
+    SDL_Surface* newSurface;
+    SDL_Texture* newTexture;
+
+    newSurface = SDL_CreateRGBSurface(0, Width, Height, 32, 0, 0, 0, 0);
+
+    if (newSurface == NULL)
+    {
+        errorString = SDL_GetError();
+        fprintf(stderr, "Unable to set create RGB surface [%s] with error %s\n", TexturePath, errorString);
+
+        return;
+    }
+    
+    res = SDL_FillRect(newSurface, NULL, pixelColor);
+
+    if (res == -1)
+    {
+        errorString = SDL_GetError();
+        fprintf(stderr, "Unable to set solid color to texture [%s] with error %s\n", TexturePath, errorString);
+
+        return;
+    }
+
+    SDL_Renderer* renderer = Graphics->gameRenderer;
+
+    newTexture = SDL_CreateTextureFromSurface(renderer, newSurface);
+
+    if (texture == NULL)
+    {
+        errorString = SDL_GetError();
+        fprintf(stderr, "Unable to set create texture [%s] with error %s\n", TexturePath, errorString);
+
+        return;
+    }
+
+    surface = newSurface;
+    texture = newTexture;
 }
