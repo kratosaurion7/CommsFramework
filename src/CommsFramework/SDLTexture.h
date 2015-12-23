@@ -1,5 +1,9 @@
 #pragma once
 
+class SDLGraphicEngine;
+class SDL_Surface;
+class SDL_Texture;
+
 #include <string>
 #include <cstdint>
 
@@ -10,6 +14,14 @@
 class SDLTexture : public BaseTexture
 {
 public:
+    SDL_Surface* surface;
+    SDL_Texture* texture;
+    SDLGraphicEngine* Graphics;
+
+    int Height;
+    int Width;
+
+
     SDLTexture();
     ~SDLTexture();
 
