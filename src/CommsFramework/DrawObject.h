@@ -1,26 +1,24 @@
 #pragma once
 
-//#include "GraphicEngine.h"
-#include "FPosition.h"
-#include "FRectangle.h"
-#include "FSize.h"
-#include "BaseMouse.h"
-#include "MouseClickInfo.h"
-
-#include <string>
-
-class GraphicEngine;
+class BaseGraphicEngine;
 class FPosition;
 class FRectangle;
 class FSize;
-class GameEngine;
 class BaseMouse;
 struct MouseClickInfo;
+
+#include "BaseMouse.h"
+
+#include <string>
+#include "Vectors.h"
+#include "FPosition.h"
+#include "FSize.h"
+#include "FRectangle.h"
 
 class DrawObject
 {
 public:
-    GraphicEngine* Engine;
+    BaseGraphicEngine* Engine;
     std::string Ident;
 
     bool PropagateClicks = false;

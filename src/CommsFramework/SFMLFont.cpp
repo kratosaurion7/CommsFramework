@@ -1,7 +1,5 @@
 #include "SFMLFont.h"
 
-
-
 SFMLFont::SFMLFont()
 {
     innerImpl = new sf::Font();

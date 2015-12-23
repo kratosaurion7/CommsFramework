@@ -1,18 +1,16 @@
 #pragma once
 
+
+class BaseText;
+class Card;
+
 #include <string>
 
 #include <BaseList.h>
 #include <PointerList.h>
 
-#include <BaseSprite.h>
-#include <BaseText.h>
 #include <BaseActor.h>
 
-#include "Deck.h"
-#include "Card.h"
-
-#include "CardActor.h"
 
 class CardActor : public BaseActor
 {

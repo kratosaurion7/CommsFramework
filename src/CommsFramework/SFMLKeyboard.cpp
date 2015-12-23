@@ -1,7 +1,11 @@
 #include "SFMLKeyboard.h"
 
-#include "Graphical.h"
+#include <SFML\Graphics.hpp>
 
+#include "BaseList.h"
+#include "BaseGraphicEngine.h"
+#include "GraphicEngine.h"
+#include "Keys.h"
 
 SFMLKeyboard::SFMLKeyboard()
 {

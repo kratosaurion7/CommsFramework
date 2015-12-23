@@ -1,24 +1,19 @@
 #pragma once
 
+class DrawObject;
+class SpriteAnimation;
+class BaseTexture;
+class DTexture;
+class BaseSprite;
+
 #include <SFML\Graphics.hpp>
 
-#include "BaseSprite.h"
+#include "PointerList.h"
 
-#include "BaseTexture.h"
 #include "DTexture.h"
 
+#include "BaseSprite.h"
 #include "SFMLDrawable.h"
-
-#include "FPosition.h"
-#include "FRectangle.h"
-#include "FSize.h"
-
-#include "SpriteAnimation.h"
-
-class BaseSprite;
-class SFMLDrawable;
-class DrawObject;
-
 
 class DSprite : public BaseSprite, public SFMLDrawable
 {
@@ -88,4 +83,3 @@ private:
     *   to the sprite. */
     void ApplyCurrentTexture();
 };
-

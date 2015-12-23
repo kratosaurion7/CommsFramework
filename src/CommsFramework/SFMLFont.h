@@ -1,8 +1,8 @@
 #pragma once
 
-#include "BaseFont.h"
-
 #include <SFML\Graphics.hpp>
+
+#include "BaseFont.h"
 
 class SFMLFont : public BaseFont
 {
@@ -16,4 +16,3 @@ public:
 private:
 
 };
-

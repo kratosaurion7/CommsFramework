@@ -1,6 +1,14 @@
+#include "BaseGraphicEngine.h"
+#include "FPosition.h"
+#include "FRectangle.h"
+#include "FSize.h"
+#include "BaseMouse.h"
+#include "MouseClickInfo.h"
+
+
 #include "DrawObject.h"
 
-#include "GameEngine.h"
+
 
 void DrawObject::Show(bool show)
 {

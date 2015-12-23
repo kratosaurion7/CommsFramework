@@ -1,19 +1,15 @@
 #include "DSprite.h"
 
-#include <SFML\Graphics.hpp>
-
-#include "GameEngine.h"
-
-#include "BaseSprite.h"
-
 #include "BaseTexture.h"
 #include "DTexture.h"
-
 #include "FPosition.h"
-#include "FSize.h"
 #include "FRectangle.h"
-
+#include "FSize.h"
+#include "SpriteAnimation.h"
+#include "GameEngine.h"
 #include "Utilities.h"
+
+#include "BaseGraphicEngine.h"
 
 DSprite::DSprite()
 {

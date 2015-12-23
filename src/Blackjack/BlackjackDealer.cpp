@@ -1,5 +1,10 @@
 #include "BlackjackDealer.h"
 
+#include <BaseActor.h>
+#include <BaseText.h>
+#include <BaseSprite.h>
+#include "Card.h"
+
 BlackjackDealer::BlackjackDealer()
 {
     TotalLabel->Show(false);

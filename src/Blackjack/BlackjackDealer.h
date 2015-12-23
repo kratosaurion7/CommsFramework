@@ -2,9 +2,6 @@
 
 #include <BaseList.h>
 #include <PointerList.h>
-#include <BaseActor.h>
-
-#include "Card.h"
 
 #include "CardActor.h"
 

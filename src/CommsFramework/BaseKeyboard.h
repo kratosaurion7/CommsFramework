@@ -1,5 +1,7 @@
 #pragma once
 
+enum Key;
+
 #include "Keys.h"
 
 class BaseKeyboard

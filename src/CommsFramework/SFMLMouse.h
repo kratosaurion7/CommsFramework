@@ -1,8 +1,9 @@
 #pragma once
 
-#include "BaseMouse.h"
+class BaseGraphicEngine;
 
-#include "GraphicEngine.h"
+#include "Vectors.h"
+#include "BaseMouse.h"
 
 class SFMLMouse : public BaseMouse
 {
@@ -10,7 +11,7 @@ public:
     SFMLMouse();
     ~SFMLMouse();
 
-    GraphicEngine* engineRef;
+    BaseGraphicEngine* engineRef;
 
     virtual bool IsClicked();
 

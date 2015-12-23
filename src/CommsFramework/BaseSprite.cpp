@@ -1,7 +1,16 @@
-#include "BaseSprite.h"
-#include "BaseSprite.h"
+#include "DrawObject.h"
 
+#include "BaseTexture.h"
+
+#include "SpriteAnimation.h"
+#include "BaseMouse.h"
+#include "SpriteDescriptor.h"
+#include "FRectangle.h"
+
+#include "BaseGraphicEngine.h"
 #include "GameEngine.h"
+
+#include "BaseSprite.h"
 
 
 bool BaseSprite::MouseOver()

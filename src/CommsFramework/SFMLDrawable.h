@@ -2,8 +2,6 @@
 
 #include <SFML\Graphics.hpp>
 
-#include "DrawObject.h"
-
 class SFMLDrawable
 {
 public:

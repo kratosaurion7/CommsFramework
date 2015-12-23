@@ -1,14 +1,11 @@
 #pragma once
 
-#include <SFML\Graphics.hpp>
-
-#include "FSize.h"
-
-#include "BaseTexture.h"
-
 #include <string>
-
 #include <cstdint>
+
+#include <SFML\Graphics.hpp>
+#include "FSize.h"
+#include "BaseTexture.h"
 
 class DTexture : public BaseTexture
 {
@@ -24,8 +21,6 @@ public:
 
     virtual FSize GetSize();
 
-
-
     virtual void SetSolidColor(uint32_t pixelColor);
 
     sf::Texture* innerImpl;
@@ -34,4 +29,3 @@ private:
     FSize size;
 
 };
-

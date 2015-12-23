@@ -1,5 +1,7 @@
 #pragma once
 
+class FSize;
+
 #include <cstdint>
 
 #include <string>

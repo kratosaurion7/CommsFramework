@@ -1,3 +1,4 @@
+#include <BaseGraphicEngine.h>
 #include <GameEngine.h>
 #include <LiteList.h>
 

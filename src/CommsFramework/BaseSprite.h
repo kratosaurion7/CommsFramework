@@ -1,18 +1,18 @@
 #pragma once
 
-#include "DrawObject.h"
-#include "BaseTexture.h"
+class DrawObject;
+class BaseSprite;
+class BaseTexture;
+class SpriteDescriptor;
+class SpriteAnimation;
+class BaseMouse;
+class SpriteDescriptor;
+
 
 #include "PointerList.h"
-#include "SpriteAnimation.h"
-#include "BaseMouse.h"
-#include "SpriteDescriptor.h"
-
 #include <string>
 
-class SpriteDescriptor;
-class GraphicEngine;
-class DrawObject;
+#include "DrawObject.h"
 
 class BaseSprite : public DrawObject
 {

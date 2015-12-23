@@ -1,10 +1,10 @@
 #pragma once
 
+class BaseFont;
+class DrawObject;
+
 #include <string>
 #include <cstdint>
-
-
-#include "BaseFont.h"
 
 #include "DrawObject.h"
 

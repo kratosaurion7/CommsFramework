@@ -1,18 +1,16 @@
 #pragma once
 
-#include <BaseActor.h>
+class BlackjackDealer;
+class BlackjackPlayer;
+class CardsShoe;
+class YesNoDialog;
+class MessageDialog;
+class BetSelection;
+
 #include <BaseList.h>
 #include <PointerList.h>
-#include <YesNoDialog.h>
-#include <MessageDialog.h>
 
-#include "CardsShoe.h"
-#include "CardActor.h"
-#include "BlackjackPlayer.h"
-#include "BlackjackDealer.h"
-#include "BetSelection.h"
-
-#include "CardActor.h"
+#include <BaseActor.h>
 
 class BlackjackGame : public BaseActor
 {

@@ -3,8 +3,9 @@
 #include <BaseActor.h>
 #include <PointerList.h>
 
-#include "Card.h"
-#include "Deck.h"
+class Card;
+class Deck;
+class GameEngine;
 
 class CardsShoe
 {

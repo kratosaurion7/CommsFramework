@@ -1,5 +1,11 @@
 #include "BlackjackPlayer.h"
 
+#include <BaseActor.h>
+#include <BaseText.h>
+#include <BaseSprite.h>
+#include <GameEngine.h>
+
+#include "Card.h"
 
 
 BlackjackPlayer::BlackjackPlayer()

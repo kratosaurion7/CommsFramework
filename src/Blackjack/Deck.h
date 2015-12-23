@@ -1,15 +1,12 @@
 #pragma once
 
-#include <GameEngine.h>
+class GameEngine;
+class Card;
 
-#include <BaseSprite.h>
-#include <BaseActor.h>
-
-#include <BaseList.h>
 #include <PointerList.h>
 #include <BaseStack.h>
+#include <BaseActor.h>
 
-#include "Card.h"
 
 class Deck : public BaseActor
 {

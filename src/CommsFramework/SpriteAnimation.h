@@ -1,10 +1,11 @@
 #pragma once
 
+class Resource;
+class BaseTexture;
+
 #include <string>
 
 #include "PointerList.h"
-#include "Resource.h"
-#include "BaseTexture.h"
 
 class SpriteAnimation
 {

@@ -1,16 +1,18 @@
 #include "GraphicEngine.h"
 
-#include "DSprite.h"
-#include "DTexture.h"
-#include "SFMLFont.h"
-#include "SFMLText.h"
-
 #include <list>
 #include <iterator>
 #include <algorithm>
 
 #include <SFML\Graphics.hpp>
 
+#include "DSprite.h"
+#include "DTexture.h"
+#include "SFMLFont.h"
+#include "SFMLText.h"
+#include "SFMLDrawable.h"
+#include "DrawObject.h"
+#include "GraphicEngineInitParams.h"
 #include "SFMLKeyboard.h"
 
 GraphicEngine::GraphicEngine()

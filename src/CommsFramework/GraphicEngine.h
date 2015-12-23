@@ -5,19 +5,16 @@ class DrawObject;
 class GraphicEngineInitParams;
 class SFMLText;
 class DSprite;
+class BaseSprite;
+class BaseText;
+class BaseTexture;
+class BaseFont;
+
+#include <cstdint>
 
 #include <SFML\Graphics.hpp>
 
 #include "PointerList.h"
-
-#include "SFMLDrawable.h"
-
-#include "DrawObject.h"
-#include "DSprite.h"
-#include "SFMLText.h"
-
-#include "GraphicEngineInitParams.h"
-
 #include "BaseGraphicEngine.h"
 
 class GraphicEngine : public BaseGraphicEngine

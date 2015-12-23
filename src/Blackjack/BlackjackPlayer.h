@@ -1,12 +1,9 @@
 #pragma once
 
+class BaseText;
+
 #include <BaseList.h>
 #include <PointerList.h>
-#include <BaseActor.h>
-#include <BaseText.h>
-#include <GameEngine.h>
-
-#include "Card.h"
 
 #include "CardActor.h"
 

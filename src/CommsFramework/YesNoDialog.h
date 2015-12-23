@@ -1,11 +1,10 @@
 #pragma once
 
+class BaseSprite;
+class BaseText;
+
 #include <string>
 
-#include "IDialog.h"
-#include "BaseSprite.h"
-#include "BaseActor.h"
-#include "BaseText.h"
 #include "BaseDialog.h"
 
 class YesNoDialog : public BaseDialog

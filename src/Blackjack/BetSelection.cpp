@@ -1,5 +1,8 @@
 #include "BetSelection.h"
 
+#include <BaseSprite.h>
+#include <BaseText.h>
+#include <GameEngine.h>
 
 
 BetSelection::BetSelection()

@@ -1,22 +1,22 @@
 #pragma once
 
-#include <string>
+class BaseGraphicEngine;
+class BaseTexture;
 
-#include "GameEngine.h"
+#include <string>
 #include "PointerList.h"
-#include "BaseTexture.h"
 
 class TextureRepository
 {
 public:
 
-    TextureRepository(GraphicEngine* engine);
+    TextureRepository(BaseGraphicEngine* engine);
     ~TextureRepository();
 
     BaseTexture* LoadTexture(std::string texturePath);
 
 private:
-    GraphicEngine* Graphics;
+    BaseGraphicEngine* Graphics;
 
     PointerList<BaseTexture*>* loadedTextures;
 

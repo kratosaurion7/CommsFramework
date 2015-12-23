@@ -1,12 +1,13 @@
 #pragma once
 
+class BaseSprite;
+class BaseActor;
+class BaseText;
+class BaseDialog;
+
 #include <string>
 
-#include "Utilities.h"
-#include "IDialog.h"
-#include "BaseSprite.h"
-#include "BaseActor.h"
-#include "BaseText.h"
+
 #include "BaseDialog.h"
 
 // TODO : Add a BaseDialog class

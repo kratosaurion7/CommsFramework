@@ -1,6 +1,5 @@
 #pragma once
 
-class DrawObject;
 class BaseSprite;
 class BaseText;
 class BaseTexture;
@@ -9,7 +8,6 @@ class BaseFont;
 class GraphicEngineInitParams;
 class TextureRepository;
 
-#include "DrawObject.h"
 #include "BaseSprite.h"
 #include "BaseText.h"
 #include "BaseFont.h"

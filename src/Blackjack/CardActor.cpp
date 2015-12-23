@@ -1,5 +1,15 @@
 #include "CardActor.h"
 
+
+#include <BaseSprite.h>
+#include <BaseText.h>
+
+#include "Deck.h"
+#include "Card.h"
+
+#include "CardActor.h"
+#include <GameEngine.h>
+
 CardActor::CardActor()
 {
     Cards = new PointerList<Card*>();

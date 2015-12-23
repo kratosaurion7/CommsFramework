@@ -1,5 +1,7 @@
 #pragma once
 
+class GameEngine;
+
 #include "GameRule.h"
 
 class GravityObjectsFallDownRule : public GameRule

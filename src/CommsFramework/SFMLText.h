@@ -1,16 +1,18 @@
 #pragma once
 
-#include <SFML\Graphics.hpp>
+class BaseFont;
 
 #include <string>
 #include <cstdint>
 
-#include "SFMLDrawable.h"
-#include "BaseText.h"
+#include <SFML\Graphics.hpp>
+
 #include "FPosition.h"
 #include "FSize.h"
 #include "FRectangle.h"
 
+#include "SFMLDrawable.h"
+#include "BaseText.h"
 
 class SFMLText : public BaseText, public SFMLDrawable
 {

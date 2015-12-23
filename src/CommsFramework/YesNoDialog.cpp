@@ -1,5 +1,11 @@
 #include "YesNoDialog.h"
 
+#include "IDialog.h"
+#include "BaseSprite.h"
+#include "BaseActor.h"
+#include "BaseText.h"
+
+#include "GameEngine.h"
 
 
 YesNoDialog::YesNoDialog()

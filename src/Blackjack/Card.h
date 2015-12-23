@@ -1,6 +1,7 @@
 #pragma once
 
-#include <BaseSprite.h>
+class BaseSprite;
+
 #include <BaseActor.h>
 
 class Card : public BaseActor

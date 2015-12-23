@@ -1,21 +1,16 @@
 #include "DTexture.h"
 
+#include <cassert>
+
 #include <SFML\System\Vector2.hpp>
-
-#include <SFML\Graphics.hpp>
-
-#include <cstdint>
-
 #include "Utilities.h"
 
-#include <cassert>
 
 DTexture::DTexture()
 {
     innerImpl = new sf::Texture();
     innerImpl->setSmooth(false);
 }
-
 
 DTexture::~DTexture()
 {

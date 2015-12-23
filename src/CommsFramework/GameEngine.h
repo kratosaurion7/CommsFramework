@@ -1,35 +1,37 @@
 #pragma once
 
-#include "GraphicEngine.h"
-
-#include "ResourceManager.h"
-
-#include "BaseActor.h"
-#include "BaseSprite.h"
-
-#include "BaseKeyboard.h"
-#include "BaseMouse.h"
-#include "MouseClickInfo.h"
-
-//#include "Network.h"
-//#include "SocketClient.h"
-//#include "SocketServer.h"
-
-#include "GameRule.h"
-
-#include "RandomGen.h"
-
-#include "EngineDialogMessage.h"
-
-#include <string>
-
-#include "BaseQueue.h"
-
+class RandomGen;
+class ResourceManager;
+struct GameEngineInitParams;
+class ResourceManagerInitParams;
+class GraphicEngineInitParams;
 class GameRule;
-class BaseActor;
-class DrawObject;
+
+class BaseGraphicEngine;
+
 class BaseSprite;
+class BaseSprite;
+class BaseText;
+class BaseActor;
+class BaseFont;
+class BaseTexture;
+
+class BaseKeyboard;
+class BaseMouse;
+
+class Resource;
+class SpriteAnimation;
+class DrawObject;
 class EngineDialogMessage;
+
+struct MouseClickInfo;
+class FSize;
+
+
+#include "PointerList.h"
+#include <string>
+#include <stdint.h>
+
 
 struct GameEngineInitParams
 {
@@ -46,7 +48,7 @@ public:
     GameEngine();
     ~GameEngine();
 
-    GraphicEngine* Graphics;
+    BaseGraphicEngine* Graphics;
     ResourceManager* Resources;
 
     static BaseKeyboard* Keyboard;

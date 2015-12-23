@@ -1,5 +1,13 @@
 #include "Deck.h"
 
+#include <GameEngine.h>
+#include <BaseSprite.h>
+#include <BaseList.h>
+
+
+#include "Card.h"
+
+
 Deck::Deck(GameEngine* engine)
 {
     Engine = engine;

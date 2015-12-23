@@ -1,8 +1,9 @@
 #pragma once
 
-#include "BaseKeyboard.h"
+class BaseGraphicEngine;
 
-#include "GraphicEngine.h"
+#include "BaseList.h"
+#include "BaseKeyboard.h"
 
 class SFMLKeyboard : public BaseKeyboard
 {
@@ -14,7 +15,7 @@ public:
 
     bool IsKeyClicked(Key key);
 
-    GraphicEngine* graphicsRef;
+    BaseGraphicEngine* graphicsRef;
 
     void UpdateKeyboardState();
 
@@ -23,4 +24,3 @@ private:
     BaseList<Key>* currentFramePressedKeys;
     
 };
-

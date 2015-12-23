@@ -1,7 +1,11 @@
 #pragma once
 
-#include "BaseSprite.h"
-#include "GameEngine.h"
+class GameEngine;
+class BaseSprite;
+class BaseText;
+
+#include <string>
+
 #include "FPosition.h"
 
 class EngineDialogMessage

@@ -1,20 +1,31 @@
 #include "GameEngine.h"
 
 #include "GraphicEngine.h"
-#include "FSize.h"
 
-#include "Resource.h"
-
-#include "PointerList.h"
-
-#include "BaseKeyboard.h"
-#include "BaseMouse.h"
-#include "MouseClickInfo.h"
+#include "GraphicEngineInitParams.h"
+#include "ResourceManager.h"
 
 #include "SFMLKeyboard.h"
 #include "SFMLMouse.h"
 
-// TODO : Why the fuck the GameEngine has includes in the cpp ??
+#include "BaseKeyboard.h"
+#include "BaseMouse.h"
+#include "BaseGraphicEngine.h"
+#include "BaseActor.h"
+#include "BaseSprite.h"
+
+#include "MouseClickInfo.h"
+#include "GameRule.h"
+#include "RandomGen.h"
+#include "EngineDialogMessage.h"
+#include "BaseQueue.h"
+
+
+#include "FSize.h"
+
+#include "Resource.h"
+
+#include "MouseClickInfo.h"
 
 BaseKeyboard* GameEngine::Keyboard = 0;
 BaseMouse* GameEngine::Mouse = 0;
@@ -320,7 +331,7 @@ BaseText* GameEngine::CreateText(std::string text)
     ret->SetColor(0x000000FF);
     ret->SetFont(this->GetGameDefaultFont());
 
-    this->Graphics->Sprites->Add(ret);
+    this->Graphics->GetDrawableList()->Add(ret);
     this->GameTexts->Add(ret);
 
     return ret;
@@ -333,7 +344,7 @@ BaseText* GameEngine::CreateText(std::string text, int textSize)
     ret->SetCharacterSize(textSize);
     ret->SetColor(0x000000FF);
 
-    this->Graphics->Sprites->Add(ret);
+    this->Graphics->GetDrawableList()->Add(ret);
     this->GameTexts->Add(ret);
 
     return ret;
@@ -346,7 +357,7 @@ BaseText* GameEngine::CreateText(std::string text, int textSize, uint32_t textCo
     ret->SetCharacterSize(textSize);
     ret->SetColor(textColor);
 
-    this->Graphics->Sprites->Add(ret);
+    this->Graphics->GetDrawableList()->Add(ret);
     this->GameTexts->Add(ret);
 
     return ret;
@@ -360,7 +371,7 @@ BaseText* GameEngine::CreateText(std::string text, int textSize, uint32_t textCo
     ret->SetColor(textColor);
     ret->SetFont(typo);
 
-    this->Graphics->Sprites->Add(ret);
+    this->Graphics->GetDrawableList()->Add(ret);
     this->GameTexts->Add(ret);
 
     return ret;
@@ -391,8 +402,8 @@ void GameEngine::FlagClickedSprites()
         
         this->FrameClickInfo = clickInfo;
 
-        auto it = this->Graphics->Sprites->GetContainer()->rbegin();
-        while (it != this->Graphics->Sprites->GetContainer()->rend())
+        auto it = this->Graphics->GetDrawableList()->GetContainer()->rbegin();
+        while (it != this->Graphics->GetDrawableList()->GetContainer()->rend())
         {
             DrawObject* sprt = (*it);
 
@@ -425,8 +436,8 @@ void GameEngine::FlagClickedSprites()
 
 void GameEngine::RemoveSpriteClickedFlag()
 {
-    auto it = this->Graphics->Sprites->GetContainer()->begin();
-    while (it != this->Graphics->Sprites->GetContainer()->end())
+    auto it = this->Graphics->GetDrawableList()->GetContainer()->begin();
+    while (it != this->Graphics->GetDrawableList()->GetContainer()->end())
     {
         DrawObject* sprt = (*it);
 

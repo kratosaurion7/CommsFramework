@@ -1,10 +1,12 @@
 #pragma once
 
+class BaseSprite;
+class BaseText;
+
 #include <BaseList.h>
 #include <PointerList.h>
-#include <BaseActor.h>
 
-#include <BaseSprite.h>
+#include <BaseActor.h>
 
 class BetSelection : public BaseActor
 {

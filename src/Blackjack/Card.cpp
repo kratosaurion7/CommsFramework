@@ -1,6 +1,7 @@
 #include "Card.h"
 
-
+#include <BaseSprite.h>
+#include <GameEngine.h>
 
 Card::Card()
 {

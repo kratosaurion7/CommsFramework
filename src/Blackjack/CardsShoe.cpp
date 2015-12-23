@@ -1,6 +1,9 @@
 #include "CardsShoe.h"
 
+#include "Card.h"
+#include "Deck.h"
 
+#include <GameEngine.h> // TODO
 
 CardsShoe::CardsShoe()
 {

@@ -1,8 +1,11 @@
 #include "TextureRepository.h"
 
+#include "BaseGraphicEngine.h"
+#include "PointerList.h"
+#include "BaseTexture.h"
 
 
-TextureRepository::TextureRepository(GraphicEngine* engine)
+TextureRepository::TextureRepository(BaseGraphicEngine* engine)
 {
     this->Graphics = engine;
 

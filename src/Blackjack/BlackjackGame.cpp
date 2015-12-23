@@ -1,5 +1,16 @@
 #include "BlackjackGame.h"
 
+#include <YesNoDialog.h>
+#include <MessageDialog.h>
+
+#include "Card.h"
+#include "CardsShoe.h"
+#include "CardActor.h"
+#include "BlackjackPlayer.h"
+#include "BlackjackDealer.h"
+#include "BetSelection.h"
+#include <GameEngine.h>
+#include "CardActor.h"
 
 
 BlackjackGame::BlackjackGame()

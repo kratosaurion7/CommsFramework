@@ -1,9 +1,6 @@
 #pragma once
 
-#include "GameEngine.h"
-#include "BaseSprite.h"
 #include "PointerList.h"
-
 #include "Vectors.h"
 #include "FRectangle.h"
 #include "FSize.h"

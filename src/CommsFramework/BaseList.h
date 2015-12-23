@@ -4,6 +4,8 @@
 #include <functional>
 #include <algorithm>
 
+#include "RandomGen.h"
+
 template <class T>
 class BaseList
 {

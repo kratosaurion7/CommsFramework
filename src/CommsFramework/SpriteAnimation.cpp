@@ -1,6 +1,7 @@
 #include "SpriteAnimation.h"
 
-
+#include "Resource.h"
+#include "BaseTexture.h"
 
 SpriteAnimation::SpriteAnimation()
 {
