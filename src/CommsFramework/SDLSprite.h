@@ -15,6 +15,7 @@ class SDLSprite : public BaseSprite
 {
 public:
     SDLGraphicEngine* Engine;
+    SDLTexture* currentSpriteTexture;
 
     SDLSprite();
     ~SDLSprite();

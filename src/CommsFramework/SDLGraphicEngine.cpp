@@ -167,10 +167,12 @@ void SDLGraphicEngine::Start()
 
 void SDLGraphicEngine::Draw()
 {
+    ProcessDraw(mainWindow);
 }
 
 void SDLGraphicEngine::ProcessEvents()
 {
+    ProcessEvents(mainWindow);
 }
 
 void SDLGraphicEngine::Stop()
@@ -191,5 +193,13 @@ void SDLGraphicEngine::FlagForZIndexSorting()
 }
 
 void SDLGraphicEngine::ReorderSprite(DrawObject* first, DrawObject* second)
+{
+}
+
+void SDLGraphicEngine::ProcessDraw(SDL_Window * targetWindow)
+{
+}
+
+void SDLGraphicEngine::ProcessEvents(SDL_Window * targetWindow)
 {
 }

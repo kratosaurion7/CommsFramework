@@ -12,6 +12,13 @@
 
 SDLSprite::SDLSprite()
 {
+    ClickInfo = NULL;
+
+    CurrentAnimation = NULL;
+    DefaultAnimation = NULL;
+    spriteAnimationList = new PointerList<SpriteAnimation*>();
+
+    Engine = NULL;
 }
 
 
@@ -21,16 +28,25 @@ SDLSprite::~SDLSprite()
 
 PointerList<SpriteAnimation*>* SDLSprite::GetAnimations()
 {
-    return nullptr;
+    return spriteAnimationList;
 }
 
 void SDLSprite::SetAnimations(PointerList<SpriteAnimation*>* newAnims)
 {
+    if (spriteAnimationList != NULL)
+    {
+        spriteAnimationList->Release();
+        delete(spriteAnimationList);
+    }
+
+    spriteAnimationList = newAnims;
+    this->DefaultAnimation = newAnims->Get(0);
+    this->SetTexture(this->DefaultAnimation->AnimationFrames->Get(0));
 }
 
-SDLTexture * SDLSprite::GetCurrentTexture()
+SDLTexture* SDLSprite::GetCurrentTexture()
 {
-    return nullptr;
+    return currentSpriteTexture;
 }
 
 PointerList<BaseTexture*>* SDLSprite::GetTextures()
@@ -71,8 +87,15 @@ bool SDLSprite::IsLastFrame(std::string animName)
     return false;
 }
 
-void SDLSprite::SetTexture(BaseTexture * texture)
+void SDLSprite::SetTexture(BaseTexture* texture)
 {
+    SDLTexture* sdlTex = dynamic_cast<SDLTexture*>(texture);
+
+    if (sdlTex != NULL)
+    {
+        currentSpriteTexture = sdlTex;
+        size = texture->GetSize();
+    }
 }
 
 BaseSprite* SDLSprite::Clone()

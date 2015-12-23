@@ -66,5 +66,9 @@ public:
     virtual void ReorderSpritesByZIndex();
     virtual void FlagForZIndexSorting();
     virtual void ReorderSprite(DrawObject* first, DrawObject* second);
+
+private:
+    void ProcessDraw(SDL_Window* targetWindow);
+    void ProcessEvents(SDL_Window* targetWindow);
 };
 
