@@ -1,4 +1,5 @@
 #include <GameEngine.h>
+#include <BaseGraphicEngine.h>
 
 #include <BaseActor.h>
 

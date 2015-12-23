@@ -1,5 +1,16 @@
 #include "GameGrid.h"
 
+#include <BaseText.h>
+#include <BaseSprite.h>
+#include <GameMessageWindow.h>
+#include <WeightedNumberGenerator.h>
+#include <BaseGraphicEngine.h>
+#include <GameEngine.h>
+
+#include "GridTile.h"
+#include "InfoTile.h"
+
+
 GameGrid::GameGrid(int squareSize, GameEngine* engine)
 {
     Tiles = new PointerList<GridTile*>();

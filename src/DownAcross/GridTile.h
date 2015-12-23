@@ -1,8 +1,9 @@
 #pragma once
 
-#include <BaseActor.h>
+class GameEngine;
+class BaseSprite;
 
-#include <BaseSprite.h>
+#include <BaseActor.h>
 
 enum GridTileState
 {

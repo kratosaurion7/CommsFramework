@@ -1,14 +1,18 @@
 #pragma once
 
-#include <PointerList.h>
-#include <BaseActor.h>
-#include <BaseText.h>
-#include <BaseSprite.h>
-#include <GameMessageWindow.h>
-#include <WeightedNumberGenerator.h>
+class GameEngine;
+class BaseTexture;
+class BaseText;
+class BaseSprite;
+class GameMessageWindow;
+class WeightedNumberGenerator;
+class GridTile;
+class InfoTile;
+struct GameGridState;
 
 #include "GridTile.h"
-#include "InfoTile.h"
+#include <PointerList.h>
+#include <BaseActor.h>
 
 struct GameGridState {
     enum GridState

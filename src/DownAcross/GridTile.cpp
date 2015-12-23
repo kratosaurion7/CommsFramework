@@ -1,6 +1,10 @@
 #include "GridTile.h"
 
-
+#include <BaseSprite.h>
+#include <GameEngine.h>
+#include <BaseGraphicEngine.h>
+#include <BaseText.h>
+#include <BaseTexture.h>
 
 GridTile::GridTile(int number, GameEngine* engine)
 {

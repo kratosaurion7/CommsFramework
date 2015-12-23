@@ -1,11 +1,11 @@
 #pragma once
 
+class GameEngine;
+class BaseFont;
+class BaseText;
+class BaseSprite;
+
 #include <BaseActor.h>
-
-#include <BaseSprite.h>
-#include <BaseTexture.h>
-#include <BaseText.h>
-
 
 class InfoTile : public BaseActor
 {

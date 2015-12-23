@@ -1,5 +1,13 @@
 #include "InfoTile.h"
 
+#include <BaseSprite.h>
+#include <BaseTexture.h>
+#include <BaseText.h>
+#include <BaseFont.h>
+
+#include <GameEngine.h>
+#include <BaseGraphicEngine.h>
+
 InfoTile::InfoTile(int zeroesAmount, int sumAmount, GameEngine* engine)
 {
     this->Engine = engine;
