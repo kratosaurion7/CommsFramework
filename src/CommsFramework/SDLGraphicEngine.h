@@ -12,6 +12,9 @@ class SDLGraphicEngine : public BaseGraphicEngine
 {
 public:
     SDL_Window* mainWindow;
+    SDL_Renderer* gameRenderer;
+
+    bool engineValid = false;
 
     SDLGraphicEngine();
     ~SDLGraphicEngine();
