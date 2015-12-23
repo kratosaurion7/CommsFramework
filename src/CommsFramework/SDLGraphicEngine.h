@@ -27,6 +27,9 @@ public:
     SDL_Window* mainWindow;
     SDL_Renderer* gameRenderer;
 
+    uint32_t LastTickTime;
+    uint32_t CurrentTickTime;
+
     /* After calling the Initialize() method, this value will tell if the engine is ready or not. */
     bool engineValid = false;
 
@@ -69,9 +72,14 @@ public:
     virtual void ReorderSprite(DrawObject* first, DrawObject* second);
 
 private:
+    int WantedFrameRate;
+    bool RunEngine;
+
     void ProcessDraw(SDL_Window* targetWindow);
     void ProcessEvents(SDL_Window* targetWindow);
 
     SDL_Rect GetSpriteRect(DrawObject* object);
+
+    bool IsTimeForFrame();
 };
 

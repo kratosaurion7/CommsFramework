@@ -8,6 +8,7 @@
 #include "BaseSprite.h"
 #include "BaseText.h"
 #include "BaseTexture.h"
+#include "Utilities.h"
 
 #include "SDLDrawable.h"
 #include "SDLSprite.h"
@@ -78,19 +79,11 @@ void SDLGraphicEngine::Initialize(GraphicEngineInitParams* params)
 void SDLGraphicEngine::AddObject(BaseSprite* obj)
 {
     drawables->Add(obj);
-
-    //SDLSprite* spr = dynamic_cast<SDLSprite*>(obj);
-
-    //if (spr != NULL)
-    //{
-    //    this->zIndexNeedsReordering = true;
-
-    //    drawables->Add(spr);
-    //}
 }
 
 void SDLGraphicEngine::AddObject(BaseText* obj)
 {
+    drawables->Add(obj);
 }
 
 void SDLGraphicEngine::RemoveObject(DrawObject * obj)
@@ -105,7 +98,22 @@ PointerList<DrawObject*>* SDLGraphicEngine::GetDrawableList()
 
 DrawObject* SDLGraphicEngine::GetObject(std::string identifier)
 {
-    return nullptr;
+    // TODO : Implement in base class.
+    std::list<DrawObject*>::iterator iter = drawables->GetContainer()->begin();
+
+    while (iter != drawables->GetContainer()->end())
+    {
+        DrawObject* targetSprite = (*iter);
+
+        if (strcmp(targetSprite->Ident.c_str(), identifier.c_str()) == 0)
+        {
+            return targetSprite;
+        }
+
+        iter++;
+    }
+
+    return NULL;
 }
 
 BaseSprite* SDLGraphicEngine::CreateSprite(std::string identifier)
@@ -143,11 +151,12 @@ BaseText* SDLGraphicEngine::CreateText()
 
 int SDLGraphicEngine::GetFramerate()
 {
-    return 0;
+    return WantedFrameRate;
 }
 
 void SDLGraphicEngine::SetFramerate(int framerate)
 {
+    WantedFrameRate = framerate;
 }
 
 void SDLGraphicEngine::SetAutoManagedFramerate(bool isSet)
@@ -164,6 +173,7 @@ void SDLGraphicEngine::SetBackgroundTexture(BaseTexture * texture)
 
 void SDLGraphicEngine::Start()
 {
+    RunEngine = true;
 }
 
 void SDLGraphicEngine::Draw()
@@ -178,11 +188,12 @@ void SDLGraphicEngine::ProcessEvents()
 
 void SDLGraphicEngine::Stop()
 {
+    RunEngine = false;
 }
 
 bool SDLGraphicEngine::IsRunning()
 {
-    return false;
+    return RunEngine;
 }
 
 void SDLGraphicEngine::ReorderSpritesByZIndex()
@@ -249,30 +260,37 @@ void SDLGraphicEngine::ReorderSprite(DrawObject* first, DrawObject* second)
 
 void SDLGraphicEngine::ProcessDraw(SDL_Window* targetWindow)
 {
-    SDL_RenderClear(gameRenderer); // First step
+    CurrentTickTime = GetTicks();
 
-    auto iter = this->drawables->GetContainer()->begin();
-    while (iter != this->drawables->GetContainer()->end())
+    if (IsTimeForFrame() && RunEngine)
     {
-        DrawObject* target = (*iter);
+        SDL_RenderClear(gameRenderer); // First step
 
-        if (target->IsVisible())
+        auto iter = this->drawables->GetContainer()->begin();
+        while (iter != this->drawables->GetContainer()->end())
         {
-            SDLDrawable* drawImpl = dynamic_cast<SDLDrawable*>(target);
+            DrawObject* target = (*iter);
 
-            if (drawImpl != NULL)
+            if (target->IsVisible())
             {
-                SDL_Rect destinationRect = this->GetSpriteRect(target);
-                SDL_Texture* tex = drawImpl->GetDrawableTexture();
+                SDLDrawable* drawImpl = dynamic_cast<SDLDrawable*>(target);
 
-                SDL_RenderCopy(gameRenderer, tex, NULL, &destinationRect);
+                if (drawImpl != NULL)
+                {
+                    SDL_Rect destinationRect = this->GetSpriteRect(target);
+                    SDL_Texture* tex = drawImpl->GetDrawableTexture();
+
+                    SDL_RenderCopy(gameRenderer, tex, NULL, &destinationRect);
+                }
             }
+
+            iter++;
         }
 
-        iter++;
+        SDL_RenderPresent(gameRenderer); // Final step
     }
 
-    SDL_RenderPresent(gameRenderer); // Final step
+    LastTickTime = CurrentTickTime;
 }
 
 void SDLGraphicEngine::ProcessEvents(SDL_Window* targetWindow)
@@ -289,4 +307,9 @@ SDL_Rect SDLGraphicEngine::GetSpriteRect(DrawObject* object)
     rec.y = object->GetY();
 
     return rec;
+}
+
+bool SDLGraphicEngine::IsTimeForFrame()
+{
+    return CurrentTickTime - LastTickTime > (1000 / WantedFrameRate);
 }
