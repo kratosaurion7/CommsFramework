@@ -105,9 +105,6 @@
     <ClCompile Include="DTexture.cpp">
       <Filter>Framework\Graphic\SFML</Filter>
     </ClCompile>
-    <ClCompile Include="GraphicEngine.cpp">
-      <Filter>Framework\Graphic\SFML</Filter>
-    </ClCompile>
     <ClCompile Include="SFMLKeyboard.cpp">
       <Filter>Framework\Graphic\SFML</Filter>
     </ClCompile>
@@ -228,6 +225,9 @@
     <ClCompile Include="BaseDialog.cpp">
       <Filter>Framework\Engine\Dialogs</Filter>
     </ClCompile>
+    <ClCompile Include="SFMLGraphicEngine.cpp">
+      <Filter>Framework\Graphic\SFML</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="XmlReader.h">
@@ -261,9 +261,6 @@
       <Filter>Framework\Graphic\SFML</Filter>
     </ClInclude>
     <ClInclude Include="DTexture.h">
-      <Filter>Framework\Graphic\SFML</Filter>
-    </ClInclude>
-    <ClInclude Include="GraphicEngine.h">
       <Filter>Framework\Graphic\SFML</Filter>
     </ClInclude>
     <ClInclude Include="Macros.h">
@@ -325,9 +322,6 @@
     </ClInclude>
     <ClInclude Include="GameEngine.h">
       <Filter>Framework\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphical.h">
-      <Filter>Framework\Graphic</Filter>
     </ClInclude>
     <ClInclude Include="SpriteDescriptor.h">
       <Filter>Framework\Game</Filter>
@@ -433,6 +427,9 @@
     </ClInclude>
     <ClInclude Include="IObservable.h">
       <Filter>Framework\Patterns</Filter>
+    </ClInclude>
+    <ClInclude Include="SFMLGraphicEngine.h">
+      <Filter>Framework\Graphic\SFML</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

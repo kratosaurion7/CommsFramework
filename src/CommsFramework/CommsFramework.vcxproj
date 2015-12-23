@@ -339,7 +339,7 @@ XCOPY /Y /E "Assets\*" "$(TargetDir)Assets"</Command>
     <ClCompile Include="GameEngine.cpp" />
     <ClCompile Include="GameMessageWindow.cpp" />
     <ClCompile Include="GameRule.cpp" />
-    <ClCompile Include="GraphicEngine.cpp" />
+    <ClCompile Include="SFMLGraphicEngine.cpp" />
     <ClCompile Include="FSize.cpp" />
     <ClCompile Include="FPosition.cpp" />
     <ClCompile Include="DTexture.cpp" />
@@ -395,7 +395,6 @@ XCOPY /Y /E "Assets\*" "$(TargetDir)Assets"</Command>
     <ClInclude Include="GameEngine.h" />
     <ClInclude Include="GameMessageWindow.h" />
     <ClInclude Include="GameRule.h" />
-    <ClInclude Include="Graphical.h" />
     <ClInclude Include="GravityObjectsFallDownRule.h" />
     <ClInclude Include="IDialog.h" />
     <ClInclude Include="IObservable.h" />
@@ -419,7 +418,7 @@ XCOPY /Y /E "Assets\*" "$(TargetDir)Assets"</Command>
     <ClInclude Include="PackageFile.h" />
     <ClInclude Include="PointerList.h" />
     <ClInclude Include="GraphicEngineInitParams.h" />
-    <ClInclude Include="GraphicEngine.h" />
+    <ClInclude Include="SFMLGraphicEngine.h" />
     <ClInclude Include="FSize.h" />
     <ClInclude Include="FPosition.h" />
     <ClInclude Include="DTexture.h" />

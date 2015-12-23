@@ -1,4 +1,4 @@
-#include "GraphicEngine.h"
+#include "SFMLGraphicEngine.h"
 
 #include <list>
 #include <iterator>
@@ -15,7 +15,7 @@
 #include "GraphicEngineInitParams.h"
 #include "SFMLKeyboard.h"
 
-GraphicEngine::GraphicEngine()
+SFMLGraphicEngine::SFMLGraphicEngine()
 {
     MainWindow = NULL;
     isRunning = false;
@@ -25,7 +25,7 @@ GraphicEngine::GraphicEngine()
     backgroundColor = sf::Color();
 }
 
-GraphicEngine::~GraphicEngine()
+SFMLGraphicEngine::~SFMLGraphicEngine()
 {
     if (MainWindow != NULL)
     {
@@ -42,7 +42,7 @@ GraphicEngine::~GraphicEngine()
     delete(startParams);
 }
 
-void GraphicEngine::Initialize(GraphicEngineInitParams* params)
+void SFMLGraphicEngine::Initialize(GraphicEngineInitParams* params)
 {
     startParams = params;
 
@@ -54,7 +54,7 @@ void GraphicEngine::Initialize(GraphicEngineInitParams* params)
     MainWindow->setVerticalSyncEnabled(params->EnableVerticalSync);
 }
 
-BaseSprite* GraphicEngine::CreateSprite(std::string identifier)
+BaseSprite* SFMLGraphicEngine::CreateSprite(std::string identifier)
 {
     DSprite* spr = new DSprite();
     spr->Engine = this;
@@ -64,40 +64,40 @@ BaseSprite* GraphicEngine::CreateSprite(std::string identifier)
     return spr;
 }
 
-BaseTexture * GraphicEngine::CreateTexture()
+BaseTexture * SFMLGraphicEngine::CreateTexture()
 {
     DTexture* tex = new DTexture();
 
     return tex;
 }
 
-BaseTexture * GraphicEngine::CreateTexture(std::string texturePath)
+BaseTexture * SFMLGraphicEngine::CreateTexture(std::string texturePath)
 {
     BaseTexture* tex = this->TextureRepo->LoadTexture(texturePath);
 
     return tex;
 }
 
-BaseFont * GraphicEngine::CreateFont()
+BaseFont * SFMLGraphicEngine::CreateFont()
 {
     SFMLFont* font = new SFMLFont();
 
     return font;
 }
 
-BaseText * GraphicEngine::CreateText()
+BaseText * SFMLGraphicEngine::CreateText()
 {
     SFMLText* text = new SFMLText();
 
     return text;
 }
 
-int GraphicEngine::GetFramerate()
+int SFMLGraphicEngine::GetFramerate()
 {
     return _sfmlFramerate;
 }
 
-void GraphicEngine::SetFramerate(int framerate)
+void SFMLGraphicEngine::SetFramerate(int framerate)
 {
     _sfmlFramerate = framerate;
 
@@ -105,7 +105,7 @@ void GraphicEngine::SetFramerate(int framerate)
     MainWindow->setFramerateLimit(_sfmlFramerate);
 }
 
-void GraphicEngine::SetAutoManagedFramerate(bool isSet)
+void SFMLGraphicEngine::SetAutoManagedFramerate(bool isSet)
 {
     if(isSet)
         MainWindow->setFramerateLimit(0);
@@ -113,16 +113,16 @@ void GraphicEngine::SetAutoManagedFramerate(bool isSet)
     MainWindow->setVerticalSyncEnabled(isSet);
 }
 
-void GraphicEngine::SetBackgroundColor(uint32_t color)
+void SFMLGraphicEngine::SetBackgroundColor(uint32_t color)
 {
     backgroundColor = sf::Color(color);
 }
 
-void GraphicEngine::SetBackgroundTexture(BaseTexture * texture)
+void SFMLGraphicEngine::SetBackgroundTexture(BaseTexture * texture)
 {
 }
 
-void GraphicEngine::AddObject(BaseSprite* obj)
+void SFMLGraphicEngine::AddObject(BaseSprite* obj)
 {
     DSprite* dspr = dynamic_cast<DSprite*>(obj);
 
@@ -135,7 +135,7 @@ void GraphicEngine::AddObject(BaseSprite* obj)
         
 }
 
-void GraphicEngine::AddObject(BaseText* obj)
+void SFMLGraphicEngine::AddObject(BaseText* obj)
 {
     SFMLText* txt = dynamic_cast<SFMLText*>(obj);
 
@@ -148,7 +148,7 @@ void GraphicEngine::AddObject(BaseText* obj)
         
 }
 
-void GraphicEngine::RemoveObject(DrawObject* obj)
+void SFMLGraphicEngine::RemoveObject(DrawObject* obj)
 {
     DSprite* dspr = dynamic_cast<DSprite*>(obj);
 
@@ -156,12 +156,12 @@ void GraphicEngine::RemoveObject(DrawObject* obj)
         Sprites->RemoveObject(dspr);
 }
 
-PointerList<DrawObject*>* GraphicEngine::GetDrawableList()
+PointerList<DrawObject*>* SFMLGraphicEngine::GetDrawableList()
 {
     return Sprites;
 }
 
-DrawObject * GraphicEngine::GetObject(std::string identifier)
+DrawObject * SFMLGraphicEngine::GetObject(std::string identifier)
 {
     std::list<DrawObject*>::iterator iter = Sprites->GetContainer()->begin();
 
@@ -180,32 +180,32 @@ DrawObject * GraphicEngine::GetObject(std::string identifier)
     return NULL;
 }
 
-void GraphicEngine::Start()
+void SFMLGraphicEngine::Start()
 {
     isRunning = true;
 }
 
-void GraphicEngine::Draw()
+void SFMLGraphicEngine::Draw()
 {
     ProcessDraw(MainWindow);
 }
 
-void GraphicEngine::ProcessEvents()
+void SFMLGraphicEngine::ProcessEvents()
 {
     ProcessWindowsEvents(MainWindow);
 }
 
-void GraphicEngine::Stop()
+void SFMLGraphicEngine::Stop()
 {
     isRunning = false;
 }
 
-bool GraphicEngine::IsRunning()
+bool SFMLGraphicEngine::IsRunning()
 {
     return isRunning;
 }
 
-void GraphicEngine::ReorderSpritesByZIndex()
+void SFMLGraphicEngine::ReorderSpritesByZIndex()
 {
     auto spritesStart = this->Sprites->GetContainer()->begin();
     auto spritesEnd = this->Sprites->GetContainer()->end();
@@ -217,12 +217,12 @@ void GraphicEngine::ReorderSpritesByZIndex()
     this->zIndexNeedsReordering = false;
 }
 
-void GraphicEngine::FlagForZIndexSorting()
+void SFMLGraphicEngine::FlagForZIndexSorting()
 {
     zIndexNeedsReordering = true;
 }
 
-void GraphicEngine::ReorderSprite(DrawObject* first, DrawObject* second)
+void SFMLGraphicEngine::ReorderSprite(DrawObject* first, DrawObject* second)
 {
     std::list<DrawObject*>* spriteslist = this->Sprites->GetContainer();
     bool foundFirst = false;
@@ -263,7 +263,7 @@ void GraphicEngine::ReorderSprite(DrawObject* first, DrawObject* second)
     }
 }
 
-void GraphicEngine::ProcessWindowsEvents(sf::RenderWindow* targetWindow)
+void SFMLGraphicEngine::ProcessWindowsEvents(sf::RenderWindow* targetWindow)
 {
     sf::Event event;
     while (targetWindow->pollEvent(event))
@@ -273,7 +273,7 @@ void GraphicEngine::ProcessWindowsEvents(sf::RenderWindow* targetWindow)
     }
 }
 
-void GraphicEngine::ProcessDraw(sf::RenderWindow* targetWindow)
+void SFMLGraphicEngine::ProcessDraw(sf::RenderWindow* targetWindow)
 {
     targetWindow->clear(backgroundColor);
 

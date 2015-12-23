@@ -17,11 +17,11 @@ class BaseFont;
 #include "PointerList.h"
 #include "BaseGraphicEngine.h"
 
-class GraphicEngine : public BaseGraphicEngine
+class SFMLGraphicEngine : public BaseGraphicEngine
 {
 public:
-    GraphicEngine();
-    ~GraphicEngine();
+    SFMLGraphicEngine();
+    ~SFMLGraphicEngine();
 
     PointerList<DrawObject*>* Sprites;
     sf::RenderWindow* MainWindow;

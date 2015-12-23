@@ -3,7 +3,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "BaseGraphicEngine.h"
-#include "GraphicEngine.h"
+#include "SFMLGraphicEngine.h"
 
 SFMLMouse::SFMLMouse()
 {
@@ -35,7 +35,7 @@ bool SFMLMouse::IsClicked(MouseButtons button)
 
 Vector2<float> SFMLMouse::GetMousePosition()
 {
-    GraphicEngine* eng = (GraphicEngine*)engineRef;
+    SFMLGraphicEngine* eng = (SFMLGraphicEngine*)engineRef;
 
     sf::Vector2i pos = sf::Mouse::getPosition(*eng->MainWindow);
 
