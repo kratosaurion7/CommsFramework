@@ -12,8 +12,6 @@ public:
 
     void LoadFontFile(std::string path);
 
-    virtual void LoadSpriteFont(BaseTexture* texture, SpriteFontGlyph** glyphs, int charactersCount);
-
     sf::Font* innerImpl;
 private:
 
