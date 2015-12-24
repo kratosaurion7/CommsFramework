@@ -13,6 +13,7 @@
 #include "SDLDrawable.h"
 #include "SDLSprite.h"
 #include "SDLTexture.h"
+#include "SDLText.h"
 
 SDLGraphicEngine::SDLGraphicEngine()
 {
@@ -21,7 +22,6 @@ SDLGraphicEngine::SDLGraphicEngine()
     drawables = new PointerList<DrawObject*>();
     gameRenderer = NULL;
 }
-
 
 SDLGraphicEngine::~SDLGraphicEngine()
 {
@@ -146,7 +146,10 @@ BaseFont* SDLGraphicEngine::CreateFont()
 
 BaseText* SDLGraphicEngine::CreateText()
 {
-    return nullptr;
+    SDLText* text = new SDLText();
+    text->Engine = this;
+
+    return text;
 }
 
 int SDLGraphicEngine::GetFramerate()

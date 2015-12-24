@@ -240,6 +240,12 @@
     <ClCompile Include="SDLTexture.cpp">
       <Filter>Framework\Graphic\SDL</Filter>
     </ClCompile>
+    <ClCompile Include="SDLText.cpp">
+      <Filter>Framework\Graphic\SDL</Filter>
+    </ClCompile>
+    <ClCompile Include="SDLFont.cpp">
+      <Filter>Framework\Graphic\SDL</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="XmlReader.h">
@@ -453,6 +459,12 @@
       <Filter>Framework\Graphic\SDL</Filter>
     </ClInclude>
     <ClInclude Include="SDLDrawable.h">
+      <Filter>Framework\Graphic\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="SDLText.h">
+      <Filter>Framework\Graphic\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="SDLFont.h">
       <Filter>Framework\Graphic\SDL</Filter>
     </ClInclude>
   </ItemGroup>

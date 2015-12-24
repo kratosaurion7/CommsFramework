@@ -339,8 +339,10 @@ XCOPY /Y /E "Assets\*" "$(TargetDir)Assets"</Command>
     <ClCompile Include="GameEngine.cpp" />
     <ClCompile Include="GameMessageWindow.cpp" />
     <ClCompile Include="GameRule.cpp" />
+    <ClCompile Include="SDLFont.cpp" />
     <ClCompile Include="SDLGraphicEngine.cpp" />
     <ClCompile Include="SDLSprite.cpp" />
+    <ClCompile Include="SDLText.cpp" />
     <ClCompile Include="SDLTexture.cpp" />
     <ClCompile Include="SFMLGraphicEngine.cpp" />
     <ClCompile Include="FSize.cpp" />
@@ -410,8 +412,10 @@ XCOPY /Y /E "Assets\*" "$(TargetDir)Assets"</Command>
     <ClInclude Include="Pair.h" />
     <ClInclude Include="RethinkDb.h" />
     <ClInclude Include="SDLDrawable.h" />
+    <ClInclude Include="SDLFont.h" />
     <ClInclude Include="SDLGraphicEngine.h" />
     <ClInclude Include="SDLSprite.h" />
+    <ClInclude Include="SDLText.h" />
     <ClInclude Include="SDLTexture.h" />
     <ClInclude Include="SocketClient.h" />
     <ClInclude Include="SocketServer.h" />
