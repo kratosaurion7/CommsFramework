@@ -26,7 +26,7 @@ void BaseFont::LoadSpriteFont(BaseTexture* texture, SpriteFontGlyph** glyphs, in
         
         BaseTexture* subTex = texture->GetSubTexture(rec);
 
-        Pair<char*, BaseTexture*>* newGlyphPair = new Pair<char*, BaseTexture*>();
+        Pair<char, BaseTexture*>* newGlyphPair = new Pair<char, BaseTexture*>();
         newGlyphPair->Item1 = glyph->Value;
         newGlyphPair->Item2 = subTex;
 
@@ -34,4 +34,30 @@ void BaseFont::LoadSpriteFont(BaseTexture* texture, SpriteFontGlyph** glyphs, in
     }
 
     FontType = SPRITE_FONT;
+}
+
+SpriteFontGlyph** BaseFont::BuildDefaultFontGlyphDescriptor(int & outLength)
+{
+    int defaultCharacterAmount = 26;
+
+    SpriteFontGlyph** ret = new SpriteFontGlyph*[defaultCharacterAmount];
+
+    for (int i = 0; i < defaultCharacterAmount; i++)
+    {
+        SpriteFontGlyph* sfg = new SpriteFontGlyph();
+
+        sfg->H = 26;
+        sfg->W = 50;
+        
+        sfg->X = 26 * i;
+        sfg->Y = 0;
+
+        sfg->Value = 65 + i;
+
+        ret[i] = sfg;
+    }
+
+    outLength = defaultCharacterAmount;
+
+    return ret;
 }
