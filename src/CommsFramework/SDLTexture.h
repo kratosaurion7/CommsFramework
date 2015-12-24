@@ -30,7 +30,7 @@ public:
 
     virtual void LoadFromMemory(char* data, int dataSize);
 
-    virtual void LoadFromSurface(SDL_Surface* surface);
+    virtual void LoadFromSurface(SDL_Surface* srcSurface);
 
     virtual BaseTexture* GetSubTexture(FRectangle rec);
 

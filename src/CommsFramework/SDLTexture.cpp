@@ -69,12 +69,13 @@ void SDLTexture::LoadFromMemory(char* data, int dataSize)
 {
 }
 
-void SDLTexture::LoadFromSurface(SDL_Surface* surface)
+void SDLTexture::LoadFromSurface(SDL_Surface* srcSurface)
 {
     const char* errorString;
     SDL_Renderer* renderer = Graphics->gameRenderer;
 
-    texture = SDL_CreateTextureFromSurface(renderer, surface);
+    this->surface = srcSurface;
+    texture = SDL_CreateTextureFromSurface(renderer, srcSurface);
 
     if (texture == NULL)
     {
@@ -90,6 +91,7 @@ void SDLTexture::LoadFromSurface(SDL_Surface* surface)
 BaseTexture* SDLTexture::GetSubTexture(FRectangle rec)
 {
     int res = 0;
+    const char* errorString;
     SDLTexture* newTexture;
 
     FSize* recSize = rec.Size();
@@ -97,7 +99,23 @@ BaseTexture* SDLTexture::GetSubTexture(FRectangle rec)
     
     SDL_Surface* subTextureSurface = SDL_CreateRGBSurface(0, recSize->Width, recSize->Height, 32, 0, 0, 0, 0);
 
+    if (subTextureSurface = NULL)
+    {
+        errorString = SDL_GetError();
+        fprintf(stderr, "Unable to create RGB surface with error %s\n", errorString);
+
+        return NULL;
+    }
+
     res = SDL_BlitSurface(this->surface, &sRec, subTextureSurface, NULL);
+
+    if (res != 0)
+    {
+        errorString = SDL_GetError();
+        fprintf(stderr, "Unable to blit surface with error %s\n", errorString);
+
+        return NULL;
+    }
 
     newTexture = new SDLTexture();
     newTexture->LoadFromSurface(subTextureSurface);
