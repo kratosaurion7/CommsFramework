@@ -10,8 +10,12 @@ SFMLFont::~SFMLFont()
 {
 }
 
-void SFMLFont::Load(std::string path)
+void SFMLFont::LoadFontFile(std::string path)
 {
     bool res = innerImpl->loadFromFile(path);
 
+}
+
+void SFMLFont::LoadSpriteFont(BaseTexture * texture, SpriteFontGlyph ** glyphs, int charactersCount)
+{
 }

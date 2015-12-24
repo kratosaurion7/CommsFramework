@@ -10,7 +10,9 @@ public:
     SFMLFont();
     ~SFMLFont();
 
-    void Load(std::string path);
+    void LoadFontFile(std::string path);
+
+    virtual void LoadSpriteFont(BaseTexture* texture, SpriteFontGlyph** glyphs, int charactersCount);
 
     sf::Font* innerImpl;
 private:

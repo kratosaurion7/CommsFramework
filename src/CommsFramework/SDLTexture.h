@@ -21,7 +21,6 @@ public:
     int Height;
     int Width;
 
-
     SDLTexture();
     ~SDLTexture();
 
@@ -31,8 +30,11 @@ public:
 
     virtual void LoadFromMemory(char* data, int dataSize);
 
+    virtual void LoadFromSurface(SDL_Surface* surface);
+
+    virtual BaseTexture* GetSubTexture(FRectangle rec);
+
     virtual FSize GetSize();
 
     virtual void SetSolidColor(uint32_t pixelColor);
 };
-

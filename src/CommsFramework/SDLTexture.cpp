@@ -4,6 +4,7 @@
 #include <SDL_surface.h>
 #include <SDL_render.h>
 
+#include "SDLUtilities.h"
 #include "SDLGraphicEngine.h"
 
 SDLTexture::SDLTexture()
@@ -60,12 +61,48 @@ void SDLTexture::Load(std::string path)
     }
 
     // TODO : Check if we keep both the Texture and Surface in memory
-    // SDL_FreeSurface(surface);
+    // SDL_FreeSurface(surface); // Must keep surface to use GetSubTexture()
     TexturePath = path;
 }
 
 void SDLTexture::LoadFromMemory(char* data, int dataSize)
 {
+}
+
+void SDLTexture::LoadFromSurface(SDL_Surface* surface)
+{
+    const char* errorString;
+    SDL_Renderer* renderer = Graphics->gameRenderer;
+
+    texture = SDL_CreateTextureFromSurface(renderer, surface);
+
+    if (texture == NULL)
+    {
+        errorString = SDL_GetError();
+        fprintf(stderr, "Unable to create texture from surface with error %s\n", errorString);
+
+        return;
+    }
+
+    TexturePath = "";
+}
+
+BaseTexture* SDLTexture::GetSubTexture(FRectangle rec)
+{
+    int res = 0;
+    SDLTexture* newTexture;
+
+    FSize* recSize = rec.Size();
+    SDL_Rect sRec = FRectToSDL_Rect(rec);
+    
+    SDL_Surface* subTextureSurface = SDL_CreateRGBSurface(0, recSize->Width, recSize->Height, 32, 0, 0, 0, 0);
+
+    res = SDL_BlitSurface(this->surface, &sRec, subTextureSurface, NULL);
+
+    newTexture = new SDLTexture();
+    newTexture->LoadFromSurface(subTextureSurface);
+
+    return newTexture;
 }
 
 FSize SDLTexture::GetSize()

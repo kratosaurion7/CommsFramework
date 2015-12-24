@@ -47,14 +47,13 @@ FPosition* FRectangle::Center()
     return pos;
 };
 
-FSize * FRectangle::Size()
+FSize* FRectangle::Size()
 {
+    // TODO : Stop returning goddamn pointers.
     FSize* siz = new FSize(Height(), Width());
 
     return siz;
 };
-
-
 
 bool FRectangle::IsPointInside(Vector2<float> vec)
 {

@@ -52,6 +52,11 @@ void DTexture::LoadFromMemory(char * data, int dataSize)
     }
 }
 
+BaseTexture * DTexture::GetSubTexture(FRectangle rec)
+{
+    return nullptr;
+}
+
 FSize DTexture::GetSize()
 {
     return size;

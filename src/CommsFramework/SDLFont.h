@@ -10,6 +10,6 @@ public:
     SDLFont();
     ~SDLFont();
 
-    virtual void Load(std::string path);
+    virtual void LoadFontFile(std::string path);
 };
 

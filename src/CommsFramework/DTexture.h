@@ -19,6 +19,8 @@ public:
 
     virtual void LoadFromMemory(char* data, int dataSize);
 
+    virtual BaseTexture* GetSubTexture(FRectangle rec);
+
     virtual FSize GetSize();
 
     virtual void SetSolidColor(uint32_t pixelColor);

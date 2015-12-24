@@ -329,6 +329,7 @@ XCOPY /Y /E "Assets\*" "$(TargetDir)Assets"</Command>
   <ItemGroup>
     <ClCompile Include="BaseActor.cpp" />
     <ClCompile Include="BaseDialog.cpp" />
+    <ClCompile Include="BaseFont.cpp" />
     <ClCompile Include="BaseMouse.cpp" />
     <ClCompile Include="BaseSprite.cpp" />
     <ClCompile Include="BitHelper.cpp" />
@@ -344,6 +345,7 @@ XCOPY /Y /E "Assets\*" "$(TargetDir)Assets"</Command>
     <ClCompile Include="SDLSprite.cpp" />
     <ClCompile Include="SDLText.cpp" />
     <ClCompile Include="SDLTexture.cpp" />
+    <ClCompile Include="SDLUtilities.cpp" />
     <ClCompile Include="SFMLGraphicEngine.cpp" />
     <ClCompile Include="FSize.cpp" />
     <ClCompile Include="FPosition.cpp" />
@@ -417,6 +419,7 @@ XCOPY /Y /E "Assets\*" "$(TargetDir)Assets"</Command>
     <ClInclude Include="SDLSprite.h" />
     <ClInclude Include="SDLText.h" />
     <ClInclude Include="SDLTexture.h" />
+    <ClInclude Include="SDLUtilities.h" />
     <ClInclude Include="SocketClient.h" />
     <ClInclude Include="SocketServer.h" />
     <ClInclude Include="TextureRepository.h" />

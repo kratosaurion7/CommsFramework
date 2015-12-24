@@ -11,6 +11,6 @@ SDLFont::~SDLFont()
 {
 }
 
-void SDLFont::Load(std::string path)
+void SDLFont::LoadFontFile(std::string path)
 {
 }
