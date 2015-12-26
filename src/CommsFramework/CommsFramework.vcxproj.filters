@@ -246,11 +246,11 @@
     <ClCompile Include="SDLFont.cpp">
       <Filter>Framework\Graphic\SDL</Filter>
     </ClCompile>
-    <ClCompile Include="BaseFont.cpp">
-      <Filter>Framework\Graphic\SDL</Filter>
-    </ClCompile>
     <ClCompile Include="SDLUtilities.cpp">
       <Filter>Framework\Graphic\SDL</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseFont.cpp">
+      <Filter>Framework\Graphic\Base Classes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

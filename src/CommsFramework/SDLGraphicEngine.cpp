@@ -23,6 +23,7 @@ SDLGraphicEngine::SDLGraphicEngine()
     TextureRepo = new TextureRepository(this);
     drawables = new PointerList<DrawObject*>();
     gameRenderer = NULL;
+    WantedFrameRate = 60;
 }
 
 SDLGraphicEngine::~SDLGraphicEngine()
@@ -140,13 +141,17 @@ BaseSprite* SDLGraphicEngine::CreateSprite(std::string identifier)
 BaseTexture* SDLGraphicEngine::CreateTexture()
 {
     SDLTexture* tex = new SDLTexture();
-    
+    tex->Engine = this;
+    tex->Graphics = this;
+
     return tex;
 }
 
 BaseTexture* SDLGraphicEngine::CreateTexture(std::string texturePath)
 {
-    BaseTexture* tex = this->TextureRepo->LoadTexture(texturePath);
+    SDLTexture* tex = (SDLTexture*)this->TextureRepo->LoadTexture(texturePath);
+    tex->Engine = this;
+    tex->Graphics = this; // Need to inject the specific graphic engine to the texture
 
     return tex;
 }
@@ -162,6 +167,7 @@ BaseText* SDLGraphicEngine::CreateText()
 {
     SDLText* text = new SDLText();
     text->Engine = this;
+    text->Ident = "Text";
 
     return text;
 }
@@ -182,9 +188,20 @@ void SDLGraphicEngine::SetAutoManagedFramerate(bool isSet)
 
 void SDLGraphicEngine::SetBackgroundColor(uint32_t color)
 {
+    //rgb(149, 237, 255)
+    bg_r = (color & 0x000000FF);
+    bg_g = (color & 0x0000FF00) >> 8;
+    bg_b = (color & 0x00FF0000) >> 16;
+    bg_a = 255;// = (color & 0xFF000000) >> 24;
+
+    //bg_r = (color & 0xFF000000);
+    //bg_g = (color & 0x00FF0000) >> 8;
+    //bg_b = (color & 0x0000FF00) >> 16;
+    //bg_a = (color & 0x000000FF) >> 24;
+
 }
 
-void SDLGraphicEngine::SetBackgroundTexture(BaseTexture * texture)
+void SDLGraphicEngine::SetBackgroundTexture(BaseTexture* texture)
 {
 }
 
@@ -281,6 +298,8 @@ void SDLGraphicEngine::ProcessDraw(SDL_Window* targetWindow)
 
     if (IsTimeForFrame() && RunEngine)
     {
+        SDL_SetRenderDrawColor(gameRenderer, bg_r, bg_g, bg_b, bg_a);
+
         SDL_RenderClear(gameRenderer); // First step
 
         auto iter = this->drawables->GetContainer()->begin();
@@ -305,14 +324,16 @@ void SDLGraphicEngine::ProcessDraw(SDL_Window* targetWindow)
         }
 
         SDL_RenderPresent(gameRenderer); // Final step
-    }
 
-    LastTickTime = CurrentTickTime;
+        LastTickTime = CurrentTickTime;
+    }
 }
 
 void SDLGraphicEngine::ProcessEvents(SDL_Window* targetWindow)
 {
+    SDL_Event event;
 
+    SDL_PollEvent(&event);
 }
 
 SDL_Rect SDLGraphicEngine::GetSpriteRect(DrawObject* object)

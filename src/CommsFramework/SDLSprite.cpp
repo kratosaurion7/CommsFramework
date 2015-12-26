@@ -13,6 +13,17 @@ SDLSprite::SDLSprite()
 {
     ClickInfo = NULL;
 
+    isVisible = false;
+    position = FPosition();
+    positionOffset = FPosition();
+    size = FSize();
+    scale = FloatVec();
+    scale.Set(1, 1);
+    clippingBounds = FRectangle();
+
+    LoopAnimation = false;
+    IsPlaying = false;
+    GravityEnabled = false;
     CurrentAnimation = NULL;
     DefaultAnimation = NULL;
     spriteAnimationList = new PointerList<SpriteAnimation*>();

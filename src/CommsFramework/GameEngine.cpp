@@ -1,7 +1,6 @@
 #include "GameEngine.h"
 
 #include "SDLGraphicEngine.h"
-#include "SFMLGraphicEngine.h"
 
 #include "GraphicEngineInitParams.h"
 #include "ResourceManager.h"
@@ -318,7 +317,14 @@ BaseFont* GameEngine::GetGameDefaultFont()
     if (engineDefaultFont == NULL)
     {
         engineDefaultFont = this->Graphics->CreateFont();
-        engineDefaultFont->LoadFontFile("assets//arial.ttf");
+
+        BaseTexture* spriteFontTexture = this->Graphics->CreateTexture("assets//DefaultSpriteFont.png");
+        
+        int glyphsLen = 0;
+        SpriteFontGlyph** glyphMap = BaseFont::BuildDefaultFontGlyphDescriptor(glyphsLen);
+        engineDefaultFont->LoadSpriteFont(spriteFontTexture, glyphMap, glyphsLen);
+
+        //engineDefaultFont->LoadFontFile("assets//arial.ttf");
     }
 
     return engineDefaultFont;
@@ -344,6 +350,7 @@ BaseText* GameEngine::CreateText(std::string text, int textSize)
     ret->SetText(text);
     ret->SetCharacterSize(textSize);
     ret->SetColor(0x000000FF);
+    ret->SetFont(this->GetGameDefaultFont());
 
     this->Graphics->GetDrawableList()->Add(ret);
     this->GameTexts->Add(ret);
@@ -357,6 +364,7 @@ BaseText* GameEngine::CreateText(std::string text, int textSize, uint32_t textCo
     ret->SetText(text);
     ret->SetCharacterSize(textSize);
     ret->SetColor(textColor);
+    ret->SetFont(this->GetGameDefaultFont());
 
     this->Graphics->GetDrawableList()->Add(ret);
     this->GameTexts->Add(ret);
@@ -364,7 +372,7 @@ BaseText* GameEngine::CreateText(std::string text, int textSize, uint32_t textCo
     return ret;
 }
 
-BaseText* GameEngine::CreateText(std::string text, int textSize, uint32_t textColor, BaseFont * typo)
+BaseText* GameEngine::CreateText(std::string text, int textSize, uint32_t textColor, BaseFont* typo)
 {
     BaseText* ret = this->Graphics->CreateText();
     ret->SetText(text);

@@ -2,6 +2,14 @@
 
 SDLText::SDLText()
 {
+    isVisible = false;
+    position = FPosition();
+    positionOffset = FPosition();
+    size = FSize();
+    scale = FloatVec();
+    scale.Set(1, 1);
+    clippingBounds = FRectangle();
+
     Engine = NULL;
     ClickInfo = NULL;
 }

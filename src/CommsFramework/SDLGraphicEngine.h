@@ -30,6 +30,11 @@ public:
     uint32_t LastTickTime;
     uint32_t CurrentTickTime;
 
+    uint8_t bg_r;
+    uint8_t bg_g;
+    uint8_t bg_b;
+    uint8_t bg_a;
+
     /* After calling the Initialize() method, this value will tell if the engine is ready or not. */
     bool engineValid = false;
 

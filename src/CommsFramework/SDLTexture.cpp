@@ -1,6 +1,7 @@
 #include "SDLTexture.h"
 
 #include <SDL.h>
+#include <SDL_image.h>
 #include <SDL_surface.h>
 #include <SDL_render.h>
 
@@ -11,7 +12,7 @@ SDLTexture::SDLTexture()
 {
     surface = NULL;
     texture = NULL;
-    Graphics = NULL;
+    Engine = NULL;
 }
 
 SDLTexture::~SDLTexture()
@@ -38,7 +39,7 @@ void SDLTexture::Load(std::string path)
     int res = 0;
     const char* errorString;
 
-    surface = SDL_LoadBMP(path.c_str());
+    surface = IMG_Load(path.c_str());
 
     if (surface == NULL)
     {
@@ -63,6 +64,8 @@ void SDLTexture::Load(std::string path)
     // TODO : Check if we keep both the Texture and Surface in memory
     // SDL_FreeSurface(surface); // Must keep surface to use GetSubTexture()
     TexturePath = path;
+    this->Height = surface->h;
+    this->Width = surface->w;
 }
 
 void SDLTexture::LoadFromMemory(char* data, int dataSize)
@@ -99,7 +102,7 @@ BaseTexture* SDLTexture::GetSubTexture(FRectangle rec)
     
     SDL_Surface* subTextureSurface = SDL_CreateRGBSurface(0, recSize->Width, recSize->Height, 32, 0, 0, 0, 0);
 
-    if (subTextureSurface = NULL)
+    if (subTextureSurface == NULL)
     {
         errorString = SDL_GetError();
         fprintf(stderr, "Unable to create RGB surface with error %s\n", errorString);
@@ -117,7 +120,7 @@ BaseTexture* SDLTexture::GetSubTexture(FRectangle rec)
         return NULL;
     }
 
-    newTexture = new SDLTexture();
+    newTexture = (SDLTexture*)this->Engine->CreateTexture();
     newTexture->LoadFromSurface(subTextureSurface);
 
     return newTexture;

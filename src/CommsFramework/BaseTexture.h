@@ -1,6 +1,7 @@
 #pragma once
 
 class FSize;
+class BaseGraphicEngine;
 
 #include <cstdint>
 
@@ -12,6 +13,10 @@ class FSize;
 class BaseTexture
 {
 public:
+    std::string TexturePath;
+
+    BaseGraphicEngine* Engine;
+
     virtual void Initalize(float width, float height) = 0;
 
     virtual void Load(std::string path) = 0;
@@ -24,5 +29,4 @@ public:
 
     virtual void SetSolidColor(uint32_t pixelColor) = 0;
 
-    std::string TexturePath;
 };

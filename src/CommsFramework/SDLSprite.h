@@ -16,7 +16,6 @@ class SDL_Texture;
 class SDLSprite : public BaseSprite, public SDLDrawable
 {
 public:
-    SDLGraphicEngine* SpecificEngine;
     SDLTexture* currentSpriteTexture;
 
     SDLSprite();
