@@ -13,7 +13,8 @@ int main()
 
     eng->Init(800, 800);
 
-    eng->Graphics->SetBackgroundColor(0x6495EDFF);
+    //eng->Graphics->SetBackgroundColor(0x659CEFFF);
+    eng->Graphics->SetBackgroundColor(101, 156, 239);
 
     //Deck* x = new Deck(eng);
 

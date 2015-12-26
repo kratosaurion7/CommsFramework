@@ -49,6 +49,8 @@ public:
     virtual void SetAutoManagedFramerate(bool isSet) = 0;
 
     virtual  void SetBackgroundColor(uint32_t color) = 0;
+    
+    virtual void SetBackgroundColor(uint8_t r, uint8_t g, uint8_t b, uint8_t a = 255) = 0;
 
     virtual void SetBackgroundTexture(BaseTexture* texture) = 0;
 

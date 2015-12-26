@@ -188,17 +188,21 @@ void SDLGraphicEngine::SetAutoManagedFramerate(bool isSet)
 
 void SDLGraphicEngine::SetBackgroundColor(uint32_t color)
 {
+    // TODO : Implementation doesn't work correctly.
+
     //rgb(149, 237, 255)
-    bg_r = (color & 0x000000FF);
+    bg_r = (color & 0x00FF0000) >> 16;
     bg_g = (color & 0x0000FF00) >> 8;
-    bg_b = (color & 0x00FF0000) >> 16;
+    bg_b = (color & 0x000000FF);
     bg_a = 255;// = (color & 0xFF000000) >> 24;
+}
 
-    //bg_r = (color & 0xFF000000);
-    //bg_g = (color & 0x00FF0000) >> 8;
-    //bg_b = (color & 0x0000FF00) >> 16;
-    //bg_a = (color & 0x000000FF) >> 24;
-
+void SDLGraphicEngine::SetBackgroundColor(uint8_t r, uint8_t g, uint8_t b, uint8_t a)
+{
+    bg_r = r;
+    bg_g = g;
+    bg_b = b;
+    bg_a = a;
 }
 
 void SDLGraphicEngine::SetBackgroundTexture(BaseTexture* texture)
