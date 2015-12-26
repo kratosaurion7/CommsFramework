@@ -1,5 +1,6 @@
 #include "GameEngine.h"
 
+#include "SDLGraphicEngine.h"
 #include "SFMLGraphicEngine.h"
 
 #include "GraphicEngineInitParams.h"
@@ -36,7 +37,7 @@ GameEngine::GameEngine()
 {
     GameEngine::_globalInstance = this;
 
-    Graphics = new SFMLGraphicEngine();
+    Graphics = new SDLGraphicEngine();
     Resources = new ResourceManager();
 
     GameSprites = new PointerList<BaseSprite*>();

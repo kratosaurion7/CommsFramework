@@ -1,6 +1,7 @@
 #include "SDLGraphicEngine.h"
 
 #include <SDL.h>
+#include <SDL_image.h>
 
 #include "TextureRepository.h"
 #include "DrawObject.h"
@@ -14,6 +15,7 @@
 #include "SDLSprite.h"
 #include "SDLTexture.h"
 #include "SDLText.h"
+#include "SDLFont.h"
 
 SDLGraphicEngine::SDLGraphicEngine()
 {
@@ -67,6 +69,16 @@ void SDLGraphicEngine::Initialize(GraphicEngineInitParams* params)
     {
         errorString = SDL_GetError();
         fprintf(stderr, "Unable to create the Accelerated Renderer with error %s\n", errorString);
+
+        return;
+    }
+
+    res = IMG_Init(IMG_INIT_PNG);
+
+    if (res == 0)
+    {
+        errorString = IMG_GetError();
+        fprintf(stderr, "Unable to create the load SDL_Image with error %s\n", errorString);
 
         return;
     }
@@ -141,7 +153,9 @@ BaseTexture* SDLGraphicEngine::CreateTexture(std::string texturePath)
 
 BaseFont* SDLGraphicEngine::CreateFont()
 {
-    return nullptr;
+    BaseFont* font = new SDLFont();
+
+    return font;
 }
 
 BaseText* SDLGraphicEngine::CreateText()

@@ -60,7 +60,7 @@ SpriteAnimation * BaseSprite::CreateAnimation(std::string name)
 
 void BaseSprite::SetTexture(std::string newTexturePath)
 {
-    BaseTexture* currentTexture = this->GetCurrentTexture();
+    //BaseTexture* currentTexture = this->GetCurrentTexture();
     
     //if (currentTexture != NULL)
     //    delete(currentTexture);
