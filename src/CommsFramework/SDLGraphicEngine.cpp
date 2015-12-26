@@ -335,9 +335,21 @@ void SDLGraphicEngine::ProcessDraw(SDL_Window* targetWindow)
 
 void SDLGraphicEngine::ProcessEvents(SDL_Window* targetWindow)
 {
-    SDL_Event event;
+    SDL_Event procEvent;
 
-    SDL_PollEvent(&event);
+    while (SDL_PollEvent(&procEvent))
+    {
+        switch (procEvent.type)
+        {
+            case SDL_WINDOWEVENT:
+            {
+                break;
+            }
+
+            default:
+                break;
+        }
+    }
 }
 
 SDL_Rect SDLGraphicEngine::GetSpriteRect(DrawObject* object)
