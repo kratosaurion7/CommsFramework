@@ -474,29 +474,32 @@ void GameEngine::DoEventLoop()
     while (SDL_PollEvent(&myEvent)) {
         switch (myEvent.type)
         {
-        case SDL_MOUSEMOTION:
-        case SDL_MOUSEBUTTONDOWN:
-        case SDL_MOUSEBUTTONUP:
-        {
-            ((SDLMouse*)Mouse)->HandleEvent(&myEvent);
-            break;
-        }
-        case SDL_KEYDOWN:
-        case SDL_KEYUP:
-        {
-            break;
-        }
-        case SDL_QUIT:
-        {
-            break;
-        }
-        case SDL_WINDOWEVENT:
-        {
-            break;
-        }
+            case SDL_MOUSEMOTION:
+            case SDL_MOUSEBUTTONDOWN:
+            case SDL_MOUSEBUTTONUP:
+            {
+                ((SDLMouse*)Mouse)->HandleEvent(&myEvent);
+                break;
+            }
+            case SDL_KEYDOWN:
+            case SDL_KEYUP:
+            {
+                ((SDLKeyboard*)Keyboard)->HandleEvent(&myEvent);
+                break;
+            }
+            case SDL_QUIT:
+            {
+                exit(0);
 
-        default:
-            break;
+                break;
+            }
+            case SDL_WINDOWEVENT:
+            {
+                break;
+            }
+
+            default:
+                break;
         }
     }
 

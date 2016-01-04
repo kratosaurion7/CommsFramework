@@ -12,17 +12,45 @@ SDLMouse::~SDLMouse()
 
 bool SDLMouse::IsClicked()
 {
-    return false;
+    return this->leftButtonClicked ||
+        this->rightButtonClicked ||
+        this->middleButtonClicked ||
+        this->fourthButtonClicked ||
+        this->fifthButtonClicked;
 }
 
 bool SDLMouse::IsClicked(MouseButtons button)
 {
-    return false;
+    switch (button)
+    {
+        case LEFT:
+            return this->leftButtonClicked;
+            break;
+        case RIGHT:
+            return this->rightButtonClicked;
+            break;
+        case MIDDLE:
+            return this->middleButtonClicked;
+            break;
+        case BUTTON3:
+            return this->fourthButtonClicked;
+            break;
+        case BUTTON4:
+            return this->fifthButtonClicked;
+            break;
+        default:
+            return false;
+            break;
+    }
 }
 
 Vector2<float> SDLMouse::GetMousePosition()
 {
-    return Vector2<float>();
+    Vector2<float> pos;
+    pos.X = MouseCoordX;
+    pos.Y = MouseCoordY;
+
+    return pos;
 }
 
 void SDLMouse::HandleEvent(SDL_Event* anEvent)
