@@ -116,6 +116,8 @@ private:
     void RemoveSpriteClickedFlag();
     MouseClickInfo* FrameClickInfo;
 
+    void DoEventLoop();
+
     GameEngineInitParams* engineInitParams;
 
     BaseFont* engineDefaultFont;

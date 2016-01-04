@@ -1,6 +1,8 @@
 #include "GameEngine.h"
 
+#include "SDLMouse.h"
 #include "SDLGraphicEngine.h"
+#include <SDL_events.h>
 
 #include "GraphicEngineInitParams.h"
 #include "ResourceManager.h"
@@ -172,7 +174,7 @@ void GameEngine::Play()
 {
     this->Pre_Update(); // Update at start of loop
 
-    this->Graphics->ProcessEvents();
+    this->DoEventLoop();
 
     this->Update(); // Update just before draw
 
@@ -461,6 +463,42 @@ void GameEngine::RemoveSpriteClickedFlag()
         FrameClickInfo = NULL;
     }
         
+}
+
+void GameEngine::DoEventLoop()
+{
+    //this->Graphics->ProcessEvents();
+
+    SDL_Event myEvent;
+    while (SDL_PollEvent(&myEvent)) {
+        switch (myEvent.type)
+        {
+        case SDL_MOUSEMOTION:
+        case SDL_MOUSEBUTTONDOWN:
+        case SDL_MOUSEBUTTONUP:
+        {
+            ((SDLMouse*)Mouse)->HandleEvent(&myEvent);
+            break;
+        }
+        case SDL_KEYDOWN:
+        case SDL_KEYUP:
+        {
+            break;
+        }
+        case SDL_QUIT:
+        {
+            break;
+        }
+        case SDL_WINDOWEVENT:
+        {
+            break;
+        }
+
+        default:
+            break;
+        }
+    }
+
 }
 
 void GameEngine::CreateSpritesFromConfig()

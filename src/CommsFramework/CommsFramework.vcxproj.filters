@@ -252,6 +252,9 @@
     <ClCompile Include="BaseFont.cpp">
       <Filter>Framework\Graphic\Base Classes</Filter>
     </ClCompile>
+    <ClCompile Include="SDLMouse.cpp">
+      <Filter>Framework\Graphic\SDL</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="XmlReader.h">
@@ -474,6 +477,9 @@
       <Filter>Framework\Graphic\SDL</Filter>
     </ClInclude>
     <ClInclude Include="SDLUtilities.h">
+      <Filter>Framework\Graphic\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="SDLMouse.h">
       <Filter>Framework\Graphic\SDL</Filter>
     </ClInclude>
   </ItemGroup>
