@@ -1,5 +1,6 @@
 #include "GameEngine.h"
 
+#include "SDLKeyboard.h"
 #include "SDLMouse.h"
 #include "SDLGraphicEngine.h"
 #include <SDL_events.h>

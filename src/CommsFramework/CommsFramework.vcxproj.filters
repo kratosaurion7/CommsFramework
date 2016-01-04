@@ -255,6 +255,9 @@
     <ClCompile Include="SDLMouse.cpp">
       <Filter>Framework\Graphic\SDL</Filter>
     </ClCompile>
+    <ClCompile Include="SDLKeyboard.cpp">
+      <Filter>Framework\Graphic\SDL</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="XmlReader.h">
@@ -480,6 +483,9 @@
       <Filter>Framework\Graphic\SDL</Filter>
     </ClInclude>
     <ClInclude Include="SDLMouse.h">
+      <Filter>Framework\Graphic\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="SDLKeyboard.h">
       <Filter>Framework\Graphic\SDL</Filter>
     </ClInclude>
   </ItemGroup>

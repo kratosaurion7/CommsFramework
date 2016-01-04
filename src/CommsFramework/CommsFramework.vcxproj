@@ -342,6 +342,7 @@ XCOPY /Y /E "Assets\*" "$(TargetDir)Assets"</Command>
     <ClCompile Include="GameRule.cpp" />
     <ClCompile Include="SDLFont.cpp" />
     <ClCompile Include="SDLGraphicEngine.cpp" />
+    <ClCompile Include="SDLKeyboard.cpp" />
     <ClCompile Include="SDLMouse.cpp" />
     <ClCompile Include="SDLSprite.cpp" />
     <ClCompile Include="SDLText.cpp" />
@@ -417,6 +418,7 @@ XCOPY /Y /E "Assets\*" "$(TargetDir)Assets"</Command>
     <ClInclude Include="SDLDrawable.h" />
     <ClInclude Include="SDLFont.h" />
     <ClInclude Include="SDLGraphicEngine.h" />
+    <ClInclude Include="SDLKeyboard.h" />
     <ClInclude Include="SDLMouse.h" />
     <ClInclude Include="SDLSprite.h" />
     <ClInclude Include="SDLText.h" />
