@@ -46,11 +46,11 @@ GameEngine::GameEngine()
     GameActors = new PointerList<BaseActor*>();
     GameTexts = new PointerList<BaseText*>();
 
-    SFMLKeyboard* sfKeyboard = new SFMLKeyboard();
-    sfKeyboard->graphicsRef = this->Graphics;
+    SDLKeyboard* sfKeyboard = new SDLKeyboard();
+    //sfKeyboard->graphicsRef = this->Graphics;
 
-    SFMLMouse* sfMouse = new SFMLMouse();
-    sfMouse->engineRef = this->Graphics;
+    SDLMouse* sfMouse = new SDLMouse();
+    //sfMouse->engineRef = this->Graphics;
 
     GameEngine::Keyboard = sfKeyboard;
     GameEngine::Mouse = sfMouse;

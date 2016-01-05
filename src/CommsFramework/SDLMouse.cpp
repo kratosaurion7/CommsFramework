@@ -12,11 +12,9 @@ SDLMouse::~SDLMouse()
 
 bool SDLMouse::IsClicked()
 {
-    return this->leftButtonClicked ||
-        this->rightButtonClicked ||
-        this->middleButtonClicked ||
-        this->fourthButtonClicked ||
-        this->fifthButtonClicked;
+    return this->LeftButtonClicked() ||
+        this->RightButtonClicked() ||
+        this->MiddleButtonClicked();
 }
 
 bool SDLMouse::IsClicked(MouseButtons button)
@@ -24,19 +22,13 @@ bool SDLMouse::IsClicked(MouseButtons button)
     switch (button)
     {
         case LEFT:
-            return this->leftButtonClicked;
+            return this->Left_Current_State == BTN_CLICKED;
             break;
         case RIGHT:
-            return this->rightButtonClicked;
+            return this->Right_Current_State == BTN_CLICKED;
             break;
         case MIDDLE:
-            return this->middleButtonClicked;
-            break;
-        case BUTTON3:
-            return this->fourthButtonClicked;
-            break;
-        case BUTTON4:
-            return this->fifthButtonClicked;
+            return this->Middle_Current_State == BTN_CLICKED;
             break;
         default:
             return false;
@@ -77,38 +69,40 @@ void SDLMouse::HandleEvent(SDL_Event* anEvent)
             {
                 case SDL_BUTTON_LEFT:
                 {
-                    this->leftButtonClicked = true;
+                    this->Left_Current_State = BTN_CLICKED;
 
                     break;
                 }
                 case SDL_BUTTON_MIDDLE:
                 {
-                    this->middleButtonClicked = true;
+                    this->Middle_Current_State = BTN_CLICKED;
                     
                     break;
                 }
                 case SDL_BUTTON_RIGHT:
                 {
-                    this->rightButtonClicked = true;
+                    this->Right_Current_State = BTN_CLICKED;
 
                     break;
                 }
-                case SDL_BUTTON_X1:
-                {
-                    this->fourthButtonClicked = true;
+                //case SDL_BUTTON_X1:
+                //{
+                //    this->fourthButtonClicked = true;
 
-                    break;
-                }
-                case SDL_BUTTON_X2:
-                {
-                    this->fifthButtonClicked = true;
+                //    break;
+                //}
+                //case SDL_BUTTON_X2:
+                //{
+                //    this->fifthButtonClicked = true;
 
-                    break;
-                }
+                //    break;
+                //}
 
                 default:
                     break;
             }
+
+            break;
         }
         case SDL_MOUSEBUTTONUP:
         {
@@ -116,31 +110,19 @@ void SDLMouse::HandleEvent(SDL_Event* anEvent)
             {
                 case SDL_BUTTON_LEFT:
                 {
-                    this->leftButtonClicked = false;
+                    this->Left_Current_State = BTN_RELEASED;
 
                     break;
                 }
                 case SDL_BUTTON_MIDDLE:
                 {
-                    this->middleButtonClicked = false;
+                    this->Middle_Current_State = BTN_RELEASED;
 
                     break;
                 }
                 case SDL_BUTTON_RIGHT:
                 {
-                    this->rightButtonClicked = false;
-
-                    break;
-                }
-                case SDL_BUTTON_X1:
-                {
-                    this->fourthButtonClicked = false;
-
-                    break;
-                }
-                case SDL_BUTTON_X2:
-                {
-                    this->fifthButtonClicked = false;
+                    this->Right_Current_State = BTN_RELEASED;
 
                     break;
                 }
@@ -148,6 +130,8 @@ void SDLMouse::HandleEvent(SDL_Event* anEvent)
                 default:
                     break;
             }
+
+            break;
         }
 
         default:

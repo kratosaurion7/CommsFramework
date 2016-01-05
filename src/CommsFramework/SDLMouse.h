@@ -23,11 +23,11 @@ private:
     float MouseCoordX = 0;
     float MouseCoordY = 0;
 
-    bool leftButtonClicked = false;
-    bool rightButtonClicked = false;
-    bool middleButtonClicked = false;
-    bool fourthButtonClicked = false;
-    bool fifthButtonClicked = false;
+    //bool leftButtonClicked = false;
+    //bool rightButtonClicked = false;
+    //bool middleButtonClicked = false;
+    //bool fourthButtonClicked = false;
+    //bool fifthButtonClicked = false;
 
 };
 

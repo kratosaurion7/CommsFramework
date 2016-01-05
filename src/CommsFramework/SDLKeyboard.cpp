@@ -18,11 +18,13 @@ SDLKeyboard::~SDLKeyboard()
 
 bool SDLKeyboard::IsKeyPressed(Key key)
 {
-    const Uint8 *state = SDL_GetKeyboardState(NULL);
+    return false;
 
-    SDL_Scancode mappedScanCode = sdlScanCodesMap->Single([key](Pair<Key, SDL_Scancode>* pair) { return pair->Item1 == key;})->Item2;
+    //const Uint8 *state = SDL_GetKeyboardState(NULL);
 
-    return state[mappedScanCode];
+    //SDL_Scancode mappedScanCode = sdlScanCodesMap->Single([key](Pair<Key, SDL_Scancode>* pair) { return pair->Item1 == key;})->Item2;
+
+    //return state[mappedScanCode];
 }
 
 bool SDLKeyboard::IsKeyClicked(Key key)
