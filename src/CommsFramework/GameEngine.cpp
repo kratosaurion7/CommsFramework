@@ -173,9 +173,9 @@ void GameEngine::Load()
 
 void GameEngine::Play()
 {
-    this->Pre_Update(); // Update at start of loop
-
     this->DoEventLoop();
+
+    this->Pre_Update(); // Update at start of loop
 
     this->Update(); // Update just before draw
 
@@ -186,7 +186,7 @@ void GameEngine::Play()
 
 void GameEngine::Pre_Update()
 {
-    GameEngine::Mouse->UpdateMouseState();
+    //GameEngine::Mouse->UpdateMouseState();
     GameEngine::Keyboard->UpdateKeyboardState();
 
     if (this->Graphics->zIndexNeedsReordering)
@@ -238,6 +238,8 @@ void GameEngine::Post_Update()
     }
 
     RemoveSpriteClickedFlag();
+
+    GameEngine::Mouse->UpdatePastMouseState();
 }
 
 BaseActor* GameEngine::CreateActor()

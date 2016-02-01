@@ -3,6 +3,13 @@
 
 SDLMouse::SDLMouse()
 {
+    this->Left_Current_State = BTN_RELEASED;
+    this->Right_Current_State = BTN_RELEASED;
+    this->Middle_Current_State = BTN_RELEASED;
+
+    this->Left_Previous_State = BTN_RELEASED;
+    this->Right_Previous_State = BTN_RELEASED;
+    this->Middle_Previous_State = BTN_RELEASED;
 }
 
 
@@ -22,6 +29,16 @@ bool SDLMouse::IsClicked(MouseButtons button)
     switch (button)
     {
         case LEFT:
+
+            if (this->Left_Current_State == BTN_CLICKED)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
             return this->Left_Current_State == BTN_CLICKED;
             break;
         case RIGHT:

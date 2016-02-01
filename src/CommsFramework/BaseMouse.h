@@ -36,6 +36,8 @@ public:
 
     void UpdateMouseState();
 
+    void UpdatePastMouseState();
+
     virtual Vector2<float> GetMousePosition() = 0;
 
 };
