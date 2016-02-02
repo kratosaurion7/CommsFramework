@@ -3,6 +3,8 @@
 class BaseFont;
 class DrawObject;
 
+class SDLFont;
+
 #include <string>
 #include <cstdint>
 
@@ -32,6 +34,11 @@ public:
 
     virtual SDL_Texture* GetDrawableTexture();
     virtual void UpdateInnerImpl();
+
+private:
+    std::string textContent;
+
+    SDLFont* font;
 
 };
 

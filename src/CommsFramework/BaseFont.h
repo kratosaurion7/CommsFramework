@@ -34,7 +34,7 @@ public:
 
     virtual void LoadFontFile(std::string path) = 0;
 
-    virtual void LoadSpriteFont(BaseTexture* texture, SpriteFontGlyph** glyphs, int charactersCount);
+    virtual void LoadSpriteFont(BaseTexture* fontTexture, SpriteFontGlyph** glyphs, int charactersCount);
 
     static SpriteFontGlyph** BuildDefaultFontGlyphDescriptor(int& outLength);
 };

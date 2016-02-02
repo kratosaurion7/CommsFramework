@@ -470,8 +470,6 @@ void GameEngine::RemoveSpriteClickedFlag()
 
 void GameEngine::DoEventLoop()
 {
-    //this->Graphics->ProcessEvents();
-
     SDL_Event myEvent;
     while (SDL_PollEvent(&myEvent)) {
         switch (myEvent.type)

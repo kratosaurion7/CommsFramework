@@ -16,7 +16,7 @@ BaseFont::~BaseFont()
     }
 }
 
-void BaseFont::LoadSpriteFont(BaseTexture* texture, SpriteFontGlyph** glyphs, int charactersCount)
+void BaseFont::LoadSpriteFont(BaseTexture* fontTexture, SpriteFontGlyph** glyphs, int charactersCount)
 {
     GlyphMap = new PointerList<Pair<char*, BaseTexture*>*>();
 
@@ -26,7 +26,7 @@ void BaseFont::LoadSpriteFont(BaseTexture* texture, SpriteFontGlyph** glyphs, in
 
         FRectangle rec = FRectangle(glyph->X, glyph->Y, glyph->H, glyph->W);
         
-        BaseTexture* subTex = texture->GetSubTexture(rec);
+        BaseTexture* subTex = fontTexture->GetSubTexture(rec);
 
         Pair<char*, BaseTexture*>* newGlyphPair = new Pair<char*, BaseTexture*>();
         newGlyphPair->Item1 = glyph->Value;

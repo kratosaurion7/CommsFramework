@@ -10,6 +10,8 @@ SDLText::SDLText()
     scale.Set(1, 1);
     clippingBounds = FRectangle();
 
+    textContent = "";
+
     Engine = NULL;
     ClickInfo = NULL;
 }
@@ -20,11 +22,17 @@ SDLText::~SDLText()
 
 std::string SDLText::GetText()
 {
-    return "";
+    return textContent;
 }
 
 void SDLText::SetText(std::string text)
 {
+    if (textContent.compare(text) != 0)
+    {
+        textContent = text;
+        
+        this->UpdateInnerImpl();
+    }
 }
 
 BaseFont* SDLText::GetFont()
