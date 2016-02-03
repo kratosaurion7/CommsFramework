@@ -64,6 +64,8 @@ void SDLText::SetFont(BaseFont* newFont)
     {
         this->font = convertedFont;
     }
+
+    UpdateInnerImpl();
 }
 
 int SDLText::GetCharacterSize()
@@ -73,7 +75,12 @@ int SDLText::GetCharacterSize()
 
 void SDLText::SetCharacterSize(int newSize)
 {
-    characterSize = newSize;
+    if (characterSize != newSize)
+    {
+        characterSize = newSize;
+
+        UpdateInnerImpl();
+    }
 }
 
 TextStyle SDLText::GetStyle()
@@ -83,7 +90,12 @@ TextStyle SDLText::GetStyle()
 
 void SDLText::SetStyle(TextStyle style)
 {
-    sdlTextStyle = style;
+    if (sdlTextStyle != style)
+    {
+        sdlTextStyle = style;
+
+        UpdateInnerImpl();
+    }
 }
 
 uint32_t SDLText::GetColor()
@@ -93,7 +105,12 @@ uint32_t SDLText::GetColor()
 
 void SDLText::SetColor(uint32_t color)
 {
-    foregroundColor = color;
+    if (foregroundColor != color)
+    {
+        foregroundColor = color;
+
+        UpdateInnerImpl();
+    }
 }
 
 SDL_Texture* SDLText::GetDrawableTexture()
