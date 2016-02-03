@@ -21,10 +21,10 @@ public:
     virtual void SetText(std::string text);
 
     virtual BaseFont* GetFont();
-    virtual void SetFont(BaseFont* font);
+    virtual void SetFont(BaseFont* newFont);
 
     virtual int GetCharacterSize();
-    virtual void SetCharacterSize(int size);
+    virtual void SetCharacterSize(int newSize);
 
     virtual TextStyle GetStyle();
     virtual void SetStyle(TextStyle style = TEXT_STYLE_REGULAR);
@@ -40,5 +40,13 @@ private:
 
     SDLFont* font;
 
+    int characterSize;
+
+    TextStyle sdlTextStyle;
+
+    uint32_t foregroundColor;
+
+    SDL_Surface* textSurface;
+    SDL_Texture* textTexture;
 };
 

@@ -1,5 +1,17 @@
 #include "SDLText.h"
 
+#include <SDL.h>
+#include <SDL_image.h>
+#include <SDL_surface.h>
+#include <SDL_render.h>
+
+#include "SDLFont.h"
+#include "FRectangle.h"
+#include "BaseTexture.h"
+#include "SDLTexture.h"
+#include "BaseGraphicEngine.h"
+#include "SDLGraphicEngine.h"
+
 SDLText::SDLText()
 {
     isVisible = false;
@@ -11,6 +23,10 @@ SDLText::SDLText()
     clippingBounds = FRectangle();
 
     textContent = "";
+    font = NULL;
+    characterSize = 12;
+    sdlTextStyle = TEXT_STYLE_REGULAR;
+    foregroundColor = 0xFFFFFFFF;
 
     Engine = NULL;
     ClickInfo = NULL;
@@ -37,45 +53,120 @@ void SDLText::SetText(std::string text)
 
 BaseFont* SDLText::GetFont()
 {
-    return NULL;
+    return font;
 }
 
-void SDLText::SetFont(BaseFont* font)
+void SDLText::SetFont(BaseFont* newFont)
 {
+    SDLFont* convertedFont = dynamic_cast<SDLFont*>(newFont);
+
+    if (convertedFont != NULL)
+    {
+        this->font = convertedFont;
+    }
 }
 
 int SDLText::GetCharacterSize()
 {
-    return 0;
+    return characterSize;
 }
 
-void SDLText::SetCharacterSize(int size)
+void SDLText::SetCharacterSize(int newSize)
 {
+    characterSize = newSize;
 }
 
 TextStyle SDLText::GetStyle()
 {
-    return TEXT_STYLE_REGULAR;
+    return sdlTextStyle;
 }
 
 void SDLText::SetStyle(TextStyle style)
 {
+    sdlTextStyle = style;
 }
 
 uint32_t SDLText::GetColor()
 {
-    return 0xFFFFFFFF;
+    return foregroundColor;
 }
 
 void SDLText::SetColor(uint32_t color)
 {
+    foregroundColor = color;
 }
 
 SDL_Texture* SDLText::GetDrawableTexture()
 {
-    return NULL;
+    return textTexture;
 }
 
 void SDLText::UpdateInnerImpl()
 {
+    int finalTextWidth = 0;
+    int finalTextHeight = 0;
+
+    finalTextWidth = this->textContent.length() * 30;
+    finalTextHeight = 50; // Test height of 50, maybe this will be provided by the font
+
+    SDL_Surface* finalTextSurface = SDL_CreateRGBSurface(0, finalTextWidth, finalTextHeight, 32, 0, 0, 0, 0);
+
+    FPosition* currentSpaceRectangle = new FPosition(0, 0);
+
+    for (int i = 0; i < this->textContent.length();i++)
+    {
+        BaseTexture* characterTexture;
+        char textCharacter = this->textContent.at(i);
+
+        if (strcmp(&textCharacter, " "))
+        {
+            currentSpaceRectangle->X += 30;
+
+            continue;
+        }
+
+        for (int y = 0; this->font->GlyphMap->Count();y++)
+        {
+            Pair<char*, BaseTexture*>* iteratedPair = this->font->GlyphMap->Get(y);
+            char* iteratedCharacter = iteratedPair->Item1;
+
+            if (strcmp(&textCharacter, iteratedCharacter))
+            {
+                characterTexture = iteratedPair->Item2;
+            }
+            else 
+            {
+                characterTexture = NULL;
+            }
+        }
+
+        if (characterTexture == NULL)
+            continue;
+
+        SDLTexture* convertedCharacterTexture = dynamic_cast<SDLTexture*>(characterTexture);
+        
+        SDL_Rect destRec = SDL_Rect();
+        destRec.x = currentSpaceRectangle->X;
+        destRec.y = currentSpaceRectangle->Y;
+        destRec.h = 50;
+        destRec.w = 30;
+        int res = SDL_BlitSurface(convertedCharacterTexture->surface, NULL, finalTextSurface, &destRec);
+
+        if (res != 0)
+        {
+            const char* errorString = SDL_GetError();
+            fprintf(stderr, "Unable to create RGB surface with error %s\n", errorString);
+        }
+
+        currentSpaceRectangle->X += 30;
+
+    }
+
+    delete(textTexture);
+    
+    SDL_Renderer* renderer = ((SDLGraphicEngine*)Engine)->gameRenderer;
+    textSurface = finalTextSurface;
+    textTexture = SDL_CreateTextureFromSurface(renderer, finalTextSurface);
+
+    delete(currentSpaceRectangle);
 }
