@@ -323,7 +323,7 @@ BaseFont* GameEngine::GetGameDefaultFont()
     {
         engineDefaultFont = this->Graphics->CreateFont();
 
-        BaseTexture* spriteFontTexture = this->Graphics->CreateTexture("assets//DefaultSpriteFont.png");
+        BaseTexture* spriteFontTexture = this->Graphics->CreateTexture("assets//DefaultSpriteFont_50h.png");
         
         int glyphsLen = 0;
         SpriteFontGlyph** glyphMap = BaseFont::BuildDefaultFontGlyphDescriptor(glyphsLen);
