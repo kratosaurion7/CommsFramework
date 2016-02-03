@@ -142,7 +142,7 @@ void SDLText::UpdateInnerImpl()
         BaseTexture* characterTexture;
         char textCharacter = this->textContent.at(i);
 
-        if (strcmp(&textCharacter, " ") == 0)
+        if (strncmp(&textCharacter, " ", 1) == 0)
         {
             currentSpaceRectangle->X += 30;
 
