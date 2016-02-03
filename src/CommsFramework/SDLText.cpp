@@ -122,6 +122,9 @@ SDL_Texture* SDLText::GetDrawableTexture()
 
 void SDLText::UpdateInnerImpl()
 {
+    if (this->font == NULL || this->characterSize <= 0)
+        return;
+
     int finalTextWidth = 0;
     int finalTextHeight = 0;
 
@@ -129,6 +132,7 @@ void SDLText::UpdateInnerImpl()
     finalTextHeight = 50; // Test height of 50, maybe this will be provided by the font
 
     SDL_Surface* finalTextSurface = SDL_CreateRGBSurface(0, finalTextWidth, finalTextHeight, 32, 0, 0, 0, 0);
+    SDL_FillRect(finalTextSurface, NULL, 0xFFFFFFFF);
 
     FPosition* currentSpaceRectangle = new FPosition(0, 0);
 
@@ -137,21 +141,22 @@ void SDLText::UpdateInnerImpl()
         BaseTexture* characterTexture;
         char textCharacter = this->textContent.at(i);
 
-        if (strcmp(&textCharacter, " "))
+        if (strcmp(&textCharacter, " ") == 0)
         {
             currentSpaceRectangle->X += 30;
 
             continue;
         }
 
-        for (int y = 0; this->font->GlyphMap->Count();y++)
+        for (int y = 0; y < this->font->GlyphMap->Count();y++)
         {
             Pair<char*, BaseTexture*>* iteratedPair = this->font->GlyphMap->Get(y);
             char* iteratedCharacter = iteratedPair->Item1;
 
-            if (strcmp(&textCharacter, iteratedCharacter))
+            if (strncmp(&textCharacter, iteratedCharacter, 1) == 0)
             {
                 characterTexture = iteratedPair->Item2;
+                break;
             }
             else 
             {

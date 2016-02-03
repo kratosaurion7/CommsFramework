@@ -14,6 +14,9 @@ class SDLFont;
 class SDLText : public BaseText, public SDLDrawable
 {
 public:
+    SDL_Surface* textSurface;
+    SDL_Texture* textTexture;
+
     SDLText();
     ~SDLText();
 
@@ -46,7 +49,5 @@ private:
 
     uint32_t foregroundColor;
 
-    SDL_Surface* textSurface;
-    SDL_Texture* textTexture;
 };
 

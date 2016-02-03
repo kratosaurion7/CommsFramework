@@ -7,6 +7,9 @@
 
 #include "BlackjackGame.h"
 
+#include <MessageDialog.h>
+#include <SDLUtilities.h>
+
 int main()
 {
     GameEngine* eng = new GameEngine();
@@ -32,6 +35,11 @@ int main()
         if (eng->Keyboard->IsKeyClicked(Key::_Escape))
         {
             break;
+        }
+
+        if (eng->Keyboard->IsKeyClicked(Key::Space))
+        {
+            SaveTextAsBMP((SDLText*)game->gameDrawDialog->DialogText, "test.bmp");
         }
 
         //if (eng->Keyboard->IsKeyClicked(Key::E))
