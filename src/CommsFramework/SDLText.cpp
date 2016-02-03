@@ -132,6 +132,7 @@ void SDLText::UpdateInnerImpl()
     finalTextHeight = 50; // Test height of 50, maybe this will be provided by the font
 
     SDL_Surface* finalTextSurface = SDL_CreateRGBSurface(0, finalTextWidth, finalTextHeight, 32, 0, 0, 0, 0);
+    
     SDL_FillRect(finalTextSurface, NULL, 0xFFFFFFFF);
 
     FPosition* currentSpaceRectangle = new FPosition(0, 0);
@@ -164,8 +165,11 @@ void SDLText::UpdateInnerImpl()
             }
         }
 
-        if (characterTexture == NULL)
+        if (characterTexture == NULL) 
+        {
+            currentSpaceRectangle->X += 30;
             continue;
+        }
 
         SDLTexture* convertedCharacterTexture = dynamic_cast<SDLTexture*>(characterTexture);
         
@@ -174,23 +178,23 @@ void SDLText::UpdateInnerImpl()
         destRec.y = currentSpaceRectangle->Y;
         destRec.h = 50;
         destRec.w = 30;
-        int res = SDL_BlitSurface(convertedCharacterTexture->surface, NULL, finalTextSurface, &destRec);
+        int res = SDL_BlitScaled(convertedCharacterTexture->surface, NULL, finalTextSurface, &destRec);
 
         if (res != 0)
         {
             const char* errorString = SDL_GetError();
-            fprintf(stderr, "Unable to create RGB surface with error %s\n", errorString);
+            fprintf(stderr, "Unable to scaled blit with error %s\n", errorString);
         }
 
         currentSpaceRectangle->X += 30;
 
     }
 
-    //if(textTexture != NULL)
-    //    delete(textTexture);
+    if (textTexture != NULL)
+        SDL_DestroyTexture(this->textTexture);
 
-    //if (textSurface != NULL)
-    //    delete(textSurface);
+    if (textSurface != NULL)
+        SDL_FreeSurface(textSurface);
 
     
     
@@ -199,10 +203,4 @@ void SDLText::UpdateInnerImpl()
     textTexture = SDL_CreateTextureFromSurface(renderer, finalTextSurface);
 
     delete(currentSpaceRectangle);
-
-    //if (textSurface != NULL)
-    //{
-    //    SDL_SaveBMP(textSurface, "out.bmp");
-    //}
-
 }
