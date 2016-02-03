@@ -27,6 +27,8 @@ SDLText::SDLText()
     characterSize = 12;
     sdlTextStyle = TEXT_STYLE_REGULAR;
     foregroundColor = 0xFFFFFFFF;
+    textSurface = NULL;
+    textTexture = NULL;
 
     Engine = NULL;
     ClickInfo = NULL;
@@ -179,11 +181,23 @@ void SDLText::UpdateInnerImpl()
 
     }
 
-    delete(textTexture);
+    //if(textTexture != NULL)
+    //    delete(textTexture);
+
+    //if (textSurface != NULL)
+    //    delete(textSurface);
+
+    
     
     SDL_Renderer* renderer = ((SDLGraphicEngine*)Engine)->gameRenderer;
     textSurface = finalTextSurface;
     textTexture = SDL_CreateTextureFromSurface(renderer, finalTextSurface);
 
     delete(currentSpaceRectangle);
+
+    //if (textSurface != NULL)
+    //{
+    //    SDL_SaveBMP(textSurface, "out.bmp");
+    //}
+
 }

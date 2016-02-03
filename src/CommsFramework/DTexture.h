@@ -25,6 +25,10 @@ public:
 
     virtual void SetSolidColor(uint32_t pixelColor);
 
+    virtual void SaveTextureToFile();
+    virtual void SaveTextureToFile(std::string fileName);
+
+
     sf::Texture* innerImpl;
 
 private:

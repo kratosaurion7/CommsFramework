@@ -29,4 +29,6 @@ public:
 
     virtual void SetSolidColor(uint32_t pixelColor) = 0;
 
+    virtual void SaveTextureToFile() = 0;
+    virtual void SaveTextureToFile(std::string fileName) = 0;
 };

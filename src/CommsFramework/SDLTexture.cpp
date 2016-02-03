@@ -101,7 +101,7 @@ BaseTexture* SDLTexture::GetSubTexture(FRectangle rec)
     SDL_Rect sRec = FRectToSDL_Rect(rec);
     
     SDL_Surface* subTextureSurface = SDL_CreateRGBSurface(0, recSize->Width, recSize->Height, 32, 0, 0, 0, 0);
-
+    
     if (subTextureSurface == NULL)
     {
         errorString = SDL_GetError();
@@ -109,6 +109,8 @@ BaseTexture* SDLTexture::GetSubTexture(FRectangle rec)
 
         return NULL;
     }
+
+    SDL_FillRect(subTextureSurface, NULL, 0xFFFFFFFF);
 
     res = SDL_BlitSurface(this->surface, &sRec, subTextureSurface, NULL);
 
@@ -181,4 +183,20 @@ void SDLTexture::SetSolidColor(uint32_t pixelColor)
 
     surface = newSurface;
     texture = newTexture;
+}
+
+void SDLTexture::SaveTextureToFile()
+{
+    this->SaveTextureToFile("out.bmp");
+}
+
+void SDLTexture::SaveTextureToFile(std::string fileName)
+{
+    int res = SDL_SaveBMP(this->surface, fileName.c_str());
+
+    if (res != 0)
+    {
+        const char* errorString = SDL_GetError();
+        fprintf(stderr, "Unable to save file to file, %s\n", errorString);
+    }
 }

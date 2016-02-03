@@ -69,3 +69,11 @@ void DTexture::SetSolidColor(uint32_t pixelColor)
 
     innerImpl->loadFromImage((*image)); // Should declare the image as stack local ?
 }
+
+void DTexture::SaveTextureToFile()
+{
+}
+
+void DTexture::SaveTextureToFile(std::string fileName)
+{
+}
