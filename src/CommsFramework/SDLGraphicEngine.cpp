@@ -54,6 +54,8 @@ void SDLGraphicEngine::Initialize(GraphicEngineInitParams* params)
         return;
     }
 
+    // TODO : Make DPI checks HERE
+
     mainWindow = SDL_CreateWindow(params->WindowTitle.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, params->WindowSize->Width, params->WindowSize->Height, 0);
 
     if (mainWindow == NULL)
@@ -80,6 +82,16 @@ void SDLGraphicEngine::Initialize(GraphicEngineInitParams* params)
     {
         errorString = IMG_GetError();
         fprintf(stderr, "Unable to create the load SDL_Image with error %s\n", errorString);
+
+        return;
+    }
+
+    //res = SDL_RenderSetScale(gameRenderer, 0.5f, 0.5f);
+
+    if (res != 0)
+    {
+        errorString = SDL_GetError();
+        fprintf(stderr, "Unable to scale by 60% with error %s\n", errorString);
 
         return;
     }
