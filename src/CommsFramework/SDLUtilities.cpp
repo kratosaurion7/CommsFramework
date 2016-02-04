@@ -44,3 +44,17 @@ void SaveTextAsBMP(SDLText* text, std::string fileName)
         fprintf(stderr, "Unable to save text to bitmap with error %s\n", errorString);
     }
 }
+
+void TestGraphical()
+{
+    float diagonalDpi = 0;
+    float horizontalDpi = 0;
+    float verticalDpi = 0;
+
+    int res = SDL_GetDisplayDPI(0, &diagonalDpi, &horizontalDpi, &verticalDpi);
+
+    char buf[256];
+    sprintf(buf, "DDPI = %f, HDPI = %f, VDPI = %f\n", diagonalDpi, horizontalDpi, verticalDpi);
+
+    SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_INFORMATION, "INFO", buf, NULL);
+}

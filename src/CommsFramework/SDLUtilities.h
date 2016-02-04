@@ -11,3 +11,5 @@ SDL_Rect FRectToSDL_Rect(FRectangle rec);
 
 void SaveSpriteAsBMP(SDLSprite* sprt, std::string fileName);
 void SaveTextAsBMP(SDLText* text, std::string fileName);
+
+void TestGraphical();
