@@ -426,7 +426,7 @@ void GameEngine::FlagClickedSprites()
                 FRectangle bounds = sprt->GetRectangle();
                 bool containmentTest = bounds.IsPointInside(mousePos);
 
-                if (strcmp(sprt->Ident.c_str(), "YesNoDialogYesButton") == 0)
+                if (strcmp(sprt->Ident.c_str(), "BetButtonAccept") == 0)
                 {
                     int i = 0;
                 }
