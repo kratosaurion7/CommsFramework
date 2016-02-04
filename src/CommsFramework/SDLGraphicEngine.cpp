@@ -54,9 +54,20 @@ void SDLGraphicEngine::Initialize(GraphicEngineInitParams* params)
         return;
     }
 
-    // TODO : Make DPI checks HERE
+    res = SDL_GetDisplayDPI(0, &this->DiagonalDPI, &this->HorizontalDPI, &this->VerticalDPI);
 
-    mainWindow = SDL_CreateWindow(params->WindowTitle.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, params->WindowSize->Width, params->WindowSize->Height, 0);
+    if (res != 0)
+    {
+        errorString = SDL_GetError();
+        fprintf(stderr, "Unable to query display 0 DPI with error %s\n", errorString);
+
+        return;
+    }
+
+    RenderingScaleX = this->VerticalDPI / 96; // Assuming assets at 96dpi
+    RenderingScaleY = this->HorizontalDPI / 96;
+
+    mainWindow = SDL_CreateWindow(params->WindowTitle.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, params->WindowSize->Width * RenderingScaleX, params->WindowSize->Height * RenderingScaleY, 0);
 
     if (mainWindow == NULL)
     {
@@ -86,12 +97,12 @@ void SDLGraphicEngine::Initialize(GraphicEngineInitParams* params)
         return;
     }
 
-    //res = SDL_RenderSetScale(gameRenderer, 0.5f, 0.5f);
+    res = SDL_RenderSetScale(gameRenderer, RenderingScaleX, RenderingScaleY);
 
     if (res != 0)
     {
         errorString = SDL_GetError();
-        fprintf(stderr, "Unable to scale by 60% with error %s\n", errorString);
+        fprintf(stderr, "Unable to scale by %f,%f with error %s\n", RenderingScaleX, RenderingScaleY, errorString);
 
         return;
     }

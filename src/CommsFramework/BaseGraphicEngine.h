@@ -27,6 +27,13 @@ public:
 
     bool zIndexNeedsReordering = false;
 
+    float DiagonalDPI;
+    float HorizontalDPI;
+    float VerticalDPI;
+
+    float RenderingScaleX;
+    float RenderingScaleY;
+
     virtual void Initialize(GraphicEngineInitParams* params) = 0;
 
     virtual void AddObject(BaseSprite* obj) = 0;
