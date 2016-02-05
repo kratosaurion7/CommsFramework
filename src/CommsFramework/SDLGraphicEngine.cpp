@@ -3,6 +3,13 @@
 #include <SDL.h>
 #include <SDL_image.h>
 
+#ifdef WIN32
+#include <Windows.h>
+
+
+#undef CreateFont // Used to hide the Windows implementation of CreateFont since I use a function with that name already.
+#endif
+
 #include "TextureRepository.h"
 #include "DrawObject.h"
 #include "GraphicEngineInitParams.h"
@@ -44,6 +51,12 @@ void SDLGraphicEngine::Initialize(GraphicEngineInitParams* params)
     int res = 0;
     const char* errorString;
 
+#ifdef WIN32
+    // This section is used to init OS specific options
+    InitWin32();
+
+#endif
+
     res = SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS);
 
     if (res != 0)
@@ -53,19 +66,6 @@ void SDLGraphicEngine::Initialize(GraphicEngineInitParams* params)
 
         return;
     }
-
-    res = SDL_GetDisplayDPI(0, &this->DiagonalDPI, &this->HorizontalDPI, &this->VerticalDPI);
-
-    if (res != 0)
-    {
-        errorString = SDL_GetError();
-        fprintf(stderr, "Unable to query display 0 DPI with error %s\n", errorString);
-
-        return;
-    }
-
-    RenderingScaleX = this->VerticalDPI / 96; // Assuming assets at 96dpi
-    RenderingScaleY = this->HorizontalDPI / 96;
 
     mainWindow = SDL_CreateWindow(params->WindowTitle.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, params->WindowSize->Width * RenderingScaleX, params->WindowSize->Height * RenderingScaleY, 0);
 
@@ -132,7 +132,7 @@ PointerList<DrawObject*>* SDLGraphicEngine::GetDrawableList()
     return drawables;
 }
 
-DrawObject* SDLGraphicEngine::GetObject(std::string identifier)
+DrawObject* SDLGraphicEngine::GetDrawableObject(std::string identifier)
 {
     // TODO : Implement in base class.
     std::list<DrawObject*>::iterator iter = drawables->GetContainer()->begin();
@@ -178,6 +178,8 @@ BaseTexture* SDLGraphicEngine::CreateTexture(std::string texturePath)
 
     return tex;
 }
+
+
 
 BaseFont* SDLGraphicEngine::CreateFont()
 {
@@ -390,3 +392,24 @@ bool SDLGraphicEngine::IsTimeForFrame()
 {
     return CurrentTickTime - LastTickTime > (1000 / WantedFrameRate);
 }
+
+#ifdef WIN32
+void SDLGraphicEngine::InitWin32()
+{
+    SetupDPI();
+}
+
+void SDLGraphicEngine::SetupDPI()
+{
+    HDC deviceContext = GetDC(NULL);
+
+    int dpiX = GetDeviceCaps(deviceContext, LOGPIXELSX);
+    int dpiY = GetDeviceCaps(deviceContext, LOGPIXELSY);
+
+    this->RenderingScaleX = dpiX / 96;
+    this->RenderingScaleY = dpiY / 96;
+
+    ReleaseDC(NULL, deviceContext);
+}
+
+#endif

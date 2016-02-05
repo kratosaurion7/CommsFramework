@@ -33,7 +33,7 @@ public:
     void RemoveObject(DrawObject* obj);
 
     PointerList<DrawObject*>* GetDrawableList();
-    DrawObject* GetObject(std::string identifier);
+    DrawObject* GetDrawableObject(std::string identifier);
 
     BaseSprite* CreateSprite(std::string identifier = "");
     BaseTexture* CreateTexture();

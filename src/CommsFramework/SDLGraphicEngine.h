@@ -50,7 +50,7 @@ public:
     virtual void RemoveObject(DrawObject* obj);
 
     virtual PointerList<DrawObject*>* GetDrawableList();
-    virtual DrawObject* GetObject(std::string identifier);
+    virtual DrawObject* GetDrawableObject(std::string identifier);
 
     virtual BaseSprite* CreateSprite(std::string identifier = "");
     virtual BaseTexture* CreateTexture();
@@ -87,5 +87,12 @@ private:
     SDL_Rect GetSpriteRect(DrawObject* object);
 
     bool IsTimeForFrame();
+    
+#ifdef WIN32
+    void InitWin32();
+
+    void SetupDPI();
+#endif
+
 };
 

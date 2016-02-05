@@ -41,7 +41,7 @@ public:
     virtual void RemoveObject(DrawObject* obj) = 0;
 
     virtual PointerList<DrawObject*>* GetDrawableList() = 0;
-    virtual DrawObject* GetObject(std::string identifier) = 0;
+    virtual DrawObject* GetDrawableObject(std::string identifier) = 0;
 
     virtual BaseSprite* CreateSprite(std::string identifier = "") = 0;
     virtual BaseTexture* CreateTexture() = 0;
