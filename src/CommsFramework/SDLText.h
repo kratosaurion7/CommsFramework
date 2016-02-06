@@ -49,5 +49,7 @@ private:
 
     uint32_t foregroundColor;
 
+    const int fallbackFontHeight = 16;
+    const int fallbackFontWidth = 8;
 };
 

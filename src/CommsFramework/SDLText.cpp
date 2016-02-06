@@ -128,12 +128,25 @@ void SDLText::UpdateInnerImpl()
     int finalTextWidth = 0;
     int finalTextHeight = 0;
 
-    finalTextWidth = this->textContent.length() * 30;
-    finalTextHeight = 50; // Test height of 50, maybe this will be provided by the font
+    finalTextWidth = this->textContent.length() * fallbackFontWidth;
+    finalTextHeight = fallbackFontHeight; // Test height of 50, maybe this will be provided by the font
 
-    SDL_Surface* finalTextSurface = SDL_CreateRGBSurface(0, finalTextWidth, finalTextHeight, 32, 0, 0, 0, 0);
+    Uint32 rmask, gmask, bmask, amask;
+#if SDL_BYTEORDER == SDL_BIG_ENDIAN
+    rmask = 0xff000000;
+    gmask = 0x00ff0000;
+    bmask = 0x0000ff00;
+    amask = 0x000000ff;
+#else
+    rmask = 0x000000ff;
+    gmask = 0x0000ff00;
+    bmask = 0x00ff0000;
+    amask = 0xff000000;
+#endif
+
+    SDL_Surface* finalTextSurface = SDL_CreateRGBSurface(0, finalTextWidth, finalTextHeight, 32, rmask, gmask, bmask, amask);
     
-    SDL_FillRect(finalTextSurface, NULL, 0xFFFFFFFF);
+    SDL_FillRect(finalTextSurface, NULL, 0x00FFFFFF);
 
     FPosition* currentSpaceRectangle = new FPosition(0, 0);
 
@@ -144,7 +157,7 @@ void SDLText::UpdateInnerImpl()
 
         if (strncmp(&textCharacter, " ", 1) == 0)
         {
-            currentSpaceRectangle->X += 30;
+            currentSpaceRectangle->X += fallbackFontWidth;
 
             continue;
         }
@@ -167,7 +180,7 @@ void SDLText::UpdateInnerImpl()
 
         if (characterTexture == NULL) 
         {
-            currentSpaceRectangle->X += 30;
+            currentSpaceRectangle->X += fallbackFontWidth;
             continue;
         }
 
@@ -176,8 +189,8 @@ void SDLText::UpdateInnerImpl()
         SDL_Rect destRec = SDL_Rect();
         destRec.x = currentSpaceRectangle->X;
         destRec.y = currentSpaceRectangle->Y;
-        destRec.h = 50;
-        destRec.w = 30;
+        destRec.h = fallbackFontHeight;
+        destRec.w = fallbackFontWidth;
         int res = SDL_BlitScaled(convertedCharacterTexture->surface, NULL, finalTextSurface, &destRec);
 
         if (res != 0)
@@ -186,7 +199,7 @@ void SDLText::UpdateInnerImpl()
             fprintf(stderr, "Unable to scaled blit with error %s\n", errorString);
         }
 
-        currentSpaceRectangle->X += 30;
+        currentSpaceRectangle->X += fallbackFontWidth;
 
     }
 
@@ -196,7 +209,7 @@ void SDLText::UpdateInnerImpl()
     if (textSurface != NULL)
         SDL_FreeSurface(textSurface);
 
-    
+    this->SetSize(finalTextHeight, finalTextWidth);
     
     SDL_Renderer* renderer = ((SDLGraphicEngine*)Engine)->gameRenderer;
     textSurface = finalTextSurface;

@@ -23,6 +23,7 @@
 #include "SDLTexture.h"
 #include "SDLText.h"
 #include "SDLFont.h"
+#include "SDLUtilities.h"
 
 SDLGraphicEngine::SDLGraphicEngine()
 {
@@ -339,6 +340,12 @@ void SDLGraphicEngine::ProcessDraw(SDL_Window* targetWindow)
             if (target->IsVisible())
             {
                 SDLDrawable* drawImpl = dynamic_cast<SDLDrawable*>(target);
+
+                SDLText* test = dynamic_cast<SDLText*>(target);
+                if (test != NULL)
+                {
+                    int i = 0;
+                }
 
                 if (drawImpl != NULL)
                 {
