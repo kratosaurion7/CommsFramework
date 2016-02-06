@@ -146,7 +146,7 @@ void SDLText::UpdateInnerImpl()
 
     SDL_Surface* finalTextSurface = SDL_CreateRGBSurface(0, finalTextWidth, finalTextHeight, 32, rmask, gmask, bmask, amask);
     
-    SDL_FillRect(finalTextSurface, NULL, 0x00FFFFFF);
+    SDL_FillRect(finalTextSurface, NULL, 0xFFFFFFFF);
 
     FPosition* currentSpaceRectangle = new FPosition(0, 0);
 
