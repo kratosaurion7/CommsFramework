@@ -10,7 +10,8 @@ void ProcessFile(char* fileName);
 enum ProcessState
 {
     SEEKING,
-
+    CHAR_FOUND,
+    CHAR_END
 };
 
 int main(int argc, char *argv[])
@@ -37,6 +38,7 @@ int main(int argc, char *argv[])
 void ProcessFile(char* fileName)
 {
     SDL_Surface* font = IMG_Load(fileName);
+    SDL_LockSurface(font);
 
     if (font == NULL)
     {
@@ -50,15 +52,20 @@ void ProcessFile(char* fileName)
     {
         for (int j = 0; j < font->h; j++)
         {
-            Uint32 px = pix[i + (j * font->w)];
-
-            if (px == 0xFFFFFFFF)
-            {
-                int test = 5;
-            }
-
+            //pix[i + (j * font->w)] = 0xFF0000FF;
+            
             int test = 0;
+
+            //if (i < 100)
+            //{
+            //    char buf[260];
+            //    sprintf(buf, "%d.png", i);
+            //    IMG_SavePNG(font, buf);
+            //}
         }
+        
     }
+
+    SDL_UnlockSurface(font);
 
 }
