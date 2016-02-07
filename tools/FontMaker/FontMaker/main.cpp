@@ -54,6 +54,12 @@ void ProcessFile(char* fileName)
         return;
     }
 
+    if (font->format->BitsPerPixel != 32)
+    {
+        fprintf(stderr, "Pixel format is not 32bit.\n");
+        return;
+    }
+
     Uint32* pix = (Uint32*)font->pixels;
 
     FRectangle* charRectangle;
