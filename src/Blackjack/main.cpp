@@ -14,6 +14,8 @@
 
 int main()
 {
+    StringList* x = new StringList();
+
     GameEngine* eng = new GameEngine();
 
     eng->Init(800, 800);
