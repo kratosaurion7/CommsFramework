@@ -1,8 +1,9 @@
 #include "StringList.h"
 
+#include <stdio.h>
 
 
-StringList::StringList()
+StringList::StringList() : BaseList()
 {
 }
 
@@ -11,11 +12,11 @@ StringList::~StringList()
 {
 }
 
-void StringList::Read(std::string fileName)
+void StringList::Read(std::string fileName, std::string delimiter)
 {
 }
 
-void StringList::Read(FILE * fromFile)
+void StringList::Read(FILE * fromFile, std::string delimiter)
 {
 }
 
