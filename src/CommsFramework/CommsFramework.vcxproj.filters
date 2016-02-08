@@ -258,6 +258,9 @@
     <ClCompile Include="SDLKeyboard.cpp">
       <Filter>Framework\Graphic\SDL</Filter>
     </ClCompile>
+    <ClCompile Include="StringList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="XmlReader.h">
@@ -487,6 +490,9 @@
     </ClInclude>
     <ClInclude Include="SDLKeyboard.h">
       <Filter>Framework\Graphic\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="StringList.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

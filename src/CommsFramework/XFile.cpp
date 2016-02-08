@@ -126,7 +126,7 @@ void XFile::AppendText(char * text, int size)
 {
 }
 
-FileContents * XFile::Read()
+FileContents* XFile::Read()
 {
     if (!this->Check())
         return NULL;

@@ -10,6 +10,8 @@
 #include <MessageDialog.h>
 #include <SDLUtilities.h>
 
+#include <StringList.h>
+
 int main()
 {
     GameEngine* eng = new GameEngine();
