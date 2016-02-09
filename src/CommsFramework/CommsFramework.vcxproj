@@ -171,6 +171,7 @@
 
 XCOPY /Y "$(ProjectDir)..\..\libs\SDL\lib\win32\*.dll" "$(TargetDir)"
 XCOPY /Y "$(ProjectDir)..\..\libs\SDL_Image\lib\x86\*.dll" "$(TargetDir)"
+XCOPY /Y "$(ProjectDir)..\..\libs\SDL_ttf\lib\x86\*.dll" "$(TargetDir)"
 
 XCOPY /Y "$(ProjectDir)..\..\libs\ZeroMQ\x32\bin\libzmq-v120-mt-4_0_4.dll" "$(TargetDir)"
 
@@ -180,7 +181,7 @@ XCOPY /Y /E "Assets\*" "$(TargetDir)Assets"</Command>
     </PostBuildEvent>
     <Lib>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
-      <AdditionalDependencies>libzmq-v120-mt-4_0_4.lib;sfml-graphics-d.lib;sfml-system-d.lib;sfml-window-d.lib;sfml-main-d.lib;SDL2.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libzmq-v120-mt-4_0_4.lib;sfml-graphics-d.lib;sfml-system-d.lib;sfml-window-d.lib;sfml-main-d.lib;SDL2.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <Verbose>false</Verbose>
     </Lib>
   </ItemDefinitionGroup>
