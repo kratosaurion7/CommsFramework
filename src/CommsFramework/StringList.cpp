@@ -40,9 +40,17 @@ void StringList::Read(FILE * fromFile, std::string delimiter)
 
 void StringList::ReadLines(std::string fileName)
 {
+    FileReader fr(fileName);
+
+    std::string* textLine = fr.NextLine();
+
+    while (textLine != NULL)
+    {
+        this->Add(textLine);
+    }
 }
 
-void StringList::ReadLines(FILE * fromFile)
+void StringList::ReadLines(FILE* fromFile)
 {
 }
 
