@@ -2,6 +2,7 @@
 
 #include <SDL.h>
 #include <SDL_image.h>
+#include <SDL_ttf.h>
 
 #ifdef WIN32
 #include <Windows.h>
@@ -105,6 +106,16 @@ void SDLGraphicEngine::Initialize(GraphicEngineInitParams* params)
         errorString = SDL_GetError();
         fprintf(stderr, "Unable to scale by %f,%f with error %s\n", RenderingScaleX, RenderingScaleY, errorString);
 
+        return;
+    }
+
+    res = TTF_Init();
+
+    if(res != 0)
+    {
+        errorString = TTF_GetError();
+        fprintf(stderr, "Unable to init SDL_TTF with error %s\n", errorString);
+        
         return;
     }
 

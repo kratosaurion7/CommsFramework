@@ -4,6 +4,7 @@
 #include <SDL_image.h>
 #include <SDL_surface.h>
 #include <SDL_render.h>
+#include <SDL_ttf.h>
 
 #include "SDLFont.h"
 #include "FRectangle.h"
@@ -11,6 +12,7 @@
 #include "SDLTexture.h"
 #include "BaseGraphicEngine.h"
 #include "SDLGraphicEngine.h"
+#include "SDLUtilities.h"
 
 SDLText::SDLText()
 {
@@ -125,95 +127,120 @@ void SDLText::UpdateInnerImpl()
     if (this->font == NULL || this->characterSize <= 0)
         return;
 
-    int finalTextWidth = 0;
-    int finalTextHeight = 0;
-
-    finalTextWidth = this->textContent.length() * fallbackFontWidth;
-    finalTextHeight = fallbackFontHeight; // Test height of 50, maybe this will be provided by the font
-
-    Uint32 rmask, gmask, bmask, amask;
-#if SDL_BYTEORDER == SDL_BIG_ENDIAN
-    rmask = 0xff000000;
-    gmask = 0x00ff0000;
-    bmask = 0x0000ff00;
-    amask = 0x000000ff;
-#else
-    rmask = 0x000000ff;
-    gmask = 0x0000ff00;
-    bmask = 0x00ff0000;
-    amask = 0xff000000;
-#endif
-
-    SDL_Surface* finalTextSurface = SDL_CreateRGBSurface(0, finalTextWidth, finalTextHeight, 32, rmask, gmask, bmask, amask);
-    
-    SDL_FillRect(finalTextSurface, NULL, 0xFFFFFFFF);
-
-    FPosition* currentSpaceRectangle = new FPosition(0, 0);
-
-    for (int i = 0; i < this->textContent.length();i++)
+    if (this->font->FontType == BaseFont::FONT_FILE)
     {
-        BaseTexture* characterTexture;
-        char textCharacter = this->textContent.at(i);
+        SDL_Color color = { 0,0,0 };
+        color.a = 255;
+        SDL_Surface* renderedSurface = TTF_RenderText_Solid(this->font->fontObject, this->textContent.c_str(), color);
 
-        if (strncmp(&textCharacter, " ", 1) == 0)
+        if (renderedSurface == NULL)
         {
-            currentSpaceRectangle->X += fallbackFontWidth;
+            const char* errorString = TTF_GetError();
+            fprintf(stderr, "Could not render font with error %s\n", errorString);
 
-            continue;
+            delete(errorString);
+            return;
         }
-
-        for (int y = 0; y < this->font->GlyphMap->Count();y++)
-        {
-            Pair<char*, BaseTexture*>* iteratedPair = this->font->GlyphMap->Get(y);
-            char* iteratedCharacter = iteratedPair->Item1;
-
-            if (strncmp(&textCharacter, iteratedCharacter, 1) == 0)
-            {
-                characterTexture = iteratedPair->Item2;
-                break;
-            }
-            else 
-            {
-                characterTexture = NULL;
-            }
-        }
-
-        if (characterTexture == NULL) 
-        {
-            currentSpaceRectangle->X += fallbackFontWidth;
-            continue;
-        }
-
-        SDLTexture* convertedCharacterTexture = dynamic_cast<SDLTexture*>(characterTexture);
         
-        SDL_Rect destRec = SDL_Rect();
-        destRec.x = currentSpaceRectangle->X;
-        destRec.y = currentSpaceRectangle->Y;
-        destRec.h = fallbackFontHeight;
-        destRec.w = fallbackFontWidth;
-        int res = SDL_BlitScaled(convertedCharacterTexture->surface, NULL, finalTextSurface, &destRec);
+        this->SetSize(renderedSurface->h, renderedSurface->w);
 
-        if (res != 0)
+        SDL_Renderer* renderer = ((SDLGraphicEngine*)Engine)->gameRenderer;
+        textSurface = renderedSurface;
+        textTexture = SDL_CreateTextureFromSurface(renderer, renderedSurface);
+    }
+    else if (this->font->FontType == BaseFont::SPRITE_FONT)
+    {
+        int finalTextWidth = 0;
+        int finalTextHeight = 0;
+
+        finalTextWidth = this->textContent.length() * fallbackFontWidth;
+        finalTextHeight = fallbackFontHeight; // Test height of 50, maybe this will be provided by the font
+
+        Uint32 rmask, gmask, bmask, amask;
+    #if SDL_BYTEORDER == SDL_BIG_ENDIAN
+        rmask = 0xff000000;
+        gmask = 0x00ff0000;
+        bmask = 0x0000ff00;
+        amask = 0x000000ff;
+    #else
+        rmask = 0x000000ff;
+        gmask = 0x0000ff00;
+        bmask = 0x00ff0000;
+        amask = 0xff000000;
+    #endif
+
+        SDL_Surface* finalTextSurface = SDL_CreateRGBSurface(0, finalTextWidth, finalTextHeight, 32, rmask, gmask, bmask, amask);
+    
+        SDL_FillRect(finalTextSurface, NULL, 0xFFFFFFFF);
+
+        FPosition* currentSpaceRectangle = new FPosition(0, 0);
+
+        for (int i = 0; i < this->textContent.length();i++)
         {
-            const char* errorString = SDL_GetError();
-            fprintf(stderr, "Unable to scaled blit with error %s\n", errorString);
+            BaseTexture* characterTexture;
+            char textCharacter = this->textContent.at(i);
+
+            if (strncmp(&textCharacter, " ", 1) == 0)
+            {
+                currentSpaceRectangle->X += fallbackFontWidth;
+
+                continue;
+            }
+
+            for (int y = 0; y < this->font->GlyphMap->Count();y++)
+            {
+                Pair<char*, BaseTexture*>* iteratedPair = this->font->GlyphMap->Get(y);
+                char* iteratedCharacter = iteratedPair->Item1;
+
+                if (strncmp(&textCharacter, iteratedCharacter, 1) == 0)
+                {
+                    characterTexture = iteratedPair->Item2;
+                    break;
+                }
+                else 
+                {
+                    characterTexture = NULL;
+                }
+            }
+
+            if (characterTexture == NULL) 
+            {
+                currentSpaceRectangle->X += fallbackFontWidth;
+                continue;
+            }
+
+            SDLTexture* convertedCharacterTexture = dynamic_cast<SDLTexture*>(characterTexture);
+        
+            SDL_Rect destRec = SDL_Rect();
+            destRec.x = currentSpaceRectangle->X;
+            destRec.y = currentSpaceRectangle->Y;
+            destRec.h = fallbackFontHeight;
+            destRec.w = fallbackFontWidth;
+            int res = SDL_BlitScaled(convertedCharacterTexture->surface, NULL, finalTextSurface, &destRec);
+
+            if (res != 0)
+            {
+                const char* errorString = SDL_GetError();
+                fprintf(stderr, "Unable to scaled blit with error %s\n", errorString);
+            }
+
+            currentSpaceRectangle->X += fallbackFontWidth;
+
         }
 
-        currentSpaceRectangle->X += fallbackFontWidth;
+        if (textTexture != NULL)
+            SDL_DestroyTexture(this->textTexture);
 
+        if (textSurface != NULL)
+            SDL_FreeSurface(textSurface);
+
+        this->SetSize(finalTextHeight, finalTextWidth);
+    
+        SDL_Renderer* renderer = ((SDLGraphicEngine*)Engine)->gameRenderer;
+        textSurface = finalTextSurface;
+        textTexture = SDL_CreateTextureFromSurface(renderer, finalTextSurface);
+
+        delete(currentSpaceRectangle);
     }
 
-    if (textTexture != NULL)
-        SDL_DestroyTexture(this->textTexture);
-
-    if (textSurface != NULL)
-        SDL_FreeSurface(textSurface);
-
-    this->SetSize(finalTextHeight, finalTextWidth);
-    
-    SDL_Renderer* renderer = ((SDLGraphicEngine*)Engine)->gameRenderer;
-    textSurface = finalTextSurface;
-    textTexture = SDL_CreateTextureFromSurface(renderer, finalTextSurface);
-
-    delete(currentSpaceRectangle);
 }

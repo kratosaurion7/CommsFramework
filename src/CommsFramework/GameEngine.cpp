@@ -322,14 +322,14 @@ BaseFont* GameEngine::GetGameDefaultFont()
     if (engineDefaultFont == NULL)
     {
         engineDefaultFont = this->Graphics->CreateFont();
-
-        BaseTexture* spriteFontTexture = this->Graphics->CreateTexture("assets//DefaultSpriteFont.png");
+        engineDefaultFont->LoadFontFile("assets//arial.ttf");
         
-        int glyphsLen = 0;
-        SpriteFontGlyph** glyphMap = BaseFont::BuildDefaultFontGlyphDescriptor(glyphsLen);
-        engineDefaultFont->LoadSpriteFont(spriteFontTexture, glyphMap, glyphsLen);
 
-        //engineDefaultFont->LoadFontFile("assets//arial.ttf");
+        //BaseTexture* spriteFontTexture = this->Graphics->CreateTexture("assets//DefaultSpriteFont.png");
+        //
+        //int glyphsLen = 0;
+        //SpriteFontGlyph** glyphMap = BaseFont::BuildDefaultFontGlyphDescriptor(glyphsLen);
+        //engineDefaultFont->LoadSpriteFont(spriteFontTexture, glyphMap, glyphsLen);
     }
 
     return engineDefaultFont;
