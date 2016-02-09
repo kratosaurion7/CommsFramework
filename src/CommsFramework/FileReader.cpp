@@ -11,6 +11,12 @@ FileReader::FileReader()
     fileStream = new std::fstream();
 }
 
+FileReader::FileReader(std::string filePath)
+{
+    fileStream = new std::fstream();
+    fileStream->open(filePath, std::ios::in);
+}
+
 FileReader::~FileReader()
 {
     if (fileStream != NULL)
@@ -51,6 +57,30 @@ FileContents* FileReader::GetFileContents(bool ensureNullTerminated)
     return fileContents;
 }
 
+std::string* FileReader::ReadChars(int count)
+{
+    char* buf = new char[count];
+    fileStream->get(buf, count);
+
+    return new std::string(buf);
+}
+
+std::string* FileReader::NextLine()
+{
+    char* buf = new char[1024];
+    fileStream->getline(buf, 1024);
+
+    if (fileStream->fail()) // Return null when file's end
+        return NULL;
+
+    return new std::string(buf);
+}
+
+void FileReader::ResetCursor()
+{
+    fileStream->seekp(0);
+}
+
 void FileReader::Close()
 {
     if (fileStream != NULL)
@@ -89,11 +119,7 @@ int FileReader::GetFileSize()
 
         fileSize = fileStream->tellg();
 
-        fileStream->seekg(150);
-
-
         fileStream->seekg(currentPos);
-
     }
 
     return fileSize;
