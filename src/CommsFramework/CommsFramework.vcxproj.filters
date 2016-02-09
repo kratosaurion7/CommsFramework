@@ -259,7 +259,7 @@
       <Filter>Framework\Graphic\SDL</Filter>
     </ClCompile>
     <ClCompile Include="StringList.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Framework\Collections</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -492,7 +492,7 @@
       <Filter>Framework\Graphic\SDL</Filter>
     </ClInclude>
     <ClInclude Include="StringList.h">
-      <Filter>Header Files</Filter>
+      <Filter>Framework\Collections</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
