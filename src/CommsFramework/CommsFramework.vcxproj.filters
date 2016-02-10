@@ -94,6 +94,12 @@
     <Filter Include="Framework\Graphic\SDL">
       <UniqueIdentifier>{c4260f2d-74ee-422d-b043-9739984b9aa8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Framework\Tools">
+      <UniqueIdentifier>{6d04d8ac-eb1f-45b7-98ca-ed7a6f9dd46c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Tools\Font">
+      <UniqueIdentifier>{5da2dff1-4965-45ef-8f2c-59c9c2cc8f0a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="XmlReader.cpp">
@@ -260,6 +266,9 @@
     </ClCompile>
     <ClCompile Include="StringList.cpp">
       <Filter>Framework\Collections</Filter>
+    </ClCompile>
+    <ClCompile Include="FontProcessor.cpp">
+      <Filter>Framework\Tools\Font</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -493,6 +502,9 @@
     </ClInclude>
     <ClInclude Include="StringList.h">
       <Filter>Framework\Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="FontProcessor.h">
+      <Filter>Framework\Tools\Font</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
