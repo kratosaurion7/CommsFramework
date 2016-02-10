@@ -14,27 +14,28 @@ StringList::~StringList()
 {
 }
 
-void StringList::Read(std::string fileName, std::string delimiter)
+void StringList::Read(std::string fileName, char delimiter)
 {
     std::fstream stream(fileName, std::ios::in);
 
     int count = 64;
+    std::string* newString = new std::string();
     char* buf;
     
     while (true)
     {
-        stream.getline(buf, count, '\n');
+        stream.getline(buf, count, delimiter);
 
-        std::string* newLine = new std::string(buf);
+        newString->append(buf);
 
-        this->Add(newLine);
-            break;
-        
-        
+        if (strlen(buf) < count)
+        {
+            this->Add(newString);
+        }
     }
 }
 
-void StringList::Read(FILE * fromFile, std::string delimiter)
+void StringList::Read(FILE* fromFile, char delimiter)
 {
 }
 
