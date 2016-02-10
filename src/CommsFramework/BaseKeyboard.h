@@ -12,4 +12,6 @@ public:
     virtual bool IsKeyClicked(Key key) = 0;
 
     virtual void UpdateKeyboardState() = 0;
+
+    virtual void UpdateKeyboardPastState() = 0;
 };

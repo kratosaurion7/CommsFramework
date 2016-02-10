@@ -19,11 +19,16 @@ public:
 
     virtual void UpdateKeyboardState();
 
+    virtual void UpdateKeyboardPastState();
+
     void HandleEvent(SDL_Event* anEvent);
 
 private:
     PointerList<Pair<Key, SDL_Scancode>*>* sdlScanCodesMap;
 
     void BuildKeyMap();
+
+    const Uint8* currentKeyboardState;
+    const Uint8* previousKeyboardState;
 };
 

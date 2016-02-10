@@ -186,9 +186,6 @@ void GameEngine::Play()
 
 void GameEngine::Pre_Update()
 {
-    //GameEngine::Mouse->UpdateMouseState();
-    GameEngine::Keyboard->UpdateKeyboardState();
-
     if (this->Graphics->zIndexNeedsReordering)
     {
         this->Graphics->ReorderSpritesByZIndex();

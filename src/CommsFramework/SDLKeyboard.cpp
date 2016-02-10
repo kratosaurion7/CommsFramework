@@ -7,6 +7,10 @@ SDLKeyboard::SDLKeyboard()
     sdlScanCodesMap = new PointerList<Pair<Key, SDL_Scancode>*>();
 
     BuildKeyMap();
+
+    currentKeyboardState = NULL;
+    previousKeyboardState = NULL;
+
 }
 
 
@@ -29,11 +33,29 @@ bool SDLKeyboard::IsKeyPressed(Key key)
 
 bool SDLKeyboard::IsKeyClicked(Key key)
 {
-    return false;
+    auto it = sdlScanCodesMap->GetContainer()->begin();
+    while (it != sdlScanCodesMap->GetContainer()->end())
+    {
+        Pair<Key, SDL_Scancode>* keyMap = (*it);
+
+        if (keyMap->Item1 == key)
+        {
+            return currentKeyboardState[keyMap->Item2];
+        }
+
+
+        it++;
+    }
 }
 
 void SDLKeyboard::UpdateKeyboardState()
 {
+    currentKeyboardState = SDL_GetKeyboardState(NULL);
+}
+
+void SDLKeyboard::UpdateKeyboardPastState()
+{
+    previousKeyboardState = currentKeyboardState;
 }
 
 void SDLKeyboard::HandleEvent(SDL_Event* anEvent)
