@@ -18,8 +18,6 @@ public:
 
     virtual bool IsKeyClicked(Key key);
 
-    virtual void UpdateKeyboardState();
-
     virtual void UpdateKeyboardPastState();
 
     void HandleEvent(SDL_Event* anEvent);

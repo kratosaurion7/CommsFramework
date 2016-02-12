@@ -21,23 +21,15 @@ SDLKeyboard::~SDLKeyboard()
 
 bool SDLKeyboard::IsKeyPressed(Key key)
 {
-    return false;
-
-    //const Uint8 *state = SDL_GetKeyboardState(NULL);
-
-    //SDL_Scancode mappedScanCode = sdlScanCodesMap->Single([key](Pair<Key, SDL_Scancode>* pair) { return pair->Item1 == key;})->Item2;
-
-    //return state[mappedScanCode];
+    return currentKeyboardState->ContainsItem((SDL_Scancode)(key));
 }
 
 bool SDLKeyboard::IsKeyClicked(Key key)
 {
-    return currentKeyboardState->ContainsItem((SDL_Scancode)(key));
-}
+    bool previous = !currentKeyboardState->ContainsItem((SDL_Scancode)key);
+    bool current = currentKeyboardState->ContainsItem((SDL_Scancode)key);
 
-void SDLKeyboard::UpdateKeyboardState()
-{
-    //currentKeyboardState = SDL_GetKeyboardState(NULL);
+    return previous && current;
 }
 
 void SDLKeyboard::UpdateKeyboardPastState()
