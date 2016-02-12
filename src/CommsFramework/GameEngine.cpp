@@ -236,7 +236,6 @@ void GameEngine::Post_Update()
 
     RemoveSpriteClickedFlag();
 
-    GameEngine::Mouse->UpdatePastMouseState();
 }
 
 BaseActor* GameEngine::CreateActor()
@@ -467,6 +466,9 @@ void GameEngine::RemoveSpriteClickedFlag()
 
 void GameEngine::DoEventLoop()
 {
+    GameEngine::Keyboard->UpdateKeyboardPastState();
+    GameEngine::Mouse->UpdatePastMouseState();
+
     SDL_Event myEvent;
     while (SDL_PollEvent(&myEvent)) {
         switch (myEvent.type)

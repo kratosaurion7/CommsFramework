@@ -8,9 +8,8 @@ SDLKeyboard::SDLKeyboard()
 
     BuildKeyMap();
 
-    currentKeyboardState = NULL;
-    previousKeyboardState = NULL;
-
+    currentKeyboardState = new BaseList<SDL_Scancode>();
+    previousKeyboardState = new BaseList<SDL_Scancode>();
 }
 
 
@@ -33,37 +32,33 @@ bool SDLKeyboard::IsKeyPressed(Key key)
 
 bool SDLKeyboard::IsKeyClicked(Key key)
 {
-    auto it = sdlScanCodesMap->GetContainer()->begin();
-    while (it != sdlScanCodesMap->GetContainer()->end())
-    {
-        Pair<Key, SDL_Scancode>* keyMap = (*it);
-
-        if (keyMap->Item1 == key)
-        {
-            return currentKeyboardState[keyMap->Item2];
-        }
-
-
-        it++;
-    }
+    return currentKeyboardState->ContainsItem((SDL_Scancode)(key));
 }
 
 void SDLKeyboard::UpdateKeyboardState()
 {
-    currentKeyboardState = SDL_GetKeyboardState(NULL);
+    //currentKeyboardState = SDL_GetKeyboardState(NULL);
 }
 
 void SDLKeyboard::UpdateKeyboardPastState()
 {
-    previousKeyboardState = currentKeyboardState;
+    previousKeyboardState->Clear();
+    previousKeyboardState->AddRange(currentKeyboardState);
+    currentKeyboardState->Clear();
 }
 
 void SDLKeyboard::HandleEvent(SDL_Event* anEvent)
 {
+    SDL_Scancode x = anEvent->key.keysym.scancode;
     switch (anEvent->type)
     {
         case SDL_KEYDOWN: // Key states are retrieved dynamically in the IsKeyPressed function
+            currentKeyboardState->Add(x);
+            
+            break;
         case SDL_KEYUP:
+            //currentKeyboardState->RemoveObject(x);
+
             break;
 
         default:

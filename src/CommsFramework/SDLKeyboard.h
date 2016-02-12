@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SDL_events.h>
+#include <SDL_scancode.h>
 
 #include "PointerList.h"
 #include "Pair.h"
@@ -28,7 +29,7 @@ private:
 
     void BuildKeyMap();
 
-    const Uint8* currentKeyboardState;
-    const Uint8* previousKeyboardState;
+    BaseList<SDL_Scancode>* currentKeyboardState;
+    BaseList<SDL_Scancode>* previousKeyboardState;
 };
 
