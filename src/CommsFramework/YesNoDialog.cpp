@@ -26,7 +26,7 @@ YesNoDialog::YesNoDialog()
     ButtonNo->SetPos(455, 300);
 
     DialogText = Engine->CreateText("");
-    DialogText->SetPos(300, 300);
+    DialogText->SetPos(315, 315);
 
     // TODO : Add images to the sprites
     // TODO : Auto arrange the sprite's position
@@ -57,7 +57,7 @@ YesNoDialog::YesNoDialog(std::string windowText)
     ButtonNo->SetPos(455, 350);
 
     DialogText = Engine->CreateText(windowText);
-    DialogText->SetPos(300, 300);
+    DialogText->SetPos(315, 315);
 
     this->Sprites->Add(DialogSprite);
     this->Sprites->Add(ButtonYes);

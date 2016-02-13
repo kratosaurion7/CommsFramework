@@ -115,7 +115,7 @@ void MessageDialog::SetupSprites()
     DialogSprite->SetPos(300, 300);
 
     DialogText = Engine->CreateText(this->dialogMessage);
-    DialogText->SetPos(300, 300);
+    DialogText->SetPos(315, 315);
 
     this->Sprites->Add(DialogSprite);
     this->Sprites->Add(DialogText);
