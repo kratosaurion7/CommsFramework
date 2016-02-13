@@ -26,6 +26,8 @@ bool SDLKeyboard::IsKeyPressed(Key key)
 
 bool SDLKeyboard::IsKeyClicked(Key key)
 {
+    return IsKeyPressed(key); // Temporary fix
+
     bool previous = !currentKeyboardState->ContainsItem((SDL_Scancode)key);
     bool current = currentKeyboardState->ContainsItem((SDL_Scancode)key);
 
