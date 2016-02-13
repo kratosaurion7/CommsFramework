@@ -43,7 +43,7 @@ int CardActor::CardsTotal()
     {
         Card* card = (*it);
 
-        totalValue += card->CardValue;
+        totalValue += card->CardCountValue;
 
         it++;
     }

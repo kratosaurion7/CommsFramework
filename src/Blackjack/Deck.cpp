@@ -46,6 +46,20 @@ void Deck::SetupStandard52CardsDeck()
             newCard->CardSuit = (Card::CARD_SUITS)i;
             newCard->CardValue = (Card::CARD_VALUE)k;
 
+            switch (k)
+            {
+                case 11:
+                case 12:
+                case 13:
+                    newCard->CardCountValue = 10;
+                    break;
+                case 1:
+                    newCard->CardCountValue = 11;
+                default:
+                    newCard->CardCountValue = k;
+                    break;
+            }
+
             std::string cardFrontStringName;
             cardFrontStringName.append(std::to_string(i));
             cardFrontStringName.append("_");

@@ -22,4 +22,3 @@ public:
     void SaveLines(std::string fileName);
     void SaveLines(FILE* toFile);
 };
-

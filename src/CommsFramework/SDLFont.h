@@ -2,9 +2,9 @@
 
 #include <string>
 
-#include "BaseFont.h"
-
 #include <SDL_ttf.h>
+
+#include "BaseFont.h"
 
 class SDLFont : public BaseFont
 {

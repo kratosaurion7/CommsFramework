@@ -31,10 +31,12 @@ public:
         Ten,
         Jack,
         Queen,
-        King,
+        King = 13,
 
         CARD_VALUE_COUNT
     } CardValue;
+
+    int CardCountValue;
 
     Card();
     ~Card();
