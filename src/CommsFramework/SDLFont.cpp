@@ -13,7 +13,7 @@ SDLFont::~SDLFont()
 
 void SDLFont::LoadFontFile(std::string path)
 {
-    fontObject = TTF_OpenFont(path.c_str(), 12);
+    fontObject = TTF_OpenFont(path.c_str(), 22);
 
     if (!fontObject)
     {
