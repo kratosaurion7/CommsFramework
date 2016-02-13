@@ -127,11 +127,15 @@ void SDLGraphicEngine::Initialize(GraphicEngineInitParams* params)
 void SDLGraphicEngine::AddObject(BaseSprite* obj)
 {
     drawables->Add(obj);
+
+    zIndexNeedsReordering = true;
 }
 
 void SDLGraphicEngine::AddObject(BaseText* obj)
 {
     drawables->Add(obj);
+
+    zIndexNeedsReordering = true;
 }
 
 void SDLGraphicEngine::RemoveObject(DrawObject * obj)

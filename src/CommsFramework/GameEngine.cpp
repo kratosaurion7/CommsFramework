@@ -441,7 +441,6 @@ void GameEngine::FlagClickedSprites()
             it++;
         }
     }
-    
 }
 
 void GameEngine::RemoveSpriteClickedFlag()

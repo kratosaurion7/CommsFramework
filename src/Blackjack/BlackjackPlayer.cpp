@@ -47,8 +47,6 @@ BlackjackPlayer::BlackjackPlayer()
     CurrentBetText->SetPos(300, 700);
     CurrentBetLabel->Show(true);
     CurrentBetText->Show(true);
-
-
 }
 
 
