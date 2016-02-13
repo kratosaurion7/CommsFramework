@@ -84,6 +84,8 @@ void BlackjackGame::Update()
             {
                 if (this->Player->Money >= this->BetSelector->TotalBet && this->BetSelector->TotalBet > 0)
                 {
+                    this->Player->Money -= this->BetSelector->TotalBet;
+
                     this->Player->CurrentBet = this->BetSelector->TotalBet;
 
                     this->BetSelector->StopBetSelection();
@@ -293,7 +295,6 @@ void BlackjackGame::Update()
             if (playerLoseDialog->DialogState == BaseDialog::DIALOG_CLOSED)
             {
                 // Show lose
-                this->Player->Money -= this->Player->CurrentBet;
 
                 playerLoseDialog->Open();
             }
