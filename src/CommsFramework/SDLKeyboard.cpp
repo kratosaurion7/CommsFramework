@@ -6,8 +6,6 @@ SDLKeyboard::SDLKeyboard()
 {
     sdlScanCodesMap = new PointerList<Pair<Key, SDL_Scancode>*>();
 
-    BuildKeyMap();
-
     currentKeyboardState = new BaseList<SDL_Scancode>();
     previousKeyboardState = new BaseList<SDL_Scancode>();
 }

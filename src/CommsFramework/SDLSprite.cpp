@@ -6,7 +6,6 @@
 #include "BaseText.h"
 #include "BaseTexture.h"
 #include "SDLTexture.h"
-#include "SpriteAnimation.h"
 #include "SDLGraphicEngine.h"
 
 SDLSprite::SDLSprite()
@@ -24,9 +23,6 @@ SDLSprite::SDLSprite()
     LoopAnimation = false;
     IsPlaying = false;
     GravityEnabled = false;
-    CurrentAnimation = NULL;
-    DefaultAnimation = NULL;
-    spriteAnimationList = new PointerList<SpriteAnimation*>();
 
     Engine = NULL;
 }
@@ -34,24 +30,6 @@ SDLSprite::SDLSprite()
 
 SDLSprite::~SDLSprite()
 {
-}
-
-PointerList<SpriteAnimation*>* SDLSprite::GetAnimations()
-{
-    return spriteAnimationList;
-}
-
-void SDLSprite::SetAnimations(PointerList<SpriteAnimation*>* newAnims)
-{
-    if (spriteAnimationList != NULL)
-    {
-        spriteAnimationList->Release();
-        delete(spriteAnimationList);
-    }
-
-    spriteAnimationList = newAnims;
-    this->DefaultAnimation = newAnims->Get(0);
-    this->SetTexture(this->DefaultAnimation->AnimationFrames->Get(0));
 }
 
 SDLTexture* SDLSprite::GetCurrentTexture()

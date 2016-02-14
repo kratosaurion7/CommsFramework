@@ -371,12 +371,7 @@ XCOPY /Y /E "Assets\*" "$(TargetDir)Assets"</Command>
     <ClCompile Include="RandomGen.cpp" />
     <ClCompile Include="SettingsRepository.cpp" />
     <ClCompile Include="SFMLMouse.cpp" />
-    <ClCompile Include="SpriteAnimation.cpp" />
-    <ClCompile Include="SpriteDescriptor.cpp" />
     <ClCompile Include="PackageFile.cpp" />
-    <ClCompile Include="Resource.cpp" />
-    <ClCompile Include="ResourceContainer.cpp" />
-    <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="GameModule.cpp" />
     <ClCompile Include="SFMLFont.cpp" />
     <ClCompile Include="SFMLKeyboard.cpp" />
@@ -440,8 +435,6 @@ XCOPY /Y /E "Assets\*" "$(TargetDir)Assets"</Command>
     <ClInclude Include="RandomGen.h" />
     <ClInclude Include="SettingsRepository.h" />
     <ClInclude Include="SFMLMouse.h" />
-    <ClInclude Include="SpriteAnimation.h" />
-    <ClInclude Include="SpriteDescriptor.h" />
     <ClInclude Include="PackageFile.h" />
     <ClInclude Include="PointerList.h" />
     <ClInclude Include="GraphicEngineInitParams.h" />
@@ -452,9 +445,6 @@ XCOPY /Y /E "Assets\*" "$(TargetDir)Assets"</Command>
     <ClInclude Include="DSprite.h" />
     <ClInclude Include="FileReader.h" />
     <ClInclude Include="Macros.h" />
-    <ClInclude Include="Resource.h" />
-    <ClInclude Include="ResourceContainer.h" />
-    <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="GameModule.h" />
     <ClInclude Include="SFMLDrawable.h" />
     <ClInclude Include="SFMLFont.h" />

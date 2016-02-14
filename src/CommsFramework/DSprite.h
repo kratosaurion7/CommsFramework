@@ -1,7 +1,6 @@
 #pragma once
 
 class DrawObject;
-class SpriteAnimation;
 class BaseTexture;
 class DTexture;
 class BaseSprite;
@@ -23,8 +22,6 @@ public:
 
     sf::Sprite* innerImpl;
 
-    virtual PointerList<SpriteAnimation*>* GetAnimations();
-    virtual void SetAnimations(PointerList<SpriteAnimation*>* newAnims);
     virtual DTexture* GetCurrentTexture();
     virtual PointerList<BaseTexture*>* GetTextures();
 
@@ -69,10 +66,6 @@ private:
      * Check if the sprite is ready for another frame switch
      * given the sprite FPS */
     bool IsFrameReady();
-
-    /**
-     * Shorthand function to search in the spriteAnimationList */
-    SpriteAnimation* FindAnim(std::string name);
 
     /**
      *  Update the SFML sprite values, position, etc. */

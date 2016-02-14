@@ -6,7 +6,7 @@
 #include <SDL_events.h>
 
 #include "GraphicEngineInitParams.h"
-#include "ResourceManager.h"
+
 
 #include "SFMLKeyboard.h"
 #include "SFMLMouse.h"
@@ -26,8 +26,6 @@
 
 #include "FSize.h"
 
-#include "Resource.h"
-
 #include "MouseClickInfo.h"
 
 BaseKeyboard* GameEngine::Keyboard = 0;
@@ -40,7 +38,6 @@ GameEngine::GameEngine()
     GameEngine::_globalInstance = this;
 
     Graphics = new SDLGraphicEngine();
-    Resources = new ResourceManager();
 
     GameSprites = new PointerList<BaseSprite*>();
     GameActors = new PointerList<BaseActor*>();
@@ -109,38 +106,13 @@ void GameEngine::Init(GameEngineInitParams* params)
     this->GameAreaSize = params->GraphicsParams->WindowSize;
 
     Graphics->Initialize(params->GraphicsParams);
-
-    Resources->Init(params->ResourceParams);
 }
 
 BaseSprite* GameEngine::GetSprite(std::string name)
 {
     BaseSprite* existingSprite = GameSprites->Single([name](BaseSprite* sprt) { return sprt->Ident == name; });
 
-    if (existingSprite != NULL)
-    {
-        return existingSprite;
-    }
-
-    // Get sprite
-    BaseSprite* spriteObject = Graphics->CreateSprite(name);
-    SpriteDescriptor* desc = Resources->SpritesInfo->Single([name](SpriteDescriptor* descriptor) { return descriptor->SpriteName.compare(name) == 0; });
-    
-    spriteObject->ApplyDescriptor(desc);
-
-    PointerList<SpriteAnimation*>* spriteAnimations = Resources->GetAnimationsForSprite(spriteObject);
-
-    BuildAnimationTextures(spriteAnimations);
-
-    // At this point, the sprite anims have created their textures.
-    spriteObject->SetAnimations(spriteAnimations);
-
-    if (spriteObject != NULL)
-    {
-        GameSprites->Add(spriteObject);
-    }
-
-    return spriteObject;
+    return existingSprite;
 }
 
 BaseList<BaseSprite*>* GameEngine::GetSpriteList(std::string name)
@@ -167,8 +139,6 @@ BaseSprite* GameEngine::CopySprite(std::string targetSpriteName, std::string new
 void GameEngine::Load()
 {
     CreateSpritesFromConfig();
-
-    Resources->Load();
 }
 
 void GameEngine::Play()
@@ -532,53 +502,9 @@ void GameEngine::UpdateGraphicEngineSpritesFromActors()
     }
 }
 
-PointerList<BaseTexture*>* GameEngine::CreateTexturesFromResources(PointerList<Resource*>* resources)
-{
-    PointerList<BaseTexture*>* textureList = new PointerList<BaseTexture*>();
-
-    int counter = 0;
-
-    auto it = resources->GetContainer()->begin();
-    while (it != resources->GetContainer()->end())
-    {
-        Resource* res = (*it);
-
-        BaseTexture* newTexture = Graphics->CreateTexture();
-
-        int dataSize = 0;
-        char* resourceData = res->GetData(dataSize);
-
-        newTexture->LoadFromMemory(resourceData, dataSize);
-
-        textureList->Add(newTexture);
-        counter++;
-        it++;
-    }
-
-    return textureList;
-}
-
-void GameEngine::BuildAnimationTextures(PointerList<SpriteAnimation*>* anims)
-{
-    auto it = anims->GetContainer()->begin();
-    while (it != anims->GetContainer()->end())
-    {
-        SpriteAnimation* anim = *it;
-
-        anim->AnimationFrames = CreateTexturesFromResources(anim->AnimationResources);
-
-        it++;
-    }
-}
-
 GameEngineInitParams* GameEngineInitParams::CreateDefaultParams()
 {
     GameEngineInitParams* newParams = new GameEngineInitParams();
-
-    ResourceManagerInitParams* newResourceParams = new ResourceManagerInitParams();
-    newResourceParams->AssetRootFolder = "Assets\\";
-    newResourceParams->ConfigFileLocation = "config.xml";
-    newParams->ResourceParams = newResourceParams;
 
     GraphicEngineInitParams* newEngineParams = new GraphicEngineInitParams();
     newEngineParams->EnableVerticalSync = true;

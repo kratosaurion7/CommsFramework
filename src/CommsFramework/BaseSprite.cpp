@@ -2,9 +2,7 @@
 
 #include "BaseTexture.h"
 
-#include "SpriteAnimation.h"
 #include "BaseMouse.h"
-#include "SpriteDescriptor.h"
 #include "FRectangle.h"
 
 #include "BaseGraphicEngine.h"
@@ -22,12 +20,6 @@ bool BaseSprite::MouseOver()
     return myRec.IsPointInside(mousePos);
 }
 
-void BaseSprite::ApplyDescriptor(SpriteDescriptor* descriptor)
-{
-    this->SetPos(descriptor->Position);
-    //this->SetSize(descriptor->Size);
-}
-
 bool BaseSprite::CollisionWith(BaseSprite * other)
 {
     auto myRec = &this->GetRectangle();
@@ -41,21 +33,6 @@ bool BaseSprite::CollisionWith(BaseSprite * other)
     {
         return false;
     }
-}
-
-SpriteAnimation * BaseSprite::CreateAnimation(std::string name)
-{
-    SpriteAnimation* newAnim = new SpriteAnimation();
-    newAnim->AnimName = name;
-
-    spriteAnimationList->Add(newAnim);
-
-    if (DefaultAnimation == NULL)
-    {
-        DefaultAnimation = newAnim;
-    }
-
-    return newAnim;
 }
 
 void BaseSprite::SetTexture(std::string newTexturePath)

@@ -141,23 +141,11 @@
     <ClCompile Include="BitHelper.cpp">
       <Filter>Framework\System</Filter>
     </ClCompile>
-    <ClCompile Include="ResourceManager.cpp">
-      <Filter>Framework\Game\DataManager</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource.cpp">
-      <Filter>Framework\Game\DataManager</Filter>
-    </ClCompile>
-    <ClCompile Include="ResourceContainer.cpp">
-      <Filter>Framework\Game\DataManager</Filter>
-    </ClCompile>
     <ClCompile Include="GameModule.cpp">
       <Filter>Framework\Engine</Filter>
     </ClCompile>
     <ClCompile Include="GameEngine.cpp">
       <Filter>Framework\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="SpriteDescriptor.cpp">
-      <Filter>Framework\Game</Filter>
     </ClCompile>
     <ClCompile Include="Utilities.cpp">
       <Filter>Framework\System</Filter>
@@ -179,9 +167,6 @@
     </ClCompile>
     <ClCompile Include="BaseSprite.cpp">
       <Filter>Framework\Graphic\Base Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="SpriteAnimation.cpp">
-      <Filter>Framework\Graphic</Filter>
     </ClCompile>
     <ClCompile Include="GameRule.cpp">
       <Filter>Framework\Game</Filter>
@@ -350,23 +335,11 @@
     <ClInclude Include="BitHelper.h">
       <Filter>Framework\System</Filter>
     </ClInclude>
-    <ClInclude Include="ResourceManager.h">
-      <Filter>Framework\Game\DataManager</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource.h">
-      <Filter>Framework\Game\DataManager</Filter>
-    </ClInclude>
-    <ClInclude Include="ResourceContainer.h">
-      <Filter>Framework\Game\DataManager</Filter>
-    </ClInclude>
     <ClInclude Include="GameModule.h">
       <Filter>Framework\Engine</Filter>
     </ClInclude>
     <ClInclude Include="GameEngine.h">
       <Filter>Framework\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="SpriteDescriptor.h">
-      <Filter>Framework\Game</Filter>
     </ClInclude>
     <ClInclude Include="Utilities.h">
       <Filter>Framework\System</Filter>
@@ -388,9 +361,6 @@
     </ClInclude>
     <ClInclude Include="SFMLMouse.h">
       <Filter>Framework\Graphic\SFML</Filter>
-    </ClInclude>
-    <ClInclude Include="SpriteAnimation.h">
-      <Filter>Framework\Graphic</Filter>
     </ClInclude>
     <ClInclude Include="GameRule.h">
       <Filter>Framework\Game</Filter>

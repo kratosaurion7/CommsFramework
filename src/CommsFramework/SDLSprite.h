@@ -1,6 +1,5 @@
 #pragma once
 
-class SpriteAnimation;
 class BaseSprite;
 class BaseTexture;
 class SDLTexture;
@@ -20,9 +19,6 @@ public:
 
     SDLSprite();
     ~SDLSprite();
-
-    PointerList<SpriteAnimation*>* GetAnimations();
-    void SetAnimations(PointerList<SpriteAnimation*>* newAnims);
 
     virtual SDLTexture* GetCurrentTexture();
     virtual PointerList<BaseTexture*>* GetTextures();

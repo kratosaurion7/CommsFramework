@@ -20,7 +20,6 @@ class BaseKeyboard;
 class BaseMouse;
 
 class Resource;
-class SpriteAnimation;
 class DrawObject;
 class EngineDialogMessage;
 
@@ -141,9 +140,5 @@ private:
     void CreateSpritesFromConfig();
 
     void UpdateGraphicEngineSpritesFromActors();
-
-    PointerList<BaseTexture*>* CreateTexturesFromResources(PointerList<Resource*>* resources);
-
-    void BuildAnimationTextures(PointerList<SpriteAnimation*>* anims);
 };
 

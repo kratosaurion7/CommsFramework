@@ -2,8 +2,6 @@
 
 #include <string>
 
-#include "Resource.h"
-
 #include "PointerList.h"
 
 class Resource;

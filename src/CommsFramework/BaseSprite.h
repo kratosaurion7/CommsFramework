@@ -4,9 +4,7 @@ class DrawObject;
 class BaseSprite;
 class BaseTexture;
 class SpriteDescriptor;
-class SpriteAnimation;
 class BaseMouse;
-class SpriteDescriptor;
 
 
 #include "PointerList.h"
@@ -17,26 +15,20 @@ class SpriteDescriptor;
 class BaseSprite : public DrawObject
 {
 public:
+
+    /* Animation properties */
     int CurrentFrameIndex = 0;
     int FramesCount = 0;
     int SpriteFPS = 0;
     bool LoopAnimation;
     bool IsPlaying;
-    bool GravityEnabled;
-    SpriteAnimation* CurrentAnimation;
-    SpriteAnimation* DefaultAnimation;
 
-    PointerList<SpriteAnimation*>* spriteAnimationList;
+    
+    bool GravityEnabled;
 
     bool MouseOver();
 
-    void ApplyDescriptor(SpriteDescriptor* descriptor);
-
     bool CollisionWith(BaseSprite* other);
-
-    virtual SpriteAnimation* CreateAnimation(std::string name);
-    virtual PointerList<SpriteAnimation*>* GetAnimations() = 0;
-    virtual void SetAnimations(PointerList<SpriteAnimation*>* newAnims) = 0;
 
     virtual BaseTexture* GetCurrentTexture() = 0;
     virtual PointerList<BaseTexture*>* GetTextures() = 0;
