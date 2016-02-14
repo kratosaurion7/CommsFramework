@@ -121,6 +121,8 @@ void SDLGraphicEngine::Initialize(GraphicEngineInitParams* params)
         return;
     }
 
+    SetupBackground();
+
     SDL_ShowWindow(mainWindow);
 
     engineValid = true;
@@ -427,7 +429,7 @@ void SDLGraphicEngine::SetupBackground()
     backgroundSprite = new SDLSprite();
 
     backgroundSprite->SetZIndex(PRIO::BACKGROUND);
-
+    backgroundSprite->Engine = this;
 }
 
 #ifdef WIN32
