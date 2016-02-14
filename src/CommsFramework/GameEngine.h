@@ -32,6 +32,22 @@ class FSize;
 #include <string>
 #include <stdint.h>
 
+struct PRIO
+{
+    enum OBJECTS_PRIO
+    {
+        OVERRIDE_BACK = 0,
+        BACKGROUND = 1,
+        SCENE_BACK = 50,
+        SCENE_FRONT = 100,
+        MESSAGE = 140,
+        UI = 150,
+        DIALOG = 160,
+        DEBUG = 999,
+        OVERRIDE_TOPMOST = UINT_MAX // This needs to stay THE TOPMOST ELEMENT
+    };
+
+};
 
 struct GameEngineInitParams
 {

@@ -215,7 +215,7 @@ float DrawObject::GetZIndex()
     return zIndex;
 }
 
-void DrawObject::SetZIndex(float z)
+void DrawObject::SetZIndex(int z)
 {
     zIndex = z;
 }

@@ -50,7 +50,7 @@ YesNoDialog::YesNoDialog(std::string windowText)
     ButtonYes = Engine->CreateSprite("YesNoDialogYesButton");
     ButtonYes->SetTexture("assets\\dialogs\\YesButton.png");
     ButtonYes->SetPos(335, 350);
-    ButtonYes->SetZIndex(9999);
+    ButtonYes->SetZIndex(PRIO::DIALOG);
 
     ButtonNo = Engine->CreateSprite("YesNoDialogNoButton");
     ButtonNo->SetTexture("assets\\dialogs\\NoButton.png");

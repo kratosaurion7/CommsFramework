@@ -73,7 +73,7 @@ public:
     virtual void SetScale(FloatVec factor);
 
     virtual float GetZIndex();
-    virtual void SetZIndex(float z);
+    virtual void SetZIndex(int z);
     virtual void SetZIndexOverObject(DrawObject* target);
     virtual void SetZIndexUnderObject(DrawObject* target);
 

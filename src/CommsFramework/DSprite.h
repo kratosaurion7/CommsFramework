@@ -43,7 +43,7 @@ public:
     virtual void SetFrame(int index, std::string animName = "");
     virtual bool IsLastFrame(std::string animName = "");
 
-    virtual void SetZIndex(float z);
+    virtual void SetZIndex(int z);
 
     virtual void SetTexture(BaseTexture* texture);
 

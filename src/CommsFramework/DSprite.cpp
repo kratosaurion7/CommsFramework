@@ -272,7 +272,7 @@ bool DSprite::IsLastFrame(std::string animName)
     return CurrentFrameIndex >= CurrentAnimation->AnimationFrames->Count() - 1;
 }
 
-void DSprite::SetZIndex(float z)
+void DSprite::SetZIndex(int z)
 {
     DrawObject::SetZIndex(z);
 
