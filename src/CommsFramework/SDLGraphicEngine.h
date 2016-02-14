@@ -81,12 +81,16 @@ private:
     int WantedFrameRate;
     bool RunEngine;
 
+    BaseSprite* backgroundSprite;
+
     void ProcessDraw(SDL_Window* targetWindow);
     void ProcessEvents(SDL_Window* targetWindow);
 
     SDL_Rect GetSpriteRect(DrawObject* object);
 
     bool IsTimeForFrame();
+
+    void SetupBackground();
     
 #ifdef WIN32
     void InitWin32();

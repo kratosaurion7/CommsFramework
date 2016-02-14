@@ -11,6 +11,7 @@
 #undef CreateFont // Used to hide the Windows implementation of CreateFont since I use a function with that name already.
 #endif
 
+#include "GameEngine.h"
 #include "TextureRepository.h"
 #include "DrawObject.h"
 #include "GraphicEngineInitParams.h"
@@ -33,6 +34,7 @@ SDLGraphicEngine::SDLGraphicEngine()
     drawables = new PointerList<DrawObject*>();
     gameRenderer = NULL;
     WantedFrameRate = 60;
+    backgroundSprite = NULL;
 }
 
 SDLGraphicEngine::~SDLGraphicEngine()
@@ -244,10 +246,15 @@ void SDLGraphicEngine::SetBackgroundColor(uint8_t r, uint8_t g, uint8_t b, uint8
     bg_g = g;
     bg_b = b;
     bg_a = a;
+
+    backgroundSprite->SetTexture(NULL);
+    backgroundSprite->Show(false);
 }
 
 void SDLGraphicEngine::SetBackgroundTexture(BaseTexture* texture)
 {
+    backgroundSprite->SetTexture(texture);
+    backgroundSprite->Show(true);
 }
 
 void SDLGraphicEngine::Start()
@@ -413,6 +420,14 @@ SDL_Rect SDLGraphicEngine::GetSpriteRect(DrawObject* object)
 bool SDLGraphicEngine::IsTimeForFrame()
 {
     return CurrentTickTime - LastTickTime > (1000 / WantedFrameRate);
+}
+
+void SDLGraphicEngine::SetupBackground()
+{
+    backgroundSprite = new SDLSprite();
+
+    backgroundSprite->SetZIndex(PRIO::BACKGROUND);
+
 }
 
 #ifdef WIN32

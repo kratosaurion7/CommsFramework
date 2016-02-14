@@ -99,6 +99,13 @@ bool SDLSprite::IsLastFrame(std::string animName)
 
 void SDLSprite::SetTexture(BaseTexture* texture)
 {
+    if (texture == NULL)
+    {
+        this->currentSpriteTexture = NULL;
+        
+        return;
+    }
+
     SDLTexture* sdlTex = dynamic_cast<SDLTexture*>(texture);
 
     if (sdlTex != NULL)
