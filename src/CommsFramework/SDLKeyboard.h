@@ -25,8 +25,6 @@ public:
 private:
     PointerList<Pair<Key, SDL_Scancode>*>* sdlScanCodesMap;
 
-    void BuildKeyMap();
-
     BaseList<SDL_Scancode>* currentKeyboardState;
     BaseList<SDL_Scancode>* previousKeyboardState;
 };

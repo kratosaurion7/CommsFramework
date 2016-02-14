@@ -59,7 +59,3 @@ void SDLKeyboard::HandleEvent(SDL_Event* anEvent)
             break;
     }
 }
-
-void SDLKeyboard::BuildKeyMap()
-{
-}
