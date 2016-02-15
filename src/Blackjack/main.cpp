@@ -23,12 +23,6 @@ int main()
     //eng->Graphics->SetBackgroundColor(0x659CEFFF);
     eng->Graphics->SetBackgroundColor(101, 156, 239);
 
-    //Deck* x = new Deck(eng);
-
-    //x->SetupStandard52CardsDeck();
-
-    //x->ShuffleDeck();
-
     BlackjackGame* game = new BlackjackGame();
     eng->AttachActor(game);
 
