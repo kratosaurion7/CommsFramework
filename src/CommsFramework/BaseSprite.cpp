@@ -7,6 +7,7 @@
 
 #include "BaseGraphicEngine.h"
 #include "GameEngine.h"
+#include "Utilities.h"
 
 #include "BaseSprite.h"
 
@@ -35,14 +36,135 @@ bool BaseSprite::CollisionWith(BaseSprite * other)
     }
 }
 
+BaseTexture* BaseSprite::GetCurrentTexture()
+{
+    if (IsAnimated)
+    {
+        if (CurrentAnimation != NULL)
+        {
+            return CurrentAnimation->CurrentFrameRef;
+        }
+    }
+    else
+    {
+        return CurrentTexture;
+    }
+
+    return NULL;
+}
+
+PointerList<BaseTexture*>* BaseSprite::GetTextures()
+{
+    return nullptr;
+}
+
+void BaseSprite::Draw()
+{
+    if (FrameReady())
+    {
+        if (this->IsAnimated && this->IsPlaying)
+        {
+            if (CurrentAnimation != NULL)
+            {
+                if (LoopAnimation && IsLastFrame())
+                {
+                    CurrentAnimation->Reset();
+                }
+
+                NextFrame();
+            }
+        }
+    }
+}
+
+void BaseSprite::Play(bool loop)
+{
+    IsPlaying = true;
+    LoopAnimation = loop;
+}
+
+void BaseSprite::Play(std::string animName, bool loop)
+{
+    IsPlaying = true;
+    SetFrame(0, animName);
+    LoopAnimation = loop;
+}
+
+void BaseSprite::Stop()
+{
+    IsPlaying = false;
+}
+
+void BaseSprite::Reset()
+{
+    IsPlaying = false;
+    CurrentAnimation->Reset();
+    CurrentAnimation = NULL;
+}
+
+void BaseSprite::AddAnimation(SpriteAnimation * newAnim)
+{
+    Animations->Add(newAnim);
+
+    IsAnimated = true;
+}
+
+void BaseSprite::NextFrame()
+{
+    if (CurrentAnimation != NULL)
+    {
+        CurrentAnimation->Advance();
+
+        CurrentTexture = CurrentAnimation->CurrentFrameRef;
+    }
+}
+
+void BaseSprite::SetFrame(int index, std::string animName)
+{
+    if (animName == "")
+    {
+        if (CurrentAnimation != NULL)
+        {
+            CurrentAnimation->SetFrame(index);
+        }
+    }
+    else
+    {
+        SpriteAnimation* newAnim = Animations->GetBy([animName](SpriteAnimation* anim) { return anim->AnimName == animName; });
+
+        if (newAnim != NULL)
+        {
+            CurrentAnimation = newAnim;
+            CurrentAnimation->SetFrame(index);
+        }
+    }
+}
+
+bool BaseSprite::IsLastFrame()
+{
+    return CurrentAnimation->CurrentFrameIndex >= CurrentAnimation->Frames->Count();
+}
+
+void BaseSprite::SetTexture(BaseTexture * texture)
+{
+    CurrentTexture = texture;
+}
+
 void BaseSprite::SetTexture(std::string newTexturePath)
 {
-    //BaseTexture* currentTexture = this->GetCurrentTexture();
-    
-    //if (currentTexture != NULL)
-    //    delete(currentTexture);
-
     BaseTexture* tex = Engine->CreateTexture(newTexturePath);
 
     this->SetTexture(tex);
+}
+
+bool BaseSprite::FrameReady()
+{
+    int current = GetTicks();
+
+    if (LastFrameTick + (1000 / SpriteFPS) <= current)
+    {
+        return true;
+    }
+    
+    return false;
 }

@@ -8,6 +8,8 @@ class BaseMouse;
 
 
 #include "PointerList.h"
+#include "SpriteAnimation.h"
+
 #include <string>
 
 #include "DrawObject.h"
@@ -17,35 +19,44 @@ class BaseSprite : public DrawObject
 public:
 
     /* Animation properties */
-    int CurrentFrameIndex = 0;
-    int FramesCount = 0;
     int SpriteFPS = 0;
-    bool LoopAnimation;
-    bool IsPlaying;
+    bool LoopAnimation = false;
+    bool IsPlaying = true;
+    bool IsAnimated = false;
 
-    
+    SpriteAnimation* CurrentAnimation;
+    PointerList<SpriteAnimation*>* Animations;
+
     bool GravityEnabled;
 
     bool MouseOver();
 
     bool CollisionWith(BaseSprite* other);
 
-    virtual BaseTexture* GetCurrentTexture() = 0;
-    virtual PointerList<BaseTexture*>* GetTextures() = 0;
+    BaseTexture* CurrentTexture;
+    virtual BaseTexture* GetCurrentTexture();
+    virtual PointerList<BaseTexture*>* GetTextures();
 
-    virtual void Draw() = 0;
+    virtual void Draw();
 
-    virtual void Play(bool loop = false) = 0;
-    virtual void Play(std::string animName, bool loop = false) = 0;
-    virtual void Stop() = 0;
-    virtual void Reset() = 0;
+    virtual void Play(bool loop = false);
+    virtual void Play(std::string animName, bool loop = false);
+    virtual void Stop();
+    virtual void Reset();
 
-    virtual void NextFrame() = 0;
-    virtual void SetFrame(int index, std::string animName = "") = 0;
-    virtual bool IsLastFrame(std::string animName = "") = 0;
+    virtual void AddAnimation(SpriteAnimation* newAnim);
+    virtual void NextFrame();
+    virtual void SetFrame(int index, std::string animName = "");
+    virtual bool IsLastFrame();
 
-    virtual void SetTexture(BaseTexture* texture) = 0;
+    virtual void SetTexture(BaseTexture* texture);
     virtual void SetTexture(std::string newTexturePath);
 
     virtual BaseSprite* Clone() = 0;
+
+protected:
+    int LastFrameTick = 0;
+
+    bool FrameReady();
+
 };
