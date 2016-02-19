@@ -42,39 +42,6 @@ PointerList<BaseTexture*>* SDLSprite::GetTextures()
     return nullptr;
 }
 
-void SDLSprite::Draw()
-{
-}
-
-void SDLSprite::Play(bool loop)
-{
-}
-
-void SDLSprite::Play(std::string animName, bool loop)
-{
-}
-
-void SDLSprite::Stop()
-{
-}
-
-void SDLSprite::Reset()
-{
-}
-
-void SDLSprite::NextFrame()
-{
-}
-
-void SDLSprite::SetFrame(int index, std::string animName)
-{
-}
-
-bool SDLSprite::IsLastFrame(std::string animName)
-{
-    return false;
-}
-
 void SDLSprite::SetTexture(BaseTexture* texture)
 {
     if (texture == NULL)

@@ -23,17 +23,6 @@ public:
     virtual SDLTexture* GetCurrentTexture();
     virtual PointerList<BaseTexture*>* GetTextures();
 
-    virtual void Draw();
-
-    virtual void Play(bool loop = false);
-    virtual void Play(std::string animName, bool loop = false);
-    virtual void Stop();
-    virtual void Reset();
-
-    virtual void NextFrame();
-    virtual void SetFrame(int index, std::string animName = "");
-    virtual bool IsLastFrame(std::string animName = "");
-
     virtual void SetTexture(BaseTexture* texture);
 
     virtual BaseSprite* Clone();
