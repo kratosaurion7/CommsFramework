@@ -6,11 +6,12 @@ class BaseTexture;
 
 #include "PointerList.h"
 
-
 class SpriteAnimation
 {
 public:
     SpriteAnimation();
+    SpriteAnimation(PointerList<BaseTexture*>* textures);
+    SpriteAnimation(BaseTexture** textures, int count);
     ~SpriteAnimation();
 
     std::string AnimName;

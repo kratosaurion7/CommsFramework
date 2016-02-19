@@ -8,6 +8,20 @@ SpriteAnimation::SpriteAnimation()
     Frames = new PointerList<BaseTexture*>();
 }
 
+SpriteAnimation::SpriteAnimation(PointerList<BaseTexture*>* textures)
+{
+    Frames->AddRange(textures);
+}
+
+SpriteAnimation::SpriteAnimation(BaseTexture** textures, int count)
+{
+    for (int i = 0; i < count; i++)
+    {
+        BaseTexture* newTex = textures[i];
+        Frames->Add(newTex);
+    }
+}
+
 
 SpriteAnimation::~SpriteAnimation()
 {
