@@ -107,6 +107,9 @@ void BaseSprite::AddAnimation(SpriteAnimation * newAnim)
     Animations->Add(newAnim);
 
     IsAnimated = true;
+
+    if (CurrentAnimation == NULL)
+        CurrentAnimation = newAnim;
 }
 
 void BaseSprite::NextFrame()

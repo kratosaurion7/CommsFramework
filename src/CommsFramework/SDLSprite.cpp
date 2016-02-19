@@ -7,6 +7,7 @@
 #include "BaseTexture.h"
 #include "SDLTexture.h"
 #include "SDLGraphicEngine.h"
+#include "SpriteAnimation.h"
 
 SDLSprite::SDLSprite()
 {
@@ -19,6 +20,11 @@ SDLSprite::SDLSprite()
     scale = FloatVec();
     scale.Set(1, 1);
     clippingBounds = FRectangle();
+    
+    
+    SpriteFPS = 15;
+    CurrentAnimation = NULL;
+    Animations = new PointerList<SpriteAnimation*>();
 
     LoopAnimation = false;
     IsPlaying = false;
