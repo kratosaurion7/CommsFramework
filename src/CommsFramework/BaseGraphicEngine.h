@@ -34,6 +34,9 @@ public:
     float RenderingScaleX;
     float RenderingScaleY;
 
+    int PreviousFrameTick;
+    int CurrentFrameTick;
+
     virtual void Initialize(GraphicEngineInitParams* params) = 0;
 
     virtual void AddObject(BaseSprite* obj) = 0;

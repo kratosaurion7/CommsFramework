@@ -27,9 +27,6 @@ public:
     SDL_Window* mainWindow;
     SDL_Renderer* gameRenderer;
 
-    uint32_t LastTickTime;
-    uint32_t CurrentTickTime;
-
     uint8_t bg_r;
     uint8_t bg_g;
     uint8_t bg_b;

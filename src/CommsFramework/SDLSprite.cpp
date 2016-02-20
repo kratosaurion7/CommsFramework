@@ -22,7 +22,7 @@ SDLSprite::SDLSprite()
     clippingBounds = FRectangle();
     
     currentSpriteTexture = NULL;
-    SpriteFPS = 15;
+    SpriteFPS = 1;
     CurrentAnimation = NULL;
     Animations = new PointerList<SpriteAnimation*>();
 

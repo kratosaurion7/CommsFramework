@@ -101,6 +101,8 @@ void BaseSprite::NextFrame()
 {
     if (CurrentAnimation != NULL)
     {
+        LastFrameTick = GetTicks();
+
         CurrentAnimation->Advance(this->LoopAnimation);
 
         SetTexture(CurrentAnimation->CurrentFrameRef);

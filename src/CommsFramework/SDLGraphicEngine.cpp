@@ -35,6 +35,8 @@ SDLGraphicEngine::SDLGraphicEngine()
     gameRenderer = NULL;
     WantedFrameRate = 60;
     backgroundSprite = NULL;
+    PreviousFrameTick = 0;
+    CurrentFrameTick = 0;
 }
 
 SDLGraphicEngine::~SDLGraphicEngine()
@@ -348,7 +350,7 @@ void SDLGraphicEngine::ReorderSprite(DrawObject* first, DrawObject* second)
 
 void SDLGraphicEngine::ProcessDraw(SDL_Window* targetWindow)
 {
-    CurrentTickTime = GetTicks();
+    CurrentFrameTick = GetTicks();
 
     if (IsTimeForFrame() && RunEngine)
     {
@@ -384,7 +386,7 @@ void SDLGraphicEngine::ProcessDraw(SDL_Window* targetWindow)
 
         SDL_RenderPresent(gameRenderer); // Final step
 
-        LastTickTime = CurrentTickTime;
+        PreviousFrameTick = CurrentFrameTick;
     }
 }
 
@@ -420,7 +422,7 @@ SDL_Rect SDLGraphicEngine::GetSpriteRect(DrawObject* object)
 
 bool SDLGraphicEngine::IsTimeForFrame()
 {
-    return CurrentTickTime - LastTickTime > (1000 / WantedFrameRate);
+    return this->PreviousFrameTick + (1000 / WantedFrameRate) <= this->CurrentFrameTick;
 }
 
 void SDLGraphicEngine::SetupBackground()
