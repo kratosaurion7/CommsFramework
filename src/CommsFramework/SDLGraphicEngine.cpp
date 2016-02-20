@@ -365,8 +365,7 @@ void SDLGraphicEngine::ProcessDraw(SDL_Window* targetWindow)
             {
                 SDLDrawable* drawImpl = dynamic_cast<SDLDrawable*>(target);
 
-                SDLText* test = dynamic_cast<SDLText*>(target);
-                if (test != NULL)
+                if (target->Ident == "animu")
                 {
                     int i = 0;
                 }

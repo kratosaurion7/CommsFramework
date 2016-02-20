@@ -21,7 +21,7 @@ public:
     PointerList<BaseTexture*>* Frames;
 
     void SetFrame(int index);
-    void Advance();
+    void Advance(bool loop = false);
     void Reset();
 };
 

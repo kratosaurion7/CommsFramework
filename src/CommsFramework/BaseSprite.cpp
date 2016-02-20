@@ -35,24 +35,6 @@ bool BaseSprite::CollisionWith(BaseSprite * other)
         return false;
     }
 }
-
-BaseTexture* BaseSprite::GetCurrentTexture()
-{
-    if (IsAnimated)
-    {
-        if (CurrentAnimation != NULL)
-        {
-            return CurrentAnimation->CurrentFrameRef;
-        }
-    }
-    else
-    {
-        return CurrentTexture;
-    }
-
-    return NULL;
-}
-
 PointerList<BaseTexture*>* BaseSprite::GetTextures()
 {
     return nullptr;
@@ -110,15 +92,18 @@ void BaseSprite::AddAnimation(SpriteAnimation * newAnim)
 
     if (CurrentAnimation == NULL)
         CurrentAnimation = newAnim;
+
+    if (this->GetCurrentTexture() == NULL)
+        this->SetTexture(newAnim->Frames->First());
 }
 
 void BaseSprite::NextFrame()
 {
     if (CurrentAnimation != NULL)
     {
-        CurrentAnimation->Advance();
+        CurrentAnimation->Advance(this->LoopAnimation);
 
-        CurrentTexture = CurrentAnimation->CurrentFrameRef;
+        SetTexture(CurrentAnimation->CurrentFrameRef);
     }
 }
 
@@ -146,11 +131,6 @@ void BaseSprite::SetFrame(int index, std::string animName)
 bool BaseSprite::IsLastFrame()
 {
     return CurrentAnimation->CurrentFrameIndex >= CurrentAnimation->Frames->Count();
-}
-
-void BaseSprite::SetTexture(BaseTexture * texture)
-{
-    CurrentTexture = texture;
 }
 
 void BaseSprite::SetTexture(std::string newTexturePath)

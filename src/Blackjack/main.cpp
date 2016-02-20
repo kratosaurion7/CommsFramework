@@ -40,9 +40,10 @@ int main()
     anim->Frames->Add(four);
     animSprite->AddAnimation(anim);
     animSprite->IsAnimated = true;
+    animSprite->Show(true);
 
     animSprite->SetPos(100, 100);
-    animSprite->Play();
+    animSprite->Play(true);
 
     //////////////////////// END TEST SECTION /////////////////////
 

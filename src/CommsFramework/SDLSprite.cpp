@@ -21,7 +21,7 @@ SDLSprite::SDLSprite()
     scale.Set(1, 1);
     clippingBounds = FRectangle();
     
-    
+    currentSpriteTexture = NULL;
     SpriteFPS = 15;
     CurrentAnimation = NULL;
     Animations = new PointerList<SpriteAnimation*>();
@@ -38,9 +38,21 @@ SDLSprite::~SDLSprite()
 {
 }
 
-SDLTexture* SDLSprite::GetCurrentTexture()
+SDLTexture * SDLSprite::GetCurrentTexture()
 {
-    return currentSpriteTexture;
+    if (IsAnimated)
+    {
+        if (CurrentAnimation != NULL)
+        {
+            return (SDLTexture*)CurrentAnimation->CurrentFrameRef;
+        }
+    }
+    else
+    {
+        return this->currentSpriteTexture;
+    }
+
+    return NULL;
 }
 
 PointerList<BaseTexture*>* SDLSprite::GetTextures()

@@ -33,8 +33,7 @@ public:
 
     bool CollisionWith(BaseSprite* other);
 
-    BaseTexture* CurrentTexture;
-    virtual BaseTexture* GetCurrentTexture();
+    virtual BaseTexture* GetCurrentTexture() = 0;
     virtual PointerList<BaseTexture*>* GetTextures();
 
     virtual void Draw();
@@ -49,7 +48,7 @@ public:
     virtual void SetFrame(int index, std::string animName = "");
     virtual bool IsLastFrame();
 
-    virtual void SetTexture(BaseTexture* texture);
+    virtual void SetTexture(BaseTexture* texture) = 0;
     virtual void SetTexture(std::string newTexturePath);
 
     virtual BaseSprite* Clone() = 0;

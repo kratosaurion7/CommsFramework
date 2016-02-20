@@ -4,6 +4,7 @@
 
 SpriteAnimation::SpriteAnimation()
 {
+    CurrentFrameIndex = 0;
     CurrentFrameRef = NULL;
     Frames = new PointerList<BaseTexture*>();
 }
@@ -36,12 +37,16 @@ void SpriteAnimation::SetFrame(int index)
     }
 }
 
-void SpriteAnimation::Advance()
+void SpriteAnimation::Advance(bool loop)
 {
     if (CurrentFrameIndex < Frames->Count() - 1)
     {
         CurrentFrameIndex++;
         CurrentFrameRef = Frames->Get(CurrentFrameIndex);
+    }
+    else if (loop)
+    {
+        this->Reset();
     }
 }
 
