@@ -127,6 +127,13 @@ bool XFile::IsOpen()
 #endif
 }
 
+std::ifstream* XFile::GetFileStream()
+{
+    std::ifstream* stream = new std::ifstream(this->FilePath);
+
+    return stream;
+}
+
 void XFile::AppendText(char * text, int size)
 {
 }

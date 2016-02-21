@@ -34,6 +34,7 @@ enum FILE_OPEN_CREATE_MODE
 #endif
 
 #include <string>
+#include <cstdio>
 
 #include "XDirectory.h"
 
@@ -66,6 +67,8 @@ public:
     bool OpenCreate(FILE_OPEN_CREATE_MODE createMode, FILE_SHARE_MODE shareMode = XSHARE_MODE_NONE);
     void Close();
     bool IsOpen();
+
+    std::ifstream* GetFileStream();
 
     void AppendText(char* text, int size);
 
