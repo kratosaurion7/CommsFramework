@@ -17,6 +17,11 @@ public:
     FileSave();
     ~FileSave();
 
+    enum SAVE_VERSION
+    {
+        V1 = 0,
+    } FileSaveVersion;
+
     void AddString(KEYTYPE name, std::string* value);
     void AddNumber(KEYTYPE name, int value);
     void AddBool(KEYTYPE name, bool value);
@@ -29,6 +34,8 @@ public:
 
     void SaveToFile(std::string filePath);
     void SaveToFile(FILE* filePath);
+
+    const char* SaveToDataString(int& outLength);
 
     static FileSave* LoadFromFile(std::string filePath);
     static FileSave* LoadFromFile(FILE* file);

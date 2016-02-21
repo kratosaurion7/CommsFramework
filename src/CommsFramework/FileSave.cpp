@@ -1,9 +1,11 @@
 #include "FileSave.h"
 
 #include "GenType.h"
+#include "XFile.h"
 
 FileSave::FileSave()
 {
+    FileSaveVersion = V1;
     list = new BaseList<Pair<std::string, GenType*>*>();
 }
 
@@ -33,8 +35,8 @@ void FileSave::AddNumber(KEYTYPE name, int value)
     GenType* newVal = new GenType();
     newVal->ValueType = GenType::SUPPORTED_TYPES::INT32;
     
-    int* newValue;
-    *newValue = value;
+    int* newValue = NULL;
+    newValue = &value;
     newVal->Value = newValue;
 
     Pair<KEYTYPE, GenType*>* newItem = new Pair<KEYTYPE, GenType*>(name, newVal);
@@ -47,8 +49,8 @@ void FileSave::AddBool(KEYTYPE name, bool value)
     GenType* newVal = new GenType();
     newVal->ValueType = GenType::SUPPORTED_TYPES::BOOL;
 
-    bool* newValue;
-    *newValue = value;
+    bool* newValue = NULL;
+    newValue = &value;
     newVal->Value = newValue;
 
     Pair<KEYTYPE, GenType*>* newItem = new Pair<KEYTYPE, GenType*>(name, newVal);
@@ -147,10 +149,81 @@ char* FileSave::GetData(KEYTYPE name, int & outLength)
 
 void FileSave::SaveToFile(std::string filePath)
 {
+    XFile saveFile(filePath);
+    saveFile.OpenCreate();
+
+    if (saveFile.FileValid)
+    {
+        int dataSize = 0;
+        const char* data = SaveToDataString(dataSize);
+
+        saveFile.Write((char*)data, dataSize);
+        // TODO : Flush file asap
+        delete(data);
+    }
 }
 
-void FileSave::SaveToFile(FILE * filePath)
+void FileSave::SaveToFile(FILE* filePath)
 {
+}
+
+const char* FileSave::SaveToDataString(int& outLength)
+{
+    std::string* outString = new std::string();
+
+    outString->append(std::to_string(FileSaveVersion));
+
+    auto it = list->GetContainer()->begin();
+    while (it != list->GetContainer()->end())
+    {
+        Pair<std::string, GenType*>* element = (*it);
+
+        outString->append(std::to_string(element->Item2->ValueType));
+        outString->append(element->Item1);
+
+        switch (element->Item2->ValueType)
+        {
+            case GenType::SUPPORTED_TYPES::BOOL:
+            {
+                bool value = element->Item2->Value;
+
+                int numValue = (int)value;
+
+                outString->append(std::to_string(numValue));
+
+                break;
+            }
+            case GenType::SUPPORTED_TYPES::DATA: 
+            {
+                char* value = (char*)element->Item2->Value;
+
+                outString->append(value, element->Item2->ValueLength);
+
+                break;
+            }
+            case GenType::SUPPORTED_TYPES::INT32:
+            {
+                int value = (int)element->Item2->Value;
+
+                outString->append(std::to_string(value));
+
+                break;
+            }
+            case GenType::SUPPORTED_TYPES::STRING:
+            {
+                std::string* value = (std::string*)element->Item2->Value;
+
+                outString->append(value->c_str());
+
+                break;
+            }
+        }
+
+        it++;
+    }
+
+    outLength = outString->length();
+    return outString->c_str();
 }
 
 FileSave* FileSave::LoadFromFile(std::string filePath)

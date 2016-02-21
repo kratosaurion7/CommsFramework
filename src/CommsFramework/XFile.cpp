@@ -16,13 +16,13 @@ XFile::XFile(std::string name)
     FilePath = name;
     parentDir = NULL;
 
-    if (this->Open())
-    {
-        this->Exists = true;
-        this->FileValid = true;
+    //if (this->Open())
+    //{
+    //    this->Exists = true;
+    //    this->FileValid = true;
 
-        this->CreateAndAssignPathInfo();
-    }
+    //    this->CreateAndAssignPathInfo();
+    //}
 
 }
 
@@ -57,8 +57,11 @@ bool XFile::Open(FILE_OPEN_MODE openMode, FILE_SHARE_MODE shareMode)
     {
         // Set error state or do stuff.
         FileValid = false;
+        
         return false;
     }
+
+    FileValid = true;
 
     winFileHandle = res;
 
@@ -97,6 +100,8 @@ bool XFile::OpenCreate(FILE_OPEN_CREATE_MODE createMode, FILE_SHARE_MODE shareMo
         FileValid = false;
         return false;
     }
+
+    FileValid = true;
 
     winFileHandle = res;
 
@@ -191,7 +196,9 @@ void XFile::Write(char * buf, int size)
     if (this->Check())
     {
 #ifdef _WINDOWS
-        bool res = WriteFile(winFileHandle, buf, size, NULL, NULL);
+        DWORD a;
+        DWORD b;
+        bool res = WriteFile(winFileHandle, buf, size, &a, NULL);
 
         if (!res)
         {

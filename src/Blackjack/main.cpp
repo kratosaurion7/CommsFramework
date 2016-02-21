@@ -16,7 +16,6 @@
 
 int main()
 {
-
     GameEngine* eng = new GameEngine();
 
     eng->Init(800, 800);
@@ -28,6 +27,18 @@ int main()
     eng->AttachActor(game);
 
     ////////////////////////// TEST SECTION ///////////////////////
+    char* data = "1234567890";
+    std::string message = "Hello World";
+
+    FileSave* newSave = new FileSave();
+    newSave->AddBool("one", true);
+    newSave->AddBool("two", false);
+    newSave->AddData("three", data, strlen(data));
+    newSave->AddNumber("four", 999);
+    newSave->AddString("five", &message);
+
+    newSave->SaveToFile("save.bin");
+
     BaseSprite* animSprite = eng->CreateSprite("animu");
     BaseTexture* one = eng->Graphics->CreateTexture("assets\\one.png");
     BaseTexture* two = eng->Graphics->CreateTexture("assets\\two.png");
