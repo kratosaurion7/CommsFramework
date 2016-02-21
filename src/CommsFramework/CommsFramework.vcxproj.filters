@@ -103,6 +103,9 @@
     <Filter Include="Framework\Graphic\Animations">
       <UniqueIdentifier>{9981dd35-8046-48e8-8dfc-3c4428fd94f2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Framework\Game\Saving">
+      <UniqueIdentifier>{4a803d51-669c-4f37-98b4-5452b27a23ae}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="XmlReader.cpp">
@@ -260,6 +263,12 @@
     </ClCompile>
     <ClCompile Include="SpriteAnimation.cpp">
       <Filter>Framework\Graphic\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="FileSave.cpp">
+      <Filter>Framework\Game\Saving</Filter>
+    </ClCompile>
+    <ClCompile Include="GenType.cpp">
+      <Filter>Framework\Types</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -484,6 +493,12 @@
     </ClInclude>
     <ClInclude Include="SpriteAnimation.h">
       <Filter>Framework\Graphic\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="FileSave.h">
+      <Filter>Framework\Game\Saving</Filter>
+    </ClInclude>
+    <ClInclude Include="GenType.h">
+      <Filter>Framework\Types</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

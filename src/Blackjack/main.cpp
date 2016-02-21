@@ -12,6 +12,7 @@
 
 #include <StringList.h>
 #include <SpriteAnimation.h>
+#include <FileSave.h>
 
 int main()
 {
