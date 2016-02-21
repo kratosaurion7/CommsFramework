@@ -71,7 +71,7 @@ int main()
 
         if (eng->Keyboard->IsKeyClicked(Key::Space))
         {
-            SaveTextAsBMP((SDLText*)game->gameDrawDialog->DialogText, "test.bmp");
+            eng->Graphics->Scale(0.5);
         }
     }
 

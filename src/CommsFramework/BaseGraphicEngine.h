@@ -64,6 +64,8 @@ public:
 
     virtual void SetBackgroundTexture(BaseTexture* texture) = 0;
 
+    virtual void Scale(float scaleFactor) = 0;
+
     virtual void Start() = 0;
 
     virtual void Draw() = 0;

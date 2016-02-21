@@ -261,6 +261,15 @@ void SDLGraphicEngine::SetBackgroundTexture(BaseTexture* texture)
     backgroundSprite->Show(true);
 }
 
+void SDLGraphicEngine::Scale(float scaleFactor)
+{
+    DiagonalDPI = 96 / scaleFactor;
+    HorizontalDPI = 96 / scaleFactor;
+    VerticalDPI = 96 / scaleFactor;
+
+    SDL_RenderSetScale(this->gameRenderer, DiagonalDPI, DiagonalDPI);
+}
+
 void SDLGraphicEngine::Start()
 {
     RunEngine = true;
