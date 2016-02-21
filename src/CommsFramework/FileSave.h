@@ -8,8 +8,8 @@ class GenType;
 #include "BaseList.h"
 #include "Pair.h"
 
-
 #define KEYTYPE std::string
+#define MAX_KEY_NAME 256
 
 class FileSave
 {
@@ -20,6 +20,8 @@ public:
     enum SAVE_VERSION
     {
         V1 = 0,
+
+        BAD = 999999,
     } FileSaveVersion;
 
     void AddString(KEYTYPE name, std::string* value);
@@ -42,5 +44,7 @@ public:
 
 private:
     BaseList<Pair<std::string, GenType*>*>* list;
+
+    static FileSave* ProcessV1SaveFile(std::ifstream* stream);
 };
 

@@ -8,3 +8,16 @@ int BytesToInt(char* characters)
 
     return number;
 }
+
+unsigned char* IntToBytes(int integer)
+{
+    unsigned char bytes[4];
+    unsigned long n = integer;
+
+    bytes[0] = (n >> 24) & 0xFF;
+    bytes[1] = (n >> 16) & 0xFF;
+    bytes[2] = (n >> 8) & 0xFF;
+    bytes[3] = n & 0xFF;
+
+    return bytes;
+}

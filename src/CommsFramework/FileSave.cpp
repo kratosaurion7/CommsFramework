@@ -1,14 +1,17 @@
 #include "FileSave.h"
 
+#include <cstdio>
+
 #include "GenType.h"
 #include "XFile.h"
+#include "FileReader.h"
+#include "BitHelper.h"
 
 FileSave::FileSave()
 {
     FileSaveVersion = V1;
     list = new BaseList<Pair<std::string, GenType*>*>();
 }
-
 
 FileSave::~FileSave()
 {
@@ -175,7 +178,7 @@ const char* FileSave::SaveToDataString(int& outLength)
         Pair<std::string, GenType*>* element = (*it);
 
         outString->append(std::to_string(element->Item2->ValueType));
-        outString->append(element->Item1);
+        outString->append(element->Item1.c_str(), element->Item1.length() + 1);
 
         switch (element->Item2->ValueType)
         {
@@ -185,7 +188,8 @@ const char* FileSave::SaveToDataString(int& outLength)
 
                 int numValue = (int)value;
 
-                outString->append(std::to_string(numValue));
+                std::string serializedValue = std::to_string(numValue);
+                outString->append(serializedValue.c_str(), serializedValue.length() + 1);
 
                 break;
             }
@@ -193,7 +197,11 @@ const char* FileSave::SaveToDataString(int& outLength)
             {
                 char* value = (char*)element->Item2->Value;
 
-                outString->append(value, element->Item2->ValueLength);
+                std::string dataLengthString = std::to_string(element->Item2->ValueLength);
+                
+                unsigned char* sizeString = IntToBytes(element->Item2->ValueLength);
+                outString->append((char*)sizeString, 4);
+                outString->append(value, element->Item2->ValueLength + 1);
 
                 break;
             }
@@ -201,7 +209,8 @@ const char* FileSave::SaveToDataString(int& outLength)
             {
                 int value = (int)element->Item2->Value;
 
-                outString->append(std::to_string(value));
+                std::string serializedValue = std::to_string(value);
+                outString->append(serializedValue.c_str(), serializedValue.length() + 1);
 
                 break;
             }
@@ -209,7 +218,7 @@ const char* FileSave::SaveToDataString(int& outLength)
             {
                 std::string* value = (std::string*)element->Item2->Value;
 
-                outString->append(value->c_str());
+                outString->append(value->c_str(), value->length() + 1);
 
                 break;
             }
@@ -224,10 +233,93 @@ const char* FileSave::SaveToDataString(int& outLength)
 
 FileSave* FileSave::LoadFromFile(std::string filePath)
 {
+    FileSave* loadedSave = NULL;
+
+    XFile inFile(filePath);
+    inFile.Open();
+
+    if (inFile.FileValid)
+    {
+        std::ifstream* fs = inFile.GetFileStream();
+        
+        if (fs->good())
+        {
+            FileSave::SAVE_VERSION fileVersion = FileSave::SAVE_VERSION::BAD;
+            char versionHeader[1];
+            fs->read(versionHeader, 1);
+
+            switch (versionHeader[0])
+            {
+                case FileSave::SAVE_VERSION::V1:
+                {
+                    loadedSave = FileSave::ProcessV1SaveFile(fs);
+
+                    break;
+                }
+                default:
+                {
+                    break;
+                }
+            }
+        }
+
+    }
+
+    return loadedSave;
+}
+
+FileSave* FileSave::LoadFromFile(FILE* file)
+{
     return nullptr;
 }
 
-FileSave* FileSave::LoadFromFile(FILE * file)
+FileSave* FileSave::ProcessV1SaveFile(std::ifstream* stream)
 {
-    return nullptr;
+    FileSave* newSave = new FileSave();
+
+    while (!stream->eof())
+    {
+        // Read type byte
+        char typeByte[1];
+        stream->read(typeByte, 1);
+
+        char* elementName = new char[MAX_KEY_NAME];
+        stream->getline(elementName, MAX_KEY_NAME, '\0');
+
+        switch (typeByte[0])
+        {
+            case GenType::SUPPORTED_TYPES::BOOL:
+            {
+                char val[1];
+                stream->read(val, 1);
+
+                bool value = val[0];
+
+                newSave->AddBool(elementName, value);
+
+                break;
+            }
+            case GenType::SUPPORTED_TYPES::DATA:
+            {
+                
+                
+
+
+                break;
+            }
+            case GenType::SUPPORTED_TYPES::INT32:
+            {
+                break;
+            }
+            case GenType::SUPPORTED_TYPES::STRING:
+            {
+                break;
+            }
+            default:
+                break;
+        }
+
+        return NULL;
+    }
+
 }
