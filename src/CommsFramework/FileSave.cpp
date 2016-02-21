@@ -35,9 +35,7 @@ void FileSave::AddNumber(KEYTYPE name, int value)
     GenType* newVal = new GenType();
     newVal->ValueType = GenType::SUPPORTED_TYPES::INT32;
     
-    int* newValue = NULL;
-    newValue = &value;
-    newVal->Value = newValue;
+    newVal->Value = (void*)value;
 
     Pair<KEYTYPE, GenType*>* newItem = new Pair<KEYTYPE, GenType*>(name, newVal);
 
@@ -49,9 +47,7 @@ void FileSave::AddBool(KEYTYPE name, bool value)
     GenType* newVal = new GenType();
     newVal->ValueType = GenType::SUPPORTED_TYPES::BOOL;
 
-    bool* newValue = NULL;
-    newValue = &value;
-    newVal->Value = newValue;
+    newVal->Value = (void*)value;
 
     Pair<KEYTYPE, GenType*>* newItem = new Pair<KEYTYPE, GenType*>(name, newVal);
 
@@ -185,7 +181,7 @@ const char* FileSave::SaveToDataString(int& outLength)
         {
             case GenType::SUPPORTED_TYPES::BOOL:
             {
-                bool value = element->Item2->Value;
+                bool value = (bool)element->Item2->Value;
 
                 int numValue = (int)value;
 
