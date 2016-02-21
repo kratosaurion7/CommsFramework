@@ -182,6 +182,17 @@ const char* FileSave::SaveToDataString(int& outLength)
 
         switch (element->Item2->ValueType)
         {
+            case GenType::SUPPORTED_TYPES::INT32:
+            {
+                int value = (int)element->Item2->Value;
+
+                char* valueBytes = (char*)&(value);
+
+                outString->append(valueBytes, 4);
+                outString->append("\0", 1); // Somehow have to add the element null terminator delimiter by hand
+
+                break;
+            }
             case GenType::SUPPORTED_TYPES::BOOL:
             {
                 bool value = (bool)element->Item2->Value;
@@ -190,6 +201,14 @@ const char* FileSave::SaveToDataString(int& outLength)
 
                 std::string serializedValue = std::to_string(numValue);
                 outString->append(serializedValue.c_str(), serializedValue.length() + 1);
+
+                break;
+            }
+            case GenType::SUPPORTED_TYPES::STRING:
+            {
+                std::string* value = (std::string*)element->Item2->Value;
+
+                outString->append(value->c_str(), value->length() + 1);
 
                 break;
             }
@@ -202,25 +221,6 @@ const char* FileSave::SaveToDataString(int& outLength)
                 char* sizeString = (char*)&(element->Item2->ValueLength);
                 outString->append(sizeString, 4);
                 outString->append(value, element->Item2->ValueLength + 1);
-
-                break;
-            }
-            case GenType::SUPPORTED_TYPES::INT32:
-            {
-                int value = (int)element->Item2->Value;
-
-                char* valueBytes = (char*)&(value);
-
-                outString->append(valueBytes, 4);
-                outString->append("\0", 1); // Somehow have to add the element null terminator delimiter by hand
-
-                break;
-            }
-            case GenType::SUPPORTED_TYPES::STRING:
-            {
-                std::string* value = (std::string*)element->Item2->Value;
-
-                outString->append(value->c_str(), value->length() + 1);
 
                 break;
             }
@@ -296,6 +296,17 @@ FileSave* FileSave::ProcessV1SaveFile(std::ifstream* stream)
 
         switch (typeByte[0] - '0')
         {
+            case GenType::SUPPORTED_TYPES::INT32:
+            {
+                char numberBytes[4];
+                stream->read(numberBytes, 4);
+
+                int number = *((int*)numberBytes);
+
+                newSave->AddNumber(elementName, number);
+
+                break;
+            }
             case GenType::SUPPORTED_TYPES::BOOL:
             {
                 char val[1];
@@ -304,6 +315,17 @@ FileSave* FileSave::ProcessV1SaveFile(std::ifstream* stream)
                 bool value = val[0] - '0';
 
                 newSave->AddBool(elementName, value);
+
+                break;
+            }
+            case GenType::SUPPORTED_TYPES::STRING:
+            {
+                char* inputString = new char[512]; // Implement safe max value ?
+                stream->getline(inputString, 512, '\0');
+
+                std::string* newStr = new std::string(inputString);
+
+                newSave->AddString(elementName, newStr);
 
                 break;
             }
@@ -318,28 +340,6 @@ FileSave* FileSave::ProcessV1SaveFile(std::ifstream* stream)
                 stream->read(data, len);
 
                 newSave->AddData(elementName, data, len);
-
-                break;
-            }
-            case GenType::SUPPORTED_TYPES::INT32:
-            {
-                char numberBytes[4];
-                stream->read(numberBytes, 4);
-
-                int number = *((int*)numberBytes);
-
-                newSave->AddNumber(elementName, number);
-
-                break;
-            }
-            case GenType::SUPPORTED_TYPES::STRING:
-            {
-                char* inputString = new char[512]; // Implement safe max value ?
-                stream->getline(inputString, 512, '\0');
-
-                std::string* newStr = new std::string(inputString);
-
-                newSave->AddString(elementName, newStr);
 
                 break;
             }
