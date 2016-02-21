@@ -129,7 +129,7 @@ bool XFile::IsOpen()
 
 std::ifstream* XFile::GetFileStream()
 {
-    std::ifstream* stream = new std::ifstream(this->FilePath);
+    std::ifstream* stream = new std::ifstream(this->FilePath, std::ios_base::binary);
 
     return stream;
 }
