@@ -37,7 +37,9 @@ int main()
     newSave->AddNumber("four", 999);
     newSave->AddString("five", &message);
 
-    newSave->SaveToFile("save.bin");
+    //newSave->SaveToFile("save.bin");
+
+    FileSave* loaded = FileSave::LoadFromFile("save.bin");
 
     BaseSprite* animSprite = eng->CreateSprite("animu");
     BaseTexture* one = eng->Graphics->CreateTexture("assets\\one.png");

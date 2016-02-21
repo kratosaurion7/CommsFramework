@@ -199,8 +199,8 @@ const char* FileSave::SaveToDataString(int& outLength)
 
                 std::string dataLengthString = std::to_string(element->Item2->ValueLength);
                 
-                unsigned char* sizeString = IntToBytes(element->Item2->ValueLength);
-                outString->append((char*)sizeString, 4);
+                char* sizeString = (char*)&(element->Item2->ValueLength);
+                outString->append(sizeString, 4);
                 outString->append(value, element->Item2->ValueLength + 1);
 
                 break;
@@ -209,8 +209,10 @@ const char* FileSave::SaveToDataString(int& outLength)
             {
                 int value = (int)element->Item2->Value;
 
-                std::string serializedValue = std::to_string(value);
-                outString->append(serializedValue.c_str(), serializedValue.length() + 1);
+                char* valueBytes = (char*)&(value);
+
+                outString->append(valueBytes, 4);
+                outString->append("\0", 1); // Somehow have to add the element null terminator delimiter by hand
 
                 break;
             }
@@ -236,19 +238,25 @@ FileSave* FileSave::LoadFromFile(std::string filePath)
     FileSave* loadedSave = NULL;
 
     XFile inFile(filePath);
-    inFile.Open();
+    inFile.Open(FILE_OPEN_MODE::XFILE_READ, FILE_SHARE_MODE::XSHARE_READ);
 
     if (inFile.FileValid)
     {
         std::ifstream* fs = inFile.GetFileStream();
-        
+        //std::ifstream* fs = new std::ifstream("save.bin", std::ios_base::binary);
+
+        auto tt = strerror(errno);
+
         if (fs->good())
         {
             FileSave::SAVE_VERSION fileVersion = FileSave::SAVE_VERSION::BAD;
             char versionHeader[1];
             fs->read(versionHeader, 1);
 
-            switch (versionHeader[0])
+            // Using the trick of substracting the value of '0' (48) to convert from the version number string to it's int value. ex: '0' = int 48.
+            FileSave::SAVE_VERSION x = (FileSave::SAVE_VERSION)(versionHeader[0] - '0');
+
+            switch (x)
             {
                 case FileSave::SAVE_VERSION::V1:
                 {
@@ -286,14 +294,14 @@ FileSave* FileSave::ProcessV1SaveFile(std::ifstream* stream)
         char* elementName = new char[MAX_KEY_NAME];
         stream->getline(elementName, MAX_KEY_NAME, '\0');
 
-        switch (typeByte[0])
+        switch (typeByte[0] - '0')
         {
             case GenType::SUPPORTED_TYPES::BOOL:
             {
                 char val[1];
                 stream->read(val, 1);
 
-                bool value = val[0];
+                bool value = val[0] - '0';
 
                 newSave->AddBool(elementName, value);
 
@@ -301,25 +309,53 @@ FileSave* FileSave::ProcessV1SaveFile(std::ifstream* stream)
             }
             case GenType::SUPPORTED_TYPES::DATA:
             {
+                char dataLen[4];
+                stream->read(dataLen, 4);
                 
-                
+                int len = *((int*)dataLen); // Convert 4 ints to a char
 
+                char* data = new char[len];
+                stream->read(data, len);
+
+                newSave->AddData(elementName, data, len);
 
                 break;
             }
             case GenType::SUPPORTED_TYPES::INT32:
             {
+                char numberBytes[4];
+                stream->read(numberBytes, 4);
+
+                int number = *((int*)numberBytes);
+
+                newSave->AddNumber(elementName, number);
+
                 break;
             }
             case GenType::SUPPORTED_TYPES::STRING:
             {
+                char* inputString = new char[512]; // Implement safe max value ?
+                stream->getline(inputString, 512, '\0');
+
+                std::string* newStr = new std::string(inputString);
+
+                newSave->AddString(elementName, newStr);
+
                 break;
             }
             default:
                 break;
         }
 
-        return NULL;
+        char valueEndDelim[1];
+        stream->read(valueEndDelim, 1);
+
+        if (valueEndDelim[0] != '\0')
+        {
+            int i = 0;
+        }
+        
     }
 
+    return newSave;
 }
