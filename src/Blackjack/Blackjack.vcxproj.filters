@@ -48,6 +48,9 @@
     <ClCompile Include="CardActor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CardHand.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Deck.h">
@@ -73,6 +76,9 @@
     </ClInclude>
     <ClInclude Include="CardActor.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CardHand.h">
+      <Filter>Objects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

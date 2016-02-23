@@ -2,16 +2,16 @@
 
 #include <YesNoDialog.h>
 #include <MessageDialog.h>
+#include <GameEngine.h>
 
 #include "Card.h"
+#include "CardHand.h"
 #include "CardsShoe.h"
+#include "CardActor.h"
 #include "CardActor.h"
 #include "BlackjackPlayer.h"
 #include "BlackjackDealer.h"
 #include "BetSelection.h"
-#include <GameEngine.h>
-#include "CardActor.h"
-
 
 BlackjackGame::BlackjackGame()
 {
@@ -107,21 +107,27 @@ void BlackjackGame::Update()
         }
         case RECEIVE_CARDS:
         {
-            while (Player->Cards->Count() < 2)
+            CardHand* playerHand = new CardHand();
+            Player->Hands->Add(playerHand);
+
+            while (playerHand->Cards->Count() < 2)
             {
                 Card* playerCard = GameCards->DrawCard();
 
-                Player->ReceiveCard(playerCard);
+                Player->ReceiveCard(playerCard, playerHand);
             }
 
-            while (Dealer->Cards->Count() < 2)
+            CardHand* dealerHand = new CardHand();
+            Dealer->Hands->Add(dealerHand);
+
+            while (dealerHand->Cards->Count() < 2)
             {
                 Card* dealerCard = GameCards->DrawCard();
 
-                Dealer->ReceiveCard(dealerCard);
+                Dealer->ReceiveCard(dealerCard, dealerHand);
             }
 
-            Dealer->Cards->Get(0)->TurnDown();
+            dealerHand->Cards->Get(0)->TurnDown();
 
             bool playerCanSplit = Player->CanSplit();
             bool playerCanInsure = Dealer->BlackjackIsPossible();
@@ -335,8 +341,8 @@ void BlackjackGame::ResetGame()
 {
     GameCards->ReSeedDeck();
 
-    Player->Cards->Clear();
-    Dealer->Cards->Clear();
+    Player->Hands->Clear();
+    Dealer->Hands->Clear();
 
     Player->LastBet = this->Player->CurrentBet;
     Player->CurrentBet = 0;

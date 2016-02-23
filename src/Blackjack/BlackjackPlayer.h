@@ -1,6 +1,7 @@
 #pragma once
 
 class BaseText;
+class CardHand;
 
 #include <BaseList.h>
 #include <PointerList.h>
@@ -27,10 +28,12 @@ public:
     BlackjackPlayer();
     ~BlackjackPlayer();
 
-    bool CanSplit();
+    bool CanSplit(int handIndex = 0);
+    bool CanSplit(CardHand* targetHand);
 
 protected:
-    virtual void UpdateCardPositions();
+    virtual void UpdateCardPositions(int handIndex = 0);
+    virtual void UpdateCardPosition(CardHand* targetHand);
 
     virtual void UpdateStatusTexts();
 };

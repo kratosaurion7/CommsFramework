@@ -3,6 +3,7 @@
 
 class BaseText;
 class Card;
+class CardHand;
 
 #include <string>
 
@@ -29,8 +30,7 @@ public:
         BUSTED
     } CardActorCurrentStatus;
 
-    PointerList<Card*>* Cards;
-
+    PointerList<CardHand*>* Hands;
 
     BaseText* TotalLabel;
     BaseText* TotalText;
@@ -39,11 +39,14 @@ public:
     CardActor();
     ~CardActor();
 
-    virtual int CardsTotal();
-    virtual void ReceiveCard(Card* card);
+    virtual int CardsTotal(int handIndex = 0);
+    virtual int CardsTotal(CardHand* targetHand);
+    virtual void ReceiveCard(Card* card, int handIndex = 0);
+    virtual void ReceiveCard(Card* card, CardHand* targetHand);
     virtual void Update();
 
 protected:
     virtual void UpdateStatusTexts();
-    virtual void UpdateCardPositions() = 0;
+    virtual void UpdateCardPositions(int handIndex = 0) = 0;
+    virtual void UpdateCardPosition(CardHand* targetHand) = 0;
 };

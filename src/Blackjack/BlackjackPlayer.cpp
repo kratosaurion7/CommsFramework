@@ -6,6 +6,7 @@
 #include <GameEngine.h>
 
 #include "Card.h"
+#include "CardHand.h"
 
 
 BlackjackPlayer::BlackjackPlayer()
@@ -54,21 +55,45 @@ BlackjackPlayer::~BlackjackPlayer()
 {
 }
 
-bool BlackjackPlayer::CanSplit()
+bool BlackjackPlayer::CanSplit(int handIndex)
 {
+    CardHand* hand = this->Hands->Get(handIndex);
+
+    return this->CanSplit(hand);
+}
+
+bool BlackjackPlayer::CanSplit(CardHand * targetHand)
+{
+    if (targetHand == NULL)
+        return false;
+
+    CardHand* hand = targetHand;
+
     // Confirm if can split when card 0 = 10 and card 1 = Jack/Queen/King
-    if (this->Cards->Get(0)->CardValue == this->Cards->Get(1)->CardValue)
+    if (hand->Cards->Get(0)->CardValue == hand->Cards->Get(1)->CardValue)
         return true;
 
     return false;
 }
 
-void BlackjackPlayer::UpdateCardPositions()
+void BlackjackPlayer::UpdateCardPositions(int handIndex)
 {
+    CardHand* hand = this->Hands->Get(handIndex);
+
+    UpdateCardPosition(hand);
+}
+
+void BlackjackPlayer::UpdateCardPosition(CardHand* targetHand)
+{
+    if (targetHand == NULL)
+        return;
+
+    CardHand* hand = targetHand;
+
     int cardIndex = 0;
 
-    auto it = this->Cards->GetContainer()->begin();
-    while (it != this->Cards->GetContainer()->end())
+    auto it = hand->Cards->GetContainer()->begin();
+    while (it != hand->Cards->GetContainer()->end())
     {
         Card* cardIter = (*it);
 

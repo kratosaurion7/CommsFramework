@@ -3,16 +3,17 @@
 
 #include <BaseSprite.h>
 #include <BaseText.h>
+#include <GameEngine.h>
 
 #include "Deck.h"
 #include "Card.h"
-
+#include "CardHand.h"
 #include "CardActor.h"
-#include <GameEngine.h>
+
 
 CardActor::CardActor()
 {
-    Cards = new PointerList<Card*>();
+    Hands = new PointerList<CardHand*>();
 
     TotalLabel = Engine->CreateText("Card Total");
     TotalLabel->SetPos(450, 680);
@@ -31,36 +32,54 @@ CardActor::CardActor()
 
 CardActor::~CardActor()
 {
-    delete(Cards);
+    delete(Hands);
 }
 
-int CardActor::CardsTotal()
+int CardActor::CardsTotal(int handIndex)
 {
     int totalValue = 0;
 
-    auto it = Cards->GetContainer()->begin();
-    while (it != Cards->GetContainer()->end())
+    CardHand* hand = Hands->Get(handIndex);
+
+    totalValue = CardsTotal(hand);
+
+    return totalValue;
+}
+
+int CardActor::CardsTotal(CardHand* targetHand)
+{
+    int totalValue = 0;
+
+    if (targetHand != NULL)
     {
-        Card* card = (*it);
-
-        totalValue += card->CardCountValue;
-
-        it++;
+        totalValue = targetHand->GetTotal();
     }
 
     return totalValue;
 }
 
-void CardActor::ReceiveCard(Card * card)
+void CardActor::ReceiveCard(Card* card, int handIndex)
 {
-    if (this->Cards->Count() > 0)
+    CardHand* selectedHand = Hands->Get(handIndex);
+
+    this->ReceiveCard(card, selectedHand);
+}
+
+void CardActor::ReceiveCard(Card* card, CardHand* targetHand)
+{
+    CardHand* selectedHand = targetHand;
+
+    if (selectedHand == NULL)
+        return;
+
+    if (selectedHand->Cards->Count() > 0)
     {
-        Card* lastCard = this->Cards->Last();
+        Card* lastCard = selectedHand->Cards->Last();
         card->cardBack->SetZIndexOverObject(lastCard->cardBack); // Card is the same as lastCard
         card->cardFront->SetZIndexOverObject(lastCard->cardFront);
     }
 
-    this->Cards->Add(card);
+    selectedHand->Cards->Add(card);
 
     if (this->CardsTotal() > 21)
     {
@@ -70,6 +89,7 @@ void CardActor::ReceiveCard(Card * card)
     {
         this->CardActorCurrentStatus = CardPlayerStatus::OK;
     }
+
 }
 
 void CardActor::Update()

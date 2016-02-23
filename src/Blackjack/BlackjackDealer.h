@@ -1,5 +1,7 @@
 #pragma once
 
+class CardHand;
+
 #include <BaseList.h>
 #include <PointerList.h>
 
@@ -11,14 +13,17 @@ public:
     BlackjackDealer();
     ~BlackjackDealer();
 
-    bool BlackjackIsPossible();
+    bool BlackjackIsPossible(int handIndex = 0);
+    bool BlackjackIsPossible(CardHand* targetHand);
 
     bool NeedsMoreCards();
 
     void Update();
 
 protected:
-    virtual void UpdateCardPositions();
+    virtual void UpdateCardPositions(int handIndex = 0);
+    virtual void UpdateCardPosition(CardHand* targetHand);
+
 
 };
 

@@ -4,6 +4,7 @@
 #include <BaseText.h>
 #include <BaseSprite.h>
 #include "Card.h"
+#include "CardHand.h"
 
 BlackjackDealer::BlackjackDealer()
 {
@@ -16,10 +17,22 @@ BlackjackDealer::~BlackjackDealer()
 {
 }
 
-bool BlackjackDealer::BlackjackIsPossible()
+bool BlackjackDealer::BlackjackIsPossible(int handIndex)
 {
+    CardHand* hand = this->Hands->Get(handIndex);
+
+    return BlackjackIsPossible(hand);
+}
+
+bool BlackjackDealer::BlackjackIsPossible(CardHand * targetHand)
+{
+    if (targetHand == NULL)
+        return false;
+
+    CardHand* hand = targetHand;
+
     // Let's say the second card is always the one shown to the player
-    if (this->Cards->Get(1)->CardValue == Card::CARD_VALUE::Ace)
+    if (hand->Cards->Get(1)->CardValue == Card::CARD_VALUE::Ace)
         return true;
 
     return false;
@@ -48,12 +61,24 @@ void BlackjackDealer::Update()
     }
 }
 
-void BlackjackDealer::UpdateCardPositions()
+void BlackjackDealer::UpdateCardPositions(int handIndex)
 {
+    CardHand* hand = this->Hands->Get(handIndex);
+
+    UpdateCardPosition(hand);
+}
+
+void BlackjackDealer::UpdateCardPosition(CardHand * targetHand)
+{
+    if (targetHand == NULL)
+        return;
+
+    CardHand* hand = targetHand;
+
     int cardIndex = 0;
 
-    auto it = this->Cards->GetContainer()->begin();
-    while (it != this->Cards->GetContainer()->end())
+    auto it = hand->Cards->GetContainer()->begin();
+    while (it != hand->Cards->GetContainer()->end())
     {
         Card* cardIter = (*it);
 
@@ -72,6 +97,5 @@ void BlackjackDealer::UpdateCardPositions()
         it++;
         cardIndex++;
     }
-
 
 }
