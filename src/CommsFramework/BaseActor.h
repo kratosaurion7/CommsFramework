@@ -7,6 +7,8 @@
 
 class GameEngine;
 class DrawObject;
+class BaseSprite;
+class BaseText;
 
 enum SpriteControls
 {
@@ -38,6 +40,12 @@ public:
 
     void WaitFrames(int nbFrames);
     void WaitTime(int millisecondsWait);
+
+protected:
+    // Utility methods to create and then add sprites automatically
+    // TODO : Find better name to illustrate that the actor will keep track of the sprite
+    BaseSprite* MakeSprite(std::string name);
+    BaseText* MakeText(std::string name);
 
 private:
     SpriteControls spriteControlScheme;

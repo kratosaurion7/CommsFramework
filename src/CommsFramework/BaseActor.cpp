@@ -1,4 +1,6 @@
 #include "BaseActor.h"
+#include "BaseActor.h"
+#include "BaseActor.h"
 
 #include "BaseGraphicEngine.h"
 #include "GameEngine.h"
@@ -72,6 +74,24 @@ void BaseActor::WaitFrames(int nbFrames)
 
 void BaseActor::WaitTime(int millisecondsWait)
 {
+}
+
+BaseSprite * BaseActor::MakeSprite(std::string name)
+{
+    BaseSprite* sprt = this->Engine->CreateSprite(name);
+    
+    this->Sprites->Add(sprt);
+
+    return sprt;
+}
+
+BaseText * BaseActor::MakeText(std::string name)
+{
+    BaseText* txt = this->Engine->CreateText(name);
+
+    this->Sprites->Add(txt);
+
+    return txt;
 }
 
 void BaseActor::HandleKeyboardInput()

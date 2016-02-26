@@ -51,6 +51,9 @@
     <ClCompile Include="CardHand.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerControls.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Deck.h">
@@ -79,6 +82,9 @@
     </ClInclude>
     <ClInclude Include="CardHand.h">
       <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerControls.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

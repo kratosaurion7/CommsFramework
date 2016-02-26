@@ -7,6 +7,8 @@
 
 #include "BlackjackGame.h"
 
+#include "PlayerControls.h"
+
 #include <MessageDialog.h>
 #include <SDLUtilities.h>
 
@@ -47,17 +49,17 @@ int main()
     BaseTexture* three = eng->Graphics->CreateTexture("assets\\three.png");
     BaseTexture* four = eng->Graphics->CreateTexture("assets\\four.png");
 
-    SpriteAnimation* anim = new SpriteAnimation();
-    anim->Frames->Add(one);
-    anim->Frames->Add(two);
-    anim->Frames->Add(three);
-    anim->Frames->Add(four);
-    animSprite->AddAnimation(anim);
-    animSprite->IsAnimated = true;
-    animSprite->Show(true);
+    //SpriteAnimation* anim = new SpriteAnimation();
+    //anim->Frames->Add(one);
+    //anim->Frames->Add(two);
+    //anim->Frames->Add(three);
+    //anim->Frames->Add(four);
+    //animSprite->AddAnimation(anim);
+    //animSprite->IsAnimated = true;
+    //animSprite->Show(true);
 
-    animSprite->SetPos(100, 100);
-    animSprite->Play(true);
+    //animSprite->SetPos(100, 100);
+    //animSprite->Play(true);
 
     //////////////////////// END TEST SECTION /////////////////////
 
