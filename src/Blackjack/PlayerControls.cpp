@@ -17,10 +17,20 @@ PlayerControls::PlayerControls()
     SplitButton = this->MakeSprite("SplitButton");
     DoubleButton = this->MakeSprite("DoubleButton");
 
+
+    int baseYPos = 25;
+
     DrawButton->SetTexture("assets//buttons//DrawButton.png");
+    DrawButton->SetPos(baseYPos, 0);
+
     HoldButton->SetTexture("assets//buttons//HoldButton.png");
+    HoldButton->SetPos(155 * 1 + baseYPos, 0);
+
     SplitButton->SetTexture("assets//buttons//SplitButton.png");
+    SplitButton->SetPos(155 * 2 + baseYPos, 0);
+
     DoubleButton->SetTexture("assets//buttons//DoubleButton.png");
+    DoubleButton->SetPos(155 *3 + baseYPos, 0);
 }
 
 PlayerControls::~PlayerControls()
@@ -35,6 +45,7 @@ void PlayerControls::Enable()
 void PlayerControls::Disable()
 {
     State = WAITING;
+    Choice = NONE;
 }
 
 void PlayerControls::Show()

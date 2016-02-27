@@ -6,6 +6,7 @@ class CardsShoe;
 class YesNoDialog;
 class MessageDialog;
 class BetSelection;
+class PlayerControls;
 
 #include <BaseList.h>
 #include <PointerList.h>
@@ -37,6 +38,8 @@ public:
     BlackjackPlayer* Player;
 
     BetSelection* BetSelector;
+
+    PlayerControls* Controls;
     
     CardsShoe* GameCards;
 
