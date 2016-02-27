@@ -38,6 +38,10 @@ public:
 
     virtual void SetSolidColor(uint32_t pixelColor);
 
+    virtual void ResetTextureFromSurface();
+
+    virtual void FreeTexture();
+
     virtual void SaveTextureToFile();
     virtual void SaveTextureToFile(std::string fileName);
 };

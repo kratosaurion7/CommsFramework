@@ -1,6 +1,7 @@
 #include "SDLSprite.h"
 
 #include <SDL.h>
+#include <SDL_image.h>
 
 #include "BaseSprite.h"
 #include "BaseText.h"
@@ -95,10 +96,15 @@ void SDLSprite::SetGraphicalFilter(int graphic_filter)
         SDL_SetTextureAlphaMod(this->currentSpriteTexture->texture, 255);
         //SDL_SetTextureBlendMode(this->currentSpriteTexture->texture, SDL_BLENDMODE_NONE);
         SDL_SetTextureColorMod(this->currentSpriteTexture->texture, 255, 255, 255);
+
+        this->currentSpriteTexture->ResetTextureFromSurface();
     }
     else if (graphic_filter & GRAPHIC_FILTER::GRAYSCALE)
     {
+        this->currentSpriteTexture->FreeTexture();
+
         this->currentSpriteTexture->texture = GrayScaleTextureFromSurface(this->currentSpriteTexture->surface);
+
     }
     else if (graphic_filter & GRAPHIC_FILTER::ALPHAMOD)
     {
@@ -124,16 +130,20 @@ SDL_Texture* SDLSprite::GrayScaleTextureFromSurface(SDL_Surface* surface)
     {
         for (int j = 0; j < surface->w; j++)
         {
-            Uint32 p = originalPix[j + i * surface->h];
+            Uint32 p = originalPix[j + (i * surface->w)];
 
-            Uint8 r = p & surface->format->Rmask;
-            Uint8 g = p & surface->format->Bmask;
-            Uint8 b = p & surface->format->Gmask;
-            Uint8 a = p & surface->format->Amask;
+            Uint8 r;
+            Uint8 g;
+            Uint8 b;
+            Uint8 a;
+
+            SDL_GetRGBA(p, surface->format, &r, &g, &b, &a);
 
             Uint8 gray = (r + g + b) / 3;
 
-            newPix[j + i * surface->h] = gray;
+            Uint32 grayColor = SDL_MapRGBA(surface->format, gray, gray, gray, 255);
+
+            newPix[j + (i * surface->w)] = grayColor;
         }
     }
 

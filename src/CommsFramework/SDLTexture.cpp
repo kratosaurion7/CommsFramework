@@ -215,6 +215,24 @@ void SDLTexture::SetSolidColor(uint32_t pixelColor)
     texture = newTexture;
 }
 
+void SDLTexture::ResetTextureFromSurface()
+{
+    SDL_Renderer* renderer = Graphics->gameRenderer;
+
+    if (surface != NULL)
+    {
+        FreeTexture();
+
+        texture = SDL_CreateTextureFromSurface(renderer, surface);
+    }
+}
+
+void SDLTexture::FreeTexture()
+{
+    if (this->texture != NULL)
+        SDL_DestroyTexture(texture);
+}
+
 void SDLTexture::SaveTextureToFile()
 {
     this->SaveTextureToFile("out.bmp");

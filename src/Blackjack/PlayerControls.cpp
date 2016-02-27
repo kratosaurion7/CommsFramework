@@ -52,10 +52,10 @@ void PlayerControls::Disable()
     State = WAITING;
     Choice = NONE;
 
-    DrawButton->SetGraphicalFilter(DrawObject::GRAPHIC_FILTER::ALPHAMOD);
-    HoldButton->SetGraphicalFilter(DrawObject::GRAPHIC_FILTER::ALPHAMOD);
-    SplitButton->SetGraphicalFilter(DrawObject::GRAPHIC_FILTER::ALPHAMOD);
-    DoubleButton->SetGraphicalFilter(DrawObject::GRAPHIC_FILTER::ALPHAMOD);
+    DrawButton->SetGraphicalFilter(DrawObject::GRAPHIC_FILTER::GRAYSCALE);
+    HoldButton->SetGraphicalFilter(DrawObject::GRAPHIC_FILTER::GRAYSCALE);
+    SplitButton->SetGraphicalFilter(DrawObject::GRAPHIC_FILTER::GRAYSCALE);
+    DoubleButton->SetGraphicalFilter(DrawObject::GRAPHIC_FILTER::GRAYSCALE);
 }
 
 void PlayerControls::Show()
