@@ -101,6 +101,42 @@ void CardActor::Update()
     UpdateCardPositions();
 }
 
+void CardActor::RevealCards()
+{
+    auto it = this->Hands->GetContainer()->begin();
+    while (it != this->Hands->GetContainer()->end())
+    {
+        CardHand* hand = (*it);
+
+        auto cardIt = hand->Cards->GetContainer()->begin();
+        while (cardIt != hand->Cards->GetContainer()->end())
+        {
+            Card* card = (*cardIt);
+            card->TurnUp();
+
+            cardIt++;
+        }
+
+        it++;
+    }
+}
+
+void CardActor::HideCards()
+{
+    auto it = this->Hands->GetContainer()->begin();
+    while (it != this->Hands->GetContainer()->end())
+    {
+        CardHand* hand = (*it);
+
+        auto cardIt = hand->Cards->GetContainer()->begin();
+        while (cardIt != hand->Cards->GetContainer()->end())
+        {
+            Card* card = (*cardIt);
+            card->TurnDown();
+        }
+    }
+}
+
 void CardActor::UpdateStatusTexts()
 {
     std::string CardsTotal = std::to_string(this->CardsTotal());

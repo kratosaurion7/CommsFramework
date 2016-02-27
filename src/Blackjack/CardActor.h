@@ -45,6 +45,9 @@ public:
     virtual void ReceiveCard(Card* card, CardHand* targetHand);
     virtual void Update();
 
+    virtual void RevealCards();
+    virtual void HideCards();
+
 protected:
     virtual void UpdateStatusTexts();
     virtual void UpdateCardPositions(int handIndex = 0) = 0;

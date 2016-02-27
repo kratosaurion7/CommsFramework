@@ -125,8 +125,9 @@ void BlackjackGame::Update()
 
                 Dealer->ReceiveCard(dealerCard, dealerHand);
             }
-
+            
             dealerHand->Cards->Get(0)->TurnDown();
+            dealerHand->Cards->Get(1)->TurnUp();
 
             bool playerCanSplit = Player->CanSplit();
             bool playerCanInsure = Dealer->BlackjackIsPossible();
@@ -234,6 +235,8 @@ void BlackjackGame::Update()
         }
         case GAME_FINISHED:
         {
+            this->Dealer->RevealCards();
+
             if (this->Player->CardsTotal() > 21)
             {
                 this->GameState = DEALER_WINS;
