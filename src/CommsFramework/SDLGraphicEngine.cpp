@@ -376,7 +376,7 @@ void SDLGraphicEngine::ProcessDraw(SDL_Window* targetWindow)
             {
                 SDLDrawable* drawImpl = dynamic_cast<SDLDrawable*>(target);
 
-                if (target->Ident == "animu")
+                if (target->Ident == "DrawButton")
                 {
                     int i = 0;
                 }
@@ -423,8 +423,8 @@ SDL_Rect SDLGraphicEngine::GetSpriteRect(DrawObject* object)
     SDL_Rect rec;
     rec.h = object->GetHeight();
     rec.w = object->GetWidth();
-    rec.x = object->GetX();
-    rec.y = object->GetY();
+    rec.x = object->GetOffsetPos().X;
+    rec.y = object->GetOffsetPos().Y;
 
     return rec;
 }
