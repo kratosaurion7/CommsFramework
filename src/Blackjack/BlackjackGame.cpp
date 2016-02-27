@@ -36,12 +36,6 @@ BlackjackGame::BlackjackGame()
     this->Engine->AttachActor(BetSelector);
     this->Engine->AttachActor(Controls);
 
-    SplitCardsDialog = new YesNoDialog("Split ?");
-    this->Engine->AttachActor(SplitCardsDialog);
-
-    AskNewCardsDialog = new YesNoDialog("Another card ?");
-    this->Engine->AttachActor(AskNewCardsDialog);
-
     playerWinDialog = new MessageDialog("You win !", 5000);
     this->Engine->AttachActor(playerWinDialog);
 
@@ -156,38 +150,6 @@ void BlackjackGame::Update()
 
             break;
         }
-        case ASK_SPLIT:
-        {
-            if (this->SplitCardsDialog->IsOpen())
-            {
-                if (this->SplitCardsDialog->DialogDecision != YesNoDialog::DialogResult::CHOOSING)
-                {
-                    if (this->SplitCardsDialog->DialogDecision != YesNoDialog::DialogResult::YES)
-                    {
-                        // Split action not implemented
-                    }
-                    else if (this->SplitCardsDialog->DialogDecision != YesNoDialog::DialogResult::NO)
-                    {
-                        // Split action not implemented
-                    }
-
-                    if (Dealer->BlackjackIsPossible())
-                    {
-                        this->GameState = Game_State::ASK_INSURANCE;
-                    }
-                    else
-                    {
-                        this->GameState = Game_State::PLAYER_NEW_CARDS;
-                    }
-                }
-            }
-            else
-            {
-                this->SplitCardsDialog->Open();
-            }
-
-            break;
-        }
         case ASK_INSURANCE:
         {
             this->GameState = Game_State::PLAYER_NEW_CARDS;
@@ -242,35 +204,6 @@ void BlackjackGame::Update()
                         break;
                 }
             }
-
-            //if (this->AskNewCardsDialog->IsOpen())
-            //{
-            //    if (this->AskNewCardsDialog->DialogDecision == YesNoDialog::DialogResult::YES)
-            //    {
-            //        this->AskNewCardsDialog->ResetDialog();
-
-            //        Card* newCard = this->GameCards->DrawCard();
-
-            //        this->Player->ReceiveCard(newCard);
-
-            //        if (this->Player->CardActorCurrentStatus == CardActor::CardPlayerStatus::BUSTED)
-            //        {
-            //            // Show busted screen
-            //            gameDelay = 60;
-            //            this->GameState = GAME_FINISHED;
-            //        }
-            //    }
-            //    else if (this->AskNewCardsDialog->DialogDecision == YesNoDialog::DialogResult::NO)
-            //    {
-            //        this->AskNewCardsDialog->ResetDialog();
-
-            //        this->GameState = DEALER_NEW_CARDS;
-            //    }
-            //}
-            //else
-            //{
-            //    this->AskNewCardsDialog->Open();
-            //}
 
             break;
         }

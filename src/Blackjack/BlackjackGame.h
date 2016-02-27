@@ -21,7 +21,6 @@ public:
         START,
         CHOOSE_BET,
         RECEIVE_CARDS,
-        ASK_SPLIT,
         ASK_INSURANCE,
         PLAYER_NEW_CARDS,
         DEALER_NEW_CARDS,
@@ -44,9 +43,6 @@ public:
     CardsShoe* GameCards;
 
     // Dialogs
-    YesNoDialog* SplitCardsDialog;
-    YesNoDialog* AskNewCardsDialog;
-
     MessageDialog* playerWinDialog;
     MessageDialog* playerLoseDialog;
     MessageDialog* gameDrawDialog;
