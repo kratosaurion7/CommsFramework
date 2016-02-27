@@ -37,14 +37,18 @@ PlayerControls::~PlayerControls()
 {
 }
 
-void PlayerControls::Enable()
+void PlayerControls::Enable(bool enableSplit, bool enableDouble)
 {
     State = WAIT_INPUT;
 
     DrawButton->SetGraphicalFilter(DrawObject::GRAPHIC_FILTER::NONE);
     HoldButton->SetGraphicalFilter(DrawObject::GRAPHIC_FILTER::NONE);
-    SplitButton->SetGraphicalFilter(DrawObject::GRAPHIC_FILTER::NONE);
-    DoubleButton->SetGraphicalFilter(DrawObject::GRAPHIC_FILTER::NONE);
+
+    if(enableSplit)
+        SplitButton->SetGraphicalFilter(DrawObject::GRAPHIC_FILTER::NONE);
+
+    if(enableDouble)
+        DoubleButton->SetGraphicalFilter(DrawObject::GRAPHIC_FILTER::NONE);
 }
 
 void PlayerControls::Disable()
@@ -56,6 +60,50 @@ void PlayerControls::Disable()
     HoldButton->SetGraphicalFilter(DrawObject::GRAPHIC_FILTER::GRAYSCALE);
     SplitButton->SetGraphicalFilter(DrawObject::GRAPHIC_FILTER::GRAYSCALE);
     DoubleButton->SetGraphicalFilter(DrawObject::GRAPHIC_FILTER::GRAYSCALE);
+}
+
+void PlayerControls::EnableButton(Choice_Result targetButton, bool enable)
+{
+    if (enable)
+    {
+        switch (targetButton)
+        {
+            case PlayerControls::DRAW:
+                DrawButton->SetGraphicalFilter(DrawObject::GRAPHIC_FILTER::NONE);
+                break;
+            case PlayerControls::HOLD:
+                HoldButton->SetGraphicalFilter(DrawObject::GRAPHIC_FILTER::NONE);
+                break;
+            case PlayerControls::SPLIT:
+                SplitButton->SetGraphicalFilter(DrawObject::GRAPHIC_FILTER::NONE);
+                break;
+            case PlayerControls::DOUBLE:
+                DoubleButton->SetGraphicalFilter(DrawObject::GRAPHIC_FILTER::NONE);
+                break;
+            default:
+                break;
+        }
+    }
+    else
+    {
+        switch (targetButton)
+        {
+            case PlayerControls::DRAW:
+                DrawButton->SetGraphicalFilter(DrawObject::GRAPHIC_FILTER::GRAYSCALE);
+                break;
+            case PlayerControls::HOLD:
+                HoldButton->SetGraphicalFilter(DrawObject::GRAPHIC_FILTER::GRAYSCALE);
+                break;
+            case PlayerControls::SPLIT:
+                SplitButton->SetGraphicalFilter(DrawObject::GRAPHIC_FILTER::GRAYSCALE);
+                break;
+            case PlayerControls::DOUBLE:
+                DoubleButton->SetGraphicalFilter(DrawObject::GRAPHIC_FILTER::GRAYSCALE);
+                break;
+            default:
+                break;
+        }
+    }
 }
 
 void PlayerControls::Show()

@@ -31,8 +31,10 @@ public:
     PlayerControls();
     ~PlayerControls();
 
-    void Enable();
+    void Enable(bool enableSplit = false, bool enableDouble = false);
     void Disable();
+
+    void EnableButton(Choice_Result targetButton, bool enable = true);
 
     void Show();
     void Hide();

@@ -162,7 +162,7 @@ void BlackjackGame::Update()
         {
             if (this->Controls->State == PlayerControls::WAITING)
             {
-                this->Controls->Enable();
+                this->Controls->Enable(this->Player->CanSplit(), this->Player->Hands->Get(0)->Cards->Count() == 2);
             }
             else if(this->Controls->State == PlayerControls::RECEIVED_INPUT)
             {
@@ -171,6 +171,8 @@ void BlackjackGame::Update()
                 {
                     case PlayerControls::DRAW:
                     {
+                        this->Controls->EnableButton(PlayerControls::DOUBLE, false);
+
                         Card* newCard = this->GameCards->DrawCard();
 
                         this->Player->ReceiveCard(newCard);
