@@ -38,6 +38,8 @@ public:
     virtual SDL_Texture* GetDrawableTexture();
     virtual void UpdateInnerImpl();
 
+    virtual void SetGraphicalFilter(int graphic_filter);
+
 private:
     std::string textContent;
 

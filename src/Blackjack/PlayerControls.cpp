@@ -40,12 +40,22 @@ PlayerControls::~PlayerControls()
 void PlayerControls::Enable()
 {
     State = WAIT_INPUT;
+
+    DrawButton->SetGraphicalFilter(DrawObject::GRAPHIC_FILTER::NONE);
+    HoldButton->SetGraphicalFilter(DrawObject::GRAPHIC_FILTER::NONE);
+    SplitButton->SetGraphicalFilter(DrawObject::GRAPHIC_FILTER::NONE);
+    DoubleButton->SetGraphicalFilter(DrawObject::GRAPHIC_FILTER::NONE);
 }
 
 void PlayerControls::Disable()
 {
     State = WAITING;
     Choice = NONE;
+
+    DrawButton->SetGraphicalFilter(DrawObject::GRAPHIC_FILTER::ALPHAMOD);
+    HoldButton->SetGraphicalFilter(DrawObject::GRAPHIC_FILTER::ALPHAMOD);
+    SplitButton->SetGraphicalFilter(DrawObject::GRAPHIC_FILTER::ALPHAMOD);
+    DoubleButton->SetGraphicalFilter(DrawObject::GRAPHIC_FILTER::ALPHAMOD);
 }
 
 void PlayerControls::Show()

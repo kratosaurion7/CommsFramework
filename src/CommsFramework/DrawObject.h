@@ -18,6 +18,14 @@ struct MouseClickInfo;
 class DrawObject
 {
 public:
+    enum GRAPHIC_FILTER
+    {
+        NONE = 1,
+        GRAYSCALE = 2,
+        ALPHAMOD = 4,
+
+    };
+
     BaseGraphicEngine* Engine;
     std::string Ident;
 
@@ -79,6 +87,8 @@ public:
 
     virtual bool Clicked(MouseButtons targetButton = LEFT);
 
+    virtual void SetGraphicalFilter(int graphic_filter) = 0;
+
 protected:
     bool isVisible;
 
@@ -87,6 +97,8 @@ protected:
     FSize size;
     FloatVec scale;
     FRectangle clippingBounds;
+
+    GRAPHIC_FILTER DrawObjectFilter;
 
     float zIndex;
 

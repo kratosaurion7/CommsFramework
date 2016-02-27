@@ -46,6 +46,8 @@ public:
 
     virtual BaseSprite* Clone();
 
+    void SetGraphicalFilter(int graphic_filter);
+
     /**
      * Function called by the graphic engine to retrieve the inner
      * SFML object implementation */

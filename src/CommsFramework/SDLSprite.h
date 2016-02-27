@@ -28,6 +28,8 @@ public:
     virtual BaseSprite* Clone();
 
     virtual SDL_Texture* GetDrawableTexture();
+
+    virtual void SetGraphicalFilter(int graphic_filter);
 private:
     virtual void UpdateInnerImpl();
 };

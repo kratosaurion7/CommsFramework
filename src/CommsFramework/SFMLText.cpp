@@ -94,6 +94,11 @@ sf::Drawable* SFMLText::GetDrawableImplementation()
     return innerImpl;
 }
 
+void SFMLText::SetGraphicalFilter(int graphic_filter)
+{
+
+}
+
 void SFMLText::UpdateTextWrapping()
 {
 }

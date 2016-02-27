@@ -244,3 +244,8 @@ void SDLText::UpdateInnerImpl()
     }
 
 }
+
+void SDLText::SetGraphicalFilter(int graphic_filter)
+{
+
+}

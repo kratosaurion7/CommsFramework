@@ -71,6 +71,7 @@ void BlackjackGame::Update()
         {
             this->GameCards->ReSeedDeck();
             this->BetSelector->ResetBet();
+            this->Controls->Disable();
 
             // Do game presentation, prompts for options, only the RESET state comes back here
             this->GameState = CHOOSE_BET;
@@ -235,6 +236,7 @@ void BlackjackGame::Update()
         }
         case GAME_FINISHED:
         {
+            this->Controls->Disable();
             this->Dealer->RevealCards();
 
             if (this->Player->CardsTotal() > 21)

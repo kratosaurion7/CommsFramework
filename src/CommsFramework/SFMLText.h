@@ -40,6 +40,8 @@ public:
 
     sf::Drawable* GetDrawableImplementation();
 
+    void SetGraphicalFilter(int graphic_filter);
+
 private:
     std::string textString;
     std::string textStringWithLineWrappings;

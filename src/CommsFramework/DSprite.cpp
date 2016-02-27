@@ -89,6 +89,11 @@ BaseSprite* DSprite::Clone()
     return NULL;
 }
 
+void DSprite::SetGraphicalFilter(int graphic_filter)
+{
+    
+}
+
 sf::Drawable * DSprite::GetDrawableImplementation()
 {
     return innerImpl;
