@@ -98,8 +98,8 @@ void SDLSprite::SetGraphicalFilter(int graphic_filter)
     if (graphic_filter & GRAPHIC_FILTER::NONE)
     {
         SDL_SetTextureAlphaMod(this->currentSpriteTexture->texture, 255);
-        SDL_SetTextureBlendMode(this->currentSpriteTexture->texture, SDL_BLENDMODE_NONE);
-        SDL_SetTextureColorMod(this->currentSpriteTexture->texture, 255, 255, 255);
+        //SDL_SetTextureBlendMode(this->currentSpriteTexture->texture, SDL_BLENDMODE_NONE);
+        //SDL_SetTextureColorMod(this->currentSpriteTexture->texture, 255, 255, 255);
     }
     else if (graphic_filter & GRAPHIC_FILTER::GRAYSCALE)
     {
