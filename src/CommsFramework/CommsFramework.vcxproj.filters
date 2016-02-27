@@ -106,6 +106,9 @@
     <Filter Include="Framework\Game\Saving">
       <UniqueIdentifier>{4a803d51-669c-4f37-98b4-5452b27a23ae}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Framework\Engine\Buttons">
+      <UniqueIdentifier>{468c2ea6-fbc8-4fe4-aedb-25e4d9b89757}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="XmlReader.cpp">
@@ -269,6 +272,9 @@
     </ClCompile>
     <ClCompile Include="GenType.cpp">
       <Filter>Framework\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseButton.cpp">
+      <Filter>Framework\Engine\Buttons</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -499,6 +505,9 @@
     </ClInclude>
     <ClInclude Include="GenType.h">
       <Filter>Framework\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseButton.h">
+      <Filter>Framework\Engine\Buttons</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
