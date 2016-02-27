@@ -32,5 +32,7 @@ public:
     virtual void SetGraphicalFilter(int graphic_filter);
 private:
     virtual void UpdateInnerImpl();
+
+    SDL_Texture* GrayScaleTextureFromSurface(SDL_Surface* surface);
 };
 

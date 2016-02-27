@@ -1,6 +1,6 @@
 #include "SDLSprite.h"
 
-#include <SDL_render.h>
+#include <SDL.h>
 
 #include "BaseSprite.h"
 #include "BaseText.h"
@@ -98,7 +98,7 @@ void SDLSprite::SetGraphicalFilter(int graphic_filter)
     }
     else if (graphic_filter & GRAPHIC_FILTER::GRAYSCALE)
     {
-
+        this->currentSpriteTexture->texture = GrayScaleTextureFromSurface(this->currentSpriteTexture->surface);
     }
     else if (graphic_filter & GRAPHIC_FILTER::ALPHAMOD)
     {
@@ -108,4 +108,36 @@ void SDLSprite::SetGraphicalFilter(int graphic_filter)
 
 void SDLSprite::UpdateInnerImpl()
 {
+}
+
+SDL_Texture* SDLSprite::GrayScaleTextureFromSurface(SDL_Surface* surface)
+{
+    SDLGraphicEngine* eng = (SDLGraphicEngine*)this->Engine;
+
+    SDL_Surface* newSurface = SDL_CreateRGBSurface(0, surface->w, surface->h, surface->format->BitsPerPixel, 
+        surface->format->Rmask, surface->format->Gmask, surface->format->Bmask, surface->format->Amask);
+
+    Uint32* originalPix = (Uint32*)surface->pixels;
+    Uint32* newPix = (Uint32*)newSurface->pixels;
+
+    for (int i = 0; i < surface->h; i++)
+    {
+        for (int j = 0; j < surface->w; j++)
+        {
+            Uint32 p = originalPix[j + i * surface->h];
+
+            Uint8 r = p & surface->format->Rmask;
+            Uint8 g = p & surface->format->Bmask;
+            Uint8 b = p & surface->format->Gmask;
+            Uint8 a = p & surface->format->Amask;
+
+            Uint8 gray = (r + g + b) / 3;
+
+            newPix[j + i * surface->h] = gray;
+        }
+    }
+
+    SDL_Texture* tex = SDL_CreateTextureFromSurface(eng->gameRenderer, newSurface);
+
+    return tex;
 }
