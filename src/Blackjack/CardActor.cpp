@@ -133,7 +133,34 @@ void CardActor::HideCards()
         {
             Card* card = (*cardIt);
             card->TurnDown();
+
+            cardIt++;
         }
+
+        it++;
+    }
+}
+
+void CardActor::ClearCards()
+{
+    auto it = this->Hands->GetContainer()->begin();
+    while (it != this->Hands->GetContainer()->end())
+    {
+        CardHand* hand = (*it);
+
+        auto cardIt = hand->Cards->GetContainer()->begin();
+        while (cardIt != hand->Cards->GetContainer()->end())
+        {
+            Card* card = (*cardIt);
+            card->cardBack->Show(false);
+            card->cardFront->Show(false);
+
+            cardIt++;
+        }
+
+        hand->Cards->Clear();
+
+        it++;
     }
 }
 

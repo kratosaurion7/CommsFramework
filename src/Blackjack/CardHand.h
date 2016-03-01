@@ -4,8 +4,6 @@ class Card;
 
 #include <PointerList.h>
 
-
-
 class CardHand
 {
 public:

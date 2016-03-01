@@ -69,7 +69,6 @@ void BlackjackGame::Update()
     {
         case START:
         {
-            this->GameCards->ReSeedDeck();
             this->BetSelector->ResetBet();
             this->Controls->Disable();
 
@@ -331,7 +330,8 @@ void BlackjackGame::Update()
 
 void BlackjackGame::ResetGame()
 {
-    GameCards->ReSeedDeck();
+    Player->ClearCards();
+    Dealer->ClearCards();
 
     Player->Hands->Clear();
     Dealer->Hands->Clear();

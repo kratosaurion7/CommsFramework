@@ -22,6 +22,12 @@ CardsShoe::~CardsShoe()
 
 Card* CardsShoe::DrawCard()
 {
+    // In the case of no decks present, reseed.
+    if (this->Decks->Count() == 0)
+    {
+        this->ReSeedDeck();
+    }
+
     Deck* firstDeck = this->Decks->Get(0);
 
     Card* nextCard = firstDeck->DrawCard();
@@ -30,12 +36,6 @@ Card* CardsShoe::DrawCard()
     if (firstDeck->DeckCards->Count() == 0)
     {
         this->Decks->RemoveAt(0);
-
-        if (this->Decks->Count() == 0)
-        {
-            // On each card draw, we check if the shoe is empty. This prevents ever trying to draw a card when there is none left.
-            this->ReSeedDeck();
-        }
     }
 
     return nextCard;

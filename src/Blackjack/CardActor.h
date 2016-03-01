@@ -48,6 +48,8 @@ public:
     virtual void RevealCards();
     virtual void HideCards();
 
+    virtual void ClearCards();
+
 protected:
     virtual void UpdateStatusTexts();
     virtual void UpdateCardPositions(int handIndex = 0) = 0;
