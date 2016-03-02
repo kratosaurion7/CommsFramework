@@ -24,6 +24,6 @@ private:
 
     PointerList<Deck*>* Decks;
 
-    PointerList<Card*>* DiscartPile;
+    PointerList<Card*>* DrawnCards;
 };
 

@@ -162,6 +162,8 @@ void CardActor::ClearCards()
 
         it++;
     }
+
+    Hands->Clear();
 }
 
 void CardActor::UpdateStatusTexts()

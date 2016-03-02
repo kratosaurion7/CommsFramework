@@ -9,7 +9,7 @@ CardsShoe::CardsShoe()
 {
     Decks = new PointerList<Deck*>();
 
-    DiscartPile = new PointerList<Card*>();
+    DrawnCards = new PointerList<Card*>();
 
     this->Engine = GameEngine::GetInstance();
 }
@@ -31,7 +31,7 @@ Card* CardsShoe::DrawCard()
     Deck* firstDeck = this->Decks->Get(0);
 
     Card* nextCard = firstDeck->DrawCard();
-    DiscartPile->Add(nextCard);
+    DrawnCards->Add(nextCard);
 
     if (firstDeck->DeckCards->Count() == 0)
     {
@@ -60,7 +60,7 @@ int CardsShoe::CardsLeft()
 
 void CardsShoe::ReSeedDeck(int amountOfDecks)
 {
-    this->DiscartPile->Release();
+    this->DrawnCards->Release();
 
     this->Decks->Release();
 
