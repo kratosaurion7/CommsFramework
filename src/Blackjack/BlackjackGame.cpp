@@ -319,6 +319,8 @@ void BlackjackGame::Update()
             }
             else if (gameDrawDialog->DialogState == BaseDialog::DIALOG_DONE)
             {
+                this->Player->Money += this->BetSelector->TotalBet;
+
                 this->GameState = RESET;
             }
 
@@ -344,7 +346,7 @@ void BlackjackGame::ResetGame()
 
     Player->LastBet = this->Player->OriginalBet;
     Player->CurrentBet = 0;
-    Player->DoubledBet = true;
+    Player->DoubledBet = false;
 
     Player->CardChoosingState = CardActor::CardChoosing::IDLE;
     Dealer->CardChoosingState = CardActor::CardChoosing::IDLE;
