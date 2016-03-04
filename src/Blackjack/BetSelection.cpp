@@ -69,6 +69,14 @@ BetSelection::~BetSelection()
     delete(BettedLevels);
 }
 
+void BetSelection::SetBet(int amount)
+{
+    this->TotalBet = amount;
+    
+    std::string newText = std::to_string(amount);
+    TotalBetText->SetText(newText);
+}
+
 void BetSelection::PlaceBet(BetSelection::BetLevels level)
 {
     BettedLevels->Add(level);

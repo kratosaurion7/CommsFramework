@@ -47,6 +47,8 @@ public:
     BetSelection();
     ~BetSelection();
 
+    void SetBet(int amount);
+
     void PlaceBet(BetSelection::BetLevels level);
     void RemoveBet(BetSelection::BetLevels level);
     void ResetBet();

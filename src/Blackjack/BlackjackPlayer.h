@@ -23,7 +23,10 @@ public:
     int Money;
 
     int LastBet;
+    int OriginalBet;
     int CurrentBet;
+
+    bool DoubledBet;
 
     BlackjackPlayer();
     ~BlackjackPlayer();

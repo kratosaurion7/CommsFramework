@@ -12,6 +12,7 @@
 BlackjackPlayer::BlackjackPlayer()
 {
     this->CurrentBet = 0;
+    this->OriginalBet = 0;
     this->LastBet = 0;
     this->Money = 0;
 
@@ -124,6 +125,6 @@ void BlackjackPlayer::UpdateStatusTexts()
     std::string currentBet = std::to_string(this->CurrentBet);
     this->CurrentBetText->SetText(currentBet);
 
-    std::string lastBet = std::to_string(this->LastBet);
+    std::string lastBet = std::to_string(this->OriginalBet);
     this->LastBetText->SetText(lastBet);
 }

@@ -86,6 +86,7 @@ void BlackjackGame::Update()
                     this->Player->Money -= this->BetSelector->TotalBet;
 
                     this->Player->CurrentBet = this->BetSelector->TotalBet;
+                    this->Player->OriginalBet = this->Player->CurrentBet;
 
                     this->BetSelector->StopBetSelection();
 
@@ -176,7 +177,7 @@ void BlackjackGame::Update()
 
                         this->Player->ReceiveCard(newCard);
 
-                        if (this->Player->CardActorCurrentStatus == CardActor::CardPlayerStatus::BUSTED)
+                        if (this->Player->CardActorCurrentStatus == CardActor::CardPlayerStatus::BUSTED || this->Player->DoubledBet)
                         {
                             this->Controls->Disable();
                             // Show busted screen
@@ -200,7 +201,15 @@ void BlackjackGame::Update()
                     }
                     case PlayerControls::DOUBLE:
                     {
-                        this->Controls->Disable();
+                        this->Controls->State = PlayerControls::RECEIVED_INPUT;
+                        this->Controls->Choice = PlayerControls::DRAW;
+
+                        BetSelector->SetBet(BetSelector->TotalBet * 2);
+                        //Player->CurrentBetText->SetText(std::to_string(BetSelector->TotalBet)); // TODO : Fix hack where the bet is at two places.
+                        Player->CurrentBet = BetSelector->TotalBet;
+
+                        this->Player->DoubledBet = true;
+
                         break;
                     }
                     default:
@@ -333,8 +342,9 @@ void BlackjackGame::ResetGame()
     Player->ClearCards();
     Dealer->ClearCards();
 
-    Player->LastBet = this->Player->CurrentBet;
+    Player->LastBet = this->Player->OriginalBet;
     Player->CurrentBet = 0;
+    Player->DoubledBet = true;
 
     Player->CardChoosingState = CardActor::CardChoosing::IDLE;
     Dealer->CardChoosingState = CardActor::CardChoosing::IDLE;
