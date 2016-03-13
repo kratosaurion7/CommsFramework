@@ -146,6 +146,39 @@ char* FileSave::GetData(KEYTYPE name, int & outLength)
     return NULL;
 }
 
+BaseList<KEYTYPE>* FileSave::GetAllKeys()
+{
+    BaseList<KEYTYPE>* keys = new BaseList<KEYTYPE>();
+
+    auto it = this->list->GetContainer()->begin();
+    while (it != this->list->GetContainer()->end())
+    {
+        Pair<KEYTYPE, GenType*>* value = (*it);
+
+        keys->Add(value->Item1);
+
+        it++;
+    }
+
+    return keys;
+}
+
+GenType* FileSave::GetGenericValue(KEYTYPE key)
+{
+    auto it = this->list->GetContainer()->begin();
+    while (it != this->list->GetContainer()->end())
+    {
+        Pair<KEYTYPE, GenType*>* value = (*it);
+
+        if (value->Item1 == key)
+        {
+            return value->Item2;
+        }
+
+        it++;
+    }
+}
+
 void FileSave::SaveToFile(std::string filePath)
 {
     XFile saveFile(filePath);

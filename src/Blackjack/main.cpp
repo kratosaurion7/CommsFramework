@@ -12,8 +12,6 @@
 #include <MessageDialog.h>
 #include <SDLUtilities.h>
 
-#include <StringList.h>
-#include <SpriteAnimation.h>
 #include <FileSave.h>
 
 int main()
@@ -29,37 +27,17 @@ int main()
     eng->AttachActor(game);
 
     ////////////////////////// TEST SECTION ///////////////////////
-    char* data = "1234567890";
-    std::string message = "Hello World";
+    
+    FileSave* save = new FileSave();
 
-    FileSave* newSave = new FileSave();
-    newSave->AddBool("one", true);
-    newSave->AddBool("two", false);
-    newSave->AddData("three", data, strlen(data));
-    newSave->AddNumber("four", 999);
-    newSave->AddString("five", &message);
-
-    //newSave->SaveToFile("save.bin");
-
-    FileSave* loaded = FileSave::LoadFromFile("save.bin");
-
-    BaseSprite* animSprite = eng->CreateSprite("animu");
-    BaseTexture* one = eng->Graphics->CreateTexture("assets\\one.png");
-    BaseTexture* two = eng->Graphics->CreateTexture("assets\\two.png");
-    BaseTexture* three = eng->Graphics->CreateTexture("assets\\three.png");
-    BaseTexture* four = eng->Graphics->CreateTexture("assets\\four.png");
-
-    //SpriteAnimation* anim = new SpriteAnimation();
-    //anim->Frames->Add(one);
-    //anim->Frames->Add(two);
-    //anim->Frames->Add(three);
-    //anim->Frames->Add(four);
-    //animSprite->AddAnimation(anim);
-    //animSprite->IsAnimated = true;
-    //animSprite->Show(true);
-
-    //animSprite->SetPos(100, 100);
-    //animSprite->Play(true);
+    std::string playerNameValue = "Tristan";
+    save->AddData("Player_Name", (char*)playerNameValue.c_str(), playerNameValue.length());
+    save->AddBool("Alive", true);
+    save->AddNumber("Lives_Left", 5);
+    save->AddString("Current_Level_Name", new std::string("World_01"));
+    
+    save->SaveToFile("out.bin");
+    
 
     //////////////////////// END TEST SECTION /////////////////////
 
