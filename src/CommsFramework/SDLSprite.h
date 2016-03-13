@@ -15,7 +15,7 @@ class SDL_Texture;
 class SDLSprite : public BaseSprite, public SDLDrawable
 {
 public:
-    SDLTexture* currentSpriteTexture;
+    SDLTexture* currentSpriteTexture; // Private by inheritance
 
     SDLSprite();
     ~SDLSprite();

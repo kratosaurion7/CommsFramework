@@ -104,7 +104,6 @@ void SDLSprite::SetGraphicalFilter(int graphic_filter)
         this->currentSpriteTexture->FreeTexture();
 
         this->currentSpriteTexture->texture = GrayScaleTextureFromSurface(this->currentSpriteTexture->surface);
-
     }
     else if (graphic_filter & GRAPHIC_FILTER::ALPHAMOD)
     {

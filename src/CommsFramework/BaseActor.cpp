@@ -58,9 +58,16 @@ void BaseActor::MoveTo(FloatVec vec)
     this->MoveTo(vec.X, vec.Y);
 }
 
-void BaseActor::Update()
+void BaseActor::UpdateActor()
 {
     this->HandleKeyboardInput();
+
+    this->Update();
+}
+
+void BaseActor::Update()
+{
+    
 }
 
 void BaseActor::BindControls(SpriteControls controlScheme)

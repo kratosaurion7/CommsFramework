@@ -27,6 +27,7 @@ public:
     SpriteAnimation* CurrentAnimation;
     PointerList<SpriteAnimation*>* Animations;
 
+    // Property should probably be moved to Actor.
     bool GravityEnabled;
 
     bool MouseOver();

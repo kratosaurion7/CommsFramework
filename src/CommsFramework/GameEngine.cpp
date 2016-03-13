@@ -171,7 +171,7 @@ void GameEngine::Update()
     {
         BaseActor* act = (*it);
 
-        act->Update();
+        act->UpdateActor();
 
         it++;
     }

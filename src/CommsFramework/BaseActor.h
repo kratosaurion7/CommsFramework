@@ -34,6 +34,11 @@ public:
     virtual void MoveTo(float x, float y);
     virtual void MoveTo(FloatVec vec);
 
+    // This method is used to make sure that updating an actor always goes through a base
+    // method. Useful when trying to implement logic in the BaseActor that affects the base
+    // class in a way that cannot be overridden away.
+    void UpdateActor();
+
     virtual void Update();
 
     virtual void BindControls(SpriteControls controlScheme = None);
