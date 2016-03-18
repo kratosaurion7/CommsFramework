@@ -52,6 +52,9 @@ public:
     virtual void SetTexture(BaseTexture* texture) = 0;
     virtual void SetTexture(std::string newTexturePath);
 
+    virtual void Reload();
+    virtual void Unload();
+
     virtual BaseSprite* Clone() = 0;
 
 protected:
