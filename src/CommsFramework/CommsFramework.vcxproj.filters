@@ -109,6 +109,9 @@
     <Filter Include="Framework\Engine\Buttons">
       <UniqueIdentifier>{468c2ea6-fbc8-4fe4-aedb-25e4d9b89757}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Framework\Graphic\Spritesheet">
+      <UniqueIdentifier>{c3cf3568-4c37-4e01-9977-a497ae7d2418}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="XmlReader.cpp">
@@ -275,6 +278,9 @@
     </ClCompile>
     <ClCompile Include="BaseButton.cpp">
       <Filter>Framework\Engine\Buttons</Filter>
+    </ClCompile>
+    <ClCompile Include="Spritesheet.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -508,6 +514,9 @@
     </ClInclude>
     <ClInclude Include="BaseButton.h">
       <Filter>Framework\Engine\Buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="Spritesheet.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

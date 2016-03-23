@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
+<!-- $TexturePacker:SmartUpdate:2b1ca9346653c54d3db2e2ada5935fc4:32b2bb810770f8641fb0ef379e5b99d0:ef7663426bf705b25566a93aef3a1571$ -->
+<!--Format:
+n  => name of the sprite
+x  => sprite x pos in texture
+y  => sprite y pos in texture
+w  => sprite width (may be trimmed)
+h  => sprite height (may be trimmed)
+pX => x pos of the pivot point (relative to sprite width)
+pY => y pos of the pivot point (relative to sprite height)
+oX => sprite's x-corner offset (only available if trimmed)
+oY => sprite's y-corner offset (only available if trimmed)
+oW => sprite's original width (only available if trimmed)
+oH => sprite's original height (only available if trimmed)
+r => 'y' only set if sprite is rotated
+with polygon mode enabled:
+vertices   => points in sprite coordinate system (x0,y0,x1,y1,x2,y2, ...)
+verticesUV => points in sheet coordinate system (x0,y0,x1,y1,x2,y2, ...)
+triangles  => sprite triangulation, 3 vertex indices per triangle
+-->
+<TextureAtlas imagePath="spritesheet.png" width="176" height="16">
+    <sprite n="CaveFloor01.png" x="0" y="0" w="16" h="16" pX="0.5" pY="0.5"/>
+    <sprite n="CaveRock01.png" x="16" y="0" w="16" h="16" pX="0.5" pY="0.5"/>
+    <sprite n="Earth01.png" x="32" y="0" w="16" h="16" pX="0.5" pY="0.5"/>
+    <sprite n="Grass01.png" x="48" y="0" w="16" h="16" pX="0.5" pY="0.5"/>
+    <sprite n="Road01.png" x="64" y="0" w="16" h="16" pX="0.5" pY="0.5"/>
+    <sprite n="Road02.png" x="80" y="0" w="16" h="16" pX="0.5" pY="0.5"/>
+    <sprite n="Road03.png" x="96" y="0" w="16" h="16" pX="0.5" pY="0.5"/>
+    <sprite n="Rock01.png" x="112" y="0" w="16" h="16" pX="0.5" pY="0.5"/>
+    <sprite n="RockCorner_BottomLeft.png" x="128" y="0" w="16" h="16" pX="0.5" pY="0.5"/>
+    <sprite n="Tree01.png" x="144" y="0" w="16" h="16" pX="0.5" pY="0.5"/>
+    <sprite n="Water01.png" x="160" y="0" w="16" h="16" pX="0.5" pY="0.5"/>
+</TextureAtlas>

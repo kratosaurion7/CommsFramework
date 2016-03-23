@@ -142,6 +142,14 @@ void BaseSprite::SetTexture(std::string newTexturePath)
     this->SetTexture(tex);
 }
 
+void BaseSprite::Reload()
+{
+}
+
+void BaseSprite::Unload()
+{
+}
+
 bool BaseSprite::FrameReady()
 {
     int current = GetTicks();

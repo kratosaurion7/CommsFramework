@@ -12,6 +12,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DownAcross", "DownAcross\Do
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Blackjack", "Blackjack\Blackjack.vcxproj", "{38FD1962-2049-4053-9D55-89665D432A8E}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FantasyGame", "FantasyGame\FantasyGame.vcxproj", "{04775308-EB20-49E2-83BD-3AF0B3C81D1C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BB1C3245-05C5-4512-93DB-E12D2ECD26E4} = {BB1C3245-05C5-4512-93DB-E12D2ECD26E4}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -58,6 +63,18 @@ Global
 		{38FD1962-2049-4053-9D55-89665D432A8E}.Release|Win32.Build.0 = Release|Win32
 		{38FD1962-2049-4053-9D55-89665D432A8E}.Release|x64.ActiveCfg = Release|x64
 		{38FD1962-2049-4053-9D55-89665D432A8E}.Release|x64.Build.0 = Release|x64
+		{04775308-EB20-49E2-83BD-3AF0B3C81D1C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{04775308-EB20-49E2-83BD-3AF0B3C81D1C}.Debug|Win32.Build.0 = Debug|Win32
+		{04775308-EB20-49E2-83BD-3AF0B3C81D1C}.Debug|x64.ActiveCfg = Debug|x64
+		{04775308-EB20-49E2-83BD-3AF0B3C81D1C}.Debug|x64.Build.0 = Debug|x64
+		{04775308-EB20-49E2-83BD-3AF0B3C81D1C}.Debug-Static|Win32.ActiveCfg = Debug|Win32
+		{04775308-EB20-49E2-83BD-3AF0B3C81D1C}.Debug-Static|Win32.Build.0 = Debug|Win32
+		{04775308-EB20-49E2-83BD-3AF0B3C81D1C}.Debug-Static|x64.ActiveCfg = Debug|x64
+		{04775308-EB20-49E2-83BD-3AF0B3C81D1C}.Debug-Static|x64.Build.0 = Debug|x64
+		{04775308-EB20-49E2-83BD-3AF0B3C81D1C}.Release|Win32.ActiveCfg = Release|Win32
+		{04775308-EB20-49E2-83BD-3AF0B3C81D1C}.Release|Win32.Build.0 = Release|Win32
+		{04775308-EB20-49E2-83BD-3AF0B3C81D1C}.Release|x64.ActiveCfg = Release|x64
+		{04775308-EB20-49E2-83BD-3AF0B3C81D1C}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
