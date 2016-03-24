@@ -280,7 +280,7 @@
       <Filter>Framework\Engine\Buttons</Filter>
     </ClCompile>
     <ClCompile Include="Spritesheet.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Framework\Graphic\Spritesheet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -516,7 +516,7 @@
       <Filter>Framework\Engine\Buttons</Filter>
     </ClInclude>
     <ClInclude Include="Spritesheet.h">
-      <Filter>Header Files</Filter>
+      <Filter>Framework\Graphic\Spritesheet</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

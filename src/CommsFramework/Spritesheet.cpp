@@ -23,6 +23,7 @@ PointerList<BaseSprite*>* Spritesheet::ExtractSprites(std::string configFilePath
     PointerList<BaseSprite*>* spriteList = new PointerList<BaseSprite*>();
 
     XmlReader configReader = XmlReader();
+    configReader.LoadFile(configFilePath);
     PointerList<XmlNode*>* nodes = configReader.GetNodes("sprite");
 
     auto it = nodes->GetContainer()->begin();
@@ -47,6 +48,8 @@ PointerList<BaseSprite*>* Spritesheet::ExtractSprites(std::string configFilePath
         it++;
     }
 
+    nodes->Release();
+    delete(nodes);
 
     return spriteList;
 }
