@@ -15,10 +15,11 @@ public:
 
     BaseTexture* LoadTexture(std::string texturePath);
 
-private:
-    BaseGraphicEngine* Graphics;
+    BaseTexture* GetTextureByName(std::string textureName);
 
     PointerList<BaseTexture*>* loadedTextures;
+private:
+    BaseGraphicEngine* Graphics;
 
     BaseTexture* GetLoadedTexture(std::string path);
 };

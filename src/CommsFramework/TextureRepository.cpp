@@ -34,6 +34,22 @@ BaseTexture* TextureRepository::LoadTexture(std::string texturePath)
     return loadedTexture;
 }
 
+BaseTexture * TextureRepository::GetTextureByName(std::string textureName)
+{
+    auto it = loadedTextures->GetContainer()->begin();
+    while (it != loadedTextures->GetContainer()->end())
+    {
+        BaseTexture* tex = (*it);
+
+        if (tex->TextureName.compare(textureName) == 0)
+            return tex;
+
+        it++;
+    }
+
+    return NULL;
+}
+
 BaseTexture* TextureRepository::GetLoadedTexture(std::string path)
 {
     auto it = loadedTextures->GetContainer()->begin();

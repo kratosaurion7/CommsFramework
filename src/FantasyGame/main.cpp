@@ -1,9 +1,13 @@
 #include <GameEngine.h>
+#include <BaseGraphicEngine.h>
 
 #include <BaseSprite.h>
 #include <BaseTexture.h>
 #include <PointerList.h>
 #include <Spritesheet.h>
+
+#include "MapGrid.h"
+#include "Tile.h"
 
 int main()
 {
@@ -11,24 +15,12 @@ int main()
 
     eng->Init();
 
-    Spritesheet* sp = new Spritesheet("assets//spritesheet.png", eng->Graphics);
+    Spritesheet* sp = new Spritesheet("assets//spritesheet.png", "assets//spritesheet.xml", eng->Graphics);
 
-    auto sprites = sp->ExtractSprites("assets//spritesheet.xml");
+    eng->Graphics->AddSpritesheet(sp);
 
-    BaseSprite* first = sprites->First();
-
-    int index = 0;
-    auto it = sprites->GetContainer()->begin();
-    while (it != sprites->GetContainer()->end())
-    {
-        BaseSprite* sprt = (*it);
-
-        sprt->GetCurrentTexture()->SaveTextureToFile(std::to_string(index) + ".png");
-
-        index++;
-
-        it++;
-    }
+    MapGrid* grid = new MapGrid();
+    grid->Setup(10, 10);
 
     while (true)
     {

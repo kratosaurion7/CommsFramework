@@ -11,13 +11,18 @@ class BaseGraphicEngine;
 class Spritesheet
 {
 public:
-    Spritesheet(std::string spritesheetPath, BaseGraphicEngine* engine);
+    Spritesheet(std::string spritesheetPath, std::string configFilePath, BaseGraphicEngine* engine);
     ~Spritesheet();
 
-    PointerList<BaseSprite*>* ExtractSprites(std::string configFilePath);
+    PointerList<BaseSprite*>* ExtractSprites();
+
+    PointerList<BaseTexture*>* ExtractTextures();
 
 private:
     BaseGraphicEngine* Graphics;
+
+    std::string SpritesheetFilePath;
+    std::string ConfigFilePath;
 
     BaseTexture* spritesheetTexture;
 };

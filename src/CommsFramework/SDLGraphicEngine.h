@@ -7,6 +7,7 @@ class BaseText;
 class BaseTexture;
 class BaseFont;
 class BaseText;
+class Spritesheet;
 
 struct SDL_Rect;
 struct SDL_Window;
@@ -37,6 +38,8 @@ public:
 
     PointerList<DrawObject*>* drawables;
 
+    PointerList<Spritesheet*>* Spritesheets;
+
     SDLGraphicEngine();
     ~SDLGraphicEngine();
 
@@ -45,6 +48,8 @@ public:
     virtual void AddObject(BaseSprite* obj);
     virtual void AddObject(BaseText* obj);
     virtual void RemoveObject(DrawObject* obj);
+
+    virtual void AddSpritesheet(Spritesheet* spritesheet);
 
     virtual PointerList<DrawObject*>* GetDrawableList();
     virtual DrawObject* GetDrawableObject(std::string identifier);

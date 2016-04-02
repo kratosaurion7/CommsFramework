@@ -19,6 +19,7 @@
 #include "BaseText.h"
 #include "BaseTexture.h"
 #include "Utilities.h"
+#include "Spritesheet.h"
 
 #include "SDLDrawable.h"
 #include "SDLSprite.h"
@@ -32,6 +33,7 @@ SDLGraphicEngine::SDLGraphicEngine()
     mainWindow = NULL;
     TextureRepo = new TextureRepository(this);
     drawables = new PointerList<DrawObject*>();
+    Spritesheets = new PointerList<Spritesheet*>();
     gameRenderer = NULL;
     WantedFrameRate = 60;
     backgroundSprite = NULL;
@@ -149,6 +151,17 @@ void SDLGraphicEngine::RemoveObject(DrawObject * obj)
     drawables->RemoveObject(obj);
 }
 
+void SDLGraphicEngine::AddSpritesheet(Spritesheet* spritesheet)
+{
+    this->Spritesheets->Add(spritesheet);
+
+    PointerList<BaseTexture*>* extractedSprites = spritesheet->ExtractTextures();
+
+    this->TextureRepo->loadedTextures->AddRange(extractedSprites);
+
+    delete(extractedSprites);
+}
+
 PointerList<DrawObject*>* SDLGraphicEngine::GetDrawableList()
 {
     return drawables;
@@ -200,8 +213,6 @@ BaseTexture* SDLGraphicEngine::CreateTexture(std::string texturePath)
 
     return tex;
 }
-
-
 
 BaseFont* SDLGraphicEngine::CreateFont()
 {

@@ -99,6 +99,7 @@ public:
     void AttachActor(BaseActor* actor);
     void DetachActor(BaseActor* actor);
 
+    BaseSprite* CreateSprite();
     BaseSprite* CreateSprite(std::string spriteName);
     BaseSprite* CreateSprite(std::string spriteName, std::string spriteTexturePath);
 

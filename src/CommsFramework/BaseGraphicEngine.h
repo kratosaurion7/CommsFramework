@@ -4,6 +4,7 @@ class BaseSprite;
 class BaseText;
 class BaseTexture;
 class BaseFont;
+class Spritesheet;
 
 class GraphicEngineInitParams;
 class TextureRepository;
@@ -42,6 +43,8 @@ public:
     virtual void AddObject(BaseSprite* obj) = 0;
     virtual void AddObject(BaseText* obj) = 0;
     virtual void RemoveObject(DrawObject* obj) = 0;
+
+    virtual void AddSpritesheet(Spritesheet* spritesheet) = 0;
 
     virtual PointerList<DrawObject*>* GetDrawableList() = 0;
     virtual DrawObject* GetDrawableObject(std::string identifier) = 0;

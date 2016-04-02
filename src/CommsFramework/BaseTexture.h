@@ -15,6 +15,8 @@ class BaseTexture
 public:
     std::string TexturePath;
 
+    std::string TextureName;
+
     BaseGraphicEngine* Engine;
 
     virtual void Initalize(float width, float height) = 0;
