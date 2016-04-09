@@ -154,3 +154,4 @@ UpgradeLog*.htm
 # Microsoft Fakes
 FakesAssemblies/
 *.opendb
+*.VC.db
