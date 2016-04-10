@@ -19,7 +19,7 @@ int main()
 
     eng->Init(SCALE_MULTIPLIER * GRID_WIDTH, SCALE_MULTIPLIER * GRID_HEIGHT);
 
-    Spritesheet* sp = new Spritesheet("assets//spritesheet.png", "assets//spritesheet.xml", eng->Graphics);
+    Spritesheet* sp = new Spritesheet("assets//spritesheet.xml", eng->Graphics);
 
     eng->Graphics->AddSpritesheet(sp);
 

@@ -11,6 +11,7 @@ class BaseGraphicEngine;
 class Spritesheet
 {
 public:
+    Spritesheet(std::string configFilePath, BaseGraphicEngine* engine);
     Spritesheet(std::string spritesheetPath, std::string configFilePath, BaseGraphicEngine* engine);
     ~Spritesheet();
 
@@ -20,6 +21,9 @@ public:
 
 private:
     BaseGraphicEngine* Graphics;
+
+    int spritesheetHeight = 0;
+    int spritesheetWidth = 0;
 
     std::string SpritesheetFilePath;
     std::string ConfigFilePath;
