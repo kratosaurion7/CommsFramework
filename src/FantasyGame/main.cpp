@@ -1,3 +1,6 @@
+
+#include "ProgDef.h"
+
 #include <GameEngine.h>
 #include <BaseGraphicEngine.h>
 
@@ -9,18 +12,19 @@
 #include "MapGrid.h"
 #include "Tile.h"
 
+
 int main()
 {
     GameEngine* eng = new GameEngine();
 
-    eng->Init(640, 640);
+    eng->Init(SCALE_MULTIPLIER * GRID_WIDTH, SCALE_MULTIPLIER * GRID_HEIGHT);
 
     Spritesheet* sp = new Spritesheet("assets//spritesheet.png", "assets//spritesheet.xml", eng->Graphics);
 
     eng->Graphics->AddSpritesheet(sp);
 
     MapGrid* grid = new MapGrid();
-    grid->Setup(10, 10);
+    grid->Setup(GRID_HEIGHT, GRID_WIDTH);
 
     eng->AttachActor(grid);
 

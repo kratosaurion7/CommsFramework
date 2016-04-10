@@ -1,5 +1,7 @@
 #include "MapGrid.h"
 
+#include "ProgDef.h"
+
 #include <GameEngine.h>
 #include <BaseGraphicEngine.h>
 #include <TextureRepository.h>
@@ -7,7 +9,6 @@
 #include <BaseSprite.h>
 
 #include "Tile.h"
-
 
 MapGrid::MapGrid()
 {
@@ -31,8 +32,8 @@ void MapGrid::Setup(int height, int width)
             Tile* newTile = new Tile();
             newTile->TileSprite = this->Engine->CreateSprite();
             newTile->TileSprite->Show(true);
-            newTile->TileSprite->SetScale(4);
-            newTile->TileSprite->SetPos(j * 64, i * 64);
+            newTile->TileSprite->SetScale(SCALE_FACTOR);
+            newTile->TileSprite->SetPos(j * SCALE_MULTIPLIER, i * SCALE_MULTIPLIER);
             newTile->Position->X = j;
             newTile->Position->Y = i;
 

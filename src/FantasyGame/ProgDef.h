@@ -1,0 +1,7 @@
+#pragma once
+
+#define GRID_HEIGHT 10
+#define GRID_WIDTH 10
+#define SCALE_FACTOR 4
+#define TILE_SQUARE_SIZE 16
+#define SCALE_MULTIPLIER (TILE_SQUARE_SIZE * SCALE_FACTOR)

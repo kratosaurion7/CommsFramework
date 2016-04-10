@@ -162,6 +162,7 @@
   <ItemGroup>
     <ClInclude Include="FantasyGame.h" />
     <ClInclude Include="MapGrid.h" />
+    <ClInclude Include="ProgDef.h" />
     <ClInclude Include="Tile.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

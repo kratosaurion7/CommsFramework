@@ -41,5 +41,8 @@
     <ClInclude Include="Tile.h">
       <Filter>Map</Filter>
     </ClInclude>
+    <ClInclude Include="ProgDef.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
