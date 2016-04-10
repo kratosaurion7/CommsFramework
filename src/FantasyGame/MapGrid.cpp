@@ -30,6 +30,9 @@ void MapGrid::Setup(int height, int width)
         {
             Tile* newTile = new Tile();
             newTile->TileSprite = this->Engine->CreateSprite();
+            newTile->TileSprite->Show(true);
+            newTile->TileSprite->SetScale(4);
+            newTile->TileSprite->SetPos(j * 64, i * 64);
             newTile->Position->X = j;
             newTile->Position->Y = i;
 

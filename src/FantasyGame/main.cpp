@@ -13,7 +13,7 @@ int main()
 {
     GameEngine* eng = new GameEngine();
 
-    eng->Init();
+    eng->Init(640, 640);
 
     Spritesheet* sp = new Spritesheet("assets//spritesheet.png", "assets//spritesheet.xml", eng->Graphics);
 
@@ -21,6 +21,8 @@ int main()
 
     MapGrid* grid = new MapGrid();
     grid->Setup(10, 10);
+
+    eng->AttachActor(grid);
 
     while (true)
     {
