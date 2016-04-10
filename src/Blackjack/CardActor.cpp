@@ -72,14 +72,23 @@ void CardActor::ReceiveCard(Card* card, CardHand* targetHand)
     if (selectedHand == NULL)
         return;
 
+    selectedHand->Cards->Add(card);
+
     if (selectedHand->Cards->Count() > 0)
     {
-        Card* lastCard = selectedHand->Cards->Last();
-        card->cardBack->SetZIndexOverObject(lastCard->cardBack); // Card is the same as lastCard
-        card->cardFront->SetZIndexOverObject(lastCard->cardFront);
+        Card* previousCard = selectedHand->Cards->Get(0);
+
+        for (int i = 1; i < selectedHand->Cards->Count(); i++)
+        {
+            Card* currentCard = selectedHand->Cards->Get(i);
+
+            currentCard->cardBack->SetZIndexOverObject(previousCard->cardBack);
+            currentCard->cardFront->SetZIndexOverObject(previousCard->cardFront);
+
+            previousCard = currentCard;
+        }
     }
 
-    selectedHand->Cards->Add(card);
 
     if (this->CardsTotal() > 21)
     {
