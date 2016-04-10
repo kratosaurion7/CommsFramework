@@ -15,6 +15,7 @@ BlackjackPlayer::BlackjackPlayer()
     this->OriginalBet = 0;
     this->LastBet = 0;
     this->Money = 0;
+    this->DoubledBet = false;
 
     MoneyText = Engine->CreateText("0");
     MoneyText->SetPos(0, 700);
