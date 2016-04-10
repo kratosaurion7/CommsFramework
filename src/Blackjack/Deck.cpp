@@ -78,6 +78,78 @@ void Deck::SetupStandard52CardsDeck()
     }
 }
 
+void Deck::SetupTestAcesDeck()
+{
+    // Set initial player cards
+    Card* cardOne = new Card();
+    cardOne->CardSuit = Card::CARD_SUITS::SPADES;
+    cardOne->CardValue = Card::CARD_VALUE::Jack;
+    cardOne->CardCountValue = 10;
+    cardOne->cardBack = Engine->CreateSprite();
+    cardOne->cardFront = Engine->CreateSprite();
+
+    Card* cardTwo= new Card();
+    cardTwo->CardSuit = Card::CARD_SUITS::SPADES;
+    cardTwo->CardValue = Card::CARD_VALUE::Ace;
+    cardTwo->CardCountValue = 11;
+    cardTwo->cardBack = Engine->CreateSprite();
+    cardTwo->cardFront = Engine->CreateSprite();
+
+    SetupCardSprites(cardOne);
+    SetupCardSprites(cardTwo);
+
+    // Set Dealer cards
+    Card* cardThree= new Card();
+    cardThree->CardSuit = Card::CARD_SUITS::SPADES;
+    cardThree->CardValue = Card::CARD_VALUE::Ace;
+    cardThree->CardCountValue = 11;
+    cardThree->cardBack = Engine->CreateSprite();
+    cardThree->cardFront = Engine->CreateSprite();
+
+    Card* cardFour= new Card();
+    cardFour->CardSuit = Card::CARD_SUITS::SPADES;
+    cardFour->CardValue = Card::CARD_VALUE::Ace;
+    cardFour->CardCountValue = 11;
+    cardFour->cardBack = Engine->CreateSprite();
+    cardFour->cardFront = Engine->CreateSprite();
+
+    SetupCardSprites(cardThree);
+    SetupCardSprites(cardFour);
+
+    // Setup next cards
+    Card* cardFive= new Card();
+    cardFive->CardSuit = Card::CARD_SUITS::SPADES;
+    cardFive->CardValue = Card::CARD_VALUE::Four;
+    cardFive->CardCountValue = 4;
+    cardFive->cardBack = Engine->CreateSprite();
+    cardFive->cardFront = Engine->CreateSprite();
+
+    Card* cardSix= new Card();
+    cardSix->CardSuit = Card::CARD_SUITS::SPADES;
+    cardSix->CardValue = Card::CARD_VALUE::King;
+    cardSix->CardCountValue = 10;
+    cardSix->cardBack = Engine->CreateSprite();
+    cardSix->cardFront = Engine->CreateSprite();
+
+    SetupCardSprites(cardFive);
+    SetupCardSprites(cardSix);
+
+    this->DeckCards->Push(cardThree);
+    this->DeckCards->Push(cardFour);
+    this->DeckCards->Push(cardFive);
+    this->DeckCards->Push(cardSix);
+    this->DeckCards->Push(cardOne);
+    this->DeckCards->Push(cardTwo);
+
+
+    Engine->AttachActor(cardOne);
+    Engine->AttachActor(cardTwo);
+    Engine->AttachActor(cardThree);
+    Engine->AttachActor(cardFour);
+    Engine->AttachActor(cardFive);
+    Engine->AttachActor(cardSix);
+}
+
 void Deck::ShuffleDeck()
 {
     this->DeckCards->Shuffle();

@@ -18,6 +18,8 @@ public:
 
     void SetupStandard52CardsDeck();
 
+    void SetupTestAcesDeck();
+
     void ShuffleDeck();
 
     Card* DrawCard();

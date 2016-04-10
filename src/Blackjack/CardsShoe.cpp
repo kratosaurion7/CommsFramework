@@ -69,6 +69,7 @@ void CardsShoe::ReSeedDeck(int amountOfDecks)
         Deck* newDeck = new Deck(this->Engine);
 
         newDeck->SetupStandard52CardsDeck();
+        //newDeck->SetupTestAcesDeck();
         newDeck->ShuffleDeck();
 
         this->Decks->Add(newDeck);
