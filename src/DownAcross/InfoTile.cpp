@@ -21,7 +21,7 @@ InfoTile::InfoTile(int zeroesAmount, int sumAmount, GameEngine* engine)
     this->Sprites->Add(BackgroundSprite);
 
     textFont = engine->Graphics->CreateFont();
-    textFont->Load("assets/arial.ttf");
+    textFont->LoadFontFile("assets/arial.ttf");
 
     std::string zeroesAmountString = std::to_string(zeroesAmount);
 
