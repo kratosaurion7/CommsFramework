@@ -282,6 +282,9 @@
     <ClCompile Include="Spritesheet.cpp">
       <Filter>Framework\Graphic\Spritesheet</Filter>
     </ClCompile>
+    <ClCompile Include="IOUtilities.cpp">
+      <Filter>Framework\Filesystem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="XmlReader.h">
@@ -517,6 +520,9 @@
     </ClInclude>
     <ClInclude Include="Spritesheet.h">
       <Filter>Framework\Graphic\Spritesheet</Filter>
+    </ClInclude>
+    <ClInclude Include="IOUtilities.h">
+      <Filter>Framework\Filesystem</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

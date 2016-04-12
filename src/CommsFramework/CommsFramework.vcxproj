@@ -349,6 +349,7 @@ XCOPY /Y /E "Assets\*" "$(TargetDir)Assets"</Command>
     <ClCompile Include="GameMessageWindow.cpp" />
     <ClCompile Include="GameRule.cpp" />
     <ClCompile Include="GenType.cpp" />
+    <ClCompile Include="IOUtilities.cpp" />
     <ClCompile Include="SDLFont.cpp" />
     <ClCompile Include="SDLGraphicEngine.cpp" />
     <ClCompile Include="SDLKeyboard.cpp" />
@@ -419,6 +420,7 @@ XCOPY /Y /E "Assets\*" "$(TargetDir)Assets"</Command>
     <ClInclude Include="IDialog.h" />
     <ClInclude Include="IObservable.h" />
     <ClInclude Include="IObserver.h" />
+    <ClInclude Include="IOUtilities.h" />
     <ClInclude Include="Keys.h" />
     <ClInclude Include="LiteList.h" />
     <ClInclude Include="MessageDialog.h" />

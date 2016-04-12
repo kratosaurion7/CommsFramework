@@ -8,6 +8,8 @@
 #include <BaseTexture.h>
 #include <PointerList.h>
 #include <Spritesheet.h>
+#include <XFile.h>
+#include <XDirectory.h>
 
 #include "MapGrid.h"
 #include "Tile.h"
@@ -15,6 +17,11 @@
 
 int main()
 {
+    XFile f = XFile("C:\\temp\\Document.txt");
+    f.Open();
+
+    exit;
+
     GameEngine* eng = new GameEngine();
 
     eng->Init(SCALE_MULTIPLIER * GRID_WIDTH, SCALE_MULTIPLIER * GRID_HEIGHT);

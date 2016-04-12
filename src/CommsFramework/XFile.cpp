@@ -8,6 +8,7 @@
 
 #include <assert.h>
 
+#include "IOUtilities.h"
 
 XFile::XFile(std::string name)
 {
@@ -23,7 +24,6 @@ XFile::XFile(std::string name)
 
     //    this->CreateAndAssignPathInfo();
     //}
-
 }
 
 XFile::~XFile()
