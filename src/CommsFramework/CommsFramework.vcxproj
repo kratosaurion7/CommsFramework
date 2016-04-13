@@ -371,6 +371,7 @@ XCOPY /Y /E "Assets\*" "$(TargetDir)Assets"</Command>
     <ClCompile Include="SocketServer.cpp" />
     <ClCompile Include="SpriteAnimation.cpp" />
     <ClCompile Include="Spritesheet.cpp" />
+    <ClCompile Include="StringFunctions.cpp" />
     <ClCompile Include="StringList.cpp" />
     <ClCompile Include="TextureRepository.cpp" />
     <ClCompile Include="Utils.cpp" />
@@ -441,6 +442,7 @@ XCOPY /Y /E "Assets\*" "$(TargetDir)Assets"</Command>
     <ClInclude Include="SocketServer.h" />
     <ClInclude Include="SpriteAnimation.h" />
     <ClInclude Include="Spritesheet.h" />
+    <ClInclude Include="StringFunctions.h" />
     <ClInclude Include="StringList.h" />
     <ClInclude Include="TextureRepository.h" />
     <ClInclude Include="Utils.h" />

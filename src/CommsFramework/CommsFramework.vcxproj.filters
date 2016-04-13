@@ -285,6 +285,9 @@
     <ClCompile Include="IOUtilities.cpp">
       <Filter>Framework\Filesystem</Filter>
     </ClCompile>
+    <ClCompile Include="StringFunctions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="XmlReader.h">
@@ -523,6 +526,9 @@
     </ClInclude>
     <ClInclude Include="IOUtilities.h">
       <Filter>Framework\Filesystem</Filter>
+    </ClInclude>
+    <ClInclude Include="StringFunctions.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,51 +1,77 @@
 #include "IOUtilities.h"
 
+#include <string>
+
 #include "XFile.h"
+#include "StringFunctions.h"
 
 std::string GetLocalFileName(XFile* file)
 {
-    return std::string();
+    BaseList<std::string>* pathComponents = GetFilePathComponents(file);
+
+    std::string fileName = pathComponents->Last();
+
+    pathComponents->Clear();
+    delete(pathComponents);
+
+    return fileName;
 }
 
 BaseList<std::string>* GetFilePathComponents(XFile* file)
 {
-    return nullptr;
+    BaseList<std::string>* components = StringSplit(file->FilePath, "\\");
+
+    return components;
 }
 
 std::string GetFileExtension(XFile* file)
 {
-    return std::string();
+    std::string path = file->FilePath;
+
+    int periodIndex = path.find(".");
+
+    std::string fileExt = path.substr(periodIndex, path.length() - periodIndex);
+
+    return fileExt;
 }
 
 std::string GetParentDirectory(XFile* file)
 {
-    std::string path = file->FilePath;
+    BaseList<std::string>* pathComponents = GetFilePathComponents(file);
 
-    // Find last '\' character
-    int lastIndex = 0;
+    std::string parentDirectoryComponent = pathComponents->Get(pathComponents->Count() - 1);
 
-    for (int i = 0; i < path.length(); i++)
-    {
-        char currentChar = path.at(i);
+    pathComponents->Clear();
+    delete(pathComponents);
 
-        if (currentChar == 92)
-            lastIndex = currentChar;
-    }
-
-    return std::string();
+    return parentDirectoryComponent;
 }
 
 std::string SanitizeFilePath(std::string filePath)
 {
-    return std::string();
+    // Replace the front slashes by backslashes
+
+    int x = 0;
+
+    x = filePath.find("/", 0);
+    while (x != std::string::npos)
+    {
+        std::string newStringMaybe = filePath.replace(x, 1, "\\");
+    }
+
+    return filePath;
 }
 
 bool IsSanitizedFilePath(std::string filePath)
 {
-    return false;
+    std::string sanitizedFilePath = SanitizeFilePath(filePath);
+
+    return sanitizedFilePath.compare(filePath) == 0;
 }
 
 bool IsValidFilePath(std::string filePath)
 {
-    return false;
+    XFile fileTest = XFile(filePath);
+
+    return fileTest.Exists;
 }

@@ -45,6 +45,7 @@ class XDirectory;
 class XFile
 {
 public:
+    XFile();
     XFile(std::string name); // Automatically opens the file using the Open() function
     ~XFile();
 

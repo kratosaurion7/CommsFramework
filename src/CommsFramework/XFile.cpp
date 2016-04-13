@@ -10,6 +10,13 @@
 
 #include "IOUtilities.h"
 
+XFile::XFile()
+{
+    FileSize = -1;
+    FileValid = false;
+    parentDir = NULL;
+}
+
 XFile::XFile(std::string name)
 {
     FileSize = -1;
@@ -17,13 +24,13 @@ XFile::XFile(std::string name)
     FilePath = name;
     parentDir = NULL;
 
-    //if (this->Open())
-    //{
-    //    this->Exists = true;
-    //    this->FileValid = true;
+    if (this->Open())
+    {
+        this->Exists = true;
+        this->FileValid = true;
 
-    //    this->CreateAndAssignPathInfo();
-    //}
+        this->CreateAndAssignPathInfo();
+    }
 }
 
 XFile::~XFile()
@@ -396,7 +403,6 @@ void XFile::CreateAndAssignPathInfo()
             std::string _parentDirPath;
             std::string _fileExt;
 
-
             std::wstring x = path;
             std::string y = WideStringToCString(x);
 
@@ -413,6 +419,8 @@ void XFile::CreateAndAssignPathInfo()
             FileExt = _fileExt;
 
             ParentDirectoryPath = CleanupDirectoryName(_parentDirPath);
+
+            this->parentDir = new XDirectory(ParentDirectoryPath);
         }
         else
         {

@@ -5,3 +5,4 @@
 extern HANDLE outMut;
 
 void stprintf(char* formatStr, ...);
+
