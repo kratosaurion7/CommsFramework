@@ -267,10 +267,10 @@ void PackageFile::ReadPackage()
     if (strncmp(buf, "PACK", PACK_FILE_SIG_LENGTH) != 0)
         return;
 
-    packageStream.get(buf, sizeof(int));
+    packageStream.get(buf, sizeof(int) + 1);
     int dirOffset = BytesToInt(buf);
 
-    packageStream.get(buf, sizeof(int));
+    packageStream.get(buf, sizeof(int) + 1);
     int directorySize = BytesToInt(buf);
 
     Header *packHeader = new Header();
@@ -288,11 +288,14 @@ void PackageFile::ReadPackage()
 
     entries->Release();
 
+    int bytesRead = 0;
     while (hasNextFile)
     {
         packageStream.get(buf, DIRECTORY_ENTRY_SIZE + 1);
 
-        if (strcmp(buf, "") == 0)
+        bytesRead += DIRECTORY_ENTRY_SIZE;
+
+        if (bytesRead > directorySize)
         {
             hasNextFile = false;
             break;
