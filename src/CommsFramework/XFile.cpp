@@ -15,6 +15,9 @@ XFile::XFile()
     FileSize = -1;
     FileValid = false;
     parentDir = NULL;
+    
+    Exists = false;
+    FileValid = false;
 }
 
 XFile::XFile(std::string name)
@@ -30,6 +33,11 @@ XFile::XFile(std::string name)
         this->FileValid = true;
 
         this->CreateAndAssignPathInfo();
+    }
+    else
+    {
+        this->Exists = false;
+        this->FileValid = false;
     }
 }
 

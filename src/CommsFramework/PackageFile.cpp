@@ -9,7 +9,7 @@
 #include "Macros.h"
 #include "BitHelper.h"
 #include "Utilities.h"
-
+#include "IOUtilities.h"
 
 
 PackageFile::PackageFile()
@@ -275,6 +275,13 @@ void PackageFile::Extract(std::string outPath)
         finalFilePath.append(entry->fileName);
 
         XFile newFile = XFile(finalFilePath);
+        
+        // Need to ensure the file path (folders are contained in the file entry name)
+        // coming from the package is created.
+        
+        std::string parentDir = GetParentDirectoryPath(finalFilePath);
+        CreatePath(parentDir);
+
         newFile.OpenCreate();
         newFile.Write(entry->fileContents, entry->fileLength);
         newFile.Close();

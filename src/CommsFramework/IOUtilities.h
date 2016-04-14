@@ -1,20 +1,42 @@
 #pragma once
 
 class XFile;
+class XDirectory;
 
 #include <string>
 
 #include "BaseList.h"
 
+/*
+ * This function returns the name of the file without the folders.
+ */
 std::string GetLocalFileName(XFile* file);
 
+/*
+ * Functions to return the 'components' of a path.
+ * The components are the folders and the file making the path.
+ */
 BaseList<std::string>* GetFilePathComponents(XFile* file);
-
 BaseList<std::string>* GetFilePathComponents(std::string path);
 
+/*
+ * Returns the extension of the file only, without the dot.
+ */
 std::string GetFileExtension(XFile* file);
 
-std::string GetParentDirectory(XFile* file);
+/*
+ * These functions can extract the parent directory of a specified
+ * file or folder. They can get the directory name only or the full
+ * path leading to the parent.
+ */
+std::string GetParentDirectoryPath(std::string path);
+std::string GetParentDirectoryPath(XFile* file);
+
+std::string GetParentDirectoryName(std::string path);
+std::string GetParentDirectoryName(XFile* file);
+
+XDirectory* GetParentDirectory(std::string path);
+XDirectory* GetParentDirectory(XFile* file);
 
 /*
  * This changes the filePath into a path that is canonically supported

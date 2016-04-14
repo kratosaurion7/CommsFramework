@@ -15,6 +15,7 @@
 #endif // WIN32
 
 #include "XFile.h"
+#include "XDirectory.h"
 #include "StringFunctions.h"
 
 std::string GetLocalFileName(XFile* file)
@@ -58,13 +59,31 @@ std::string GetFileExtension(XFile* file)
     return fileExt;
 }
 
-std::string GetParentDirectory(XFile* file)
+std::string GetParentDirectoryPath(std::string path)
+{
+    assert(path != "");
+
+    std::string::size_type lastSlash = path.rfind('\\', std::string::npos);
+
+    std::string newString = path.substr(0, lastSlash);
+
+    return newString;
+}
+
+std::string GetParentDirectoryPath(XFile * file)
 {
     assert(file != NULL);
 
-    BaseList<std::string>* pathComponents = GetFilePathComponents(file);
+    return GetParentDirectoryPath(file->FilePath);
+}
 
-    std::string parentDirectoryComponent = pathComponents->Get(pathComponents->Count() - 1);
+std::string GetParentDirectoryName(std::string path)
+{
+    assert(path != "");
+
+    BaseList<std::string>* pathComponents = GetFilePathComponents(path);
+
+    std::string parentDirectoryComponent = pathComponents->Get(pathComponents->Count() - 2); // -2 to skip adjusted from 1-based and to skip the last element (the file itself)
 
     pathComponents->Clear();
     delete(pathComponents);
@@ -72,10 +91,34 @@ std::string GetParentDirectory(XFile* file)
     return parentDirectoryComponent;
 }
 
+std::string GetParentDirectoryName(XFile* file)
+{
+    assert(file != NULL);
+
+    return GetParentDirectoryName(file->FilePath);
+}
+
+XDirectory* GetParentDirectory(std::string path)
+{
+    assert(path != "");
+
+    XDirectory* parentDir = new XDirectory(path);
+
+    return parentDir;
+}
+
+XDirectory* GetParentDirectory(XFile * file)
+{
+    assert(file != NULL);
+
+    return GetParentDirectory(file->FilePath);
+}
+
 std::string SanitizeFilePath(std::string filePath)
 {
-    // Replace the front slashes by backslashes
+    assert(filePath != "");
 
+    // Replace the front slashes by backslashes
     int x = 0;
 
     x = filePath.find("/", 0);
@@ -89,6 +132,8 @@ std::string SanitizeFilePath(std::string filePath)
 
 bool IsSanitizedFilePath(std::string filePath)
 {
+    assert(filePath != "");
+
     std::string sanitizedFilePath = SanitizeFilePath(filePath);
 
     return sanitizedFilePath.compare(filePath) == 0;
@@ -96,6 +141,8 @@ bool IsSanitizedFilePath(std::string filePath)
 
 bool IsValidFilePath(std::string filePath)
 {
+    assert(filePath != "");
+
     XFile fileTest = XFile(filePath);
 
     return fileTest.Exists;
@@ -103,6 +150,8 @@ bool IsValidFilePath(std::string filePath)
 
 bool IsValidPath(std::string path)
 {
+    assert(path != "");
+
 #ifdef WIN32
 
     std::wstring x = CStringToWideString(path);
@@ -149,4 +198,6 @@ void CreatePath(std::string path)
 
     }
 
+    pathComponents->Clear();
+    delete(pathComponents);
 }
