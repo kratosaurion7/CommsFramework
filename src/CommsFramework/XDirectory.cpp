@@ -35,7 +35,7 @@ PointerList<XFile*>* XDirectory::GetFiles(bool recursive)
 {
     PointerList<XFile*>* ret = new PointerList<XFile*>();
 
-#ifdef _WINDOWS
+#ifdef WIN32
 
     this->FindFilesInDirectory(DirectoryPath.c_str(), *ret, recursive);
 
@@ -48,7 +48,7 @@ PointerList<XDirectory*>* XDirectory::GetDirectories(bool recursive)
     return NULL;
 }
 
-#ifdef _WINDOWS
+#ifdef WIN32
 XDirectory::XDirectory(std::wstring path)
 {
     FullPath = WideStringToCString(path);
@@ -71,7 +71,7 @@ XDirectory * XDirectory::OpenDirectory(std::wstring path)
 
 bool XDirectory::Check()
 {
-#ifdef _WINDOWS
+#ifdef WIN32
     return FullPath != "";
 #elif
     return false;
@@ -80,7 +80,7 @@ bool XDirectory::Check()
 
 void XDirectory::FindFilesInDirectory(std::wstring directoryPath, PointerList<XFile*> &filesAggregate, bool recursive)
 {
-#ifdef _WINDOWS
+#ifdef WIN32
     WIN32_FIND_DATA ffd;
 
     std::wstring directorySearchAlias = directoryPath;
@@ -121,7 +121,15 @@ void XDirectory::FindFilesInDirectory(std::wstring directoryPath, PointerList<XF
 
             WideCharToMultiByte(CP_ACP, 0, x, -1, filePath, MAX_PATH, &defChar, NULL);
 
-            XFile* newFile = new XFile(filePath);
+            char* fileNamePart = new char[directoryPath.length() + strlen(filePath) + 2];
+
+            char* directoryPart = new char[directoryPath.length()];
+            WideCharToMultiByte(CP_ACP, 0, directoryPath.c_str(), -1, directoryPart, MAX_PATH, &defChar, NULL);
+
+            sprintf(fileNamePart, "%s\\%s", directoryPart, filePath);
+
+            XFile* newFile = new XFile(fileNamePart);
+            newFile->Close();
             filesAggregate.Add(newFile);
         }
 
@@ -134,7 +142,7 @@ void XDirectory::FindFilesInDirectory(std::wstring directoryPath, PointerList<XF
 
 XDirectory* GetWorkingDir()
 {
-#ifdef _WINDOWS
+#ifdef WIN32
     LPWSTR buf = new wchar_t[MAX_PATH];
     DWORD res = GetCurrentDirectory(MAX_PATH, buf);
 
@@ -155,7 +163,7 @@ XDirectory* GetWorkingDir()
 
 void ChangeWorkingDir(std::string newPath)
 {
-#ifdef _WINDOWS
+#ifdef WIN32
     wchar_t dirPath[MAX_PATH];
     mbstowcs(dirPath, newPath.c_str(), newPath.length() + 1);
 
@@ -168,7 +176,7 @@ void ChangeWorkingDir(std::string newPath)
 #endif
 }
 
-#ifdef _WINDOWS
+#ifdef WIN32
 bool IsDotFile(WIN32_FIND_DATA dir)
 {
     auto x = lstrcmpW(currentDotDirName, dir.cFileName);

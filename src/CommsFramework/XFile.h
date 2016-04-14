@@ -23,7 +23,7 @@ enum FILE_OPEN_CREATE_MODE
     XTRUNCATE_EXISTING
 };
 
-#ifdef _WINDOWS
+#ifdef WIN32
 
 #include <windows.h>
 #include <tchar.h> 
@@ -106,7 +106,7 @@ protected:
 
     void AssignFileSize();
 
-#ifdef _WINDOWS
+#ifdef WIN32
     HANDLE winFileHandle;
 
 #endif

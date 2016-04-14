@@ -1,6 +1,6 @@
 #pragma once
 
-#ifdef _WINDOWS
+#ifdef WIN32
 
 //#define WIN32_LEAN_AND_MEAN
 
@@ -32,7 +32,7 @@ enum DIRECTORY_CREATE_RESULT
 
 class XFile;
 
-#ifdef _WINDOWS
+#ifdef WIN32
 static const wchar_t* currentDotDirName = _T(".");
 static const wchar_t* parentDotDirName = _T("..");
 #endif
@@ -50,7 +50,7 @@ public:
     PointerList<XFile*>* GetFiles(bool recursive = false);
     PointerList<XDirectory*>* GetDirectories(bool recursive = false);
 
-#ifdef _WINDOWS
+#ifdef WIN32
     XDirectory(std::wstring path);
 
     static XDirectory* OpenDirectory(std::wstring path);
@@ -63,7 +63,7 @@ protected:
 
 
 
-#ifdef _WINDOWS
+#ifdef WIN32
     HANDLE winDirHandle;
 
     std::wstring DirectoryPath; // Path to the directory, including the \\* characters at the end
@@ -77,6 +77,6 @@ XDirectory* GetWorkingDir();
 
 void ChangeWorkingDir(std::string newPath);
 
-#ifdef _WINDOWS
+#ifdef WIN32
 bool IsDotFile(WIN32_FIND_DATA name);
 #endif

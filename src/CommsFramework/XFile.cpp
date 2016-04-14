@@ -1,6 +1,6 @@
 #include "XFile.h"
 
-#ifdef _WINDOWS
+#ifdef WIN32
 
 #include "WindowsHelpers.h"
 
@@ -55,7 +55,7 @@ bool XFile::Open(FILE_OPEN_MODE openMode, FILE_SHARE_MODE shareMode)
     int _accessMode = this->TranslateFileOpenMode(openMode);
     int _shareMode = this->TranslateFileShareMode(shareMode);
 
-#ifdef _WINDOWS
+#ifdef WIN32
     std::wstring wText = CStringToWideString(FilePath);
 
     HANDLE res = CreateFile(wText.c_str(), _accessMode, _shareMode, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
@@ -95,7 +95,7 @@ bool XFile::OpenCreate(FILE_OPEN_CREATE_MODE createMode, FILE_SHARE_MODE shareMo
     int _createMode = this->TranslateOpenCreateMode(createMode);
     int _shareMode = this->TranslateFileShareMode(shareMode);
 
-#ifdef _WINDOWS
+#ifdef WIN32
     wchar_t* wText = new wchar_t[FilePath.length() + 1];
     mbstowcs(wText, FilePath.c_str(), FilePath.length() + 1);
 
@@ -120,14 +120,14 @@ bool XFile::OpenCreate(FILE_OPEN_CREATE_MODE createMode, FILE_SHARE_MODE shareMo
 
 void XFile::Close()
 {
-#ifdef _WINDOWS
+#ifdef WIN32
     CloseHandle(winFileHandle);
 #endif
 }
 
 bool XFile::IsOpen()
 {
-#ifdef _WINDOWS
+#ifdef WIN32
     return winFileHandle != INVALID_HANDLE_VALUE && FileValid;
 #elif
     return false;
@@ -152,7 +152,7 @@ FileContents* XFile::Read()
 
     FileContents* contents = new FileContents();
 
-#ifdef _WINDOWS
+#ifdef WIN32
     char* buf = new char[FileSize];
     LPDWORD nbBytesRead = 0;
     LPOVERLAPPED overlap = new _OVERLAPPED();
@@ -183,7 +183,7 @@ void XFile::Read(char* &buf, int & size)
     if (!this->Check())
         return;
 
-#ifdef _WINDOWS
+#ifdef WIN32
     char* fileBuf = new char[FileSize];
     LPDWORD nbBytesRead = 0;
     LPOVERLAPPED overlap = new _OVERLAPPED();
@@ -209,7 +209,7 @@ void XFile::Write(char * buf, int size)
 {
     if (this->Check())
     {
-#ifdef _WINDOWS
+#ifdef WIN32
         DWORD a;
         DWORD b;
         bool res = WriteFile(winFileHandle, buf, size, &a, NULL);
@@ -247,7 +247,7 @@ void XFile::CopyTo(std::string filePath, bool overwrite)
 {
     if (this->Check())
     {
-#ifdef _WINDOWS
+#ifdef WIN32
         std::wstring copyFromPath = CStringToWideString(FilePath);
 
         std::wstring copyToPath = CStringToWideString(filePath);
@@ -276,7 +276,7 @@ void XFile::MoveTo(std::string filePath, bool overwrite)
 {
     if (this->Check())
     {
-#ifdef _WINDOWS
+#ifdef WIN32
         std::wstring moveFromPath = CStringToWideString(FilePath);
 
         std::wstring moveToPath = CStringToWideString(filePath);
@@ -313,7 +313,7 @@ void XFile::Delete()
 {
     if (this->Check())
     {
-#ifdef _WINDOWS
+#ifdef WIN32
         wchar_t wText[MAX_PATH];
         mbstowcs(wText, FilePath.c_str(), FilePath.length());
 
@@ -327,7 +327,7 @@ void XFile::Delete()
 
 int XFile::TranslateFileOpenMode(FILE_OPEN_MODE mode)
 {
-#ifdef _WINDOWS
+#ifdef WIN32
     switch (mode)
     {
     case XFILE_READ:
@@ -346,7 +346,7 @@ int XFile::TranslateFileOpenMode(FILE_OPEN_MODE mode)
 
 int XFile::TranslateFileShareMode(FILE_SHARE_MODE mode)
 {
-#ifdef _WINDOWS
+#ifdef WIN32
     switch (mode)
     {
     case XSHARE_MODE_NONE:
@@ -365,7 +365,7 @@ int XFile::TranslateFileShareMode(FILE_SHARE_MODE mode)
 
 int XFile::TranslateOpenCreateMode(FILE_OPEN_CREATE_MODE mode)
 {
-#ifdef _WINDOWS
+#ifdef WIN32
     switch (mode)
     {
     case XCREATE_NEW:
@@ -390,7 +390,7 @@ void XFile::CreateAndAssignPathInfo()
 {
     if (this->IsOpen() && this->Exists)
     {
-#ifdef _WINDOWS
+#ifdef WIN32
         // Here I have a valid handle and the file exists
         TCHAR path[MAX_PATH];
         DWORD res;
@@ -438,7 +438,7 @@ void XFile::CreateAndAssignPathInfo()
 
 std::string XFile::CleanupDirectoryName(std::string stringToClean)
 {
-#ifdef _WINDOWS
+#ifdef WIN32
     // On windows, the GetFinalPathNameByHandle return the path using the \\?\ (convention to mark the path as unicode to support 32k char paths)
     return stringToClean.substr(4, stringToClean.length() - 4);
 #elif
@@ -448,7 +448,7 @@ std::string XFile::CleanupDirectoryName(std::string stringToClean)
 
 bool XFile::Check()
 {
-#ifdef _WINDOWS
+#ifdef WIN32
     return winFileHandle != INVALID_HANDLE_VALUE;
 #elif
     return false;
@@ -459,7 +459,7 @@ __int64 XFile::GetSize()
 {
     if (this->Check())
     {
-#ifdef _WINDOWS
+#ifdef WIN32
         PLARGE_INTEGER fileSize = NULL;
 
         bool res = GetFileSizeEx(winFileHandle, fileSize);
@@ -483,7 +483,7 @@ void XFile::AssignFileSize()
 {
     if (this->Check())
     {
-#ifdef _WINDOWS
+#ifdef WIN32
         DWORD res = GetFileSize(winFileHandle, NULL);
 
         if (res == INVALID_FILE_SIZE)

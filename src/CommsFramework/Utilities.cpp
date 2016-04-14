@@ -1,6 +1,6 @@
 #include "Utilities.h"
 
-#ifdef _WINDOWS
+#ifdef WIN32
 
 #include <Windows.h>
 
@@ -17,7 +17,7 @@ void DumpData(const char* data, int size, std::string outputName)
 
 int GetTicks()
 {
-#ifdef _WINDOWS
+#ifdef WIN32
 
     DWORD res = GetTickCount();
 

@@ -27,12 +27,26 @@ FileReader::~FileReader()
 
 void FileReader::OpenFile(char* fileName)
 {
+    errno = 0;
+
     fileStream->open(fileName, std::ios::in | std::ios::binary);
+
+    if (errno != 0)
+    {
+        printf(strerror(errno));
+    }
 }
 
 void FileReader::OpenFile(const char* fileName)
 {
+    errno = 0;
+
     fileStream->open(fileName, std::ios::in | std::ios::binary);
+
+    if (errno != 0)
+    {
+        printf(strerror(errno));
+    }
 }
 
 FileContents* FileReader::GetFileContents(bool ensureNullTerminated)
