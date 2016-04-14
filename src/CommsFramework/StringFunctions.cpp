@@ -6,9 +6,9 @@ BaseList<std::string>* StringSplit(std::string str, char* delimiter)
     BaseList<std::string>* parts = new BaseList<std::string>();
 
     const char* originalString = str.c_str();
-    char* tokeningString = new char[strlen(originalString)];
+    char* tokeningString = new char[strlen(originalString) + 1];
 
-    memcpy(tokeningString, originalString, strlen(originalString));
+    memcpy(tokeningString, originalString, strlen(originalString) + 1);
 
     char* foundToken;
 
@@ -16,9 +16,9 @@ BaseList<std::string>* StringSplit(std::string str, char* delimiter)
     
     while (foundToken != NULL)
     {
-        foundToken = strtok(NULL, delimiter); // Second calls to strtok sends a NULL to the first parameter.
-
         parts->Add(foundToken);
+
+        foundToken = strtok(NULL, delimiter); // Second calls to strtok sends a NULL to the first parameter.
     }
 
     return parts;

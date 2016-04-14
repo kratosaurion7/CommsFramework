@@ -10,6 +10,8 @@ std::string GetLocalFileName(XFile* file);
 
 BaseList<std::string>* GetFilePathComponents(XFile* file);
 
+BaseList<std::string>* GetFilePathComponents(std::string path);
+
 std::string GetFileExtension(XFile* file);
 
 std::string GetParentDirectory(XFile* file);
@@ -34,3 +36,14 @@ bool IsSanitizedFilePath(std::string filePath);
  * it will still return true if the path is valid but not sanitized.
  */
 bool IsValidFilePath(std::string filePath);
+
+/*
+ * Tests if the path is valid, could point to a directory or a file.
+ */
+bool IsValidPath(std::string path);
+
+/*
+ * Creates all the components of a path to make sure that the full path
+ * is accesible. 
+ */
+void CreatePath(std::string path);
