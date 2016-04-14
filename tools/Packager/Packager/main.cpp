@@ -16,14 +16,14 @@ int main(int argc, char* argv[])
 
     PackageFile* fil = new PackageFile();
     
-    // fil.AddDirectory(dir);
+    fil->AddDirectory(dir);
 
-    for (int i = 0; i < allFiles->Count(); i++)
-    {
-        std::string filePath = allFiles->Get(i)->FilePath;
+    //for (int i = 0; i < allFiles->Count(); i++)
+    //{
+    //    std::string filePath = allFiles->Get(i)->FilePath;
 
-        fil->AddFile(filePath);
-    }
+    //    fil->AddFile(filePath);
+    //}
 
     fil->Save("Out.pak");
 

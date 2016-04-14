@@ -4,6 +4,9 @@
 
 #include <string>
 
+class XFile;
+class XDirectory;
+
 #include "FileReader.h"
 
 #include "PointerList.h"
@@ -63,6 +66,10 @@ public:
     PointerList<std::string>* GetAllFiles();
 
     void AddFile(std::string filename);
+    void AddFile(XFile* file);
+
+    void AddDirectory(std::string directoryPath);
+    void AddDirectory(XDirectory* directory);
 
     void RemoveFile(std::string filename);
 

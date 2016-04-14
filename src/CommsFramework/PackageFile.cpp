@@ -1,16 +1,16 @@
 #include "PackageFile.h"
 
-#include "PointerList.h"
-
-#include "Macros.h"
-
-#include "BitHelper.h"
-
 #include <cstring>
-
 #include <fstream>
 
+#include "XFile.h"
+#include "XDirectory.h"
+#include "PointerList.h"
+#include "Macros.h"
+#include "BitHelper.h"
 #include "Utilities.h"
+
+
 
 PackageFile::PackageFile()
 {
@@ -57,7 +57,7 @@ PackageFile::~PackageFile()
     delete(entries);
 }
 
-const char * PackageFile::GetFile(std::string filename, int& fileSize)
+const char* PackageFile::GetFile(std::string filename, int& fileSize)
 {
     std::ifstream packageStream = std::ifstream(TargetPackage, std::ios::in | std::ios::binary);
 
@@ -128,6 +128,33 @@ PointerList<std::string>* PackageFile::GetAllFiles()
 void PackageFile::AddFile(std::string filename)
 {
     filesList->Add(filename);
+}
+
+void PackageFile::AddFile(XFile* file)
+{
+    filesList->Add(file->FilePath);
+}
+
+void PackageFile::AddDirectory(std::string directoryPath)
+{
+    XDirectory dir = XDirectory(directoryPath);
+
+    this->AddDirectory(&dir);
+}
+
+void PackageFile::AddDirectory(XDirectory* directory)
+{
+    PointerList<XFile*>* files = directory->GetFiles(true);
+
+    auto it = files->GetContainer()->begin();
+    while (it != files->GetContainer()->end())
+    {
+        XFile* file = *it;
+
+        this->AddFile(file);
+
+        it++;
+    }
 }
 
 void PackageFile::RemoveFile(std::string filename)
