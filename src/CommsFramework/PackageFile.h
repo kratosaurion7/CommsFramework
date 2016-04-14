@@ -75,7 +75,15 @@ public:
 
     void Save(std::string savePath);
 
+    void Extract(std::string outPath);
+
 private:
+    /*
+     * Indicate that the package has been read from disk after creating the PackageFile instance.
+     *  If false, the function ReadPackage needs to be called to load the entries.
+     */
+    bool packageRead; 
+
     Header* packageHeader;
 
     BaseList<std::string>* filesList;

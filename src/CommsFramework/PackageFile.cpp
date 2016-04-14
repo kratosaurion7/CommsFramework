@@ -19,6 +19,7 @@ PackageFile::PackageFile()
     entries = new PointerList<DirectoryEntry*>;
 
     filesList = new BaseList<std::string>();
+    packageRead = false;
 }
 
 PackageFile::PackageFile(std::string packageFilePath)
@@ -30,6 +31,7 @@ PackageFile::PackageFile(std::string packageFilePath)
     filesList = new BaseList<std::string>();
 
     TargetPackage = packageFilePath;
+    packageRead = false;
 }
 
 
@@ -255,6 +257,33 @@ void PackageFile::Save(std::string savePath)
     fileStream.close();
 }
 
+void PackageFile::Extract(std::string outPath)
+{
+    if (!packageRead)
+    {
+        this->ReadPackage();
+    }
+
+    // Loop the directory entries
+    auto it = this->entries->GetContainer()->begin();
+    while (it != this->entries->GetContainer()->end())
+    {
+        DirectoryEntry* entry = *it;
+
+        std::string finalFilePath = outPath;
+        finalFilePath.append("\\");
+        finalFilePath.append(entry->fileName);
+
+        XFile newFile = XFile(finalFilePath);
+        newFile.OpenCreate();
+        newFile.Write(entry->fileContents, entry->fileLength);
+        newFile.Close();
+
+        it++;
+    }
+
+}
+
 void PackageFile::ReadPackage()
 {
     std::ifstream packageStream = std::ifstream(TargetPackage, std::ios::in | std::ios::binary);
@@ -313,4 +342,6 @@ void PackageFile::ReadPackage()
 
         entries->Add(newEntry);
     }
+
+    packageRead = true;
 }
