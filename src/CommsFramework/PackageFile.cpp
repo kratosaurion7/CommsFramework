@@ -39,9 +39,21 @@ PackageFile::~PackageFile()
 
     delete(contents);
 
+    filesList->Clear();
     delete(filesList);
 
-    entries->Release();
+    // Since DirectoryEntry are structures, need to do the constructor myself.
+    auto it = this->entries->GetContainer()->begin();
+    while (it != this->entries->GetContainer()->end())
+    {
+        DirectoryEntry* entry = *it;
+        delete(entry->fileContents);
+        delete(entry);
+
+        it++;
+    }
+
+    entries->Clear();
     delete(entries);
 }
 

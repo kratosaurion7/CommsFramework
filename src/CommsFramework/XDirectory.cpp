@@ -106,11 +106,13 @@ void XDirectory::FindFilesInDirectory(std::wstring directoryPath, PointerList<XF
             // Fix line to not append directly to the same string buffer.
             //std::wstring subDirectoryPath = directoryPath.append(_T("\\")).append(ffd.cFileName);
 
-            wchar_t* subDirectoryPath = new wchar_t[directoryPath.length() + lstrlenW(ffd.cFileName)];
+            wchar_t* subDirectoryPath = new wchar_t[directoryPath.length() + 1 + lstrlenW(ffd.cFileName) + 1];
 
             wsprintfW(subDirectoryPath, _T("%s\\%s"), directoryPath.c_str(), ffd.cFileName);
 
             FindFilesInDirectory(subDirectoryPath, filesAggregate, recursive);
+
+            delete(subDirectoryPath);
         }
         else
         {
@@ -123,7 +125,7 @@ void XDirectory::FindFilesInDirectory(std::wstring directoryPath, PointerList<XF
 
             char* fileNamePart = new char[directoryPath.length() + strlen(filePath) + 2];
 
-            char* directoryPart = new char[directoryPath.length()];
+            char* directoryPart = new char[directoryPath.length() + 1];
             WideCharToMultiByte(CP_ACP, 0, directoryPath.c_str(), -1, directoryPart, MAX_PATH, &defChar, NULL);
 
             sprintf(fileNamePart, "%s\\%s", directoryPart, filePath);
@@ -131,6 +133,10 @@ void XDirectory::FindFilesInDirectory(std::wstring directoryPath, PointerList<XF
             XFile* newFile = new XFile(fileNamePart);
             newFile->Close();
             filesAggregate.Add(newFile);
+
+            delete(directoryPart);
+            delete(fileNamePart);
+            delete(filePath);
         }
 
     } while (FindNextFile(hFind, &ffd) != 0);

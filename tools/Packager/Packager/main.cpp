@@ -10,11 +10,11 @@ int main(int argc, char* argv[])
 
     char* dirPath = argv[1];
 
-    XDirectory dir = XDirectory(dirPath);
+    XDirectory* dir = new XDirectory(dirPath);
 
-    auto allFiles = dir.GetFiles(true);
+    auto allFiles = dir->GetFiles(true);
 
-    PackageFile fil = PackageFile();
+    PackageFile* fil = new PackageFile();
     
     // fil.AddDirectory(dir);
 
@@ -22,10 +22,15 @@ int main(int argc, char* argv[])
     {
         std::string filePath = allFiles->Get(i)->FilePath;
 
-        fil.AddFile(filePath);
+        fil->AddFile(filePath);
     }
 
-    fil.Save("Out.pak");
+    fil->Save("Out.pak");
+
+    delete(fil);
+    allFiles->Release();
+    delete(allFiles);
+    delete(dir);
 
     return 0;
 }
