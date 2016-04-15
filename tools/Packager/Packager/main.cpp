@@ -18,13 +18,6 @@ int main(int argc, char* argv[])
     
     fil->AddDirectory(dir);
 
-    //for (int i = 0; i < allFiles->Count(); i++)
-    //{
-    //    std::string filePath = allFiles->Get(i)->FilePath;
-
-    //    fil->AddFile(filePath);
-    //}
-
     fil->Save("Out.pak");
 
     delete(fil);
