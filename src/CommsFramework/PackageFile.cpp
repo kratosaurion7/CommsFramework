@@ -300,7 +300,7 @@ void PackageFile::ReadPackage()
 {
     std::ifstream packageStream = std::ifstream(TargetPackage, std::ios::in | std::ios::binary);
 
-    char buf[256];
+    char buf[512];
     char* fileContents = NULL;
 
     packageStream.get(buf, PACK_FILE_SIG_LENGTH + 1);	// get(n) method returns at most n-1 elements. Signature is 4

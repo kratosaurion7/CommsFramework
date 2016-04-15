@@ -11,7 +11,7 @@ class XDirectory;
 
 #include "PointerList.h"
 
-#define FILENAME_MAX_LENGTH 32
+#define FILENAME_MAX_LENGTH 256
 #define PACK_FILE_SIG_LENGTH 4
 
 /*
@@ -22,7 +22,7 @@ class XDirectory;
     (4 bytes, int) directory lenght
 
     Directory entries
-    (32 bytes, char) file name
+    (256 bytes, char) file name
     (4 bytes, int) file position (position is absolute)
     (4 bytes, int) file lenght
 
@@ -37,7 +37,7 @@ struct Header {
     int dirLength;
 };
 
-#define DIRECTORY_ENTRY_SIZE 40
+#define DIRECTORY_ENTRY_SIZE 264
 struct DirectoryEntry {
     char fileName[FILENAME_MAX_LENGTH];
     int filePosition;
