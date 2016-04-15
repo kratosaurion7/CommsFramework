@@ -43,6 +43,7 @@ XFile::XFile(std::string name)
 
 XFile::~XFile()
 {
+    this->Close();
     delete(parentDir);
 }
 
