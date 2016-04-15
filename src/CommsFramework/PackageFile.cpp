@@ -2,6 +2,7 @@
 
 #include <cstring>
 #include <fstream>
+#include <assert.h>
 
 #include "XFile.h"
 #include "XDirectory.h"
@@ -10,6 +11,7 @@
 #include "BitHelper.h"
 #include "Utilities.h"
 #include "IOUtilities.h"
+#include "StringFunctions.h"
 
 
 PackageFile::PackageFile()
@@ -18,7 +20,7 @@ PackageFile::PackageFile()
     contents = NULL;
     entries = new PointerList<DirectoryEntry*>;
 
-    filesList = new BaseList<std::string>();
+    filesList = new PointerList<FileListEntry*>();
     packageRead = false;
 }
 
@@ -28,7 +30,7 @@ PackageFile::PackageFile(std::string packageFilePath)
     contents = NULL;
     entries = new PointerList<DirectoryEntry*>;
 
-    filesList = new BaseList<std::string>();
+    filesList = new PointerList<FileListEntry*>();
 
     TargetPackage = packageFilePath;
     packageRead = false;
@@ -63,7 +65,7 @@ const char* PackageFile::GetFile(std::string filename, int& fileSize)
 {
     std::ifstream packageStream = std::ifstream(TargetPackage, std::ios::in | std::ios::binary);
 
-    char buf[256];
+    char buf[512];
     char* fileContents = NULL;
 
     packageStream.get(buf, PACK_FILE_SIG_LENGTH + 1); // get(n) method returns at most n-1 elements. Signature is 4
@@ -129,12 +131,16 @@ PointerList<std::string>* PackageFile::GetAllFiles()
 
 void PackageFile::AddFile(std::string filename)
 {
-    filesList->Add(filename);
+    FileListEntry* newFile = new FileListEntry();
+    newFile->FileName = filename;
+    newFile->RelativeDirectoryParentRoot = "";
+
+    filesList->Add(newFile);
 }
 
 void PackageFile::AddFile(XFile* file)
 {
-    filesList->Add(file->FilePath);
+    this->AddFile(file->FilePath);
 }
 
 void PackageFile::AddDirectory(std::string directoryPath)
@@ -153,7 +159,12 @@ void PackageFile::AddDirectory(XDirectory* directory)
     {
         XFile* file = *it;
 
-        this->AddFile(file);
+        FileListEntry* newFile = new FileListEntry();
+        newFile->FileName = file->FilePath;
+        newFile->RelativeDirectoryParentRoot = GetParentDirectoryPath(directory->FullPath);
+        newFile->RelativeDirectoryParentRoot.append("\\"); // TODO : HAcked for now, decide if want trailing slashes
+
+        this->filesList->Add(newFile);
 
         it++;
     }
@@ -161,7 +172,7 @@ void PackageFile::AddDirectory(XDirectory* directory)
 
 void PackageFile::RemoveFile(std::string filename)
 {
-    filesList->RemoveObject(filename);
+    //filesList->RemoveObject(filename);
 }
 
 void PackageFile::Save(std::string savePath)
@@ -178,9 +189,11 @@ void PackageFile::Save(std::string savePath)
 
     while (it != filesList->GetContainer()->end())
     {
-        std::string fileName = *it;
+        FileListEntry* fileListing = *it;
 
-        rdr.OpenFile(fileName.c_str());
+        std::string fileName = StringSubtract(fileListing->FileName, fileListing->RelativeDirectoryParentRoot);
+
+        rdr.OpenFile(fileListing->FileName.c_str());
 
         if (contents != NULL)
             delete(contents);
@@ -192,7 +205,6 @@ void PackageFile::Save(std::string savePath)
         strcpy(newFileEntry->fileName, const_cast<char*>(fileName.c_str()));
         newFileEntry->fileLength = contents->fileSize;
         newFileEntry->filePosition = bufPos;
-        //newFileEntry->fileContents = contents->buffer;
 
         newFileEntry->fileContents = new char[contents->fileSize];
         memcpy(newFileEntry->fileContents, contents->buffer, contents->fileSize);
@@ -287,8 +299,13 @@ void PackageFile::Extract(std::string outPath)
         std::string parentDir = GetParentDirectoryPath(finalFilePath);
         CreatePath(parentDir);
 
+        int bufSize = 0;
+        char* buf = (char*)this->GetFile(entry->fileName, bufSize);
+
+        assert(bufSize == entry->fileLength);
+
         newFile.OpenCreate();
-        newFile.Write(entry->fileContents, entry->fileLength);
+        newFile.Write(buf, entry->fileLength);
         newFile.Close();
 
         it++;

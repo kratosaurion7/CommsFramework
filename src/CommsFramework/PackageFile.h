@@ -78,6 +78,14 @@ public:
     void Extract(std::string outPath);
 
 private:
+
+    struct FileListEntry
+    {
+        std::string FileName;
+
+        std::string RelativeDirectoryParentRoot;
+    };
+
     /*
      * Indicate that the package has been read from disk after creating the PackageFile instance.
      *  If false, the function ReadPackage needs to be called to load the entries.
@@ -86,7 +94,7 @@ private:
 
     Header* packageHeader;
 
-    BaseList<std::string>* filesList;
+    PointerList<FileListEntry*>* filesList;
 
     PointerList<DirectoryEntry*>* entries;
 

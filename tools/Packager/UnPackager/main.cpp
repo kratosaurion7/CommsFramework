@@ -8,21 +8,17 @@ int main(int argc, char* argv[])
     {
         return 1;
     }
-
     
     char* pakPath = argv[1];
 
     bool pathIsFile = IsValidFilePath(pakPath);
 
-    if (true)
+    if (pathIsFile)
     {
         PackageFile package = PackageFile(pakPath);
 
         package.Extract("");
-    }
-    
-    
-    
+    }    
 
     return 0;
 }

@@ -23,3 +23,12 @@ BaseList<std::string>* StringSplit(std::string str, char* delimiter)
 
     return parts;
 }
+
+std::string StringSubtract(std::string a, std::string b)
+{
+    int startPosition = a.find(b, 0) + b.length();
+
+    std::string result = a.substr(startPosition, a.length() - b.length());
+
+    return result;
+}
