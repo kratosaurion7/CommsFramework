@@ -43,7 +43,13 @@ XFile::XFile(std::string name)
 
 XFile::~XFile()
 {
-    this->Close();
+    if (this->IsOpen() && FileValid)
+    {
+        this->Close();
+
+        this->FileValid = false;
+    }
+    
     delete(parentDir);
 }
 
@@ -55,6 +61,8 @@ bool XFile::Open()
     }
     else
     {
+        this->FileValid = false;
+
         return false;
     }
 }
@@ -130,7 +138,13 @@ bool XFile::OpenCreate(FILE_OPEN_CREATE_MODE createMode, FILE_SHARE_MODE shareMo
 void XFile::Close()
 {
 #ifdef WIN32
-    CloseHandle(winFileHandle);
+    if (this->IsOpen())
+    {
+        CloseHandle(winFileHandle);
+
+        FileValid = false;
+        winFileHandle = INVALID_HANDLE_VALUE;
+    }
 #endif
 }
 

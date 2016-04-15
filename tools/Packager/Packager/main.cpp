@@ -1,5 +1,6 @@
 #include <XFile.h>
 #include <PackageFile.h>
+#include <IOUtilities.h>
 
 int main(int argc, char* argv[])
 {
@@ -18,7 +19,7 @@ int main(int argc, char* argv[])
     
     fil->AddDirectory(dir);
 
-    fil->Save("Out.pak");
+    fil->Save("out.pak");
 
     delete(fil);
     allFiles->Release();

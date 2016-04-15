@@ -270,8 +270,13 @@ void PackageFile::Extract(std::string outPath)
     {
         DirectoryEntry* entry = *it;
 
-        std::string finalFilePath = outPath;
-        finalFilePath.append("\\");
+        std::string finalFilePath;
+        if (outPath != "")
+        {
+            finalFilePath.append(outPath);
+            finalFilePath.append("\\");
+        }
+        
         finalFilePath.append(entry->fileName);
 
         XFile newFile = XFile(finalFilePath);

@@ -49,7 +49,9 @@ public:
     XFile(std::string name); // Automatically opens the file using the Open() function
     ~XFile();
 
+    // USed to indicate if the file was opened well (if Windows has a hook on it)
     bool FileValid;
+
     int FileSize;
     bool Exists;
 
