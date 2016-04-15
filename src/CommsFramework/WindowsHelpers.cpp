@@ -1,5 +1,11 @@
 #include "WindowsHelpers.h"
 
+#include <windows.h>
+#include <tchar.h> 
+#include <stdio.h>
+#include <strsafe.h>
+
+
 std::wstring CStringToWideString(std::string cstr)
 {
     wchar_t* wText = new wchar_t[cstr.length() + 1];

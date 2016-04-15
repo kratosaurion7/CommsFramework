@@ -170,6 +170,9 @@ void PackageFile::AddDirectory(XDirectory* directory)
 
         it++;
     }
+
+    files->Release();
+    delete(files);
 }
 
 void PackageFile::RemoveFile(std::string filename)
