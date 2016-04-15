@@ -185,7 +185,7 @@ void CreatePath(std::string path)
             std::wstring wPath = CStringToWideString(pathBuilder);
 
             SECURITY_ATTRIBUTES attr;
-
+            // TODO : Check if file, if true don't create
             BOOL ret = CreateDirectory(wPath.c_str(), NULL);
 
             int i = 0;

@@ -81,7 +81,7 @@ private:
 
     struct FileListEntry
     {
-        std::string FileName;
+        XFile* File;
 
         std::string RelativeDirectoryParentRoot;
     };

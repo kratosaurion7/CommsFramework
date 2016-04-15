@@ -132,7 +132,8 @@ PointerList<std::string>* PackageFile::GetAllFiles()
 void PackageFile::AddFile(std::string filename)
 {
     FileListEntry* newFile = new FileListEntry();
-    newFile->FileName = filename;
+    newFile->File = new XFile(filename);
+    newFile->File->Close();
     newFile->RelativeDirectoryParentRoot = "";
 
     filesList->Add(newFile);
@@ -160,7 +161,8 @@ void PackageFile::AddDirectory(XDirectory* directory)
         XFile* file = *it;
 
         FileListEntry* newFile = new FileListEntry();
-        newFile->FileName = file->FilePath;
+        newFile->File = new XFile(file->FilePath);
+        newFile->File->Close();
         newFile->RelativeDirectoryParentRoot = GetParentDirectoryPath(directory->FullPath);
         newFile->RelativeDirectoryParentRoot.append("\\"); // TODO : HAcked for now, decide if want trailing slashes
 
@@ -191,9 +193,18 @@ void PackageFile::Save(std::string savePath)
     {
         FileListEntry* fileListing = *it;
 
-        std::string fileName = StringSubtract(fileListing->FileName, fileListing->RelativeDirectoryParentRoot);
+        std::string fileName;
 
-        rdr.OpenFile(fileListing->FileName.c_str());
+        if (fileListing->RelativeDirectoryParentRoot == "")
+        {
+            fileName = fileListing->File->FileName;
+        }
+        else
+        {
+            fileName = StringSubtract(fileListing->File->FilePath, fileListing->RelativeDirectoryParentRoot);
+        }        
+
+        rdr.OpenFile(fileListing->File->FilePath.c_str());
 
         if (contents != NULL)
             delete(contents);
@@ -297,7 +308,10 @@ void PackageFile::Extract(std::string outPath)
         // coming from the package is created.
         
         std::string parentDir = GetParentDirectoryPath(finalFilePath);
-        CreatePath(parentDir);
+        
+        // This is used to skip creating the directory when going over a file without directories.
+        if(parentDir != finalFilePath)
+            CreatePath(parentDir);
 
         int bufSize = 0;
         char* buf = (char*)this->GetFile(entry->fileName, bufSize);
