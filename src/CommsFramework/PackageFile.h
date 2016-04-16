@@ -61,7 +61,7 @@ public:
 
     ~PackageFile();
 
-    const char* GetFile(std::string filename, int& fileSize);
+    virtual const char* GetFile(std::string filename, int& fileSize);
 
     PointerList<std::string>* GetAllFiles();
 
@@ -73,11 +73,20 @@ public:
 
     void RemoveFile(std::string filename);
 
-    void Save(std::string savePath);
+    virtual void Save(std::string savePath);
 
-    void Extract(std::string outPath);
+    virtual void Extract(std::string outPath);
 
-private:
+protected:
+
+    virtual void AddFile(std::string filename, std::string directoryRoot);
+
+    /**
+    * Read the package's directory and puts the list of Entries in the entries list.
+    *
+    * The data is not read at this point, only the file names and offsets. */
+    virtual void ReadPackage();
+
 
     struct FileListEntry
     {
@@ -104,10 +113,5 @@ private:
 
     std::string OutputFileName;
 
-    /**
-    * Read the package's directory and puts the list of Entries in the entries list.
-    *
-    * The data is not read at this point, only the file names and offsets. */
-    void ReadPackage();
 };
 

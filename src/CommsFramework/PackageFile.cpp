@@ -131,17 +131,31 @@ PointerList<std::string>* PackageFile::GetAllFiles()
 
 void PackageFile::AddFile(std::string filename)
 {
-    FileListEntry* newFile = new FileListEntry();
-    newFile->File = new XFile(filename);
-    newFile->File->Close();
-    newFile->RelativeDirectoryParentRoot = "";
-
-    filesList->Add(newFile);
+    this->AddFile(filename, "");
 }
 
 void PackageFile::AddFile(XFile* file)
 {
-    this->AddFile(file->FilePath);
+    this->AddFile(file->FilePath, "");
+}
+
+void PackageFile::AddFile(std::string filename, std::string directoryRoot)
+{
+    FileListEntry* newFile = new FileListEntry();
+    newFile->File = new XFile(filename);
+    newFile->File->Close();
+    
+    if (directoryRoot == "")
+    {
+        newFile->RelativeDirectoryParentRoot = "";
+    }
+    else
+    {
+        newFile->RelativeDirectoryParentRoot = GetParentDirectoryPath(directoryRoot);
+        newFile->RelativeDirectoryParentRoot.append("\\"); // TODO : HAcked for now, decide if want trailing slashes
+    }
+
+    filesList->Add(newFile);
 }
 
 void PackageFile::AddDirectory(std::string directoryPath)
@@ -160,13 +174,7 @@ void PackageFile::AddDirectory(XDirectory* directory)
     {
         XFile* file = *it;
 
-        FileListEntry* newFile = new FileListEntry();
-        newFile->File = new XFile(file->FilePath);
-        newFile->File->Close();
-        newFile->RelativeDirectoryParentRoot = GetParentDirectoryPath(directory->FullPath);
-        newFile->RelativeDirectoryParentRoot.append("\\"); // TODO : HAcked for now, decide if want trailing slashes
-
-        this->filesList->Add(newFile);
+        this->AddFile(file->FilePath, directory->FullPath);
 
         it++;
     }
@@ -330,6 +338,7 @@ void PackageFile::Extract(std::string outPath)
 
 }
 
+
 void PackageFile::ReadPackage()
 {
     std::ifstream packageStream = std::ifstream(TargetPackage, std::ios::in | std::ios::binary);
@@ -367,7 +376,7 @@ void PackageFile::ReadPackage()
     while (hasNextFile)
     {
         packageStream.get(buf, DIRECTORY_ENTRY_SIZE + 1);
-
+        
         bytesRead += DIRECTORY_ENTRY_SIZE;
 
         if (bytesRead > directorySize)

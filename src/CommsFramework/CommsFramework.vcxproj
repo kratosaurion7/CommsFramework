@@ -341,6 +341,7 @@ XCOPY /Y /E "Assets\*" "$(TargetDir)Assets"</Command>
     <ClCompile Include="BitHelper.cpp" />
     <ClCompile Include="DialogManager.cpp" />
     <ClCompile Include="DrawObject.cpp" />
+    <ClCompile Include="EncryptedPackageFile.cpp" />
     <ClCompile Include="EngineDialogMessage.cpp" />
     <ClCompile Include="FileSave.cpp" />
     <ClCompile Include="FontProcessor.cpp" />
@@ -408,6 +409,7 @@ XCOPY /Y /E "Assets\*" "$(TargetDir)Assets"</Command>
     <ClInclude Include="BitHelper.h" />
     <ClInclude Include="DialogManager.h" />
     <ClInclude Include="DrawObject.h" />
+    <ClInclude Include="EncryptedPackageFile.h" />
     <ClInclude Include="EngineDialogMessage.h" />
     <ClInclude Include="FileSave.h" />
     <ClInclude Include="FileSystem.h" />
