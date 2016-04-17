@@ -10,16 +10,20 @@ public:
     EncryptedPackageFile(char* encryptionKey); // Null terminated byte array
     ~EncryptedPackageFile();
 
+    //const char* GetFile(std::string filename, int& fileSize);
+
+    //void Save(std::string savePath);
+
+    //void Extract(std::string outPath);
+
+
 protected:
-    const char* GetFile(std::string filename, int& fileSize);
 
-    void AddFile(std::string filename, std::string directoryRoot);
+    //void ReadPackage();
 
-    void Save(std::string savePath);
+    void ReadBytes(char* targetBuffer, int nbBytes, std::ifstream* stream);
 
-    void Extract(std::string outPath);
-
-    void ReadPackage();
+    void WriteBytes(char* sourceBuffer, int nbBytes, std::ofstream* stream);
 
 
 private:

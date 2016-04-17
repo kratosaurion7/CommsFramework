@@ -68,13 +68,15 @@ const char* PackageFile::GetFile(std::string filename, int& fileSize)
     char buf[512];
     char* fileContents = NULL;
 
-    packageStream.get(buf, PACK_FILE_SIG_LENGTH + 1); // get(n) method returns at most n-1 elements. Signature is 4
+    ReadBytes(buf, PACK_FILE_SIG_LENGTH + 1, &packageStream);
+    //packageStream.get(buf, PACK_FILE_SIG_LENGTH + 1); // get(n) method returns at most n-1 elements. Signature is 4
 
     // Step 1. Check it the file is the correct format
     if (strncmp(buf, "PACK", PACK_FILE_SIG_LENGTH) != 0)
         return NULL;
 
-    packageStream.get(buf, sizeof(int));
+    ReadBytes(buf, sizeof(int), &packageStream);
+    //packageStream.get(buf, sizeof(int));
 
     int dirOffset = BytesToInt(buf);
 
@@ -85,7 +87,8 @@ const char* PackageFile::GetFile(std::string filename, int& fileSize)
     int filesIndex = 0;
     while (hasNextFile && !fileFound)
     {
-        packageStream.read(buf, DIRECTORY_ENTRY_SIZE);
+        ReadBytes(buf, PACK_FILE_SIG_LENGTH, &packageStream);
+        //packageStream.read(buf, DIRECTORY_ENTRY_SIZE);
         if (strncmp(filename.c_str(), buf, FILENAME_MAX_LENGTH) == 0)
         {
             int targetFilePos = BytesToInt(&buf[FILENAME_MAX_LENGTH]);
@@ -93,7 +96,8 @@ const char* PackageFile::GetFile(std::string filename, int& fileSize)
 
             packageStream.seekg(targetFilePos);
             fileContents = new char[targetFileLength];
-            packageStream.read(fileContents, targetFileLength);
+            ReadBytes(buf, targetFileLength, &packageStream);
+            //packageStream.read(fileContents, targetFileLength);
 
             fileSize = targetFileLength;
             fileFound = true;
@@ -253,9 +257,13 @@ void PackageFile::Save(std::string savePath)
     packHeader->dirLength = directorySize;
 
 
-    fileStream.write(packHeader->sig, 4);
-    fileStream.write((char*)&packHeader->dirOffset, 4);
-    fileStream.write((char*)&packHeader->dirLength, 4);
+    //fileStream.write(packHeader->sig, 4);
+    //fileStream.write((char*)&packHeader->dirOffset, 4);
+    //fileStream.write((char*)&packHeader->dirLength, 4);
+
+    WriteBytes(packHeader->sig, 4, &fileStream);
+    WriteBytes((char*)&packHeader->dirOffset, 4, &fileStream);
+    WriteBytes((char*)&packHeader->dirLength, 4, &fileStream);
 
     delete(packHeader);
 
@@ -268,10 +276,15 @@ void PackageFile::Save(std::string savePath)
     {
         DirectoryEntry* entry = *it2;
 
+        WriteBytes(entry->fileName, sizeof(entry->fileName), &fileStream);
         fileStream.write(entry->fileName, sizeof(entry->fileName));
         int currPos = headerSize + directorySize + currentDataSize;
-        fileStream.write((char*)&currPos, sizeof(entry->filePosition));
-        fileStream.write((char*)&entry->fileLength, sizeof(entry->fileLength));
+
+        WriteBytes((char*)&currPos, sizeof(entry->filePosition), &fileStream);
+        //fileStream.write((char*)&currPos, sizeof(entry->filePosition));
+
+        WriteBytes((char*)&entry->fileLength, sizeof(entry->fileLength), &fileStream);
+        //fileStream.write((char*)&entry->fileLength, sizeof(entry->fileLength));
 
         currentDataSize += entry->fileLength;
         it2++;
@@ -283,7 +296,8 @@ void PackageFile::Save(std::string savePath)
     {
         DirectoryEntry* entry = *it3;
 
-        fileStream.write(entry->fileContents, entry->fileLength);
+        WriteBytes(entry->fileContents, entry->fileLength, &fileStream);
+        //fileStream.write(entry->fileContents, entry->fileLength);
 
         it3++;
     }
@@ -346,15 +360,18 @@ void PackageFile::ReadPackage()
     char buf[512];
     char* fileContents = NULL;
 
-    packageStream.get(buf, PACK_FILE_SIG_LENGTH + 1);	// get(n) method returns at most n-1 elements. Signature is 4
+    ReadBytes(buf, PACK_FILE_SIG_LENGTH + 1, &packageStream);
+    //packageStream.get(buf, PACK_FILE_SIG_LENGTH + 1);	// get(n) method returns at most n-1 elements. Signature is 4
 
     if (strncmp(buf, "PACK", PACK_FILE_SIG_LENGTH) != 0)
         return;
 
-    packageStream.get(buf, sizeof(int) + 1);
+    ReadBytes(buf, sizeof(int) + 1, &packageStream);
+    //packageStream.get(buf, sizeof(int) + 1);
     int dirOffset = BytesToInt(buf);
 
-    packageStream.get(buf, sizeof(int) + 1);
+    ReadBytes(buf, sizeof(int) + 1, &packageStream);
+    //packageStream.get(buf, sizeof(int) + 1);
     int directorySize = BytesToInt(buf);
 
     Header *packHeader = new Header();
@@ -375,7 +392,8 @@ void PackageFile::ReadPackage()
     int bytesRead = 0;
     while (hasNextFile)
     {
-        packageStream.get(buf, DIRECTORY_ENTRY_SIZE + 1);
+        ReadBytes(buf, DIRECTORY_ENTRY_SIZE + 1, &packageStream);
+        //packageStream.get(buf, DIRECTORY_ENTRY_SIZE + 1);
         
         bytesRead += DIRECTORY_ENTRY_SIZE;
 
@@ -399,4 +417,14 @@ void PackageFile::ReadPackage()
     }
 
     packageRead = true;
+}
+
+void PackageFile::ReadBytes(char* targetBuffer, int nbBytes, std::ifstream* stream)
+{
+    stream->get(targetBuffer, nbBytes);
+}
+
+void PackageFile::WriteBytes(char* targetBuffer, int nbBytes, std::ofstream* stream)
+{
+    stream->write(targetBuffer, nbBytes);
 }

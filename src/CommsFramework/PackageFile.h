@@ -87,6 +87,9 @@ protected:
     * The data is not read at this point, only the file names and offsets. */
     virtual void ReadPackage();
 
+    virtual void ReadBytes(char* targetBuffer, int nbBytes, std::ifstream* stream);
+
+    virtual void WriteBytes(char* targetBuffer, int nbBytes, std::ofstream* stream);
 
     struct FileListEntry
     {
