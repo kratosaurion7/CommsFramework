@@ -6,6 +6,7 @@
 
 class XFile;
 class XDirectory;
+class EncryptedPackageFile;
 
 #include "FileReader.h"
 
@@ -72,6 +73,8 @@ public:
     void AddDirectory(XDirectory* directory);
 
     void RemoveFile(std::string filename);
+
+    EncryptedPackageFile* SaveEncrypt(std::string savePath, char* key);
 
     virtual void Save(std::string savePath);
 

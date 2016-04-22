@@ -12,6 +12,7 @@
 #include "Utilities.h"
 #include "IOUtilities.h"
 #include "StringFunctions.h"
+#include "EncryptedPackageFile.h"
 
 
 PackageFile::PackageFile()
@@ -192,6 +193,21 @@ void PackageFile::RemoveFile(std::string filename)
     //filesList->RemoveObject(filename);
 }
 
+EncryptedPackageFile* PackageFile::SaveEncrypt(std::string savePath, char* key)
+{
+    assert(savePath != "");
+    assert(key != NULL);
+
+    EncryptedPackageFile* newPackage = new EncryptedPackageFile(TargetPackage, key);
+
+    newPackage->entries->AddRange(this->entries);
+    newPackage->filesList->AddRange(this->filesList);
+
+    newPackage->Save(savePath);
+
+    return newPackage;
+}
+
 void PackageFile::Save(std::string savePath)
 {
     OutputFileName = savePath;
@@ -261,7 +277,7 @@ void PackageFile::Save(std::string savePath)
     //fileStream.write((char*)&packHeader->dirOffset, 4);
     //fileStream.write((char*)&packHeader->dirLength, 4);
 
-    WriteBytes(packHeader->sig, 4, &fileStream);
+    fileStream.write(packHeader->sig, 4); // Don't encrypt the package signature.
     WriteBytes((char*)&packHeader->dirOffset, 4, &fileStream);
     WriteBytes((char*)&packHeader->dirLength, 4, &fileStream);
 
@@ -283,7 +299,9 @@ void PackageFile::Save(std::string savePath)
         WriteBytes((char*)&currPos, sizeof(entry->filePosition), &fileStream);
         //fileStream.write((char*)&currPos, sizeof(entry->filePosition));
 
-        WriteBytes((char*)&entry->fileLength, sizeof(entry->fileLength), &fileStream);
+        char* fileLengthCopy = new char[4];
+        memcpy(fileLengthCopy, (char*)&entry->fileLength, 4);
+        WriteBytes(fileLengthCopy, sizeof(entry->fileLength), &fileStream);
         //fileStream.write((char*)&entry->fileLength, sizeof(entry->fileLength));
 
         currentDataSize += entry->fileLength;
@@ -360,7 +378,7 @@ void PackageFile::ReadPackage()
     char buf[512];
     char* fileContents = NULL;
 
-    ReadBytes(buf, PACK_FILE_SIG_LENGTH, &packageStream);
+    packageStream.read(buf, PACK_FILE_SIG_LENGTH);
     //packageStream.get(buf, PACK_FILE_SIG_LENGTH + 1);	// get(n) method returns at most n-1 elements. Signature is 4
 
     if (strncmp(buf, "PACK", PACK_FILE_SIG_LENGTH) != 0)

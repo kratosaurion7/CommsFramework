@@ -1,5 +1,6 @@
 #include <XFile.h>
 #include <PackageFile.h>
+#include <EncryptedPackageFile.h>
 #include <IOUtilities.h>
 
 int main(int argc, char* argv[])
@@ -15,8 +16,8 @@ int main(int argc, char* argv[])
 
     if (pathIsFile)
     {
-        PackageFile package = PackageFile(pakPath);
-
+        EncryptedPackageFile package = EncryptedPackageFile("out.pak", "1234");
+        
         package.Extract("");
     }    
 

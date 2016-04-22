@@ -14,8 +14,9 @@
 #include "StringFunctions.h"
 
 
-EncryptedPackageFile::EncryptedPackageFile(char* encryptionKey) : PackageFile()
+EncryptedPackageFile::EncryptedPackageFile(std::string filename, char* encryptionKey) : PackageFile(filename)
 {
+    assert(filename != "");
     assert(encryptionKey != NULL);
 
     this->EncryptionKey = encryptionKey;

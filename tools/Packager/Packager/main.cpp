@@ -1,5 +1,6 @@
 #include <XFile.h>
 #include <PackageFile.h>
+#include <EncryptedPackageFile.h>
 #include <IOUtilities.h>
 
 int main(int argc, char* argv[])
@@ -19,7 +20,8 @@ int main(int argc, char* argv[])
     
     fil->AddDirectory(dir);
 
-    fil->Save("out.pak");
+    //fil->Save("out.pak");
+    EncryptedPackageFile* res = fil->SaveEncrypt("out.pak", "1234");
 
     delete(fil);
     allFiles->Release();

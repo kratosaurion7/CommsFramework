@@ -7,7 +7,7 @@
 class EncryptedPackageFile : public PackageFile
 {
 public:
-    EncryptedPackageFile(char* encryptionKey); // Null terminated byte array
+    EncryptedPackageFile(std::string filename, char* encryptionKey); // Null terminated byte array
     ~EncryptedPackageFile();
 
     //const char* GetFile(std::string filename, int& fileSize);
