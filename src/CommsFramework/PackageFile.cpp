@@ -378,7 +378,7 @@ void PackageFile::ReadPackage()
     char buf[512];
     char* fileContents = NULL;
 
-    packageStream.read(buf, PACK_FILE_SIG_LENGTH);
+    ReadBytes(buf, PACK_FILE_SIG_LENGTH, &packageStream);
     //packageStream.get(buf, PACK_FILE_SIG_LENGTH + 1);	// get(n) method returns at most n-1 elements. Signature is 4
 
     if (strncmp(buf, "PACK", PACK_FILE_SIG_LENGTH) != 0)
@@ -415,7 +415,7 @@ void PackageFile::ReadPackage()
         
         bytesRead += DIRECTORY_ENTRY_SIZE;
 
-        if (bytesRead > directorySize)
+        if (bytesRead >= directorySize)
         {
             hasNextFile = false;
             break;
