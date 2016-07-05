@@ -8,6 +8,8 @@
 #include "SDLUtilities.h"
 #include "SDLGraphicEngine.h"
 
+SDLTexture* SDLTexture::MissingTextureSingleton;
+
 SDLTexture::SDLTexture()
 {
     surface = NULL;
@@ -22,6 +24,22 @@ SDLTexture::~SDLTexture()
 
     if (surface != NULL)
         SDL_FreeSurface(surface);
+}
+
+SDL_Texture* SDLTexture::GetMissingTextureTexture()
+{
+    if (SDLTexture::MissingTextureSingleton == NULL)
+    {
+        SDLTexture* tex = new SDLTexture();
+
+        tex->Load("Assets/engine/missing_texture.png");
+        
+        SDLTexture::MissingTextureSingleton = tex;
+    }
+
+    return SDLTexture::MissingTextureSingleton->texture;
+
+    return NULL;
 }
 
 void SDLTexture::Initalize(float width, float height)

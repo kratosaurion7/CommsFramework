@@ -24,6 +24,8 @@ public:
     SDLTexture();
     ~SDLTexture();
 
+    static SDL_Texture* GetMissingTextureTexture();
+
     virtual void Initalize(float width, float height);
 
     virtual void Load(std::string path);
@@ -44,4 +46,7 @@ public:
 
     virtual void SaveTextureToFile();
     virtual void SaveTextureToFile(std::string fileName);
+
+private:
+    static SDLTexture* MissingTextureSingleton;
 };

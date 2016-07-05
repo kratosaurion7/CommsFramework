@@ -37,7 +37,7 @@ void MapGrid::Setup(int height, int width)
             newTile->Position->X = j;
             newTile->Position->Y = i;
 
-            //newTile->TileSprite->SetTexture(this->Engine->Graphics->TextureRepo->LoadTexture("Grass"));
+            newTile->TileSprite->SetTexture(this->Engine->Graphics->TextureRepo->LoadTexture("Grass"));
             BaseTexture* tex = this->Engine->Graphics->TextureRepo->GetTextureByName("Grass01.png");
             newTile->TileSprite->SetTexture(tex);
 

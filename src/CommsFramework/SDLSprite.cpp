@@ -86,6 +86,11 @@ BaseSprite* SDLSprite::Clone()
 
 SDL_Texture* SDLSprite::GetDrawableTexture()
 {
+    if (currentSpriteTexture == NULL)
+    {
+        return SDLTexture::GetMissingTextureTexture();
+    }
+
     return currentSpriteTexture->texture;
 }
 

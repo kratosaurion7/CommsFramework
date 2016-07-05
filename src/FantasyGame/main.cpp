@@ -15,8 +15,26 @@
 #include "Tile.h"
 
 // test comment
+
+// Test includes
+#include <PackageFile.h>
+
+#define OUT_DIR "C:\\temp\\out.pak"
+
 int main()
 {
+    PackageFile open = PackageFile(OUT_DIR);
+    open.Extract("C:\\temp\\res");
+
+    return 0;
+
+    PackageFile pak = PackageFile();
+    pak.AddDirectory("C:\\temp\\depends");
+
+    pak.Save(OUT_DIR);
+
+    return 0;
+
     XFile f = XFile("C:\\temp\\Document.txt");
     f.Open();
 
