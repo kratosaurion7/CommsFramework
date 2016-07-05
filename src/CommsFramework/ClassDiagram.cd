@@ -106,14 +106,14 @@
     </TypeIdentifier>
   </Class>
   <Class Name="DSprite">
-    <Position X="13" Y="18.75" Width="1.5" />
+    <Position X="11.75" Y="19.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AIACgAIAAQAAhkgAAQAAGAAIACAIAAIAoABAAAAAABA=</HashCode>
       <FileName>DSprite.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SFMLDrawable">
-    <Position X="7" Y="17" Width="1.5" />
+    <Position X="15.25" Y="23.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>SFMLDrawable.h</FileName>
@@ -141,7 +141,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="SDLDrawable">
-    <Position X="10" Y="17" Width="1.5" />
+    <Position X="18.25" Y="23.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>SDLDrawable.h</FileName>
@@ -176,7 +176,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="SDLSprite">
-    <Position X="10" Y="18.75" Width="1.5" />
+    <Position X="16.5" Y="25.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AIAAAAAAAAIQAEQAAAAAAAAAACAAAAAIAABAAAAAAhA=</HashCode>
       <FileName>SDLSprite.h</FileName>
@@ -233,13 +233,6 @@
   </Class>
   <Class Name="FileSave" Collapsed="true">
     <Position X="27.25" Y="1.5" Width="1.5" />
-    <NestedTypes>
-      <Enum Name="FileSave::SAVE_VERSION" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>FileSave.h</NewMemberFileName>
-        </TypeIdentifier>
-      </Enum>
-    </NestedTypes>
     <TypeIdentifier>
       <HashCode>CCCAAkAgEIAAAAQAIAABhAQAACQAAAAAAAEAAAAAEAA=</HashCode>
       <FileName>FileSave.h</FileName>
@@ -325,7 +318,7 @@
   <Class Name="PackageFile" Collapsed="true">
     <Position X="29" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AEhAAIAAgAAAAAIAAEggAAAgAAAAAAAAAAoMAAAAAAA=</HashCode>
+      <HashCode>gEhAAIAAgAAAQAIgAEggAAAgQAAAAEAAAAoMAAAAAAA=</HashCode>
       <FileName>PackageFile.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -359,13 +352,6 @@
   </Class>
   <Class Name="FRectangle" Collapsed="true">
     <Position X="32.5" Y="1.5" Width="1.5" />
-    <NestedTypes>
-      <Enum Name="FRectangle::RectangleEdge" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>FRectangle.h</NewMemberFileName>
-        </TypeIdentifier>
-      </Enum>
-    </NestedTypes>
     <TypeIdentifier>
       <HashCode>AAAAAAAABBAAgAAAAAQUAEAAAAAIAAAAiACAgAgIAAA=</HashCode>
       <FileName>FRectangle.h</FileName>
@@ -506,13 +492,6 @@
   </Class>
   <Class Name="GenType" Collapsed="true">
     <Position X="29" Y="2.5" Width="1.5" />
-    <NestedTypes>
-      <Struct Name="GenType::SUPPORTED_TYPES" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>GenType.h</NewMemberFileName>
-        </TypeIdentifier>
-      </Struct>
-    </NestedTypes>
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEQQAAgAAAAEAA=</HashCode>
       <FileName>GenType.h</FileName>
@@ -541,18 +520,6 @@
   </Class>
   <Class Name="RethinkDb" Collapsed="true">
     <Position X="34.25" Y="3.5" Width="1.5" />
-    <NestedTypes>
-      <Enum Name="RethinkDb::RETHINKDB_STATE" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>RethinkDb.h</NewMemberFileName>
-        </TypeIdentifier>
-      </Enum>
-      <Struct Name="RethinkDb::RETHINKDB_HANDSHAKE" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>RethinkDb.h</NewMemberFileName>
-        </TypeIdentifier>
-      </Struct>
-    </NestedTypes>
     <TypeIdentifier>
       <HashCode>AAQAAAAAACCAAAAAAAAAAICAIQAAgAQAAAIAAAAAAAA=</HashCode>
       <FileName>RethinkDb.h</FileName>
@@ -574,13 +541,6 @@
   </Class>
   <Class Name="FontProcessor" Collapsed="true">
     <Position X="29" Y="1.5" Width="1.5" />
-    <NestedTypes>
-      <Enum Name="FontProcessor::ProcessState" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>FontProcessor.h</NewMemberFileName>
-        </TypeIdentifier>
-      </Enum>
-    </NestedTypes>
     <TypeIdentifier>
       <HashCode>AIQAAAAAAAACAAQAAAAAAAAAAAAAAAAAAAAABAAIAAA=</HashCode>
       <FileName>FontProcessor.h</FileName>
@@ -616,13 +576,6 @@
   </Struct>
   <Struct Name="PRIO" Collapsed="true">
     <Position X="36" Y="6.75" Width="1.5" />
-    <NestedTypes>
-      <Enum Name="PRIO::OBJECTS_PRIO" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>GameEngine.h</NewMemberFileName>
-        </TypeIdentifier>
-      </Enum>
-    </NestedTypes>
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>GameEngine.h</FileName>

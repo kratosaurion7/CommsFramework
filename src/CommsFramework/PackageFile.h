@@ -1,15 +1,13 @@
 #pragma once
 
-#include <cstdio>
-
-#include <string>
-
 class XFile;
 class XDirectory;
 class EncryptedPackageFile;
 
-#include "FileReader.h"
+#include <cstdio>
+#include <string>
 
+#include "FileReader.h"
 #include "PointerList.h"
 
 #define FILENAME_MAX_LENGTH 256
@@ -47,9 +45,12 @@ struct DirectoryEntry {
     char* fileContents;
 };
 
-/**
-* The PackageFile class is used to bundle files together in a single file on disk.
+/** \brief The PackageFile class is used to bundle files together that can be extracted afterwards.
+*			The empty constructor is used to initiate a blank package where files can be added. 
+*			The second constructor PackageFile(string) is used to specify an existing package file
+*			that is used to extract files from.
 * 
+* PackageFile is implementing the PACK format from Quake. The 
 * 
 *
 */
@@ -58,6 +59,11 @@ class PackageFile
 public:
     PackageFile();
 
+	/**
+		Constructor used to open an existing package. 
+
+		This constructor needs to be used because there is no function Load(packagePath).
+	*/
     PackageFile(std::string packageFilePath);
 
     ~PackageFile();

@@ -18,20 +18,32 @@
 
 // Test includes
 #include <PackageFile.h>
+#include <EncryptedPackageFile.h>
 
 #define OUT_DIR "C:\\temp\\out.pak"
 
 int main()
 {
-    PackageFile open = PackageFile(OUT_DIR);
-    open.Extract("C:\\temp\\res");
+	char* key = "abcde";
+	int len = strlen(key);
 
-    return 0;
+
+	EncryptedPackageFile enc = EncryptedPackageFile(OUT_DIR, key);
+	enc.Extract("C:\\temp\\out");
+
+	return 0;
+
+    //PackageFile open = PackageFile(OUT_DIR);
+    //open.Extract("C:\\temp\\res");
+
+    //return 0;
 
     PackageFile pak = PackageFile();
-    pak.AddDirectory("C:\\temp\\depends");
+    //pak.AddDirectory("C:\\temp\\depends");
+	pak.AddFile("C:\\temp\\text.txt");
 
-    pak.Save(OUT_DIR);
+
+    pak.SaveEncrypt(OUT_DIR, key);
 
     return 0;
 

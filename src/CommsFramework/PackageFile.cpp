@@ -198,7 +198,7 @@ EncryptedPackageFile* PackageFile::SaveEncrypt(std::string savePath, char* key)
     assert(savePath != "");
     assert(key != NULL);
 
-    EncryptedPackageFile* newPackage = new EncryptedPackageFile(TargetPackage, key);
+    EncryptedPackageFile* newPackage = new EncryptedPackageFile(key, strlen(key));
 
     newPackage->entries->AddRange(this->entries);
     newPackage->filesList->AddRange(this->filesList);
@@ -296,12 +296,14 @@ void PackageFile::Save(std::string savePath)
         //fileStream.write(entry->fileName, sizeof(entry->fileName));
         int currPos = headerSize + directorySize + currentDataSize;
 
-        WriteBytes((char*)&currPos, sizeof(entry->filePosition), &fileStream);
+		char* filePosCopy = new char[4];
+		memcpy(filePosCopy, (char*)&entry->filePosition, 4);
+        WriteBytes(filePosCopy, sizeof(filePosCopy), &fileStream);
         //fileStream.write((char*)&currPos, sizeof(entry->filePosition));
 
         char* fileLengthCopy = new char[4];
         memcpy(fileLengthCopy, (char*)&entry->fileLength, 4);
-        WriteBytes(fileLengthCopy, sizeof(entry->fileLength), &fileStream);
+        WriteBytes(fileLengthCopy, sizeof(fileLengthCopy), &fileStream);
         //fileStream.write((char*)&entry->fileLength, sizeof(entry->fileLength));
 
         currentDataSize += entry->fileLength;
@@ -378,7 +380,8 @@ void PackageFile::ReadPackage()
     char buf[512];
     char* fileContents = NULL;
 
-    ReadBytes(buf, PACK_FILE_SIG_LENGTH, &packageStream);
+	packageStream.read(buf, PACK_FILE_SIG_LENGTH);
+    //ReadBytes(buf, PACK_FILE_SIG_LENGTH, &packageStream);
     //packageStream.get(buf, PACK_FILE_SIG_LENGTH + 1);	// get(n) method returns at most n-1 elements. Signature is 4
 
     if (strncmp(buf, "PACK", PACK_FILE_SIG_LENGTH) != 0)
@@ -415,7 +418,7 @@ void PackageFile::ReadPackage()
         
         bytesRead += DIRECTORY_ENTRY_SIZE;
 
-        if (bytesRead >= directorySize)
+        if (bytesRead > directorySize)
         {
             hasNextFile = false;
             break;

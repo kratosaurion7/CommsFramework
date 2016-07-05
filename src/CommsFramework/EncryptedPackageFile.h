@@ -7,19 +7,13 @@
 class EncryptedPackageFile : public PackageFile
 {
 public:
+	EncryptedPackageFile(char* encryptionKey, int len);
+
     EncryptedPackageFile(std::string filename, char* encryptionKey); // Null terminated byte array
+
     ~EncryptedPackageFile();
 
-    //const char* GetFile(std::string filename, int& fileSize);
-
-    //void Save(std::string savePath);
-
-    //void Extract(std::string outPath);
-
-
 protected:
-
-    //void ReadPackage();
 
     void ReadBytes(char* targetBuffer, int nbBytes, std::ifstream* stream);
 
