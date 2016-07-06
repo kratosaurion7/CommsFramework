@@ -69,7 +69,7 @@ const char* PackageFile::GetFile(std::string filename, int& fileSize)
     char buf[512];
     char* fileContents = NULL;
 
-    ReadBytes(buf, PACK_FILE_SIG_LENGTH, &packageStream);
+    packageStream.read(buf, PACK_FILE_SIG_LENGTH);
     //packageStream.get(buf, PACK_FILE_SIG_LENGTH + 1); // get(n) method returns at most n-1 elements. Signature is 4
 
     // Step 1. Check it the file is the correct format
@@ -414,8 +414,6 @@ void PackageFile::ReadPackage()
     while (hasNextFile)
     {
         ReadBytes(buf, DIRECTORY_ENTRY_SIZE, &packageStream);
-        //packageStream.get(buf, DIRECTORY_ENTRY_SIZE + 1);
-        
         bytesRead += DIRECTORY_ENTRY_SIZE;
 
         if (bytesRead > directorySize)
