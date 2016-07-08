@@ -75,6 +75,8 @@ std::string* FileSave::GetString(KEYTYPE name)
     Pair<std::string, GenType*>* foundItem = list->GetBy([name](Pair<KEYTYPE, GenType*>* item) {
         if (item->Item1 == name)
             return item;
+
+		return (Pair<std::string, GenType*>*)NULL; // Using the cast of NULL to help with the compiler deduced lambda return type.
     });
 
     if (foundItem != NULL)
@@ -83,11 +85,13 @@ std::string* FileSave::GetString(KEYTYPE name)
         {
             return (std::string*)foundItem->Item2->Value;
         }
+		else
+		{
+			// Mismatched type
+		}
     }
-    else
-    {
-        return NULL;
-    }
+
+    return NULL;
 }
 
 int FileSave::GetNumber(KEYTYPE name)
@@ -95,7 +99,9 @@ int FileSave::GetNumber(KEYTYPE name)
     Pair<std::string, GenType*>* foundItem = list->GetBy([name](Pair<KEYTYPE, GenType*>* item) {
         if (item->Item1 == name)
             return item;
-    });
+
+		return (Pair<std::string, GenType*>*)NULL; // Using the cast of NULL to help with the compiler deduced lambda return type.
+	});
 
     if (foundItem != NULL)
     {
@@ -103,6 +109,10 @@ int FileSave::GetNumber(KEYTYPE name)
         {
             return (int)foundItem->Item2->Value;
         }
+		else
+		{
+			// Mismatched type
+		}
     }
     else
     {
@@ -115,6 +125,8 @@ bool FileSave::GetBool(KEYTYPE name)
     Pair<std::string, GenType*>* foundItem = list->GetBy([name](Pair<KEYTYPE, GenType*>* item) {
         if (item->Item1 == name)
             return item;
+
+		return (Pair<std::string, GenType*>*)NULL; // Using the cast of NULL to help with the compiler deduced lambda return type.
     });
 
     if (foundItem != NULL)
@@ -123,6 +135,10 @@ bool FileSave::GetBool(KEYTYPE name)
         {
             return (bool)foundItem->Item2->Value;
         }
+		else
+		{
+			// Mismatched type
+		}
     }
 
     return NULL;
@@ -133,6 +149,8 @@ char* FileSave::GetData(KEYTYPE name, int & outLength)
     Pair<std::string, GenType*>* foundItem = list->GetBy([name](Pair<KEYTYPE, GenType*>* item) {
         if (item->Item1 == name)
             return item;
+
+		return (Pair<std::string, GenType*>*)NULL; // Using the cast of NULL to help with the compiler deduced lambda return type.
     });
 
     if (foundItem != NULL)
@@ -141,6 +159,10 @@ char* FileSave::GetData(KEYTYPE name, int & outLength)
         {
             return (char*)foundItem->Item2->Value;
         }
+		else 
+		{
+			// Mismatched type
+		}
     }
 
     return NULL;
