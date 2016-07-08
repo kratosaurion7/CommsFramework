@@ -202,7 +202,7 @@ void SDLTexture::SetSolidColor(uint32_t pixelColor)
     if (newSurface == NULL)
     {
         errorString = SDL_GetError();
-        fprintf(stderr, "Unable to set create RGB surface [%s] with error %s\n", TexturePath, errorString);
+        fprintf(stderr, "Unable to set create RGB surface [%s] with error %s\n", TexturePath.c_str(), errorString);
 
         return;
     }
@@ -212,7 +212,7 @@ void SDLTexture::SetSolidColor(uint32_t pixelColor)
     if (res == -1)
     {
         errorString = SDL_GetError();
-        fprintf(stderr, "Unable to set solid color to texture [%s] with error %s\n", TexturePath, errorString);
+        fprintf(stderr, "Unable to set solid color to texture [%s] with error %s\n", TexturePath.c_str(), errorString);
 
         return;
     }
@@ -224,7 +224,7 @@ void SDLTexture::SetSolidColor(uint32_t pixelColor)
     if (texture == NULL)
     {
         errorString = SDL_GetError();
-        fprintf(stderr, "Unable to set create texture [%s] with error %s\n", TexturePath, errorString);
+        fprintf(stderr, "Unable to set create texture [%s] with error %s\n", TexturePath.c_str(), errorString);
 
         return;
     }

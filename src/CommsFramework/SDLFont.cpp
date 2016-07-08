@@ -18,7 +18,7 @@ void SDLFont::LoadFontFile(std::string path)
     if (!fontObject)
     {
         const char* errorString = TTF_GetError();
-        fprintf(stderr, "Cannot open font file %s with error %s\n", path, errorString);
+        fprintf(stderr, "Cannot open font file %s with error %s\n", path.c_str(), errorString);
 
         delete(errorString);
 
