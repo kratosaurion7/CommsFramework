@@ -2,6 +2,7 @@
 
 #include <cstring>
 #include <fstream>
+#include <sstream>
 #include <assert.h>
 
 #include "XFile.h"
@@ -23,6 +24,8 @@ PackageFile::PackageFile()
 
     filesList = new PointerList<FileListEntry*>();
     packageRead = false;
+
+    memStream = new std::stringstream();
 }
 
 PackageFile::PackageFile(std::string packageFilePath)
@@ -35,8 +38,9 @@ PackageFile::PackageFile(std::string packageFilePath)
 
     TargetPackage = packageFilePath;
     packageRead = false;
-}
 
+    memStream = new std::stringstream();
+}
 
 PackageFile::~PackageFile()
 {
@@ -46,6 +50,8 @@ PackageFile::~PackageFile()
 
     filesList->Clear();
     delete(filesList);
+
+    delete(memStream);
 
     // Since DirectoryEntry are structures, need to do the constructor myself.
     auto it = this->entries->GetContainer()->begin();
@@ -64,20 +70,18 @@ PackageFile::~PackageFile()
 
 const char* PackageFile::GetFile(std::string filename, int& fileSize)
 {
-    std::ifstream packageStream = std::ifstream(TargetPackage, std::ios::in | std::ios::binary);
+    std::fstream packageStream = std::fstream(TargetPackage, std::ios::in | std::ios::binary);
 
     char buf[512];
     char* fileContents = NULL;
 
-    packageStream.read(buf, PACK_FILE_SIG_LENGTH);
-    //packageStream.get(buf, PACK_FILE_SIG_LENGTH + 1); // get(n) method returns at most n-1 elements. Signature is 4
+    ReadBytes(buf, PACK_FILE_SIG_LENGTH, &packageStream);
 
     // Step 1. Check it the file is the correct format
     if (strncmp(buf, "PACK", PACK_FILE_SIG_LENGTH) != 0)
         return NULL;
 
     ReadBytes(buf, sizeof(int), &packageStream);
-    //packageStream.get(buf, sizeof(int));
 
     int dirOffset = BytesToInt(buf);
 
@@ -89,16 +93,16 @@ const char* PackageFile::GetFile(std::string filename, int& fileSize)
     while (hasNextFile && !fileFound)
     {
         ReadBytes(buf, DIRECTORY_ENTRY_SIZE, &packageStream);
-        //packageStream.read(buf, DIRECTORY_ENTRY_SIZE);
         if (strncmp(filename.c_str(), buf, FILENAME_MAX_LENGTH) == 0)
         {
             int targetFilePos = BytesToInt(&buf[FILENAME_MAX_LENGTH]);
             int targetFileLength = BytesToInt(&buf[FILENAME_MAX_LENGTH + sizeof(int)]);
 
-            packageStream.seekg(targetFilePos);
+            int absoluteFileOffset = dirOffset + (DIRECTORY_ENTRY_SIZE * this->entries->Count());
+            packageStream.seekg(targetFilePos + absoluteFileOffset); // Offset the file pos by the directory offset and the entry offset
+            
             fileContents = new char[targetFileLength];
             ReadBytes(fileContents, targetFileLength, &packageStream);
-            //packageStream.read(fileContents, targetFileLength);
 
             fileSize = targetFileLength;
             fileFound = true;
@@ -190,7 +194,23 @@ void PackageFile::AddDirectory(XDirectory* directory)
 
 void PackageFile::RemoveFile(std::string filename)
 {
-    //filesList->RemoveObject(filename);
+    int foundIndex = -1;
+
+    for (int i = 0; i < this->filesList->Count(); i++) 
+    {
+        FileListEntry* file = this->filesList->Get(i);
+
+        if (file->File->FileName == filename)
+        {
+            foundIndex = i;
+            break;
+        }
+    }
+
+    if (foundIndex != -1)
+    {
+        this->filesList->RemoveAt(foundIndex);
+    }
 }
 
 EncryptedPackageFile* PackageFile::SaveEncrypt(std::string savePath, char* key)
@@ -198,14 +218,7 @@ EncryptedPackageFile* PackageFile::SaveEncrypt(std::string savePath, char* key)
     assert(savePath != "");
     assert(key != NULL);
 
-    EncryptedPackageFile* newPackage = new EncryptedPackageFile(key, strlen(key));
-
-    newPackage->entries->AddRange(this->entries);
-    newPackage->filesList->AddRange(this->filesList);
-
-    newPackage->Save(savePath);
-
-    return newPackage;
+    return NULL;
 }
 
 void PackageFile::Save(std::string savePath)
@@ -264,24 +277,16 @@ void PackageFile::Save(std::string savePath)
 
     int fileSize = headerSize + bufPos + directorySize;
 
-    std::ofstream fileStream;
-    fileStream.open(OutputFileName.c_str(), std::ios::out | std::ios::binary | std::ios::trunc);
-
     Header *packHeader = new Header();
     strncpy(packHeader->sig, "PACK", 4);
     packHeader->dirOffset = headerSize;
     packHeader->dirLength = directorySize;
 
+    WriteBytes(packHeader->sig, 4, memStream);
+    WriteBytes((char*)&packHeader->dirOffset, 4, memStream);
+    WriteBytes((char*)&packHeader->dirLength, 4, memStream);
 
-    //fileStream.write(packHeader->sig, 4);
-    //fileStream.write((char*)&packHeader->dirOffset, 4);
-    //fileStream.write((char*)&packHeader->dirLength, 4);
-
-    fileStream.write(packHeader->sig, 4); // Don't encrypt the package signature.
-    WriteBytes((char*)&packHeader->dirOffset, 4, &fileStream);
-    WriteBytes((char*)&packHeader->dirLength, 4, &fileStream);
-
-    delete(packHeader);
+    packageHeader = packHeader;
 
     auto it2 = entries->GetContainer()->begin();
 
@@ -292,19 +297,16 @@ void PackageFile::Save(std::string savePath)
     {
         DirectoryEntry* entry = *it2;
 
-        WriteBytes(entry->fileName, sizeof(entry->fileName), &fileStream);
-        //fileStream.write(entry->fileName, sizeof(entry->fileName));
+        WriteBytes(entry->fileName, sizeof(entry->fileName), memStream);
         int currPos = headerSize + directorySize + currentDataSize;
 
 		char* filePosCopy = new char[4];
 		memcpy(filePosCopy, (char*)&entry->filePosition, 4);
-        WriteBytes(filePosCopy, sizeof(filePosCopy), &fileStream);
-        //fileStream.write((char*)&currPos, sizeof(entry->filePosition));
+        WriteBytes(filePosCopy, sizeof(filePosCopy), memStream);
 
         char* fileLengthCopy = new char[4];
         memcpy(fileLengthCopy, (char*)&entry->fileLength, 4);
-        WriteBytes(fileLengthCopy, sizeof(fileLengthCopy), &fileStream);
-        //fileStream.write((char*)&entry->fileLength, sizeof(entry->fileLength));
+        WriteBytes(fileLengthCopy, sizeof(fileLengthCopy), memStream);
 
         currentDataSize += entry->fileLength;
         it2++;
@@ -316,13 +318,22 @@ void PackageFile::Save(std::string savePath)
     {
         DirectoryEntry* entry = *it3;
 
-        WriteBytes(entry->fileContents, entry->fileLength, &fileStream);
-        //fileStream.write(entry->fileContents, entry->fileLength);
+        WriteBytes(entry->fileContents, entry->fileLength, memStream);
 
         it3++;
     }
 
-    fileStream.close();
+    int streamSize = memStream->tellg();
+    
+    memStream->seekg(0); // Reset the cursor
+
+    auto test = ((std::stringstream*)memStream)->str();
+
+    std::fstream packageStream = std::fstream(OutputFileName, std::ios::out | std::ios::binary);
+
+    packageStream << memStream->rdbuf();
+    
+    packageStream.close();
 }
 
 void PackageFile::Extract(std::string outPath)
@@ -375,24 +386,20 @@ void PackageFile::Extract(std::string outPath)
 
 void PackageFile::ReadPackage()
 {
-    std::ifstream packageStream = std::ifstream(TargetPackage, std::ios::in | std::ios::binary);
+    std::fstream packageStream = std::fstream(TargetPackage, std::ios::in | std::ios::binary);
 
     char buf[512];
     char* fileContents = NULL;
 
-	packageStream.read(buf, PACK_FILE_SIG_LENGTH);
-    //ReadBytes(buf, PACK_FILE_SIG_LENGTH, &packageStream);
-    //packageStream.get(buf, PACK_FILE_SIG_LENGTH + 1);	// get(n) method returns at most n-1 elements. Signature is 4
+    ReadBytes(buf, PACK_FILE_SIG_LENGTH, &packageStream);
 
     if (strncmp(buf, "PACK", PACK_FILE_SIG_LENGTH) != 0)
         return;
 
     ReadBytes(buf, sizeof(int), &packageStream);
-    //packageStream.get(buf, sizeof(int) + 1);
     int dirOffset = BytesToInt(buf);
 
     ReadBytes(buf, sizeof(int), &packageStream);
-    //packageStream.get(buf, sizeof(int) + 1);
     int directorySize = BytesToInt(buf);
 
     Header *packHeader = new Header();
@@ -438,12 +445,12 @@ void PackageFile::ReadPackage()
     packageRead = true;
 }
 
-void PackageFile::ReadBytes(char* targetBuffer, int nbBytes, std::ifstream* stream)
+void PackageFile::ReadBytes(char* targetBuffer, int nbBytes, std::iostream* stream)
 {
     stream->read(targetBuffer, nbBytes);
 }
 
-void PackageFile::WriteBytes(char* targetBuffer, int nbBytes, std::ofstream* stream)
+void PackageFile::WriteBytes(char* targetBuffer, int nbBytes, std::iostream* stream)
 {
     stream->write(targetBuffer, nbBytes);
 }

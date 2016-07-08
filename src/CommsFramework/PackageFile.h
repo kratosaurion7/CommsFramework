@@ -96,9 +96,9 @@ protected:
     * The data is not read at this point, only the file names and offsets. */
     virtual void ReadPackage();
 
-    virtual void ReadBytes(char* targetBuffer, int nbBytes, std::ifstream* stream);
+    virtual void ReadBytes(char* targetBuffer, int nbBytes, std::iostream* stream);
 
-    virtual void WriteBytes(char* targetBuffer, int nbBytes, std::ofstream* stream);
+    virtual void WriteBytes(char* targetBuffer, int nbBytes, std::iostream* stream);
 
     struct FileListEntry
     {
@@ -125,5 +125,6 @@ protected:
 
     std::string OutputFileName;
 
+    std::iostream* memStream;
 };
 
