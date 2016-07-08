@@ -11,7 +11,7 @@ int BytesToInt(char* characters)
 
 unsigned char* IntToBytes(int integer)
 {
-    unsigned char bytes[4];
+    unsigned char* bytes = new unsigned char[4];
     unsigned long n = integer;
 
     bytes[0] = (n >> 24) & 0xFF;
