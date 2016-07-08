@@ -83,7 +83,7 @@ void BlackjackDealer::UpdateCardPosition(CardHand * targetHand)
         Card* cardIter = (*it);
 
         FPosition cardPos;
-        cardPos.X = 200 + (100 * cardIndex);
+        cardPos.X = 200 + (100 * (float)cardIndex);
         cardPos.Y = 20;
 
         cardIter->cardFront->SetPos(cardPos);
