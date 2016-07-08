@@ -50,9 +50,34 @@ struct DirectoryEntry {
 *			The second constructor PackageFile(string) is used to specify an existing package file
 *			that is used to extract files from.
 * 
-* PackageFile is implementing the PACK format from Quake. The 
-* 
+* ========== Overview ==========
 *
+* PackageFile is implementing the PACK format from Quake. The format spec can be found in the "docs/pak.txt"
+*  directory. The basic packaging algorithm is such : each time a file is added to the package an entry is created and 
+*  added to the entries list, each entry is of type DirectoryEntry. The contents of the files are not yet retrieved from disk
+*  so the class never really grows big until a Save() is called. When the Save() function is called, the PAK directory is build
+*  using the information from the entries list. After the directory is build, the content of each file is read into a memory stream
+*  (of type std::stringstream). In fact, all writes so far are first done into a memory stream. When all files are loaded the stream is 
+*  written to disk.
+*
+* Directories can be added add all the sub-files of that directory. The directory tree will be preserved when extracting the package.
+* Each file keeps his path relative to the directory when added and will appear inside the same sub-folders when the package is extracted.
+* This is done by doing a path difference between the file and the added directory, this results in each file keeping a relative path to its
+* "mother" directory.
+*
+* ========== Inputs ==========
+*
+  Adding files is the means of input for the PackageFile class. Adding a file is done either by passing a path or an instance of XFile.
+  One can also add directories, either by path or by passing a XDirectory. All files in the directory tree (recursively) are added.
+  Adding a directory causes each sub-file to be added respectively of it's position inside the added directory.
+
+* ========== Outputs ==========
+*
+* ========== Dependencies ==========
+*
+* FileReader
+* PointerList
+
 */
 class PackageFile
 {
