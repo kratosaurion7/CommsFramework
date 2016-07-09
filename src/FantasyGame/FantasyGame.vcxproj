@@ -154,16 +154,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AreaGrid.cpp" />
     <ClCompile Include="FantasyGame.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="MapGrid.cpp" />
+    <ClCompile Include="LocalGrid.cpp" />
     <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AreaGrid.h" />
     <ClInclude Include="FantasyGame.h" />
-    <ClInclude Include="MapGrid.h" />
+    <ClInclude Include="LocalGrid.h" />
     <ClInclude Include="ProgDef.h" />
     <ClInclude Include="Tile.h" />
+    <ClInclude Include="World.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

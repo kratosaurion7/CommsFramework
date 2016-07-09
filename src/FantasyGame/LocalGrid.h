@@ -5,11 +5,11 @@ class BaseTexture;
 
 #include <BaseActor.h>
 
-class MapGrid : public BaseActor
+class LocalGrid : public BaseActor
 {
 public:
-    MapGrid();
-    ~MapGrid();
+    LocalGrid();
+    ~LocalGrid();
 
     void Setup(int height, int width);
 

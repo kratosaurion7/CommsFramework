@@ -16,6 +16,9 @@
     <Filter Include="Map">
       <UniqueIdentifier>{157ae5d8-971b-4a10-9083-8a74df489eb0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Camera">
+      <UniqueIdentifier>{b99c536b-3e19-4b08-83ad-57a306720524}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -24,10 +27,16 @@
     <ClCompile Include="FantasyGame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MapGrid.cpp">
+    <ClCompile Include="Tile.cpp">
       <Filter>Map</Filter>
     </ClCompile>
-    <ClCompile Include="Tile.cpp">
+    <ClCompile Include="LocalGrid.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="AreaGrid.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="World.cpp">
       <Filter>Map</Filter>
     </ClCompile>
   </ItemGroup>
@@ -35,14 +44,20 @@
     <ClInclude Include="FantasyGame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MapGrid.h">
-      <Filter>Map</Filter>
-    </ClInclude>
     <ClInclude Include="Tile.h">
       <Filter>Map</Filter>
     </ClInclude>
     <ClInclude Include="ProgDef.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LocalGrid.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="AreaGrid.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="World.h">
+      <Filter>Map</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,4 +1,4 @@
-#include "MapGrid.h"
+#include "LocalGrid.h"
 
 #include "ProgDef.h"
 
@@ -10,16 +10,16 @@
 
 #include "Tile.h"
 
-MapGrid::MapGrid()
+LocalGrid::LocalGrid()
 {
 }
 
 
-MapGrid::~MapGrid()
+LocalGrid::~LocalGrid()
 {
 }
 
-void MapGrid::Setup(int height, int width)
+void LocalGrid::Setup(int height, int width)
 {
     this->tiles = new Tile**[height];
 
@@ -33,11 +33,12 @@ void MapGrid::Setup(int height, int width)
             newTile->TileSprite = this->Engine->CreateSprite();
             newTile->TileSprite->Show(true);
             newTile->TileSprite->SetScale(SCALE_FACTOR);
-            newTile->TileSprite->SetPos(j * SCALE_MULTIPLIER, i * SCALE_MULTIPLIER);
-            newTile->Position->X = j;
-            newTile->Position->Y = i;
+            newTile->TileSprite->SetPos((float)j * SCALE_MULTIPLIER, (float)i * SCALE_MULTIPLIER);
+            newTile->Position->X = (float)j;
+            newTile->Position->Y = (float)i;
 
             newTile->TileSprite->SetTexture(this->Engine->Graphics->TextureRepo->LoadTexture("Grass"));
+
             BaseTexture* tex = this->Engine->Graphics->TextureRepo->GetTextureByName("Grass01.png");
             newTile->TileSprite->SetTexture(tex);
 
@@ -46,17 +47,17 @@ void MapGrid::Setup(int height, int width)
     }
 }
 
-Tile* MapGrid::Get(int x, int y)
+Tile* LocalGrid::Get(int x, int y)
 {
     return tiles[y][x];
 }
 
-void MapGrid::Set(int x, int y, Tile * tile)
+void LocalGrid::Set(int x, int y, Tile * tile)
 {
     tiles[y][x] = tile;
 }
 
-void MapGrid::SetTileTexture(int x, int y, BaseTexture * texture)
+void LocalGrid::SetTileTexture(int x, int y, BaseTexture * texture)
 {
     Tile* tile = this->Get(x, y);
 
