@@ -158,6 +158,8 @@
     <ClCompile Include="FantasyGame.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="LocalGrid.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerCamera.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
@@ -165,6 +167,8 @@
     <ClInclude Include="AreaGrid.h" />
     <ClInclude Include="FantasyGame.h" />
     <ClInclude Include="LocalGrid.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerCamera.h" />
     <ClInclude Include="ProgDef.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="World.h" />

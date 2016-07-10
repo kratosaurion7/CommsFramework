@@ -19,6 +19,9 @@
     <Filter Include="Camera">
       <UniqueIdentifier>{b99c536b-3e19-4b08-83ad-57a306720524}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Actors">
+      <UniqueIdentifier>{3a52887d-4643-422d-8fe4-f8a11ccaf620}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -39,6 +42,12 @@
     <ClCompile Include="World.cpp">
       <Filter>Map</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerCamera.cpp">
+      <Filter>Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Actors</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FantasyGame.h">
@@ -58,6 +67,12 @@
     </ClInclude>
     <ClInclude Include="World.h">
       <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerCamera.h">
+      <Filter>Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Actors</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
