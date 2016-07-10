@@ -1,9 +1,13 @@
 #include "World.h"
 
+#include "AreaGrid.h"
 
-
-World::World()
+World::World(WorldCreateParams* params)
 {
+    AreaGrid* defaultArea = new AreaGrid(NULL);
+    
+
+    Areas->Add(defaultArea);
 }
 
 

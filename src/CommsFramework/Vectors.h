@@ -9,6 +9,12 @@ public:
 
     };
 
+    Vector2(T x, T y)
+    {
+        this->X = x;
+        this->Y = y;
+    }
+
     ~Vector2()
     {
 

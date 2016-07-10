@@ -10,17 +10,11 @@
 
 #include "Tile.h"
 
-LocalGrid::LocalGrid()
+LocalGrid::LocalGrid(LocalGridCreateParam* params)
 {
-}
+    int height = 10;
+    int width = 10;
 
-
-LocalGrid::~LocalGrid()
-{
-}
-
-void LocalGrid::Setup(int height, int width)
-{
     this->tiles = new Tile**[height];
 
     for (int i = 0; i < height; i++)
@@ -37,12 +31,30 @@ void LocalGrid::Setup(int height, int width)
             newTile->Position->X = (float)j;
             newTile->Position->Y = (float)i;
 
-            newTile->TileSprite->SetTexture(this->Engine->Graphics->TextureRepo->LoadTexture("Grass"));
+            this->tiles[i][j] = newTile;
+            tilesList->Add(newTile);
+        }
+    }
+}
+
+LocalGrid::~LocalGrid()
+{
+}
+
+void LocalGrid::Setup(int height, int width)
+{
+    for (int i = 0; i < height; i++)
+    {
+        for (int j = 0; j < width; j++)
+        {
+            Tile* setupTile = this->tiles[i][j];
+
+            setupTile->TileSprite->SetTexture(this->Engine->Graphics->TextureRepo->LoadTexture("Grass"));
 
             BaseTexture* tex = this->Engine->Graphics->TextureRepo->GetTextureByName("Grass01.png");
-            newTile->TileSprite->SetTexture(tex);
+            setupTile->TileSprite->SetTexture(tex);
 
-            this->tiles[i][j] = newTile;
+            this->tiles[i][j] = setupTile;
         }
     }
 }

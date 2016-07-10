@@ -11,6 +11,11 @@ class PlayerCamera;
 
 #include <PointerList.h>
 
+struct Game_Start_Params
+{
+
+};
+
 class FantasyGame : public BaseActor
 {
 public:
@@ -19,11 +24,13 @@ public:
 
     World* GameWorld;
 
+    AreaGrid* CurrentArea;
+    LocalGrid* CurrentGrid;
+
     Player* GamePlayer;
     PlayerCamera* MainCamera;
 
-    virtual void Update();
+    void Start(Game_Start_Params startingParams);
 
-private:
-    void SetupPlayer(Player* target);
+    virtual void Update();
 };

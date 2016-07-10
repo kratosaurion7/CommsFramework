@@ -32,7 +32,7 @@ int main()
 
     eng->Graphics->AddSpritesheet(sp);
 
-    LocalGrid* grid = new LocalGrid();
+    LocalGrid* grid = new LocalGrid(NULL);
     grid->Setup(GRID_HEIGHT, GRID_WIDTH);
 
     eng->AttachActor(grid);

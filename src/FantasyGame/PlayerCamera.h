@@ -4,6 +4,7 @@
 
 class Player;
 class FRectangle;
+class FVector;
 
 class PlayerCamera : public BaseActor
 {
@@ -14,6 +15,8 @@ public:
     Player* PlayerToFocus;
 
     FRectangle* CameraFieldOfView;
+
+    void SetCameraPosition(FloatVec* newPos);
 
     virtual void Update();
 

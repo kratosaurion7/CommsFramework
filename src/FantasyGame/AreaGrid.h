@@ -5,12 +5,17 @@ class LocalGrid;
 
 #include <PointerList.h>
 
+struct AreaCreateParams
+{
+
+};
+
 class AreaGrid
 {
 public:
-    AreaGrid();
+    AreaGrid(AreaCreateParams* params);
     ~AreaGrid();
 
-    PointerList<LocalGrid*> Grids;
+    PointerList<LocalGrid*>* Grids;
 };
 
