@@ -261,8 +261,8 @@ void Deck::SpreadCardsOnScreen()
     auto it = this->DeckCards->GetContainer()->begin();
 
     int index = 0;
-    int nextX = 0;
-    int nextY = 0;
+    float nextX = 0;
+    float nextY = 0;
     while (it != end)
     {
         Card* item = (*it);
