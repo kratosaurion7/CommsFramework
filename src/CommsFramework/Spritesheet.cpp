@@ -119,8 +119,5 @@ PointerList<BaseTexture*>* Spritesheet::ExtractTextures()
         it++;
     }
 
-    nodes->Release();
-    delete(nodes);
-
     return textures;
 }
