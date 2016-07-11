@@ -8,6 +8,7 @@
 #include <DrawObject.h>
 #include <BaseSprite.h>
 #include <Vectors.h>
+#include <XmlReader.h>
 
 #include "ProgDef.h"
 #include "World.h"
@@ -90,4 +91,16 @@ void FantasyGame::Update()
 
         it++;
     }
+}
+
+Game_Start_Params * FantasyGame::ReadParametersConfig(std::string configFilePath)
+{
+	Game_Start_Params* retParams = new Game_Start_Params();
+
+	XmlReader file = XmlReader();
+	file.LoadFile(configFilePath);
+
+	
+
+	return retParams;
 }

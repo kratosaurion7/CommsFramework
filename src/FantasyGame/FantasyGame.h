@@ -9,7 +9,7 @@ class LocalGrid;
 class Player;
 class PlayerCamera;
 
-
+#include <string>
 #include <PointerList.h>
 
 struct Game_Start_Params
@@ -38,4 +38,6 @@ public:
     void Play();
 
     virtual void Update();
+
+	Game_Start_Params* ReadParametersConfig(std::string configFilePath);
 };

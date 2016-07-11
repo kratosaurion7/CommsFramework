@@ -1,0 +1,20 @@
+<config>
+	<game>
+		<GameName>FantasyGame</GameName>
+		
+		<Worlds>
+			<WorldName>World01</WorldName>
+			<WorldName>World02</WorldName>
+		</World>
+	</game>
+	
+	<Worlds>
+		<WorldData name="World01">
+			
+		</WorldData>
+		
+		<WorldData name="World02">
+		
+		</WorldData>
+	</Worlds>
+</config>
