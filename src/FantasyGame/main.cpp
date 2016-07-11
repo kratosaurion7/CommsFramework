@@ -1,4 +1,3 @@
-
 #include "ProgDef.h"
 
 #include <GameEngine.h>
@@ -14,10 +13,13 @@
 #include "FantasyGame.h"
 #include "LocalGrid.h"
 
+class Game_Start_Params;
+
 int main()
 {
     FantasyGame* game = new FantasyGame();
-    game->Start(NULL);
+	Game_Start_Params* params = game->ReadParametersConfig("assets\\game_config.xml");
+    game->Start(params);
     
     game->Play();
 

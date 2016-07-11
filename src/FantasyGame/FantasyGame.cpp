@@ -93,14 +93,15 @@ void FantasyGame::Update()
     }
 }
 
-Game_Start_Params * FantasyGame::ReadParametersConfig(std::string configFilePath)
+Game_Start_Params* FantasyGame::ReadParametersConfig(std::string configFilePath)
 {
 	Game_Start_Params* retParams = new Game_Start_Params();
 
 	XmlReader file = XmlReader();
 	file.LoadFile(configFilePath);
 
-	
+	auto gameName = file.GetNode("game")->GetNode("GameName")->Contents();
+	retParams->GameName = gameName;
 
 	return retParams;
 }

@@ -14,7 +14,7 @@ class PlayerCamera;
 
 struct Game_Start_Params
 {
-
+	std::string GameName;
 };
 
 class FantasyGame
