@@ -1,24 +1,18 @@
 #pragma once
 
-//#define RAPIDXML_NO_EXCEPTIONS // Test
+class XmlNode;
+class XmlNodeAttribute;
+class FileContents;
+
+#include <string>
+#include <functional>
 
 #include "rapidxml.hpp"
 
 #include "BaseList.h"
-
 #include "PointerList.h"
 
-#include "FileReader.h"
-
-#include <string>
-
-#include <functional>
-
 using namespace rapidxml;
-
-class XmlNode;
-class XmlNodeAttribute;
-
 
 class XmlReader
 {
@@ -58,6 +52,8 @@ public:
 
 private:
     xml_node<>* data_node;
+
+	PointerList<XmlNode*>* CreatedNodesList;
 
     xml_node<>* FindNode(xml_node<>* node, std::function<bool(rapidxml::xml_node<>*)> predicate, bool searchInChildOnly);
 

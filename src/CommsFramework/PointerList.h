@@ -22,7 +22,12 @@ public:
     {
         for (std::list<T>::iterator it = _container->begin(); it != _container->end(); it++)
         {
-            delete *it;
+			T obj = *it;
+
+			if (obj != NULL)
+			{
+				delete(obj);
+			}
         }
 
         _container->clear();

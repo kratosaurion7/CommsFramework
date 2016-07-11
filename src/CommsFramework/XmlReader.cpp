@@ -1,13 +1,6 @@
 #include "XmlReader.h"
 
-#include "rapidxml.hpp"
-
 #include "FileReader.h"
-
-#include "Macros.h"
-
-#include <string>
-#include <functional>
 
 using namespace rapidxml;
 
@@ -54,12 +47,16 @@ PointerList<XmlNode*>* XmlReader::GetNodes(std::string nodeName)
 XmlNode::XmlNode(xml_node<>* xmlData)
 {
     data_node = xmlData;
+	CreatedNodesList = new PointerList<XmlNode*>();
 }
 
 XmlNode::~XmlNode()
 {
     //NodeAttributes->Release(); // TODO : Create a Delete() method.
     //delete(NodeAttributes);
+
+	CreatedNodesList->Release();
+	delete(CreatedNodesList);
 }
 
 std::string XmlNode::NodeName()
@@ -125,6 +122,8 @@ XmlNode* XmlNode::GetNode(std::string nodeName, bool searchInChildOnly)
     {
         XmlNode* foundNode = new XmlNode(ret);
 
+		CreatedNodesList->Add(foundNode);
+
         return foundNode;
     }
     else
@@ -154,6 +153,8 @@ PointerList<XmlNode*>* XmlNode::GetNodes(std::string nodeName, bool searchInChil
         auto item = *it;
 
         XmlNode* foundNode = new XmlNode(item);
+		
+		CreatedNodesList->Add(foundNode);
 
         nodeList->Add(foundNode);
 
