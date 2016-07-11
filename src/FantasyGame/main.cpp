@@ -11,16 +11,8 @@
 #include <XFile.h>
 #include <XDirectory.h>
 
+#include "FantasyGame.h"
 #include "LocalGrid.h"
-
-// test comment
-
-// Test includes
-#include <PackageFile.h>
-#include <EncryptedPackageFile.h>
-#include <sstream>
-
-#define OUT_DIR "C:\\temp\\out.pak"
 
 int main()
 {
@@ -32,10 +24,10 @@ int main()
 
     eng->Graphics->AddSpritesheet(sp);
 
-    LocalGrid* grid = new LocalGrid(NULL);
-    grid->Setup(GRID_HEIGHT, GRID_WIDTH);
-
-    eng->AttachActor(grid);
+    FantasyGame* game = new FantasyGame();
+    eng->AttachActor(game);
+    game->Start(NULL);
+    
 
     while (true)
     {

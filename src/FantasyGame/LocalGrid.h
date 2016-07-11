@@ -24,7 +24,8 @@ public:
 
     void SetTileTexture(int x, int y, BaseTexture* texture);
 
-private:
+    void ShowGridTiles(bool show);
+
     // 2D array of Tile*
     Tile*** tiles;
     

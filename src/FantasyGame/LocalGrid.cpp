@@ -12,8 +12,10 @@
 
 LocalGrid::LocalGrid(LocalGridCreateParam* params)
 {
-    int height = 10;
-    int width = 10;
+    int height = 20;
+    int width = 20;
+
+    tilesList = new PointerList<Tile*>();
 
     this->tiles = new Tile**[height];
 
@@ -49,7 +51,7 @@ void LocalGrid::Setup(int height, int width)
         {
             Tile* setupTile = this->tiles[i][j];
 
-            setupTile->TileSprite->SetTexture(this->Engine->Graphics->TextureRepo->LoadTexture("Grass"));
+            //setupTile->TileSprite->SetTexture(this->Engine->Graphics->TextureRepo->LoadTexture("Grass"));
 
             BaseTexture* tex = this->Engine->Graphics->TextureRepo->GetTextureByName("Grass01.png");
             setupTile->TileSprite->SetTexture(tex);
@@ -74,4 +76,17 @@ void LocalGrid::SetTileTexture(int x, int y, BaseTexture * texture)
     Tile* tile = this->Get(x, y);
 
     tile->TileSprite->SetTexture(texture);
+}
+
+void LocalGrid::ShowGridTiles(bool show)
+{
+    auto it = tilesList->GetContainer()->begin();
+    while (it != tilesList->GetContainer()->end())
+    {
+        Tile* iter = (*it);
+
+        iter->TileSprite->Show(show);
+
+        it++;
+    }
 }

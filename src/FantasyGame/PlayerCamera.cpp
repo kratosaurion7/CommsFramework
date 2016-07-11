@@ -1,5 +1,8 @@
 #include "PlayerCamera.h"
 
+#include <GameEngine.h>
+#include <BaseMouse.h>
+#include <BaseKeyboard.h>
 #include <FRectangle.h>
 #include <Vectors.h>
 
@@ -25,4 +28,24 @@ void PlayerCamera::SetCameraPosition(FloatVec* newPos)
 
 void PlayerCamera::Update()
 {
+    if (this->Engine->Keyboard->IsKeyClicked(Key::D))
+    {
+        this->CameraFieldOfView->Right++;
+        this->CameraFieldOfView->Left--;
+    }
+    if (this->Engine->Keyboard->IsKeyClicked(Key::W))
+    {
+        this->CameraFieldOfView->Top++;
+        this->CameraFieldOfView->Bottom--;
+    }
+    if (this->Engine->Keyboard->IsKeyClicked(Key::A))
+    {
+        this->CameraFieldOfView->Left++;
+        this->CameraFieldOfView->Right--;
+    }
+    if (this->Engine->Keyboard->IsKeyClicked(Key::S))
+    {
+        this->CameraFieldOfView->Bottom++;
+        this->CameraFieldOfView->Top--;
+    }
 }

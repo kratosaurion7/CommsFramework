@@ -6,6 +6,7 @@ World::World(WorldCreateParams* params)
 {
     AreaGrid* defaultArea = new AreaGrid(NULL);
     
+    Areas = new PointerList<AreaGrid*>();
 
     Areas->Add(defaultArea);
 }

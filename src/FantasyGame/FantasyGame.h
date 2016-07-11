@@ -30,7 +30,7 @@ public:
     Player* GamePlayer;
     PlayerCamera* MainCamera;
 
-    void Start(Game_Start_Params startingParams);
+    void Start(Game_Start_Params* startingParams);
 
     virtual void Update();
 };
