@@ -3,10 +3,13 @@
 #include <cassert>
 
 #include <GameEngine.h>
+#include <BaseGraphicEngine.h>
+#include <Spritesheet.h>
 #include <DrawObject.h>
 #include <BaseSprite.h>
 #include <Vectors.h>
 
+#include "ProgDef.h"
 #include "World.h"
 #include "AreaGrid.h"
 #include "LocalGrid.h"
@@ -18,6 +21,13 @@
 
 FantasyGame::FantasyGame()
 {
+    Engine = new GameEngine();
+
+    Engine->Init(SCALE_MULTIPLIER * GRID_WIDTH, SCALE_MULTIPLIER * GRID_HEIGHT);
+
+    Spritesheet* sp = new Spritesheet("assets//spritesheet.xml", Engine->Graphics);
+    Engine->Graphics->AddSpritesheet(sp);
+
     GameWorld = new World(NULL);
 
     GamePlayer = new Player();
@@ -52,6 +62,16 @@ void FantasyGame::Start(Game_Start_Params* startingParams)
     CurrentGrid->ShowGridTiles(true);
 }
 
+void FantasyGame::Play()
+{
+    while (true)
+    {
+        this->Update();
+
+        Engine->Play();
+    }
+}
+
 void FantasyGame::Update()
 {
     // Update the position of the tiles of the current grid
@@ -61,10 +81,10 @@ void FantasyGame::Update()
     {
         Tile* iter = (*it);
 
-        auto tilePos = iter->TileSprite->GetPos();
+        auto tilePos = iter->OriginalPosition;
 
-        float x = tilePos.X + MainCamera->CameraFieldOfView->Left;
-        float y = tilePos.Y + MainCamera->CameraFieldOfView->Top;
+        float x = tilePos->X + MainCamera->CameraFieldOfView->Left;
+        float y = tilePos->Y + MainCamera->CameraFieldOfView->Top;
 
         iter->TileSprite->SetPos(x, y);
 

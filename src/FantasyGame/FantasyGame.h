@@ -1,6 +1,6 @@
 #pragma once
 
-#include <BaseActor.h>
+class GameEngine;
 
 class World;
 class AreaGrid;
@@ -9,6 +9,7 @@ class LocalGrid;
 class Player;
 class PlayerCamera;
 
+
 #include <PointerList.h>
 
 struct Game_Start_Params
@@ -16,11 +17,13 @@ struct Game_Start_Params
 
 };
 
-class FantasyGame : public BaseActor
+class FantasyGame
 {
 public:
     FantasyGame();
     ~FantasyGame();
+
+    GameEngine* Engine;
 
     World* GameWorld;
 
@@ -31,6 +34,8 @@ public:
     PlayerCamera* MainCamera;
 
     void Start(Game_Start_Params* startingParams);
+
+    void Play();
 
     virtual void Update();
 };

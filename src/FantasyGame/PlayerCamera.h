@@ -16,6 +16,8 @@ public:
 
     FRectangle* CameraFieldOfView;
 
+    int CameraSpeed;
+
     void SetCameraPosition(FloatVec* newPos);
 
     virtual void Update();

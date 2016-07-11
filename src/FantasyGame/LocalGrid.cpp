@@ -56,7 +56,8 @@ void LocalGrid::Setup(int height, int width)
             BaseTexture* tex = this->Engine->Graphics->TextureRepo->GetTextureByName("Grass01.png");
             setupTile->TileSprite->SetTexture(tex);
 
-            this->tiles[i][j] = setupTile;
+            setupTile->OriginalPosition = new FPosition(setupTile->TileSprite->GetPos());
+            setupTile->Position = new FPosition(setupTile->TileSprite->GetPos());
         }
     }
 }

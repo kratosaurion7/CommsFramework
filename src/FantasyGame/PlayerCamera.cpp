@@ -12,6 +12,8 @@ PlayerCamera::PlayerCamera(Player* target)
 {
     PlayerToFocus = target;
     CameraFieldOfView = new FRectangle(0, 0, 10, 10);
+
+    CameraSpeed = 4;
 }
 
 
@@ -30,22 +32,22 @@ void PlayerCamera::Update()
 {
     if (this->Engine->Keyboard->IsKeyClicked(Key::D))
     {
-        this->CameraFieldOfView->Right++;
-        this->CameraFieldOfView->Left--;
+        this->CameraFieldOfView->Right += CameraSpeed;
+        this->CameraFieldOfView->Left -= CameraSpeed;
     }
     if (this->Engine->Keyboard->IsKeyClicked(Key::W))
     {
-        this->CameraFieldOfView->Top++;
-        this->CameraFieldOfView->Bottom--;
+        this->CameraFieldOfView->Top += CameraSpeed;
+            this->CameraFieldOfView->Bottom -= CameraSpeed;
     }
     if (this->Engine->Keyboard->IsKeyClicked(Key::A))
     {
-        this->CameraFieldOfView->Left++;
-        this->CameraFieldOfView->Right--;
+        this->CameraFieldOfView->Left += CameraSpeed;
+        this->CameraFieldOfView->Right -= CameraSpeed;
     }
     if (this->Engine->Keyboard->IsKeyClicked(Key::S))
     {
-        this->CameraFieldOfView->Bottom++;
-        this->CameraFieldOfView->Top--;
+        this->CameraFieldOfView->Bottom += CameraSpeed;
+        this->CameraFieldOfView->Top -= CameraSpeed;
     }
 }
