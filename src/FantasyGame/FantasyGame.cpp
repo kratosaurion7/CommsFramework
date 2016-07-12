@@ -27,9 +27,6 @@ FantasyGame::FantasyGame()
 
     Engine->Init(SCALE_MULTIPLIER * GRID_WIDTH, SCALE_MULTIPLIER * GRID_HEIGHT);
 
-    Spritesheet* sp = new Spritesheet("assets//spritesheet.xml", Engine->Graphics);
-    Engine->Graphics->AddSpritesheet(sp);
-
     GamePlayer = new Player();
     MainCamera = new PlayerCamera(GamePlayer);
 
@@ -39,7 +36,6 @@ FantasyGame::FantasyGame()
     Engine->AttachActor(GamePlayer);
     Engine->AttachActor(MainCamera);
 }
-
 
 FantasyGame::~FantasyGame()
 {
@@ -112,12 +108,12 @@ Game_Start_Params* FantasyGame::ReadParametersConfig(std::string configFilePath)
 	file.LoadFile(configFilePath);
 
     // GET GAME NAME
-	auto gameName = file.GetNode("game")->GetNode("GameName")->Contents();
+	std::string gameName = file.GetNode("game")->GetNode("GameName")->Contents();
 	retParams->GameName = gameName;
 
     // GET SPRITESHEETS
     retParams->Spritesheets = new PointerList<Spritesheet*>();
-    auto spritesheetNodes = file.GetNodes("Spritesheet");
+    PointerList<XmlNode*>* spritesheetNodes = file.GetNodes("Spritesheet");
     auto spritesheetIter = spritesheetNodes->GetContainer()->begin();
     while (spritesheetIter != spritesheetNodes->GetContainer()->end())
     {

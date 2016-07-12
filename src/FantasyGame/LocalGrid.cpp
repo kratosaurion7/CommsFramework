@@ -7,6 +7,7 @@
 #include <TextureRepository.h>
 #include <FPosition.h>
 #include <BaseSprite.h>
+#include <RandomGen.h>
 
 #include "Tile.h"
 
@@ -45,15 +46,16 @@ LocalGrid::~LocalGrid()
 
 void LocalGrid::Setup(int height, int width)
 {
+    RandomGen rnd = RandomGen();
+
     for (int i = 0; i < height; i++)
     {
         for (int j = 0; j < width; j++)
         {
             Tile* setupTile = this->tiles[i][j];
 
-            //setupTile->TileSprite->SetTexture(this->Engine->Graphics->TextureRepo->LoadTexture("Grass"));
-
-            BaseTexture* tex = this->Engine->Graphics->TextureRepo->GetTextureByName("Grass01.png");
+            int randomNumberIndex = rnd.GetRandom(this->Engine->Graphics->TextureRepo->loadedTextures->Count());
+            BaseTexture* tex = this->Engine->Graphics->TextureRepo->loadedTextures->Get(randomNumberIndex);
             setupTile->TileSprite->SetTexture(tex);
 
             setupTile->OriginalPosition = new FPosition(setupTile->TileSprite->GetPos());

@@ -22,7 +22,7 @@
                     </Area>
                 </Areas>
             </World>
-		</World>
+		</Worlds>
 	</game>
 	
     <Spritesheet>assets//spritesheet.xml</Spritesheet>
