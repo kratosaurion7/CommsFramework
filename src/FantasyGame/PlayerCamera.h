@@ -21,6 +21,5 @@ public:
     void SetCameraPosition(FloatVec* newPos);
 
     virtual void Update();
-
 };
 

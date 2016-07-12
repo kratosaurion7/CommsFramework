@@ -9,6 +9,7 @@
 #include <BaseSprite.h>
 #include <Vectors.h>
 #include <XmlReader.h>
+#include <Spritesheet.h>
 
 #include "ProgDef.h"
 #include "World.h"
@@ -28,8 +29,6 @@ FantasyGame::FantasyGame()
 
     Spritesheet* sp = new Spritesheet("assets//spritesheet.xml", Engine->Graphics);
     Engine->Graphics->AddSpritesheet(sp);
-
-    GameWorld = new World(NULL);
 
     GamePlayer = new Player();
     MainCamera = new PlayerCamera(GamePlayer);
@@ -54,6 +53,18 @@ FantasyGame::~FantasyGame()
 
 void FantasyGame::Start(Game_Start_Params* startingParams)
 {
+    auto it = startingParams->Spritesheets->GetContainer()->begin();
+    while (it != startingParams->Spritesheets->GetContainer()->end())
+    {
+        Spritesheet* sheet = (*it);
+
+        Engine->Graphics->AddSpritesheet(sheet);
+
+        it++;
+    }
+
+    GameWorld = new World(NULL);
+
     CurrentArea = GameWorld->Areas->First();
 
     CurrentGrid = CurrentArea->Grids->First();
@@ -100,8 +111,26 @@ Game_Start_Params* FantasyGame::ReadParametersConfig(std::string configFilePath)
 	XmlReader file = XmlReader();
 	file.LoadFile(configFilePath);
 
+    // GET GAME NAME
 	auto gameName = file.GetNode("game")->GetNode("GameName")->Contents();
 	retParams->GameName = gameName;
+
+    // GET SPRITESHEETS
+    retParams->Spritesheets = new PointerList<Spritesheet*>();
+    auto spritesheetNodes = file.GetNodes("Spritesheet");
+    auto spritesheetIter = spritesheetNodes->GetContainer()->begin();
+    while (spritesheetIter != spritesheetNodes->GetContainer()->end())
+    {
+        XmlNode* node = (*spritesheetIter);
+
+        std::string spritesheetPath = node->Contents();
+
+        Spritesheet* newSpritesheet = new Spritesheet(spritesheetPath, this->Engine->Graphics);
+
+        retParams->Spritesheets->Add(newSpritesheet);
+
+        spritesheetIter++;
+    }
 
 	return retParams;
 }

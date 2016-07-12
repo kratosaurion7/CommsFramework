@@ -3,18 +3,28 @@
 		<GameName>FantasyGame</GameName>
 		
 		<Worlds>
-			<WorldName>World01</WorldName>
-			<WorldName>World02</WorldName>
+			<World>
+                <WorldName>World01</WorldName>
+                
+                <Areas>
+                    <Area>
+                        <AreaName>Plains</AreaName>
+                    
+                        <Maps>
+                            <Map>House</Map>
+                            
+                            <!-- Temporary values while the map format is conceived -->
+                            <Width>20</Width>
+                            <Height>20</Height>
+                            
+                            
+                        </Maps>
+                    </Area>
+                </Areas>
+            </World>
 		</World>
 	</game>
 	
-	<Worlds>
-		<WorldData name="World01">
-			
-		</WorldData>
-		
-		<WorldData name="World02">
-		
-		</WorldData>
-	</Worlds>
+    <Spritesheet>assets//spritesheet.xml</Spritesheet>
+    
 </config>

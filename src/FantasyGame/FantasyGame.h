@@ -1,6 +1,7 @@
 #pragma once
 
 class GameEngine;
+class Spritesheet;
 
 class World;
 class AreaGrid;
@@ -15,6 +16,8 @@ class PlayerCamera;
 struct Game_Start_Params
 {
 	std::string GameName;
+
+    PointerList<Spritesheet*>* Spritesheets;
 };
 
 class FantasyGame
