@@ -27,4 +27,14 @@
 	
     <Spritesheet>assets//spritesheet.xml</Spritesheet>
     
+    <camera>
+        <StartingPosition>
+            <X>2</X>
+            <Y>3</Y>
+        </StartingPosition>
+        
+        <Height>10</Height>
+        <Width>10</Width>
+    </camera>
+    
 </config>

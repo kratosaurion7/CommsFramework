@@ -10,6 +10,8 @@
 #include <Vectors.h>
 #include <XmlReader.h>
 #include <Spritesheet.h>
+#include <FRectangle.h>
+#include <FSize.h>
 
 #include "ProgDef.h"
 #include "World.h"
@@ -127,6 +129,17 @@ Game_Start_Params* FantasyGame::ReadParametersConfig(std::string configFilePath)
 
         spritesheetIter++;
     }
+
+    // GET CAMERA OPTIONS
+    auto cameraNode = file.GetNode("camera");
+    auto cameraStartingPositionX = std::stof(cameraNode->GetNode("StartingPosition")->GetNode("X")->Contents());
+    auto cameraStartingPositionY = std::stof(cameraNode->GetNode("StartingPosition")->GetNode("Y")->Contents());
+
+    auto cameraHeight = std::stof(cameraNode->FindNode("Height")->Contents());
+    auto cameraWidth = std::stof(cameraNode->FindNode("Width")->Contents());
+
+    retParams->CameraStart = new FPosition(cameraStartingPositionX, cameraStartingPositionY);
+    retParams->CameraSize = new FSize(cameraHeight, cameraWidth);
 
 	return retParams;
 }

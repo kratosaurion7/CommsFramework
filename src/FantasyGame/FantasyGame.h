@@ -2,6 +2,8 @@
 
 class GameEngine;
 class Spritesheet;
+class FPosition;
+class FSize;
 
 class World;
 class AreaGrid;
@@ -18,6 +20,9 @@ struct Game_Start_Params
 	std::string GameName;
 
     PointerList<Spritesheet*>* Spritesheets;
+
+    FPosition* CameraStart;
+    FSize* CameraSize;
 };
 
 class FantasyGame
