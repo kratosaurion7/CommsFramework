@@ -23,8 +23,10 @@ public:
     void LoadFile(std::string filePath);
 
     XmlNode* GetNode(std::string nodeName);
-
     PointerList<XmlNode*>* GetNodes(std::string nodeName);
+
+    XmlNode* FindNode(std::string nodeName, bool searchInChildsOnly = false);
+    PointerList<XmlNode*>* FindNodes(std::string nodeName, bool searchInChildsOnly = false);
 
 private:
     FileContents* xmlFile;
@@ -44,9 +46,11 @@ public:
 
     std::string Contents();
 
-    XmlNode* GetNode(std::string nodeName, bool searchInChildOnly = false);
+    XmlNode* GetNode(std::string nodeName);
+    PointerList<XmlNode*>* GetNodes(std::string nodeName);
 
-    PointerList<XmlNode*>* GetNodes(std::string nodeName, bool searchInChildOnly = false);
+    XmlNode* FindNode(std::string nodeName, bool searchInChildOnly = false);
+    PointerList<XmlNode*>* FindNodes(std::string nodeName, bool searchInChildOnly = false);
 
     XmlNodeAttribute GetAttribute(std::string attributeName);
 

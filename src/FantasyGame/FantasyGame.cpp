@@ -108,12 +108,12 @@ Game_Start_Params* FantasyGame::ReadParametersConfig(std::string configFilePath)
 	file.LoadFile(configFilePath);
 
     // GET GAME NAME
-	std::string gameName = file.GetNode("game")->GetNode("GameName")->Contents();
+	std::string gameName = file.FindNode("game")->FindNode("GameName")->Contents();
 	retParams->GameName = gameName;
 
     // GET SPRITESHEETS
     retParams->Spritesheets = new PointerList<Spritesheet*>();
-    PointerList<XmlNode*>* spritesheetNodes = file.GetNodes("Spritesheet");
+    PointerList<XmlNode*>* spritesheetNodes = file.FindNodes("Spritesheet");
     auto spritesheetIter = spritesheetNodes->GetContainer()->begin();
     while (spritesheetIter != spritesheetNodes->GetContainer()->end())
     {

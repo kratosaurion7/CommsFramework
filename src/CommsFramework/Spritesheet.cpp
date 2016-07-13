@@ -15,7 +15,7 @@ Spritesheet::Spritesheet(std::string configFilePath, BaseGraphicEngine* engine)
     XmlReader configReader = XmlReader();
     configReader.LoadFile(configFilePath);
 
-    XmlNode* node = configReader.GetNode("TextureAtlas");
+    XmlNode* node = configReader.FindNode("TextureAtlas");
 
     std::string path = node->GetAttribute("imagePath").AttributeValue;
 
@@ -56,7 +56,7 @@ PointerList<BaseSprite*>* Spritesheet::ExtractSprites()
 
     XmlReader configReader = XmlReader();
     configReader.LoadFile(this->ConfigFilePath);
-    PointerList<XmlNode*>* nodes = configReader.GetNodes("sprite");
+    PointerList<XmlNode*>* nodes = configReader.FindNodes("sprite");
 
     auto it = nodes->GetContainer()->begin();
     while (it != nodes->GetContainer()->end())
@@ -96,7 +96,7 @@ PointerList<BaseTexture*>* Spritesheet::ExtractTextures()
 
     XmlReader configReader = XmlReader();
     configReader.LoadFile(this->ConfigFilePath);
-    PointerList<XmlNode*>* nodes = configReader.GetNodes("sprite");
+    PointerList<XmlNode*>* nodes = configReader.FindNodes("sprite");
 
     auto it = nodes->GetContainer()->begin();
     while (it != nodes->GetContainer()->end())
