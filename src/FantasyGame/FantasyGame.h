@@ -47,5 +47,7 @@ public:
 
     virtual void Update();
 
+	void ReadXmlConfigFiles();
+
 	Game_Start_Params* ReadParametersConfig(std::string configFilePath);
 };

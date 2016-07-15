@@ -12,6 +12,8 @@
 #include <Spritesheet.h>
 #include <FRectangle.h>
 #include <FSize.h>
+#include <XDirectory.h>
+#include <XFile.h>
 
 #include "ProgDef.h"
 #include "World.h"
@@ -100,6 +102,24 @@ void FantasyGame::Update()
 
         it++;
     }
+}
+
+void FantasyGame::ReadXmlConfigFiles()
+{
+	XDirectory dir = XDirectory("assets");
+	auto files = dir.GetFiles(true);
+
+	for (XFile* file : *files->GetContainer())
+	{
+		if (file->FileName.find("_config.xml", 0) != std::string::npos)
+		{
+			XmlReader* reader = new XmlReader();
+			reader->LoadFile(file->FilePath);
+
+			reader->FindNodes("");
+		}
+	}
+
 }
 
 Game_Start_Params* FantasyGame::ReadParametersConfig(std::string configFilePath)

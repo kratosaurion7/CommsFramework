@@ -92,6 +92,36 @@ std::string XmlNode::Contents()
     }
 }
 
+PointerList<XmlNode*>* XmlNode::GetChildNodes(bool recursive)
+{
+	auto pred = [](rapidxml::xml_node<>*node) -> bool {
+		return true;
+	};
+
+	PointerList<XmlNode*>* nodeList = new PointerList<XmlNode*>();
+	PointerList<xml_node<>*> listOfStuff;
+
+	this->FindNodeList(this->data_node, pred, listOfStuff, true);
+
+	auto stuff = listOfStuff.GetContainer();
+
+	auto it = stuff->begin();
+	while (it != listOfStuff.GetContainer()->end())
+	{
+		auto item = *it;
+
+		XmlNode* foundNode = new XmlNode(item);
+
+		CreatedNodesList->Add(foundNode);
+
+		nodeList->Add(foundNode);
+
+		it++;
+	}
+
+	return nodeList;
+}
+
 XmlNode * XmlNode::GetNode(std::string nodeName)
 {
     rapidxml::xml_node<>* firstNode = this->data_node->first_node(nodeName.c_str());
@@ -191,7 +221,6 @@ PointerList<XmlNode*>* XmlNode::FindNodes(std::string nodeName, bool searchInChi
     auto stuff = listOfStuff.GetContainer();
 
     auto it = stuff->begin();
-
     while (it != listOfStuff.GetContainer()->end())
     {
         auto item = *it;

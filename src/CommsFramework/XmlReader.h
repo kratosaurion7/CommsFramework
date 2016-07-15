@@ -46,6 +46,8 @@ public:
 
     std::string Contents();
 
+	PointerList<XmlNode*>* GetChildNodes(bool recursive = false);
+
     XmlNode* GetNode(std::string nodeName);
     PointerList<XmlNode*>* GetNodes(std::string nodeName);
 
