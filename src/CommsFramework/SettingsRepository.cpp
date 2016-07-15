@@ -1,21 +1,42 @@
 #include "SettingsRepository.h"
 
-
+SettingsRepository* SettingsRepository::_instance = NULL;
 
 SettingsRepository::SettingsRepository()
 {
+    this->SettingsList = new PointerList<Pair<std::string, char*>*>();
 }
-
 
 SettingsRepository::~SettingsRepository()
 {
+    this->SettingsList->Release();
+    delete(this->SettingsList);
 }
 
-void SettingsRepository::RegisterSetting(void * value, std::string name)
+SettingsRepository* SettingsRepository::GetInstance()
 {
+    if (_instance == NULL)
+    {
+        _instance = new SettingsRepository();
+    }
+
+    return _instance;
 }
 
-PointerList<std::string>* SettingsRepository::GetSettingsList()
+char* SettingsRepository::Get(std::string name)
 {
-    return NULL;
+    for (Pair<std::string, char*>* val : *this->SettingsList->GetContainer())
+    {
+        if (val->Item1 == name)
+        {
+            return val->Item2;
+        }
+    }
+}
+
+void SettingsRepository::Register(std::string name, char* value)
+{
+    Pair<std::string, char*>* newItem = new Pair<std::string, char*>();
+    
+    this->SettingsList->Add(newItem);
 }
