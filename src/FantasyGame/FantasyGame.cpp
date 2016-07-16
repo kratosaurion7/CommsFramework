@@ -14,6 +14,7 @@
 #include <FSize.h>
 #include <XDirectory.h>
 #include <XFile.h>
+#include <SettingsRepository.h>
 
 #include "ProgDef.h"
 #include "World.h"
@@ -106,6 +107,8 @@ void FantasyGame::Update()
 
 void FantasyGame::ReadXmlConfigFiles()
 {
+    SettingsRepository* settings = SettingsRepository::GetInstance();
+
 	XDirectory dir = XDirectory("assets");
 	auto files = dir.GetFiles(true);
 
@@ -116,7 +119,24 @@ void FantasyGame::ReadXmlConfigFiles()
 			XmlReader* reader = new XmlReader();
 			reader->LoadFile(file->FilePath);
 
-			reader->FindNodes("");
+            auto paramNodes = reader->FindNodes("parameters");
+
+            for (XmlNode* pNodeContainer : *paramNodes->GetContainer())
+            {
+                auto container = pNodeContainer->GetChildNodes(true);
+
+                for (XmlNode* pNode : *container->GetContainer())
+                {
+                    std::string parameterName = pNode->NodeName();
+                    std::string value = pNode->Contents();
+
+                    char* valueData = new char[value.length()];
+                    strcpy(valueData, value.c_str());
+                    //memcpy(valueData, value.c_str(), value.length());
+
+                    settings->Register(parameterName, valueData);
+                }
+            }
 		}
 	}
 

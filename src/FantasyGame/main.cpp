@@ -18,6 +18,9 @@ class Game_Start_Params;
 int main()
 {
     FantasyGame* game = new FantasyGame();
+
+    game->ReadXmlConfigFiles();
+
 	Game_Start_Params* params = game->ReadParametersConfig("assets\\game_config.xml");
     game->Start(params);
     

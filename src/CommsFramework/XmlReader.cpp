@@ -99,9 +99,9 @@ PointerList<XmlNode*>* XmlNode::GetChildNodes(bool recursive)
 	};
 
 	PointerList<XmlNode*>* nodeList = new PointerList<XmlNode*>();
-	PointerList<xml_node<>*> listOfStuff;
+    PointerList<xml_node<>*> listOfStuff = PointerList<xml_node<>*>();
 
-	this->FindNodeList(this->data_node, pred, listOfStuff, true);
+	this->NodesSearch(this->data_node->first_node(), pred, &listOfStuff, true);
 
 	auto stuff = listOfStuff.GetContainer();
 
@@ -311,4 +311,40 @@ void XmlNode::FindNodeList(xml_node<>* node, std::function<bool(rapidxml::xml_no
     }
 
     FindNodeList(nextNode, predicate, aggregate, searchInChildOnly);
+}
+
+void XmlNode::NodesSearch(xml_node<>* node, std::function<bool(rapidxml::xml_node<>*)> predicate, PointerList<xml_node<>*>* aggregate, bool recursive)
+{
+    if (node == NULL)
+        return;
+
+    // If the node has children, it doesn't contain parameters but probably contains other parameters so don't add it
+    bool hasChildren = false;
+
+    if (node->first_node() != NULL && node->first_node()->type() != node_data)
+    {
+        hasChildren = true;
+    }
+
+    if (predicate(node) && !hasChildren)
+    {
+        aggregate->Add(node);
+    }
+
+    if (recursive)
+    {
+        xml_node<>* child = node->first_node();
+
+        if (child != NULL && child->type() != node_data)
+        {
+            NodesSearch(child, predicate, aggregate, recursive);
+        }
+    }
+
+    rapidxml::xml_node<>* nextNode = node->next_sibling();
+
+    if (nextNode == NULL)
+        return;
+
+    NodesSearch(nextNode, predicate, aggregate, recursive);
 }
