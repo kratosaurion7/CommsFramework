@@ -1,5 +1,7 @@
 #include "SettingsRepository.h"
 
+#include <cassert>
+
 SettingsRepository* SettingsRepository::_instance = NULL;
 
 SettingsRepository::SettingsRepository()
@@ -32,6 +34,10 @@ char* SettingsRepository::Get(std::string name)
             return val->Item2;
         }
     }
+    
+    assert(false);
+
+    return NULL;
 }
 
 void SettingsRepository::Register(std::string name, char* value)
