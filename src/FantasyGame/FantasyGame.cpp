@@ -32,11 +32,10 @@ FantasyGame::FantasyGame()
 
     Engine->Init(SCALE_MULTIPLIER * GRID_WIDTH, SCALE_MULTIPLIER * GRID_HEIGHT);
 
+    Settings = SettingsRepository::GetInstance();
+
     GamePlayer = new Player();
     MainCamera = new PlayerCamera(GamePlayer);
-
-    FloatVec* camPosition = new FloatVec(0, 0);
-    MainCamera->SetCameraPosition(camPosition);
 
     Engine->AttachActor(GamePlayer);
     Engine->AttachActor(MainCamera);
@@ -50,6 +49,34 @@ FantasyGame::~FantasyGame()
     delete(MainCamera);
     delete(GamePlayer);
     delete(GameWorld);
+}
+
+void FantasyGame::Init()
+{
+    float _cameraX = std::stof(Settings->Get("camera_starting_x"));
+    float _cameraY = std::stof(Settings->Get("camera_starting_y"));
+    
+    float _cameraHeights = std::stof(Settings->Get("camera_fov_height"));
+    float _cameraWidth = std::stof(Settings->Get("camera_fov_width"));
+
+    FloatVec* camPos = new FloatVec(_cameraX, _cameraY);
+    MainCamera->SetCameraPosition(camPos);
+
+    FSize* siz = new FSize(_cameraHeights, _cameraWidth);
+
+    auto pred = [](std::string p) {
+        return p.find("spritesheet_") == 0;
+    };
+
+    auto spritesheetValues = Settings->GetWhere(pred);
+
+    for (char* sPath : *spritesheetValues->GetContainer())
+    {
+        Spritesheet* ssheet = new Spritesheet(sPath, this->Engine->Graphics);
+
+        Engine->Graphics->AddSpritesheet(ssheet);
+    }
+
 }
 
 void FantasyGame::Start(Game_Start_Params* startingParams)

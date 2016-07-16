@@ -4,6 +4,7 @@ class GameEngine;
 class Spritesheet;
 class FPosition;
 class FSize;
+class SettingsRepository;
 
 class World;
 class AreaGrid;
@@ -31,6 +32,8 @@ public:
     FantasyGame();
     ~FantasyGame();
 
+    void Init();
+
     GameEngine* Engine;
 
     World* GameWorld;
@@ -50,4 +53,7 @@ public:
 	void ReadXmlConfigFiles();
 
 	Game_Start_Params* ReadParametersConfig(std::string configFilePath);
+
+private:
+    SettingsRepository* Settings;
 };

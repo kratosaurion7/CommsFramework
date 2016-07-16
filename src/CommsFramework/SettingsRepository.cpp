@@ -40,6 +40,21 @@ char* SettingsRepository::Get(std::string name)
     return NULL;
 }
 
+PointerList<char*>* SettingsRepository::GetWhere(std::function<bool(std::string)> predicate)
+{
+    PointerList<char*>* retValues = new PointerList<char*>();
+
+    for (Pair<std::string, char*>* val : *this->SettingsList->GetContainer())
+    {
+        if (predicate(val->Item1))
+        {
+            retValues->Add(val->Item2);
+        }
+    }
+
+    return retValues;
+}
+
 void SettingsRepository::Register(std::string name, char* value)
 {
     Pair<std::string, char*>* newItem = new Pair<std::string, char*>();
