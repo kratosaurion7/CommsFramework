@@ -18,11 +18,11 @@ class Game_Start_Params;
 int main()
 {
     FantasyGame* game = new FantasyGame();
+    game->Configure();
 
-    game->ReadXmlConfigFiles();
-
-	Game_Start_Params* params = game->ReadParametersConfig("assets\\game_config.xml");
-    game->Start(params);
+    game->Init();
+    
+    game->Start();
     
     game->Play();
 

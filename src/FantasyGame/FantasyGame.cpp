@@ -79,19 +79,9 @@ void FantasyGame::Init()
 
 }
 
-void FantasyGame::Start(Game_Start_Params* startingParams)
+void FantasyGame::Start()
 {
-    auto it = startingParams->Spritesheets->GetContainer()->begin();
-    while (it != startingParams->Spritesheets->GetContainer()->end())
-    {
-        Spritesheet* sheet = (*it);
-
-        Engine->Graphics->AddSpritesheet(sheet);
-
-        it++;
-    }
-
-    GameWorld = new World(NULL);
+    GameWorld = this->ReadWorldData(NULL);
 
     CurrentArea = GameWorld->Areas->First();
 
@@ -132,7 +122,7 @@ void FantasyGame::Update()
     }
 }
 
-void FantasyGame::ReadXmlConfigFiles()
+void FantasyGame::Configure()
 {
     SettingsRepository* settings = SettingsRepository::GetInstance();
 
@@ -159,7 +149,6 @@ void FantasyGame::ReadXmlConfigFiles()
 
                     char* valueData = new char[value.length()];
                     strcpy(valueData, value.c_str());
-                    //memcpy(valueData, value.c_str(), value.length());
 
                     settings->Register(parameterName, valueData);
                 }
@@ -169,44 +158,15 @@ void FantasyGame::ReadXmlConfigFiles()
 
 }
 
-Game_Start_Params* FantasyGame::ReadParametersConfig(std::string configFilePath)
+World* FantasyGame::ReadWorldData(XmlNode* worldsNode)
 {
-	Game_Start_Params* retParams = new Game_Start_Params();
+    XmlNode* firstWorldNode = worldsNode->GetNode("World");
 
-	XmlReader file = XmlReader();
-	file.LoadFile(configFilePath);
+    World* gameWorld = new World();
+    gameWorld->WorldName = firstWorldNode->GetNode("WorldName")->Contents();
 
-    // GET GAME NAME
-	std::string gameName = file.FindNode("game")->FindNode("GameName")->Contents();
-	retParams->GameName = gameName;
+    gameWorld->SetupAreas(firstWorldNode->GetNode("Areas"));
+    
 
-    // GET SPRITESHEETS
-    retParams->Spritesheets = new PointerList<Spritesheet*>();
-    PointerList<XmlNode*>* spritesheetNodes = file.FindNodes("Spritesheet");
-    auto spritesheetIter = spritesheetNodes->GetContainer()->begin();
-    while (spritesheetIter != spritesheetNodes->GetContainer()->end())
-    {
-        XmlNode* node = (*spritesheetIter);
-
-        std::string spritesheetPath = node->Contents();
-
-        Spritesheet* newSpritesheet = new Spritesheet(spritesheetPath, this->Engine->Graphics);
-
-        retParams->Spritesheets->Add(newSpritesheet);
-
-        spritesheetIter++;
-    }
-
-    // GET CAMERA OPTIONS
-    auto cameraNode = file.GetNode("camera");
-    auto cameraStartingPositionX = std::stof(cameraNode->GetNode("StartingPosition")->GetNode("X")->Contents());
-    auto cameraStartingPositionY = std::stof(cameraNode->GetNode("StartingPosition")->GetNode("Y")->Contents());
-
-    auto cameraHeight = std::stof(cameraNode->FindNode("Height")->Contents());
-    auto cameraWidth = std::stof(cameraNode->FindNode("Width")->Contents());
-
-    retParams->CameraStart = new FPosition(cameraStartingPositionX, cameraStartingPositionY);
-    retParams->CameraSize = new FSize(cameraHeight, cameraWidth);
-
-	return retParams;
+    return gameWorld;
 }

@@ -1,8 +1,11 @@
 #include "World.h"
 
+#include <PointerList.h>
+#include <XmlReader.h>
+
 #include "AreaGrid.h"
 
-World::World(WorldCreateParams* params)
+World::World()
 {
     AreaGrid* defaultArea = new AreaGrid(NULL);
     
@@ -14,4 +17,9 @@ World::World(WorldCreateParams* params)
 
 World::~World()
 {
+}
+
+void World::SetupAreas(XmlNode* areasNode)
+{
+
 }
