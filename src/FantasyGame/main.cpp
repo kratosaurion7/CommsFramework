@@ -18,7 +18,7 @@ class Game_Start_Params;
 int main()
 {
     FantasyGame* game = new FantasyGame();
-    game->Configure();
+    game->ReadConfig();
 
     game->Init();
     

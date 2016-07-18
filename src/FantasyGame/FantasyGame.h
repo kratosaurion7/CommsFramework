@@ -25,6 +25,8 @@ public:
 
     void Init();
 
+	void ReadConfig();
+
     GameEngine* Engine;
 
     World* GameWorld;
@@ -35,16 +37,16 @@ public:
     Player* GamePlayer;
     PlayerCamera* MainCamera;
 
+    SettingsRepository* Settings;
+
     void Start();
 
     void Play();
 
     virtual void Update();
 
-	void Configure();
-
+    
 private:
-    SettingsRepository* Settings;
 
-    World* ReadWorldData(XmlNode* worldsNode);
+    World* ReadWorldData(std::string worldXmlConfigFile);
 };

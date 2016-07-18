@@ -77,6 +77,7 @@ void FantasyGame::Init()
         Engine->Graphics->AddSpritesheet(ssheet);
     }
 
+    this->GameWorld = ReadWorldData("game_config.xml");
 }
 
 void FantasyGame::Start()
@@ -122,7 +123,7 @@ void FantasyGame::Update()
     }
 }
 
-void FantasyGame::Configure()
+void FantasyGame::ReadConfig()
 {
     SettingsRepository* settings = SettingsRepository::GetInstance();
 
@@ -158,15 +159,15 @@ void FantasyGame::Configure()
 
 }
 
-World* FantasyGame::ReadWorldData(XmlNode* worldsNode)
+World* FantasyGame::ReadWorldData(std::string worldXmlConfigFile)
 {
-    XmlNode* firstWorldNode = worldsNode->GetNode("World");
+    XmlReader data = XmlReader();
+    auto worldsRoot = data.FindNode("Worlds");
 
-    World* gameWorld = new World();
-    gameWorld->WorldName = firstWorldNode->GetNode("WorldName")->Contents();
+    auto firstWorld = worldsRoot->GetNode("World");
 
-    gameWorld->SetupAreas(firstWorldNode->GetNode("Areas"));
-    
+    World* newWorld = new World();
+    newWorld->WorldName = firstWorld->GetNode("WorldName")->Contents();
 
-    return gameWorld;
+    return newWorld;
 }
