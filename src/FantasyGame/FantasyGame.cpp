@@ -62,6 +62,8 @@ void FantasyGame::Init()
     FloatVec* camPos = new FloatVec(_cameraX, _cameraY);
     MainCamera->SetCameraPosition(camPos);
 
+	MainCamera->CameraSpeed = std::stof(Settings->Get("camera_speed"));
+
     FSize* siz = new FSize(_cameraHeights, _cameraWidth);
 
     auto pred = [](std::string p) {
@@ -77,13 +79,11 @@ void FantasyGame::Init()
         Engine->Graphics->AddSpritesheet(ssheet);
     }
 
-    this->GameWorld = ReadWorldData("game_config.xml");
+	this->GameWorld = ReadWorldData("assets\\game_config.xml");
 }
 
 void FantasyGame::Start()
 {
-    GameWorld = this->ReadWorldData(NULL);
-
     CurrentArea = GameWorld->Areas->First();
 
     CurrentGrid = CurrentArea->Grids->First();
@@ -130,14 +130,15 @@ void FantasyGame::ReadConfig()
 	XDirectory dir = XDirectory("assets");
 	auto files = dir.GetFiles(true);
 
+	// Take all XML files and read the <parameters> to extract the config from them
 	for (XFile* file : *files->GetContainer())
 	{
 		if (file->FileName.find("_config.xml", 0) != std::string::npos)
 		{
-			XmlReader* reader = new XmlReader();
-			reader->LoadFile(file->FilePath);
+			XmlReader reader = XmlReader();
+			reader.LoadFile(file->FilePath);
 
-            auto paramNodes = reader->FindNodes("parameters");
+            auto paramNodes = reader.FindNodes("parameters");
 
             for (XmlNode* pNodeContainer : *paramNodes->GetContainer())
             {
@@ -157,11 +158,13 @@ void FantasyGame::ReadConfig()
 		}
 	}
 
+	delete(files);
 }
 
 World* FantasyGame::ReadWorldData(std::string worldXmlConfigFile)
 {
     XmlReader data = XmlReader();
+	data.LoadFile(worldXmlConfigFile);
     auto worldsRoot = data.FindNode("Worlds");
 
     auto firstWorld = worldsRoot->GetNode("World");
