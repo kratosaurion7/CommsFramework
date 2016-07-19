@@ -40,6 +40,8 @@ public:
 
     virtual void SetGraphicalFilter(int graphic_filter);
 
+    virtual BaseTexture* GetTextImage();
+
 private:
     std::string textContent;
 
@@ -54,4 +56,3 @@ private:
     const int fallbackFontHeight = 16;
     const int fallbackFontWidth = 8;
 };
-

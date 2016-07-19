@@ -266,3 +266,34 @@ void SDLTexture::SaveTextureToFile(std::string fileName)
         fprintf(stderr, "Unable to save file to file, %s\n", errorString);
     }
 }
+
+void SDLTexture::OverlayTexture(BaseTexture* other)
+{
+    Uint32* myPix = NULL;
+
+    SDL_LockSurface(this->surface);
+
+    SDLTexture* sdlOther = (SDLTexture*)other;
+
+    SDL_Surface* surf = sdlOther->surface;
+    
+    Uint32* pix = (Uint32*)surf->pixels;
+
+    for (int i = 0; i < this->Height; i++)
+    {
+        for (int j = 0; j < this->Width; j++)
+        {
+            Uint32 blendedPix;
+            Uint32 myP = myPix[i + (j * this->Width)];
+            Uint32 otP = pix[i + (j * this->Width)];
+
+            // TODO : Blend both pixels based on alpha
+
+            myPix[i + (j * this->Width)] = blendedPix;
+        }
+
+
+    }
+
+    SDL_UnlockSurface(this->surface);
+}

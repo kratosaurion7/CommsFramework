@@ -2,6 +2,7 @@
 
 class BaseFont;
 class DrawObject;
+class BaseTexture;
 
 #include <string>
 #include <cstdint>
@@ -31,4 +32,6 @@ public:
 
     virtual uint32_t GetColor() = 0;
     virtual void SetColor(uint32_t color) = 0;
+
+    virtual BaseTexture* GetTextImage() = 0;
 };

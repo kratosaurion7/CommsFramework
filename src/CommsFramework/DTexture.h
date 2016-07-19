@@ -28,6 +28,7 @@ public:
     virtual void SaveTextureToFile();
     virtual void SaveTextureToFile(std::string fileName);
 
+    virtual void OverlayTexture(BaseTexture* other);
 
     sf::Texture* innerImpl;
 

@@ -42,6 +42,7 @@ public:
 
     void SetGraphicalFilter(int graphic_filter);
 
+    virtual BaseTexture* GetTextImage();
 private:
     std::string textString;
     std::string textStringWithLineWrappings;

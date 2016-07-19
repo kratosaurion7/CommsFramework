@@ -33,4 +33,6 @@ public:
 
     virtual void SaveTextureToFile() = 0;
     virtual void SaveTextureToFile(std::string fileName) = 0;
+
+    virtual void OverlayTexture(BaseTexture* other) = 0;
 };

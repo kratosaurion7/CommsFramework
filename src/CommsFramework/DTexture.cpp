@@ -77,3 +77,7 @@ void DTexture::SaveTextureToFile()
 void DTexture::SaveTextureToFile(std::string fileName)
 {
 }
+
+void DTexture::OverlayTexture(BaseTexture * other)
+{
+}

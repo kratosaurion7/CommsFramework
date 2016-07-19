@@ -99,6 +99,11 @@ void SFMLText::SetGraphicalFilter(int graphic_filter)
 
 }
 
+BaseTexture * SFMLText::GetTextImage()
+{
+    return NULL;
+}
+
 void SFMLText::UpdateTextWrapping()
 {
 }
