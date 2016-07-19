@@ -53,19 +53,7 @@ FantasyGame::~FantasyGame()
 
 void FantasyGame::Init()
 {
-    float _cameraX = std::stof(Settings->Get("camera_starting_x"));
-    float _cameraY = std::stof(Settings->Get("camera_starting_y"));
-    
-    float _cameraHeights = std::stof(Settings->Get("camera_fov_height"));
-    float _cameraWidth = std::stof(Settings->Get("camera_fov_width"));
-
-    FloatVec* camPos = new FloatVec(_cameraX, _cameraY);
-    MainCamera->SetCameraPosition(camPos);
-
-	MainCamera->CameraSpeed = std::stof(Settings->Get("camera_speed"));
-
-    FSize* siz = new FSize(_cameraHeights, _cameraWidth);
-
+    // Extract sprites
     auto pred = [](std::string p) {
         return p.find("spritesheet_") == 0;
     };
@@ -79,7 +67,28 @@ void FantasyGame::Init()
         Engine->Graphics->AddSpritesheet(ssheet);
     }
 
+    // Setup Game World
 	this->GameWorld = ReadWorldData("assets\\game_config.xml");
+
+    // Setup Camera
+    _tile_size = std::stof(Settings->Get("graphic_tile_size"));
+
+    _cameraX = std::stof(Settings->Get("camera_starting_x"));
+    _cameraY = std::stof(Settings->Get("camera_starting_y"));
+
+    _cameraHeights = std::stof(Settings->Get("camera_fov_height"));
+    _cameraWidth = std::stof(Settings->Get("camera_fov_width"));
+
+    FRectangle* camFov = new FRectangle(_cameraX, _cameraY, _cameraHeights * SCALE_MULTIPLIER, _cameraWidth * SCALE_MULTIPLIER);
+
+    Vector2<int>* camSpeed = new Vector2<int>();
+    camSpeed->X = std::stof(Settings->Get("camera_speed_x"));
+    camSpeed->Y = std::stof(Settings->Get("camera_speed_y"));
+
+    MainCamera->SetupCamera(camFov, camSpeed);
+
+    // Deletes
+    delete(spritesheetValues);
 }
 
 void FantasyGame::Start()
@@ -119,6 +128,15 @@ void FantasyGame::Update()
 
         iter->TileSprite->SetPos(x, y);
 
+        if (MainCamera->CameraFieldOfView->Intersect(&iter->TileSprite->GetRectangle()))
+        {
+            iter->TileSprite->Show(true);
+        }
+        else
+        {
+            iter->TileSprite->Show(false);
+        }
+        
         it++;
     }
 }

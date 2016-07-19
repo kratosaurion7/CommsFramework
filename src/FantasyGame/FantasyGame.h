@@ -3,6 +3,7 @@
 class GameEngine;
 class Spritesheet;
 class FPosition;
+class FRectangle;
 class FSize;
 class SettingsRepository;
 class XmlNode;
@@ -14,6 +15,7 @@ class LocalGrid;
 class Player;
 class PlayerCamera;
 
+#include <Vectors.h>
 #include <string>
 #include <PointerList.h>
 
@@ -44,9 +46,18 @@ public:
     void Play();
 
     virtual void Update();
-
     
 private:
 
     World* ReadWorldData(std::string worldXmlConfigFile);
+
+    // CONFIG
+    float _tile_size;
+    float _cameraX;
+    float _cameraY;
+    float _cameraHeights;
+    float _cameraWidth;
+
+    FRectangle* camFov;
+    Vector2<int>* camSpeed;
 };

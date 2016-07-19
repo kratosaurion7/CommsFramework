@@ -11,7 +11,10 @@
         <camera_fov_height>10</camera_fov_height>
         <camera_fov_width>10</camera_fov_width>
 	
-		<camera_speed>16</camera_speed>
+		<camera_speed_x>16</camera_speed_x>
+        <camera_speed_y>16</camera_speed_y>
+        
+        <graphic_tile_size>64</graphic_tile_size>
 	
 	</parameters>
 

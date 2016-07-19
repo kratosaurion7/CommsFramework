@@ -14,13 +14,30 @@ PlayerCamera::PlayerCamera(Player* target)
     PlayerToFocus = target;
     CameraFieldOfView = new FRectangle(0, 0, 10, 10);
 
-    CameraSpeed = 4;
+    CameraSpeed = new Vector2<int>(4, 4);
 }
 
 
 PlayerCamera::~PlayerCamera()
 {
     delete(CameraFieldOfView);
+}
+
+void PlayerCamera::SetupCamera(FRectangle* fieldOfView, Vector2<int>* scrollSpeed)
+{
+    if (this->CameraFieldOfView != NULL)
+    {
+        delete(CameraFieldOfView);
+    }
+
+    CameraFieldOfView = fieldOfView;
+
+    if (this->CameraSpeed != NULL)
+    {
+        delete(CameraSpeed);
+    }
+
+    this->CameraSpeed = scrollSpeed;
 }
 
 void PlayerCamera::SetCameraPosition(FloatVec* newPos)
@@ -33,22 +50,18 @@ void PlayerCamera::Update()
 {
     if (this->Engine->Keyboard->IsKeyClicked(Key::D))
     {
-        this->CameraFieldOfView->Right += CameraSpeed;
-        this->CameraFieldOfView->Left -= CameraSpeed;
+        this->CameraFieldOfView->IncrementX(this->CameraSpeed->X * -1);
     }
     if (this->Engine->Keyboard->IsKeyClicked(Key::W))
     {
-        this->CameraFieldOfView->Top += CameraSpeed;
-            this->CameraFieldOfView->Bottom -= CameraSpeed;
+        this->CameraFieldOfView->IncrementY(this->CameraSpeed->Y);
     }
     if (this->Engine->Keyboard->IsKeyClicked(Key::A))
     {
-        this->CameraFieldOfView->Left += CameraSpeed;
-        this->CameraFieldOfView->Right -= CameraSpeed;
+        this->CameraFieldOfView->IncrementX(this->CameraSpeed->X);
     }
     if (this->Engine->Keyboard->IsKeyClicked(Key::S))
     {
-        this->CameraFieldOfView->Bottom += CameraSpeed;
-        this->CameraFieldOfView->Top -= CameraSpeed;
+        this->CameraFieldOfView->IncrementY(this->CameraSpeed->Y * -1);
     }
 }

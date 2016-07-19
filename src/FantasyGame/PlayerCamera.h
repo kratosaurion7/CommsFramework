@@ -2,6 +2,8 @@
 
 #include <BaseActor.h>
 
+#include <Vectors.h>
+
 class Player;
 class FRectangle;
 class FVector;
@@ -16,7 +18,9 @@ public:
 
     FRectangle* CameraFieldOfView;
 
-    int CameraSpeed;
+    Vector2<int>* CameraSpeed;
+
+    void SetupCamera(FRectangle* fieldOfView, Vector2<int>* scrollSpeed);
 
     void SetCameraPosition(FloatVec* newPos);
 
