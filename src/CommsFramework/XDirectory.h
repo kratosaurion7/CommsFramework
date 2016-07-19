@@ -19,10 +19,11 @@ Bla bla bla linux stuff should not compile.
 
 #endif
 
-#include "PointerList.h"
 #include <string>
-#include "XFile.h"
-#include "XDirectory.h"
+
+#include "PointerList.h"
+
+class XFile;
 
 enum DIRECTORY_CREATE_RESULT
 {

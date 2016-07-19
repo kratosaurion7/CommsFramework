@@ -3,7 +3,7 @@
 #include <memory>
 
 #include "WindowsHelpers.h" // TODO : REplace that by a generic header, these functions are not specific to windows
-
+#include "XFile.h"
 
 XDirectory::XDirectory(std::string path)
 {
@@ -17,7 +17,7 @@ XDirectory::~XDirectory()
 {
 }
 
-XDirectory * XDirectory::OpenDirectory(std::string path)
+XDirectory* XDirectory::OpenDirectory(std::string path)
 {
     XDirectory* dir = new XDirectory(path);
 
@@ -54,7 +54,7 @@ XDirectory::XDirectory(std::wstring path)
     FullPath = WideStringToCString(path);
 }
 
-XDirectory * XDirectory::OpenDirectory(std::wstring path)
+XDirectory* XDirectory::OpenDirectory(std::wstring path)
 {
     XDirectory* dir = new XDirectory(path);
 

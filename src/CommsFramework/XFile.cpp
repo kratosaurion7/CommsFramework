@@ -9,6 +9,8 @@
 #include <assert.h>
 
 #include "IOUtilities.h"
+#include "XDirectory.h"
+#include "FileReader.h"
 
 XFile::XFile()
 {

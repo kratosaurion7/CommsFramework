@@ -36,10 +36,7 @@ enum FILE_OPEN_CREATE_MODE
 #include <string>
 #include <cstdio>
 
-#include "XDirectory.h"
-
-#include "FileReader.h"
-
+class FileContents;
 class XDirectory;
 
 class XFile
