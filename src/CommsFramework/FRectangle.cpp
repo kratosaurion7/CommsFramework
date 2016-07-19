@@ -10,32 +10,47 @@ FRectangle::FRectangle()
 
 FRectangle::FRectangle(float x, float y, float h, float w)
 {
-    Left = x;
-    Top = y;
-    Right = x + w;
-    Bottom = y + h;
-};
+    this->Set(x, y, h, w);
+}
 
 FRectangle::~FRectangle()
 {
-};
+}
 
 float FRectangle::Width()
 {
     return Right - Left;
-};
+}
 
 float FRectangle::Height()
 {
     return Bottom - Top;
-};
+}
+
+void FRectangle::Set(float x, float y, float h, float w)
+{
+    Left = x;
+    Top = y;
+    Right = x + w;
+    Bottom = y + h;
+}
+
+void FRectangle::IncrementX(float amount)
+{
+    this->Set(this->Left + amount, this->Top, this->Width(), this->Height());
+}
+
+void FRectangle::IncrementY(float amount)
+{
+    this->Set(this->Left, this->Top + amount, this->Width(), this->Height());
+}
 
 FPosition* FRectangle::Origin()
 {
     FPosition* pos = new FPosition(Left, Top);
 
     return pos;
-};
+}
 
 FPosition* FRectangle::Center()
 {
@@ -45,7 +60,7 @@ FPosition* FRectangle::Center()
     pos->Y = (Bottom - Top) / 2;
 
     return pos;
-};
+}
 
 FSize* FRectangle::Size()
 {
@@ -53,7 +68,7 @@ FSize* FRectangle::Size()
     FSize* siz = new FSize(Height(), Width());
 
     return siz;
-};
+}
 
 bool FRectangle::IsPointInside(Vector2<float> vec)
 {
@@ -63,7 +78,7 @@ bool FRectangle::IsPointInside(Vector2<float> vec)
 bool FRectangle::IsPointInside(FPosition* pos)
 {
     return IsPointInside(pos->X, pos->Y);
-};
+}
 
 bool FRectangle::IsPointInside(float x, float y)
 {
@@ -73,7 +88,7 @@ bool FRectangle::IsPointInside(float x, float y)
     }
 
     return false;
-};
+}
 
 bool FRectangle::Intersect(FRectangle* rec)
 {
@@ -86,6 +101,7 @@ bool FRectangle::Intersect(FRectangle* rec)
 
     return false;
 }
+
 bool FRectangle::Intersect(FRectangle * rec, int thisRectangleEdge)
 {
     bool result = false;
@@ -129,11 +145,11 @@ bool FRectangle::Intersect(FRectangle * rec, int thisRectangleEdge)
 
     return result;
 }
+
 bool FRectangle::Intersect(FRectangle * rec, int thisRectangleEdge, int otherRectangleEdge)
 {
     return false;
 }
-;
 
 Vector2<float>* FRectangle::DistanceFrom(FRectangle* rec, DistanceFromType comparaisonType)
 {
@@ -165,4 +181,4 @@ Vector2<float>* FRectangle::DistanceFrom(FRectangle* rec, DistanceFromType compa
     delete(otherTargetPosition);
 
     return distance;
-};
+}

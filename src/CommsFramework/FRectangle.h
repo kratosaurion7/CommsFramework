@@ -33,6 +33,10 @@ public:
     float Right;
     float Bottom;
 
+    void Set(float x, float y, float h, float w);
+    void IncrementX(float amount);
+    void IncrementY(float amount);
+
     FPosition* Origin();
     FPosition* Center();
 
