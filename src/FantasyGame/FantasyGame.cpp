@@ -82,8 +82,8 @@ void FantasyGame::Init()
     FRectangle* camFov = new FRectangle(_cameraX, _cameraY, _cameraHeights * SCALE_MULTIPLIER, _cameraWidth * SCALE_MULTIPLIER);
 
     Vector2<int>* camSpeed = new Vector2<int>();
-    camSpeed->X = std::stof(Settings->Get("camera_speed_x"));
-    camSpeed->Y = std::stof(Settings->Get("camera_speed_y"));
+    camSpeed->X = std::stoi(Settings->Get("camera_speed_x"));
+    camSpeed->Y = std::stoi(Settings->Get("camera_speed_y"));
 
     MainCamera->SetupCamera(camFov, camSpeed);
 

@@ -31,5 +31,9 @@ public:
     
     // Same array of tiles but in an handy list
     PointerList<Tile*>* tilesList;
+
+private:
+    LocalGridCreateParam* initParams;
+
 };
 

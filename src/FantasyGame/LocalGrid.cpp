@@ -13,6 +13,8 @@
 
 LocalGrid::LocalGrid(LocalGridCreateParam* params)
 {
+    initParams = params;
+
     int height = 20;
     int width = 20;
 
@@ -74,7 +76,7 @@ void LocalGrid::Set(int x, int y, Tile * tile)
     tiles[y][x] = tile;
 }
 
-void LocalGrid::SetTileTexture(int x, int y, BaseTexture * texture)
+void LocalGrid::SetTileTexture(int x, int y, BaseTexture* texture)
 {
     Tile* tile = this->Get(x, y);
 
