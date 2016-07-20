@@ -253,6 +253,9 @@ void SDLText::SetGraphicalFilter(int graphic_filter)
 BaseTexture* SDLText::GetTextImage()
 {
     SDLTexture* tex = new SDLTexture();
+    tex->Graphics = (SDLGraphicEngine*)this->Engine;
+    tex->Engine = this->Engine;
+
     tex->LoadFromSurface(this->textSurface);
 
     return tex;

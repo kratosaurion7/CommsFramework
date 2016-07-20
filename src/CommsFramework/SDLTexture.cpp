@@ -1,10 +1,5 @@
 #include "SDLTexture.h"
 
-#include <SDL.h>
-#include <SDL_image.h>
-#include <SDL_surface.h>
-#include <SDL_render.h>
-
 #include "SDLUtilities.h"
 #include "SDLGraphicEngine.h"
 
@@ -102,6 +97,9 @@ void SDLTexture::LoadFromSurface(SDL_Surface* srcSurface)
         return;
     }
 
+    this->Height = surface->h;
+    this->Width = surface->w;
+
     TexturePath = "";
 }
 
@@ -113,20 +111,6 @@ BaseTexture* SDLTexture::GetSubTexture(FRectangle rec)
 
     FSize* recSize = rec.Size();
     SDL_Rect sRec = FRectToSDL_Rect(rec);
-    
-    Uint32 rmask, gmask, bmask, amask;
-#if SDL_BYTEORDER == SDL_BIG_ENDIAN
-    rmask = 0xff000000;
-    gmask = 0x00ff0000;
-    bmask = 0x0000ff00;
-    amask = 0x000000ff;
-#else
-    rmask = 0x000000ff;
-    gmask = 0x0000ff00;
-    bmask = 0x00ff0000;
-    amask = 0xff000000;
-#endif
-
 
     SDL_Surface* subTextureSurface = SDL_CreateRGBSurface(0, recSize->Width, recSize->Height, 32, rmask, gmask, bmask,amask);
     //SDL_Surface* subTextureSurface = SDL_CreateRGBSurface(0, recSize->Width, recSize->Height, 32, 0, 0, 0, 0);
@@ -269,31 +253,74 @@ void SDLTexture::SaveTextureToFile(std::string fileName)
 
 void SDLTexture::OverlayTexture(BaseTexture* other)
 {
-    Uint32* myPix = NULL;
-
-    SDL_LockSurface(this->surface);
-
     SDLTexture* sdlOther = (SDLTexture*)other;
 
     SDL_Surface* surf = sdlOther->surface;
+
+    SDL_BlendMode currentBlend;
+    int res = SDL_GetSurfaceBlendMode(this->surface, &currentBlend);
+
+    if (res != 0)
+    {
+
+    }
+
+    res = SDL_SetSurfaceBlendMode(this->surface, SDL_BLENDMODE_BLEND);
+
+    if (res != 0)
+    {
+
+    }
     
+    SDL_Rect rec;
+    rec.h = surf->h;
+    rec.w = surf->w;
+    rec.x = 0;
+    rec.y = 0;
+
+    other->SaveTextureToFile("test.png");
+    res = SDL_BlitSurface(surf, NULL, this->surface, NULL);
+
+    this->SaveTextureToFile("test.png");
+
+    if (res != 0)
+    {
+        auto errorString = SDL_GetError();
+        fprintf(stderr, "Unable to set solid color to texture [%s] with error %s\n", TexturePath.c_str(), errorString);
+    }
+
+    res = SDL_SetSurfaceBlendMode(this->surface, currentBlend);
+
+
+    return;
+    
+    Uint32* myPix = (Uint32*)this->surface->pixels;
     Uint32* pix = (Uint32*)surf->pixels;
 
     for (int i = 0; i < this->Height; i++)
     {
         for (int j = 0; j < this->Width; j++)
         {
+            if (i > other->GetSize().Height || j > other->GetSize().Width)
+            {
+                continue;
+            }
+
             Uint32 blendedPix;
-            Uint32 myP = myPix[i + (j * this->Width)];
-            Uint32 otP = pix[i + (j * this->Width)];
+            Uint32 myP = myPix[j + (i * this->Height)];
+            Uint32 otP = pix[j + (i * this->Height)];
+
+            //dstRGB = (srcRGB * srcA) + (dstRGB * (1 - srcA))
+            //dstA = srcA + (dstA * (1 - srcA))
 
             // TODO : Blend both pixels based on alpha
+            blendedPix = ((myP & (rmask | gmask | amask)) * (myP & amask)) + ((otP & (rmask | gmask | amask) * (1 - (myP & amask)))) & (rmask | gmask | amask);
 
-            myPix[i + (j * this->Width)] = blendedPix;
+            myPix[j + (i * this->Height)] = blendedPix;
         }
-
-
     }
 
     SDL_UnlockSurface(this->surface);
+
+    ResetTextureFromSurface();
 }
