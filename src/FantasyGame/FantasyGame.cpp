@@ -87,12 +87,6 @@ void FantasyGame::Init()
 
     MainCamera->SetupCamera(camFov, camSpeed);
 
-    // Deletes
-    delete(spritesheetValues);
-}
-
-void FantasyGame::Start()
-{
     CurrentArea = GameWorld->Areas->First();
 
     CurrentGrid = CurrentArea->Grids->First();
@@ -100,6 +94,13 @@ void FantasyGame::Start()
     CurrentGrid->Setup(20, 20);
 
     CurrentGrid->ShowGridTiles(true);
+
+    // Deletes
+    delete(spritesheetValues);
+}
+
+void FantasyGame::Start()
+{
 }
 
 void FantasyGame::Play()
@@ -126,7 +127,7 @@ void FantasyGame::Update()
         float x = tilePos->X + MainCamera->CameraFieldOfView->Left;
         float y = tilePos->Y + MainCamera->CameraFieldOfView->Top;
 
-        iter->TileSprite->SetPos(x, y);
+        iter->SetTilePosition(x, y);
 
         if (MainCamera->CameraFieldOfView->Intersect(&iter->TileSprite->GetRectangle()))
         {
