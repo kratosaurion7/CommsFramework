@@ -145,7 +145,10 @@ void SDLText::UpdateInnerImpl()
         this->SetSize(renderedSurface->h, renderedSurface->w);
 
         SDL_Renderer* renderer = ((SDLGraphicEngine*)Engine)->gameRenderer;
+        SDL_FreeSurface(textSurface);
         textSurface = renderedSurface;
+
+        SDL_DestroyTexture(textTexture);
         textTexture = SDL_CreateTextureFromSurface(renderer, renderedSurface);
     }
     else if (this->font->FontType == BaseFont::SPRITE_FONT)
