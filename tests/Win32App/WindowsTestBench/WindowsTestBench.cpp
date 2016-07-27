@@ -30,6 +30,7 @@ BOOL                InitInstance(HINSTANCE, int);
 BOOL                InitDevice(HWND window);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
+BOOL				ReCreateRenderTarget(HWND window);
 
 void DoPaint(HWND);
 
@@ -151,21 +152,12 @@ BOOL InitDevice(HWND window)
     {
         std::string err = GetLastErrorString();
 
+		fprintf(stderr, "%s", err);
+
         return FALSE;
     }
 
-    RECT rec;
-    GetClientRect(window, &rec);
-
-    hr = D2Factory->CreateHwndRenderTarget(
-        D2D1::RenderTargetProperties(),
-        D2D1::HwndRenderTargetProperties(
-            window,
-            D2D1::SizeU(
-                rec.right - rec.left,
-                rec.bottom - rec.top)
-        ),
-        &RenderTarget);
+	ReCreateRenderTarget(window);
     
     if (FAILED(hr))
     {
@@ -225,6 +217,11 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             PostQuitMessage(0);
             break;
         }
+		case WM_SIZE:
+		{
+			ReCreateRenderTarget(hWnd);
+			break;
+		}
         default:
         {
             return DefWindowProc(hWnd, message, wParam, lParam);
@@ -257,6 +254,41 @@ INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
     return (INT_PTR)FALSE;
 }
 
+BOOL ReCreateRenderTarget(HWND window)
+{
+	if (RenderTarget != NULL)
+	{
+		RenderTarget->Release();
+		RenderTarget = NULL;
+	}
+
+	if (DefaultBrush != NULL)
+	{
+		DefaultBrush->Release();;
+		DefaultBrush = NULL;
+	}
+
+	RECT rec;
+	GetClientRect(window, &rec);
+
+	HRESULT hr = D2Factory->CreateHwndRenderTarget(
+		D2D1::RenderTargetProperties(),
+		D2D1::HwndRenderTargetProperties(
+			window,
+			D2D1::SizeU(
+				rec.right - rec.left,
+				rec.bottom - rec.top)
+		),
+		&RenderTarget);
+
+	if (FAILED(hr))
+	{
+		std::string err = GetLastErrorString();
+
+		return FALSE;
+	}
+}
+
 void DoPaint(HWND target)
 {
     if (DefaultBrush == NULL)
@@ -276,13 +308,14 @@ void DoPaint(HWND target)
 
     RenderTarget->BeginDraw();
 
+	RenderTarget->Clear();
     RenderTarget->FillRectangle(
         D2D1::RectF(
-            rc.left + 100.0f,
-            rc.top + 100.0f,
-            rc.right - 100.0f,
-            rc.bottom - 100.0f),
-        DefaultBrush);
+			rc.left + 100.0f,
+			rc.top + 100.0f,
+			rc.right - 100.0f,
+			rc.bottom - 100.0f),
+		DefaultBrush);
 
     HRESULT hr = RenderTarget->EndDraw();
 
