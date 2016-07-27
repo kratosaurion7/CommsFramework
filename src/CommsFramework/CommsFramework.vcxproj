@@ -351,6 +351,7 @@ XCOPY /Y /E "Assets\*" "$(TargetDir)Assets"</Command>
     <ClCompile Include="GameMessageWindow.cpp" />
     <ClCompile Include="GameRule.cpp" />
     <ClCompile Include="GenType.cpp" />
+    <ClCompile Include="ImageLoader.cpp" />
     <ClCompile Include="IOUtilities.cpp" />
     <ClCompile Include="SDLFont.cpp" />
     <ClCompile Include="SDLGraphicEngine.cpp" />
@@ -422,6 +423,7 @@ XCOPY /Y /E "Assets\*" "$(TargetDir)Assets"</Command>
     <ClInclude Include="GenType.h" />
     <ClInclude Include="GravityObjectsFallDownRule.h" />
     <ClInclude Include="IDialog.h" />
+    <ClInclude Include="ImageLoader.h" />
     <ClInclude Include="IObservable.h" />
     <ClInclude Include="IObserver.h" />
     <ClInclude Include="IOUtilities.h" />

@@ -27,3 +27,14 @@ std::string WideStringToCString(std::wstring wstr)
 
     return out;
 }
+
+std::string GetLastErrorString()
+{
+    DWORD err = GetLastError();
+
+    wchar_t errorBuf[512];
+
+    FormatMessage(FORMAT_MESSAGE_FROM_SYSTEM, 0, err, 0, errorBuf, 512, NULL);
+
+    return WideStringToCString(errorBuf);
+}
