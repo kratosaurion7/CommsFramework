@@ -8,24 +8,16 @@
 
 std::wstring CStringToWideString(std::string cstr)
 {
-    wchar_t* wText = new wchar_t[cstr.length() + 1];
-    std::size_t ret = mbstowcs(wText, cstr.c_str(), cstr.length() + 1);
-
-    std::wstring out = std::wstring(wText);
-    delete[] wText;
-
-    return out;
+    std::wstring stemp = std::wstring(cstr.begin(), cstr.end());
+    
+    return stemp;
 }
 
 std::string WideStringToCString(std::wstring wstr)
 {
-    char* cText = new char[wstr.length() + 1];
-    std::size_t ret = wcstombs(cText, wstr.c_str(), wstr.length() + 1);
+    std::string stemp = std::string(wstr.begin(), wstr.end());
 
-    std::string out = std::string(cText);
-    delete[] cText;
-
-    return out;
+    return stemp;
 }
 
 std::string GetLastErrorString()
