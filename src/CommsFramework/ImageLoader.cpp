@@ -4,11 +4,7 @@
 
 ImageLoader::ImageLoader()
 {
-#ifdef WIN32
     WicFactory = NULL;
-
-
-#endif
     
     InitializeServices();
 
@@ -19,15 +15,16 @@ ImageLoader::~ImageLoader()
 {
 }
 
-IWICBitmapFrameDecode* ImageLoader::LoadImage(std::string fileName)
+IWICBitmapFrameDecode* ImageLoader::LoadImageFromDisk(std::string fileName)
 {
     IWICBitmapDecoder* decoder = NULL;
 
-    wchar_t name = (wchar_t)CStringToWideString(fileName).c_str();
+    std::wstring stemp = std::wstring(fileName.begin(), fileName.end());
+    LPCWSTR sw = stemp.c_str();
 
     HRESULT hr;
     
-    hr = WicFactory->CreateDecoderFromFilename(&name, NULL, GENERIC_READ, WICDecodeMetadataCacheOnDemand, &decoder);
+    hr = WicFactory->CreateDecoderFromFilename(sw, NULL, GENERIC_READ, WICDecodeMetadataCacheOnDemand, &decoder);
 
     if (FAILED(hr))
     {
@@ -54,7 +51,6 @@ IWICBitmapFrameDecode* ImageLoader::LoadImage(std::string fileName)
 
 void ImageLoader::InitializeServices()
 {
-#ifdef WIN32
     CoInitialize(NULL);
 
     HRESULT hr = CoCreateInstance(
@@ -63,5 +59,4 @@ void ImageLoader::InitializeServices()
         CLSCTX_INPROC_SERVER,
         IID_PPV_ARGS(&WicFactory)
     );
-#endif
 }
