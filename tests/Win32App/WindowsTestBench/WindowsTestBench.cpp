@@ -4,18 +4,34 @@
 #include "stdafx.h"
 #include "WindowsTestBench.h"
 
+#include <d2d1.h>
+#include <wincodec.h>
+#include <wincodecsdk.h>
+
+#include <ImageLoader.h>
+
+
 #define MAX_LOADSTRING 100
 
 // Global Variables:
 HINSTANCE hInst;                                // current instance
 WCHAR szTitle[MAX_LOADSTRING];                  // The title bar text
 WCHAR szWindowClass[MAX_LOADSTRING];            // the main window class name
+HWND MainWindow;
+
+// D2
+ID2D1Factory* D2Factory = NULL;
+ID2D1HwndRenderTarget* RenderTarget = NULL;
+ID2D1SolidColorBrush* DefaultBrush = NULL;
 
 // Forward declarations of functions included in this code module:
 ATOM                MyRegisterClass(HINSTANCE hInstance);
 BOOL                InitInstance(HINSTANCE, int);
+BOOL                InitDevice(HWND window);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
+
+void DoPaint(HWND);
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
@@ -27,6 +43,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     // TODO: Place code here.
 
+    ImageLoader* loader = new ImageLoader();
+
+    IWICBitmapFrameDecode* x = loader->LoadImageFromDisk("assets\\image.png");
+
     // Initialize global strings
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
     LoadStringW(hInstance, IDC_WINDOWSTESTBENCH, szWindowClass, MAX_LOADSTRING);
@@ -37,6 +57,15 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     {
         return FALSE;
     }
+
+    if (!InitDevice(MainWindow))
+    {
+        return FALSE;
+    }
+
+    ShowWindow(MainWindow, nCmdShow);
+    UpdateWindow(MainWindow);
+
 
     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_WINDOWSTESTBENCH));
 
@@ -105,10 +134,47 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
       return FALSE;
    }
 
-   ShowWindow(hWnd, nCmdShow);
-   UpdateWindow(hWnd);
+   MainWindow = hWnd;
+
 
    return TRUE;
+}
+
+BOOL InitDevice(HWND window)
+{
+    HRESULT hr = D2D1CreateFactory(
+        D2D1_FACTORY_TYPE_SINGLE_THREADED,
+        &D2Factory
+    );
+
+    if (FAILED(hr))
+    {
+        std::string err = GetLastErrorString();
+
+        return FALSE;
+    }
+
+    RECT rec;
+    GetClientRect(window, &rec);
+
+    hr = D2Factory->CreateHwndRenderTarget(
+        D2D1::RenderTargetProperties(),
+        D2D1::HwndRenderTargetProperties(
+            window,
+            D2D1::SizeU(
+                rec.right - rec.left,
+                rec.bottom - rec.top)
+        ),
+        &RenderTarget);
+    
+    if (FAILED(hr))
+    {
+        std::string err = GetLastErrorString();
+
+        return FALSE;
+    }
+
+    return TRUE;
 }
 
 //
@@ -147,7 +213,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             {
                 PAINTSTRUCT ps;
                 HDC hdc = BeginPaint(hWnd, &ps);
-                // TODO: Add any drawing code that uses hdc here...
+                
+                DoPaint(MainWindow);
+
                 EndPaint(hWnd, &ps);
                 
                 break;
@@ -187,4 +255,35 @@ INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
     }
 
     return (INT_PTR)FALSE;
+}
+
+void DoPaint(HWND target)
+{
+    if (DefaultBrush == NULL)
+    {
+        HRESULT hr = RenderTarget->CreateSolidColorBrush(D2D1::ColorF(D2D1::ColorF::CornflowerBlue), &DefaultBrush);
+
+        if (FAILED(hr))
+        {
+            std::string err = GetLastErrorString();
+
+            return;
+        }
+    }
+
+    RECT rc;
+    GetClientRect(target, &rc);
+
+    RenderTarget->BeginDraw();
+
+    RenderTarget->FillRectangle(
+        D2D1::RectF(
+            rc.left + 100.0f,
+            rc.top + 100.0f,
+            rc.right - 100.0f,
+            rc.bottom - 100.0f),
+        DefaultBrush);
+
+    HRESULT hr = RenderTarget->EndDraw();
+
 }
