@@ -297,6 +297,9 @@
     <ClCompile Include="ImageLoader.cpp">
       <Filter>Framework\System\Windows</Filter>
     </ClCompile>
+    <ClCompile Include="Functions.cpp">
+      <Filter>Framework\Math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="XmlReader.h">
@@ -544,6 +547,9 @@
     </ClInclude>
     <ClInclude Include="ImageLoader.h">
       <Filter>Framework\System\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="Functions.h">
+      <Filter>Framework\Math</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
