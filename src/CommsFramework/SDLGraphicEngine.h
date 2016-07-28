@@ -60,6 +60,7 @@ public:
     virtual BaseFont* CreateFont();
     virtual BaseText* CreateText();
 
+    virtual bool IsTimeForFrame();
     virtual int GetFramerate();
     virtual void SetFramerate(int framerate);
     virtual void SetAutoManagedFramerate(bool isSet);
@@ -92,7 +93,7 @@ private:
 
     SDL_Rect GetSpriteRect(DrawObject* object);
 
-    bool IsTimeForFrame();
+    
 
     void SetupBackground();
     

@@ -55,10 +55,9 @@ public:
     virtual BaseFont* CreateFont() = 0;
     virtual BaseText* CreateText() = 0;
 
+    virtual bool IsTimeForFrame() = 0;
     virtual int GetFramerate() = 0;
-
     virtual void SetFramerate(int framerate) = 0;
-
     virtual void SetAutoManagedFramerate(bool isSet) = 0;
 
     virtual  void SetBackgroundColor(uint32_t color) = 0;

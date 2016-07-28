@@ -442,7 +442,11 @@ SDL_Rect SDLGraphicEngine::GetSpriteRect(DrawObject* object)
 
 bool SDLGraphicEngine::IsTimeForFrame()
 {
-    return this->PreviousFrameTick + (1000 / WantedFrameRate) <= this->CurrentFrameTick;
+    int ticks = GetTicks();
+
+    return this->PreviousFrameTick + (1000 / WantedFrameRate) <= ticks;
+
+    //return this->PreviousFrameTick + (1000 / WantedFrameRate) <= this->CurrentFrameTick;
 }
 
 void SDLGraphicEngine::SetupBackground()

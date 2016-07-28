@@ -107,9 +107,12 @@ void FantasyGame::Play()
 {
     while (true)
     {
-        this->Update();
+        if (this->Engine->Graphics->IsTimeForFrame())
+        {
+            this->Update();
 
-        Engine->Play();
+            Engine->Play();
+        }
     }
 }
 
