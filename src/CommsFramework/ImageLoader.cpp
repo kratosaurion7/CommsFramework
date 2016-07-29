@@ -15,7 +15,7 @@ ImageLoader::~ImageLoader()
 {
 }
 
-IWICBitmapFrameDecode* ImageLoader::LoadImageFromDisk(std::string fileName)
+IWICBitmap* ImageLoader::LoadImageFromDisk(std::string fileName)
 {
     IWICBitmapDecoder* decoder = NULL;
 
@@ -46,7 +46,10 @@ IWICBitmapFrameDecode* ImageLoader::LoadImageFromDisk(std::string fileName)
         return NULL;
     }
 
-    return frame;
+    IWICBitmap* bitmap = NULL;
+    hr = WicFactory->CreateBitmapFromSource(frame, WICBitmapCacheOnDemand, &bitmap);
+
+    return bitmap;
 }
 
 void ImageLoader::InitializeServices()

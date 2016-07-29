@@ -18,7 +18,7 @@ public:
     ImageLoader();
     ~ImageLoader();
 
-    IWICBitmapFrameDecode* LoadImageFromDisk(std::string fileName);
+    IWICBitmap* LoadImageFromDisk(std::string fileName);
 
 private:
     IWICImagingFactory* WicFactory;

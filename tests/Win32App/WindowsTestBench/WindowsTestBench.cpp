@@ -23,6 +23,8 @@ HWND MainWindow;
 ID2D1Factory* D2Factory = NULL;
 ID2D1HwndRenderTarget* RenderTarget = NULL;
 ID2D1SolidColorBrush* DefaultBrush = NULL;
+ID2D1BitmapBrush* BGBrush;
+IWICBitmap* bgImage;
 
 // Forward declarations of functions included in this code module:
 ATOM                MyRegisterClass(HINSTANCE hInstance);
@@ -46,8 +48,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     ImageLoader* loader = new ImageLoader();
 
-    IWICBitmapFrameDecode* x = loader->LoadImageFromDisk("assets\\image.png");
-
+    bgImage = loader->LoadImageFromDisk("assets\\image.png");
+    
     // Initialize global strings
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
     LoadStringW(hInstance, IDC_WINDOWSTESTBENCH, szWindowClass, MAX_LOADSTRING);
@@ -295,6 +297,12 @@ void DoPaint(HWND target)
     {
         HRESULT hr = RenderTarget->CreateSolidColorBrush(D2D1::ColorF(D2D1::ColorF::CornflowerBlue), &DefaultBrush);
 
+        ID2D1Bitmap* bgBitmap = NULL;
+        
+        hr = RenderTarget->CreateBitmapFromWicBitmap(bgImage, &bgBitmap);
+
+        RenderTarget->CreateBitmapBrush(bgBitmap, &BGBrush);
+
         if (FAILED(hr))
         {
             std::string err = GetLastErrorString();
@@ -315,7 +323,7 @@ void DoPaint(HWND target)
 			rc.top + 100.0f,
 			rc.right - 100.0f,
 			rc.bottom - 100.0f),
-		DefaultBrush);
+        BGBrush);
 
     HRESULT hr = RenderTarget->EndDraw();
 
