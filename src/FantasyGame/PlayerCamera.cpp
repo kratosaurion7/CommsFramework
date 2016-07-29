@@ -50,18 +50,18 @@ void PlayerCamera::Update()
 {
     if (this->Engine->Keyboard->IsKeyClicked(Key::D))
     {
-        this->CameraFieldOfView->IncrementX(this->CameraSpeed->X * -1);
+        this->CameraFieldOfView->IncrementX(this->CameraSpeed->X);
     }
     if (this->Engine->Keyboard->IsKeyClicked(Key::W))
     {
-        this->CameraFieldOfView->IncrementY(this->CameraSpeed->Y);
+        this->CameraFieldOfView->IncrementY(this->CameraSpeed->Y * -1);
     }
     if (this->Engine->Keyboard->IsKeyClicked(Key::A))
     {
-        this->CameraFieldOfView->IncrementX(this->CameraSpeed->X);
+        this->CameraFieldOfView->IncrementX(this->CameraSpeed->X * -1);
     }
     if (this->Engine->Keyboard->IsKeyClicked(Key::S))
     {
-        this->CameraFieldOfView->IncrementY(this->CameraSpeed->Y * -1);
+        this->CameraFieldOfView->IncrementY(this->CameraSpeed->Y);
     }
 }

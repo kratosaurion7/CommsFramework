@@ -127,8 +127,8 @@ void FantasyGame::Update()
 
         auto tilePos = iter->OriginalPosition;
 
-        float x = tilePos->X + MainCamera->CameraFieldOfView->Left;
-        float y = tilePos->Y + MainCamera->CameraFieldOfView->Top;
+        float x = tilePos->X - MainCamera->CameraFieldOfView->Left;
+        float y = tilePos->Y - MainCamera->CameraFieldOfView->Top;
 
         iter->SetTilePosition(x, y);
 

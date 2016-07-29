@@ -33,7 +33,7 @@ public:
     float Right;
     float Bottom;
 
-    void Set(float x, float y, float h, float w);
+    void Set(float x, float y, float w, float h);
     void IncrementX(float amount);
     void IncrementY(float amount);
 

@@ -8,7 +8,7 @@ FRectangle::FRectangle()
 {
 }
 
-FRectangle::FRectangle(float x, float y, float h, float w)
+FRectangle::FRectangle(float x, float y, float h, float w) // TODO : Change order
 {
     this->Set(x, y, h, w);
 }
@@ -27,7 +27,7 @@ float FRectangle::Height()
     return Bottom - Top;
 }
 
-void FRectangle::Set(float x, float y, float h, float w)
+void FRectangle::Set(float x, float y, float w, float h)
 {
     Left = x;
     Top = y;
