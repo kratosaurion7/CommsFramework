@@ -378,6 +378,7 @@ XCOPY /Y /E "Assets\*" "$(TargetDir)Assets"</Command>
     <ClCompile Include="StringFunctions.cpp" />
     <ClCompile Include="StringList.cpp" />
     <ClCompile Include="TextureRepository.cpp" />
+    <ClCompile Include="TgaFile.cpp" />
     <ClCompile Include="Utils.cpp" />
     <ClCompile Include="RandomGen.cpp" />
     <ClCompile Include="SettingsRepository.cpp" />
@@ -452,6 +453,7 @@ XCOPY /Y /E "Assets\*" "$(TargetDir)Assets"</Command>
     <ClInclude Include="StringFunctions.h" />
     <ClInclude Include="StringList.h" />
     <ClInclude Include="TextureRepository.h" />
+    <ClInclude Include="TgaFile.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="RandomGen.h" />
     <ClInclude Include="SettingsRepository.h" />

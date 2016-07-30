@@ -115,6 +115,9 @@
     <Filter Include="Framework\System\Windows">
       <UniqueIdentifier>{3d0b151e-edee-43da-b899-0d1c92d81165}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Framework\Image">
+      <UniqueIdentifier>{7b21a9fa-7dd6-4111-95be-a5ab8dcd9b5b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="XmlReader.cpp">
@@ -299,6 +302,9 @@
     </ClCompile>
     <ClCompile Include="Functions.cpp">
       <Filter>Framework\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="TgaFile.cpp">
+      <Filter>Framework\Image</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -550,6 +556,9 @@
     </ClInclude>
     <ClInclude Include="Functions.h">
       <Filter>Framework\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="TgaFile.h">
+      <Filter>Framework\Image</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
