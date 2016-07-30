@@ -60,7 +60,6 @@ void LocalGrid::Setup(int height, int width)
 
             int randomNumberIndex = rnd.GetRandom(this->Engine->Graphics->TextureRepo->loadedTextures->Count());
             BaseTexture* tex = this->Engine->Graphics->TextureRepo->loadedTextures->Get(randomNumberIndex);
-            
             BaseText* text = this->Engine->CreateText(std::to_string(j + (i * height)));
             text->SetFont(this->Engine->GetGameDefaultFont());
             text->SetPos(setupTile->TileSprite->GetPos());

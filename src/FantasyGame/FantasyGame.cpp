@@ -132,14 +132,14 @@ void FantasyGame::Update()
 
         iter->SetTilePosition(x, y);
 
-        if (MainCamera->CameraFieldOfView->Intersect(&iter->TileSprite->GetRectangle()))
-        {
-            iter->TileSprite->Show(true);
-        }
-        else
-        {
-            iter->TileSprite->Show(false);
-        }
+        //if (MainCamera->CameraFieldOfView->Intersect(&iter->TileSprite->GetRectangle()))
+        //{
+        //    iter->TileSprite->Show(true);
+        //}
+        //else
+        //{
+        //    iter->TileSprite->Show(false);
+        //}
         
         it++;
     }
