@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 //enum COLOR_MAP_TYPE
 //{
 //    NO_COLOR_MAP = 0,
@@ -45,15 +47,15 @@ public:
     TgaFileHeader* Header;
     TgaPix** Pixels;
 
-    int PixelCount;
-    
+    short int Width;
+    short int Height;
 
     void Init(short int w, short int h);
 
-    void Save();
+    void FillColor(short int r, short int g, short int b, short int a);
+    void FillColor(TgaPix* pixColor);
+
+    void Save(std::string fileName);
 
     void Clear();
-
-    
 };
-
