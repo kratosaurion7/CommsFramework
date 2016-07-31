@@ -11,7 +11,7 @@ float* CreateSinusTrack(int amount, int amplitude)
 
     for (int i = 0; i < amount; i++)
     {
-        ret[i] = (sin(i) * amplitude) * -1;
+        ret[i] = (sin(i) * amplitude);
     }
 
     return ret;
@@ -23,7 +23,7 @@ float* CreateCosineTrack(int amount, int amplitude)
 
     for (int i = 0; i < amount; i++)
     {
-        ret[i] = (cos(i) * amplitude) * -1;
+        ret[i] = (cos(i) * amplitude);
     }
 
     return ret;
@@ -35,7 +35,7 @@ float* CreateTangentTrack(int amount)
 
     for (int i = 0; i < amount; i++)
     {
-        ret[i] = tan(i + 1);
+        ret[i] = tan(i);
     }
 
     return ret;
@@ -82,7 +82,7 @@ TgaFile* PlotSequenceToImage(float* curve, int curveLength)
 
     for (int i = 0; i < curveLength; i++)
     {
-        int pt = ceil(curve[i]);
+        int pt = ceil(curve[i] * -1);
 
         if (pt > highestPoint)
             highestPoint = pt;
@@ -100,7 +100,7 @@ TgaFile* PlotSequenceToImage(float* curve, int curveLength)
 
     for (int i = 0; i < curveLength; i++)
     {
-        int pt = curve[i];
+        int pt = curve[i] * -1;
         int baseLine = i + (curveLength * imageHeight / 2);
 
         TgaPix* px = image->Get(i, (imageHeight / 2) + pt);
