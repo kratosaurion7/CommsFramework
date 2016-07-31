@@ -6,6 +6,8 @@ HANDLE outMut;
 
 HINSTANCE qk_inst;
 HWND qk_hwnd[MAX_QUICKWINDOWS] = { 0 };
+HANDLE qk_threads[MAX_QUICKWINDOWS] = { 0 };
+DWORD qk_threadid[MAX_QUICKWINDOWS] = { 0 };
 
 
 void stprintf(char* buf)
@@ -64,6 +66,16 @@ int GetNCmdShow()
     return SW_SHOWDEFAULT;
 }
 
+DWORD WINAPI ThreadFuncHandleWindows(LPVOID lpParam)
+{
+    MSG msg;
+    while (GetMessage(&msg, NULL, 0, 0)) {
+        TranslateMessage(&msg);
+        DispatchMessage(&msg);
+    }
+
+    return 0;
+}
 
 int GetNextFreeHwndIndex()
 {
@@ -115,12 +127,20 @@ void QuickCreateWindow(TgaFile * content)
     ShowWindow(hwnd, GetNCmdShow());
     UpdateWindow(hwnd);
 
+    qk_threads[index] = CreateThread(
+        NULL,
+        0,
+        ThreadFuncHandleWindows,
+        NULL,
+        0,
+        &qk_threadid[index]);
 
-    MSG msg;
-    while (GetMessage(&msg, NULL, 0, 0)) {
-        TranslateMessage(&msg);
-        DispatchMessage(&msg);
-    }
+
+    //MSG msg;
+    //while (GetMessage(&msg, NULL, 0, 0)) {
+    //    TranslateMessage(&msg);
+    //    DispatchMessage(&msg);
+    //}
 
 
 #endif

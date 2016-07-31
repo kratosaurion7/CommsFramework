@@ -14,10 +14,14 @@ extern HANDLE outMut;
 
 extern HINSTANCE qk_inst;
 extern HWND qk_hwnd[MAX_QUICKWINDOWS];
+extern HANDLE qk_threads[MAX_QUICKWINDOWS];
+extern DWORD qk_threadid[MAX_QUICKWINDOWS];
 
 BOOL InitApp();
 LRESULT CALLBACK WndProc(HWND hwnd, UINT uiMsg, WPARAM wParam, LPARAM lParam);
 int GetNCmdShow();
+
+DWORD WINAPI ThreadFuncHandleWindows(LPVOID lpParam);
 
 int GetNextFreeHwndIndex();
 
