@@ -11,7 +11,7 @@ float* CreateSinusTrack(int amount, int amplitude)
 
     for (int i = 0; i < amount; i++)
     {
-        ret[i] = sin(i + 1) * amplitude;
+        ret[i] = (sin(i + 1) * amplitude) * -1;
     }
 
     return ret;
@@ -23,7 +23,7 @@ float* CreateCosineTrack(int amount, int amplitude)
 
     for (int i = 0; i < amount; i++)
     {
-        ret[i] = cos(i + 1) * amplitude;
+        ret[i] = (cos(i + 1) * amplitude) * -1;
     }
 
     return ret;
