@@ -25,11 +25,11 @@ int main()
     int smoothFactor = 5;
     int curveLen = seqLen * smoothFactor - (smoothFactor);
 
-    float* seq = CreateSinusTrack(seqLen, amplitude);
+    float* seq = CreateCosineTrack(seqLen, amplitude);
     float* smoothedSeq = SmoothCurveTrack(seq, seqLen, smoothFactor);
 
     auto x = PlotSequenceToImage(smoothedSeq, curveLen);
-    x->Save("sin.tga");
+    x->Save("cos.tga");
     return 0;
 
     FantasyGame* game = new FantasyGame();
