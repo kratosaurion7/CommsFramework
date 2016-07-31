@@ -24,8 +24,7 @@ int main()
     int smoothFactor = 4;
     int curveLen = seqLen * smoothFactor;
 
-    float* seq = CreateSinusTrack(seqLen, 10);
-
+    float* seq = CreateSinusTrack(seqLen, 3);
     float* smoothedSeq = SmoothCurveTrack(seq, seqLen, smoothFactor);
 
     TgaFile image = TgaFile();
@@ -35,7 +34,9 @@ int main()
     {
         int pt = smoothedSeq[i];
         int baseLine = i + (curveLen * curveLen / 2);
-        TgaPix* px = image.Pixels[baseLine + pt];
+
+        int pixAddress = baseLine + (pt * seqLen);
+        TgaPix* px = image.Pixels[pixAddress];
         px->a = 255;
         px->r = 255;
         px->g = 0;
