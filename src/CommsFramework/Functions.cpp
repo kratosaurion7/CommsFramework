@@ -8,7 +8,7 @@ float* CreateSinusTrack(int amount, int amplitude)
 
     for (int i = 0; i < amount; i++)
     {
-        ret[i] = sin(i) + amplitude;
+        ret[i] = sin(i + 1) * amplitude;
     }
 
     return ret;
