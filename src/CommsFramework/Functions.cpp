@@ -17,6 +17,30 @@ float* CreateSinusTrack(int amount, int amplitude)
     return ret;
 }
 
+float* CreateCosineTrack(int amount, int amplitude)
+{
+    float* ret = new float[amount];
+
+    for (int i = 0; i < amount; i++)
+    {
+        ret[i] = cos(i + 1) * amplitude;
+    }
+
+    return ret;
+}
+
+float* CreateTangentTrack(int amount)
+{
+    float* ret = new float[amount];
+
+    for (int i = 0; i < amount; i++)
+    {
+        ret[i] = tan(i + 1);
+    }
+
+    return ret;
+}
+
 float* SmoothCurveTrack(float* track, int trackLength, int factor)
 {
     float* smoothedCurve = new float[trackLength * factor];

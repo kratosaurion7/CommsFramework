@@ -20,7 +20,7 @@ class Game_Start_Params;
 
 int main()
 {
-    int amplitude = 40;
+    int amplitude = 20;
     int seqLen = 100;
     int smoothFactor = 5;
     int curveLen = seqLen * smoothFactor - (smoothFactor);
@@ -29,7 +29,7 @@ int main()
     float* smoothedSeq = SmoothCurveTrack(seq, seqLen, smoothFactor);
 
     auto x = PlotSequenceToImage(smoothedSeq, curveLen);
-    x->Save("out.tga");
+    x->Save("sin.tga");
     return 0;
 
     FantasyGame* game = new FantasyGame();

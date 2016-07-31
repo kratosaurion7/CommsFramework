@@ -5,6 +5,8 @@ class TgaFile;
 #include <string>
 
 float* CreateSinusTrack(int amount, int amplitude);
+float* CreateCosineTrack(int amount, int amplitude);
+float* CreateTangentTrack(int amount);
 
 float* SmoothCurveTrack(float* track, int trackLength, int factor);
 
