@@ -21,7 +21,7 @@ class Game_Start_Params;
 int main()
 {
     int seqLen = 100;
-    float* seq = CreateSinusTrack(seqLen, 10);
+    float* seq = CreateSinusTrack(seqLen, 3);
 
     TgaFile image = TgaFile();
     image.Init(seqLen, seqLen);
@@ -30,7 +30,9 @@ int main()
     {
         int pt = seq[i];
         int baseLine = i + (seqLen * seqLen / 2);
-        TgaPix* px = image.Pixels[baseLine + pt];
+
+        int pixAddress = baseLine + (pt * seqLen);
+        TgaPix* px = image.Pixels[pixAddress];
         px->a = 255;
         px->r = 255;
         px->g = 0;
