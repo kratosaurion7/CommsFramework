@@ -20,18 +20,6 @@ class Game_Start_Params;
 
 int main()
 {
-    int amplitude = 20;
-    int seqLen = 100;
-    int smoothFactor = 5;
-    int curveLen = seqLen * smoothFactor - (smoothFactor);
-
-    float* seq = CreateCosineTrack(seqLen, amplitude);
-    float* smoothedSeq = SmoothCurveTrack(seq, seqLen, smoothFactor);
-
-    auto x = PlotSequenceToImage(smoothedSeq, curveLen);
-    x->Save("cos.tga");
-    return 0;
-
     FantasyGame* game = new FantasyGame();
     game->ReadConfig();
 
