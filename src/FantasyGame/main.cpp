@@ -20,33 +20,16 @@ class Game_Start_Params;
 
 int main()
 {
-    int amplitude = 20;
-    int height = amplitude * 2;
+    int amplitude = 40;
     int seqLen = 100;
-    int smoothFactor = 20;
-    int curveLen = seqLen * smoothFactor;
+    int smoothFactor = 5;
+    int curveLen = seqLen * smoothFactor - (smoothFactor);
 
     float* seq = CreateSinusTrack(seqLen, amplitude);
     float* smoothedSeq = SmoothCurveTrack(seq, seqLen, smoothFactor);
 
-    TgaFile image = TgaFile();
-    image.Init(curveLen, height);
-    
-    for (int i = 0; i < curveLen; i++)
-    {
-        int pt = smoothedSeq[i];
-        int baseLine = i + (curveLen * height / 2);
-
-        int pixAddress = baseLine + (pt * seqLen);
-        TgaPix* px = image.Get(i, (height / 2) + pt);
-        px->a = 255;
-        px->r = 255;
-        px->g = 0;
-        px->b = 255;
-    }
-
-    image.Save("out.tga");
-
+    auto x = PlotSequenceToImage(smoothedSeq, curveLen);
+    x->Save("out.tga");
     return 0;
 
     FantasyGame* game = new FantasyGame();
