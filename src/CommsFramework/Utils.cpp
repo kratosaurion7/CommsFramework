@@ -93,7 +93,8 @@ int GetNCmdShow()
 DWORD WINAPI ThreadFuncHandleWindows(LPVOID lpParam)
 {
     MSG msg;
-    while (GetMessage(&msg, NULL, 0, 0)) {
+    while (GetMessage(&msg, NULL, 0, 0)) 
+    {
         TranslateMessage(&msg);
         DispatchMessage(&msg);
     }
@@ -103,7 +104,29 @@ DWORD WINAPI ThreadFuncHandleWindows(LPVOID lpParam)
 
 void DoPaint(HWND window)
 {
+    int myIndex = GetIndexByHwnd(window);
 
+    ID2D1HwndRenderTarget* target = RenderTarget[myIndex];
+    ID2D1BitmapBrush* brush = BGBrush[myIndex];
+
+    if (target == NULL || brush == NULL)
+        return;
+
+    RECT rc;
+    GetClientRect(window, &rc);
+
+    target->BeginDraw();
+
+    target->Clear();
+    target->FillRectangle(
+        D2D1::RectF(
+            rc.left,
+            rc.top,
+            rc.right,
+            rc.bottom),
+        brush);
+
+    HRESULT hr = target->EndDraw();
 }
 
 int GetNextFreeHwndIndex()
@@ -111,6 +134,17 @@ int GetNextFreeHwndIndex()
     for (int i = 0; i < MAX_QUICKWINDOWS; i++)
     {
         if (qk_hwnd[i] == NULL)
+            return i;
+    }
+
+    return -1;
+}
+
+int GetIndexByHwnd(HWND window)
+{
+    for (int i = 0; i < MAX_QUICKWINDOWS; i++)
+    {
+        if (qk_hwnd[i] == window)
             return i;
     }
 
@@ -131,6 +165,7 @@ void QuickCreateWindow(TgaFile* content)
     if (index < 0)
         return;
 
+    int* pindex = new int(index);
     HWND hwnd = CreateWindow(
         L"CommsFramework",
         L"QuickWindow",

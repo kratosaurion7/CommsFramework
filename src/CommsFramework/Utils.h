@@ -29,7 +29,7 @@ void DoPaint(HWND window);
 
 // Finds the next available spot in the window array
 int GetNextFreeHwndIndex();
-
+int GetIndexByHwnd(HWND window);
 
 
 #endif // _WIN32
