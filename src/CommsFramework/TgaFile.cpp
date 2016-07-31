@@ -16,7 +16,7 @@ TgaFile::TgaFile()
     Header->width = 0;
     Header->height = 0;
     Header->bitsperpixel = 32;
-    Header->imagedescriptor = 8;
+    Header->imagedescriptor = 32;
 }
 
 
@@ -39,17 +39,17 @@ void TgaFile::Init(short int w, short int h)
     Width = w;
     Height = h;
 
-    Header->width = 100;
-    Header->height = 100;
+    Header->width = w;
+    Header->height = h;
 
     Pixels = new TgaPix*[Width * Height];
     for (int i = 0; i < Width * Height; i++)
     {
         TgaPix* px = new TgaPix();
         px->a = 255;
-        px->b = 0;
-        px->g = 0;
-        px->r = 0;
+        px->b = 255;
+        px->g = 255;
+        px->r = 255;
 
         Pixels[i] = px;
     }
@@ -90,7 +90,6 @@ void TgaFile::Clear()
         px->g = 0;
         px->r = 0;
     }
-
 }
 
 void TgaFile::FillColor(short int r, short int g, short int b, short int a)
@@ -103,7 +102,6 @@ void TgaFile::FillColor(short int r, short int g, short int b, short int a)
         px->g = g;
         px->r = r;
     }
-
 }
 
 void TgaFile::FillColor(TgaPix * pixColor)
@@ -116,5 +114,4 @@ void TgaFile::FillColor(TgaPix * pixColor)
         px->g = pixColor->g;
         px->r = pixColor->r;
     }
-
 }
