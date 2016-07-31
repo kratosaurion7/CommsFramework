@@ -115,3 +115,17 @@ void TgaFile::FillColor(TgaPix * pixColor)
         px->r = pixColor->r;
     }
 }
+
+TgaPix* TgaFile::Get(int x, int y)
+{
+    return Pixels[x + (y * Width)];
+}
+
+void TgaFile::Set(TgaPix * px, int x, int y)
+{
+    TgaPix* pixel = this->Get(x, y);
+    pixel->a = px->a;
+    pixel->r = px->r;
+    pixel->g = px->g;
+    pixel->b = px->b;
+}

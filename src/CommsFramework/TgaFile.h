@@ -55,6 +55,9 @@ public:
     void FillColor(short int r, short int g, short int b, short int a);
     void FillColor(TgaPix* pixColor);
 
+    TgaPix* Get(int x, int y);
+    void Set(TgaPix* px, int x, int y);
+
     void Save(std::string fileName);
 
     void Clear();

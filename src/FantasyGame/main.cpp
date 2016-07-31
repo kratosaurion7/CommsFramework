@@ -20,23 +20,25 @@ class Game_Start_Params;
 
 int main()
 {
+    int amplitude = 20;
+    int height = amplitude * 2;
     int seqLen = 100;
-    int smoothFactor = 4;
+    int smoothFactor = 20;
     int curveLen = seqLen * smoothFactor;
 
-    float* seq = CreateSinusTrack(seqLen, 3);
+    float* seq = CreateSinusTrack(seqLen, amplitude);
     float* smoothedSeq = SmoothCurveTrack(seq, seqLen, smoothFactor);
 
     TgaFile image = TgaFile();
-    image.Init(curveLen, curveLen);
+    image.Init(curveLen, height);
     
     for (int i = 0; i < curveLen; i++)
     {
         int pt = smoothedSeq[i];
-        int baseLine = i + (curveLen * curveLen / 2);
+        int baseLine = i + (curveLen * height / 2);
 
         int pixAddress = baseLine + (pt * seqLen);
-        TgaPix* px = image.Pixels[pixAddress];
+        TgaPix* px = image.Get(i, (height / 2) + pt);
         px->a = 255;
         px->r = 255;
         px->g = 0;
