@@ -16,10 +16,20 @@
 #include <TgaFile.h>
 #include <Functions.h>
 
+#include <Utils.h>
+
+
 class Game_Start_Params;
 
 int main()
 {
+    auto x = new TgaFile();
+    x->Init(300, 300);
+
+    QuickCreateWindow(x);
+    QuickCreateWindow(x);
+    QuickCreateWindow(x);
+
     FantasyGame* game = new FantasyGame();
     game->ReadConfig();
 

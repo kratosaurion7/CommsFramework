@@ -1,6 +1,9 @@
 #include "Utils.h"
 
+#include <cassert>
+
 #include "TgaFile.h"
+#include "ImageLoader.h"
 
 void stprintf(char* buf)
 {
@@ -201,11 +204,13 @@ void QuickCreateWindow(TgaFile* content)
     size.width = content->Width;
     D2D1_BITMAP_PROPERTIES props = D2D1::BitmapProperties();
     props.pixelFormat = D2D1_PIXEL_FORMAT();
-    props.pixelFormat.alphaMode = D2D1_ALPHA_MODE_PREMULTIPLIED;
+    props.pixelFormat.alphaMode = D2D1_ALPHA_MODE_IGNORE;
     props.pixelFormat.format = DXGI_FORMAT_B8G8R8A8_UNORM;
-
+    
     hr = RenderTarget[index]->CreateBitmap(size, props, &bmp);
-    hr = bmp->CopyFromMemory(0, content->Pixels, 32);
+    assert(SUCCEEDED(hr));
+    hr = bmp->CopyFromMemory(0, content->Pixels, 1);
+    assert(SUCCEEDED(hr));
 
     ID2D1BitmapBrush* bru;
     hr = RenderTarget[index]->CreateBitmapBrush(bmp, &bru);
