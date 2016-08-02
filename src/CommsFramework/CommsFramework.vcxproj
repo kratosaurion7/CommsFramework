@@ -340,6 +340,7 @@ XCOPY /Y /E "Assets\*" "$(TargetDir)Assets"</Command>
     <ClCompile Include="BaseMouse.cpp" />
     <ClCompile Include="BaseSprite.cpp" />
     <ClCompile Include="BitHelper.cpp" />
+    <ClCompile Include="BitmapHandler.cpp" />
     <ClCompile Include="DialogManager.cpp" />
     <ClCompile Include="DrawObject.cpp" />
     <ClCompile Include="EncryptedPackageFile.cpp" />
@@ -411,6 +412,7 @@ XCOPY /Y /E "Assets\*" "$(TargetDir)Assets"</Command>
     <ClInclude Include="BaseText.h" />
     <ClInclude Include="BaseTexture.h" />
     <ClInclude Include="BitHelper.h" />
+    <ClInclude Include="BitmapHandler.h" />
     <ClInclude Include="DialogManager.h" />
     <ClInclude Include="DrawObject.h" />
     <ClInclude Include="EncryptedPackageFile.h" />

@@ -8,6 +8,7 @@
 #include <wincodec.h>
 #include <wincodecsdk.h>
 
+
 #include <ImageLoader.h>
 
 
@@ -36,6 +37,8 @@ BOOL				ReCreateRenderTarget(HWND window);
 
 void DoPaint(HWND);
 
+HBITMAP bitmp;
+
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
                      _In_ LPWSTR    lpCmdLine,
@@ -45,6 +48,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     UNREFERENCED_PARAMETER(lpCmdLine);
 
     // TODO: Place code here.
+
+    bitmp = (HBITMAP)LoadImage(NULL, L"Untitled.bmp", IMAGE_BITMAP, 0, 0, LR_CREATEDIBSECTION | LR_DEFAULTSIZE | LR_LOADFROMFILE);
 
     ImageLoader* loader = new ImageLoader();
 
@@ -207,8 +212,20 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             {
                 PAINTSTRUCT ps;
                 HDC hdc = BeginPaint(hWnd, &ps);
-                
-                DoPaint(MainWindow);
+                HDC hdcMem;
+                BITMAP hbit;
+                HGDIOBJ oldBitmap;
+
+                hdcMem = CreateCompatibleDC(hdc);
+                oldBitmap = SelectObject(hdcMem, bitmp);
+
+                GetObject(bitmp, sizeof(BITMAP), &hbit);
+                BitBlt(hdc, 0, 0, hbit.bmWidth, hbit.bmHeight, hdcMem, 0, 0, SRCCOPY);
+
+                SelectObject(hdcMem, oldBitmap);
+                DeleteDC(hdcMem);
+
+                //DoPaint(MainWindow);
 
                 EndPaint(hWnd, &ps);
                 

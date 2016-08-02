@@ -306,6 +306,9 @@
     <ClCompile Include="TgaFile.cpp">
       <Filter>Framework\Image</Filter>
     </ClCompile>
+    <ClCompile Include="BitmapHandler.cpp">
+      <Filter>Framework\System\Windows</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="XmlReader.h">
@@ -559,6 +562,9 @@
     </ClInclude>
     <ClInclude Include="TgaFile.h">
       <Filter>Framework\Image</Filter>
+    </ClInclude>
+    <ClInclude Include="BitmapHandler.h">
+      <Filter>Framework\System\Windows</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
