@@ -15,20 +15,30 @@
 
 #include <TgaFile.h>
 #include <Functions.h>
+#include <ImageLoader.h>
 
 #include <Utils.h>
 
 
 class Game_Start_Params;
+class IWICBitmap;
 
 int main()
 {
-    auto x = new TgaFile();
-    x->Init(300, 300);
+    ImageLoader ldr = ImageLoader();
 
-    QuickCreateWindow(x);
-    QuickCreateWindow(x);
-    QuickCreateWindow(x);
+    TgaFile* img = new TgaFile();
+    img->Init(256, 256);
+    img->FillColor(255, 0, 0, 255);
+    img->Save("test.tga");
+
+
+    auto bits = ldr.CreateBits(img);
+
+    return 0;
+
+
+
 
     FantasyGame* game = new FantasyGame();
     game->ReadConfig();
