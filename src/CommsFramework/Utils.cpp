@@ -76,6 +76,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uiMsg, WPARAM wParam, LPARAM lParam)
         }
         case WM_DESTROY:
         {
+            PostQuitMessage(0);
             break;
         }
         default:
@@ -99,7 +100,6 @@ int GetNCmdShow()
 
 DWORD WINAPI ThreadFuncHandleWindows(LPVOID lpParam)
 {
-
     MSG msg;
     while (GetMessage(&msg, NULL, 0, 0)) 
     {
