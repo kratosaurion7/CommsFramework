@@ -25,18 +25,21 @@ class IWICBitmap;
 
 int main()
 {
-    ImageLoader ldr = ImageLoader();
+    auto b = new TgaFile();
+    b->Init(300, 300);
+    b->FillColor(0, 0, 255, 255);
 
-    TgaFile* img = new TgaFile();
-    img->Init(256, 256);
-    img->FillColor(255, 0, 0, 255);
-    img->Save("test.tga");
+    auto g = new TgaFile();
+    g->Init(300, 300);
+    g->FillColor(0, 255, 0, 255);
 
+    auto r = new TgaFile();
+    r->Init(300, 300);
+    r->FillColor(255, 0, 0, 255);
 
-    auto bits = ldr.CreateBits(img);
-
-    return 0;
-
+    QuickCreateWindow(b);
+    QuickCreateWindow(g);
+    QuickCreateWindow(r);
 
 
 

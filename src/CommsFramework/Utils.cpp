@@ -78,9 +78,13 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uiMsg, WPARAM wParam, LPARAM lParam)
         {
             break;
         }
+        default:
+        {
+            return DefWindowProc(hwnd, uiMsg, wParam, lParam);
+        }
     }
 
-    return DefWindowProc(hwnd, uiMsg, wParam, lParam);
+    return 0;
 }
 
 int GetNCmdShow()
@@ -95,6 +99,7 @@ int GetNCmdShow()
 
 DWORD WINAPI ThreadFuncHandleWindows(LPVOID lpParam)
 {
+
     MSG msg;
     while (GetMessage(&msg, NULL, 0, 0)) 
     {
@@ -182,9 +187,6 @@ void QuickCreateWindow(TgaFile* content)
 
     qk_hwnd[index] = hwnd;
 
-    ShowWindow(hwnd, GetNCmdShow());
-    UpdateWindow(hwnd);
-
     RECT rec;
     GetClientRect(hwnd, &rec);
 
@@ -198,23 +200,12 @@ void QuickCreateWindow(TgaFile* content)
         ),
         &RenderTarget[index]);
 
-    ID2D1Bitmap* bmp;
-    D2D1_SIZE_U size;
-    size.height = content->Height;
-    size.width = content->Width;
-    D2D1_BITMAP_PROPERTIES props = D2D1::BitmapProperties();
-    props.pixelFormat = D2D1_PIXEL_FORMAT();
-    props.pixelFormat.alphaMode = D2D1_ALPHA_MODE_IGNORE;
-    props.pixelFormat.format = DXGI_FORMAT_B8G8R8A8_UNORM;
-    
-    hr = RenderTarget[index]->CreateBitmap(size, props, &bmp);
-    assert(SUCCEEDED(hr));
-    hr = bmp->CopyFromMemory(0, content->Pixels, 1);
-    assert(SUCCEEDED(hr));
+    ImageLoader loader = ImageLoader();
+    IWICBitmap* bmp = loader.CreateBitmap(content, false);
 
-    ID2D1BitmapBrush* bru;
-    hr = RenderTarget[index]->CreateBitmapBrush(bmp, &bru);
-    BGBrush[index] = bru;
+    ID2D1Bitmap* d2bmp;
+    hr = RenderTarget[index]->CreateBitmapFromWicBitmap(bmp, &d2bmp);
+    hr = RenderTarget[index]->CreateBitmapBrush(d2bmp, &BGBrush[index]);
 
     if (FAILED(hr))
     {
@@ -222,6 +213,9 @@ void QuickCreateWindow(TgaFile* content)
 
         return;
     }
+
+    ShowWindow(hwnd, GetNCmdShow());
+    UpdateWindow(hwnd);
 
     qk_threads[index] = CreateThread(
         NULL,
