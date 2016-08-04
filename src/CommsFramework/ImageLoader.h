@@ -21,7 +21,7 @@ public:
 
     IWICBitmap* LoadImageFromDisk(std::string fileName);
 
-    IWICBitmap* CreateBitmap(TgaFile* originTga);
+    IWICBitmap* CreateBitmap(TgaFile* originTga, bool supportAlpha = true);
 
     void SaveToPng(TgaFile* file);
     void SaveToPng(IWICBitmap* bmp);

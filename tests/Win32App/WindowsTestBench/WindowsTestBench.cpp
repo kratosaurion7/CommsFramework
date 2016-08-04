@@ -10,7 +10,7 @@
 
 
 #include <ImageLoader.h>
-
+#include <TgaFile.h>
 
 #define MAX_LOADSTRING 100
 
@@ -53,7 +53,12 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     ImageLoader* loader = new ImageLoader();
 
-    bgImage = loader->LoadImageFromDisk("assets\\image.png");
+    TgaFile* tga = new TgaFile();
+    tga->Init(300, 300);
+    tga->FillColor(0, 255, 0, 255);
+    loader->SaveToPng(tga);
+
+    bgImage = loader->CreateBitmap(tga, false);
     
     // Initialize global strings
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
@@ -211,21 +216,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         case WM_PAINT:
             {
                 PAINTSTRUCT ps;
-                HDC hdc = BeginPaint(hWnd, &ps);
-                HDC hdcMem;
-                BITMAP hbit;
-                HGDIOBJ oldBitmap;
 
-                hdcMem = CreateCompatibleDC(hdc);
-                oldBitmap = SelectObject(hdcMem, bitmp);
-
-                GetObject(bitmp, sizeof(BITMAP), &hbit);
-                BitBlt(hdc, 0, 0, hbit.bmWidth, hbit.bmHeight, hdcMem, 0, 0, SRCCOPY);
-
-                SelectObject(hdcMem, oldBitmap);
-                DeleteDC(hdcMem);
-
-                //DoPaint(MainWindow);
+                DoPaint(MainWindow);
 
                 EndPaint(hWnd, &ps);
                 
@@ -290,8 +282,13 @@ BOOL ReCreateRenderTarget(HWND window)
 	RECT rec;
 	GetClientRect(window, &rec);
 
+    D2D1_RENDER_TARGET_PROPERTIES format = D2D1::RenderTargetProperties();
+    format.pixelFormat = D2D1_PIXEL_FORMAT();
+    format.pixelFormat.alphaMode = D2D1_ALPHA_MODE_IGNORE;
+    format.pixelFormat.format = DXGI_FORMAT_B8G8R8A8_UNORM;
+
 	HRESULT hr = D2Factory->CreateHwndRenderTarget(
-		D2D1::RenderTargetProperties(),
+        format,
 		D2D1::HwndRenderTargetProperties(
 			window,
 			D2D1::SizeU(
@@ -310,15 +307,18 @@ BOOL ReCreateRenderTarget(HWND window)
 
 void DoPaint(HWND target)
 {
-    if (DefaultBrush == NULL)
+    if (BGBrush == NULL)
     {
-        HRESULT hr = RenderTarget->CreateSolidColorBrush(D2D1::ColorF(D2D1::ColorF::CornflowerBlue), &DefaultBrush);
+        //HRESULT hr = RenderTarget->CreateSolidColorBrush(D2D1::ColorF(D2D1::ColorF::CornflowerBlue), &DefaultBrush);
+        ID2D1Bitmap* outbit;
+        HRESULT hr = RenderTarget->CreateBitmapFromWicBitmap(bgImage, &outbit);
+        hr = RenderTarget->CreateBitmapBrush(outbit, &BGBrush);
 
-        ID2D1Bitmap* bgBitmap = NULL;
-        
-        hr = RenderTarget->CreateBitmapFromWicBitmap(bgImage, &bgBitmap);
+        //ID2D1Bitmap* bgBitmap = NULL;
+        //
+        //hr = RenderTarget->CreateBitmapFromWicBitmap(bgImage, &bgBitmap);
 
-        RenderTarget->CreateBitmapBrush(bgBitmap, &BGBrush);
+        //RenderTarget->CreateBitmapBrush(bgBitmap, &BGBrush);
 
         if (FAILED(hr))
         {
@@ -341,6 +341,8 @@ void DoPaint(HWND target)
 			rc.right - 100.0f,
 			rc.bottom - 100.0f),
         BGBrush);
+
+    
 
     HRESULT hr = RenderTarget->EndDraw();
 

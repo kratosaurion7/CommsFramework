@@ -53,7 +53,7 @@ IWICBitmap* ImageLoader::LoadImageFromDisk(std::string fileName)
     return bitmap;
 }
 
-IWICBitmap* ImageLoader::CreateBitmap(TgaFile* originTga)
+IWICBitmap* ImageLoader::CreateBitmap(TgaFile* originTga, bool supportAlpha)
 {
     HRESULT hr;
 
@@ -74,8 +74,15 @@ IWICBitmap* ImageLoader::CreateBitmap(TgaFile* originTga)
     }
 
     IWICBitmap* bitmap = NULL;
-    hr = WicFactory->CreateBitmap(originTga->Width, originTga->Height, GUID_WICPixelFormat32bppBGRA, WICBitmapCacheOnDemand, &bitmap);
-
+    if (supportAlpha)
+    {
+         hr = WicFactory->CreateBitmap(originTga->Width, originTga->Height, GUID_WICPixelFormat32bppBGRA, WICBitmapCacheOnDemand, &bitmap);
+    }
+    else
+    {
+        hr = WicFactory->CreateBitmap(originTga->Width, originTga->Height, GUID_WICPixelFormat32bppBGR, WICBitmapCacheOnDemand, &bitmap);
+    }
+    
     WICRect rec;
     rec.Height = originTga->Height;
     rec.Width = originTga->Width;
