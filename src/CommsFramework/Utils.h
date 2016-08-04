@@ -13,16 +13,12 @@ extern HANDLE outMut;
 #define MAX_QUICKWINDOWS 10
 
 // Thread & Window handling arrays
-//extern HINSTANCE qk_inst;
-//extern HWND qk_hwnd[MAX_QUICKWINDOWS];
-//extern HANDLE qk_threads[MAX_QUICKWINDOWS];
-//extern DWORD qk_threadid[MAX_QUICKWINDOWS];
 
 // Window init functions and window callback
 BOOL InitApp();
 BOOL InitDX();
 int GetNCmdShow();
-LRESULT CALLBACK WndProc(HWND hwnd, UINT uiMsg, WPARAM wParam, LPARAM lParam);
+LRESULT CALLBACK QuickWindowProc(HWND hwnd, UINT uiMsg, WPARAM wParam, LPARAM lParam);
 DWORD WINAPI ThreadFuncHandleWindows(LPVOID lpParam);
 
 void DoPaint(HWND window);
@@ -31,6 +27,7 @@ void DoPaint(HWND window);
 int GetNextFreeHwndIndex();
 int GetIndexByHwnd(HWND window);
 
+// ===== Quick Window =====
 
 #endif // _WIN32
 

@@ -35,7 +35,7 @@ BOOL InitApp()
     WNDCLASS wc;
 
     wc.style = 0;
-    wc.lpfnWndProc = WndProc;
+    wc.lpfnWndProc = QuickWindowProc;
     wc.cbClsExtra = 0;
     wc.cbWndExtra = 0;
     wc.hInstance = qk_inst;
@@ -60,7 +60,7 @@ BOOL InitDX()
     return SUCCEEDED(hr);
 }
 
-LRESULT CALLBACK WndProc(HWND hwnd, UINT uiMsg, WPARAM wParam, LPARAM lParam)
+LRESULT CALLBACK QuickWindowProc(HWND hwnd, UINT uiMsg, WPARAM wParam, LPARAM lParam)
 {
     switch (uiMsg)
     {
@@ -76,8 +76,13 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uiMsg, WPARAM wParam, LPARAM lParam)
         }
         case WM_DESTROY:
         {
-            PostQuitMessage(0);
-            break;
+            //PostQuitMessage(0);
+
+			int windowIndex = GetIndexByHwnd(hwnd);
+			qk_hwnd[windowIndex] = 0; // TODO : Need to CloseHandle() ?
+			qk_threadid[windowIndex] = 0;
+           
+			break;
         }
         default:
         {
@@ -101,11 +106,20 @@ int GetNCmdShow()
 DWORD WINAPI ThreadFuncHandleWindows(LPVOID lpParam)
 {
     MSG msg;
-    while (GetMessage(&msg, NULL, 0, 0)) 
-    {
-        TranslateMessage(&msg);
-        DispatchMessage(&msg);
-    }
+	BOOL bRet;
+	while ((bRet = GetMessage(&msg, NULL, 0, 0)) != 0)
+	{
+		if (bRet == -1)
+		{
+			// handle the error and possibly exit
+			return 1;
+		}
+		else
+		{
+			TranslateMessage(&msg);
+			DispatchMessage(&msg);
+		}
+	}
 
     return 0;
 }
@@ -113,6 +127,12 @@ DWORD WINAPI ThreadFuncHandleWindows(LPVOID lpParam)
 void DoPaint(HWND window)
 {
     int myIndex = GetIndexByHwnd(window);
+
+	if (myIndex < 0)
+	{
+		fprintf(stderr, "Window cannot be found in the array.");
+		return;
+	}
 
     ID2D1HwndRenderTarget* target = RenderTarget[myIndex];
     ID2D1BitmapBrush* brush = BGBrush[myIndex];
@@ -170,11 +190,13 @@ void QuickCreateWindow(TgaFile* content)
     }
 
     int index = GetNextFreeHwndIndex();
-    if (index < 0)
+	if (index < 0)
+	{
+		fprintf(stderr, "Max number of QuickWindow has been reached (10). Cannot create any more.");
         return;
+	}
 
-    int* pindex = new int(index);
-    HWND hwnd = CreateWindow(
+	HWND hwnd = CreateWindow(
         L"CommsFramework",
         L"QuickWindow",
         WS_OVERLAPPEDWINDOW,
@@ -206,6 +228,8 @@ void QuickCreateWindow(TgaFile* content)
     ID2D1Bitmap* d2bmp;
     hr = RenderTarget[index]->CreateBitmapFromWicBitmap(bmp, &d2bmp);
     hr = RenderTarget[index]->CreateBitmapBrush(d2bmp, &BGBrush[index]);
+
+	bmp->Release();
 
     if (FAILED(hr))
     {

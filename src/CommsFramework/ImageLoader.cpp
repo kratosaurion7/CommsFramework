@@ -8,12 +8,12 @@ ImageLoader::ImageLoader()
     WicFactory = NULL;
     
     InitializeServices();
-
 }
-
 
 ImageLoader::~ImageLoader()
 {
+	WicFactory->Release();
+	CoUninitialize();
 }
 
 IWICBitmap* ImageLoader::LoadImageFromDisk(std::string fileName)
@@ -36,19 +36,20 @@ IWICBitmap* ImageLoader::LoadImageFromDisk(std::string fileName)
 
     IWICBitmapFrameDecode *frame = NULL;
 
-    if (SUCCEEDED(hr))
-    {
-        hr = decoder->GetFrame(0, &frame);
-    }
-    else
+    if (FAILED(hr))
     {
         std::string errorString = GetLastErrorString();
 
         return NULL;
     }
 
+	hr = decoder->GetFrame(0, &frame);
+
     IWICBitmap* bitmap = NULL;
     hr = WicFactory->CreateBitmapFromSource(frame, WICBitmapCacheOnDemand, &bitmap);
+
+	frame->Release();
+	decoder->Release();
 
     return bitmap;
 }
@@ -76,7 +77,7 @@ IWICBitmap* ImageLoader::CreateBitmap(TgaFile* originTga, bool supportAlpha)
     IWICBitmap* bitmap = NULL;
     if (supportAlpha)
     {
-         hr = WicFactory->CreateBitmap(originTga->Width, originTga->Height, GUID_WICPixelFormat32bppBGRA, WICBitmapCacheOnDemand, &bitmap);
+        hr = WicFactory->CreateBitmap(originTga->Width, originTga->Height, GUID_WICPixelFormat32bppBGRA, WICBitmapCacheOnDemand, &bitmap);
     }
     else
     {
