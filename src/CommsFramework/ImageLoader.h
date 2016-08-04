@@ -21,7 +21,10 @@ public:
 
     IWICBitmap* LoadImageFromDisk(std::string fileName);
 
-    IWICBitmap* CreateBits(TgaFile* originTga);
+    IWICBitmap* CreateBitmap(TgaFile* originTga);
+
+    void SaveToPng(TgaFile* file);
+    void SaveToPng(IWICBitmap* bmp);
 
 private:
     IWICImagingFactory* WicFactory;

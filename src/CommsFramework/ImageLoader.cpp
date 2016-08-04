@@ -53,7 +53,7 @@ IWICBitmap* ImageLoader::LoadImageFromDisk(std::string fileName)
     return bitmap;
 }
 
-IWICBitmap* ImageLoader::CreateBits(TgaFile* originTga)
+IWICBitmap* ImageLoader::CreateBitmap(TgaFile* originTga)
 {
     HRESULT hr;
 
@@ -72,8 +72,6 @@ IWICBitmap* ImageLoader::CreateBits(TgaFile* originTga)
             memcpy(&imageData[index++], &x->a, sizeof(unsigned char));
         }
     }
-
-
 
     IWICBitmap* bitmap = NULL;
     hr = WicFactory->CreateBitmap(originTga->Width, originTga->Height, GUID_WICPixelFormat32bppBGRA, WICBitmapCacheOnDemand, &bitmap);
@@ -107,22 +105,42 @@ IWICBitmap* ImageLoader::CreateBits(TgaFile* originTga)
 
     lock->Release();
 
+    return bitmap;
+
+}
+
+void ImageLoader::SaveToPng(TgaFile * file)
+{
+    IWICBitmap* convertedTga = this->CreateBitmap(file);
+
+    SaveToPng(convertedTga);
+
+    convertedTga->Release();
+}
+
+void ImageLoader::SaveToPng(IWICBitmap* bmp)
+{
+    HRESULT hr;
     IWICBitmapEncoder* enc = NULL;
     IWICBitmapFrameEncode* frame = NULL;
     IPropertyBag2 *pPropertybag = NULL;
     IWICStream* bitmapStream = NULL;
 
+    UINT height = 0;
+    UINT width = 0;
+    bmp->GetSize(&width, &height);
+
     hr = WicFactory->CreateStream(&bitmapStream);
-    
+
     DeleteFile(L"out.png");
     hr = bitmapStream->InitializeFromFilename(L"out.png", GENERIC_WRITE);
 
     hr = WicFactory->CreateEncoder(GUID_ContainerFormatPng, NULL, &enc);
-    
+
     hr = enc->Initialize(bitmapStream, WICBitmapEncoderNoCache);
 
     hr = enc->CreateNewFrame(&frame, &pPropertybag);
-
+    
     //PROPBAG2 option = { 0 };
     //option.pstrName = L"TiffCompressionMethod";
     //VARIANT varValue;
@@ -132,42 +150,41 @@ IWICBitmap* ImageLoader::CreateBits(TgaFile* originTga)
     //hr = pPropertybag->Write(1, &option, &varValue);
 
     hr = frame->Initialize(pPropertybag);
-    hr = frame->SetSize(originTga->Width, originTga->Height);
+    hr = frame->SetSize(width, height);
     WICPixelFormatGUID formatGUID = GUID_WICPixelFormat32bppBGRA;
     hr = frame->SetPixelFormat(&formatGUID);
-    
+
     hr = IsEqualGUID(formatGUID, GUID_WICPixelFormat32bppBGRA) ? S_OK : E_FAIL;
-    
+
     //UINT cbStride = (originTga->Width * 24 + 7) / 8/***WICGetStride***/;
-    UINT cbStride = (originTga->Width * 32) / 8/***WICGetStride***/;
-    UINT cbBufferSize = originTga->Height * cbStride;
+    UINT cbStride = (width * 32) / 8/***WICGetStride***/;
+    UINT cbBufferSize = height * cbStride;
 
     BYTE *pbBuffer = new BYTE[cbBufferSize];
 
-    if (pbBuffer != NULL)
-    {
-        unsigned char* bytes = imageData;
+    bmp->CopyPixels(NULL, cbStride, cbBufferSize, pbBuffer);
+    
+    hr = frame->WritePixels(height, cbStride, cbBufferSize, pbBuffer);
+    //if (pbBuffer != NULL)
+    //{
+    //    unsigned char* bytes = imageData;
 
-        for (UINT i = 0; i < cbBufferSize; i++)
-        {
-            pbBuffer[i] = static_cast<BYTE>(bytes[i]);
-        }
+    //    for (UINT i = 0; i < cbBufferSize; i++)
+    //    {
+    //        pbBuffer[i] = static_cast<BYTE>(bytes[i]);
+    //    }
+    //    
+    //    hr = frame->WritePixels(height, cbStride, cbBufferSize, pbBuffer);
 
-        hr = frame->WritePixels(originTga->Height, cbStride, cbBufferSize, pbBuffer);
-
-        delete[] pbBuffer;
-    }
-    else
-    {
-        hr = E_OUTOFMEMORY;
-    }
+    //    delete[] pbBuffer;
+    //}
+    //else
+    //{
+    //    hr = E_OUTOFMEMORY;
+    //}
 
     hr = frame->Commit();
     hr = enc->Commit();
-
-    auto err = GetLastErrorString();
-
-    return bitmap;
 }
 
 void ImageLoader::InitializeServices()
