@@ -309,6 +309,9 @@
     <ClCompile Include="BitmapHandler.cpp">
       <Filter>Framework\System\Windows</Filter>
     </ClCompile>
+    <ClCompile Include="Network.cpp">
+      <Filter>Framework\Network</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="XmlReader.h">

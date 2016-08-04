@@ -182,7 +182,7 @@ XCOPY /Y /E "Assets\*" "$(TargetDir)Assets"</Command>
     </PostBuildEvent>
     <Lib>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
-      <AdditionalDependencies>libzmq-v120-mt-4_0_4.lib;sfml-graphics-d.lib;sfml-system-d.lib;sfml-window-d.lib;sfml-main-d.lib;SDL2.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sfml-graphics-d.lib;sfml-system-d.lib;sfml-window-d.lib;sfml-main-d.lib;SDL2.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <Verbose>false</Verbose>
     </Lib>
   </ItemDefinitionGroup>
@@ -355,6 +355,7 @@ XCOPY /Y /E "Assets\*" "$(TargetDir)Assets"</Command>
     <ClCompile Include="GenType.cpp" />
     <ClCompile Include="ImageLoader.cpp" />
     <ClCompile Include="IOUtilities.cpp" />
+    <ClCompile Include="Network.cpp" />
     <ClCompile Include="SDLFont.cpp" />
     <ClCompile Include="SDLGraphicEngine.cpp" />
     <ClCompile Include="SDLKeyboard.cpp" />
