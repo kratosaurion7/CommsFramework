@@ -23,8 +23,8 @@ public:
 
     IWICBitmap* CreateBitmap(TgaFile* originTga, bool supportAlpha = true);
 
-    void SaveToPng(TgaFile* file);
-    void SaveToPng(IWICBitmap* bmp);
+    void SaveToPng(TgaFile* file, std::string destinationFilename);
+    void SaveToPng(IWICBitmap* bmp, std::string destinationFilename);
 
 private:
     IWICImagingFactory* WicFactory;

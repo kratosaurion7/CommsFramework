@@ -107,25 +107,23 @@ IWICBitmap* ImageLoader::CreateBitmap(TgaFile* originTga, bool supportAlpha)
         bits[i] = static_cast<BYTE>(bytes[i]);
     }
 
-
-    //ZeroMemory(bits, bufSize);
-
     lock->Release();
 
-    return bitmap;
+    delete(imageData);
 
+    return bitmap;
 }
 
-void ImageLoader::SaveToPng(TgaFile * file)
+void ImageLoader::SaveToPng(TgaFile * file, std::string destinationFilename)
 {
     IWICBitmap* convertedTga = this->CreateBitmap(file);
 
-    SaveToPng(convertedTga);
+    SaveToPng(convertedTga, destinationFilename);
 
     convertedTga->Release();
 }
 
-void ImageLoader::SaveToPng(IWICBitmap* bmp)
+void ImageLoader::SaveToPng(IWICBitmap* bmp, std::string destinationFilename)
 {
     HRESULT hr;
     IWICBitmapEncoder* enc = NULL;
@@ -139,8 +137,7 @@ void ImageLoader::SaveToPng(IWICBitmap* bmp)
 
     hr = WicFactory->CreateStream(&bitmapStream);
 
-    DeleteFile(L"out.png");
-    hr = bitmapStream->InitializeFromFilename(L"out.png", GENERIC_WRITE);
+    hr = bitmapStream->InitializeFromFilename(CStringToWideString(destinationFilename).c_str(), GENERIC_WRITE);
 
     hr = WicFactory->CreateEncoder(GUID_ContainerFormatPng, NULL, &enc);
 
@@ -148,6 +145,7 @@ void ImageLoader::SaveToPng(IWICBitmap* bmp)
 
     hr = enc->CreateNewFrame(&frame, &pPropertybag);
     
+    // USEFULL IF NEED TO IMPLEMENT OPTIONS
     //PROPBAG2 option = { 0 };
     //option.pstrName = L"TiffCompressionMethod";
     //VARIANT varValue;
@@ -172,6 +170,8 @@ void ImageLoader::SaveToPng(IWICBitmap* bmp)
     bmp->CopyPixels(NULL, cbStride, cbBufferSize, pbBuffer);
     
     hr = frame->WritePixels(height, cbStride, cbBufferSize, pbBuffer);
+    
+    // USEFUL IF NEED TO PACK IN BYTES MANUALLY
     //if (pbBuffer != NULL)
     //{
     //    unsigned char* bytes = imageData;
@@ -192,6 +192,12 @@ void ImageLoader::SaveToPng(IWICBitmap* bmp)
 
     hr = frame->Commit();
     hr = enc->Commit();
+
+    delete(pbBuffer);
+    bitmapStream->Release();
+    pPropertybag->Release();
+    frame->Release();
+    enc->Release();
 }
 
 void ImageLoader::InitializeServices()
