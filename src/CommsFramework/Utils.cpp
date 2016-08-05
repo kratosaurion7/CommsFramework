@@ -76,12 +76,9 @@ LRESULT CALLBACK QuickWindowProc(HWND hwnd, UINT uiMsg, WPARAM wParam, LPARAM lP
         }
         case WM_DESTROY:
         {
-            //PostQuitMessage(0);
+            DeleteQuickWindowResources(hwnd);
 
-			int windowIndex = GetIndexByHwnd(hwnd);
-			qk_hwnd[windowIndex] = 0; // TODO : Need to CloseHandle() ?
-			qk_threadid[windowIndex] = 0;
-           
+            ExitThread(0);
 			break;
         }
         default:
@@ -222,21 +219,38 @@ int GetIndexByHwnd(HWND window)
     return -1;
 }
 
-void QuickCreateWindow(TgaFile* content)
+void DeleteQuickWindowResources(HWND window)
+{
+    int windowIndex = GetIndexByHwnd(window);
+
+    RenderTarget[windowIndex]->Release();
+    BGBrush[windowIndex]->Release();
+    
+    RenderTarget[windowIndex] = NULL;
+    BGBrush[windowIndex] = NULL;
+
+    qk_threadid[windowIndex] = 0;
+    
+    // Need to see if those resources can be de-allocated now
+    qk_threads[windowIndex] = NULL;
+    qk_hwnd[windowIndex] = NULL;
+}
+
+int QuickCreateWindow(TgaFile* content)
 {
     if (qk_inst == NULL)
     {
         qk_inst = GetModuleHandle(nullptr);
 
-        if (!InitApp()) return;
-        if (!InitDX()) return;
+        if (!InitApp()) return -1;
+        if (!InitDX()) return -1;
     }
 
     int index = GetNextFreeHwndIndex();
 	if (index < 0)
 	{
 		fprintf(stderr, "Max number of QuickWindow has been reached (10). Cannot create any more.");
-        return;
+        return -1;
 	}
 
 	QuickWindowCreateThreadOptions* threadOpts = new QuickWindowCreateThreadOptions();
@@ -252,7 +266,7 @@ void QuickCreateWindow(TgaFile* content)
 		0,
 		&qk_threadid[index]);
 
-	return;
+	return index;
 }
 
 #elif

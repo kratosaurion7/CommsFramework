@@ -34,10 +34,12 @@ void DoPaint(HWND window);
 int GetNextFreeHwndIndex();
 int GetIndexByHwnd(HWND window);
 
+void DeleteQuickWindowResources(HWND window);
+
 // ===== Quick Window =====
 
 #endif // _WIN32
 
-void QuickCreateWindow(TgaFile* content);
+int QuickCreateWindow(TgaFile* content);
 
-void CloseQuickWindow();
+void CloseQuickWindow(int windowIndex);
