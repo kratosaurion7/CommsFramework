@@ -105,6 +105,49 @@ int GetNCmdShow()
 
 DWORD WINAPI ThreadFuncHandleWindows(LPVOID lpParam)
 {
+	QuickWindowCreateThreadOptions* threadStartParams = (QuickWindowCreateThreadOptions*)lpParam;
+
+	int qkIndex = threadStartParams->ThreadIndex;
+	TgaFile* content = threadStartParams->WindowContent;
+
+	HWND hwnd = CreateWindow(
+		L"CommsFramework",
+		threadStartParams->WindowName,
+		WS_OVERLAPPEDWINDOW,
+		CW_USEDEFAULT, CW_USEDEFAULT,
+		content->Width, content->Height,
+		NULL,
+		NULL,
+		qk_inst,
+		0);
+
+	qk_hwnd[qkIndex] = hwnd;
+
+	RECT rec;
+	GetClientRect(hwnd, &rec);
+
+	HRESULT hr = D2Factory->CreateHwndRenderTarget(
+		D2D1::RenderTargetProperties(),
+		D2D1::HwndRenderTargetProperties(
+			hwnd,
+			D2D1::SizeU(
+				rec.right - rec.left,
+				rec.bottom - rec.top)
+		),
+		&RenderTarget[qkIndex]);
+
+	ImageLoader loader = ImageLoader();
+	IWICBitmap* bmp = loader.CreateBitmap(content, false);
+
+	ID2D1Bitmap* d2bmp;
+	hr = RenderTarget[qkIndex]->CreateBitmapFromWicBitmap(bmp, &d2bmp);
+	hr = RenderTarget[qkIndex]->CreateBitmapBrush(d2bmp, &BGBrush[qkIndex]);
+
+	bmp->Release();
+
+	ShowWindow(hwnd, GetNCmdShow());
+	UpdateWindow(hwnd);
+
     MSG msg;
 	BOOL bRet;
 	while ((bRet = GetMessage(&msg, NULL, 0, 0)) != 0)
@@ -161,7 +204,7 @@ int GetNextFreeHwndIndex()
 {
     for (int i = 0; i < MAX_QUICKWINDOWS; i++)
     {
-        if (qk_hwnd[i] == NULL)
+        if (qk_threads[i] == NULL)
             return i;
     }
 
@@ -196,58 +239,20 @@ void QuickCreateWindow(TgaFile* content)
         return;
 	}
 
-	HWND hwnd = CreateWindow(
-        L"CommsFramework",
-        L"QuickWindow",
-        WS_OVERLAPPEDWINDOW,
-        CW_USEDEFAULT, CW_USEDEFAULT,
-        content->Width, content->Height,
-        NULL,
-        NULL,
-        qk_inst,
-        0);
+	QuickWindowCreateThreadOptions* threadOpts = new QuickWindowCreateThreadOptions();
+	threadOpts->ThreadIndex = index;
+	threadOpts->WindowContent = content;
+	threadOpts->WindowName = L"QuickWindow";
 
-    qk_hwnd[index] = hwnd;
+	qk_threads[index] = CreateThread(
+		NULL,
+		0,
+		ThreadFuncHandleWindows,
+		threadOpts,
+		0,
+		&qk_threadid[index]);
 
-    RECT rec;
-    GetClientRect(hwnd, &rec);
-
-    HRESULT hr = D2Factory->CreateHwndRenderTarget(
-        D2D1::RenderTargetProperties(),
-        D2D1::HwndRenderTargetProperties(
-            hwnd,
-            D2D1::SizeU(
-                rec.right - rec.left,
-                rec.bottom - rec.top)
-        ),
-        &RenderTarget[index]);
-
-    ImageLoader loader = ImageLoader();
-    IWICBitmap* bmp = loader.CreateBitmap(content, false);
-
-    ID2D1Bitmap* d2bmp;
-    hr = RenderTarget[index]->CreateBitmapFromWicBitmap(bmp, &d2bmp);
-    hr = RenderTarget[index]->CreateBitmapBrush(d2bmp, &BGBrush[index]);
-
-	bmp->Release();
-
-    if (FAILED(hr))
-    {
-        std::string x = GetLastErrorString();
-
-        return;
-    }
-
-    ShowWindow(hwnd, GetNCmdShow());
-    UpdateWindow(hwnd);
-
-    qk_threads[index] = CreateThread(
-        NULL,
-        0,
-        ThreadFuncHandleWindows,
-        NULL,
-        0,
-        &qk_threadid[index]);
+	return;
 }
 
 #elif

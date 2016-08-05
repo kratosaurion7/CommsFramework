@@ -14,6 +14,13 @@ extern HANDLE outMut;
 
 // Thread & Window handling arrays
 
+struct QuickWindowCreateThreadOptions
+{
+	int ThreadIndex;
+	LPCWSTR WindowName;
+	TgaFile* WindowContent;
+};
+
 // Window init functions and window callback
 BOOL InitApp();
 BOOL InitDX();
