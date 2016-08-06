@@ -137,6 +137,16 @@ void FantasyGame::Update()
         createdWindows->Add(QuickCreateWindow(quickContent));
     }
 
+    if (this->Engine->Keyboard->IsKeyClicked(Key::E))
+    {
+        if (createdWindows->Count() > 0)
+        {
+            int lastIndex = createdWindows->Last();
+
+            CloseQuickWindow(lastIndex);
+        }
+    }
+
 
     // Update the position of the tiles of the current grid
     // by offsetting their position by the camera's pos.

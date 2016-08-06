@@ -269,6 +269,16 @@ int QuickCreateWindow(TgaFile* content)
 	return index;
 }
 
+void CloseQuickWindow(int windowIndex)
+{
+    HWND window = qk_hwnd[windowIndex];
+
+    if (window != NULL)
+    {
+        PostMessage(window, WM_CLOSE, 0, 0);
+    }
+}
+
 #elif
 void QuickCreateWindow(TgaFile* content)
 {
