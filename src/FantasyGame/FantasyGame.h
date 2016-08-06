@@ -60,4 +60,6 @@ private:
 
     FRectangle* camFov;
     Vector2<int>* camSpeed;
+
+    BaseList<int>* createdWindows; // TODO : TEST
 };

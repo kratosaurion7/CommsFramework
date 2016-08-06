@@ -78,7 +78,7 @@ LRESULT CALLBACK QuickWindowProc(HWND hwnd, UINT uiMsg, WPARAM wParam, LPARAM lP
         {
             DeleteQuickWindowResources(hwnd);
 
-            ExitThread(0);
+            PostQuitMessage(0);
 			break;
         }
         default:

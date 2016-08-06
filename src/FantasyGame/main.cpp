@@ -37,11 +37,6 @@ int main()
     r->Init(300, 300);
     r->FillColor(255, 0, 0, 255);
 
-    QuickCreateWindow(b);
-    QuickCreateWindow(g);
-    QuickCreateWindow(r);
-
-
 
     FantasyGame* game = new FantasyGame();
     game->ReadConfig();

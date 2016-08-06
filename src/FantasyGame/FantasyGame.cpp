@@ -15,6 +15,8 @@
 #include <XDirectory.h>
 #include <XFile.h>
 #include <SettingsRepository.h>
+#include <TgaFile.h>
+#include <Utils.h>
 
 #include "ProgDef.h"
 #include "World.h"
@@ -39,6 +41,8 @@ FantasyGame::FantasyGame()
 
     Engine->AttachActor(GamePlayer);
     Engine->AttachActor(MainCamera);
+
+    createdWindows = new BaseList<int>();
 }
 
 FantasyGame::~FantasyGame()
@@ -118,6 +122,22 @@ void FantasyGame::Play()
 
 void FantasyGame::Update()
 {
+    if (this->Engine->Keyboard->IsKeyClicked(Key::Q))
+    {
+        RandomGen rng = RandomGen();
+        TgaFile* quickContent = new TgaFile();
+        quickContent->Init(256, 256);
+        
+        int randomRed = rng.GetRandom(255);
+        int randomGreen = rng.GetRandom(255);
+        int randomBlue = rng.GetRandom(255);
+
+        quickContent->FillColor(randomRed, randomGreen, randomBlue, 255);
+
+        createdWindows->Add(QuickCreateWindow(quickContent));
+    }
+
+
     // Update the position of the tiles of the current grid
     // by offsetting their position by the camera's pos.
     auto it = this->CurrentGrid->tilesList->GetContainer()->begin();
