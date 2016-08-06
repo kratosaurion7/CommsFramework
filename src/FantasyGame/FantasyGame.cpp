@@ -16,7 +16,7 @@
 #include <XFile.h>
 #include <SettingsRepository.h>
 #include <TgaFile.h>
-#include <Utils.h>
+#include <QuickWindow.h>
 
 #include "ProgDef.h"
 #include "World.h"

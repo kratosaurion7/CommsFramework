@@ -118,6 +118,9 @@
     <Filter Include="Framework\Image">
       <UniqueIdentifier>{7b21a9fa-7dd6-4111-95be-a5ab8dcd9b5b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Framework\Utilities">
+      <UniqueIdentifier>{47835e0a-09a0-48ac-afd2-fdcc7a9b49e5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="XmlReader.cpp">
@@ -311,6 +314,9 @@
     </ClCompile>
     <ClCompile Include="Network.cpp">
       <Filter>Framework\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="QuickWindow.cpp">
+      <Filter>Framework\Utilities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -568,6 +574,9 @@
     </ClInclude>
     <ClInclude Include="BitmapHandler.h">
       <Filter>Framework\System\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="QuickWindow.h">
+      <Filter>Framework\Utilities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
