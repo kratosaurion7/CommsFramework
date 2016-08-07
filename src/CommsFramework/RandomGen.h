@@ -1,5 +1,12 @@
 #pragma once
 
+/** Random Generator
+ * 
+ * USAGE : 
+ *  Call GetRandom and specify an integer as the maximum to return. The random will be between 0 and MAX-1.
+ *  There is also a method to return a random percentage between 0 and 99.
+*/
+
 #include <random>
 
 class RandomGen
