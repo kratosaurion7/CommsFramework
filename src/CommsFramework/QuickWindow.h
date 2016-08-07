@@ -44,6 +44,10 @@ struct QuickWindowCreateThreadOptions
 // Window init functions and window callback
 BOOL InitApp();
 BOOL InitDX();
+/** Function used to get the command for the window show.
+*
+* This is needed when the QuickWindow is used from a project that is not a Windows Subsystem.
+* For example from a Console project. */
 int GetNCmdShow();
 LRESULT CALLBACK QuickWindowProc(HWND hwnd, UINT uiMsg, WPARAM wParam, LPARAM lParam);
 DWORD WINAPI ThreadFuncHandleWindows(LPVOID lpParam);
