@@ -1,6 +1,6 @@
 #include "WeightedNumberGenerator.h"
 
-
+#include "RandomGen.h"
 
 WeightedNumberGenerator::WeightedNumberGenerator()
 {
