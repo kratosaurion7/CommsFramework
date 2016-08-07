@@ -10,8 +10,7 @@
 
 #include "ImageLoader.h"
 
-HANDLE outMut;
-
+// ===== WINDOW MANAGEMENT =====
 HINSTANCE qk_inst;
 HWND qk_hwnd[MAX_QUICKWINDOWS] = { 0 };
 HANDLE qk_threads[MAX_QUICKWINDOWS] = { 0 };
@@ -82,6 +81,11 @@ LRESULT CALLBACK QuickWindowProc(HWND hwnd, UINT uiMsg, WPARAM wParam, LPARAM lP
     return 0;
 }
 
+/** Function used to get the command for the window show.
+*
+* This is needed when the QuickWindow is used from a project that is not a Windows Subsystem.
+* For example from a Console project.
+*/
 int GetNCmdShow()
 {
     STARTUPINFO startupInfo;

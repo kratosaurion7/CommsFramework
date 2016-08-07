@@ -1,5 +1,27 @@
 #pragma once
 
+/** QuickWindow is an encapsulated window that is used to show an image.
+ * 
+ * USAGE :
+ *  To use the QuickWindow, the caller needs to supply a pointer of TgaFile and call QuickCreateWindow
+ *  The creation functions returns an integer index that is used to close the window. Closing the 
+ *  window is done by calling CloseQuickWindow and passing the index.
+ * 
+ * DEPENDS :
+ *  - Win32
+ *  - Direct2D
+ *  - Windows Imaging Components
+ *  - TgaFile
+ *
+ * SPECS :
+ *  - Each window is handled by a separate thread.
+ *  - A maximum of MAX_QUICKWINDOWS (10) windows can be opened at one time.
+ *  - On Windows, the QuickWindows are handled by DirectD2 
+ * 
+
+
+*/
+
 #include "TgaFile.h"
 
 #ifdef _WIN32
@@ -11,6 +33,7 @@
 
 // Thread & Window handling arrays
 
+// Structure passed to the thread operating the window.
 struct QuickWindowCreateThreadOptions
 {
     int ThreadIndex;
@@ -31,6 +54,7 @@ void DoPaint(HWND window);
 int GetNextFreeHwndIndex();
 int GetIndexByHwnd(HWND window);
 
+// Implements the deletes and release of the resources of a window.
 void DeleteQuickWindowResources(HWND window);
 
 #endif

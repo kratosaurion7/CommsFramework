@@ -1,9 +1,7 @@
 #include "Utils.h"
 
-#include <cassert>
+HANDLE outMut;
 
-#include "TgaFile.h"
-#include "ImageLoader.h"
 
 void stprintf(char* buf)
 {
