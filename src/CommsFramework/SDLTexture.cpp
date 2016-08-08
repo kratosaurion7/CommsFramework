@@ -205,7 +205,7 @@ void SDLTexture::SetSolidColor(uint32_t pixelColor)
 
     newTexture = SDL_CreateTextureFromSurface(renderer, newSurface);
 
-    if (texture == NULL)
+    if (newTexture == NULL)
     {
         errorString = SDL_GetError();
         fprintf(stderr, "Unable to set create texture [%s] with error %s\n", TexturePath.c_str(), errorString);
