@@ -22,6 +22,9 @@
     <Filter Include="Actors">
       <UniqueIdentifier>{3a52887d-4643-422d-8fe4-f8a11ccaf620}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Menu">
+      <UniqueIdentifier>{b13bf529-34e1-4f5c-836e-a2c6bed01b12}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -48,6 +51,9 @@
     <ClCompile Include="Player.cpp">
       <Filter>Actors</Filter>
     </ClCompile>
+    <ClCompile Include="CheatMenu.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FantasyGame.h">
@@ -73,6 +79,9 @@
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="CheatMenu.h">
+      <Filter>Menu</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -155,6 +155,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AreaGrid.cpp" />
+    <ClCompile Include="CheatMenu.cpp" />
     <ClCompile Include="FantasyGame.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="LocalGrid.cpp" />
@@ -165,6 +166,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AreaGrid.h" />
+    <ClInclude Include="CheatMenu.h" />
     <ClInclude Include="FantasyGame.h" />
     <ClInclude Include="LocalGrid.h" />
     <ClInclude Include="Player.h" />

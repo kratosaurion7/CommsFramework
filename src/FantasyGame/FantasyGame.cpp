@@ -43,6 +43,15 @@ FantasyGame::FantasyGame()
     Engine->AttachActor(MainCamera);
 
     createdWindows = new BaseList<int>();
+
+	auto tex = Engine->Graphics->CreateTexture();
+	tex->Initalize(this->Engine->GameAreaSize->Width, this->Engine->GameAreaSize->Width);
+	tex->SetSolidColor(0x77000000);
+
+	auto fSprite = Engine->CreateSprite();
+	fSprite->SetTexture(tex);
+	fSprite->SetZIndex(999);
+	fSprite->Show(true);
 }
 
 FantasyGame::~FantasyGame()
