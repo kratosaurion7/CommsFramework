@@ -11,6 +11,7 @@
 #include <BaseSprite.h>
 #include <RandomGen.h>
 
+#include "FantasyGame.h"
 #include "Tile.h"
 
 LocalGrid::LocalGrid(LocalGridCreateParam* params)
@@ -50,6 +51,8 @@ LocalGrid::~LocalGrid()
 
 void LocalGrid::Setup(int height, int width)
 {
+    FantasyGame* game = GetGameInstance();
+
     RandomGen rnd = RandomGen();
 
     for (int i = 0; i < height; i++)
@@ -64,6 +67,8 @@ void LocalGrid::Setup(int height, int width)
             text->SetFont(this->Engine->GetGameDefaultFont());
             text->SetPos(setupTile->TileSprite->GetPos());
             text->Show(true);
+            
+            game->TileIndexIdentifiers->Add(text);
             
             setupTile->TileHelpText = text;
             /*BaseTexture* textureFromText = text->GetTextImage();

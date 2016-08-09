@@ -199,6 +199,8 @@ GenType* FileSave::GetGenericValue(KEYTYPE key)
 
         it++;
     }
+
+    return NULL;
 }
 
 void FileSave::SaveToFile(std::string filePath)

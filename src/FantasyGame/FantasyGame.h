@@ -4,6 +4,8 @@ class GameEngine;
 class Spritesheet;
 class FPosition;
 class FRectangle;
+class BaseSprite;
+class BaseText;
 class FSize;
 class SettingsRepository;
 class XmlNode;
@@ -41,6 +43,10 @@ public:
 
     SettingsRepository* Settings;
 
+    // DEBUG STUFF
+    BaseSprite* CheatPlate;
+    PointerList<BaseText*>* TileIndexIdentifiers;
+
     void Start();
 
     void Play();
@@ -63,3 +69,5 @@ private:
 
     BaseList<int>* createdWindows; // TODO : TEST
 };
+
+FantasyGame* GetGameInstance();

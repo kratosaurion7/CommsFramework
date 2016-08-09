@@ -67,10 +67,10 @@ struct DirectoryEntry {
 *
 * ========== Inputs ==========
 *
-  Adding files is the means of input for the PackageFile class. Adding a file is done either by passing a path or an instance of XFile.
-  One can also add directories, either by path or by passing a XDirectory. All files in the directory tree (recursively) are added.
-  Adding a directory causes each sub-file to be added respectively of it's position inside the added directory.
-
+* Adding files is the means of input for the PackageFile class. Adding a file is done either by passing a path or an instance of XFile.
+* One can also add directories, either by path or by passing a XDirectory. All files in the directory tree (recursively) are added.
+* Adding a directory causes each sub-file to be added respectively of it's position inside the added directory.
+*
 * ========== Outputs ==========
 *
 * ========== Dependencies ==========

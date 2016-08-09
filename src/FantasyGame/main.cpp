@@ -23,6 +23,7 @@
 class Game_Start_Params;
 class IWICBitmap;
 
+
 int main()
 {
     auto b = new TgaFile();
@@ -49,3 +50,4 @@ int main()
 
     return 0;
 }
+

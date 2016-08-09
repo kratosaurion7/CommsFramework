@@ -7,6 +7,7 @@
 #include <Spritesheet.h>
 #include <DrawObject.h>
 #include <BaseSprite.h>
+#include <BaseText.h>
 #include <Vectors.h>
 #include <XmlReader.h>
 #include <Spritesheet.h>
@@ -28,8 +29,16 @@
 #include "Player.h"
 #include "PlayerCamera.h"
 
+FantasyGame* _gameInstance; // Fuck it
+FantasyGame * GetGameInstance()
+{
+    return _gameInstance;
+}
+
 FantasyGame::FantasyGame()
 {
+    _gameInstance = this;
+
     Engine = new GameEngine();
 
     Engine->Init(SCALE_MULTIPLIER * GRID_WIDTH, SCALE_MULTIPLIER * GRID_HEIGHT);
@@ -51,7 +60,11 @@ FantasyGame::FantasyGame()
 	auto fSprite = Engine->CreateSprite();
 	fSprite->SetTexture(tex);
 	fSprite->SetZIndex(999);
-	fSprite->Show(true);
+	fSprite->Show(false);
+
+    CheatPlate = fSprite;
+
+    TileIndexIdentifiers = new PointerList<BaseText*>();
 }
 
 FantasyGame::~FantasyGame()
@@ -156,6 +169,39 @@ void FantasyGame::Update()
         }
     }
 
+    if (this->Engine->Keyboard->IsKeyClicked(Key::Num1))
+    {
+        auto it = TileIndexIdentifiers->GetContainer()->begin();
+        while (it != TileIndexIdentifiers->GetContainer()->end())
+        {
+            BaseText* txt = *it;
+
+            if (txt->IsVisible())
+            {
+                txt->Show(false);
+            }
+            else
+            {
+                txt->Show(true);
+            }
+
+            it++;
+        }
+    }
+
+    if (this->Engine->Keyboard->IsKeyClicked(Key::Space))
+    {
+        if (CheatPlate->IsVisible())
+        {
+            CheatPlate->Show(false);
+        }
+        else
+        {
+            CheatPlate->Show(true);
+        }
+    }
+
+
 
     // Update the position of the tiles of the current grid
     // by offsetting their position by the camera's pos.
@@ -235,3 +281,4 @@ World* FantasyGame::ReadWorldData(std::string worldXmlConfigFile)
 
     return newWorld;
 }
+
