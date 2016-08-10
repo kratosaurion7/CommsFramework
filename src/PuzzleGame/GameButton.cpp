@@ -5,8 +5,7 @@
 #include <BaseSprite.h>
 #include <BaseTexture.h>
 
-GameButton*** Arr;
-PointerList<GameButton*>* list;
+#include "GameCore.h"
 
 GameButton::GameButton()
 {
@@ -36,28 +35,24 @@ void GameButton::Update()
 	{
 		ButtonIsOn = !ButtonIsOn;
 
-		GameButton* btn = list->Get(Index + 1);
-		if (btn != NULL)
+		if (PosX + 1 < NB_TILES_W)
 		{
-			btn->Toggle();
+			Board[PosY][PosX + 1]->Toggle();
 		}
 
-		btn = list->Get(Index - 1);
-		if (btn != NULL)
+		if (PosX - 1 >= 0)
 		{
-			btn->Toggle();
+			Board[PosY][PosX - 1]->Toggle();
 		}
 
-		btn = list->Get(Index + 5);
-		if (btn != NULL)
+		if (PosY - 1 >= 0)
 		{
-			btn->Toggle();
+			Board[PosY - 1][PosX]->Toggle();
 		}
-		
-		btn = list->Get(Index - 5);
-		if (btn != NULL)
+
+		if (PosY + 1 < NB_TILES_H)
 		{
-			btn->Toggle();
+			Board[PosY + 1][PosX]->Toggle();
 		}
 	}
 

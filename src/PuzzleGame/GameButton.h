@@ -1,10 +1,5 @@
 #pragma once
 
-#define TILE_W 65
-#define TILE_H 65
-
-#define TILE_SCALE 1.2
-
 class GameEngine;
 class BaseSprite;
 class BaseTexture;
@@ -33,6 +28,3 @@ public:
 
 	void Toggle();
 };
-
-extern GameButton*** Arr;
-extern PointerList<GameButton*>* list;
