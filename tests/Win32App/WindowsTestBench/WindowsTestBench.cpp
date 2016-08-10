@@ -37,7 +37,8 @@ BOOL				ReCreateRenderTarget(HWND window);
 
 void DoPaint(HWND);
 
-HBITMAP bitmp;
+#define IDC_MAIN_BUTTON 101
+HWND myButton;
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
@@ -49,16 +50,14 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     // TODO: Place code here.
 
-    bitmp = (HBITMAP)LoadImage(NULL, L"Untitled.bmp", IMAGE_BITMAP, 0, 0, LR_CREATEDIBSECTION | LR_DEFAULTSIZE | LR_LOADFROMFILE);
+    //ImageLoader* loader = new ImageLoader();
 
-    ImageLoader* loader = new ImageLoader();
+    //TgaFile* tga = new TgaFile();
+    //tga->Init(300, 300);
+    //tga->FillColor(0, 255, 0, 255);
 
-    TgaFile* tga = new TgaFile();
-    tga->Init(300, 300);
-    tga->FillColor(0, 255, 0, 255);
-    loader->SaveToPng(tga);
+    //bgImage = loader->CreateBitmap(tga, false);
 
-    bgImage = loader->CreateBitmap(tga, false);
     
     // Initialize global strings
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
@@ -81,6 +80,13 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 
     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_WINDOWSTESTBENCH));
+
+	if (myButton == NULL)
+	{
+		std::string err = GetLastErrorString();
+
+		int i = 0;
+	}
 
     MSG msg;
 
@@ -195,20 +201,40 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch (message)
     {
+		case WM_CREATE:
+		{
+			myButton = CreateWindowEx(NULL,
+				L"BUTTON",
+				L"OK",
+				WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,
+				20, 20,
+				100, 100,
+				hWnd,
+				(HMENU)IDC_MAIN_BUTTON,
+				GetModuleHandle(NULL),
+				NULL);
+
+			break;
+		}
         case WM_COMMAND:
             {
                 int wmId = LOWORD(wParam);
+				int hi = HIWORD(wParam);
+				
                 // Parse the menu selections:
                 switch (wmId)
                 {
-                case IDM_ABOUT:
-                    DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
-                    break;
-                case IDM_EXIT:
-                    DestroyWindow(hWnd);
-                    break;
-                default:
-                    return DefWindowProc(hWnd, message, wParam, lParam);
+					case IDM_ABOUT:
+						DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
+						break;
+					case IDM_EXIT:
+						DestroyWindow(hWnd);
+						break;
+					case IDC_MAIN_BUTTON:
+						Beep(400, 50);
+						break;
+					default:
+						return DefWindowProc(hWnd, message, wParam, lParam);
                 }
                 
                 break;
@@ -217,7 +243,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             {
                 PAINTSTRUCT ps;
 
-                DoPaint(MainWindow);
+                //DoPaint(MainWindow);
 
                 EndPaint(hWnd, &ps);
                 
