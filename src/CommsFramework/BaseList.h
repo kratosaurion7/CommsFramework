@@ -3,6 +3,7 @@
 #include <list>
 #include <functional>
 #include <algorithm>
+#include <cassert>
 
 #include "RandomGen.h"
 
@@ -240,7 +241,58 @@ public:
         return _container->size();
     };
 
-    std::list<T>* GetContainer() // Temp function to give outsiders a possibility to iterate on the container
+	T** GetListAs2dArray(int width)
+	{
+		assert(width > 0);
+
+		int totalItems = this->Count();
+
+		if (totalItems % width != 0)
+			return NULL;
+		
+
+		int columnIndex = 0;
+		int rowIndex = 0;
+
+		T** resultList = new T*[totalItems];
+		T* row = new T[width];
+		resultList[rowIndex] = row;
+
+		auto it = this->GetContainer()->begin();
+		while (it != this->GetContainer()->end())
+		{
+			resultList[rowIndex][columnIndex] = (*it);
+
+			columnIndex++;
+
+			if (columnIndex % width == 0)
+			{
+				rowIndex++;
+				T* newRow = new T[width];
+				resultList[rowIndex] = newRow;
+
+				columnIndex = 0;
+			}
+
+			it++;
+		}
+
+		//for (int i = 0; i < totalItems / width; i++)
+		//{
+		//	T** row = new T*[width];
+
+		//	for (int j < 0; j < width; j++)
+		//	{
+		//		row[j] = NULL;
+		//	}
+
+		//	resultList[i] = row;
+		//}
+
+		return resultList;
+	};
+
+    std::list<T>* GetContainer()
     {
         return _container;
     };
