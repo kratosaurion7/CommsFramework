@@ -1,5 +1,3 @@
-
-
 #include <GameEngine.h>
 #include <BaseGraphicEngine.h>
 #include <PointerList.h>
@@ -35,10 +33,7 @@ int main()
 	}
 
 	Board = list->GetListAs2dArray(5);
-
 	Board[2][2]->Toggle();
-
-	//list->Get(12)->ButtonIsOn = true;
 
 	while (true)
 	{

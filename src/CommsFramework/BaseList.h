@@ -277,18 +277,6 @@ public:
 			it++;
 		}
 
-		//for (int i = 0; i < totalItems / width; i++)
-		//{
-		//	T** row = new T*[width];
-
-		//	for (int j < 0; j < width; j++)
-		//	{
-		//		row[j] = NULL;
-		//	}
-
-		//	resultList[i] = row;
-		//}
-
 		return resultList;
 	};
 
