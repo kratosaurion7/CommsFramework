@@ -133,7 +133,7 @@ DWORD WINAPI ThreadFuncHandleWindows(LPVOID lpParam)
 
     bmp->Release();
 
-    ShowWindow(hwnd, GetNCmdShow());
+    ShowWindow(hwnd, SW_SHOWNOACTIVATE);
     UpdateWindow(hwnd);
 
     MSG msg;
