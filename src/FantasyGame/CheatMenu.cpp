@@ -14,14 +14,21 @@ CheatMenu::CheatMenu()
 
 	BackPlate = Engine->CreateSprite();
 	BackPlate->SetTexture(BackPlateTexture);
-	BackPlate->SetZIndex(999);
+	BackPlate->SetZIndex(990);
 	BackPlate->Show(false);
 
 	SwitchTileNumberLabel = this->Engine->CreateText("Switch Tile numbers", 16);
 	SwitchTileNumberLabel->SetPos(10, 10);
+    SwitchTileNumberLabel->SetZIndex(991);
+    SwitchTileNumberLabel->SetStyle(TEXT_STYLE_BOLD);
+    SwitchTileNumberLabel->SetColor(0xFFFF0000);
 
 	SwitchTileNumber = this->Engine->CreateText("1", 16);
 	SwitchTileNumber->SetPos(10, 20);
+    SwitchTileNumber->SetZIndex(991);
+    SwitchTileNumber->SetStyle(TEXT_STYLE_BOLD);
+    SwitchTileNumber->SetColor(0xFF000000);
+
 }
 
 

@@ -28,6 +28,7 @@
 
 #include "Player.h"
 #include "PlayerCamera.h"
+#include "CheatMenu.h"
 
 FantasyGame* _gameInstance; // Fuck it
 FantasyGame * GetGameInstance()
@@ -53,16 +54,8 @@ FantasyGame::FantasyGame()
 
     createdWindows = new BaseList<int>();
 
-	auto tex = Engine->Graphics->CreateTexture();
-	tex->Initalize(this->Engine->GameAreaSize->Width, this->Engine->GameAreaSize->Width);
-	tex->SetSolidColor(0x77000000);
-
-	auto fSprite = Engine->CreateSprite();
-	fSprite->SetTexture(tex);
-	fSprite->SetZIndex(999);
-	fSprite->Show(false);
-
-    CheatPlate = fSprite;
+    DebugCheatsMenu = new CheatMenu();
+    Engine->AttachActor(DebugCheatsMenu);
 
     TileIndexIdentifiers = new PointerList<BaseText*>();
 }
@@ -191,13 +184,13 @@ void FantasyGame::Update()
 
     if (this->Engine->Keyboard->IsKeyClicked(Key::Space))
     {
-        if (CheatPlate->IsVisible())
+        if (DebugCheatsMenu->BackPlate->IsVisible())
         {
-            CheatPlate->Show(false);
+            DebugCheatsMenu->Hide();
         }
         else
         {
-            CheatPlate->Show(true);
+            DebugCheatsMenu->Show();
         }
     }
 

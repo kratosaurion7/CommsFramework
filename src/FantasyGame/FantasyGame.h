@@ -17,6 +17,8 @@ class LocalGrid;
 class Player;
 class PlayerCamera;
 
+class CheatMenu;
+
 #include <Vectors.h>
 #include <string>
 #include <PointerList.h>
@@ -44,7 +46,7 @@ public:
     SettingsRepository* Settings;
 
     // DEBUG STUFF
-    BaseSprite* CheatPlate;
+    CheatMenu* DebugCheatsMenu;
     PointerList<BaseText*>* TileIndexIdentifiers;
 
     void Start();

@@ -129,8 +129,11 @@ void SDLText::UpdateInnerImpl()
 
     if (this->font->FontType == BaseFont::FONT_FILE)
     {
-        SDL_Color color = { 0,0,0 };
-        color.a = 255;
+        SDL_Color color = { 0,0,0,0 };
+        color.a = (this->foregroundColor &  0xFF000000) >> 24;
+        color.r = (this->foregroundColor &  0x00FF0000) >> 16;
+        color.g = (this->foregroundColor) & 0x0000FF00 >> 8;
+        color.b = (this->foregroundColor) & 0x000000FF;
         SDL_Surface* renderedSurface = TTF_RenderText_Solid(this->font->fontObject, this->textContent.c_str(), color);
 
         if (renderedSurface == NULL)
