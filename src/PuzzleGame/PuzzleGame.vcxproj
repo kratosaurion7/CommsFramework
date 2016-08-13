@@ -22,7 +22,7 @@
     <ProjectGuid>{FCD7885A-6784-4998-B1CC-EFFFFA8A1DF3}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>PuzzleGame</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.10586.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -97,7 +97,8 @@
       <AdditionalDependencies>CommsFramework.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>XCOPY /Y /E "$(ProjectDir)assets\*" "$(TargetDir)Assets"</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
