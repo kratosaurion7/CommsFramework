@@ -54,6 +54,9 @@
     <ClCompile Include="CheatMenu.cpp">
       <Filter>Menu</Filter>
     </ClCompile>
+    <ClCompile Include="MapLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FantasyGame.h">
@@ -82,6 +85,9 @@
     </ClInclude>
     <ClInclude Include="CheatMenu.h">
       <Filter>Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="MapLoader.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -6,15 +6,10 @@ class BaseTexture;
 #include <BaseActor.h>
 #include <PointerList.h>
 
-struct LocalGridCreateParam
-{
-
-};
-
 class LocalGrid : public BaseActor
 {
 public:
-    LocalGrid(LocalGridCreateParam* params);
+    LocalGrid();
     ~LocalGrid();
 
     void Setup(int height, int width);
@@ -33,7 +28,6 @@ public:
     PointerList<Tile*>* tilesList;
 
 private:
-    LocalGridCreateParam* initParams;
 
 };
 

@@ -14,10 +14,8 @@
 #include "FantasyGame.h"
 #include "Tile.h"
 
-LocalGrid::LocalGrid(LocalGridCreateParam* params)
+LocalGrid::LocalGrid()
 {
-    initParams = params;
-
     int height = 20;
     int width = 20;
 

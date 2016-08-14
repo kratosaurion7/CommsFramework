@@ -24,13 +24,11 @@ CheatMenu::CheatMenu()
     SwitchTileNumberLabel->SetColor(0xFFFF0000);
 
 	SwitchTileNumber = this->Engine->CreateText("1", 16);
-	SwitchTileNumber->SetPos(10, 20);
+	SwitchTileNumber->SetPos(10, 30);
     SwitchTileNumber->SetZIndex(991);
     SwitchTileNumber->SetStyle(TEXT_STYLE_BOLD);
-    SwitchTileNumber->SetColor(0xFF000000);
-
+    SwitchTileNumber->SetColor(0xFFFF0000);
 }
-
 
 CheatMenu::~CheatMenu()
 {
@@ -55,5 +53,4 @@ void CheatMenu::Hide()
 	BackPlate->Show(false);
 	SwitchTileNumberLabel->Show(false);
 	SwitchTileNumber->Show(false);
-
 }

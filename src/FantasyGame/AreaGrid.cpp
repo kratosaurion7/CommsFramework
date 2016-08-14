@@ -5,7 +5,7 @@
 
 AreaGrid::AreaGrid(AreaCreateParams* params)
 {
-    LocalGrid* defaultGrid = new LocalGrid(NULL);
+    LocalGrid* defaultGrid = new LocalGrid();
     
     Grids = new PointerList<LocalGrid*>();
 

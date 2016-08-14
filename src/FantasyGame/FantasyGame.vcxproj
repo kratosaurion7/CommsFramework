@@ -159,6 +159,7 @@
     <ClCompile Include="FantasyGame.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="LocalGrid.cpp" />
+    <ClCompile Include="MapLoader.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerCamera.cpp" />
     <ClCompile Include="Tile.cpp" />
@@ -169,6 +170,7 @@
     <ClInclude Include="CheatMenu.h" />
     <ClInclude Include="FantasyGame.h" />
     <ClInclude Include="LocalGrid.h" />
+    <ClInclude Include="MapLoader.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerCamera.h" />
     <ClInclude Include="ProgDef.h" />
