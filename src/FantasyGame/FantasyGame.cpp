@@ -46,10 +46,8 @@ FantasyGame::FantasyGame()
 
     Settings = SettingsRepository::GetInstance();
 
-    GamePlayer = new Player();
     MainCamera = new PlayerCamera(GamePlayer);
 
-    Engine->AttachActor(GamePlayer);
     Engine->AttachActor(MainCamera);
 
     createdWindows = new BaseList<int>();
@@ -113,6 +111,9 @@ void FantasyGame::Init()
     CurrentGrid->Setup(20, 20);
 
     CurrentGrid->ShowGridTiles(true);
+
+    GamePlayer = new Player();
+    Engine->AttachActor(GamePlayer);
 
     // Deletes
     delete(spritesheetValues);
