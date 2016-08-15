@@ -6,11 +6,11 @@ class BaseTexture;
 #include <BaseActor.h>
 #include <PointerList.h>
 
-class LocalGrid : public BaseActor
+class Map : public BaseActor
 {
 public:
-    LocalGrid();
-    ~LocalGrid();
+    Map();
+    ~Map();
 
     void Setup(int height, int width);
 
@@ -30,4 +30,3 @@ public:
 private:
 
 };
-

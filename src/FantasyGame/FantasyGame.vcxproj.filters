@@ -36,15 +36,6 @@
     <ClCompile Include="Tile.cpp">
       <Filter>Map</Filter>
     </ClCompile>
-    <ClCompile Include="LocalGrid.cpp">
-      <Filter>Map</Filter>
-    </ClCompile>
-    <ClCompile Include="AreaGrid.cpp">
-      <Filter>Map</Filter>
-    </ClCompile>
-    <ClCompile Include="World.cpp">
-      <Filter>Map</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerCamera.cpp">
       <Filter>Camera</Filter>
     </ClCompile>
@@ -57,6 +48,9 @@
     <ClCompile Include="MapLoader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Map.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FantasyGame.h">
@@ -67,15 +61,6 @@
     </ClInclude>
     <ClInclude Include="ProgDef.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LocalGrid.h">
-      <Filter>Map</Filter>
-    </ClInclude>
-    <ClInclude Include="AreaGrid.h">
-      <Filter>Map</Filter>
-    </ClInclude>
-    <ClInclude Include="World.h">
-      <Filter>Map</Filter>
     </ClInclude>
     <ClInclude Include="PlayerCamera.h">
       <Filter>Camera</Filter>
@@ -89,5 +74,13 @@
     <ClInclude Include="MapLoader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Map.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="REWORK.txt">
+      <Filter>Map</Filter>
+    </Text>
   </ItemGroup>
 </Project>

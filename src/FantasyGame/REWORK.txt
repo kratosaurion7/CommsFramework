@@ -1,0 +1,6 @@
+Items needed to rework the Map classes from an unusable bunch of complicated crap to a simple working mechanism.
+
+- Remove World, AreaGrid and LocalGrid
+- Make class named Map
+- Maps are loaded from the MapLoader class, they can be loaded from files (or other)
+- Maps are grids of tiles that the player can walk on. The camera decides what tiles are seen on the screen.

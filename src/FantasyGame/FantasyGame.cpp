@@ -20,10 +20,7 @@
 #include <QuickWindow.h>
 
 #include "ProgDef.h"
-#include "World.h"
-#include "AreaGrid.h"
-#include "LocalGrid.h"
-
+#include "Map.h"
 #include "Tile.h"
 
 #include "Player.h"
@@ -65,7 +62,6 @@ FantasyGame::~FantasyGame()
 
     delete(MainCamera);
     delete(GamePlayer);
-    delete(GameWorld);
 }
 
 void FantasyGame::Init()
@@ -85,7 +81,7 @@ void FantasyGame::Init()
     }
 
     // Setup Game World
-	this->GameWorld = ReadWorldData("assets\\game_config.xml");
+	//this->GameWorld = ReadWorldData("assets\\game_config.xml");
 
     // Setup Camera
     _tile_size = std::stof(Settings->Get("graphic_tile_size"));
@@ -104,9 +100,7 @@ void FantasyGame::Init()
 
     MainCamera->SetupCamera(camFov, camSpeed);
 
-    CurrentArea = GameWorld->Areas->First();
-
-    CurrentGrid = CurrentArea->Grids->First();
+    CurrentGrid = NULL; // TODO
 
     CurrentGrid->Setup(20, 20);
 
@@ -261,18 +255,3 @@ void FantasyGame::ReadConfig()
 
 	delete(files);
 }
-
-World* FantasyGame::ReadWorldData(std::string worldXmlConfigFile)
-{
-    XmlReader data = XmlReader();
-	data.LoadFile(worldXmlConfigFile);
-    auto worldsRoot = data.FindNode("Worlds");
-
-    auto firstWorld = worldsRoot->GetNode("World");
-
-    World* newWorld = new World();
-    newWorld->WorldName = firstWorld->GetNode("WorldName")->Contents();
-
-    return newWorld;
-}
-

@@ -10,9 +10,7 @@ class FSize;
 class SettingsRepository;
 class XmlNode;
 
-class World;
-class AreaGrid;
-class LocalGrid;
+class Map;
 
 class Player;
 class PlayerCamera;
@@ -35,10 +33,7 @@ public:
 
     GameEngine* Engine;
 
-    World* GameWorld;
-
-    AreaGrid* CurrentArea;
-    LocalGrid* CurrentGrid;
+    Map* CurrentGrid;
 
     Player* GamePlayer;
     PlayerCamera* MainCamera;
@@ -57,7 +52,7 @@ public:
     
 private:
 
-    World* ReadWorldData(std::string worldXmlConfigFile);
+    void ReadWorldData(std::string worldXmlConfigFile);
 
     // CONFIG
     float _tile_size;
@@ -69,7 +64,7 @@ private:
     FRectangle* camFov;
     Vector2<int>* camSpeed;
 
-    BaseList<int>* createdWindows; // TODO : TEST
+    BaseList<int>* createdWindows;
 };
 
 FantasyGame* GetGameInstance();

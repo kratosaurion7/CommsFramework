@@ -1,6 +1,6 @@
 #pragma once
 
-class LocalGrid;
+class Map;
 
 #include <string>
 
@@ -10,6 +10,6 @@ public:
     MapLoader();
     ~MapLoader();
 
-    LocalGrid* LoadFromFile(std::string fileName);
+    Map* LoadFromFile(std::string fileName);
 };
 

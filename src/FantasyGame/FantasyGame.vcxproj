@@ -154,28 +154,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AreaGrid.cpp" />
     <ClCompile Include="CheatMenu.cpp" />
     <ClCompile Include="FantasyGame.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="LocalGrid.cpp" />
+    <ClCompile Include="Map.cpp" />
     <ClCompile Include="MapLoader.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerCamera.cpp" />
     <ClCompile Include="Tile.cpp" />
-    <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AreaGrid.h" />
     <ClInclude Include="CheatMenu.h" />
     <ClInclude Include="FantasyGame.h" />
-    <ClInclude Include="LocalGrid.h" />
+    <ClInclude Include="Map.h" />
     <ClInclude Include="MapLoader.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerCamera.h" />
     <ClInclude Include="ProgDef.h" />
     <ClInclude Include="Tile.h" />
-    <ClInclude Include="World.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="REWORK.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

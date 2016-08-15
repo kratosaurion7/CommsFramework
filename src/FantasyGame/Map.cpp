@@ -1,4 +1,4 @@
-#include "LocalGrid.h"
+#include "Map.h"
 
 #include "ProgDef.h"
 
@@ -14,7 +14,7 @@
 #include "FantasyGame.h"
 #include "Tile.h"
 
-LocalGrid::LocalGrid()
+Map::Map()
 {
     int height = 20;
     int width = 20;
@@ -43,11 +43,11 @@ LocalGrid::LocalGrid()
     }
 }
 
-LocalGrid::~LocalGrid()
+Map::~Map()
 {
 }
 
-void LocalGrid::Setup(int height, int width)
+void Map::Setup(int height, int width)
 {
     FantasyGame* game = GetGameInstance();
 
@@ -80,24 +80,24 @@ void LocalGrid::Setup(int height, int width)
     }
 }
 
-Tile* LocalGrid::Get(int x, int y)
+Tile* Map::Get(int x, int y)
 {
     return tiles[y][x];
 }
 
-void LocalGrid::Set(int x, int y, Tile * tile)
+void Map::Set(int x, int y, Tile * tile)
 {
     tiles[y][x] = tile;
 }
 
-void LocalGrid::SetTileTexture(int x, int y, BaseTexture* texture)
+void Map::SetTileTexture(int x, int y, BaseTexture* texture)
 {
     Tile* tile = this->Get(x, y);
 
     tile->TileSprite->SetTexture(texture);
 }
 
-void LocalGrid::ShowGridTiles(bool show)
+void Map::ShowGridTiles(bool show)
 {
     auto it = tilesList->GetContainer()->begin();
     while (it != tilesList->GetContainer()->end())
