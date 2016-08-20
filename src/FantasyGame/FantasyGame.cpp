@@ -38,22 +38,6 @@ FantasyGame::FantasyGame()
 {
     _gameInstance = this;
 
-    Engine = new GameEngine();
-
-    Engine->Init(SCALE_MULTIPLIER * GRID_WIDTH, SCALE_MULTIPLIER * GRID_HEIGHT);
-
-    Settings = SettingsRepository::GetInstance();
-
-    MainCamera = new PlayerCamera(GamePlayer);
-
-    Engine->AttachActor(MainCamera);
-
-    createdWindows = new BaseList<int>();
-
-    DebugCheatsMenu = new CheatMenu();
-    Engine->AttachActor(DebugCheatsMenu);
-
-    TileIndexIdentifiers = new PointerList<BaseText*>();
 }
 
 FantasyGame::~FantasyGame()
@@ -67,10 +51,19 @@ FantasyGame::~FantasyGame()
 
 void FantasyGame::Init()
 {
+    // Init the engine first, this gives access to the services proposed by the engine
     InitEngine();
 
+    // Next we can init the game world, we can't fully create the tiles yet
+    // because the graphics are not loaded yet.
     World* root = ReadWorldXml("assets\\World.xml");
     this->GameWorld = root;
+
+    // Now that we have a World to load, we can check and load the assets that are needed
+    InitGraphics();
+
+    // Finally, we init the game. Player, camera, etc. After that, the game is ready to play.
+    InitGame();
 
     // Extract sprites
     auto pred = [](std::string p) {
@@ -226,6 +219,22 @@ void FantasyGame::Update()
 
 void FantasyGame::InitEngine()
 {
+    Engine = new GameEngine();
+
+    Engine->Init(SCALE_MULTIPLIER * GRID_WIDTH, SCALE_MULTIPLIER * GRID_HEIGHT);
+
+    Settings = SettingsRepository::GetInstance();
+
+    MainCamera = new PlayerCamera(GamePlayer);
+
+    Engine->AttachActor(MainCamera);
+
+    createdWindows = new BaseList<int>();
+
+    DebugCheatsMenu = new CheatMenu();
+    Engine->AttachActor(DebugCheatsMenu);
+
+    TileIndexIdentifiers = new PointerList<BaseText*>();
 }
 
 World* FantasyGame::ReadWorldXml(std::string rootWorldFileName)
@@ -274,6 +283,15 @@ Map* FantasyGame::ReadMapData(std::string mapFileName)
     memcpy(ret->RawMapData, mapData.data(), mapData.length());
 
     return ret;
+
+}
+
+void FantasyGame::InitGraphics()
+{
+}
+
+void FantasyGame::InitGame()
+{
 
 }
 

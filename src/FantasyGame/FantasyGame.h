@@ -59,8 +59,11 @@ private:
 
     // Init World
     World* ReadWorldXml(std::string rootWorldFileName);
-
     Map* ReadMapData(std::string mapFileName);
+
+    void InitGraphics();
+
+    void InitGame(); // Final init
 
     // CONFIG
     float _tile_size;
