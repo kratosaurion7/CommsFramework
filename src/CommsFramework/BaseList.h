@@ -7,6 +7,9 @@
 
 #include "RandomGen.h"
 
+#define ITBEGIN(x) x->GetContainer()->begin()
+#define ITEND(x) x->GetContainer()->end()
+
 template <class T>
 class BaseList
 {
