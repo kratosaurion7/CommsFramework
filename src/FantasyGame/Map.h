@@ -12,6 +12,11 @@ public:
     Map();
     ~Map();
 
+    std::string MapName;
+    int RawMapDataLength;
+    char* RawMapData;
+    void ProcessMapData();
+
     void Setup(int height, int width);
 
     Tile* Get(int x, int y);

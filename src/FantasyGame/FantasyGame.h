@@ -10,6 +10,7 @@ class FSize;
 class SettingsRepository;
 class XmlNode;
 
+class World;
 class Map;
 
 class Player;
@@ -33,6 +34,7 @@ public:
 
     GameEngine* Engine;
 
+    World* GameWorld;
     Map* CurrentGrid;
 
     Player* GamePlayer;
@@ -52,7 +54,13 @@ public:
     
 private:
 
-    void ReadWorldData(std::string worldXmlConfigFile);
+    // Init Engine
+    void InitEngine();
+
+    // Init World
+    World* ReadWorldXml(std::string rootWorldFileName);
+
+    Map* ReadMapData(std::string mapFileName);
 
     // CONFIG
     float _tile_size;

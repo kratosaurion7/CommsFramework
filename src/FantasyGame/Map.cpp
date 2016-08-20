@@ -47,6 +47,10 @@ Map::~Map()
 {
 }
 
+void Map::ProcessMapData()
+{
+}
+
 void Map::Setup(int height, int width)
 {
     FantasyGame* game = GetGameInstance();

@@ -1,0 +1,7 @@
+<World>
+
+<maps>
+    <map name="Map 1" source="map1.xml" />
+</maps>
+
+</World>

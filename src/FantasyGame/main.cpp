@@ -26,19 +26,6 @@ class IWICBitmap;
 
 int main()
 {
-    auto b = new TgaFile();
-    b->Init(300, 300);
-    b->FillColor(0, 0, 255, 255);
-
-    auto g = new TgaFile();
-    g->Init(300, 300);
-    g->FillColor(0, 255, 0, 255);
-
-    auto r = new TgaFile();
-    r->Init(300, 300);
-    r->FillColor(255, 0, 0, 255);
-
-
     FantasyGame* game = new FantasyGame();
     game->ReadConfig();
 

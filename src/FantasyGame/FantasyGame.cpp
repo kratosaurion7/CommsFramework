@@ -20,6 +20,7 @@
 #include <QuickWindow.h>
 
 #include "ProgDef.h"
+#include "World.h"
 #include "Map.h"
 #include "Tile.h"
 
@@ -66,6 +67,11 @@ FantasyGame::~FantasyGame()
 
 void FantasyGame::Init()
 {
+    InitEngine();
+
+    World* root = ReadWorldXml("assets\\World.xml");
+    this->GameWorld = root;
+
     // Extract sprites
     auto pred = [](std::string p) {
         return p.find("spritesheet_") == 0;
@@ -216,6 +222,59 @@ void FantasyGame::Update()
         
         it++;
     }
+}
+
+void FantasyGame::InitEngine()
+{
+}
+
+World* FantasyGame::ReadWorldXml(std::string rootWorldFileName)
+{
+    XmlReader worldFileReader = XmlReader();
+    World* ret = new World();
+
+    worldFileReader.LoadFile(rootWorldFileName);
+
+    auto mapNodes = worldFileReader.GetNode("maps")->GetNodes("map");
+
+    auto it = ITBEGIN(mapNodes);
+    while (it != ITEND(mapNodes))
+    {
+        XmlNode* element = *it;
+
+        std::string mapName = element->GetAttribute("name").AttributeValue;
+        std::string mapFilepath = element->GetAttribute("source").AttributeValue;
+
+        Map* newMap = ReadMapData(mapFilepath);
+
+        ret->Maps->Add(newMap);
+
+        it++;
+    }
+
+    return ret;
+}
+
+Map* FantasyGame::ReadMapData(std::string mapFileName)
+{
+    XmlReader mapReader = XmlReader();
+    Map* ret = new Map();
+
+    mapReader.LoadFile("assets\\" + mapFileName);
+
+    std::string mapName = mapReader.GetNode("map_name")->Contents();
+    std::string mapData;
+    int mapWidth;
+    XmlNode* tilesNode = mapReader.GetNode("tiles");
+    mapData = tilesNode->Contents();
+    mapWidth = atoi(tilesNode->GetAttribute("width").AttributeValue);
+
+    ret->MapName = mapName;
+    ret->RawMapData = new char[mapData.length()];
+    memcpy(ret->RawMapData, mapData.data(), mapData.length());
+
+    return ret;
+
 }
 
 void FantasyGame::ReadConfig()

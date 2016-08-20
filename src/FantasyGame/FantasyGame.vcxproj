@@ -162,6 +162,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerCamera.cpp" />
     <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CheatMenu.h" />
@@ -172,6 +173,7 @@
     <ClInclude Include="PlayerCamera.h" />
     <ClInclude Include="ProgDef.h" />
     <ClInclude Include="Tile.h" />
+    <ClInclude Include="World.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="REWORK.txt" />
