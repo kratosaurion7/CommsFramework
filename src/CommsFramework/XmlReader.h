@@ -48,9 +48,12 @@ public:
 
 	PointerList<XmlNode*>* GetChildNodes(bool recursive = false);
 
+    // Looks only in immediate child nodes, use chained calls
     XmlNode* GetNode(std::string nodeName);
     PointerList<XmlNode*>* GetNodes(std::string nodeName);
 
+    // Find the node in all the tree of children, if searchInChildOnly is true it will loop out of the current tree of elements and continue looking
+    // for the node in the rest of the document.
     XmlNode* FindNode(std::string nodeName, bool searchInChildOnly = false);
     PointerList<XmlNode*>* FindNodes(std::string nodeName, bool searchInChildOnly = false);
 
