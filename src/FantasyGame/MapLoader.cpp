@@ -2,7 +2,7 @@
 
 #include <XmlReader.h>
 
-#include "LocalGrid.h"
+#include "Map.h"
 
 MapLoader::MapLoader()
 {

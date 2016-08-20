@@ -11,7 +11,7 @@
 #include <XDirectory.h>
 
 #include "FantasyGame.h"
-#include "LocalGrid.h"
+#include "Map.h"
 
 #include <TgaFile.h>
 #include <Functions.h>
