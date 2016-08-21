@@ -20,10 +20,6 @@
 #include <Utils.h>
 
 
-class Game_Start_Params;
-class IWICBitmap;
-
-
 int main()
 {
     FantasyGame* game = new FantasyGame();

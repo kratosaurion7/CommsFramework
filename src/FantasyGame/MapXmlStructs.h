@@ -1,6 +1,6 @@
 #pragma once
 
-class TileDescriptionEntry;
+struct TileDescriptionEntry;
 
 #include <string>
 #include <PointerList.h>

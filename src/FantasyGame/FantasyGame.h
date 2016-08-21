@@ -68,6 +68,8 @@ private:
     void InitGame(); // Final init
 
     // CONFIG
+    std::string assetsPath;
+
     float _tile_size;
     float _cameraX;
     float _cameraY;

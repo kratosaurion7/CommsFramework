@@ -224,6 +224,10 @@ void FantasyGame::ReadCoreSettings()
 {
     // TODO : Find a way to copy the config file from somewhere else than the assets
     Settings->ReadFromXml("assets\\config.xml");
+
+    this->assetsPath = Settings->Get("assets_root");
+
+    
 }
 
 void FantasyGame::InitEngine()
@@ -300,7 +304,7 @@ Map* FantasyGame::ReadMapData(std::string mapFileName)
     XmlReader mapReader = XmlReader();
     Map* ret = new Map();
 
-    mapReader.LoadFile("assets\\" + mapFileName);
+    mapReader.LoadFile(this->assetsPath + mapFileName);
 
     std::string mapName = mapReader.GetNode("map_name")->Contents();
     std::string mapData;
@@ -319,26 +323,43 @@ Map* FantasyGame::ReadMapData(std::string mapFileName)
 
 void FantasyGame::InitGraphics()
 {
-    BaseList<std::string>* loadQueue = new BaseList<std::string>();
+    // Find all settings named Spritesheet
+    auto pred = [](std::string p) {
+        return p == "Spritesheet";
+    };
 
-    auto it = ITBEGIN(this->GameWorld->Maps);
-    while (it != ITEND(this->GameWorld->Maps))
+    auto spritesheetValues = Settings->GetWhere(pred);
+    auto it = ITBEGIN(spritesheetValues);
+    while (it != ITEND(spritesheetValues))
     {
-        Map* iter = *it;
+        char* spritesheetPath = *it;
 
-        auto mappingIter = ITBEGIN(iter->TileMappings->Entries);
-        while (mappingIter != ITEND(iter->TileMappings->Entries))
-        {
-            TileDescriptionEntry* entry = *mappingIter;
+        Spritesheet* ssheet = new Spritesheet(spritesheetPath, this->Engine->Graphics);
 
-            if (!loadQueue->ContainsItem(entry->TextureName))
-            {
-                loadQueue->Add(entry->TextureName);
-            }
-        }
-
-        it++;
+        Engine->Graphics->AddSpritesheet(ssheet);
     }
+
+
+    //BaseList<std::string>* loadQueue = new BaseList<std::string>();
+
+    //auto it = ITBEGIN(this->GameWorld->Maps);
+    //while (it != ITEND(this->GameWorld->Maps))
+    //{
+    //    Map* iter = *it;
+
+    //    auto mappingIter = ITBEGIN(iter->TileMappings->Entries);
+    //    while (mappingIter != ITEND(iter->TileMappings->Entries))
+    //    {
+    //        TileDescriptionEntry* entry = *mappingIter;
+
+    //        if (!loadQueue->ContainsItem(entry->TextureName))
+    //        {
+    //            loadQueue->Add(entry->TextureName);
+    //        }
+    //    }
+
+    //    it++;
+    //}
 }
 
 void FantasyGame::InitGame()
