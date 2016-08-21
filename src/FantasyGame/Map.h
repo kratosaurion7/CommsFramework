@@ -1,5 +1,6 @@
 #pragma once
 
+struct TileDescriptionList;
 class Tile;
 class BaseTexture;
 
@@ -16,6 +17,10 @@ public:
     int RawMapDataLength;
     char* RawMapData;
     void ProcessMapData();
+
+    TileDescriptionList* TileMappings;
+
+    // --- OLD STUFF BELOW ---
 
     void Setup(int height, int width);
 

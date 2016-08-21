@@ -23,6 +23,7 @@
 #include "World.h"
 #include "Map.h"
 #include "Tile.h"
+#include "MapXmlStructs.h"
 
 #include "Player.h"
 #include "PlayerCamera.h"
@@ -51,6 +52,8 @@ FantasyGame::~FantasyGame()
 
 void FantasyGame::Init()
 {
+    ReadCoreSettings();
+
     // Init the engine first, this gives access to the services proposed by the engine
     InitEngine();
 
@@ -217,6 +220,12 @@ void FantasyGame::Update()
     }
 }
 
+void FantasyGame::ReadCoreSettings()
+{
+    // TODO : Find a way to copy the config file from somewhere else than the assets
+    Settings->ReadFromXml("assets\\config.xml");
+}
+
 void FantasyGame::InitEngine()
 {
     Engine = new GameEngine();
@@ -244,6 +253,7 @@ World* FantasyGame::ReadWorldXml(std::string rootWorldFileName)
 
     worldFileReader.LoadFile(rootWorldFileName);
 
+    // Read the <tiles> node
     auto mapNodes = worldFileReader.GetNode("maps")->GetNodes("map");
 
     auto it = ITBEGIN(mapNodes);
@@ -259,6 +269,27 @@ World* FantasyGame::ReadWorldXml(std::string rootWorldFileName)
         ret->Maps->Add(newMap);
 
         it++;
+    }
+
+    // Read the <tile_description> node
+    auto descriptionNode = worldFileReader.FindNode("tile_description")->GetNodes("tile");
+    TileDescriptionList* descList = new TileDescriptionList();
+    ret->TileMapping = descList;
+
+    descList->Entries = new PointerList<TileDescriptionEntry*>();
+
+    auto descIt = ITBEGIN(descriptionNode);
+    while (descIt != ITEND(descriptionNode))
+    {
+        XmlNode* element = *descIt;
+
+        TileDescriptionEntry* newEntry = new TileDescriptionEntry();
+        newEntry->id = atoi(element->GetAttribute("id").AttributeValue);
+        newEntry->TextureName = element->GetAttribute("texture").AttributeValue;
+
+        descList->Entries->Add(newEntry);
+
+        descIt++;
     }
 
     return ret;
@@ -288,6 +319,26 @@ Map* FantasyGame::ReadMapData(std::string mapFileName)
 
 void FantasyGame::InitGraphics()
 {
+    BaseList<std::string>* loadQueue = new BaseList<std::string>();
+
+    auto it = ITBEGIN(this->GameWorld->Maps);
+    while (it != ITEND(this->GameWorld->Maps))
+    {
+        Map* iter = *it;
+
+        auto mappingIter = ITBEGIN(iter->TileMappings->Entries);
+        while (mappingIter != ITEND(iter->TileMappings->Entries))
+        {
+            TileDescriptionEntry* entry = *mappingIter;
+
+            if (!loadQueue->ContainsItem(entry->TextureName))
+            {
+                loadQueue->Add(entry->TextureName);
+            }
+        }
+
+        it++;
+    }
 }
 
 void FantasyGame::InitGame()

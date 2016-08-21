@@ -1,6 +1,7 @@
 #pragma once
 
 class Map;
+struct TileDescriptionList;
 
 #include <PointerList.h>
 
@@ -11,4 +12,7 @@ public:
     ~World();
 
     PointerList<Map*>* Maps;
+
+    TileDescriptionList* TileMapping;
+
 };

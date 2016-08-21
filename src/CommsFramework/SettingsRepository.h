@@ -18,6 +18,8 @@ public:
 
     void Register(std::string name, char* value);
 
+    void ReadFromXml(std::string filePath);
+
 protected:
     PointerList<Pair<std::string, char*>*>* SettingsList;
 

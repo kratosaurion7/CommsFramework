@@ -25,6 +25,9 @@
     <Filter Include="Menu">
       <UniqueIdentifier>{b13bf529-34e1-4f5c-836e-a2c6bed01b12}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Map\Structures">
+      <UniqueIdentifier>{19a871d9-bfb3-472b-95cf-0fee3ac77c7d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -54,6 +57,9 @@
     <ClCompile Include="World.cpp">
       <Filter>Map</Filter>
     </ClCompile>
+    <ClCompile Include="MapXmlStructs.cpp">
+      <Filter>Map\Structures</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FantasyGame.h">
@@ -82,6 +88,9 @@
     </ClInclude>
     <ClInclude Include="World.h">
       <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="MapXmlStructs.h">
+      <Filter>Map\Structures</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -2,6 +2,8 @@
 
 #include <cassert>
 
+#include "XmlReader.h"
+
 SettingsRepository* SettingsRepository::_instance = NULL;
 
 SettingsRepository::SettingsRepository()
@@ -62,4 +64,26 @@ void SettingsRepository::Register(std::string name, char* value)
     newItem->Item2 = value;
 
     this->SettingsList->Add(newItem);
+}
+
+void SettingsRepository::ReadFromXml(std::string filePath)
+{
+    XmlReader settingsReader = XmlReader();
+    settingsReader.LoadFile(filePath);
+
+    auto settingNodes = settingsReader.FindNode("settings")->GetChildNodes();
+
+    auto it = ITBEGIN(settingNodes);
+    while (it != ITEND(settingNodes))
+    {
+        XmlNode* settingNode = *it;
+        
+        std::string settingName = settingNode->NodeName();
+        char* settingValue = new char[settingNode->Contents().length()];
+        strcpy(settingValue, settingNode->Contents().c_str());
+        
+        this->Register(settingName, settingValue);
+
+        it++;
+    }
 }

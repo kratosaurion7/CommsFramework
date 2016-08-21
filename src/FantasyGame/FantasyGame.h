@@ -54,6 +54,9 @@ public:
     
 private:
 
+    // Fill up the settings repository with general settings
+    void ReadCoreSettings();
+
     // Init Engine
     void InitEngine();
 
@@ -62,7 +65,6 @@ private:
     Map* ReadMapData(std::string mapFileName);
 
     void InitGraphics();
-
     void InitGame(); // Final init
 
     // CONFIG

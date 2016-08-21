@@ -1,7 +1,18 @@
 <World>
 
-<maps>
-    <map name="Map 1" source="map1.xml" />
-</maps>
+    <maps>
+        <map name="Map 1" source="map1.xml" />
+    </maps>
+
+
+    <!-- Required, this will be the default fallback for the maps that don't include a tile_description node -->
+    <tile_description>
+        
+        <tile id="1" texture="Grass" />
+        <tile id="2" texture="Rock" />
+        <tile id="3" texture="Water" />
+        
+    </tile_description>
+
 
 </World>
