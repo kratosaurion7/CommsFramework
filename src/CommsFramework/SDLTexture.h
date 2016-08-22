@@ -1,8 +1,6 @@
 #pragma once
 
 class SDLGraphicEngine;
-class SDL_Surface;
-class SDL_Texture;
 
 #include <string>
 #include <cstdint>
@@ -29,11 +27,11 @@ public:
     SDLTexture();
     ~SDLTexture();
 
-    static SDL_Texture* GetMissingTextureTexture();
+    static SDL_Texture* GetMissingTextureTexture(BaseGraphicEngine* engine);
 
     virtual void Initalize(float width, float height);
 
-    virtual void Load(std::string path);
+    virtual int Load(std::string path);
 
     virtual void LoadFromMemory(char* data, int dataSize);
 

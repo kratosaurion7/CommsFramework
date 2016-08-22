@@ -28,6 +28,7 @@
 #include "SDLFont.h"
 #include "SDLUtilities.h"
 
+
 SDLGraphicEngine::SDLGraphicEngine()
 {
     mainWindow = NULL;
@@ -208,6 +209,10 @@ BaseTexture* SDLGraphicEngine::CreateTexture()
 BaseTexture* SDLGraphicEngine::CreateTexture(std::string texturePath)
 {
     SDLTexture* tex = (SDLTexture*)this->TextureRepo->LoadTexture(texturePath);
+
+    if (tex == NULL)
+        return NULL;
+
     tex->Engine = this;
     tex->Graphics = this; // Need to inject the specific graphic engine to the texture
 
@@ -396,6 +401,21 @@ void SDLGraphicEngine::ProcessDraw(SDL_Window* targetWindow)
                 {
                     SDL_Rect destinationRect = this->GetSpriteRect(target);
                     SDL_Texture* tex = drawImpl->GetDrawableTexture();
+
+                    if (tex == NULL)
+                    {
+                        tex = SDLTexture::GetMissingTextureTexture(this);
+                        destinationRect.w = target->GetWidth();
+                        destinationRect.h = target->GetHeight();
+
+                        // If the width or height is 0 nothing will be shown, this will set it do some default values
+                        // This is done to clearly mark the texture as missing
+                        if (destinationRect.h == 0 || destinationRect.w == 0)
+                        {
+                            destinationRect.w = 25;
+                            destinationRect.h = 25;
+                        }
+                    }
 
                     SDL_RenderCopy(gameRenderer, tex, NULL, &destinationRect);
                 }

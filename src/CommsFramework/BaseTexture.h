@@ -21,7 +21,7 @@ public:
 
     virtual void Initalize(float width, float height) = 0;
 
-    virtual void Load(std::string path) = 0;
+    virtual int Load(std::string path) = 0;
 
     virtual void LoadFromMemory(char* data, int dataSize) = 0;
 

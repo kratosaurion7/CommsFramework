@@ -21,11 +21,11 @@ SDLTexture::~SDLTexture()
         SDL_FreeSurface(surface);
 }
 
-SDL_Texture* SDLTexture::GetMissingTextureTexture()
+SDL_Texture* SDLTexture::GetMissingTextureTexture(BaseGraphicEngine* engine)
 {
     if (SDLTexture::MissingTextureSingleton == NULL)
     {
-        SDLTexture* tex = new SDLTexture();
+        SDLTexture* tex = (SDLTexture*)engine->CreateTexture();
 
         tex->Load("Assets/engine/missing_texture.png");
         
@@ -33,8 +33,6 @@ SDL_Texture* SDLTexture::GetMissingTextureTexture()
     }
 
     return SDLTexture::MissingTextureSingleton->texture;
-
-    return NULL;
 }
 
 void SDLTexture::Initalize(float width, float height)
@@ -43,7 +41,7 @@ void SDLTexture::Initalize(float width, float height)
     Width = width;
 }
 
-void SDLTexture::Load(std::string path)
+int SDLTexture::Load(std::string path)
 {    
     int res = 0;
     const char* errorString;
@@ -55,7 +53,7 @@ void SDLTexture::Load(std::string path)
         errorString = SDL_GetError();
         fprintf(stderr, "Unable to create surface for [%s] with error %s\n", path.c_str(), errorString);
 
-        return;
+        return 1;
     }
 
     SDL_Renderer* renderer = Graphics->gameRenderer;
@@ -67,7 +65,7 @@ void SDLTexture::Load(std::string path)
         errorString = SDL_GetError();
         fprintf(stderr, "Unable to create texture for [%s] with error %s\n", path.c_str(), errorString);
 
-        return;
+        return 1;
     }
 
     // TODO : Check if we keep both the Texture and Surface in memory
@@ -75,6 +73,8 @@ void SDLTexture::Load(std::string path)
     TexturePath = path;
     this->Height = surface->h;
     this->Width = surface->w;
+
+    return 0;
 }
 
 void SDLTexture::LoadFromMemory(char* data, int dataSize)

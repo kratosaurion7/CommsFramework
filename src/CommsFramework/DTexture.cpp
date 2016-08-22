@@ -24,7 +24,7 @@ void DTexture::Initalize(float width, float height)
     size.Width = width;
 }
 
-void DTexture::Load(std::string path)
+int DTexture::Load(std::string path)
 {
     bool res = innerImpl->loadFromFile(path);
 
@@ -36,7 +36,11 @@ void DTexture::Load(std::string path)
         size.Width = vec.x;
 
         TexturePath = path;
+
+        return 0;
     }
+
+    return 1;
 }
 
 void DTexture::LoadFromMemory(char * data, int dataSize)

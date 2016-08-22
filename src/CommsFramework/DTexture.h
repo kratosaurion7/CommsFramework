@@ -15,7 +15,7 @@ public:
 
     virtual void Initalize(float width, float height);
 
-    void Load(std::string path);
+    int Load(std::string path);
 
     virtual void LoadFromMemory(char* data, int dataSize);
 
