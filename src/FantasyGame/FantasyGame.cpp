@@ -39,6 +39,7 @@ FantasyGame::FantasyGame()
 {
     _gameInstance = this;
 
+    this->Settings = SettingsRepository::GetInstance();
 }
 
 FantasyGame::~FantasyGame()

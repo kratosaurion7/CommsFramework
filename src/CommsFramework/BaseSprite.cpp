@@ -137,13 +137,33 @@ bool BaseSprite::IsLastFrame()
 
 void BaseSprite::SetTexture(std::string newTexturePath)
 {
+    assert(newTexturePath != "");
+
     BaseTexture* tex = Engine->CreateTexture(newTexturePath);
 
+    if (tex == NULL)
+        return;
+
     this->SetTexture(tex);
+
+    this->RequestedTextureName = "";
+    this->HasTextureApplied = true;
+}
+
+void BaseSprite::SetTextureName(std::string textureName)
+{
+    this->RequestedTextureName = textureName;
+    this->HasTextureApplied = false;
 }
 
 void BaseSprite::Reload()
 {
+    BaseTexture* tex = this->Engine->TextureRepo->GetTextureByName(this->RequestedTextureName);
+
+    if (tex != NULL)
+    {
+        this->SetTexture(tex);
+    }
 }
 
 void BaseSprite::Unload()

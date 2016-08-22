@@ -26,7 +26,10 @@ BaseTexture* TextureRepository::LoadTexture(std::string texturePath)
     if (loadedTexture == NULL)
     {
         loadedTexture = this->Graphics->CreateTexture();
-        loadedTexture->Load(texturePath);
+        int res = loadedTexture->Load(texturePath);
+
+        if (res != 0)
+            return NULL; // Texture was not loaded
 
         this->loadedTextures->Add(loadedTexture);
     }
@@ -34,7 +37,7 @@ BaseTexture* TextureRepository::LoadTexture(std::string texturePath)
     return loadedTexture;
 }
 
-BaseTexture * TextureRepository::GetTextureByName(std::string textureName)
+BaseTexture* TextureRepository::GetTextureByName(std::string textureName)
 {
     auto it = loadedTextures->GetContainer()->begin();
     while (it != loadedTextures->GetContainer()->end())

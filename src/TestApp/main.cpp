@@ -4,6 +4,8 @@
 #include <BaseText.h>
 #include <BaseTexture.h>
 
+
+
 int main()
 {
     GameEngine* engine = new GameEngine();
@@ -12,11 +14,10 @@ int main()
     BaseGraphicEngine* graphics = engine->Graphics;
 
     BaseSprite* sprt = engine->CreateSprite();
-    BaseTexture* tex = graphics->CreateTexture();
-    tex->Initalize(128, 128);
-    tex->SetSolidColor(0xFF0000FF);
+    BaseTexture* tex = graphics->CreateTexture("assets\\img2.png");
 
     sprt->SetTexture(tex);
+    sprt->SetSize(50, 50);
     sprt->SetPos(25, 25);
     sprt->Show(true);
 

@@ -1,10 +1,12 @@
 <config>
 
-<settings>
+    <settings>
 
-    <assets_root>assets\\</assets_root>
+        <assets_root>assets\\</assets_root>
+        
+        
 
-<settings>
+    </settings>
 
 	<parameters>
 		<game_name>FantasyGame</game_name>

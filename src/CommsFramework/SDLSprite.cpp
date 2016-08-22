@@ -32,8 +32,10 @@ SDLSprite::SDLSprite()
     GravityEnabled = false;
 
     Engine = NULL;
-}
 
+    this->HasTextureApplied = false;
+    this->RequestedTextureName = "";
+}
 
 SDLSprite::~SDLSprite()
 {
@@ -76,6 +78,8 @@ void SDLSprite::SetTexture(BaseTexture* texture)
     {
         currentSpriteTexture = sdlTex;
         size = texture->GetSize();
+
+        this->HasTextureApplied = true;
     }
 }
 
@@ -88,7 +92,7 @@ SDL_Texture* SDLSprite::GetDrawableTexture()
 {
     if (currentSpriteTexture == NULL)
     {
-        return SDLTexture::GetMissingTextureTexture();
+        return NULL;
     }
 
     return currentSpriteTexture->texture;

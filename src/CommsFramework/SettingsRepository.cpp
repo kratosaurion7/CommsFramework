@@ -62,7 +62,7 @@ void SettingsRepository::Register(std::string name, char* value)
     Pair<std::string, char*>* newItem = new Pair<std::string, char*>();
     newItem->Item1 = name;
     newItem->Item2 = value;
-
+    
     this->SettingsList->Add(newItem);
 }
 

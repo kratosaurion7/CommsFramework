@@ -76,6 +76,8 @@ PointerList<BaseSprite*>* Spritesheet::ExtractSprites()
         BaseSprite* newSprite = Graphics->CreateSprite(spriteName);
         BaseTexture* newSpriteTexture = spritesheetTexture->GetSubTexture(subRec);
         newSprite->SetTexture(newSpriteTexture);
+        newSpriteTexture->TextureName = spriteName;
+        newSpriteTexture->TexturePath = this->SpritesheetFilePath;
 
         spriteList->Add(newSprite);
 
@@ -115,6 +117,7 @@ PointerList<BaseTexture*>* Spritesheet::ExtractTextures()
 
         BaseTexture* newSpriteTexture = spritesheetTexture->GetSubTexture(subRec);
         newSpriteTexture->TextureName = textureName;
+        newSpriteTexture->TexturePath = this->SpritesheetFilePath;
 
         textures->Add(newSpriteTexture);
 

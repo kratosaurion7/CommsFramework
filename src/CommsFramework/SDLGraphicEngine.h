@@ -60,6 +60,8 @@ public:
     virtual BaseFont* CreateFont();
     virtual BaseText* CreateText();
 
+    virtual void ReloadSpriteTextures();
+
     virtual bool IsTimeForFrame();
     virtual int GetFramerate();
     virtual void SetFramerate(int framerate);

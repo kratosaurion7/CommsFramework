@@ -51,6 +51,8 @@ public:
 
     virtual void SetTexture(BaseTexture* texture) = 0;
     virtual void SetTexture(std::string newTexturePath);
+    
+    virtual void SetTextureName(std::string textureName);
 
     virtual void Reload();
     virtual void Unload();
@@ -61,5 +63,8 @@ protected:
     int LastFrameTick = 0;
 
     bool FrameReady();
+
+    bool HasTextureApplied; // Is true if the sprite has a texture set, false if the texture is requested but not loaded yet.
+    std::string RequestedTextureName;
 
 };

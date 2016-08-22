@@ -20,6 +20,7 @@
 #include "BaseTexture.h"
 #include "Utilities.h"
 #include "Spritesheet.h"
+#include "SettingsRepository.h"
 
 #include "SDLDrawable.h"
 #include "SDLSprite.h"
@@ -233,6 +234,23 @@ BaseText* SDLGraphicEngine::CreateText()
     text->Ident = "Text";
 
     return text;
+}
+
+void SDLGraphicEngine::ReloadSpriteTextures()
+{
+    auto it = ITBEGIN(this->drawables);
+    while (it != ITEND(this->drawables))
+    {
+        DrawObject* drawable = *it;
+
+        SDLSprite* sprt = dynamic_cast<SDLSprite*>(drawable);
+
+        if (sprt != NULL)
+        {
+            sprt->Reload();
+        }
+
+    }
 }
 
 int SDLGraphicEngine::GetFramerate()
