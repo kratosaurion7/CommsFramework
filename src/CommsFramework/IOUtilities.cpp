@@ -59,6 +59,19 @@ std::string GetFileExtension(XFile* file)
     return fileExt;
 }
 
+std::string GetFileName(std::string filePath)
+{
+    // Get only the file part of the path
+    size_t filePartStartIndex = filePath.find_last_of('\\') + 1;
+    std::string filePart = filePath.substr(filePartStartIndex, filePath.length() - filePartStartIndex);
+
+    // Get the filename from the filename + extension string
+    size_t extIndex = filePart.find_last_of('.');
+    std::string fileName = filePart.substr(0, extIndex);
+
+    return fileName;
+}
+
 std::string GetParentDirectoryPath(std::string path)
 {
     assert(path != "");

@@ -25,6 +25,11 @@ BaseList<std::string>* GetFilePathComponents(std::string path);
 std::string GetFileExtension(XFile* file);
 
 /*
+ * Returns the file name from the given path, without the extension.
+ */
+std::string GetFileName(std::string filePath);
+
+/*
  * These functions can extract the parent directory of a specified
  * file or folder. They can get the directory name only or the full
  * path leading to the parent.
