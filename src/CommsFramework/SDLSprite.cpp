@@ -92,7 +92,12 @@ SDL_Texture* SDLSprite::GetDrawableTexture()
 {
     if (currentSpriteTexture == NULL)
     {
-        return NULL;
+        this->Reload();
+
+        if (this->currentSpriteTexture == NULL)
+        {
+            return NULL;
+        }
     }
 
     return currentSpriteTexture->texture;

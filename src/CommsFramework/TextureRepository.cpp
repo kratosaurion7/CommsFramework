@@ -3,7 +3,7 @@
 #include "BaseGraphicEngine.h"
 #include "PointerList.h"
 #include "BaseTexture.h"
-
+#include "IOUtilities.h"
 
 TextureRepository::TextureRepository(BaseGraphicEngine* engine)
 {
@@ -30,6 +30,8 @@ BaseTexture* TextureRepository::LoadTexture(std::string texturePath)
 
         if (res != 0)
             return NULL; // Texture was not loaded
+
+        loadedTexture->TextureName = GetFileName(texturePath);
 
         this->loadedTextures->Add(loadedTexture);
     }

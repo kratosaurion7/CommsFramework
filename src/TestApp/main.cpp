@@ -12,11 +12,15 @@ int main()
     engine->Init(640, 640);
 
     BaseGraphicEngine* graphics = engine->Graphics;
+    graphics->TextureRepo->LoadTexture("assets\\flag.png");
 
     BaseSprite* sprt = engine->CreateSprite();
-    BaseTexture* tex = graphics->CreateTexture("assets\\img2.png");
+    sprt->SetTextureName("flag");
+    //sprt->Reload();
 
-    sprt->SetTexture(tex);
+    //BaseTexture* tex = graphics->CreateTexture("assets\\img2.png");
+    //sprt->SetTexture(tex);
+
     sprt->SetSize(50, 50);
     sprt->SetPos(25, 25);
     sprt->Show(true);
