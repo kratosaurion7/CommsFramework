@@ -19,7 +19,7 @@ TextureRepository::~TextureRepository()
     delete(loadedTextures);
 }
 
-BaseTexture* TextureRepository::LoadTexture(std::string texturePath)
+BaseTexture* TextureRepository::LoadTexture(std::string texturePath, std::string newTextureName)
 {
     BaseTexture* loadedTexture = GetLoadedTexture(texturePath);
 
@@ -31,7 +31,15 @@ BaseTexture* TextureRepository::LoadTexture(std::string texturePath)
         if (res != 0)
             return NULL; // Texture was not loaded
 
-        loadedTexture->TextureName = GetFileName(texturePath);
+        if (newTextureName == "")
+        {
+            loadedTexture->TextureName = GetFileName(texturePath);
+        }
+        else
+        {
+            loadedTexture->TextureName = newTextureName;
+        }
+
 
         this->loadedTextures->Add(loadedTexture);
     }

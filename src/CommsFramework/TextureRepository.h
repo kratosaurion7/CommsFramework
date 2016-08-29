@@ -9,11 +9,10 @@ class BaseTexture;
 class TextureRepository
 {
 public:
-
     TextureRepository(BaseGraphicEngine* engine);
     ~TextureRepository();
 
-    BaseTexture* LoadTexture(std::string texturePath);
+    BaseTexture* LoadTexture(std::string texturePath, std::string newTextureName = "");
 
     BaseTexture* GetTextureByName(std::string textureName);
 

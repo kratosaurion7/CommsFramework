@@ -13,6 +13,7 @@ int main()
 
     BaseGraphicEngine* graphics = engine->Graphics;
     graphics->TextureRepo->LoadTexture("assets\\flag.png");
+    
 
     BaseSprite* sprt = engine->CreateSprite();
     sprt->SetTextureName("flag");
