@@ -47,6 +47,18 @@ BaseTexture* TextureRepository::LoadTexture(std::string texturePath, std::string
     return loadedTexture;
 }
 
+void TextureRepository::FlushTexture(std::string textureName)
+{
+    BaseTexture* texture = GetTextureByName(textureName);
+
+    if (texture != NULL)
+    {
+        delete(texture);
+    }
+
+    this->loadedTextures->RemoveObject(texture);
+}
+
 BaseTexture* TextureRepository::GetTextureByName(std::string textureName)
 {
     auto it = loadedTextures->GetContainer()->begin();

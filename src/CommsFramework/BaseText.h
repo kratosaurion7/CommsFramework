@@ -18,6 +18,8 @@ enum TextStyle {
 class BaseText : public DrawObject
 {
 public:
+    virtual ~BaseText() = 0;
+
     virtual std::string GetText() = 0;
     virtual void SetText(std::string text) = 0;
 
@@ -35,3 +37,5 @@ public:
 
     virtual BaseTexture* GetTextImage() = 0;
 };
+
+inline BaseText::~BaseText() { };

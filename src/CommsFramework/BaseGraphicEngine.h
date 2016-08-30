@@ -24,6 +24,8 @@ class TextureRepository;
 class BaseGraphicEngine
 {
 public:
+    virtual ~BaseGraphicEngine() = 0;
+
     TextureRepository* TextureRepo;
 
     bool zIndexNeedsReordering = false;
@@ -86,3 +88,5 @@ public:
     virtual void ReorderSprite(DrawObject* first, DrawObject* second) = 0;
 
 };
+
+inline BaseGraphicEngine::~BaseGraphicEngine() { };

@@ -13,6 +13,7 @@ public:
     ~TextureRepository();
 
     BaseTexture* LoadTexture(std::string texturePath, std::string newTextureName = "");
+    void FlushTexture(std::string textureName);
 
     BaseTexture* GetTextureByName(std::string textureName);
 

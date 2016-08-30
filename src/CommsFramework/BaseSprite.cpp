@@ -12,6 +12,11 @@
 #include "BaseSprite.h"
 
 
+BaseSprite::~BaseSprite()
+{
+
+}
+
 bool BaseSprite::MouseOver()
 {
     FRectangle myRec = this->GetRectangle();

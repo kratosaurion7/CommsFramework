@@ -13,6 +13,8 @@ class BaseGraphicEngine;
 class BaseTexture
 {
 public:
+    virtual ~BaseTexture() = 0;
+
     std::string TexturePath;
 
     std::string TextureName;
@@ -36,3 +38,5 @@ public:
 
     virtual void OverlayTexture(BaseTexture* other) = 0;
 };
+
+inline BaseTexture::~BaseTexture() { };

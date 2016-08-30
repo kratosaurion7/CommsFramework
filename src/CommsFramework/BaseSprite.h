@@ -17,6 +17,7 @@ class BaseMouse;
 class BaseSprite : public DrawObject
 {
 public:
+    ~BaseSprite();
 
     /* Animation properties */
     int SpriteFPS = 0;
