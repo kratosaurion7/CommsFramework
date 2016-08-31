@@ -23,7 +23,6 @@
 int main()
 {
     FantasyGame* game = new FantasyGame();
-    game->ReadConfig();
 
     game->Init();
     

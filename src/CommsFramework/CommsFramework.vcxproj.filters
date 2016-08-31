@@ -318,6 +318,9 @@
     <ClCompile Include="QuickWindow.cpp">
       <Filter>Framework\Utilities</Filter>
     </ClCompile>
+    <ClCompile Include="PathLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="XmlReader.h">
@@ -577,6 +580,9 @@
     </ClInclude>
     <ClInclude Include="QuickWindow.h">
       <Filter>Framework\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="PathLoader.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

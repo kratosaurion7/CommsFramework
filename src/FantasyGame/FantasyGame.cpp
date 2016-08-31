@@ -18,6 +18,7 @@
 #include <SettingsRepository.h>
 #include <TgaFile.h>
 #include <QuickWindow.h>
+#include <PathLoader.h>
 
 #include "ProgDef.h"
 #include "World.h"
@@ -55,12 +56,14 @@ void FantasyGame::Init()
 {
     ReadCoreSettings();
 
+    PathLoader::SetBasePath("assets\\");
+
     // Init the engine first, this gives access to the services proposed by the engine
     InitEngine();
 
     // Next we can init the game world, we can't fully create the tiles yet
     // because the graphics are not loaded yet.
-    World* root = ReadWorldXml("assets\\World.xml");
+    World* root = ReadWorldXml(PathLoader::GetPath("World.xml"));
     this->GameWorld = root;
 
     // Now that we have a World to load, we can check and load the assets that are needed
@@ -224,11 +227,11 @@ void FantasyGame::Update()
 void FantasyGame::ReadCoreSettings()
 {
     // TODO : Find a way to copy the config file from somewhere else than the assets
-    Settings->ReadFromXml("assets\\config.xml");
+    Settings->ReadFromXml("config.xml");
 
     this->assetsPath = Settings->Get("assets_root");
 
-    
+    PathLoader::SetBasePath(this->assetsPath);
 }
 
 void FantasyGame::InitEngine()
