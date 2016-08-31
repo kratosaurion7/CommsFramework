@@ -1,0 +1,20 @@
+-= General =-
+
+The game keeps all the configurable data in config files. Most of the program setting's are going to be in the
+SetingsRepository object but classes can read their own config files as well.
+
+The config files must keep the same format as this.
+- The root node is called <config>
+- Inside the root node is a node called <settings>. This is a generic node containing a list of nodes of
+    various names. The <settings> node is used to contain settings meant to be inserted into the SettingsRepository.
+    The node name is the parameter name and the content is the parameter value.
+    When a class is managing the content of an XML file, it should extract all the settings sub-nodes and
+    put them inside the SettingsRepository.
+- The rest of the nodes in the root, other than setting, can be named whatever,    
+
+
+The game does not keep an hardcoded reference to each of the config file names, instead there is a core config
+file called 'config.xml'. This file is read first and each other XML file's path is kept in there.
+
+There is a facility method in SettingsRepository that loads all the general settings from an XML file and inserts
+them.

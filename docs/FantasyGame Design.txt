@@ -1,4 +1,0 @@
-Map design :
-
-Map -> Grid - Block
-

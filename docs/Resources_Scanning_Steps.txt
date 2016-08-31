@@ -1,6 +1,0 @@
-Read the main config file
-- Read all <resource> tags
-- Keep a list of all <config> tags
-- For each <config> tag, read the config file and execute the previous two steps.
-
-When all config files have been read :
