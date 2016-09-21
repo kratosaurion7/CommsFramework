@@ -61,8 +61,6 @@ private:
     void InitEngine();
 
     // Init World
-    World* ReadWorldXml(std::string rootWorldFileName);
-    Map* ReadMapData(std::string mapFileName);
 
     void InitGraphics();
     void InitGame(); // Final init

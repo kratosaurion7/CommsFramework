@@ -63,7 +63,7 @@ void FantasyGame::Init()
 
     // Next we can init the game world, we can't fully create the tiles yet
     // because the graphics are not loaded yet.
-    World* root = ReadWorldXml(PathLoader::GetPath("World.xml"));
+    World* root = World::CreateWorldFromXml(PathLoader::GetPath("World.xml"));
     this->GameWorld = root;
 
     // Now that we have a World to load, we can check and load the assets that are needed
@@ -252,77 +252,6 @@ void FantasyGame::InitEngine()
     Engine->AttachActor(DebugCheatsMenu);
 
     TileIndexIdentifiers = new PointerList<BaseText*>();
-}
-
-World* FantasyGame::ReadWorldXml(std::string rootWorldFileName)
-{
-    XmlReader worldFileReader = XmlReader();
-    World* ret = new World();
-
-    worldFileReader.LoadFile(rootWorldFileName);
-
-    // Read the <tiles> node
-    auto mapNodes = worldFileReader.GetNode("maps")->GetNodes("map");
-
-    auto it = ITBEGIN(mapNodes);
-    while (it != ITEND(mapNodes))
-    {
-        XmlNode* element = *it;
-
-        std::string mapName = element->GetAttribute("name").AttributeValue;
-        std::string mapFilepath = element->GetAttribute("source").AttributeValue;
-
-        Map* newMap = ReadMapData(mapFilepath);
-
-        ret->Maps->Add(newMap);
-
-        it++;
-    }
-
-    // Read the <tile_description> node
-    auto descriptionNode = worldFileReader.FindNode("tile_description")->GetNodes("tile");
-    TileDescriptionList* descList = new TileDescriptionList();
-    ret->TileMapping = descList;
-
-    descList->Entries = new PointerList<TileDescriptionEntry*>();
-
-    auto descIt = ITBEGIN(descriptionNode);
-    while (descIt != ITEND(descriptionNode))
-    {
-        XmlNode* element = *descIt;
-
-        TileDescriptionEntry* newEntry = new TileDescriptionEntry();
-        newEntry->id = atoi(element->GetAttribute("id").AttributeValue);
-        newEntry->TextureName = element->GetAttribute("texture").AttributeValue;
-
-        descList->Entries->Add(newEntry);
-
-        descIt++;
-    }
-
-    return ret;
-}
-
-Map* FantasyGame::ReadMapData(std::string mapFileName)
-{
-    XmlReader mapReader = XmlReader();
-    Map* ret = new Map();
-
-    mapReader.LoadFile(this->assetsPath + mapFileName);
-
-    std::string mapName = mapReader.GetNode("map_name")->Contents();
-    std::string mapData;
-    int mapWidth;
-    XmlNode* tilesNode = mapReader.GetNode("tiles");
-    mapData = tilesNode->Contents();
-    mapWidth = atoi(tilesNode->GetAttribute("width").AttributeValue);
-
-    ret->MapName = mapName;
-    ret->RawMapData = new char[mapData.length()];
-    memcpy(ret->RawMapData, mapData.data(), mapData.length());
-
-    return ret;
-
 }
 
 void FantasyGame::InitGraphics()

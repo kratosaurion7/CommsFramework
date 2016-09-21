@@ -13,6 +13,8 @@ public:
     Map();
     ~Map();
 
+	static Map* CreateFromXml(std::string xmlPath);
+
     std::string MapName;
     int RawMapDataLength;
     char* RawMapData;

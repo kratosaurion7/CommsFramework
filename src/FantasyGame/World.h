@@ -15,4 +15,5 @@ public:
 
     TileDescriptionList* TileMapping;
 
+	static World* CreateWorldFromXml(std::string xmlPath);
 };

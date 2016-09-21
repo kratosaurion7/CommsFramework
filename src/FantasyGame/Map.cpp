@@ -1,5 +1,7 @@
 #include "Map.h"
 
+#include <XmlReader.h>
+
 #include "ProgDef.h"
 
 #include <GameEngine.h>
@@ -45,6 +47,27 @@ Map::Map()
 
 Map::~Map()
 {
+}
+
+Map * Map::CreateFromXml(std::string xmlPath)
+{
+	XmlReader mapReader = XmlReader();
+	Map* ret = new Map();
+
+	mapReader.LoadFile(xmlPath);
+
+	std::string mapName = mapReader.GetNode("map_name")->Contents();
+	std::string mapData;
+	int mapWidth;
+	XmlNode* tilesNode = mapReader.GetNode("tiles");
+	mapData = tilesNode->Contents();
+	mapWidth = atoi(tilesNode->GetAttribute("width").AttributeValue);
+
+	ret->MapName = mapName;
+	ret->RawMapData = new char[mapData.length()];
+	memcpy(ret->RawMapData, mapData.data(), mapData.length());
+
+	return ret;
 }
 
 void Map::ProcessMapData()
