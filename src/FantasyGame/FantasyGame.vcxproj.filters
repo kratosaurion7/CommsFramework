@@ -48,9 +48,6 @@
     <ClCompile Include="CheatMenu.cpp">
       <Filter>Menu</Filter>
     </ClCompile>
-    <ClCompile Include="MapLoader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Map.cpp">
       <Filter>Map</Filter>
     </ClCompile>
@@ -79,9 +76,6 @@
     </ClInclude>
     <ClInclude Include="CheatMenu.h">
       <Filter>Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="MapLoader.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Map.h">
       <Filter>Map</Filter>
