@@ -72,51 +72,6 @@ void FantasyGame::Init()
     // Finally, we init the game. Player, camera, etc. After that, the game is ready to play.
     InitGame();
 
-    // Extract sprites
-    auto pred = [](std::string p) {
-        return p.find("spritesheet_") == 0;
-    };
-
-    auto spritesheetValues = Settings->GetWhere(pred);
-
-    for (char* sPath : *spritesheetValues->GetContainer())
-    {
-        Spritesheet* ssheet = new Spritesheet(sPath, this->Engine->Graphics);
-
-        Engine->Graphics->AddSpritesheet(ssheet);
-    }
-
-    // Setup Game World
-	//this->GameWorld = ReadWorldData("assets\\game_config.xml");
-
-    // Setup Camera
-    _tile_size = std::stof(Settings->Get("graphic_tile_size"));
-
-    _cameraX = std::stof(Settings->Get("camera_starting_x"));
-    _cameraY = std::stof(Settings->Get("camera_starting_y"));
-
-    _cameraHeights = std::stof(Settings->Get("camera_fov_height"));
-    _cameraWidth = std::stof(Settings->Get("camera_fov_width"));
-
-    FRectangle* camFov = new FRectangle(_cameraX, _cameraY, _cameraHeights * SCALE_MULTIPLIER, _cameraWidth * SCALE_MULTIPLIER);
-
-    Vector2<int>* camSpeed = new Vector2<int>();
-    camSpeed->X = std::stoi(Settings->Get("camera_speed_x"));
-    camSpeed->Y = std::stoi(Settings->Get("camera_speed_y"));
-
-    MainCamera->SetupCamera(camFov, camSpeed);
-
-    CurrentGrid = NULL; // TODO
-
-    CurrentGrid->Setup(20, 20);
-
-    CurrentGrid->ShowGridTiles(true);
-
-    GamePlayer = new Player();
-    Engine->AttachActor(GamePlayer);
-
-    // Deletes
-    delete(spritesheetValues);
 }
 
 void FantasyGame::Start()
@@ -197,31 +152,6 @@ void FantasyGame::Update()
 
 
 
-    // Update the position of the tiles of the current grid
-    // by offsetting their position by the camera's pos.
-    auto it = this->CurrentGrid->tilesList->GetContainer()->begin();
-    while (it != this->CurrentGrid->tilesList->GetContainer()->end())
-    {
-        Tile* iter = (*it);
-
-        auto tilePos = iter->OriginalPosition;
-
-        float x = tilePos->X - MainCamera->CameraFieldOfView->Left;
-        float y = tilePos->Y - MainCamera->CameraFieldOfView->Top;
-
-        iter->SetTilePosition(x, y);
-
-        //if (MainCamera->CameraFieldOfView->Intersect(&iter->TileSprite->GetRectangle()))
-        //{
-        //    iter->TileSprite->Show(true);
-        //}
-        //else
-        //{
-        //    iter->TileSprite->Show(false);
-        //}
-        
-        it++;
-    }
 }
 
 void FantasyGame::ReadCoreSettings()
@@ -271,28 +201,6 @@ void FantasyGame::InitGraphics()
 
         Engine->Graphics->AddSpritesheet(ssheet);
     }
-
-
-    //BaseList<std::string>* loadQueue = new BaseList<std::string>();
-
-    //auto it = ITBEGIN(this->GameWorld->Maps);
-    //while (it != ITEND(this->GameWorld->Maps))
-    //{
-    //    Map* iter = *it;
-
-    //    auto mappingIter = ITBEGIN(iter->TileMappings->Entries);
-    //    while (mappingIter != ITEND(iter->TileMappings->Entries))
-    //    {
-    //        TileDescriptionEntry* entry = *mappingIter;
-
-    //        if (!loadQueue->ContainsItem(entry->TextureName))
-    //        {
-    //            loadQueue->Add(entry->TextureName);
-    //        }
-    //    }
-
-    //    it++;
-    //}
 }
 
 void FantasyGame::InitGame()
