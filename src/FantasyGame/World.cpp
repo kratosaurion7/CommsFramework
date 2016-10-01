@@ -1,6 +1,7 @@
 #include "World.h"
 
 #include <XmlReader.h>
+#include <PathLoader.h>
 
 #include "MapXmlStructs.h"
 
@@ -23,7 +24,7 @@ World* World::CreateWorldFromXml(std::string xmlPath)
 	XmlReader worldFileReader = XmlReader();
 	World* ret = new World();
 
-	worldFileReader.LoadFile(xmlPath);
+	worldFileReader.LoadFile(PathLoader::GetPath(xmlPath));
 
 	// Read the <tiles> node
 	auto mapNodes = worldFileReader.GetNode("maps")->GetNodes("map");

@@ -63,7 +63,7 @@ void FantasyGame::Init()
 
     // Next we can init the game world, we can't fully create the tiles yet
     // because the graphics are not loaded yet.
-    World* root = World::CreateWorldFromXml(PathLoader::GetPath("World.xml"));
+    World* root = World::CreateWorldFromXml("World.xml");
     this->GameWorld = root;
 
     // Now that we have a World to load, we can check and load the assets that are needed
@@ -200,6 +200,8 @@ void FantasyGame::InitGraphics()
         Spritesheet* ssheet = new Spritesheet(spritesheetPath, this->Engine->Graphics);
 
         Engine->Graphics->AddSpritesheet(ssheet);
+
+        it++;
     }
 }
 

@@ -99,7 +99,9 @@
       <AdditionalDependencies>CommsFramework.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>XCOPY /Y /E "$(ProjectDir)assets\*" "$(TargetDir)Assets"</Command>
+      <Command>XCOPY /Y /E "$(ProjectDir)assets\*" "$(TargetDir)Assets"
+
+XCOPY /Y /E "$(ProjectDir)config.xml" "$(TargetDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

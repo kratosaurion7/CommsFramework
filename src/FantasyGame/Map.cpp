@@ -12,6 +12,7 @@
 #include <FPosition.h>
 #include <BaseSprite.h>
 #include <RandomGen.h>
+#include <PathLoader.h>
 
 #include "FantasyGame.h"
 #include "Tile.h"
@@ -43,7 +44,7 @@ Map::~Map()
 Map* Map::CreateFromXml(std::string xmlPath)
 {
 	XmlReader mapReader;
-	mapReader.LoadFile(xmlPath);
+	mapReader.LoadFile(PathLoader::GetPath(xmlPath));
 
 	// Get the size properties to create a Map instance
 	int mapWidth;
