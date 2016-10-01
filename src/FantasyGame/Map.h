@@ -26,5 +26,5 @@ public:
 	PointerList<Tile*> TilesList;
 
 private:
-
+    void InitializeDefaultMap();
 };

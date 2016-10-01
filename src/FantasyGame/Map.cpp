@@ -62,7 +62,7 @@ Map* Map::CreateFromXml(std::string xmlPath)
 	// No map data, create a random layout
 	if (mapDataElement == NULL)
 	{
-
+        ret->InitializeDefaultMap();
 	}
 	else
 	{
@@ -70,4 +70,19 @@ Map* Map::CreateFromXml(std::string xmlPath)
 	}
 
 	return ret;
+}
+
+void Map::InitializeDefaultMap()
+{
+    for (int i = 0; i < this->Height; i++)
+    {
+        for (int j = 0; j < this->Width; j++)
+        {
+            Tile* targetTile = this->Tiles[i][j];
+
+            targetTile->Coordinate = new FPosition(j, i);
+
+            targetTile->TileIdentifier = (i + j) % 10;
+        }
+    }
 }
