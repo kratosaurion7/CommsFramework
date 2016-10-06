@@ -15,6 +15,7 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FantasyGame", "FantasyGame\FantasyGame.vcxproj", "{04775308-EB20-49E2-83BD-3AF0B3C81D1C}"
 	ProjectSection(ProjectDependencies) = postProject
 		{BB1C3245-05C5-4512-93DB-E12D2ECD26E4} = {BB1C3245-05C5-4512-93DB-E12D2ECD26E4}
+		{DFDC308A-D339-4557-BEDC-DA3A07128F11} = {DFDC308A-D339-4557-BEDC-DA3A07128F11}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PuzzleGame", "PuzzleGame\PuzzleGame.vcxproj", "{FCD7885A-6784-4998-B1CC-EFFFFA8A1DF3}"
@@ -23,6 +24,12 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PuzzleGame", "PuzzleGame\Pu
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestApp", "TestApp\TestApp.vcxproj", "{01988E42-D81B-4D8A-A667-7DAE760B6064}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BB1C3245-05C5-4512-93DB-E12D2ECD26E4} = {BB1C3245-05C5-4512-93DB-E12D2ECD26E4}
+		{DFDC308A-D339-4557-BEDC-DA3A07128F11} = {DFDC308A-D339-4557-BEDC-DA3A07128F11}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Engine", "Engine\Engine.vcxproj", "{DFDC308A-D339-4557-BEDC-DA3A07128F11}"
 	ProjectSection(ProjectDependencies) = postProject
 		{BB1C3245-05C5-4512-93DB-E12D2ECD26E4} = {BB1C3245-05C5-4512-93DB-E12D2ECD26E4}
 	EndProjectSection
@@ -109,6 +116,18 @@ Global
 		{01988E42-D81B-4D8A-A667-7DAE760B6064}.Release|Win32.Build.0 = Release|Win32
 		{01988E42-D81B-4D8A-A667-7DAE760B6064}.Release|x64.ActiveCfg = Release|x64
 		{01988E42-D81B-4D8A-A667-7DAE760B6064}.Release|x64.Build.0 = Release|x64
+		{DFDC308A-D339-4557-BEDC-DA3A07128F11}.Debug|Win32.ActiveCfg = Debug|Win32
+		{DFDC308A-D339-4557-BEDC-DA3A07128F11}.Debug|Win32.Build.0 = Debug|Win32
+		{DFDC308A-D339-4557-BEDC-DA3A07128F11}.Debug|x64.ActiveCfg = Debug|x64
+		{DFDC308A-D339-4557-BEDC-DA3A07128F11}.Debug|x64.Build.0 = Debug|x64
+		{DFDC308A-D339-4557-BEDC-DA3A07128F11}.Debug-Static|Win32.ActiveCfg = Debug|Win32
+		{DFDC308A-D339-4557-BEDC-DA3A07128F11}.Debug-Static|Win32.Build.0 = Debug|Win32
+		{DFDC308A-D339-4557-BEDC-DA3A07128F11}.Debug-Static|x64.ActiveCfg = Debug|x64
+		{DFDC308A-D339-4557-BEDC-DA3A07128F11}.Debug-Static|x64.Build.0 = Debug|x64
+		{DFDC308A-D339-4557-BEDC-DA3A07128F11}.Release|Win32.ActiveCfg = Release|Win32
+		{DFDC308A-D339-4557-BEDC-DA3A07128F11}.Release|Win32.Build.0 = Release|Win32
+		{DFDC308A-D339-4557-BEDC-DA3A07128F11}.Release|x64.ActiveCfg = Release|x64
+		{DFDC308A-D339-4557-BEDC-DA3A07128F11}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
