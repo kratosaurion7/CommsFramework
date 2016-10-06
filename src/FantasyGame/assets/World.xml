@@ -8,9 +8,10 @@
     <!-- Required, this will be the default fallback for the maps that don't include a tile_description node -->
     <tile_description>
         
-        <tile id="1" texture="Grass" />
-        <tile id="2" texture="Rock" />
-        <tile id="3" texture="Water" />
+        <tile id="0" texture="Earth01.png" />
+        <tile id="1" texture="Grass01.png" />
+        <tile id="2" texture="Rock01.png" />
+        <tile id="3" texture="Water01.png" />
         
     </tile_description>
 

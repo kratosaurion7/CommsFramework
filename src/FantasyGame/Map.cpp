@@ -24,6 +24,9 @@ Map::Map(int width, int height)
 
 	this->Tiles = new Tile**[height];
 
+    this->TilesList = new PointerList<Tile*>();
+    
+
 	for (int i = 0; i < height; i++)
 	{
 		this->Tiles[i] = new Tile*[width];
@@ -33,6 +36,7 @@ Map::Map(int width, int height)
 			Tile* newTile = new Tile();
 
 			this->Tiles[i][j] = newTile;
+            this->TilesList->Add(newTile);
 		}
 	}
 }
