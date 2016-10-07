@@ -108,6 +108,10 @@ public:
     BaseSprite* GetSprite(std::string name);
     BaseList<BaseSprite*>* GetSpriteList(std::string name);
 
+	BaseTexture* CreateTexture();
+
+	BaseFont* CreateFont();
+
     BaseFont* GetGameDefaultFont();
 
     BaseText* CreateText(std::string text);

@@ -120,6 +120,16 @@ BaseList<BaseSprite*>* GameEngine::GetSpriteList(std::string name)
     return GameSprites->Where([name](BaseSprite* sprite) { return sprite->Ident == name; });
 }
 
+BaseTexture * GameEngine::CreateTexture()
+{
+	return nullptr;
+}
+
+BaseFont * GameEngine::CreateFont()
+{
+	return nullptr;
+}
+
 BaseSprite* GameEngine::CopySprite(std::string targetSpriteName, std::string newName)
 {
     BaseSprite* orig = GetSprite(targetSpriteName);

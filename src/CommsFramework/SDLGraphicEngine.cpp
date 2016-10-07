@@ -189,16 +189,15 @@ DrawObject* SDLGraphicEngine::GetDrawableObject(std::string identifier)
     return NULL;
 }
 
-BaseSprite* SDLGraphicEngine::CreateSprite(std::string identifier)
+BaseSprite* SDLGraphicEngine::CreateSpriteInstance()
 {
     SDLSprite* spr = new SDLSprite();
     spr->Engine = this;
-    spr->Ident = identifier;
 
     return spr;
 }
 
-BaseTexture* SDLGraphicEngine::CreateTexture()
+BaseTexture* SDLGraphicEngine::CreateTextureInstance()
 {
     SDLTexture* tex = new SDLTexture();
     tex->Engine = this;
@@ -207,31 +206,17 @@ BaseTexture* SDLGraphicEngine::CreateTexture()
     return tex;
 }
 
-BaseTexture* SDLGraphicEngine::CreateTexture(std::string texturePath)
-{
-    SDLTexture* tex = (SDLTexture*)this->TextureRepo->LoadTexture(texturePath);
-
-    if (tex == NULL)
-        return NULL;
-
-    tex->Engine = this;
-    tex->Graphics = this; // Need to inject the specific graphic engine to the texture
-
-    return tex;
-}
-
-BaseFont* SDLGraphicEngine::CreateFont()
+BaseFont* SDLGraphicEngine::CreateFontInstance()
 {
     BaseFont* font = new SDLFont();
 
     return font;
 }
 
-BaseText* SDLGraphicEngine::CreateText()
+BaseText* SDLGraphicEngine::CreateTextInstance()
 {
     SDLText* text = new SDLText();
     text->Engine = this;
-    text->Ident = "Text";
 
     return text;
 }

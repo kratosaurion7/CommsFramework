@@ -51,11 +51,10 @@ public:
     virtual PointerList<DrawObject*>* GetDrawableList() = 0;
     virtual DrawObject* GetDrawableObject(std::string identifier) = 0;
 
-    virtual BaseSprite* CreateSprite(std::string identifier = "") = 0;
-    virtual BaseTexture* CreateTexture() = 0;
-    virtual BaseTexture* CreateTexture(std::string texturePath) = 0;
-    virtual BaseFont* CreateFont() = 0;
-    virtual BaseText* CreateText() = 0;
+    virtual BaseSprite* CreateSpriteInstance() = 0;
+    virtual BaseTexture* CreateTextureInstance() = 0;
+    virtual BaseFont* CreateFontInstance() = 0;
+    virtual BaseText* CreateTextInstance() = 0;
 
     virtual void ReloadSpriteTextures() = 0;
 

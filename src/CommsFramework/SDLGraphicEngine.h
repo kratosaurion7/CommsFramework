@@ -54,11 +54,10 @@ public:
     virtual PointerList<DrawObject*>* GetDrawableList();
     virtual DrawObject* GetDrawableObject(std::string identifier);
 
-    virtual BaseSprite* CreateSprite(std::string identifier = "");
-    virtual BaseTexture* CreateTexture();
-    virtual BaseTexture* CreateTexture(std::string texturePath);
-    virtual BaseFont* CreateFont();
-    virtual BaseText* CreateText();
+	virtual BaseSprite* CreateSpriteInstance();
+	virtual BaseTexture* CreateTextureInstance();
+	virtual BaseFont* CreateFontInstance();
+	virtual BaseText* CreateTextInstance();
 
     virtual void ReloadSpriteTextures();
 

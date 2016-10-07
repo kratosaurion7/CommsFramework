@@ -25,7 +25,7 @@ SDL_Texture* SDLTexture::GetMissingTextureTexture(BaseGraphicEngine* engine)
 {
     if (SDLTexture::MissingTextureSingleton == NULL)
     {
-        SDLTexture* tex = (SDLTexture*)engine->CreateTexture();
+        SDLTexture* tex = (SDLTexture*)engine->CreateTextureInstance();
 
         tex->Load("Assets/engine/missing_texture.png");
         
