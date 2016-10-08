@@ -231,9 +231,6 @@
     <ClCompile Include="RethinkDb.cpp">
       <Filter>Framework\Database</Filter>
     </ClCompile>
-    <ClCompile Include="TextureRepository.cpp">
-      <Filter>Framework\Graphic</Filter>
-    </ClCompile>
     <ClCompile Include="MessageDialog.cpp">
       <Filter>Framework\Engine\Dialogs</Filter>
     </ClCompile>
@@ -320,6 +317,9 @@
     </ClCompile>
     <ClCompile Include="PathLoader.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureManager.cpp">
+      <Filter>Framework\Graphic</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -491,9 +491,6 @@
     <ClInclude Include="Network.h">
       <Filter>Framework\Network</Filter>
     </ClInclude>
-    <ClInclude Include="TextureRepository.h">
-      <Filter>Framework\Graphic</Filter>
-    </ClInclude>
     <ClInclude Include="MessageDialog.h">
       <Filter>Framework\Engine\Dialogs</Filter>
     </ClInclude>
@@ -584,8 +581,8 @@
     <ClInclude Include="PathLoader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram.cd" />
+    <ClInclude Include="TextureManager.h">
+      <Filter>Framework\Graphic</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

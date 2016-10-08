@@ -25,7 +25,7 @@ BaseTexture* TextureRepository::LoadTexture(std::string texturePath, std::string
 
     if (loadedTexture == NULL)
     {
-        loadedTexture = this->Graphics->CreateTexture();
+        loadedTexture = this->Graphics->CreateTextureInstance();
         int res = loadedTexture->Load(texturePath);
 
         if (res != 0)

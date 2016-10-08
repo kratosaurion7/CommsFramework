@@ -381,7 +381,7 @@ XCOPY /Y /E "Assets\*" "$(TargetDir)Assets"</Command>
     <ClCompile Include="Spritesheet.cpp" />
     <ClCompile Include="StringFunctions.cpp" />
     <ClCompile Include="StringList.cpp" />
-    <ClCompile Include="TextureRepository.cpp" />
+    <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="TgaFile.cpp" />
     <ClCompile Include="Utils.cpp" />
     <ClCompile Include="RandomGen.cpp" />
@@ -459,7 +459,7 @@ XCOPY /Y /E "Assets\*" "$(TargetDir)Assets"</Command>
     <ClInclude Include="Spritesheet.h" />
     <ClInclude Include="StringFunctions.h" />
     <ClInclude Include="StringList.h" />
-    <ClInclude Include="TextureRepository.h" />
+    <ClInclude Include="TextureManager.h" />
     <ClInclude Include="TgaFile.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="RandomGen.h" />
@@ -488,9 +488,6 @@ XCOPY /Y /E "Assets\*" "$(TargetDir)Assets"</Command>
     <ClInclude Include="XFile.h" />
     <ClInclude Include="XmlReader.h" />
     <ClInclude Include="YesNoDialog.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -22,8 +22,7 @@ Spritesheet::Spritesheet(std::string configFilePath, BaseGraphicEngine* engine)
     this->spritesheetHeight = std::atoi(node->GetAttribute("height").AttributeValue);
     this->spritesheetWidth = std::atoi(node->GetAttribute("width").AttributeValue);
 
-    this->spritesheetTexture = engine->CreateTexture(); // TODO : Asset root is not prepended in the texture packed config file
-    this->spritesheetTexture->Load("assets/" + path);
+    this->spritesheetTexture = engine->TextureRepo->Create("assets/" + path); // TODO : Asset root is not prepended in the texture packed config file
 
     this->Graphics = engine;
     this->SpritesheetFilePath = path;
@@ -36,8 +35,7 @@ Spritesheet::Spritesheet(std::string spritesheetPath, std::string configFilePath
     assert(configFilePath != "");
     assert(engine != NULL);
 
-    spritesheetTexture = engine->CreateTexture();
-    spritesheetTexture->Load(spritesheetPath);
+    spritesheetTexture = engine->TextureRepo->Create(spritesheetPath);
 
     this->Graphics = engine;
     this->SpritesheetFilePath = spritesheetPath;
@@ -73,7 +71,9 @@ PointerList<BaseSprite*>* Spritesheet::ExtractSprites()
 
         FRectangle subRec = FRectangle(spriteSubTextureX, spriteSubTextureY, spriteSubTextureW, spriteSubTextureH);
 
-        BaseSprite* newSprite = Graphics->CreateSprite(spriteName);
+        BaseSprite* newSprite = Graphics->CreateSpriteInstance();
+        newSprite->Ident = spriteName;
+
         BaseTexture* newSpriteTexture = spritesheetTexture->GetSubTexture(subRec);
         newSprite->SetTexture(newSpriteTexture);
         newSpriteTexture->TextureName = spriteName;

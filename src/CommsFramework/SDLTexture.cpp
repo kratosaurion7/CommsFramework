@@ -141,7 +141,7 @@ BaseTexture* SDLTexture::GetSubTexture(FRectangle rec)
         return NULL;
     }
 
-    newTexture = (SDLTexture*)this->Engine->CreateTexture();
+    newTexture = (SDLTexture*)this->Engine->CreateTextureInstance();
     newTexture->LoadFromSurface(subTextureSurface);
 
     return newTexture;

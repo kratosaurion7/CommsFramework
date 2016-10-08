@@ -2,7 +2,7 @@
 
 #include <string>
 
-#include <PointerList.h>
+#include "PointerList.h"
 
 class BaseGraphicEngine;
 class BaseTexture;
@@ -14,6 +14,8 @@ public:
 	~TextureManager();
 
 	BaseTexture* Create(std::string textureName);
+
+    void AddTexture(BaseTexture* addedTexture);
 
 	BaseTexture* LoadFromDisk(std::string assetPath, std::string textureName = "");
 

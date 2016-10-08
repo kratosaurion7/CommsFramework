@@ -1,8 +1,8 @@
 #include "TextureManager.h"
 
-#include <BaseGraphicEngine.h>
-#include <BaseTexture.h>
-#include <IOUtilities.h>
+#include "BaseGraphicEngine.h"
+#include "BaseTexture.h"
+#include "IOUtilities.h"
 
 TextureManager::TextureManager(BaseGraphicEngine* graphicEngine)
 {
@@ -17,7 +17,7 @@ TextureManager::~TextureManager()
 
 BaseTexture* TextureManager::Create(std::string textureName)
 {
-	BaseTexture* tex = EngineRef->CreateTexture();
+	BaseTexture* tex = EngineRef->CreateTextureInstance();
 
 	tex->TextureName = textureName;
 
@@ -26,11 +26,14 @@ BaseTexture* TextureManager::Create(std::string textureName)
 	return tex;
 }
 
+void TextureManager::AddTexture(BaseTexture * addedTexture)
+{
+    this->TexturesList.Add(addedTexture);
+}
+
 BaseTexture* TextureManager::LoadFromDisk(std::string assetPath, std::string textureName)
 {
-	BaseTexture* tex = EngineRef->CreateTexture();
-	
-	tex->Load(assetPath); // TODO : Add common base path
+    BaseTexture* tex = EngineRef->TextureRepo->Create(assetPath);
 
 	// If the texture name is a blank string, use the Name part of the filename as texture name
 	if (textureName == "")

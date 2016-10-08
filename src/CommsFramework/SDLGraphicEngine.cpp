@@ -12,7 +12,7 @@
 #endif
 
 #include "GameEngine.h"
-#include "TextureRepository.h"
+#include "TextureManager.h"
 #include "DrawObject.h"
 #include "GraphicEngineInitParams.h"
 #include "BaseSprite.h"
@@ -33,7 +33,7 @@
 SDLGraphicEngine::SDLGraphicEngine()
 {
     mainWindow = NULL;
-    TextureRepo = new TextureRepository(this);
+    TextureRepo = new TextureManager(this);
     drawables = new PointerList<DrawObject*>();
     Spritesheets = new PointerList<Spritesheet*>();
     gameRenderer = NULL;
@@ -159,7 +159,15 @@ void SDLGraphicEngine::AddSpritesheet(Spritesheet* spritesheet)
 
     PointerList<BaseTexture*>* extractedSprites = spritesheet->ExtractTextures();
 
-    this->TextureRepo->loadedTextures->AddRange(extractedSprites);
+    auto it = ITBEGIN(extractedSprites);
+    while (it != ITEND(extractedSprites))
+    {
+        BaseTexture* tex = *it;
+        
+        this->TextureRepo->AddTexture(tex);
+
+        it++;
+    }
 
     delete(extractedSprites);
 }

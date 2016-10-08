@@ -269,7 +269,8 @@ BaseSprite * GameEngine::CreateSprite()
 
 BaseSprite* GameEngine::CreateSprite(std::string spriteName)
 {
-    BaseSprite* sprt = this->Graphics->CreateSprite(spriteName);
+    BaseSprite* sprt = this->Graphics->CreateSpriteInstance();
+    sprt->Ident = spriteName;
     
     GameSprites->Add(sprt);
     this->Graphics->AddObject(sprt);
@@ -279,9 +280,10 @@ BaseSprite* GameEngine::CreateSprite(std::string spriteName)
 
 BaseSprite* GameEngine::CreateSprite(std::string spriteName, std::string spriteTexturePath)
 {
-    BaseSprite* sprt = this->Graphics->CreateSprite(spriteName);
+    BaseSprite* sprt = this->Graphics->CreateSpriteInstance();
+    sprt->Ident = spriteName;
 
-    BaseTexture* tex = this->Graphics->CreateTexture(spriteTexturePath);
+    BaseTexture* tex = this->Graphics->TextureRepo->Create(spriteTexturePath);
 
     if(tex != NULL)
         sprt->SetTexture(tex);
@@ -302,7 +304,7 @@ BaseFont* GameEngine::GetGameDefaultFont()
 {
     if (engineDefaultFont == NULL)
     {
-        engineDefaultFont = this->Graphics->CreateFont();
+        engineDefaultFont = this->Graphics->CreateFontInstance();
         engineDefaultFont->LoadFontFile("assets//arial.ttf");
         
 
@@ -318,7 +320,7 @@ BaseFont* GameEngine::GetGameDefaultFont()
 
 BaseText* GameEngine::CreateText(std::string text)
 {
-    BaseText* ret = this->Graphics->CreateText();
+    BaseText* ret = this->Graphics->CreateTextInstance();
     ret->SetText(text);
     ret->SetCharacterSize(36);
     ret->SetColor(0x000000FF);
@@ -332,7 +334,7 @@ BaseText* GameEngine::CreateText(std::string text)
 
 BaseText* GameEngine::CreateText(std::string text, int textSize)
 {
-    BaseText* ret = this->Graphics->CreateText();
+    BaseText* ret = this->Graphics->CreateTextInstance();
     ret->SetText(text);
     ret->SetCharacterSize(textSize);
     ret->SetColor(0x000000FF);
@@ -346,7 +348,7 @@ BaseText* GameEngine::CreateText(std::string text, int textSize)
 
 BaseText* GameEngine::CreateText(std::string text, int textSize, uint32_t textColor)
 {
-    BaseText* ret = this->Graphics->CreateText();
+    BaseText* ret = this->Graphics->CreateTextInstance();
     ret->SetText(text);
     ret->SetCharacterSize(textSize);
     ret->SetColor(textColor);
@@ -360,7 +362,7 @@ BaseText* GameEngine::CreateText(std::string text, int textSize, uint32_t textCo
 
 BaseText* GameEngine::CreateText(std::string text, int textSize, uint32_t textColor, BaseFont* typo)
 {
-    BaseText* ret = this->Graphics->CreateText();
+    BaseText* ret = this->Graphics->CreateTextInstance();
     ret->SetText(text);
     ret->SetCharacterSize(textSize);
     ret->SetColor(textColor);

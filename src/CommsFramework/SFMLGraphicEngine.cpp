@@ -19,7 +19,7 @@ SFMLGraphicEngine::SFMLGraphicEngine()
 {
     MainWindow = NULL;
     isRunning = false;
-    TextureRepo = new TextureRepository(this);
+    TextureRepo = new TextureManager(this);
     Sprites = new PointerList<DrawObject*>();
     startParams = NULL;
     backgroundColor = sf::Color();
@@ -73,7 +73,7 @@ BaseTexture * SFMLGraphicEngine::CreateTexture()
 
 BaseTexture * SFMLGraphicEngine::CreateTexture(std::string texturePath)
 {
-    BaseTexture* tex = this->TextureRepo->LoadTexture(texturePath);
+    BaseTexture* tex = this->TextureRepo->Create(texturePath);
 
     return tex;
 }

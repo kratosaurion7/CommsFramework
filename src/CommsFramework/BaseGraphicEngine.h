@@ -7,7 +7,6 @@ class BaseFont;
 class Spritesheet;
 
 class GraphicEngineInitParams;
-class TextureRepository;
 
 #include "BaseSprite.h"
 #include "BaseText.h"
@@ -17,7 +16,7 @@ class TextureRepository;
 
 #include "GraphicEngineInitParams.h"
 
-#include "TextureRepository.h"
+#include "TextureManager.h"
 
 #include <string>
 
@@ -26,7 +25,8 @@ class BaseGraphicEngine
 public:
     virtual ~BaseGraphicEngine() = 0;
 
-    TextureRepository* TextureRepo;
+    TextureManager* TextureRepo;
+    //TextureRepository* TextureRepo;
 
     bool zIndexNeedsReordering = false;
 

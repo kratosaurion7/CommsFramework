@@ -144,7 +144,7 @@ void BaseSprite::SetTexture(std::string newTexturePath)
 {
     assert(newTexturePath != "");
 
-    BaseTexture* tex = Engine->CreateTexture(newTexturePath);
+    BaseTexture* tex = Engine->TextureRepo->Create(newTexturePath);
 
     if (tex == NULL)
         return;
@@ -163,7 +163,7 @@ void BaseSprite::SetTextureName(std::string textureName)
 
 void BaseSprite::Reload()
 {
-    BaseTexture* tex = this->Engine->TextureRepo->GetTextureByName(this->RequestedTextureName);
+    BaseTexture* tex = this->Engine->TextureRepo->GetTexture(this->RequestedTextureName);
 
     if (tex != NULL)
     {
