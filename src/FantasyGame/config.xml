@@ -4,7 +4,7 @@
 
         <assets_root>assets\\</assets_root>
         
-        
+        <Spritesheet>assets//spritesheet.xml</Spritesheet>
 
     </settings>
 
@@ -52,7 +52,7 @@
 		</Worlds>
 	</game>
 	
-    <Spritesheet>assets//spritesheet.xml</Spritesheet>
+    
     
     <camera>
         <StartingPosition>

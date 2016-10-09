@@ -23,8 +23,8 @@ public:
 	Tile*** Tiles;
 
 	// Linked list of Tiles for easier access, albeit slower.
-	PointerList<Tile*> TilesList;
+	PointerList<Tile*>* TilesList;
 
 private:
-
+    void InitializeDefaultMap();
 };
