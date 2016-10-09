@@ -217,13 +217,15 @@ void FantasyGame::InitGraphics()
                 Tile* tileToLoad = mapToLoad->Tiles[i][j];
 
                 tileToLoad->TileSprite = this->Engine->CreateSprite();
+                tileToLoad->TileSprite->Show(true);
+                tileToLoad->SetTilePosition(i * 64, j * 64);
 
                 TileDescriptionEntry* textureNameNeeded = this->GameWorld->TileMapping->Entries->Single([tileToLoad](TileDescriptionEntry* entry) { return tileToLoad->TileIdentifier == entry->id; });
 
                 if (textureNameNeeded == NULL)
                     continue;
 
-                BaseTexture* textureForTile = this->Engine->Graphics->TextureRepo->GetTextureByName(textureNameNeeded->TextureName);
+                BaseTexture* textureForTile = this->Engine->Graphics->TextureRepo->GetTexture(textureNameNeeded->TextureName);
 
                 if (textureForTile == NULL)
                     continue;

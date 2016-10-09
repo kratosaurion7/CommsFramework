@@ -3,13 +3,6 @@
     
     <map_size width="10" height="10" />
     
-    <!-- Optional, defaults to the World config tile_description node -->
-    <tile_description>
-        
-        <tile id="1" texture="Grass" />
-        <tile id="2" texture="Rock" />
-        <tile id="3" texture="Water" />
-        
-    </tile_description>
+   
 
 </map>

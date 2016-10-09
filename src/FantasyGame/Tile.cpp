@@ -7,6 +7,8 @@
 Tile::Tile()
 {
     Position = new FPosition();
+    TileSprite = NULL;
+    TileHelpText = NULL;
 }
 
 
@@ -18,8 +20,16 @@ Tile::~Tile()
 void Tile::SetTilePosition(FPosition* pos)
 {
     this->Position = pos;
-    this->TileSprite->SetPos(*pos);
-    this->TileHelpText->SetPos(*pos);
+
+    if (this->TileSprite != NULL)
+    {
+        this->TileSprite->SetPos(*pos);
+    }
+
+    if (this->TileHelpText != NULL)
+    {
+        this->TileHelpText->SetPos(*pos);
+    }
 }
 
 void Tile::SetTilePosition(float x, float y)

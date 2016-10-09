@@ -7,7 +7,9 @@
 TextureManager::TextureManager(BaseGraphicEngine* graphicEngine)
 {
 	EngineRef = graphicEngine;
-	TexturesList = PointerList<BaseTexture*>();
+	//TexturesList = PointerList<BaseTexture*>();
+
+    int i = 0;
 }
 
 TextureManager::~TextureManager()
@@ -51,6 +53,7 @@ BaseTexture* TextureManager::LoadFromDisk(std::string assetPath, std::string tex
     }
 
     tex = EngineRef->CreateTextureInstance();
+    tex->Load(assetPath);
 
     tex->TexturePath = assetPath;
 
