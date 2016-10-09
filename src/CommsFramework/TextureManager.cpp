@@ -26,9 +26,18 @@ BaseTexture* TextureManager::Create(std::string textureName)
 	return tex;
 }
 
-void TextureManager::AddTexture(BaseTexture * addedTexture)
+void TextureManager::AddTexture(BaseTexture* addedTexture)
 {
-    this->TexturesList.Add(addedTexture);
+    auto res = TexturesList.Contains([addedTexture](BaseTexture* tex) { return tex->TextureName == addedTexture->TextureName; });
+
+    if (res == false)
+    {
+        this->TexturesList.Add(addedTexture);
+    }
+    else
+    {
+        assert(true);
+    }
 }
 
 BaseTexture* TextureManager::LoadFromDisk(std::string assetPath, std::string textureName)
