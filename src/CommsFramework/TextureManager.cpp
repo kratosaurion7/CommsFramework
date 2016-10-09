@@ -33,7 +33,17 @@ void TextureManager::AddTexture(BaseTexture * addedTexture)
 
 BaseTexture* TextureManager::LoadFromDisk(std::string assetPath, std::string textureName)
 {
-    BaseTexture* tex = EngineRef->TextureRepo->Create(assetPath);
+    BaseTexture* tex = TexturesList.Single([assetPath](BaseTexture* tex) { return tex->TexturePath == assetPath; });
+
+    // Texture already in repo
+    if (tex != NULL)
+    {
+        return tex;
+    }
+
+    tex = EngineRef->CreateTextureInstance();
+
+    tex->TexturePath = assetPath;
 
 	// If the texture name is a blank string, use the Name part of the filename as texture name
 	if (textureName == "")
