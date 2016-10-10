@@ -19,6 +19,7 @@
 #include <TgaFile.h>
 #include <QuickWindow.h>
 #include <PathLoader.h>
+#include <Viewport.h>
 
 #include "ProgDef.h"
 #include "World.h"
@@ -150,7 +151,8 @@ void FantasyGame::Update()
         }
     }
 
-
+    Engine->Graphics->Viewport->X = MainCamera->CameraFieldOfView->Left;
+    Engine->Graphics->Viewport->Y = MainCamera->CameraFieldOfView->Top;
 
 }
 

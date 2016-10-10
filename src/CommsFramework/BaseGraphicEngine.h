@@ -5,6 +5,7 @@ class BaseText;
 class BaseTexture;
 class BaseFont;
 class Spritesheet;
+class ViewportRect;
 
 class GraphicEngineInitParams;
 
@@ -13,6 +14,7 @@ class GraphicEngineInitParams;
 #include "BaseFont.h"
 #include "BaseTexture.h"
 #include "BaseKeyboard.h"
+
 
 #include "GraphicEngineInitParams.h"
 
@@ -26,7 +28,8 @@ public:
     virtual ~BaseGraphicEngine() = 0;
 
     TextureManager* TextureRepo;
-    //TextureRepository* TextureRepo;
+
+    ViewportRect* Viewport;
 
     bool zIndexNeedsReordering = false;
 

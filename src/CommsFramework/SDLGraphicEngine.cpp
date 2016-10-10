@@ -21,6 +21,7 @@
 #include "Utilities.h"
 #include "Spritesheet.h"
 #include "SettingsRepository.h"
+#include "Viewport.h"
 
 #include "SDLDrawable.h"
 #include "SDLSprite.h"
@@ -34,6 +35,7 @@ SDLGraphicEngine::SDLGraphicEngine()
 {
     mainWindow = NULL;
     TextureRepo = new TextureManager(this);
+    Viewport = new ViewportRect();
     drawables = new PointerList<DrawObject*>();
     Spritesheets = new PointerList<Spritesheet*>();
     gameRenderer = NULL;
@@ -86,6 +88,9 @@ void SDLGraphicEngine::Initialize(GraphicEngineInitParams* params)
 
         return;
     }
+
+    Viewport->Width = params->WindowSize->Width * RenderingScaleX;
+    Viewport->Height = params->WindowSize->Height * RenderingScaleY;
 
     gameRenderer = SDL_CreateRenderer(mainWindow, -1, SDL_RENDERER_ACCELERATED);
 
@@ -412,6 +417,9 @@ void SDLGraphicEngine::ProcessDraw(SDL_Window* targetWindow)
                 {
                     SDL_Rect destinationRect = this->GetSpriteRect(target);
                     SDL_Texture* tex = drawImpl->GetDrawableTexture();
+
+                    destinationRect.x -= Viewport->X;
+                    destinationRect.y -= Viewport->Y;
 
                     if (tex == NULL)
                     {

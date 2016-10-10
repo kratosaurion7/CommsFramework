@@ -321,6 +321,9 @@
     <ClCompile Include="TextureManager.cpp">
       <Filter>Framework\Graphic</Filter>
     </ClCompile>
+    <ClCompile Include="Viewport.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="XmlReader.h">
@@ -583,6 +586,9 @@
     </ClInclude>
     <ClInclude Include="TextureManager.h">
       <Filter>Framework\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="Viewport.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
