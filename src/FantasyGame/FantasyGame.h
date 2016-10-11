@@ -30,8 +30,6 @@ public:
 
     void Init();
 
-	void ReadConfig();
-
     GameEngine* Engine;
 
     World* GameWorld;
@@ -67,15 +65,6 @@ private:
 
     // CONFIG
     std::string assetsPath;
-
-    float _tile_size;
-    float _cameraX;
-    float _cameraY;
-    float _cameraHeights;
-    float _cameraWidth;
-
-    FRectangle* camFov;
-    Vector2<int>* camSpeed;
 
     BaseList<int>* createdWindows;
 };
