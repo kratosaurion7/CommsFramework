@@ -42,6 +42,34 @@ char* SettingsRepository::Get(std::string name)
     return NULL;
 }
 
+float SettingsRepository::GetFloat(std::string name)
+{
+    char* data = this->Get(name);
+
+    if (data == NULL)
+    {
+        return 0;
+    }
+
+    float result = atof(data);
+
+    return result;
+}
+
+int SettingsRepository::GetInt(std::string name)
+{
+    char* data = this->Get(name);
+
+    if (data == NULL)
+    {
+        return 0;
+    }
+
+    int result = atoi(data);
+
+    return result;
+}
+
 PointerList<char*>* SettingsRepository::GetWhere(std::function<bool(std::string)> predicate)
 {
     PointerList<char*>* retValues = new PointerList<char*>();

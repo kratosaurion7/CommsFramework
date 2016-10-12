@@ -1,67 +1,63 @@
 <config>
 
-    <settings>
+  <settings>
 
-        <assets_root>assets\\</assets_root>
-        
-        <Spritesheet>assets//spritesheet.xml</Spritesheet>
+    <assets_root>assets\\</assets_root>
 
-    </settings>
+    <Spritesheet>assets//spritesheet.xml</Spritesheet>
 
-	<parameters>
-		<game_name>FantasyGame</game_name>
-        
-        <spritesheet_terrain>assets//spritesheet.xml</spritesheet_terrain>
-        
-        <camera_starting_x>2</camera_starting_x>
-        <camera_starting_y>2</camera_starting_y>
-        
-        <camera_fov_height>10</camera_fov_height>
-        <camera_fov_width>10</camera_fov_width>
-	
-		<camera_speed_x>16</camera_speed_x>
-        <camera_speed_y>16</camera_speed_y>
-        
-        <graphic_tile_size>64</graphic_tile_size>
-	
-	</parameters>
+    <game_name>FantasyGame</game_name>
 
-	<game>
-		<GameName>FantasyGame</GameName>
-		
-		<Worlds>
-			<World>
-                <WorldName>World01</WorldName>
-                
-                <Areas>
-                    <Area>
-                        <AreaName>Plains</AreaName>
-                    
-                        <Maps>
-                            <Map>House</Map>
-                            
-                            <!-- Temporary values while the map format is conceived -->
-                            <Width>20</Width>
-                            <Height>20</Height>
-                            
-                            
-                        </Maps>
-                    </Area>
-                </Areas>
-            </World>
-		</Worlds>
-	</game>
-	
-    
-    
-    <camera>
-        <StartingPosition>
-            <X>2</X>
-            <Y>3</Y>
-        </StartingPosition>
-        
-        <Height>10</Height>
-        <Width>10</Width>
-    </camera>
-    
+    <!-- Camera Settings -->
+    <camera_starting_x>32</camera_starting_x>
+    <camera_starting_y>32</camera_starting_y>
+
+    <camera_fov_height>10</camera_fov_height>
+    <camera_fov_width>10</camera_fov_width>
+
+    <camera_speed_x>16</camera_speed_x>
+    <camera_speed_y>16</camera_speed_y>
+
+    <graphic_tile_size>64</graphic_tile_size>
+
+  </settings>
+
+  <game>
+    <GameName>FantasyGame</GameName>
+
+    <Worlds>
+      <World>
+        <WorldName>World01</WorldName>
+
+        <Areas>
+          <Area>
+            <AreaName>Plains</AreaName>
+
+            <Maps>
+              <Map>House</Map>
+
+              <!-- Temporary values while the map format is conceived -->
+              <Width>20</Width>
+              <Height>20</Height>
+
+
+            </Maps>
+          </Area>
+        </Areas>
+      </World>
+    </Worlds>
+  </game>
+
+
+
+  <camera>
+    <StartingPosition>
+      <X>2</X>
+      <Y>3</Y>
+    </StartingPosition>
+
+    <Height>10</Height>
+    <Width>10</Width>
+  </camera>
+
 </config>

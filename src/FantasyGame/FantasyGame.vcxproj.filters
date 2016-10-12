@@ -28,6 +28,9 @@
     <Filter Include="Map\Structures">
       <UniqueIdentifier>{19a871d9-bfb3-472b-95cf-0fee3ac77c7d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Config">
+      <UniqueIdentifier>{7ffc1762-c279-433c-898e-3a27b97ffb1d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -91,5 +94,10 @@
     <Text Include="REWORK.txt">
       <Filter>Map</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="config.xml">
+      <Filter>Config</Filter>
+    </Xml>
   </ItemGroup>
 </Project>

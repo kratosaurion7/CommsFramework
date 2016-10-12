@@ -14,6 +14,10 @@ public:
 
     char* Get(std::string name);
 
+    float GetFloat(std::string name);
+
+    int GetInt(std::string name);
+
     PointerList<char*>* GetWhere(std::function<bool(std::string)> predicate);
 
     void Register(std::string name, char* value);
