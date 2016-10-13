@@ -49,20 +49,18 @@ public:
 
 	T ArrayList::Get(int index)
 	{
-		int i = 0;
-
-		for (std::list<T>::iterator it = _container->begin(); it != _container->end(); it++)
+		if (index < _container->size())
 		{
-			if (index == i)
-			{
-				return *it;
-			}
-
-			i++;
+			return _container->at(index);
 		}
 
 		return NULL;
 	};
+
+	T& ArrayList::operator[] (int index) 
+	{
+		return _container->at(index);
+	}
 
 	T ArrayList::GetBy(std::function<bool(T)> predicate)
 	{
