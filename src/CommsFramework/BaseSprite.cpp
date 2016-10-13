@@ -28,10 +28,10 @@ bool BaseSprite::MouseOver()
 
 bool BaseSprite::CollisionWith(BaseSprite * other)
 {
-    auto myRec = &this->GetRectangle();
-    auto otherRec = other->GetRectangle();
+    FRectangle myRec = this->GetRectangle();
+    FRectangle otherRec = other->GetRectangle();
 
-    if (otherRec.Intersect(myRec))
+    if (otherRec.Intersect(&myRec))
     {
         return true;
     }
@@ -40,6 +40,7 @@ bool BaseSprite::CollisionWith(BaseSprite * other)
         return false;
     }
 }
+
 PointerList<BaseTexture*>* BaseSprite::GetTextures()
 {
     return nullptr;
@@ -49,7 +50,7 @@ void BaseSprite::Draw()
 {
     if (FrameReady())
     {
-        if (this->IsAnimated && this->IsPlaying)
+        if (IsAnimated && IsPlaying)
         {
             if (CurrentAnimation != NULL)
             {
@@ -89,7 +90,7 @@ void BaseSprite::Reset()
     CurrentAnimation = NULL;
 }
 
-void BaseSprite::AddAnimation(SpriteAnimation * newAnim)
+void BaseSprite::AddAnimation(SpriteAnimation* newAnim)
 {
     Animations->Add(newAnim);
 

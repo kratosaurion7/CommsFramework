@@ -33,8 +33,8 @@ SDLSprite::SDLSprite()
 
     Engine = NULL;
 
-    this->HasTextureApplied = false;
-    this->RequestedTextureName = "";
+    HasTextureApplied = false;
+    RequestedTextureName = "";
 }
 
 SDLSprite::~SDLSprite()
@@ -43,9 +43,9 @@ SDLSprite::~SDLSprite()
 
 SDLTexture * SDLSprite::GetCurrentTexture()
 {
-    if (IsAnimated)
+    if (this->IsAnimated)
     {
-        if (CurrentAnimation != NULL)
+        if (this->CurrentAnimation != NULL)
         {
             return (SDLTexture*)CurrentAnimation->CurrentFrameRef;
         }
@@ -76,8 +76,8 @@ void SDLSprite::SetTexture(BaseTexture* texture)
 
     if (sdlTex != NULL)
     {
-        currentSpriteTexture = sdlTex;
-        size = texture->GetSize();
+        this->currentSpriteTexture = sdlTex;
+        this->size = texture->GetSize();
 
         this->HasTextureApplied = true;
     }
@@ -90,7 +90,7 @@ BaseSprite* SDLSprite::Clone()
 
 SDL_Texture* SDLSprite::GetDrawableTexture()
 {
-    if (currentSpriteTexture == NULL)
+    if (this->currentSpriteTexture == NULL)
     {
         this->Reload();
 
