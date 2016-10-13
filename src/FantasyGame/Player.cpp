@@ -15,9 +15,7 @@ Player::Player()
     this->PlayerSprite->SetPos(5, 5);
     this->PlayerSprite->SetZIndex(900);
     this->PlayerSprite->Show(true);
-
 }
-
 
 Player::~Player()
 {
@@ -38,12 +36,6 @@ void Player::Update()
     if (this->Engine->Keyboard->IsKeyPressed(Key::D))
     {
         this->Speed.X = 5;
-
-        fprintf(stdout, "%s\n", "TRUE Key pressed");
-    }
-    else
-    {
-        fprintf(stdout, "%s\n", "FALSE Key pressed");
     }
     if (this->Engine->Keyboard->IsKeyPressed(Key::A))
     {
@@ -51,6 +43,4 @@ void Player::Update()
     }
 
     this->Move(this->Speed);
-
-    
 }

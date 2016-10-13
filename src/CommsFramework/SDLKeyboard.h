@@ -18,14 +18,13 @@ public:
 
     virtual bool IsKeyClicked(Key key);
 
-    virtual void UpdateKeyboardPastState();
-
-    void HandleEvent(SDL_Event* anEvent);
+    virtual void UpdateKeyboardState();
 
 private:
-    PointerList<Pair<Key, SDL_Scancode>*>* sdlScanCodesMap;
+    int keysCount;
+    Uint8* previousScancodes;
+    const Uint8* currentScancodes;
 
-    BaseList<SDL_Scancode>* currentKeyboardState;
-    BaseList<SDL_Scancode>* previousKeyboardState;
+    PointerList<Pair<Key, SDL_Scancode>*>* sdlScanCodesMap;
 };
 

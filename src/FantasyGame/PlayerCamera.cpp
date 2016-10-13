@@ -48,6 +48,7 @@ void PlayerCamera::SetCameraPosition(FloatVec* newPos)
 
 void PlayerCamera::Update()
 {
+    return;
     if (this->Engine->Keyboard->IsKeyClicked(Key::D))
     {
         this->CameraFieldOfView->IncrementX(this->CameraSpeed->X);

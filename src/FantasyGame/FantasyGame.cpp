@@ -258,4 +258,7 @@ void FantasyGame::InitGame()
     scrollSpeed->Y = Settings->GetInt("camera_speed_y");
 
     this->MainCamera->SetupCamera(fov, scrollSpeed);
+
+    GamePlayer = new Player();
+    Engine->AttachActor(GamePlayer);
 }

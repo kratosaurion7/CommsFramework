@@ -9,8 +9,8 @@
     <game_name>FantasyGame</game_name>
 
     <!-- Camera Settings -->
-    <camera_starting_x>32</camera_starting_x>
-    <camera_starting_y>32</camera_starting_y>
+    <camera_starting_x>0</camera_starting_x>
+    <camera_starting_y>0</camera_starting_y>
 
     <camera_fov_height>10</camera_fov_height>
     <camera_fov_width>10</camera_fov_width>

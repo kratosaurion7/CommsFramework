@@ -456,8 +456,8 @@ void GameEngine::RemoveSpriteClickedFlag()
 
 void GameEngine::DoEventLoop()
 {
-    GameEngine::Keyboard->UpdateKeyboardPastState();
     GameEngine::Mouse->UpdatePastMouseState();
+    GameEngine::Keyboard->UpdateKeyboardState();
 
     SDL_Event myEvent;
     while (SDL_PollEvent(&myEvent)) {
@@ -470,12 +470,6 @@ void GameEngine::DoEventLoop()
                 ((SDLMouse*)Mouse)->HandleEvent(&myEvent);
                 break;
             }
-            case SDL_KEYDOWN:
-            case SDL_KEYUP:
-            {
-                ((SDLKeyboard*)Keyboard)->HandleEvent(&myEvent);
-                break;
-            }
             case SDL_QUIT:
             {
                 exit(0);
@@ -486,12 +480,10 @@ void GameEngine::DoEventLoop()
             {
                 break;
             }
-
             default:
                 break;
         }
     }
-
 }
 
 void GameEngine::CreateSpritesFromConfig()
