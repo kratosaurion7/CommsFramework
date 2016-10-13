@@ -13,4 +13,3 @@ public:
 
     void Set(float x, float y);
 };
-

@@ -24,6 +24,14 @@ public:
         BottomEdge = 8,
     };
 
+	enum RectangleCorner
+	{
+		TopLeft,
+		TopRight,
+		BottomRight,
+		BottomLeft
+	};
+
 
     float Width();
     float Height();
@@ -37,10 +45,10 @@ public:
     void IncrementX(float amount);
     void IncrementY(float amount);
 
-    FPosition* Origin();
-    FPosition* Center();
+    FPosition Origin();
+    FPosition Center();
 
-    FSize* Size();
+    FSize Size();
 
     // Geometry methods
     bool IsPointInside(Vector2<float> vec);
@@ -51,6 +59,8 @@ public:
     bool Intersect(FRectangle* rec, int thisRectangleEdge);
     bool Intersect(FRectangle* rec, int thisRectangleEdge, int otherRectangleEdge);
 
-    Vector2<float>* DistanceFrom(FRectangle* rec, DistanceFromType comparaisonType = OriginToOrigin);
+	FPosition GetCorner(RectangleCorner corner);
+
+    Vector2<float> DistanceFrom(FRectangle rec, DistanceFromType comparaisonType = OriginToOrigin);
 };
 

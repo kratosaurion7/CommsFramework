@@ -1,5 +1,6 @@
 #include "FPosition.h"
 
+#include "FRectangle.h"
 
 FPosition::FPosition()
 {

@@ -109,10 +109,10 @@ BaseTexture* SDLTexture::GetSubTexture(FRectangle rec)
     const char* errorString;
     SDLTexture* newTexture;
 
-    FSize* recSize = rec.Size();
+    FSize recSize = rec.Size();
     SDL_Rect sRec = FRectToSDL_Rect(rec);
 
-    SDL_Surface* subTextureSurface = SDL_CreateRGBSurface(0, recSize->Width, recSize->Height, 32, rmask, gmask, bmask,amask);
+    SDL_Surface* subTextureSurface = SDL_CreateRGBSurface(0, recSize.Width, recSize.Height, 32, rmask, gmask, bmask,amask);
     //SDL_Surface* subTextureSurface = SDL_CreateRGBSurface(0, recSize->Width, recSize->Height, 32, 0, 0, 0, 0);
     
     if (subTextureSurface == NULL)

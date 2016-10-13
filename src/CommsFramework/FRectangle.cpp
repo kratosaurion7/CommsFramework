@@ -45,27 +45,28 @@ void FRectangle::IncrementY(float amount)
     this->Set(this->Left, this->Top + amount, this->Width(), this->Height());
 }
 
-FPosition* FRectangle::Origin()
+FPosition FRectangle::Origin()
 {
-    FPosition* pos = new FPosition(Left, Top);
+	FPosition pos = FPosition(Left, Top);
+	
 
     return pos;
 }
 
-FPosition* FRectangle::Center()
+FPosition FRectangle::Center()
 {
-    FPosition* pos = new FPosition();
+	FPosition pos;
 
-    pos->X = (Right - Left) / 2;
-    pos->Y = (Bottom - Top) / 2;
+    pos.X = (Right - Left) / 2;
+    pos.Y = (Bottom - Top) / 2;
 
     return pos;
 }
 
-FSize* FRectangle::Size()
+FSize FRectangle::Size()
 {
     // TODO : Stop returning goddamn pointers.
-    FSize* siz = new FSize(Height(), Width());
+    FSize siz = FSize(Height(), Width());
 
     return siz;
 }
@@ -102,7 +103,7 @@ bool FRectangle::Intersect(FRectangle* rec)
     return false;
 }
 
-bool FRectangle::Intersect(FRectangle * rec, int thisRectangleEdge)
+bool FRectangle::Intersect(FRectangle* rec, int thisRectangleEdge)
 {
     bool result = false;
 
@@ -151,34 +152,48 @@ bool FRectangle::Intersect(FRectangle * rec, int thisRectangleEdge, int otherRec
     return false;
 }
 
-Vector2<float>* FRectangle::DistanceFrom(FRectangle* rec, DistanceFromType comparaisonType)
+FPosition FRectangle::GetCorner(RectangleCorner corner)
 {
-    Vector2<float>* distance = new Vector2<float>();
+	switch (corner)
+	{
+		case FRectangle::TopLeft:
+			return FPosition(Left, Top);
+		case FRectangle::TopRight:
+			return FPosition(Right, Top);
+		case FRectangle::BottomRight:
+			return FPosition(Right, Bottom);
+		case FRectangle::BottomLeft:
+			return FPosition(Left, Bottom);
+		default:
+			return FPosition(-1, -1);
+	}
+}
 
-    FPosition* myTargetPosition;
-    FPosition* otherTargetPosition;
+Vector2<float> FRectangle::DistanceFrom(FRectangle rec, DistanceFromType comparaisonType)
+{
+	Vector2<float> distance;
+
+    FPosition myTargetPosition;
+    FPosition otherTargetPosition;
 
     switch (comparaisonType)
     {
     case CenterToCenter:
         myTargetPosition = Center();
-        otherTargetPosition = rec->Center();
+        otherTargetPosition = rec.Center();
         break;
     case OriginToOrigin:
         myTargetPosition = Origin();
-        otherTargetPosition = rec->Origin();
+        otherTargetPosition = rec.Origin();
         break;
     default:
         myTargetPosition = Origin();
-        otherTargetPosition = rec->Origin();
+        otherTargetPosition = rec.Origin();
         break;
     }
 
-    distance->X = myTargetPosition->X - otherTargetPosition->X;
-    distance->Y = myTargetPosition->Y - otherTargetPosition->Y;
-
-    delete(myTargetPosition);
-    delete(otherTargetPosition);
+    distance.X = myTargetPosition.X - otherTargetPosition.X;
+    distance.Y = myTargetPosition.Y - otherTargetPosition.Y;
 
     return distance;
 }
