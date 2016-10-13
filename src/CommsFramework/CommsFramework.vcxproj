@@ -337,6 +337,7 @@ XCOPY /Y /E "Assets\*" "$(TargetDir)Assets"</Command>
     <ClCompile Include="BaseButton.cpp" />
     <ClCompile Include="BaseDialog.cpp" />
     <ClCompile Include="BaseFont.cpp" />
+    <ClCompile Include="BaseGraphicEngine.cpp" />
     <ClCompile Include="BaseMouse.cpp" />
     <ClCompile Include="BaseSprite.cpp" />
     <ClCompile Include="BitHelper.cpp" />
@@ -357,6 +358,7 @@ XCOPY /Y /E "Assets\*" "$(TargetDir)Assets"</Command>
     <ClCompile Include="IOUtilities.cpp" />
     <ClCompile Include="Network.cpp" />
     <ClCompile Include="PathLoader.cpp" />
+    <ClCompile Include="Primitives.cpp" />
     <ClCompile Include="QuickWindow.cpp" />
     <ClCompile Include="SDLFont.cpp" />
     <ClCompile Include="SDLGraphicEngine.cpp" />
@@ -443,6 +445,7 @@ XCOPY /Y /E "Assets\*" "$(TargetDir)Assets"</Command>
     <ClInclude Include="Network.h" />
     <ClInclude Include="Pair.h" />
     <ClInclude Include="PathLoader.h" />
+    <ClInclude Include="Primitives.h" />
     <ClInclude Include="QuickWindow.h" />
     <ClInclude Include="RethinkDb.h" />
     <ClInclude Include="SDLDrawable.h" />

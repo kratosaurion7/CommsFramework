@@ -13,6 +13,8 @@ struct SDL_Rect;
 struct SDL_Window;
 struct SDL_Renderer;
 
+struct PrimitiveDrawInfo;
+
 #include <string>
 #include <cstdint>
 
@@ -59,7 +61,7 @@ public:
 	virtual BaseFont* CreateFontInstance();
 	virtual BaseText* CreateTextInstance();
 
-    virtual void ReloadSpriteTextures();
+	virtual void ReloadSpriteTextures();
 
     virtual bool IsTimeForFrame();
     virtual int GetFramerate();
@@ -94,7 +96,7 @@ private:
 
     SDL_Rect GetSpriteRect(DrawObject* object);
 
-    
+	void DrawPrimitive(PrimitiveDrawInfo* primitive);
 
     void SetupBackground();
     

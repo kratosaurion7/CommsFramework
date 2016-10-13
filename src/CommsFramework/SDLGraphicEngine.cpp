@@ -22,6 +22,8 @@
 #include "Spritesheet.h"
 #include "SettingsRepository.h"
 #include "Viewport.h"
+#include "Primitives.h"
+#include "BitHelper.h"
 
 #include "SDLDrawable.h"
 #include "SDLSprite.h"
@@ -443,6 +445,20 @@ void SDLGraphicEngine::ProcessDraw(SDL_Window* targetWindow)
             iter++;
         }
 
+		auto primitiveDrawListPointer = &(this->PrimitiveDrawables);
+
+		auto primitiveIter = ITBEGIN(primitiveDrawListPointer);
+		while (primitiveIter != ITEND(primitiveDrawListPointer))
+		{
+			PrimitiveDrawInfo* nextPrimitive = *primitiveIter;
+
+			this->DrawPrimitive(nextPrimitive);
+
+			primitiveIter++;
+		}
+
+		this->PrimitiveDrawables.Release();
+
         SDL_RenderPresent(gameRenderer); // Final step
 
         PreviousFrameTick = CurrentFrameTick;
@@ -477,6 +493,45 @@ SDL_Rect SDLGraphicEngine::GetSpriteRect(DrawObject* object)
     rec.y = object->GetOffsetPos().Y;
 
     return rec;
+}
+
+void SDLGraphicEngine::DrawPrimitive(PrimitiveDrawInfo* primitive)
+{
+	unsigned char* colors = IntToBytes(primitive->Color);
+	SDL_SetRenderDrawColor(gameRenderer, colors[0], colors[1], colors[2], colors[3]);
+
+	switch (primitive->CallType)
+	{
+		case DrawType_Line:
+		{
+			PrimitiveLineDraw* prim = (PrimitiveLineDraw*)primitive->DrawData;
+
+			SDL_RenderDrawLine(gameRenderer, prim->xA, prim->yB, prim->xB, prim->yB);
+
+			break;
+		}
+		case DrawType_LineList:
+		{
+			break;
+		}
+		case DrawType_Rect:
+		{
+			PrimitiveRectDraw* prim = (PrimitiveRectDraw*)primitive->DrawData;
+
+			SDL_Rect rec;
+			rec.x = prim->x;
+			rec.y = prim->y;
+			rec.h = prim->h;
+			rec.w = prim->w;
+
+			SDL_RenderFillRect(gameRenderer, &rec);
+
+			break;
+		}
+		default:
+			break;
+		}
+
 }
 
 bool SDLGraphicEngine::IsTimeForFrame()

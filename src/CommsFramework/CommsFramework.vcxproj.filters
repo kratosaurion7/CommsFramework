@@ -121,6 +121,9 @@
     <Filter Include="Framework\Utilities">
       <UniqueIdentifier>{47835e0a-09a0-48ac-afd2-fdcc7a9b49e5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Framework\Graphic\PrimitiveDraws">
+      <UniqueIdentifier>{a272f123-66ef-4136-b74b-ece829599f13}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="XmlReader.cpp">
@@ -322,6 +325,12 @@
       <Filter>Framework\Graphic</Filter>
     </ClCompile>
     <ClCompile Include="Viewport.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseGraphicEngine.cpp">
+      <Filter>Framework\Graphic\Base Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Primitives.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -589,6 +598,9 @@
     </ClInclude>
     <ClInclude Include="Viewport.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Primitives.h">
+      <Filter>Framework\Graphic\PrimitiveDraws</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -6,6 +6,7 @@ class BaseTexture;
 class BaseFont;
 class Spritesheet;
 class ViewportRect;
+class PrimitiveDrawInfo;
 
 class GraphicEngineInitParams;
 
@@ -15,6 +16,7 @@ class GraphicEngineInitParams;
 #include "BaseTexture.h"
 #include "BaseKeyboard.h"
 
+#include "PointerList.h"
 
 #include "GraphicEngineInitParams.h"
 
@@ -25,6 +27,7 @@ class GraphicEngineInitParams;
 class BaseGraphicEngine
 {
 public:
+	BaseGraphicEngine();
     virtual ~BaseGraphicEngine() = 0;
 
     TextureManager* TextureRepo;
@@ -54,10 +57,22 @@ public:
     virtual PointerList<DrawObject*>* GetDrawableList() = 0;
     virtual DrawObject* GetDrawableObject(std::string identifier) = 0;
 
+	// Drawable objects creation methods
     virtual BaseSprite* CreateSpriteInstance() = 0;
     virtual BaseTexture* CreateTextureInstance() = 0;
     virtual BaseFont* CreateFontInstance() = 0;
     virtual BaseText* CreateTextInstance() = 0;
+
+	// Primitive drawing methods9
+	virtual void SetPrimitiveDrawParameters(uint32_t color, int zIndex);
+
+	virtual void DrawLine(FPosition* pointA, FPosition* pointB);
+	virtual void DrawLine(FPosition* pointsArray, int arrayLength);
+	virtual void DrawLine(float xA, float yA, float xB, float yB);
+
+	virtual void DrawRect(FRectangle* rec);
+	virtual void DrawRect(FPosition* startCorner, FPosition* opposingCorner);
+	virtual void DrawRect(float x, float y, float height, float width);
 
     virtual void ReloadSpriteTextures() = 0;
 
@@ -73,6 +88,7 @@ public:
 
     virtual void Scale(float scaleFactor) = 0;
 
+	// Flow Control methods
     virtual void Start() = 0;
 
     virtual void Draw() = 0;
@@ -83,12 +99,18 @@ public:
 
     virtual bool IsRunning() = 0;
 
+	// Z-Index management methods
     virtual void ReorderSpritesByZIndex() = 0;
 
     virtual void FlagForZIndexSorting() = 0;
 
     virtual void ReorderSprite(DrawObject* first, DrawObject* second) = 0;
 
+protected:
+	int primitiveDrawZIndex = 1;
+	uint32_t primitiveDrawColor = 0xFF000000;
+
+	PointerList<PrimitiveDrawInfo*> PrimitiveDrawables;
 };
 
 inline BaseGraphicEngine::~BaseGraphicEngine() { };
