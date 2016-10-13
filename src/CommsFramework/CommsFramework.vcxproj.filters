@@ -602,5 +602,8 @@
     <ClInclude Include="Primitives.h">
       <Filter>Framework\Graphic\PrimitiveDraws</Filter>
     </ClInclude>
+    <ClInclude Include="ArrayList.h">
+      <Filter>Framework\Collections</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
