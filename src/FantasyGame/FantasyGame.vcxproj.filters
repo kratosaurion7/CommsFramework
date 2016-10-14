@@ -99,5 +99,8 @@
     <Xml Include="config.xml">
       <Filter>Config</Filter>
     </Xml>
+    <Xml Include="assets\spritesheet.xml">
+      <Filter>Config</Filter>
+    </Xml>
   </ItemGroup>
 </Project>
