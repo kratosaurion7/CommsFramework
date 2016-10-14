@@ -3,6 +3,7 @@
 #include <GameEngine.h>
 #include <BaseMouse.h>
 #include <BaseKeyboard.h>
+#include <BaseSprite.h>
 #include <FRectangle.h>
 #include <Vectors.h>
 #include <SettingsRepository.h>
@@ -48,21 +49,8 @@ void PlayerCamera::SetCameraPosition(FloatVec* newPos)
 
 void PlayerCamera::Update()
 {
-    return;
-    if (this->Engine->Keyboard->IsKeyClicked(Key::D))
-    {
-        this->CameraFieldOfView->IncrementX(this->CameraSpeed->X);
-    }
-    if (this->Engine->Keyboard->IsKeyClicked(Key::W))
-    {
-        this->CameraFieldOfView->IncrementY(this->CameraSpeed->Y * -1);
-    }
-    if (this->Engine->Keyboard->IsKeyClicked(Key::A))
-    {
-        this->CameraFieldOfView->IncrementX(this->CameraSpeed->X * -1);
-    }
-    if (this->Engine->Keyboard->IsKeyClicked(Key::S))
-    {
-        this->CameraFieldOfView->IncrementY(this->CameraSpeed->Y);
-    }
+    float cameraX = this->PlayerToFocus->PlayerSprite->GetOffsetPos().X - (this->CameraFieldOfView->Width() / 2);
+    float cameraY = this->PlayerToFocus->PlayerSprite->GetOffsetPos().Y - (this->CameraFieldOfView->Height() / 2);
+
+    this->CameraFieldOfView->Set(cameraX, cameraY);
 }

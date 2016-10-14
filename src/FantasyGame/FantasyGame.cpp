@@ -174,10 +174,6 @@ void FantasyGame::InitEngine()
 
     Settings = SettingsRepository::GetInstance();
 
-    MainCamera = new PlayerCamera(GamePlayer);
-
-    Engine->AttachActor(MainCamera);
-
     createdWindows = new BaseList<int>();
 
     DebugCheatsMenu = new CheatMenu();
@@ -244,21 +240,27 @@ void FantasyGame::InitGraphics()
 
 void FantasyGame::InitGame()
 {
+    // Setup Player
+    GamePlayer = new Player();
+    Engine->AttachActor(GamePlayer);
+
+    // Setup Camera
     FRectangle* fov = new FRectangle();
     Vector2<int>* scrollSpeed = new Vector2<int>();
 
     float cam_x = Settings->GetFloat("camera_starting_x");
     float cam_y = Settings->GetFloat("camera_starting_y");
-    float cam_w = Settings->GetFloat("camera_fov_width");
-    float cam_h = Settings->GetFloat("camera_fov_height");
+    float cam_w = Settings->GetFloat("camera_fov_width") * 64;
+    float cam_h = Settings->GetFloat("camera_fov_height") * 64;
     
     fov->Set(cam_x, cam_y, cam_w, cam_h);
 
     scrollSpeed->X = Settings->GetInt("camera_speed_x");
     scrollSpeed->Y = Settings->GetInt("camera_speed_y");
 
-    this->MainCamera->SetupCamera(fov, scrollSpeed);
+    MainCamera = new PlayerCamera(GamePlayer);
+    MainCamera->SetupCamera(fov, scrollSpeed);
 
-    GamePlayer = new Player();
-    Engine->AttachActor(GamePlayer);
+    Engine->AttachActor(MainCamera);
+
 }

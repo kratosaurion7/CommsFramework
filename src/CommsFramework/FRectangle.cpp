@@ -27,6 +27,14 @@ float FRectangle::Height()
     return Bottom - Top;
 }
 
+void FRectangle::Set(float x, float y)
+{
+    float currentWidth = this->Width();
+    float currentHeight = this->Height();
+
+    this->Set(x, y, currentWidth, currentHeight);
+}
+
 void FRectangle::Set(float x, float y, float w, float h)
 {
     Left = x;
