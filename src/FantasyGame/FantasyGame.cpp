@@ -225,12 +225,7 @@ void FantasyGame::InitGraphics()
                 if (textureNameNeeded == NULL)
                     continue;
 
-                BaseTexture* textureForTile = this->Engine->Graphics->TextureRepo->GetTexture(textureNameNeeded->TextureName);
-
-                if (textureForTile == NULL)
-                    continue;
-
-                tileToLoad->TileSprite->SetTexture(textureForTile);
+                tileToLoad->TileSprite->SetTextureName(textureNameNeeded->TextureName);
             }
         }
 

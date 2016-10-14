@@ -102,5 +102,11 @@
     <Xml Include="assets\spritesheet.xml">
       <Filter>Config</Filter>
     </Xml>
+    <Xml Include="assets\map1.xml">
+      <Filter>Config</Filter>
+    </Xml>
+    <Xml Include="assets\World.xml">
+      <Filter>Config</Filter>
+    </Xml>
   </ItemGroup>
 </Project>
