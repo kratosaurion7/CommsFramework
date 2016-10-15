@@ -170,7 +170,7 @@ void FantasyGame::InitEngine()
 {
     Engine = new GameEngine();
 
-    Engine->Init(SCALE_MULTIPLIER * GRID_WIDTH, SCALE_MULTIPLIER * GRID_HEIGHT);
+    Engine->Init(GAME_WINDOW_WIDTH, GAME_WINDOW_HEIGHT);
 
     Settings = SettingsRepository::GetInstance();
 
@@ -216,9 +216,9 @@ void FantasyGame::InitGraphics()
 
                 tileToLoad->TileSprite = this->Engine->CreateSprite();
                 tileToLoad->TileSprite->Show(true);
-                tileToLoad->TileSprite->SetScale(4);
-                tileToLoad->TileSprite->SetSize(16, 16);
-                tileToLoad->SetTilePosition(i * 64, j * 64);
+                tileToLoad->TileSprite->SetScale(SCALE_FACTOR);
+                tileToLoad->TileSprite->SetSize(TILE_SQUARE_SIZE, TILE_SQUARE_SIZE); // Explicit SetSize so that missing textures still get a size
+                tileToLoad->SetTilePosition(i * TILE_SCALED_SIZE, j * TILE_SCALED_SIZE);
 
                 TileDescriptionEntry* textureNameNeeded = this->GameWorld->TileMapping->Entries->Single([tileToLoad](TileDescriptionEntry* entry) { return tileToLoad->TileIdentifier == entry->id; });
 
@@ -245,8 +245,8 @@ void FantasyGame::InitGame()
 
     float cam_x = Settings->GetFloat("camera_starting_x");
     float cam_y = Settings->GetFloat("camera_starting_y");
-    float cam_w = Settings->GetFloat("camera_fov_width") * 64;
-    float cam_h = Settings->GetFloat("camera_fov_height") * 64;
+    float cam_w = Settings->GetFloat("camera_fov_width") * TILE_SCALED_SIZE;
+    float cam_h = Settings->GetFloat("camera_fov_height") * TILE_SCALED_SIZE;
     
     fov->Set(cam_x, cam_y, cam_w, cam_h);
 
