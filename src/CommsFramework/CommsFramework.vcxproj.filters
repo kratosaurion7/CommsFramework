@@ -333,6 +333,9 @@
     <ClCompile Include="Primitives.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ConfigurationManager.cpp">
+      <Filter>Framework\Configuration</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="XmlReader.h">
@@ -604,6 +607,9 @@
     </ClInclude>
     <ClInclude Include="ArrayList.h">
       <Filter>Framework\Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="ConfigurationManager.h">
+      <Filter>Framework\Configuration</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

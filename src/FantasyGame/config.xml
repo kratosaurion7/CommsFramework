@@ -21,6 +21,10 @@
     <graphic_tile_size>64</graphic_tile_size>
 
   </settings>
+  
+  <link dir="assets" pattern=".xml" />
+  <link src="config.xml" />
+
 
   <game>
     <GameName>FantasyGame</GameName>

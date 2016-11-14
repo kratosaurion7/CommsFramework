@@ -20,6 +20,8 @@
 #include <Utils.h>
 
 
+#include <ConfigurationManager.h>
+
 int main()
 {
     FantasyGame* game = new FantasyGame();
