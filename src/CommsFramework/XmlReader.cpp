@@ -213,7 +213,7 @@ PointerList<XmlNode*>* XmlNode::FindNodes(std::string nodeName, bool searchInChi
         return strcmp(node->name(), nodeName.c_str()) == 0;
     };
 
-    PointerList<xml_node<>*> listOfStuff;
+    BaseList<xml_node<>*> listOfStuff;
     PointerList<XmlNode*>* nodeList = new PointerList<XmlNode*>();
 
     FindNodeList(data_node, pred, listOfStuff, searchInChildOnly);
@@ -278,7 +278,7 @@ xml_node<>* XmlNode::FindNode(xml_node<>* node, std::function<bool(rapidxml::xml
     }
 }
 
-void XmlNode::FindNodeList(xml_node<>* node, std::function<bool(rapidxml::xml_node<>*)> predicate, PointerList<xml_node<>*> &aggregate, bool searchInChildOnly)
+void XmlNode::FindNodeList(xml_node<>* node, std::function<bool(rapidxml::xml_node<>*)> predicate, BaseList<xml_node<>*> &aggregate, bool searchInChildOnly)
 {
     if (node == NULL)
         return;
@@ -313,7 +313,7 @@ void XmlNode::FindNodeList(xml_node<>* node, std::function<bool(rapidxml::xml_no
     FindNodeList(nextNode, predicate, aggregate, searchInChildOnly);
 }
 
-void XmlNode::NodesSearch(xml_node<>* node, std::function<bool(rapidxml::xml_node<>*)> predicate, PointerList<xml_node<>*>* aggregate, bool recursive)
+void XmlNode::NodesSearch(xml_node<>* node, std::function<bool(rapidxml::xml_node<>*)> predicate, BaseList<xml_node<>*>* aggregate, bool recursive)
 {
     if (node == NULL)
         return;
@@ -347,4 +347,16 @@ void XmlNode::NodesSearch(xml_node<>* node, std::function<bool(rapidxml::xml_nod
         return;
 
     NodesSearch(nextNode, predicate, aggregate, recursive);
+}
+
+XmlNodeAttribute::XmlNodeAttribute()
+{
+    this->AttributeName = "";
+    this->AttributeValue = "";
+}
+
+XmlNodeAttribute::~XmlNodeAttribute()
+{
+    //delete(this->AttributeName);
+    //delete(this->AttributeValue);
 }

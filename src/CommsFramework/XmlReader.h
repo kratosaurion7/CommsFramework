@@ -66,9 +66,9 @@ private:
 
     xml_node<>* FindNode(xml_node<>* node, std::function<bool(rapidxml::xml_node<>*)> predicate, bool searchInChildOnly);
 
-    void FindNodeList(xml_node<>* node, std::function<bool(rapidxml::xml_node<>*)> predicate, PointerList<xml_node<>*> &aggregate, bool searchInChildOnly);
+    void FindNodeList(xml_node<>* node, std::function<bool(rapidxml::xml_node<>*)> predicate, BaseList<xml_node<>*> &aggregate, bool searchInChildOnly);
 
-    void NodesSearch(xml_node<>* node, std::function<bool(rapidxml::xml_node<>*)> predicate, PointerList<xml_node<>*>* aggregate, bool recursive);
+    void NodesSearch(xml_node<>* node, std::function<bool(rapidxml::xml_node<>*)> predicate, BaseList<xml_node<>*>* aggregate, bool recursive);
 };
 
 class XmlNodeAttribute
@@ -78,4 +78,7 @@ public:
 
     int valueSize; // TODO : Check if removing this member
     char* AttributeValue; // MUST BE NULL TERMINATED
+
+    XmlNodeAttribute();
+    ~XmlNodeAttribute();
 };
