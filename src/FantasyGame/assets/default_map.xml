@@ -1,7 +1,7 @@
 <map>
     <map_name>Default</map_name>
     
-    <tiles width=20> <!-- 0 for grass, 1 for wall, 2 for water -->
+    <tiles width="20"> <!-- 0 for grass, 1 for wall, 2 for water -->
         1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
         1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
         1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,

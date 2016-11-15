@@ -23,7 +23,7 @@
   </settings>
   
   <link dir="assets" pattern=".xml" />
-  <link src="config.xml" />
+  <!--<link src="assets\\map1.xml" />-->
 
 
   <game>

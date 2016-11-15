@@ -181,10 +181,13 @@ XCOPY /Y /E "$(ProjectDir)config.xml" "$(TargetDir)"</Command>
     <Text Include="REWORK.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Xml Include="assets\default_map.xml" />
     <Xml Include="assets\map1.xml" />
     <Xml Include="assets\spritesheet.xml" />
     <Xml Include="assets\World.xml" />
-    <Xml Include="config.xml" />
+    <Xml Include="config.xml">
+      <DeploymentContent>false</DeploymentContent>
+    </Xml>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
