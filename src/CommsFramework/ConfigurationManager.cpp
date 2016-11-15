@@ -7,7 +7,7 @@
 
 ConfigurationManager::ConfigurationManager()
 {
-    SettingsList = PointerList<Pair<std::string, char*>*>();
+    //this->SettingsList = PointerList<Pair<std::string, char*>*>();
 }
 
 
@@ -114,7 +114,12 @@ void ConfigurationManager::Register(std::string name, char* value)
 
 void ConfigurationManager::ExtractConfigFromFile(XmlReader* fileReader, PointerList<Pair<std::string, char*>*>* list)
 {
-    auto settingNodes = fileReader->FindNode(defaultConfigNodeName)->GetChildNodes();
+    auto rootSettingNode = fileReader->FindNode(defaultConfigNodeName);
+
+    if (rootSettingNode == NULL)
+        return; // No <settings> node
+
+    auto settingNodes = rootSettingNode->GetChildNodes();
 
     auto it = ITBEGIN(settingNodes);
     while (it != ITEND(settingNodes))
@@ -138,7 +143,7 @@ void ConfigurationManager::ExtractConfigFromFile(XmlReader* fileReader, PointerL
         it++;
     }
 
-    auto linkedConfigFilesNodes = fileReader->FindNodes("link");
+    auto linkedConfigFilesNodes = fileReader->GetNodes("link");
 
     auto link_it = ITBEGIN(linkedConfigFilesNodes);
     while (link_it != ITEND(linkedConfigFilesNodes))
@@ -171,14 +176,16 @@ void ConfigurationManager::ExtractConfigFromFile(XmlReader* fileReader, PointerL
             {
                 XFile* file = *linkedFileIt;
 
-                file->FileName.find(linkedDirFilePattern, 0);
+                auto res = file->FileName.find(linkedDirFilePattern, 0);
 
-                XmlReader fileReader = XmlReader();
-                fileReader.LoadFile(file->FilePath);
+                // If the file fits the pattern
+                if (res != std::string::npos)
+                {
+                    XmlReader fileReader = XmlReader();
+                    fileReader.LoadFile(file->FilePath);
 
-                ExtractConfigFromFile(&fileReader, list);
-
-                delete(file);
+                    ExtractConfigFromFile(&fileReader, list);
+                }
 
                 linkedFileIt++;
             }

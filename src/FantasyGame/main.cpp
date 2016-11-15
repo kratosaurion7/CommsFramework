@@ -24,6 +24,9 @@
 
 int main()
 {
+    ConfigurationManager man = ConfigurationManager();
+    man.LoadConfig();
+
     FantasyGame* game = new FantasyGame();
 
     game->Init();
