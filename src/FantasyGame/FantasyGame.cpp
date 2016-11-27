@@ -40,6 +40,10 @@ FantasyGame * GetGameInstance()
 FantasyGame::FantasyGame()
 {
     _gameInstance = this;
+
+    Engine = new GameEngine();
+
+    Settings = Engine->ConfigManager;
 }
 
 FantasyGame::~FantasyGame()
@@ -70,96 +74,14 @@ void FantasyGame::Init()
 
     // Finally, we init the game. Player, camera, etc. After that, the game is ready to play.
     InitGame();
-
 }
 
-void FantasyGame::Start()
-{
-}
-
-void FantasyGame::Play()
-{
-    while (true)
-    {
-        if (this->Engine->Graphics->IsTimeForFrame())
-        {
-            this->Update();
-
-            Engine->Play();
-        }
-    }
-}
-
-void FantasyGame::Update()
-{
-    if (this->Engine->Keyboard->IsKeyClicked(Key::Q))
-    {
-        RandomGen rng = RandomGen();
-        TgaFile* quickContent = new TgaFile();
-        quickContent->Init(256, 256);
-        
-        int randomRed = rng.GetRandom(255);
-        int randomGreen = rng.GetRandom(255);
-        int randomBlue = rng.GetRandom(255);
-
-        quickContent->FillColor(randomRed, randomGreen, randomBlue, 255);
-
-        createdWindows->Add(QuickCreateWindow(quickContent));
-    }
-
-    if (this->Engine->Keyboard->IsKeyClicked(Key::E))
-    {
-        if (createdWindows->Count() > 0)
-        {
-            int lastIndex = createdWindows->Last();
-
-            CloseQuickWindow(lastIndex);
-        }
-    }
-
-    if (this->Engine->Keyboard->IsKeyClicked(Key::Num1))
-    {
-        auto it = TileIndexIdentifiers->GetContainer()->begin();
-        while (it != TileIndexIdentifiers->GetContainer()->end())
-        {
-            BaseText* txt = *it;
-
-            if (txt->IsVisible())
-            {
-                txt->Show(false);
-            }
-            else
-            {
-                txt->Show(true);
-            }
-
-            it++;
-        }
-    }
-
-    if (this->Engine->Keyboard->IsKeyClicked(Key::Space))
-    {
-        if (DebugCheatsMenu->BackPlate->IsVisible())
-        {
-            DebugCheatsMenu->Hide();
-        }
-        else
-        {
-            DebugCheatsMenu->Show();
-        }
-    }
-
-    Engine->Graphics->Viewport->X = MainCamera->CameraFieldOfView->Left;
-    Engine->Graphics->Viewport->Y = MainCamera->CameraFieldOfView->Top;
-
-}
 
 void FantasyGame::ReadCoreSettings()
 {
     // TODO : Find a way to copy the config file from somewhere else than the assets
     //Settings->ReadFromXml("config.xml");
 
-    Settings = new ConfigurationManager();
     Settings->LoadConfig();
 
     this->assetsPath = Settings->Get("assets_root");
@@ -169,7 +91,6 @@ void FantasyGame::ReadCoreSettings()
 
 void FantasyGame::InitEngine()
 {
-    Engine = new GameEngine();
 
     Engine->Init(GAME_WINDOW_WIDTH, GAME_WINDOW_HEIGHT);
 
@@ -258,5 +179,86 @@ void FantasyGame::InitGame()
     MainCamera->SetupCamera(fov, scrollSpeed);
 
     Engine->AttachActor(MainCamera);
+
+}
+
+void FantasyGame::Start()
+{
+}
+
+void FantasyGame::Play()
+{
+    while (true)
+    {
+        if (this->Engine->Graphics->IsTimeForFrame())
+        {
+            this->Update();
+
+            Engine->Play();
+        }
+    }
+}
+
+void FantasyGame::Update()
+{
+    if (this->Engine->Keyboard->IsKeyClicked(Key::Q))
+    {
+        RandomGen rng = RandomGen();
+        TgaFile* quickContent = new TgaFile();
+        quickContent->Init(256, 256);
+
+        int randomRed = rng.GetRandom(255);
+        int randomGreen = rng.GetRandom(255);
+        int randomBlue = rng.GetRandom(255);
+
+        quickContent->FillColor(randomRed, randomGreen, randomBlue, 255);
+
+        createdWindows->Add(QuickCreateWindow(quickContent));
+    }
+
+    if (this->Engine->Keyboard->IsKeyClicked(Key::E))
+    {
+        if (createdWindows->Count() > 0)
+        {
+            int lastIndex = createdWindows->Last();
+
+            CloseQuickWindow(lastIndex);
+        }
+    }
+
+    if (this->Engine->Keyboard->IsKeyClicked(Key::Num1))
+    {
+        auto it = TileIndexIdentifiers->GetContainer()->begin();
+        while (it != TileIndexIdentifiers->GetContainer()->end())
+        {
+            BaseText* txt = *it;
+
+            if (txt->IsVisible())
+            {
+                txt->Show(false);
+            }
+            else
+            {
+                txt->Show(true);
+            }
+
+            it++;
+        }
+    }
+
+    if (this->Engine->Keyboard->IsKeyClicked(Key::Space))
+    {
+        if (DebugCheatsMenu->BackPlate->IsVisible())
+        {
+            DebugCheatsMenu->Hide();
+        }
+        else
+        {
+            DebugCheatsMenu->Show();
+        }
+    }
+
+    Engine->Graphics->Viewport->X = MainCamera->CameraFieldOfView->Left;
+    Engine->Graphics->Viewport->Y = MainCamera->CameraFieldOfView->Top;
 
 }
