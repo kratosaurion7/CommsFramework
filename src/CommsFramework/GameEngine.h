@@ -7,6 +7,8 @@ class ResourceManagerInitParams;
 class GraphicEngineInitParams;
 class GameRule;
 
+class ConfigurationManager;
+
 class BaseGraphicEngine;
 
 class BaseSprite;
@@ -62,6 +64,8 @@ class GameEngine
 public:
     GameEngine();
     ~GameEngine();
+
+    ConfigurationManager* ConfigManager;
 
     BaseGraphicEngine* Graphics;
     ResourceManager* Resources;

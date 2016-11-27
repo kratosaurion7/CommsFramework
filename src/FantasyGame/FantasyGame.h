@@ -7,7 +7,7 @@ class FRectangle;
 class BaseSprite;
 class BaseText;
 class FSize;
-class SettingsRepository;
+class ConfigurationManager;
 class XmlNode;
 
 class World;
@@ -38,7 +38,7 @@ public:
     Player* GamePlayer;
     PlayerCamera* MainCamera;
 
-    SettingsRepository* Settings;
+    ConfigurationManager* Settings;
 
     // DEBUG STUFF
     CheatMenu* DebugCheatsMenu;

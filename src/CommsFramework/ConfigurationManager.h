@@ -18,6 +18,8 @@ public:
 
     char* Get(std::string valueName);
 
+    PointerList<char*>* GetWhere(std::function<bool(std::string)> predicate);
+
     int GetInt(std::string valueName);
 
     float GetFloat(std::string valueName);
@@ -27,7 +29,7 @@ public:
     void Register(std::string name, char* value);
 
 protected:
-    PointerList<Pair<std::string, char*>*> SettingsList;
+    PointerList<Pair<std::string, char*>*>* SettingsList;
 
 
 private:

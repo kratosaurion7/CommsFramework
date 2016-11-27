@@ -15,7 +15,7 @@
 #include <FSize.h>
 #include <XDirectory.h>
 #include <XFile.h>
-#include <SettingsRepository.h>
+#include <ConfigurationManager.h>
 #include <TgaFile.h>
 #include <QuickWindow.h>
 #include <PathLoader.h>
@@ -40,8 +40,6 @@ FantasyGame * GetGameInstance()
 FantasyGame::FantasyGame()
 {
     _gameInstance = this;
-
-    this->Settings = SettingsRepository::GetInstance();
 }
 
 FantasyGame::~FantasyGame()
@@ -159,7 +157,10 @@ void FantasyGame::Update()
 void FantasyGame::ReadCoreSettings()
 {
     // TODO : Find a way to copy the config file from somewhere else than the assets
-    Settings->ReadFromXml("config.xml");
+    //Settings->ReadFromXml("config.xml");
+
+    Settings = new ConfigurationManager();
+    Settings->LoadConfig();
 
     this->assetsPath = Settings->Get("assets_root");
 
@@ -172,7 +173,7 @@ void FantasyGame::InitEngine()
 
     Engine->Init(GAME_WINDOW_WIDTH, GAME_WINDOW_HEIGHT);
 
-    Settings = SettingsRepository::GetInstance();
+    //Settings = Engine->ConfigManager;
 
     createdWindows = new BaseList<int>();
 

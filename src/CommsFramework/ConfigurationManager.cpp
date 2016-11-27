@@ -7,7 +7,7 @@
 
 ConfigurationManager::ConfigurationManager()
 {
-    //this->SettingsList = PointerList<Pair<std::string, char*>*>();
+    this->SettingsList = new PointerList<Pair<std::string, char*>*>();
 }
 
 
@@ -20,7 +20,7 @@ void ConfigurationManager::LoadConfig()
     XmlReader settingsReader = XmlReader();
     settingsReader.LoadFile(defaultConfigFileName);
 
-    this->ExtractConfigFromFile(&settingsReader, &this->SettingsList);
+    this->ExtractConfigFromFile(&settingsReader, this->SettingsList);
 
 }
 
@@ -48,7 +48,7 @@ void ConfigurationManager::LoadConfig(std::string rootConfigFilePath, std::strin
 
 char* ConfigurationManager::Get(std::string settingName)
 {
-    for (Pair<std::string, char*>* val : *this->SettingsList.GetContainer())
+    for (Pair<std::string, char*>* val : *this->SettingsList->GetContainer())
     {
         if (val->Item1 == settingName)
         {
@@ -59,6 +59,21 @@ char* ConfigurationManager::Get(std::string settingName)
     assert(false);
 
     return NULL;
+}
+
+PointerList<char*>* ConfigurationManager::GetWhere(std::function<bool(std::string)> predicate)
+{
+    PointerList<char*>* retValues = new PointerList<char*>();
+
+    for (Pair<std::string, char*>* val : *this->SettingsList->GetContainer())
+    {
+        if (predicate(val->Item1))
+        {
+            retValues->Add(val->Item2);
+        }
+    }
+
+    return retValues;
 }
 
 int ConfigurationManager::GetInt(std::string settingName)
@@ -109,7 +124,7 @@ void ConfigurationManager::Register(std::string name, char* value)
     newItem->Item1 = name;
     newItem->Item2 = value;
 
-    this->SettingsList.Add(newItem);
+    this->SettingsList->Add(newItem);
 }
 
 void ConfigurationManager::ExtractConfigFromFile(XmlReader* fileReader, PointerList<Pair<std::string, char*>*>* list)

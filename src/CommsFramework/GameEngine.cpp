@@ -11,6 +11,8 @@
 #include "SFMLKeyboard.h"
 #include "SFMLMouse.h"
 
+#include "ConfigurationManager.h"
+
 #include "BaseKeyboard.h"
 #include "BaseMouse.h"
 #include "BaseGraphicEngine.h"
@@ -51,6 +53,8 @@ GameEngine::GameEngine()
 
     GameEngine::Keyboard = sfKeyboard;
     GameEngine::Mouse = sfMouse;
+
+    this->ConfigManager = new ConfigurationManager();
 
     this->FrameClickInfo = NULL;
 
@@ -102,6 +106,8 @@ void GameEngine::Init(int windowWidth, int windowHeight)
 void GameEngine::Init(GameEngineInitParams* params)
 {
     engineInitParams = params;
+
+    this->ConfigManager->LoadConfig();
 
     this->GameAreaSize = params->GraphicsParams->WindowSize;
 
