@@ -1,12 +1,7 @@
 #include "PlayerCamera.h"
 
-#include <GameEngine.h>
-#include <BaseMouse.h>
-#include <BaseKeyboard.h>
 #include <BaseSprite.h>
 #include <FRectangle.h>
-#include <Vectors.h>
-#include <SettingsRepository.h>
 
 #include "Player.h"
 
