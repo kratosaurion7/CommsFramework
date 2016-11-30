@@ -428,7 +428,6 @@ XCOPY /Y /E "Assets\*" "$(TargetDir)Assets"</Command>
     <ClInclude Include="EngineDialogMessage.h" />
     <ClInclude Include="FileSave.h" />
     <ClInclude Include="FileSystem.h" />
-    <ClInclude Include="FluentConfigurationSetting.h" />
     <ClInclude Include="FontProcessor.h" />
     <ClInclude Include="FRectangle.h" />
     <ClInclude Include="Functions.h" />

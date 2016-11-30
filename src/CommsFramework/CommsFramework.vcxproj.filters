@@ -611,8 +611,5 @@
     <ClInclude Include="ConfigurationManager.h">
       <Filter>Framework\Configuration</Filter>
     </ClInclude>
-    <ClInclude Include="FluentConfigurationSetting.h">
-      <Filter>Framework\Configuration</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>
