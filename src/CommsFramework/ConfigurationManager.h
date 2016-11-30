@@ -16,17 +16,17 @@ public:
     void LoadConfig();
     void LoadConfig(std::string rootConfigFilePath, std::string settingsRootNodeName = "settings");
 
-    char* Get(std::string valueName);
+    void Register(std::string name, char* value);
+
+    char* Get(std::string valueName, char* defaultValue = NULL);
 
     PointerList<char*>* GetWhere(std::function<bool(std::string)> predicate);
 
-    int GetInt(std::string valueName);
+    int GetInt(std::string valueName, int defaultValue = -1);
 
-    float GetFloat(std::string valueName);
+    float GetFloat(std::string valueName, float defaultValue = -1);
 
-    bool GetBool(std::string valueName);
-
-    void Register(std::string name, char* value);
+    bool GetBool(std::string valueName, bool defaultValue = false);
 
 protected:
     PointerList<Pair<std::string, char*>*>* SettingsList;

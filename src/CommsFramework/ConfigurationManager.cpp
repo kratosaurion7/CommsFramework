@@ -46,7 +46,7 @@ void ConfigurationManager::LoadConfig(std::string rootConfigFilePath, std::strin
     }
 }
 
-char* ConfigurationManager::Get(std::string settingName)
+char* ConfigurationManager::Get(std::string settingName, char* defaultValue)
 {
     for (Pair<std::string, char*>* val : *this->SettingsList->GetContainer())
     {
@@ -58,7 +58,7 @@ char* ConfigurationManager::Get(std::string settingName)
 
     fprintf(stderr, "Setting %s not found.\n", settingName.c_str());
 
-    return NULL;
+    return defaultValue;
 }
 
 PointerList<char*>* ConfigurationManager::GetWhere(std::function<bool(std::string)> predicate)
@@ -76,13 +76,13 @@ PointerList<char*>* ConfigurationManager::GetWhere(std::function<bool(std::strin
     return retValues;
 }
 
-int ConfigurationManager::GetInt(std::string settingName)
+int ConfigurationManager::GetInt(std::string settingName, int defaultValue)
 {
     char* data = this->Get(settingName);
 
     if (data == NULL)
     {
-        return 0;
+        return defaultValue;
     }
 
     int result = atoi(data);
@@ -90,13 +90,13 @@ int ConfigurationManager::GetInt(std::string settingName)
     return result;
 }
 
-float ConfigurationManager::GetFloat(std::string settingName)
+float ConfigurationManager::GetFloat(std::string settingName, float defaultValue)
 {
     char* data = this->Get(settingName);
 
     if (data == NULL)
     {
-        return 0;
+        return defaultValue;
     }
 
     float result = atof(data);
@@ -104,13 +104,13 @@ float ConfigurationManager::GetFloat(std::string settingName)
     return result;
 }
 
-bool ConfigurationManager::GetBool(std::string settingName)
+bool ConfigurationManager::GetBool(std::string settingName, bool defaultValue)
 {
     char* data = this->Get(settingName);
 
     if (data == NULL)
     {
-        return 0;
+        return defaultValue;
     }
 
     int result = atoi(data);
