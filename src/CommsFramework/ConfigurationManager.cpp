@@ -56,7 +56,7 @@ char* ConfigurationManager::Get(std::string settingName)
         }
     }
 
-    assert(false);
+    fprintf(stderr, "Setting %s not found.\n", settingName.c_str());
 
     return NULL;
 }

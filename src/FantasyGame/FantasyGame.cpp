@@ -91,8 +91,9 @@ void FantasyGame::ReadCoreSettings()
 
 void FantasyGame::InitEngine()
 {
-
-    Engine->Init(GAME_WINDOW_WIDTH, GAME_WINDOW_HEIGHT);
+    int width = Settings->GetInt("window_width");
+    int height = Settings->GetInt("window_height");
+    Engine->Init(width, height);
 
     //Settings = Engine->ConfigManager;
 

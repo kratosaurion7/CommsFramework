@@ -182,6 +182,7 @@ XCOPY /Y /E "$(ProjectDir)config.xml" "$(TargetDir)"</Command>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="assets\default_map.xml" />
+    <Xml Include="assets\general_settings.xml" />
     <Xml Include="assets\map1.xml" />
     <Xml Include="assets\spritesheet.xml" />
     <Xml Include="assets\World.xml" />

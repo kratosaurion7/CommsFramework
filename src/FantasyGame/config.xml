@@ -4,7 +4,7 @@
 
     <assets_root>assets\\</assets_root>
 
-    <Spritesheet>assets//spritesheet.xml</Spritesheet>
+    <Spritesheet>assets\\spritesheet.xml</Spritesheet>
 
     <game_name>FantasyGame</game_name>
 
