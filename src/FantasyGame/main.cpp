@@ -27,6 +27,8 @@ int main()
     ConfigurationManager man = ConfigurationManager();
     man.LoadConfig();
 
+    auto res = man.FindValue<int>("window_width")->As<long>()->WithDefault(445)->Get();
+
     FantasyGame* game = new FantasyGame();
 
     game->Init();
