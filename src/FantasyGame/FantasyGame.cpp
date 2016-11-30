@@ -59,7 +59,8 @@ void FantasyGame::Init()
 {
     ReadCoreSettings();
 
-    PathLoader::SetBasePath("assets\\");
+	char* rootAssetPath = Settings->Get("assets_root", "assets\\");
+    PathLoader::SetBasePath(rootAssetPath);
 
     // Init the engine first, this gives access to the services proposed by the engine
     InitEngine();
@@ -80,22 +81,19 @@ void FantasyGame::Init()
 void FantasyGame::ReadCoreSettings()
 {
     // TODO : Find a way to copy the config file from somewhere else than the assets
-    //Settings->ReadFromXml("config.xml");
 
     Settings->LoadConfig();
 
-    this->assetsPath = Settings->Get("assets_root");
-
-    PathLoader::SetBasePath(this->assetsPath);
+	scaleFactor = Settings->GetFloat("game_scale_factor", 4);
+	tileSize = Settings->GetFloat("game_tile_size", 16);
+	scaledSize = tileSize * scaleFactor;
 }
 
 void FantasyGame::InitEngine()
 {
-    int width = Settings->GetInt("window_width");
-    int height = Settings->GetInt("window_height");
+    int width = Settings->GetInt("window_width", 640);
+    int height = Settings->GetInt("window_height", 640);
     Engine->Init(width, height);
-
-    //Settings = Engine->ConfigManager;
 
     createdWindows = new BaseList<int>();
 
@@ -139,9 +137,9 @@ void FantasyGame::InitGraphics()
 
                 tileToLoad->TileSprite = this->Engine->CreateSprite();
                 tileToLoad->TileSprite->Show(true);
-                tileToLoad->TileSprite->SetScale(SCALE_FACTOR);
-                tileToLoad->TileSprite->SetSize(TILE_SQUARE_SIZE, TILE_SQUARE_SIZE); // Explicit SetSize so that missing textures still get a size
-                tileToLoad->SetTilePosition(i * TILE_SCALED_SIZE, j * TILE_SCALED_SIZE);
+                tileToLoad->TileSprite->SetScale(scaleFactor);
+                tileToLoad->TileSprite->SetSize(tileSize, tileSize); // Explicit SetSize so that missing textures still get a size
+                tileToLoad->SetTilePosition(i * scaledSize, j * scaledSize);
 
                 TileDescriptionEntry* textureNameNeeded = this->GameWorld->TileMapping->Entries->Single([tileToLoad](TileDescriptionEntry* entry) { return tileToLoad->TileIdentifier == entry->id; });
 
@@ -166,15 +164,15 @@ void FantasyGame::InitGame()
     FRectangle* fov = new FRectangle();
     Vector2<int>* scrollSpeed = new Vector2<int>();
 
-    float cam_x = Settings->GetFloat("camera_starting_x");
-    float cam_y = Settings->GetFloat("camera_starting_y");
-    float cam_w = Settings->GetFloat("camera_fov_width") * TILE_SCALED_SIZE;
-    float cam_h = Settings->GetFloat("camera_fov_height") * TILE_SCALED_SIZE;
+    float cam_x = Settings->GetFloat("camera_starting_x", 0);
+    float cam_y = Settings->GetFloat("camera_starting_y", 0);
+    float cam_w = Settings->GetFloat("camera_fov_width") * scaledSize;
+    float cam_h = Settings->GetFloat("camera_fov_height") * scaledSize;
     
     fov->Set(cam_x, cam_y, cam_w, cam_h);
 
-    scrollSpeed->X = Settings->GetInt("camera_speed_x");
-    scrollSpeed->Y = Settings->GetInt("camera_speed_y");
+    scrollSpeed->X = Settings->GetInt("camera_speed_x", 16);
+    scrollSpeed->Y = Settings->GetInt("camera_speed_y", 16);
 
     MainCamera = new PlayerCamera(GamePlayer);
     MainCamera->SetupCamera(fov, scrollSpeed);

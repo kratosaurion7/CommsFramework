@@ -67,6 +67,11 @@ private:
     std::string assetsPath;
 
     BaseList<int>* createdWindows;
+
+	// Config values
+	float scaleFactor;
+	float tileSize;
+	float scaledSize;
 };
 
 FantasyGame* GetGameInstance();
