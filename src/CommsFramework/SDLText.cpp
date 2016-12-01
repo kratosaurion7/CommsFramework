@@ -16,6 +16,8 @@
 
 SDLText::SDLText()
 {
+    Coordinate = VIEWPORT_RELATIVE;
+
     isVisible = false;
     position = FPosition();
     positionOffset = FPosition();

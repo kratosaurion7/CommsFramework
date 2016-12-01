@@ -12,6 +12,8 @@
 
 SDLSprite::SDLSprite()
 {
+    Coordinate = VIEWPORT_RELATIVE;
+
     ClickInfo = NULL;
 
     isVisible = false;

@@ -23,8 +23,15 @@ public:
         NONE = 1,
         GRAYSCALE = 2,
         ALPHAMOD = 4,
-
     };
+
+    enum COORDINATE_TYPE
+    {
+        VIEWPORT_RELATIVE,
+        GAME_ABSOLUTE
+    };
+
+    COORDINATE_TYPE Coordinate;
 
     BaseGraphicEngine* Engine;
     std::string Ident;

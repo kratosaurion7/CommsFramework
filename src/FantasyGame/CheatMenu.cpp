@@ -2,6 +2,7 @@
 
 #include <GameEngine.h>
 #include <BaseGraphicEngine.h>
+#include <DrawObject.h>
 #include <BaseSprite.h>
 #include <BaseTexture.h>
 #include <BaseText.h>
@@ -16,18 +17,21 @@ CheatMenu::CheatMenu()
 	BackPlate->SetTexture(BackPlateTexture);
 	BackPlate->SetZIndex(990);
 	BackPlate->Show(false);
+    BackPlate->Coordinate = DrawObject::GAME_ABSOLUTE;
 
 	SwitchTileNumberLabel = this->Engine->CreateText("Switch Tile numbers", 16);
 	SwitchTileNumberLabel->SetPos(10, 10);
     SwitchTileNumberLabel->SetZIndex(991);
     SwitchTileNumberLabel->SetStyle(TEXT_STYLE_BOLD);
     SwitchTileNumberLabel->SetColor(0xFFFF0000);
+    SwitchTileNumberLabel->Coordinate = DrawObject::GAME_ABSOLUTE;
 
 	SwitchTileNumber = this->Engine->CreateText("1", 16);
 	SwitchTileNumber->SetPos(10, 30);
     SwitchTileNumber->SetZIndex(991);
     SwitchTileNumber->SetStyle(TEXT_STYLE_BOLD);
     SwitchTileNumber->SetColor(0xFFFF0000);
+    SwitchTileNumber->Coordinate = DrawObject::GAME_ABSOLUTE;
 }
 
 CheatMenu::~CheatMenu()
