@@ -420,7 +420,7 @@ void SDLGraphicEngine::ProcessDraw(SDL_Window* targetWindow)
                     SDL_Rect destinationRect = this->GetSpriteRect(target);
                     SDL_Texture* tex = drawImpl->GetDrawableTexture();
 
-                    if (target->Coordinate != DrawObject::GAME_ABSOLUTE)
+                    if (target->Coordinate == DrawObject::VIEWPORT_RELATIVE)
                     {
                         destinationRect.x -= Viewport->X;
                         destinationRect.y -= Viewport->Y;
