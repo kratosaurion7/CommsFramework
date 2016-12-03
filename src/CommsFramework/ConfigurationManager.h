@@ -33,8 +33,8 @@ protected:
 
 
 private:
-    std::string defaultConfigFileName = "config.xml";
-    std::string defaultConfigNodeName = "settings";
+    const std::string defaultConfigFileName = "config.xml";
+    const std::string defaultConfigNodeName = "settings";
 
     void ExtractConfigFromFile(XmlReader* fileReader, PointerList<Pair<std::string, char*>*>* list);
 };

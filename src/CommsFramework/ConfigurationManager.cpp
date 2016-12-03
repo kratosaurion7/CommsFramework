@@ -10,7 +10,6 @@ ConfigurationManager::ConfigurationManager()
     this->SettingsList = new PointerList<Pair<std::string, char*>*>();
 }
 
-
 ConfigurationManager::~ConfigurationManager()
 {
 }
@@ -21,7 +20,6 @@ void ConfigurationManager::LoadConfig()
     settingsReader.LoadFile(defaultConfigFileName);
 
     this->ExtractConfigFromFile(&settingsReader, this->SettingsList);
-
 }
 
 void ConfigurationManager::LoadConfig(std::string rootConfigFilePath, std::string settingsRootNodeName)
