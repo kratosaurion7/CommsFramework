@@ -388,7 +388,6 @@ XCOPY /Y /E "Assets\*" "$(TargetDir)Assets"</Command>
     <ClCompile Include="TgaFile.cpp" />
     <ClCompile Include="Utils.cpp" />
     <ClCompile Include="RandomGen.cpp" />
-    <ClCompile Include="SettingsRepository.cpp" />
     <ClCompile Include="SFMLMouse.cpp" />
     <ClCompile Include="PackageFile.cpp" />
     <ClCompile Include="GameModule.cpp" />
@@ -470,7 +469,6 @@ XCOPY /Y /E "Assets\*" "$(TargetDir)Assets"</Command>
     <ClInclude Include="TgaFile.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="RandomGen.h" />
-    <ClInclude Include="SettingsRepository.h" />
     <ClInclude Include="SFMLMouse.h" />
     <ClInclude Include="PackageFile.h" />
     <ClInclude Include="PointerList.h" />

@@ -204,9 +204,6 @@
     <ClCompile Include="RandomGen.cpp">
       <Filter>Framework\Math</Filter>
     </ClCompile>
-    <ClCompile Include="SettingsRepository.cpp">
-      <Filter>Framework\Configuration</Filter>
-    </ClCompile>
     <ClCompile Include="EngineDialogMessage.cpp">
       <Filter>Framework\Engine\Dialogs</Filter>
     </ClCompile>
@@ -454,9 +451,6 @@
     </ClInclude>
     <ClInclude Include="RandomGen.h">
       <Filter>Framework\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="SettingsRepository.h">
-      <Filter>Framework\Configuration</Filter>
     </ClInclude>
     <ClInclude Include="EngineDialogMessage.h">
       <Filter>Framework\Engine\Dialogs</Filter>

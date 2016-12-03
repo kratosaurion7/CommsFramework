@@ -20,7 +20,6 @@
 #include "BaseTexture.h"
 #include "Utilities.h"
 #include "Spritesheet.h"
-#include "SettingsRepository.h"
 #include "Viewport.h"
 #include "Primitives.h"
 #include "BitHelper.h"
