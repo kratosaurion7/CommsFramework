@@ -124,6 +124,9 @@
     <Filter Include="Framework\Graphic\PrimitiveDraws">
       <UniqueIdentifier>{a272f123-66ef-4136-b74b-ece829599f13}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Framework\Graphic\Menus">
+      <UniqueIdentifier>{ff0af833-c2a2-40f3-bd16-6dd95a6adc1a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="XmlReader.cpp">
@@ -332,6 +335,15 @@
     </ClCompile>
     <ClCompile Include="ConfigurationManager.cpp">
       <Filter>Framework\Configuration</Filter>
+    </ClCompile>
+    <ClCompile Include="UIMenu.cpp">
+      <Filter>Framework\Graphic\Menus</Filter>
+    </ClCompile>
+    <ClCompile Include="UIElement.cpp">
+      <Filter>Framework\Graphic\Menus</Filter>
+    </ClCompile>
+    <ClCompile Include="UIButton.cpp">
+      <Filter>Framework\Graphic\Menus</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -604,6 +616,15 @@
     </ClInclude>
     <ClInclude Include="ConfigurationManager.h">
       <Filter>Framework\Configuration</Filter>
+    </ClInclude>
+    <ClInclude Include="UIMenu.h">
+      <Filter>Framework\Graphic\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="UIElement.h">
+      <Filter>Framework\Graphic\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="UIButton.h">
+      <Filter>Framework\Graphic\Menus</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
