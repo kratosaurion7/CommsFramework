@@ -21,13 +21,17 @@
 
 
 #include <ConfigurationManager.h>
+#include "SimpleMenu.h"
 
 int main()
 {
-    ConfigurationManager man = ConfigurationManager();
-    man.LoadConfig();
+    
+
 
     FantasyGame* game = new FantasyGame();
+
+    SimpleMenu* mnu = new SimpleMenu(game->Engine);
+
 
     game->Init();
     

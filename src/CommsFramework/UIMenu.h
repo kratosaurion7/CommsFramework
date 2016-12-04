@@ -1,28 +1,42 @@
 #pragma once
-#include "PointerList.h"
 
 class UIElement;
 class MouseClickInfo;
+class FPosition;
+class GameEngine;
+class BaseSprite;
+
+#include "PointerList.h"
+#include "FRectangle.h"
+
 
 class UIMenu
 {
 public:
-    UIMenu();
+    UIMenu(GameEngine* engine);
     ~UIMenu();
+
+    FPosition* MousePosition; // Relative to the 0,0 of the UIMenu.
+
+    FRectangle MenuArea;
+
 
     virtual void Show();
     virtual void Hide();
 
     virtual void Update(MouseClickInfo* clickInfo);
 
-    FPosition* MousePosition; // Relative to the 0,0 of the UIMenu.
 
 protected:
+    GameEngine* Engine;
+
 
     void AddElement(UIElement* newElement);
     void RemoveElement(UIElement* element);
 
+    void RegisterBackgroundImageAndSetSize(BaseSprite* sprite);
 private:
+    BaseSprite* BackgroundImage;
 
     PointerList<UIElement*>* Elements;
 };

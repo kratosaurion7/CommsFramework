@@ -1,17 +1,17 @@
 #include "UIMenu.h"
 
-
-//class UIElement;
-//class BaseGraphicEngine;
-//class FPosition;
-
 #include "UIElement.h"
 #include "FPosition.h"
+#include "BaseSprite.h"
 
 
-UIMenu::UIMenu()
+UIMenu::UIMenu(GameEngine* engine)
 {
+    this->Engine = engine;
+
     Elements = new PointerList<UIElement*>();
+
+    this->MenuArea.Set(0, 0, 0, 0);
 }
 
 
@@ -23,6 +23,8 @@ UIMenu::~UIMenu()
 
 void UIMenu::Show()
 {
+    this->BackgroundImage->Show(true);
+
     auto it = ITBEGIN(Elements);
     while (it != ITEND(Elements))
     {
@@ -37,6 +39,8 @@ void UIMenu::Show()
 
 void UIMenu::Hide()
 {
+    this->BackgroundImage->Show(false);
+
     auto it = ITBEGIN(Elements);
     while (it != ITEND(Elements))
     {
@@ -70,4 +74,14 @@ void UIMenu::AddElement(UIElement* newElement)
 void UIMenu::RemoveElement(UIElement* element)
 {
     Elements->RemoveObject(element);
+}
+
+void UIMenu::RegisterBackgroundImageAndSetSize(BaseSprite* sprite)
+{
+    if (sprite != NULL)
+    {
+        this->BackgroundImage = sprite;
+
+        this->MenuArea.Set(0, 0, sprite->GetWidth(), sprite->GetHeight());
+    }
 }

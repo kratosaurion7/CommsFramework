@@ -60,6 +60,9 @@
     <ClCompile Include="MapXmlStructs.cpp">
       <Filter>Map\Structures</Filter>
     </ClCompile>
+    <ClCompile Include="SimpleMenu.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FantasyGame.h">
@@ -88,6 +91,9 @@
     </ClInclude>
     <ClInclude Include="MapXmlStructs.h">
       <Filter>Map\Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleMenu.h">
+      <Filter>Menu</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
