@@ -73,6 +73,8 @@ public:
     static BaseKeyboard* Keyboard;
     static BaseMouse* Mouse;
 
+    MouseClickInfo* FrameClickInfo;
+
     static GameEngine* GetInstance();
 
     RandomGen* Rng;
@@ -133,12 +135,12 @@ public:
     PointerList<GameRule*>* GameRules;
 
     void ShowEngineDialog(std::string engineMessageForDialog);
+    
 private:
     static GameEngine* _globalInstance; // Ugh, TODO CHANGE STATIC TO SOMETHING NOT BULLSHIT
 
     void FlagClickedSprites();
     void RemoveSpriteClickedFlag();
-    MouseClickInfo* FrameClickInfo;
 
     void DoEventLoop();
 
