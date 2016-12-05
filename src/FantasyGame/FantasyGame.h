@@ -17,6 +17,7 @@ class Player;
 class PlayerCamera;
 
 class CheatMenu;
+class SimpleMenu;
 
 #include <Vectors.h>
 #include <string>
@@ -50,6 +51,9 @@ public:
 
     virtual void Update();
     
+    // TEST
+    SimpleMenu* TestMenu;
+
 private:
 
     // Fill up the settings repository with general settings

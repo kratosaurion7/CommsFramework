@@ -30,7 +30,6 @@ int main()
 
     FantasyGame* game = new FantasyGame();
 
-    SimpleMenu* mnu = new SimpleMenu(game->Engine);
 
 
     game->Init();

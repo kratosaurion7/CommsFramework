@@ -20,6 +20,9 @@
 #include <QuickWindow.h>
 #include <PathLoader.h>
 #include <Viewport.h>
+#include <MouseClickInfo.h>
+
+#include "SimpleMenu.h"
 
 #include "ProgDef.h"
 #include "World.h"
@@ -179,6 +182,8 @@ void FantasyGame::InitGame()
 
     Engine->AttachActor(MainCamera);
 
+    TestMenu = new SimpleMenu(Engine);
+    TestMenu->Hide();
 }
 
 void FantasyGame::Start()
@@ -200,6 +205,11 @@ void FantasyGame::Play()
 
 void FantasyGame::Update()
 {
+    // TODO : Translate the clickInfo to the origin of each UI element
+    MouseClickInfo* ClickInfo = Engine->FrameClickInfo;
+
+    TestMenu->Update(ClickInfo);
+
     if (this->Engine->Keyboard->IsKeyClicked(Key::Q))
     {
         RandomGen rng = RandomGen();
@@ -247,14 +257,16 @@ void FantasyGame::Update()
 
     if (this->Engine->Keyboard->IsKeyClicked(Key::Space))
     {
-        if (DebugCheatsMenu->BackPlate->IsVisible())
-        {
-            DebugCheatsMenu->Hide();
-        }
-        else
-        {
-            DebugCheatsMenu->Show();
-        }
+        TestMenu->Show();
+
+        //if (DebugCheatsMenu->BackPlate->IsVisible())
+        //{
+        //    DebugCheatsMenu->Hide();
+        //}
+        //else
+        //{
+        //    DebugCheatsMenu->Show();
+        //}
     }
 
     Engine->Graphics->Viewport->X = MainCamera->CameraFieldOfView->Left;
