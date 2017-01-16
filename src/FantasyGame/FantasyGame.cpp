@@ -257,16 +257,14 @@ void FantasyGame::Update()
 
     if (this->Engine->Keyboard->IsKeyClicked(Key::Space))
     {
-        TestMenu->Show();
-
-        //if (DebugCheatsMenu->BackPlate->IsVisible())
-        //{
-        //    DebugCheatsMenu->Hide();
-        //}
-        //else
-        //{
-        //    DebugCheatsMenu->Show();
-        //}
+        if (TestMenu->Visible)
+        {
+            TestMenu->Hide();
+        }
+        else
+        {
+            TestMenu->Show();
+        }
     }
 
     Engine->Graphics->Viewport->X = MainCamera->CameraFieldOfView->Left;

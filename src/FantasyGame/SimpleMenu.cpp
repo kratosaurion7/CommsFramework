@@ -14,6 +14,7 @@ SimpleMenu::SimpleMenu(GameEngine* engine) : UIMenu::UIMenu(engine)
     BaseSprite* btnOnePushedState = engine->CreateSprite("4", "Assets\\Menu\\Button_Pushed.png");
 
     BaseSprite* menuBackground = engine->CreateSprite("5", "Assets\\Menu\\MenuBackground.png");
+    menuBackground->Coordinate = DrawObject::GAME_ABSOLUTE;
 
     ButtonOne = new UIButton(btnOneActiveState);
     MenuBackground = menuBackground;

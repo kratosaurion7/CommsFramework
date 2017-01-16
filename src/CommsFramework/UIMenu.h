@@ -26,6 +26,7 @@ public:
 
     virtual void Update(MouseClickInfo* clickInfo);
 
+    bool Visible;
 
 protected:
     GameEngine* Engine;

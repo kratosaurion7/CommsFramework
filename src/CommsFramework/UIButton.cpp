@@ -32,6 +32,9 @@ void UIButton::Reset()
 
 void UIButton::Update(MouseClickInfo* mouseInfo)
 {
+    if (mouseInfo == NULL)
+        return;
+
     switch (CurrentState)
     {
         case UIButton::ACTIVE:

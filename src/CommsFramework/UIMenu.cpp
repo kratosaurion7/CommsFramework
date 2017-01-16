@@ -12,6 +12,8 @@ UIMenu::UIMenu(GameEngine* engine)
     Elements = new PointerList<UIElement*>();
 
     this->MenuArea.Set(0, 0, 0, 0);
+
+    Visible = false;
 }
 
 
@@ -35,6 +37,7 @@ void UIMenu::Show()
         it++;
     }
 
+    Visible = true;
 }
 
 void UIMenu::Hide()
@@ -51,6 +54,7 @@ void UIMenu::Hide()
         it++;
     }
 
+    Visible = false;
 }
 
 void UIMenu::Update(MouseClickInfo* clickInfo)
