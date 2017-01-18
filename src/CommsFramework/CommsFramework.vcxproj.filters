@@ -106,9 +106,6 @@
     <Filter Include="Framework\Game\Saving">
       <UniqueIdentifier>{4a803d51-669c-4f37-98b4-5452b27a23ae}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Framework\Engine\Buttons">
-      <UniqueIdentifier>{468c2ea6-fbc8-4fe4-aedb-25e4d9b89757}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Framework\Graphic\Spritesheet">
       <UniqueIdentifier>{c3cf3568-4c37-4e01-9977-a497ae7d2418}</UniqueIdentifier>
     </Filter>
@@ -285,9 +282,6 @@
     <ClCompile Include="GenType.cpp">
       <Filter>Framework\Types</Filter>
     </ClCompile>
-    <ClCompile Include="BaseButton.cpp">
-      <Filter>Framework\Engine\Buttons</Filter>
-    </ClCompile>
     <ClCompile Include="Spritesheet.cpp">
       <Filter>Framework\Graphic\Spritesheet</Filter>
     </ClCompile>
@@ -324,14 +318,8 @@
     <ClCompile Include="TextureManager.cpp">
       <Filter>Framework\Graphic</Filter>
     </ClCompile>
-    <ClCompile Include="Viewport.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="BaseGraphicEngine.cpp">
       <Filter>Framework\Graphic\Base Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="Primitives.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ConfigurationManager.cpp">
       <Filter>Framework\Configuration</Filter>
@@ -344,6 +332,12 @@
     </ClCompile>
     <ClCompile Include="UIButton.cpp">
       <Filter>Framework\Graphic\Menus</Filter>
+    </ClCompile>
+    <ClCompile Include="Viewport.cpp">
+      <Filter>Framework\Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="Primitives.cpp">
+      <Filter>Framework\Graphic\PrimitiveDraws</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -569,9 +563,6 @@
     <ClInclude Include="GenType.h">
       <Filter>Framework\Types</Filter>
     </ClInclude>
-    <ClInclude Include="BaseButton.h">
-      <Filter>Framework\Engine\Buttons</Filter>
-    </ClInclude>
     <ClInclude Include="Spritesheet.h">
       <Filter>Framework\Graphic\Spritesheet</Filter>
     </ClInclude>
@@ -605,9 +596,6 @@
     <ClInclude Include="TextureManager.h">
       <Filter>Framework\Graphic</Filter>
     </ClInclude>
-    <ClInclude Include="Viewport.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Primitives.h">
       <Filter>Framework\Graphic\PrimitiveDraws</Filter>
     </ClInclude>
@@ -625,6 +613,9 @@
     </ClInclude>
     <ClInclude Include="UIButton.h">
       <Filter>Framework\Graphic\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="Viewport.h">
+      <Filter>Framework\Graphic</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

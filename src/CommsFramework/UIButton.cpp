@@ -6,6 +6,12 @@
 UIButton::UIButton(BaseSprite * activeSprite, BaseSprite * disabledSprite, BaseSprite * pushedSprite, BaseSprite * hoverSprite)
 {
     this->ActiveButtonSprite = activeSprite;
+
+    if (activeSprite != NULL)
+    {
+        ElementSprites->Add(activeSprite);
+    }
+
     this->DisabledButtonSprite = disabledSprite;
     this->PushedButtonSprite = pushedSprite;
     this->HoverButtonSprite = hoverSprite;

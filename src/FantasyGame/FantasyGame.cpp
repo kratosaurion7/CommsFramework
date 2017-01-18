@@ -255,7 +255,7 @@ void FantasyGame::Update()
         }
     }
 
-    if (this->Engine->Keyboard->IsKeyClicked(Key::Space))
+    if (this->Engine->Keyboard->IsKeyClicked(Key::I))
     {
         if (TestMenu->Visible)
         {
