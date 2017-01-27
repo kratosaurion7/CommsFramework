@@ -7,13 +7,20 @@ using namespace rapidxml;
 XmlReader::XmlReader()
 {
     rootDoc = new xml_document<>();
+	rootNode = NULL;
+	xmlFile = NULL;
 }
 
 XmlReader::~XmlReader()
 {
-    delete(rootDoc);
-    delete(rootNode);
-    delete(xmlFile);
+	if(rootDoc != NULL)
+		delete(rootDoc);
+	
+	if(rootNode != NULL)
+		delete(rootNode);
+
+	if(xmlFile != NULL)
+		delete(xmlFile);
 }
 
 void XmlReader::LoadFile(std::string filePath)
@@ -31,6 +38,11 @@ void XmlReader::LoadFile(std::string filePath)
 
         rootNode = new XmlNode(rootDoc->first_node());
     }
+}
+
+bool XmlReader::IsValid()
+{
+	return this->xmlFile != NULL;
 }
 
 XmlNode * XmlReader::GetNode(std::string nodeName)

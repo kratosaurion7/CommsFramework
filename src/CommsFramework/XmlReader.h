@@ -22,6 +22,8 @@ public:
 
     void LoadFile(std::string filePath);
 
+	bool IsValid();
+
     XmlNode* GetNode(std::string nodeName);
     PointerList<XmlNode*>* GetNodes(std::string nodeName);
 

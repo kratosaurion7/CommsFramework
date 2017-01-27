@@ -19,6 +19,11 @@ void ConfigurationManager::LoadConfig()
     XmlReader settingsReader = XmlReader();
     settingsReader.LoadFile(defaultConfigFileName);
 
+	if (settingsReader.IsValid() == false)
+	{
+		return; // No config present
+	}
+
     this->ExtractConfigFromFile(&settingsReader, this->SettingsList);
 }
 
