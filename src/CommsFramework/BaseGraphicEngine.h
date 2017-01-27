@@ -63,6 +63,8 @@ public:
     virtual BaseFont* CreateFontInstance() = 0;
     virtual BaseText* CreateTextInstance() = 0;
 
+    virtual BaseTexture* CreateTexture(std::string texturePath);
+
 	// Primitive drawing methods9
 	virtual void SetPrimitiveDrawParameters(uint32_t color, int zIndex);
 

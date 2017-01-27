@@ -22,7 +22,8 @@ Spritesheet::Spritesheet(std::string configFilePath, BaseGraphicEngine* engine)
     this->spritesheetHeight = std::atoi(node->GetAttribute("height").AttributeValue);
     this->spritesheetWidth = std::atoi(node->GetAttribute("width").AttributeValue);
 
-    this->spritesheetTexture = engine->TextureRepo->LoadFromDisk("assets//" + path); // TODO : Asset root is not prepended in the texture packed config file
+    this->spritesheetTexture = engine->CreateTextureInstance();
+    this->spritesheetTexture->Load("assets//" + path);
 
     this->Graphics = engine;
     this->SpritesheetFilePath = path;
@@ -35,7 +36,9 @@ Spritesheet::Spritesheet(std::string spritesheetPath, std::string configFilePath
     assert(configFilePath != "");
     assert(engine != NULL);
 
-    spritesheetTexture = engine->TextureRepo->Create(spritesheetPath);
+    //spritesheetTexture = engine->TextureRepo->Create(spritesheetPath);
+    spritesheetTexture = engine->CreateTextureInstance();
+    spritesheetTexture->Load(spritesheetPath);
 
     this->Graphics = engine;
     this->SpritesheetFilePath = spritesheetPath;

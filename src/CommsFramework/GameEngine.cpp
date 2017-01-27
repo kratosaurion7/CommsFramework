@@ -279,10 +279,10 @@ BaseSprite* GameEngine::CreateSprite(std::string spriteName, std::string spriteT
     BaseSprite* sprt = this->Graphics->CreateSpriteInstance();
     sprt->Ident = spriteName;
 
-    //BaseTexture* tex = this->Graphics->TextureRepo->Create(spriteTexturePath);
-    BaseTexture* tex = this->Graphics->TextureRepo->LoadFromDisk(spriteTexturePath);
+    BaseTexture* tex = this->Graphics->CreateTextureInstance();
+    tex->Load(spriteTexturePath);
 
-    
+    this->Graphics->TextureRepo->InsertTexture(tex);
 
     if(tex != NULL)
         sprt->SetTexture(tex);

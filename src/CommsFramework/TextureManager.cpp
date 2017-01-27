@@ -4,12 +4,8 @@
 #include "BaseTexture.h"
 #include "IOUtilities.h"
 
-TextureManager::TextureManager(BaseGraphicEngine* graphicEngine)
+TextureManager::TextureManager()
 {
-	EngineRef = graphicEngine;
-	//TexturesList = PointerList<BaseTexture*>();
-
-    int i = 0;
 }
 
 TextureManager::~TextureManager()
@@ -17,64 +13,63 @@ TextureManager::~TextureManager()
 	TexturesList.Release();
 }
 
-BaseTexture* TextureManager::Create(std::string textureName)
+void TextureManager::InsertTexture(BaseTexture * newTexture)
 {
-	BaseTexture* tex = EngineRef->CreateTextureInstance();
-
-	tex->TextureName = textureName;
-
-	TexturesList.Add(tex);
-
-	return tex;
+    TexturesList.Add(newTexture);
 }
 
-void TextureManager::AddTexture(BaseTexture* addedTexture)
+BaseTexture* TextureManager::GetTexture(BaseTexture * checkedTexture)
 {
-    auto res = TexturesList.Contains([addedTexture](BaseTexture* tex) { return tex->TextureName == addedTexture->TextureName; });
+    auto it = ITBEGIN((&TexturesList));
+    while (it != ITEND((&TexturesList)))
+    {
+        BaseTexture* tex = *it;
 
-    if (res == false)
-    {
-        this->TexturesList.Add(addedTexture);
+        if (tex == checkedTexture)
+        {
+            return tex;
+        }
+
+        it++;
     }
-    else
-    {
-        assert(true);
-    }
+
+    return NULL;
 }
 
-BaseTexture* TextureManager::LoadFromDisk(std::string assetPath, std::string textureName)
+BaseTexture* TextureManager::GetTexture(std::string texturePath)
 {
-    BaseTexture* tex = TexturesList.Single([assetPath](BaseTexture* tex) { return tex->TexturePath == assetPath; });
-
-    // Texture already in repo
-    if (tex != NULL)
+    auto it = ITBEGIN((&TexturesList));
+    while (it != ITEND((&TexturesList)))
     {
-        return tex;
+        BaseTexture* tex = *it;
+
+        if (tex->TexturePath == texturePath)
+        {
+            return tex;
+        }
+
+        it++;
     }
 
-    tex = EngineRef->CreateTextureInstance();
-    tex->Load(assetPath);
-
-    tex->TexturePath = assetPath;
-
-	// If the texture name is a blank string, use the Name part of the filename as texture name
-	if (textureName == "")
-	{
-		tex->TextureName = GetFileName(assetPath);
-	}
-	else
-	{
-		tex->TextureName = textureName;
-	}
-
-	TexturesList.Add(tex);
-
-	return tex;
+    return NULL;
 }
 
-BaseTexture* TextureManager::GetTexture(std::string textureName)
+BaseTexture* TextureManager::FindTexture(std::string textureName)
 {
-	return TexturesList.Single([textureName](BaseTexture* texture) { return texture->TextureName == textureName; });
+    auto it = ITBEGIN((&TexturesList));
+    while (it != ITEND((&TexturesList)))
+    {
+        BaseTexture* tex = *it;
+
+        if (tex->TextureName == textureName)
+        {
+            return tex;
+        }
+
+        it++;
+    }
+
+    return NULL;
 }
 
 void TextureManager::FlushTexture(BaseTexture* texture)

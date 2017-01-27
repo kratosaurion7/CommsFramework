@@ -35,7 +35,7 @@
 SDLGraphicEngine::SDLGraphicEngine()
 {
     mainWindow = NULL;
-    TextureRepo = new TextureManager(this);
+    TextureRepo = new TextureManager();
     Viewport = new ViewportRect();
     drawables = new PointerList<DrawObject*>();
     Spritesheets = new PointerList<Spritesheet*>();
@@ -170,7 +170,7 @@ void SDLGraphicEngine::AddSpritesheet(Spritesheet* spritesheet)
     {
         BaseTexture* tex = *it;
         
-        this->TextureRepo->AddTexture(tex);
+        this->TextureRepo->InsertTexture(tex);
 
         it++;
     }

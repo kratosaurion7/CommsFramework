@@ -145,7 +145,7 @@ void BaseSprite::SetTexture(std::string newTexturePath)
 {
     assert(newTexturePath != "");
 
-    BaseTexture* tex = Engine->TextureRepo->LoadFromDisk(newTexturePath);
+    BaseTexture* tex = Engine->CreateTexture(newTexturePath);
 
     if (tex == NULL)
         return;

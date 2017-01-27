@@ -6,6 +6,19 @@ BaseGraphicEngine::BaseGraphicEngine()
 {
 }
 
+BaseTexture* BaseGraphicEngine::CreateTexture(std::string texturePath)
+{
+    BaseTexture* newTexture = this->TextureRepo->GetTexture(texturePath);
+
+    if (newTexture == NULL)
+    {
+        newTexture = this->CreateTextureInstance();
+        newTexture->Load(texturePath);
+    }
+
+    return newTexture;
+}
+
 void BaseGraphicEngine::SetPrimitiveDrawParameters(uint32_t color, int zIndex)
 {
 	primitiveDrawColor = color;

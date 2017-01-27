@@ -19,7 +19,7 @@ SFMLGraphicEngine::SFMLGraphicEngine()
 {
     MainWindow = NULL;
     isRunning = false;
-    TextureRepo = new TextureManager(this);
+    TextureRepo = new TextureManager();
     Sprites = new PointerList<DrawObject*>();
     startParams = NULL;
     backgroundColor = sf::Color();
@@ -64,28 +64,30 @@ BaseSprite* SFMLGraphicEngine::CreateSprite(std::string identifier)
     return spr;
 }
 
-BaseTexture * SFMLGraphicEngine::CreateTexture()
+BaseTexture* SFMLGraphicEngine::CreateTexture()
 {
     DTexture* tex = new DTexture();
 
     return tex;
 }
 
-BaseTexture * SFMLGraphicEngine::CreateTexture(std::string texturePath)
+BaseTexture* SFMLGraphicEngine::CreateTexture(std::string texturePath)
 {
-    BaseTexture* tex = this->TextureRepo->Create(texturePath);
+    return NULL;
+
+    BaseTexture* tex = this->CreateTexture(texturePath);
 
     return tex;
 }
 
-BaseFont * SFMLGraphicEngine::CreateFont()
+BaseFont* SFMLGraphicEngine::CreateFont()
 {
     SFMLFont* font = new SFMLFont();
 
     return font;
 }
 
-BaseText * SFMLGraphicEngine::CreateText()
+BaseText* SFMLGraphicEngine::CreateText()
 {
     SFMLText* text = new SFMLText();
 

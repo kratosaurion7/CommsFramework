@@ -27,6 +27,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestApp", "TestApp\TestApp.
 		{BB1C3245-05C5-4512-93DB-E12D2ECD26E4} = {BB1C3245-05C5-4512-93DB-E12D2ECD26E4}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CommsFramework.UnitTests", "UnitTests\CommsFramework.UnitTests\CommsFramework.UnitTests.vcxproj", "{2E9AA22D-CD3E-46FC-8B6D-DF1CAEAB6C7A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{8F717AFF-4373-42A0-AF16-6A5718501042}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -109,8 +113,23 @@ Global
 		{01988E42-D81B-4D8A-A667-7DAE760B6064}.Release|Win32.Build.0 = Release|Win32
 		{01988E42-D81B-4D8A-A667-7DAE760B6064}.Release|x64.ActiveCfg = Release|x64
 		{01988E42-D81B-4D8A-A667-7DAE760B6064}.Release|x64.Build.0 = Release|x64
+		{2E9AA22D-CD3E-46FC-8B6D-DF1CAEAB6C7A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{2E9AA22D-CD3E-46FC-8B6D-DF1CAEAB6C7A}.Debug|Win32.Build.0 = Debug|Win32
+		{2E9AA22D-CD3E-46FC-8B6D-DF1CAEAB6C7A}.Debug|x64.ActiveCfg = Debug|x64
+		{2E9AA22D-CD3E-46FC-8B6D-DF1CAEAB6C7A}.Debug|x64.Build.0 = Debug|x64
+		{2E9AA22D-CD3E-46FC-8B6D-DF1CAEAB6C7A}.Debug-Static|Win32.ActiveCfg = Debug|Win32
+		{2E9AA22D-CD3E-46FC-8B6D-DF1CAEAB6C7A}.Debug-Static|Win32.Build.0 = Debug|Win32
+		{2E9AA22D-CD3E-46FC-8B6D-DF1CAEAB6C7A}.Debug-Static|x64.ActiveCfg = Debug|x64
+		{2E9AA22D-CD3E-46FC-8B6D-DF1CAEAB6C7A}.Debug-Static|x64.Build.0 = Debug|x64
+		{2E9AA22D-CD3E-46FC-8B6D-DF1CAEAB6C7A}.Release|Win32.ActiveCfg = Release|Win32
+		{2E9AA22D-CD3E-46FC-8B6D-DF1CAEAB6C7A}.Release|Win32.Build.0 = Release|Win32
+		{2E9AA22D-CD3E-46FC-8B6D-DF1CAEAB6C7A}.Release|x64.ActiveCfg = Release|x64
+		{2E9AA22D-CD3E-46FC-8B6D-DF1CAEAB6C7A}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2E9AA22D-CD3E-46FC-8B6D-DF1CAEAB6C7A} = {8F717AFF-4373-42A0-AF16-6A5718501042}
 	EndGlobalSection
 EndGlobal

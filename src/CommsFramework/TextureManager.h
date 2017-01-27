@@ -4,27 +4,30 @@
 
 #include "PointerList.h"
 
-class BaseGraphicEngine;
 class BaseTexture;
 
+/*
+  TextureManager 
+  - Add existing textures
+  - Load textures
+  - Return existing texture if it exists before loading
+*/
 class TextureManager
 {
 public:
-	TextureManager(BaseGraphicEngine* graphicEngine);
+	TextureManager();
 	~TextureManager();
 
-	BaseTexture* Create(std::string textureName);
+    void InsertTexture(BaseTexture* newTexture);
 
-    void AddTexture(BaseTexture* addedTexture);
+    BaseTexture* GetTexture(BaseTexture* checkedTexture);
+    BaseTexture* GetTexture(std::string texturePath);
 
-	BaseTexture* LoadFromDisk(std::string assetPath, std::string textureName = "");
-
-	BaseTexture* GetTexture(std::string textureName);
+    BaseTexture* FindTexture(std::string textureName);
 
 	void FlushTexture(BaseTexture* texture);
 
 private:
-	BaseGraphicEngine* EngineRef;
 
 	PointerList<BaseTexture*> TexturesList;
 };
