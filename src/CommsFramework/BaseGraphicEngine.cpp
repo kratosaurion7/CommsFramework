@@ -40,13 +40,6 @@ BaseTexture* BaseGraphicEngine::CreateTexture(std::string textureName)
 
 		this->TextureRepo->InsertTexture(newTexture);
     }
-    else
-    {
-        if (newTexture->TextureName != textureName)
-        {
-            fprintf(stderr, "Trying to load a cached texture with a new name.");
-        }
-    }
 
     return newTexture;
 }
