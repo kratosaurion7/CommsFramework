@@ -9,7 +9,7 @@
 
 CheatMenu::CheatMenu()
 {
-	this->BackPlateTexture = Engine->Graphics->CreateTextureInstance();
+	this->BackPlateTexture = Engine->Graphics->CreateTexture();
 	this->BackPlateTexture->Initalize(this->Engine->GameAreaSize->Width, this->Engine->GameAreaSize->Width);
 	this->BackPlateTexture->SetSolidColor(0x77000000);
 

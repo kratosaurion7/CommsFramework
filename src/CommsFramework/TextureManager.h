@@ -6,12 +6,6 @@
 
 class BaseTexture;
 
-/*
-  TextureManager 
-  - Add existing textures
-  - Load textures
-  - Return existing texture if it exists before loading
-*/
 class TextureManager
 {
 public:

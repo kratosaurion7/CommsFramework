@@ -409,7 +409,7 @@ void SDLGraphicEngine::ProcessDraw(SDL_Window* targetWindow)
             {
                 SDLDrawable* drawImpl = dynamic_cast<SDLDrawable*>(target);
 
-                if (target->Ident == "ButtonTest")
+                if (target->Ident != "")
                 {
                     int i = 0;
                 }

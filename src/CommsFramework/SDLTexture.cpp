@@ -25,7 +25,7 @@ SDL_Texture* SDLTexture::GetMissingTextureTexture(BaseGraphicEngine* engine)
 {
     if (SDLTexture::MissingTextureSingleton == NULL)
     {
-        SDLTexture* tex = (SDLTexture*)engine->CreateTextureInstance();
+        SDLTexture* tex = (SDLTexture*)engine->CreateTexture("Missing_Texture");
 
         tex->Load("Assets/engine/missing_texture.png");
         
@@ -141,7 +141,7 @@ BaseTexture* SDLTexture::GetSubTexture(FRectangle rec)
         return NULL;
     }
 
-    newTexture = (SDLTexture*)this->Engine->CreateTextureInstance();
+    newTexture = (SDLTexture*)this->Engine->CreateTexture();
     newTexture->LoadFromSurface(subTextureSurface);
 
     return newTexture;

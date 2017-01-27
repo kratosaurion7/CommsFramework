@@ -8,6 +8,7 @@
 #include "BaseGraphicEngine.h"
 #include "GameEngine.h"
 #include "Utilities.h"
+#include "IOUtilities.h"
 
 #include "BaseSprite.h"
 
@@ -145,7 +146,9 @@ void BaseSprite::SetTexture(std::string newTexturePath)
 {
     assert(newTexturePath != "");
 
-    BaseTexture* tex = Engine->CreateTexture(newTexturePath);
+    std::string assetNameFromPath = GetFileName(newTexturePath);
+
+    BaseTexture* tex = Engine->CreateTexture(assetNameFromPath, newTexturePath);
 
     if (tex == NULL)
         return;
@@ -158,6 +161,11 @@ void BaseSprite::SetTexture(std::string newTexturePath)
 
 void BaseSprite::SetTextureName(std::string textureName)
 {
+    if (textureName == "")
+    {
+        int i = 0;
+    }
+
     this->RequestedTextureName = textureName;
     this->HasTextureApplied = false;
 }

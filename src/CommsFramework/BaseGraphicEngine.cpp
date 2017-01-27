@@ -6,7 +6,48 @@ BaseGraphicEngine::BaseGraphicEngine()
 {
 }
 
-BaseTexture* BaseGraphicEngine::CreateTexture(std::string texturePath)
+BaseSprite * BaseGraphicEngine::CreateSprite()
+{
+    return CreateSpriteInstance();
+}
+
+BaseFont * BaseGraphicEngine::CreateFont()
+{
+    return CreateFontInstance();
+}
+
+BaseText * BaseGraphicEngine::CreateText()
+{
+    return CreateTextInstance();
+}
+
+BaseTexture * BaseGraphicEngine::CreateTexture()
+{
+    return CreateTextureInstance();
+}
+
+BaseTexture* BaseGraphicEngine::CreateTexture(std::string textureName)
+{
+    BaseTexture* newTexture = this->TextureRepo->FindTexture(textureName);
+
+    if (newTexture == NULL)
+    {
+        newTexture = this->CreateTextureInstance();
+        newTexture->TextureName = textureName;
+    }
+    else
+    {
+        if (newTexture->TextureName != textureName)
+        {
+            fprintf(stderr, "Trying to load a cached texture with a new name.");
+        }
+    }
+
+
+    return newTexture;
+}
+
+BaseTexture* BaseGraphicEngine::CreateTexture(std::string textureName, std::string texturePath)
 {
     BaseTexture* newTexture = this->TextureRepo->GetTexture(texturePath);
 
@@ -14,6 +55,14 @@ BaseTexture* BaseGraphicEngine::CreateTexture(std::string texturePath)
     {
         newTexture = this->CreateTextureInstance();
         newTexture->Load(texturePath);
+        newTexture->TextureName = textureName;
+    }
+    else
+    {
+        if (newTexture->TextureName != textureName)
+        {
+            fprintf(stderr, "Trying to load a cached texture with a new name.");
+        }
     }
 
     return newTexture;

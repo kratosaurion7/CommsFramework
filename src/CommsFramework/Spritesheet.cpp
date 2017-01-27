@@ -22,7 +22,7 @@ Spritesheet::Spritesheet(std::string configFilePath, BaseGraphicEngine* engine)
     this->spritesheetHeight = std::atoi(node->GetAttribute("height").AttributeValue);
     this->spritesheetWidth = std::atoi(node->GetAttribute("width").AttributeValue);
 
-    this->spritesheetTexture = engine->CreateTextureInstance();
+    this->spritesheetTexture = engine->CreateTexture();
     this->spritesheetTexture->Load("assets//" + path);
 
     this->Graphics = engine;
@@ -37,7 +37,7 @@ Spritesheet::Spritesheet(std::string spritesheetPath, std::string configFilePath
     assert(engine != NULL);
 
     //spritesheetTexture = engine->TextureRepo->Create(spritesheetPath);
-    spritesheetTexture = engine->CreateTextureInstance();
+    spritesheetTexture = engine->CreateTexture();
     spritesheetTexture->Load(spritesheetPath);
 
     this->Graphics = engine;
@@ -74,7 +74,7 @@ PointerList<BaseSprite*>* Spritesheet::ExtractSprites()
 
         FRectangle subRec = FRectangle(spriteSubTextureX, spriteSubTextureY, spriteSubTextureW, spriteSubTextureH);
 
-        BaseSprite* newSprite = Graphics->CreateSpriteInstance();
+        BaseSprite* newSprite = Graphics->CreateSprite();
         newSprite->Ident = spriteName;
 
         BaseTexture* newSpriteTexture = spritesheetTexture->GetSubTexture(subRec);

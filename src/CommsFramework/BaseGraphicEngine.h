@@ -57,13 +57,14 @@ public:
     virtual PointerList<DrawObject*>* GetDrawableList() = 0;
     virtual DrawObject* GetDrawableObject(std::string identifier) = 0;
 
-	// Drawable objects creation methods
-    virtual BaseSprite* CreateSpriteInstance() = 0;
-    virtual BaseTexture* CreateTextureInstance() = 0;
-    virtual BaseFont* CreateFontInstance() = 0;
-    virtual BaseText* CreateTextInstance() = 0;
+	
+    virtual BaseSprite* CreateSprite();
+    virtual BaseFont* CreateFont();
+    virtual BaseText* CreateText();
 
-    virtual BaseTexture* CreateTexture(std::string texturePath);
+    virtual BaseTexture* CreateTexture();
+    virtual BaseTexture* CreateTexture(std::string textureName);
+    virtual BaseTexture* CreateTexture(std::string textureName, std::string texturePath);
 
 	// Primitive drawing methods9
 	virtual void SetPrimitiveDrawParameters(uint32_t color, int zIndex);
@@ -109,6 +110,11 @@ public:
     virtual void ReorderSprite(DrawObject* first, DrawObject* second) = 0;
 
 protected:
+    virtual BaseSprite* CreateSpriteInstance() = 0;
+    virtual BaseTexture* CreateTextureInstance() = 0;
+    virtual BaseFont* CreateFontInstance() = 0;
+    virtual BaseText* CreateTextInstance() = 0;
+
 	int primitiveDrawZIndex = 1;
 	uint32_t primitiveDrawColor = 0xFF000000;
 

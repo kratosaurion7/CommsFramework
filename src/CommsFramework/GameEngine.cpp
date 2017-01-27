@@ -265,7 +265,7 @@ BaseSprite * GameEngine::CreateSprite()
 
 BaseSprite* GameEngine::CreateSprite(std::string spriteName)
 {
-    BaseSprite* sprt = this->Graphics->CreateSpriteInstance();
+    BaseSprite* sprt = this->Graphics->CreateSprite();
     sprt->Ident = spriteName;
     
     GameSprites->Add(sprt);
@@ -276,16 +276,17 @@ BaseSprite* GameEngine::CreateSprite(std::string spriteName)
 
 BaseSprite* GameEngine::CreateSprite(std::string spriteName, std::string spriteTexturePath)
 {
-    BaseSprite* sprt = this->Graphics->CreateSpriteInstance();
+    BaseSprite* sprt = this->Graphics->CreateSprite();
     sprt->Ident = spriteName;
 
-    BaseTexture* tex = this->Graphics->CreateTextureInstance();
-    tex->Load(spriteTexturePath);
+    BaseTexture* tex = this->Graphics->CreateTexture(spriteName, spriteTexturePath);
+    //tex->Load(spriteTexturePath);
 
-    this->Graphics->TextureRepo->InsertTexture(tex);
-
-    if(tex != NULL)
+    if (tex != NULL)
+    {
         sprt->SetTexture(tex);
+
+    }
     
 
     GameSprites->Add(sprt);
@@ -302,14 +303,14 @@ void GameEngine::RemoveSprite(BaseSprite* sprite)
 
 BaseTexture* GameEngine::CreateTexture()
 {
-	BaseTexture* texture = this->Graphics->CreateTextureInstance();
+	BaseTexture* texture = this->Graphics->CreateTexture();
 
 	return texture;
 }
 
 BaseFont* GameEngine::CreateFont()
 {
-	BaseFont* newFont = this->Graphics->CreateFontInstance();
+	BaseFont* newFont = this->Graphics->CreateFont();
 
 	return newFont;
 }
@@ -318,7 +319,7 @@ BaseFont* GameEngine::GetGameDefaultFont()
 {
     if (engineDefaultFont == NULL)
     {
-        engineDefaultFont = this->Graphics->CreateFontInstance();
+        engineDefaultFont = this->Graphics->CreateFont();
         engineDefaultFont->LoadFontFile("assets//arial.ttf");
         
 
@@ -334,7 +335,7 @@ BaseFont* GameEngine::GetGameDefaultFont()
 
 BaseText* GameEngine::CreateText(std::string text)
 {
-    BaseText* ret = this->Graphics->CreateTextInstance();
+    BaseText* ret = this->Graphics->CreateText();
     ret->SetText(text);
     ret->SetCharacterSize(36);
     ret->SetColor(0x000000FF);
@@ -348,7 +349,7 @@ BaseText* GameEngine::CreateText(std::string text)
 
 BaseText* GameEngine::CreateText(std::string text, int textSize)
 {
-    BaseText* ret = this->Graphics->CreateTextInstance();
+    BaseText* ret = this->Graphics->CreateText();
     ret->SetText(text);
     ret->SetCharacterSize(textSize);
     ret->SetColor(0x000000FF);
@@ -362,7 +363,7 @@ BaseText* GameEngine::CreateText(std::string text, int textSize)
 
 BaseText* GameEngine::CreateText(std::string text, int textSize, uint32_t textColor)
 {
-    BaseText* ret = this->Graphics->CreateTextInstance();
+    BaseText* ret = this->Graphics->CreateText();
     ret->SetText(text);
     ret->SetCharacterSize(textSize);
     ret->SetColor(textColor);
@@ -376,7 +377,7 @@ BaseText* GameEngine::CreateText(std::string text, int textSize, uint32_t textCo
 
 BaseText* GameEngine::CreateText(std::string text, int textSize, uint32_t textColor, BaseFont* typo)
 {
-    BaseText* ret = this->Graphics->CreateTextInstance();
+    BaseText* ret = this->Graphics->CreateText();
     ret->SetText(text);
     ret->SetCharacterSize(textSize);
     ret->SetColor(textColor);
