@@ -66,7 +66,7 @@ public:
     virtual BaseTexture* CreateTexture(std::string textureName);
     virtual BaseTexture* CreateTexture(std::string textureName, std::string texturePath);
 
-	// Primitive drawing methods9
+	// Primitive drawing methods
 	virtual void SetPrimitiveDrawParameters(uint32_t color, int zIndex);
 
 	virtual void DrawLine(FPosition* pointA, FPosition* pointB);

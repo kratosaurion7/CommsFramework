@@ -172,7 +172,7 @@ void BaseSprite::SetTextureName(std::string textureName)
 
 void BaseSprite::Reload()
 {
-    BaseTexture* tex = this->Engine->TextureRepo->FindTexture(this->RequestedTextureName);
+    BaseTexture* tex = this->Engine->TextureRepo->GetTextureByName(this->RequestedTextureName);
 
     if (tex != NULL)
     {

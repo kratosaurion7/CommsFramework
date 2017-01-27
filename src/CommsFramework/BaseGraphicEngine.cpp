@@ -28,12 +28,17 @@ BaseTexture * BaseGraphicEngine::CreateTexture()
 
 BaseTexture* BaseGraphicEngine::CreateTexture(std::string textureName)
 {
-    BaseTexture* newTexture = this->TextureRepo->FindTexture(textureName);
+	// Tries to find a texture that exists with the same name
+    BaseTexture* newTexture = this->TextureRepo->GetTextureByName(textureName);
 
     if (newTexture == NULL)
     {
+		// If no texture has been found, create a new one and assign it his name so that it can be reloaded later.
+
         newTexture = this->CreateTextureInstance();
         newTexture->TextureName = textureName;
+
+		this->TextureRepo->InsertTexture(newTexture);
     }
     else
     {
@@ -43,19 +48,20 @@ BaseTexture* BaseGraphicEngine::CreateTexture(std::string textureName)
         }
     }
 
-
     return newTexture;
 }
 
 BaseTexture* BaseGraphicEngine::CreateTexture(std::string textureName, std::string texturePath)
 {
-    BaseTexture* newTexture = this->TextureRepo->GetTexture(texturePath);
+    BaseTexture* newTexture = this->TextureRepo->GetTextureByPath(texturePath);
 
     if (newTexture == NULL)
     {
         newTexture = this->CreateTextureInstance();
         newTexture->Load(texturePath);
         newTexture->TextureName = textureName;
+
+		this->TextureRepo->InsertTexture(newTexture);
     }
     else
     {

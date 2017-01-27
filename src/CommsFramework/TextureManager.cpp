@@ -13,13 +13,15 @@ TextureManager::~TextureManager()
 	TexturesList.Release();
 }
 
-void TextureManager::InsertTexture(BaseTexture * newTexture)
+void TextureManager::InsertTexture(BaseTexture* newTexture)
 {
     TexturesList.Add(newTexture);
 }
 
-BaseTexture* TextureManager::GetTexture(BaseTexture * checkedTexture)
+BaseTexture* TextureManager::GetTexture(BaseTexture* checkedTexture)
 {
+	assert(checkedTexture != NULL);
+
     auto it = ITBEGIN((&TexturesList));
     while (it != ITEND((&TexturesList)))
     {
@@ -36,8 +38,11 @@ BaseTexture* TextureManager::GetTexture(BaseTexture * checkedTexture)
     return NULL;
 }
 
-BaseTexture* TextureManager::GetTexture(std::string texturePath)
+BaseTexture* TextureManager::GetTextureByPath(std::string texturePath)
 {
+	if (texturePath == "")
+		return NULL;
+
     auto it = ITBEGIN((&TexturesList));
     while (it != ITEND((&TexturesList)))
     {
@@ -54,8 +59,11 @@ BaseTexture* TextureManager::GetTexture(std::string texturePath)
     return NULL;
 }
 
-BaseTexture* TextureManager::FindTexture(std::string textureName)
+BaseTexture* TextureManager::GetTextureByName(std::string textureName)
 {
+	if (textureName == "")
+		return NULL;
+
     auto it = ITBEGIN((&TexturesList));
     while (it != ITEND((&TexturesList)))
     {
@@ -74,5 +82,7 @@ BaseTexture* TextureManager::FindTexture(std::string textureName)
 
 void TextureManager::FlushTexture(BaseTexture* texture)
 {
+	assert(texture != NULL);
+
 	TexturesList.RemoveObject(texture);
 }

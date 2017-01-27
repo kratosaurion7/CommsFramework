@@ -15,9 +15,8 @@ public:
     void InsertTexture(BaseTexture* newTexture);
 
     BaseTexture* GetTexture(BaseTexture* checkedTexture);
-    BaseTexture* GetTexture(std::string texturePath);
-
-    BaseTexture* FindTexture(std::string textureName);
+    BaseTexture* GetTextureByPath(std::string texturePath);
+    BaseTexture* GetTextureByName(std::string textureName);
 
 	void FlushTexture(BaseTexture* texture);
 
