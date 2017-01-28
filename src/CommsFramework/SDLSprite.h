@@ -34,5 +34,7 @@ private:
     virtual void UpdateInnerImpl();
 
     SDL_Texture* GrayScaleTextureFromSurface(SDL_Surface* surface);
+
+    bool hasSendTextureLoadingMessage = false;
 };
 

@@ -98,6 +98,13 @@ SDL_Texture* SDLSprite::GetDrawableTexture()
 
         if (this->currentSpriteTexture == NULL)
         {
+            if (hasSendTextureLoadingMessage == false)
+            {
+                fprintf(stderr, "Cannot load texture '%s' for sprite [%s].\n", this->RequestedTextureName.c_str(), this->Ident.c_str());
+
+                hasSendTextureLoadingMessage = true;
+            }
+
             return NULL;
         }
     }
