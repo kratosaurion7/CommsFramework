@@ -137,8 +137,14 @@ void FantasyGame::InitGraphics()
             for (int j = 0; j < mapToLoad->Width; j++)
             {
                 Tile* tileToLoad = mapToLoad->Tiles[i][j];
+                
+                std::string tileName;
+                tileName.append("tile:");
+                tileName.append(std::to_string(i));
+                tileName.append("_");
+                tileName.append(std::to_string(j));
 
-                tileToLoad->TileSprite = this->Engine->CreateSprite();
+                tileToLoad->TileSprite = this->Engine->CreateSprite(tileName);
                 tileToLoad->TileSprite->Show(true);
                 tileToLoad->TileSprite->SetScale(scaleFactor);
                 tileToLoad->TileSprite->SetSize(tileSize, tileSize); // Explicit SetSize so that missing textures still get a size

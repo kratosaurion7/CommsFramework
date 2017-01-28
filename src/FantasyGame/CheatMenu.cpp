@@ -13,7 +13,7 @@ CheatMenu::CheatMenu()
 	this->BackPlateTexture->Initalize(this->Engine->GameAreaSize->Width, this->Engine->GameAreaSize->Width);
 	this->BackPlateTexture->SetSolidColor(0x77000000);
 
-	BackPlate = Engine->CreateSprite();
+	BackPlate = Engine->CreateSprite("CheatMenuBackPlate");
 	BackPlate->SetTexture(BackPlateTexture);
 	BackPlate->SetZIndex(990);
 	BackPlate->Show(false);
