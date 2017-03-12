@@ -348,6 +348,9 @@
     <ClCompile Include="LinkedList.cpp">
       <Filter>Framework\Collections\Custom</Filter>
     </ClCompile>
+    <ClCompile Include="MyArrayList.cpp">
+      <Filter>Framework\Collections\Custom</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="XmlReader.h">
@@ -630,6 +633,9 @@
       <Filter>Framework\IO</Filter>
     </ClInclude>
     <ClInclude Include="LinkedList.h">
+      <Filter>Framework\Collections\Custom</Filter>
+    </ClInclude>
+    <ClInclude Include="MyArrayList.h">
       <Filter>Framework\Collections\Custom</Filter>
     </ClInclude>
   </ItemGroup>

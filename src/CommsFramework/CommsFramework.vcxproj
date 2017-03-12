@@ -358,6 +358,7 @@ XCOPY /Y /E "Assets\*" "$(TargetDir)Assets"</Command>
     <ClCompile Include="ImageLoader.cpp" />
     <ClCompile Include="IOUtilities.cpp" />
     <ClCompile Include="LinkedList.cpp" />
+    <ClCompile Include="MyArrayList.cpp" />
     <ClCompile Include="Network.cpp" />
     <ClCompile Include="PathLoader.cpp" />
     <ClCompile Include="Primitives.cpp" />
@@ -449,6 +450,7 @@ XCOPY /Y /E "Assets\*" "$(TargetDir)Assets"</Command>
     <ClInclude Include="LiteList.h" />
     <ClInclude Include="MessageDialog.h" />
     <ClInclude Include="MouseClickInfo.h" />
+    <ClInclude Include="MyArrayList.h" />
     <ClInclude Include="Network.h" />
     <ClInclude Include="Pair.h" />
     <ClInclude Include="PathLoader.h" />
