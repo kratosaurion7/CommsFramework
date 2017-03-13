@@ -6,6 +6,9 @@ class FPosition;
 class GameEngine;
 class BaseSprite;
 
+class UIButton;
+class UIImage;
+
 #include "PointerList.h"
 #include "FRectangle.h"
 
@@ -28,9 +31,13 @@ public:
 
     bool Visible;
 
+    
+
 protected:
     GameEngine* Engine;
 
+    UIImage* CreateImage(std::string imagePath);
+    UIButton* CreateButton(std::string idleImage, std::string disabled = "", std::string pushed = "", std::string hovered = "");
 
     void AddElement(UIElement* newElement);
     void RemoveElement(UIElement* element);
