@@ -44,6 +44,11 @@ SDLGraphicEngine::SDLGraphicEngine()
     backgroundSprite = NULL;
     PreviousFrameTick = 0;
     CurrentFrameTick = 0;
+    
+    RenderingScaleX = 1;
+    RenderingScaleY = 1;
+    
+    RunEngine = true;
 }
 
 SDLGraphicEngine::~SDLGraphicEngine()

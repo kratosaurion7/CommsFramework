@@ -4,6 +4,10 @@
 
 #include <Windows.h>
 
+#elif linux
+
+#include <sys/time.h>
+
 #endif
 
 void DumpData(const char* data, int size, std::string outputName)
@@ -23,6 +27,14 @@ int GetTicks()
 
     return res;
 
+#elif linux
+    
+    struct timeval tv;
+    if(gettimeofday(&tv, NULL) != 0)
+            return 0;
+
+    return (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
+    
 #else
     return 0;
 #endif
