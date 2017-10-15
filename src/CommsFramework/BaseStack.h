@@ -73,7 +73,7 @@ public:
         innerList->Clear();
     };
 
-    int Count()
+    uint64_t Count()
     {
         return innerList->Count();
     };

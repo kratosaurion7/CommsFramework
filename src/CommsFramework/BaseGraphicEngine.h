@@ -10,19 +10,16 @@ class PrimitiveDrawInfo;
 
 class GraphicEngineInitParams;
 
+#include <string>
+
 #include "BaseSprite.h"
 #include "BaseText.h"
 #include "BaseFont.h"
 #include "BaseTexture.h"
 #include "BaseKeyboard.h"
-
 #include "PointerList.h"
-
 #include "GraphicEngineInitParams.h"
-
 #include "TextureManager.h"
-
-#include <string>
 
 class BaseGraphicEngine
 {

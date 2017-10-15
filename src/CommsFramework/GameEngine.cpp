@@ -299,16 +299,16 @@ void GameEngine::RemoveSprite(BaseSprite* sprite)
 
 BaseTexture* GameEngine::CreateTexture()
 {
-	BaseTexture* texture = this->Graphics->CreateTexture();
+    BaseTexture* texture = this->Graphics->CreateTexture();
 
-	return texture;
+    return texture;
 }
 
 BaseFont* GameEngine::CreateFont()
 {
-	BaseFont* newFont = this->Graphics->CreateFont();
+    BaseFont* newFont = this->Graphics->CreateFont();
 
-	return newFont;
+    return newFont;
 }
 
 BaseFont* GameEngine::GetGameDefaultFont()

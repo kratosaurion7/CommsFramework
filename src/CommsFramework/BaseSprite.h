@@ -6,13 +6,11 @@ class BaseTexture;
 class SpriteDescriptor;
 class BaseMouse;
 
-
-#include "PointerList.h"
-#include "SpriteAnimation.h"
-
 #include <string>
 
 #include "DrawObject.h"
+#include "PointerList.h"
+#include "SpriteAnimation.h"
 
 class BaseSprite : public DrawObject
 {

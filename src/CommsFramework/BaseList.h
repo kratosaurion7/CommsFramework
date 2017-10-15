@@ -239,49 +239,48 @@ public:
         _container->clear();
     };
 
-    int Count()
+    uint64_t Count()
     {
         return _container->size();
     };
 
-	T** GetListAs2dArray(int width)
-	{
-		assert(width > 0);
+    T** GetListAs2dArray(int width)
+    {
+        assert(width > 0);
 
-		int totalItems = this->Count();
+        uint64_t totalItems = this->Count();
 
-		if (totalItems % width != 0)
-			return NULL;
-		
+        if (totalItems % width != 0)
+            return NULL;
 
-		int columnIndex = 0;
-		int rowIndex = 0;
+        int columnIndex = 0;
+        int rowIndex = 0;
 
-		T** resultList = new T*[totalItems];
-		T* row = new T[width];
-		resultList[rowIndex] = row;
+        T** resultList = new T*[totalItems];
+        T* row = new T[width];
+        resultList[rowIndex] = row;
 
-		auto it = this->GetContainer()->begin();
-		while (it != this->GetContainer()->end())
-		{
-			resultList[rowIndex][columnIndex] = (*it);
+        auto it = this->GetContainer()->begin();
+        while (it != this->GetContainer()->end())
+        {
+            resultList[rowIndex][columnIndex] = (*it);
 
-			columnIndex++;
+            columnIndex++;
 
-			if (columnIndex % width == 0)
-			{
-				rowIndex++;
-				T* newRow = new T[width];
-				resultList[rowIndex] = newRow;
+            if (columnIndex % width == 0)
+            {
+                rowIndex++;
+                T* newRow = new T[width];
+                resultList[rowIndex] = newRow;
 
-				columnIndex = 0;
-			}
+                columnIndex = 0;
+            }
 
-			it++;
-		}
+            it++;
+        }
 
-		return resultList;
-	};
+        return resultList;
+    };
 
     std::list<T>* GetContainer()
     {
@@ -298,7 +297,7 @@ private:
     {
         typename std::list<T>::iterator* current = _container->begin();
 
-        for (int i = 0; i < _container->size; i++)
+        for (int i = 0; i < _container->size(); i++)
         {
             if (i == index)
                 return current;

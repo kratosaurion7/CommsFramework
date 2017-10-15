@@ -30,8 +30,6 @@ public:
 
     T Pop()
     {
-        //if (innerList->Count() > 0)
-        //{
         std::list<T>* x = innerList->GetContainer();
 
         T result = x->front();
@@ -39,23 +37,15 @@ public:
         x->pop_front();
 
         return result;
-        //}
-
-        //return NULL;
     };
 
     T Peek()
     {
-        //if (innerList->Count() > 0)
-        //{
         std::list<T>* x = innerList->GetContainer();
 
         T result = x->front();
 
         return result;
-        //}
-
-        //return NULL;
     };
 
     //bool BaseStack::HasNext()
@@ -73,7 +63,7 @@ public:
         innerList->Clear();
     };
 
-    int Count()
+    uint64_t Count()
     {
         return innerList->Count();
     };
