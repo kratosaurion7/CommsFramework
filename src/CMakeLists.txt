@@ -2,6 +2,7 @@ cmake_minimum_required (VERSION 3.7)
 
 project (CommsFramework)
 
+file(GLOB ENGINE_HEADERS "CommsFramework/*.h")
 file(GLOB ENGINE_SOURCES "CommsFramework/*.cpp")
 file(GLOB GAME_SOURCES "Blackjack/*.cpp")
 file(GLOB GAME_SOURCES "PuzzleGame/*.cpp")
@@ -27,7 +28,7 @@ PKG_SEARCH_MODULE(SDL2IMAGE REQUIRED SDL2_image>=2.0.0)
 PKG_SEARCH_MODULE(SDL2TTF REQUIRED SDL2_ttf)
 
 
-add_library(engine STATIC ${ENGINE_SOURCES})
+add_library(engine STATIC ${ENGINE_SOURCES} ${ENGINE_HEADERS})
 target_link_libraries(engine ${SDL2_LIBRARIES} ${SDL2IMAGE_LIBRARIES})
 
 include_directories("CommsFramework")
