@@ -109,7 +109,7 @@ public:
 
     virtual void ReorderSprite(DrawObject* first, DrawObject* second) = 0;
 
-protected:
+//protected:
     virtual BaseSprite* CreateSpriteInstance() = 0;
     virtual BaseTexture* CreateTextureInstance() = 0;
     virtual BaseFont* CreateFontInstance() = 0;
