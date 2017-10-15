@@ -164,7 +164,6 @@ XCOPY /Y /E "$(ProjectDir)config.xml" "$(TargetDir)"</Command>
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerCamera.cpp" />
     <ClCompile Include="SimpleMenu.cpp" />
-    <ClCompile Include="TestingMenu.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
@@ -177,7 +176,6 @@ XCOPY /Y /E "$(ProjectDir)config.xml" "$(TargetDir)"</Command>
     <ClInclude Include="PlayerCamera.h" />
     <ClInclude Include="ProgDef.h" />
     <ClInclude Include="SimpleMenu.h" />
-    <ClInclude Include="TestingMenu.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>

@@ -387,7 +387,6 @@ XCOPY /Y /E "Assets\*" "$(TargetDir)Assets"</Command>
     <ClCompile Include="TgaFile.cpp" />
     <ClCompile Include="UIButton.cpp" />
     <ClCompile Include="UIElement.cpp" />
-    <ClCompile Include="UIImage.cpp" />
     <ClCompile Include="UIMenu.cpp" />
     <ClCompile Include="Utils.cpp" />
     <ClCompile Include="RandomGen.cpp" />
@@ -470,7 +469,6 @@ XCOPY /Y /E "Assets\*" "$(TargetDir)Assets"</Command>
     <ClInclude Include="TgaFile.h" />
     <ClInclude Include="UIButton.h" />
     <ClInclude Include="UIElement.h" />
-    <ClInclude Include="UIImage.h" />
     <ClInclude Include="UIMenu.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="RandomGen.h" />
