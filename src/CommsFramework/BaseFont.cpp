@@ -5,6 +5,8 @@
 BaseFont::BaseFont()
 {
     GlyphMap = NULL;
+
+    FontType = FontTypes::FONT_FILE;
 }
 
 BaseFont::~BaseFont()
@@ -18,7 +20,7 @@ BaseFont::~BaseFont()
 
 void BaseFont::LoadSpriteFont(BaseTexture* fontTexture, SpriteFontGlyph** glyphs, int charactersCount)
 {
-    GlyphMap = new PointerList<Pair<char*, BaseTexture*>*>();
+    GlyphMap = new PointerList<Pair<const char*, BaseTexture*>*>();
 
     for (int i = 0; i < charactersCount; i++)
     {
@@ -28,7 +30,7 @@ void BaseFont::LoadSpriteFont(BaseTexture* fontTexture, SpriteFontGlyph** glyphs
         
         BaseTexture* subTex = fontTexture->GetSubTexture(rec);
 
-        Pair<char*, BaseTexture*>* newGlyphPair = new Pair<char*, BaseTexture*>();
+        Pair<const char*, BaseTexture*>* newGlyphPair = new Pair<const char*, BaseTexture*>();
         newGlyphPair->Item1 = glyph->Value;
         newGlyphPair->Item2 = subTex;
 

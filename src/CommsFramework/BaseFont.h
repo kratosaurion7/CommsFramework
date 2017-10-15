@@ -9,7 +9,7 @@ class BaseTexture;
 
 struct SpriteFontGlyph
 {
-    char* Value;
+    const char* Value;
 
     float X;
     float Y;
@@ -30,7 +30,7 @@ public:
     BaseFont();
     ~BaseFont();
 
-    PointerList<Pair<char*, BaseTexture*>*>* GlyphMap;
+    PointerList<Pair<const char*, BaseTexture*>*>* GlyphMap;
 
     virtual void LoadFontFile(std::string path) = 0;
 

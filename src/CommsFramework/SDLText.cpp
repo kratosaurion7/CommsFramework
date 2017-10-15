@@ -197,8 +197,8 @@ void SDLText::UpdateInnerImpl()
 
             for (int y = 0; y < this->font->GlyphMap->Count();y++)
             {
-                Pair<char*, BaseTexture*>* iteratedPair = this->font->GlyphMap->Get(y);
-                char* iteratedCharacter = iteratedPair->Item1;
+                Pair<const char*, BaseTexture*>* iteratedPair = this->font->GlyphMap->Get(y);
+                const char* iteratedCharacter = iteratedPair->Item1;
 
                 if (strncmp(&textCharacter, iteratedCharacter, 1) == 0)
                 {
