@@ -8,48 +8,48 @@
 
 int main()
 {
-	GameEngine* Engine = new GameEngine();
-	Engine->Init(NB_TILES_W * TILE_W * TILE_SCALE, NB_TILES_H * TILE_H * TILE_SCALE);
+    GameEngine* Engine = new GameEngine();
+    Engine->Init(NB_TILES_W * TILE_W * TILE_SCALE, NB_TILES_H * TILE_H * TILE_SCALE);
 
-	PointerList<GameButton*>* list = new PointerList<GameButton*>();
+    PointerList<GameButton*>* list = new PointerList<GameButton*>();
 
-	int index = 0;
-	for (int i = 0; i < NB_TILES_H; i++)
-	{
-		for (int j = 0; j < NB_TILES_W; j++)
-		{
-			GameButton* newBut = new GameButton();
-			newBut->TileSprite->SetPos((int)(j * TILE_TOTAL_W), (int)(i * TILE_TOTAL_H));
-			newBut->Index = index;
-			newBut->PosX = j;
-			newBut->PosY = i;
+    int index = 0;
+    for (int i = 0; i < NB_TILES_H; i++)
+    {
+        for (int j = 0; j < NB_TILES_W; j++)
+        {
+            GameButton* newBut = new GameButton();
+            newBut->TileSprite->SetPos((int)(j * TILE_TOTAL_W), (int)(i * TILE_TOTAL_H));
+            newBut->Index = index;
+            newBut->PosX = j;
+            newBut->PosY = i;
 
-			list->Add(newBut);
+            list->Add(newBut);
 
-			Engine->AttachActor(newBut);
+            Engine->AttachActor(newBut);
 
-			index++;
-		}
-	}
+            index++;
+        }
+    }
 
-	Board = list->GetListAs2dArray(5);
-	Board[2][2]->Toggle();
+    Board = list->GetListAs2dArray(5);
+    Board[2][2]->Toggle();
 
-	while (true)
-	{
-		if (Engine->Graphics->IsTimeForFrame())
-		{
-			if (Engine->Mouse->LeftButtonClicked())
-			{
-				auto pos = Engine->Mouse->GetMousePosition();
+    while (true)
+    {
+        if (Engine->Graphics->IsTimeForFrame())
+        {
+            if (Engine->Mouse->LeftButtonClicked())
+            {
+                auto pos = Engine->Mouse->GetMousePosition();
 
-				fprintf(stdout, "Click at X: %f, Y: %f \n", pos.X, pos.Y);
-			}
+                fprintf(stdout, "Click at X: %f, Y: %f \n", pos.X, pos.Y);
+            }
 
-			Engine->Play();
-		}
-	}
+            Engine->Play();
+        }
+    }
 
 
-	return 0;
+    return 0;
 }

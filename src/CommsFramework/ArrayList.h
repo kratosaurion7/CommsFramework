@@ -28,12 +28,12 @@ public:
 		delete(_container);
 	};
 
-	void ArrayList::Add(T item)
+	void Add(T item)
 	{
 		_container->push_back(item);
 	};
 
-	void ArrayList::AddRange(ArrayList<T>* items)
+	void AddRange(ArrayList<T>* items)
 	{
 		auto it = items->GetContainer()->begin();
 
@@ -47,7 +47,7 @@ public:
 		}
 	};
 
-	T ArrayList::Get(int index)
+	T Get(int index)
 	{
 		if (index < _container->size())
 		{
@@ -57,14 +57,14 @@ public:
 		return NULL;
 	};
 
-	T& ArrayList::operator[] (int index) 
+	T& operator[] (int index)
 	{
 		return _container->at(index);
 	}
 
-	T ArrayList::GetBy(std::function<bool(T)> predicate)
+	T GetBy(std::function<bool(T)> predicate)
 	{
-		for (std::list<T>::iterator it = _container->begin(); it != _container->end(); it++)
+		for (typename std::list<T>::iterator it = this->_container->begin(); it != this->_container->end(); it++)
 		{
 			T element = *it;
 
@@ -77,14 +77,14 @@ public:
 		return NULL;
 	};
 
-	T ArrayList::First()
+	T First()
 	{
 		auto it = _container->begin();
 
 		return (*it);
 	};
 
-	T ArrayList::Last()
+	T Last()
 	{
 		auto it = _container->end();
 
@@ -93,11 +93,11 @@ public:
 		return (*it);
 	};
 
-	ArrayList<T>* ArrayList::Where(std::function<bool(T)> predicate)
+	ArrayList<T>* Where(std::function<bool(T)> predicate)
 	{
 		ArrayList<T>* retList = new ArrayList<T>();
 
-		for (std::list<T>::iterator it = _container->begin(); it != _container->end(); it++)
+		for (typename std::list<T>::iterator it = this->_container->begin(); it != this->_container->end(); it++)
 		{
 			auto test = predicate(*it);
 
@@ -110,11 +110,11 @@ public:
 		return retList;
 	};
 
-	T ArrayList::Single(std::function<bool(T)> predicate)
+	T Single(std::function<bool(T)> predicate)
 	{
 		T retValue = NULL;
 
-		for (std::list<T>::iterator it = _container->begin(); it != _container->end(); it++)
+		for (typename std::list<T>::iterator it = this->_container->begin(); it != this->_container->end(); it++)
 		{
 			T val = *it;
 
@@ -129,9 +129,9 @@ public:
 		return retValue;
 	};
 
-	bool ArrayList::Contains(std::function<bool(T)> predicate)
+	bool Contains(std::function<bool(T)> predicate)
 	{
-		for (std::list<T>::iterator it = _container->begin(); it != _container->end(); it++)
+		for (typename std::list<T>::iterator it = this->_container->begin(); it != this->_container->end(); it++)
 		{
 			T element = *it;
 
@@ -144,9 +144,9 @@ public:
 		return false;
 	};
 
-	bool ArrayList::ContainsItem(T item)
+	bool ContainsItem(T item)
 	{
-		for (std::list<T>::iterator it = _container->begin(); it != _container->end(); it++)
+		for (typename std::list<T>::iterator it = this->_container->begin(); it != this->_container->end(); it++)
 		{
 			T element = *it;
 
@@ -159,9 +159,9 @@ public:
 		return false;
 	}
 
-	void ArrayList::ForEach(std::function<void(T)> func)
+	void ForEach(std::function<void(T)> func)
 	{
-		for (std::list<T>::iterator it = _container->begin(); it != _container->end(); it++)
+		for (typename std::list<T>::iterator it = this->_container->begin(); it != this->_container->end(); it++)
 		{
 			T val = *it;
 
@@ -169,11 +169,11 @@ public:
 		}
 	};
 
-	int ArrayList::IndexOf(T item)
+	int IndexOf(T item)
 	{
 		int i = 0;
 
-		for (std::list<T>::iterator it = _container->begin(); it != _container->end(); it++)
+		for (typename std::list<T>::iterator it = this->_container->begin(); it != this->_container->end(); it++)
 		{
 			T current = (*it);
 
@@ -186,7 +186,7 @@ public:
 		return NULL;
 	};
 
-	void ArrayList::Swap(int indexA, int indexB)
+	void Swap(int indexA, int indexB)
 	{
 		auto x = _container->begin();
 		auto y = _container->begin();
@@ -197,7 +197,7 @@ public:
 		std::iter_swap(elementA, elementB);
 	};
 
-	void ArrayList::Shuffle()
+	void Shuffle()
 	{
 		int length = this->Count();
 		RandomGen rng;
@@ -211,7 +211,7 @@ public:
 	};
 
 
-	void ArrayList::RemoveAt(int index)
+	void RemoveAt(int index)
 	{
 		auto it = _container->begin();
 
@@ -220,9 +220,9 @@ public:
 		_container->erase(it);
 	};
 
-	void ArrayList::RemoveObject(T object)
+	void RemoveObject(T object)
 	{
-		for (std::list<T>::iterator it = _container->begin(); it != _container->end(); it++)
+		for (typename std::list<T>::iterator it = this->_container->begin(); it != this->_container->end(); it++)
 		{
 			T current = (*it);
 
@@ -240,7 +240,7 @@ public:
 		_container->clear();
 	};
 
-	int ArrayList::Count()
+	int Count()
 	{
 		return _container->size();
 	};
@@ -303,7 +303,7 @@ ArrayList<U>* ListSelect(ArrayList<T>* input, std::function<U(T)> selector)
 {
 	ArrayList<U>* outList = new ArrayList<U>();
 
-	for (std::vector<T>::iterator it = input->GetContainer()->begin(); it != input->GetContainer()->end(); it++)
+	for (typename std::vector<T>::iterator it = input->GetContainer()->begin(); it != input->GetContainer()->end(); it++)
 	{
 		auto projected = selector(*it);
 
@@ -318,7 +318,7 @@ Agg ListAggregate(ArrayList<T>* input, Agg initial, std::function<Agg(Agg, T)> f
 {
 	Agg aggregateValue = initial;
 
-	for (std::vector<T>::iterator it = input->GetContainer()->begin(); it != input->GetContainer()->end(); it++)
+	for (typename std::vector<T>::iterator it = input->GetContainer()->begin(); it != input->GetContainer()->end(); it++)
 	{
 		T element = *it;
 
