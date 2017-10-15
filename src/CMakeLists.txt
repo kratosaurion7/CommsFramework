@@ -4,8 +4,13 @@ project (CommsFramework)
 
 file(GLOB ENGINE_HEADERS "CommsFramework/*.h")
 file(GLOB ENGINE_SOURCES "CommsFramework/*.cpp")
-file(GLOB GAME_SOURCES "Blackjack/*.cpp")
-file(GLOB GAME_SOURCES "PuzzleGame/*.cpp")
+
+file(GLOB BLACKJACK_HEADERS "Blackjack/*.h")
+file(GLOB BLACKJACK_SOURCES "Blackjack/*.cpp")
+
+
+file(GLOB PUZZLEGAME_HEADERS "PuzzleGame/*.h")
+file(GLOB PUZZLEGAME_SOURCES "PuzzleGame/*.cpp")
 
 #add_definitions("-D_WINDOWS")
 #add_definitions("-D_UNICODE")
@@ -33,11 +38,11 @@ target_link_libraries(engine ${SDL2_LIBRARIES} ${SDL2IMAGE_LIBRARIES})
 
 include_directories("CommsFramework")
 
-add_executable(Blackjack ${GAME_SOURCES})
+add_executable(Blackjack ${BLACKJACK_HEADERS} ${BLACKJACK_SOURCES})
 target_link_libraries(Blackjack engine)
 target_link_libraries(Blackjack ${SDL2_LIBRARIES} ${SDL2IMAGE_LIBRARIES} ${SDL2TTF_LIBRARIES})
 
-add_executable(PuzzleGame ${GAME_SOURCES})
+add_executable(PuzzleGame ${PUZZLEGAME_HEADERS} ${PUZZLEGAME_SOURCES})
 target_link_libraries(PuzzleGame engine)
 target_link_libraries(PuzzleGame ${SDL2_LIBRARIES} ${SDL2IMAGE_LIBRARIES} ${SDL2TTF_LIBRARIES})
 
