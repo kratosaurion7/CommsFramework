@@ -21,7 +21,7 @@ int main()
     eng->Init(800, 800);
 
     
-    eng->Graphics->SetBackgroundColor(101, 156, 239, 255);
+    eng->Graphics->SetBackgroundColor(101, 156, 239);
 
     BlackjackGame* game = new BlackjackGame();
     eng->AttachActor(game);
