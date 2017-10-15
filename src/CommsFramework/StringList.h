@@ -3,6 +3,7 @@
 #include "BaseList.h"
 
 #include <string>
+#include <string.h>
 
 class StringList : public BaseList<std::string*>
 {

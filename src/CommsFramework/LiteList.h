@@ -90,7 +90,7 @@ public:
         return iter;
     };
 
-    void LiteList::Add(T item)
+    void Add(T item)
     {
         ITEM<T>* newStruct = new ITEM<T>();
         newStruct->contents = item;
@@ -99,12 +99,12 @@ public:
         this->AddItem(newStruct);
     };
 
-    void LiteList::AddRange(LiteList<T>* items)
+    void AddRange(LiteList<T>* items)
     {
         
     };
 
-    T LiteList::Get(int index)
+    T Get(int index)
     {
         int current = 0;
         ITEM<T>* currentItem = FirstItem;
@@ -121,52 +121,52 @@ public:
         return currentItem->contents;
     };
 
-    T LiteList::GetBy(std::function<bool(T)> predicate)
+    T GetBy(std::function<bool(T)> predicate)
     {
         return 0;
     };
 
-    LiteList<T>* LiteList::Where(std::function<bool(T)> predicate)
+    LiteList<T>* Where(std::function<bool(T)> predicate)
     {
         return 0;
     };
 
-    T LiteList::Single(std::function<bool(T)> predicate)
+    T Single(std::function<bool(T)> predicate)
     {
         return 0;
     };
 
-    bool LiteList::Contains(std::function<bool(T)> predicate)
+    bool Contains(std::function<bool(T)> predicate)
     {
         return false;
     };
 
-    bool LiteList::ContainsItem(T item)
+    bool ContainsItem(T item)
     {
         return false;
     };
 
-    void LiteList::ForEach(std::function<void(T)> func)
+    void ForEach(std::function<void(T)> func)
     {
 
     };
 
-    int LiteList::IndexOf(T item)
+    int IndexOf(T item)
     {
         return 0;
     };
 
-    void LiteList::Swap(int indexA, int indexB)
+    void Swap(int indexA, int indexB)
     {
 
     };
 
-    void LiteList::Shuffle()
+    void Shuffle()
     {
 
     };
 
-    void LiteList::RemoveAt(int index)
+    void RemoveAt(int index)
     {
         int current = 0;
 
@@ -194,17 +194,17 @@ public:
         delete(currentItem);
     };
 
-    void LiteList::RemoveObject(T object)
+    void RemoveObject(T object)
     {
 
     };
 
-    void LiteList::Clear()
+    void Clear()
     {
 
     };
 
-    int LiteList::Count()
+    int Count()
     {
         int amount = 0;
         ITEM<T>* nextItem = FirstItem;
@@ -221,7 +221,7 @@ public:
 private:
     ITEM<T>* FirstItem;
 
-    void LiteList::AddItem(ITEM<T>* item)
+    void AddItem(ITEM<T>* item)
     {
         if (FirstItem == NULL)
         {

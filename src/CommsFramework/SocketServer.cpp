@@ -1,6 +1,6 @@
 #include "SocketServer.h"
 
-
+#ifdef WIN32
 
 SocketServer::SocketServer(std::string portNumber)
 {
@@ -295,3 +295,5 @@ void SocketServer::StopReadingFromSocket(SOCKET clientSocket)
         }
     }
 }
+
+#endif

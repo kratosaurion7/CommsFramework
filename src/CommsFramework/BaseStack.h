@@ -20,14 +20,14 @@ public:
         delete(innerList);
     };
 
-    void BaseStack::Push(T item)
+    void Push(T item)
     {
         std::list<T>* x = innerList->GetContainer();
 
         x->push_front(item);
     };
 
-    T BaseStack::Pop()
+    T Pop()
     {
         if (this->Count() > 0)
         {
@@ -43,7 +43,7 @@ public:
         return NULL;
     };
 
-    T BaseStack::Peek()
+    T Peek()
     {
         if (this->Count() > 0)
         {
@@ -57,28 +57,28 @@ public:
         return NULL;
     };
 
-    bool BaseStack::HasNext()
+    bool HasNext()
     {
         return innerList->Count() > 0;
     }
 
     // Stack should probably not have a Shuffle method.
-    void BaseStack::Shuffle()
+    void Shuffle()
     {
         innerList->Shuffle();
     };
 
-    void BaseStack::Clear()
+    void Clear()
     {
         innerList->Clear();
     };
 
-    int BaseStack::Count()
+    int Count()
     {
         return innerList->Count();
     };
 
-    void BaseStack::Release()
+    void Release()
     {
         //for (std::list<T>::iterator it = innerList->GetContainer()->begin(); it != innerList->GetContainer()->end(); it++)
         //{
@@ -88,7 +88,7 @@ public:
         //innerList->GetContainer()->clear();
     };
 
-    std::list<T>* BaseStack::GetContainer()
+    std::list<T>* GetContainer()
     {
         return innerList->GetContainer();
     };

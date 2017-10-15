@@ -7,7 +7,7 @@
 
 BetSelection::BetSelection()
 {
-    BaseActor::BaseActor();
+    //BaseActor::BaseActor();
 
     this->TotalBet = 0;
 

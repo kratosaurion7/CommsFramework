@@ -35,6 +35,7 @@ enum FILE_OPEN_CREATE_MODE
 
 #include <string>
 #include <cstdio>
+#include <stdint.h>
 
 class FileContents;
 class XDirectory;
@@ -101,7 +102,7 @@ protected:
 
     bool Check();
 
-    __int64 GetSize();
+    uint64_t GetSize();
 
     void AssignFileSize();
 

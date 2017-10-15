@@ -1,6 +1,6 @@
 #pragma once
 
-enum Key;
+//enum Key;
 
 #include "Keys.h"
 

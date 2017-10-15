@@ -1,6 +1,6 @@
 #include "SocketClient.h"
 
-
+#ifdef WIN32
 
 SocketClient::SocketClient(std::string serverAddress, std::string portNumber)
 {
@@ -362,3 +362,5 @@ void SocketClient::StopReceiving()
 {
     StopSocket = true;
 }
+
+#endif

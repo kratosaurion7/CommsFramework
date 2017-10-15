@@ -173,7 +173,7 @@ bool IsValidPath(std::string path)
 
     return ret == 1;
 
-#elif
+#else
     return false;
 
 #endif // WIN32

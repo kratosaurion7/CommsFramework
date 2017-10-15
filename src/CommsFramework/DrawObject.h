@@ -71,7 +71,7 @@ public:
 
     virtual FRectangle GetRectangle();
 
-    virtual void DrawObject::SetClippingBounds(FRectangle rec);
+    virtual void SetClippingBounds(FRectangle rec);
 
     virtual float GetHeight();
     virtual float GetWidth();

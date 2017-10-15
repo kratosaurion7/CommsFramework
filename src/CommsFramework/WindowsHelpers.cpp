@@ -1,5 +1,7 @@
 #include "WindowsHelpers.h"
 
+#ifdef WIN32
+
 #include <windows.h>
 #include <tchar.h> 
 #include <stdio.h>
@@ -30,3 +32,5 @@ std::string GetLastErrorString()
 
     return WideStringToCString(errorBuf);
 }
+
+#endif

@@ -154,7 +154,7 @@ bool XFile::IsOpen()
 {
 #ifdef WIN32
     return winFileHandle != INVALID_HANDLE_VALUE && FileValid;
-#elif
+#else
     return false;
 #endif
 }
@@ -364,8 +364,8 @@ int XFile::TranslateFileOpenMode(FILE_OPEN_MODE mode)
     default:
         return GENERIC_READ;
     }
-#elif
-    return GENERIC_READ;
+#else
+    return 0;
 #endif
 }
 
@@ -383,7 +383,7 @@ int XFile::TranslateFileShareMode(FILE_SHARE_MODE mode)
     default:
         return 0;
     }
-#elif
+#else
     return 0;
 #endif
 }
@@ -406,8 +406,8 @@ int XFile::TranslateOpenCreateMode(FILE_OPEN_CREATE_MODE mode)
     default:
         return CREATE_NEW;
     }
-#elif
-    return CREATE_NEW;
+#else
+    return 0;
 #endif
 }
 
@@ -466,7 +466,7 @@ std::string XFile::CleanupDirectoryName(std::string stringToClean)
 #ifdef WIN32
     // On windows, the GetFinalPathNameByHandle return the path using the \\?\ (convention to mark the path as unicode to support 32k char paths)
     return stringToClean.substr(4, stringToClean.length() - 4);
-#elif
+#else
     return stringToClean;
 #endif
 }
@@ -475,12 +475,12 @@ bool XFile::Check()
 {
 #ifdef WIN32
     return winFileHandle != INVALID_HANDLE_VALUE;
-#elif
+#else
     return false;
 #endif
 }
 
-__int64 XFile::GetSize()
+uint64_t XFile::GetSize()
 {
     if (this->Check())
     {

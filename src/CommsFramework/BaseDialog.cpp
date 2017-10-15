@@ -4,7 +4,7 @@
 
 BaseDialog::BaseDialog()
 {
-    BaseActor::BaseActor();
+    //BaseActor::BaseActor();
     DialogState = DIALOG_CLOSED;
 }
 

@@ -10,7 +10,7 @@
 
 YesNoDialog::YesNoDialog()
 {
-    BaseActor::BaseActor();
+    //BaseActor::BaseActor();
 
     DialogSprite = Engine->CreateSprite("YesNoDialogMessageFrame");
     DialogSprite->SetTexture("assets\\dialogs\\DialogFrame.png");
@@ -41,7 +41,7 @@ YesNoDialog::YesNoDialog()
 
 YesNoDialog::YesNoDialog(std::string windowText)
 {
-    BaseActor::BaseActor();
+    //BaseActor::BaseActor();
 
     DialogSprite = Engine->CreateSprite("YesNoDialogMessageFrame");
     DialogSprite->SetTexture("assets\\dialogs\\DialogFrame.png");

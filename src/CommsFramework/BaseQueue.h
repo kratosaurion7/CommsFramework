@@ -20,7 +20,7 @@ public:
         delete(innerList);
     };
 
-    void BaseQueue::Push(T item)
+    void Push(T item)
     {
         std::list<T>* x = innerList->GetContainer();
 
@@ -28,7 +28,7 @@ public:
 
     };
 
-    T BaseQueue::Pop()
+    T Pop()
     {
         //if (innerList->Count() > 0)
         //{
@@ -44,7 +44,7 @@ public:
         //return NULL;
     };
 
-    T BaseQueue::Peek()
+    T Peek()
     {
         //if (innerList->Count() > 0)
         //{
@@ -68,17 +68,17 @@ public:
     //    innerList->Shuffle();
     //};
     
-    void BaseQueue::Clear()
+    void Clear()
     {
         innerList->Clear();
     };
 
-    int BaseQueue::Count()
+    int Count()
     {
         return innerList->Count();
     };
 
-    std::list<T>* BaseQueue::GetContainer()
+    std::list<T>* GetContainer()
     {
         return innerList->GetContainer();
     };

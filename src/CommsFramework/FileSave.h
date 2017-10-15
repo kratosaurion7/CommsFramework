@@ -4,6 +4,7 @@ class GenType;
 
 #include <cstdio>
 #include <string>
+#include <string.h>
 
 #include "BaseList.h"
 #include "Pair.h"

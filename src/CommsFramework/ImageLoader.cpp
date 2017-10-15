@@ -1,5 +1,7 @@
 #include "ImageLoader.h"
 
+#ifdef WIN32
+
 #include "TgaFile.h"
 #include "WindowsHelpers.h"
 
@@ -212,3 +214,5 @@ void ImageLoader::InitializeServices()
         IID_PPV_ARGS(&WicFactory)
     );
 }
+
+#endif

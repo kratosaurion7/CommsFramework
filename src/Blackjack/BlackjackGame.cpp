@@ -16,7 +16,7 @@
 
 BlackjackGame::BlackjackGame()
 {
-    BaseActor::BaseActor();
+    //BaseActor::BaseActor();
 
     GameCards = new CardsShoe();
 

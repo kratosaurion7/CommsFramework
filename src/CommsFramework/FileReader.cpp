@@ -3,6 +3,7 @@
 #include <stdio.h>
 
 #include <string>
+#include <string.h>
 
 #define READ_BLOCK_SIZE 128
 
@@ -102,7 +103,7 @@ void FileReader::Close()
 }
 void FileReader::DumpFile(std::string outFileName)
 {
-    fileStream->seekg(0, 0);
+    fileStream->seekg(0, std::ios_base::beg);
 
     std::ofstream outStream = std::ofstream(outFileName.c_str(), std::ofstream::out | std::ofstream::binary);
 
@@ -118,7 +119,7 @@ void FileReader::DumpFile(std::string outFileName)
 
     outStream.close();
 
-    fileStream->seekg(0, 0);
+    fileStream->seekg(0, std::ios_base::beg);
 }
 
 int FileReader::GetFileSize()

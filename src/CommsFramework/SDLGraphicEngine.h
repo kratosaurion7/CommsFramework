@@ -16,6 +16,7 @@ struct SDL_Renderer;
 struct PrimitiveDrawInfo;
 
 #include <string>
+#include <string.h>
 #include <cstdint>
 
 #include "PointerList.h"

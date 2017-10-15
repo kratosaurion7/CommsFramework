@@ -1,5 +1,6 @@
 #include "Deck.h"
 
+#include <stdio.h>
 #include <GameEngine.h>
 #include <BaseSprite.h>
 #include <BaseList.h>
@@ -175,34 +176,34 @@ void Deck::SetupCardSprites(Card * targetCard)
     {
         case Card::SPADES:
         {
-            sprintf_s(suitName, 256, "%s", "Spades");
+            snprintf(suitName, 256, "%s", "Spades");
             break;
         }
         case Card::HEARTS:
         {
-            sprintf_s(suitName, 256, "%s", "Hearts");
+            snprintf(suitName, 256, "%s", "Hearts");
             break;
         }
         case Card::DIAMOND:
         {
-            sprintf_s(suitName, 256, "%s", "Diamonds");
+            snprintf(suitName, 256, "%s", "Diamonds");
             break;
         }
         case Card::CLUBS:
         {
-            sprintf_s(suitName, 256, "%s", "Clubs");
+            snprintf(suitName, 256, "%s", "Clubs");
             break;
         }
         default:
         {
-            sprintf_s(suitName, 256, "%s", "?SuitName?");
+            snprintf(suitName, 256, "%s", "?SuitName?");
             break;
         }
     }
 
     if (targetCard->CardValue < Card::Jack)
     {
-        sprintf_s(cardValue, 256, "%d", targetCard->CardValue);
+        snprintf(cardValue, 256, "%d", targetCard->CardValue);
     }
     else
     {
@@ -210,17 +211,17 @@ void Deck::SetupCardSprites(Card * targetCard)
         {
             case Card::Jack:
             {
-                sprintf_s(cardValue, 256, "%s", "J");
+                snprintf(cardValue, 256, "%s", "J");
                 break;
             }
             case Card::Queen:
             {
-                sprintf_s(cardValue, 256, "%s", "Q");
+                snprintf(cardValue, 256, "%s", "Q");
                 break;
             }
             case Card::King:
             {
-                sprintf_s(cardValue, 256, "%s", "K");
+                snprintf(cardValue, 256, "%s", "K");
                 break;
             }
             default:
@@ -228,7 +229,7 @@ void Deck::SetupCardSprites(Card * targetCard)
         }
     }
 
-    sprintf_s(cardFileName, 256, "card%s%s.png\0", suitName, cardValue);
+    snprintf(cardFileName, 256, "card%s%s.png\0", suitName, cardValue);
 
     std::string cardBackFileName = "assets\\cards\\back\\";
     cardBackFileName.append(cardBackName);

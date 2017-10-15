@@ -2,6 +2,8 @@
 
 class TgaFile;
 
+#ifdef WIN32
+
 #include <Windows.h>
 #include <d2d1.h>
 
@@ -34,3 +36,4 @@ private:
     void InitializeServices();
 };
 
+#endif

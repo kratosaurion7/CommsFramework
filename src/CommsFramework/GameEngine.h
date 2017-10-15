@@ -32,6 +32,7 @@ class FSize;
 #include "PointerList.h"
 #include <string>
 #include <stdint.h>
+#include <limits.h>
 
 struct PRIO
 {

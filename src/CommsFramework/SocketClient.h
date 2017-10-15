@@ -1,5 +1,7 @@
 #pragma once
 
+#ifdef WIN32
+
 #include <winsock2.h>
 #include <ws2tcpip.h>
 #include <iphlpapi.h>
@@ -17,7 +19,6 @@
 
 #include "BaseList.h"
 #include "BaseQueue.h"
-#include "Utils.h"
 
 #define DEFAULT_BUFLEN 512
 
@@ -83,3 +84,4 @@ private:
 
 };
 
+#endif

@@ -107,7 +107,8 @@ int FileSave::GetNumber(KEYTYPE name)
     {
         if (foundItem->Item2->ValueType == GenType::SUPPORTED_TYPES::INT32)
         {
-            return (int)foundItem->Item2->Value;
+            // TODO : x64 code losing half the bits
+            return (long int)foundItem->Item2->Value;
         }
 		else
 		{
@@ -241,7 +242,7 @@ const char* FileSave::SaveToDataString(int& outLength)
         {
             case GenType::SUPPORTED_TYPES::INT32:
             {
-                int value = (int)element->Item2->Value;
+                int value = (long int)element->Item2->Value;
 
                 char* valueBytes = (char*)&(value);
 

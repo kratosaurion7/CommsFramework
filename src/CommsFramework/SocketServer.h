@@ -1,5 +1,7 @@
 #pragma once
 
+#ifdef WIN32
+
 #include <winsock2.h>
 #include <ws2tcpip.h>
 #include <iphlpapi.h>
@@ -13,7 +15,6 @@
 #include "Network.h"
 #include "BaseList.h"
 #include "BaseQueue.h"
-#include "Utils.h"
 
 #define MAX_SOCK_CLIENTS 5
 #define DEFAULT_BUFLEN 512
@@ -86,3 +87,5 @@ private:
     struct addrinfo *result = NULL;
     struct addrinfo hints;
 };
+
+#endif

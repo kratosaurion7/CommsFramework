@@ -25,12 +25,12 @@ public:
         delete(_container);
     };
 
-    void BaseList::Add(T item)
+    void Add(T item)
     {
         _container->push_back(item);
     };
 
-    void BaseList::AddRange(BaseList<T>* items)
+    void AddRange(BaseList<T>* items)
     {
         auto it = items->GetContainer()->begin();
 
@@ -44,11 +44,11 @@ public:
         }
     };
 
-    T BaseList::Get(int index)
+    T Get(int index)
     {
         int i = 0;
 
-        for (std::list<T>::iterator it = _container->begin(); it != _container->end(); it++)
+        for (typename std::list<T>::iterator it = _container->begin(); it != _container->end(); it++)
         {
             if (index == i)
             {
@@ -61,9 +61,9 @@ public:
         return NULL;
     };
 
-    T BaseList::GetBy(std::function<bool(T)> predicate)
+    T GetBy(std::function<bool(T)> predicate)
     {
-        for (std::list<T>::iterator it = _container->begin(); it != _container->end(); it++)
+        for (typename std::list<T>::iterator it = _container->begin(); it != _container->end(); it++)
         {
             T element = *it;
             
@@ -76,14 +76,14 @@ public:
         return NULL;
     };
 
-    T BaseList::First()
+    T First()
     {
         auto it = _container->begin();
 
         return (*it);
     };
 
-    T BaseList::Last()
+    T Last()
     {
         auto it = _container->end();
 
@@ -92,11 +92,11 @@ public:
         return (*it);
     };
 
-    BaseList<T>* BaseList::Where(std::function<bool(T)> predicate)
+    BaseList<T>* Where(std::function<bool(T)> predicate)
     {
         BaseList<T>* retList = new BaseList<T>();
 
-        for (std::list<T>::iterator it = _container->begin(); it != _container->end(); it++)
+        for (typename std::list<T>::iterator it = _container->begin(); it != _container->end(); it++)
         {
             auto test = predicate(*it);
 
@@ -109,11 +109,11 @@ public:
         return retList;
     };
 
-    T BaseList::Single(std::function<bool(T)> predicate)
+    T Single(std::function<bool(T)> predicate)
     {
         T retValue = NULL;
 
-        for (std::list<T>::iterator it = _container->begin(); it != _container->end(); it++)
+        for (typename std::list<T>::iterator it = _container->begin(); it != _container->end(); it++)
         {
             T val = *it;
 
@@ -128,9 +128,9 @@ public:
         return retValue;
     };
 
-    bool BaseList::Contains(std::function<bool(T)> predicate)
+    bool Contains(std::function<bool(T)> predicate)
     {
-        for (std::list<T>::iterator it = _container->begin(); it != _container->end(); it++)
+        for (typename std::list<T>::iterator it = _container->begin(); it != _container->end(); it++)
         {
             T element = *it;
 
@@ -143,9 +143,9 @@ public:
         return false;
     };
 
-    bool BaseList::ContainsItem(T item)
+    bool ContainsItem(T item)
     {
-        for (std::list<T>::iterator it = _container->begin(); it != _container->end(); it++)
+        for (typename std::list<T>::iterator it = _container->begin(); it != _container->end(); it++)
         {
             T element = *it;
 
@@ -158,9 +158,9 @@ public:
         return false;
     }
 
-    void BaseList::ForEach(std::function<void(T)> func)
+    void ForEach(std::function<void(T)> func)
     {
-        for (std::list<T>::iterator it = _container->begin(); it != _container->end(); it++)
+        for (typename std::list<T>::iterator it = _container->begin(); it != _container->end(); it++)
         {
             T val = *it;
 
@@ -168,11 +168,11 @@ public:
         }
     };
 
-    int BaseList::IndexOf(T item)
+    int IndexOf(T item)
     {
         int i = 0;
 
-        for (std::list<T>::iterator it = _container->begin(); it != _container->end(); it++)
+        for (typename std::list<T>::iterator it = _container->begin(); it != _container->end(); it++)
         {
             T current = (*it);
 
@@ -185,7 +185,7 @@ public:
         return NULL;
     };
 
-    void BaseList::Swap(int indexA, int indexB)
+    void Swap(int indexA, int indexB)
     {
         auto x = _container->begin();
         auto y = _container->begin();
@@ -196,7 +196,7 @@ public:
         std::iter_swap(elementA, elementB);
     };
 
-    void BaseList::Shuffle()
+    void Shuffle()
     {
         int length = this->Count();
         RandomGen rng;
@@ -210,7 +210,7 @@ public:
     };
 
 
-    void BaseList::RemoveAt(int index)
+    void RemoveAt(int index)
     {
         auto it = _container->begin();
 
@@ -219,9 +219,9 @@ public:
         _container->erase(it);
     };
 
-    void BaseList::RemoveObject(T object)
+    void RemoveObject(T object)
     {
-        for (std::list<T>::iterator it = _container->begin(); it != _container->end(); it++)
+        for (typename std::list<T>::iterator it = _container->begin(); it != _container->end(); it++)
         {
             T current = (*it);
 
@@ -239,7 +239,7 @@ public:
         _container->clear();
     };
 
-    int BaseList::Count()
+    int Count()
     {
         return _container->size();
     };
@@ -296,7 +296,7 @@ private:
     // Explanation of the neccesary 'typename' keyword : http://pages.cs.wisc.edu/~driscoll/typename.html
     typename std::list<T>::iterator* GetIterator(int index)
     {
-        std::list<T>::iterator* current = _container->begin();
+        typename std::list<T>::iterator* current = _container->begin();
 
         for (int i = 0; i < _container->size; i++)
         {
@@ -314,7 +314,7 @@ BaseList<U>* ListSelect(BaseList<T>* input, std::function<U(T)> selector)
 {
     BaseList<U>* outList = new BaseList<U>();
 
-    for (std::list<T>::iterator it = input->GetContainer()->begin(); it != input->GetContainer()->end(); it++)
+    for (typename std::list<T>::iterator it = input->GetContainer()->begin(); it != input->GetContainer()->end(); it++)
     {
         auto projected = selector(*it);
 
@@ -329,7 +329,7 @@ Agg ListAggregate(BaseList<T>* input, Agg initial, std::function<Agg(Agg, T)> fu
 {
     Agg aggregateValue = initial;
 
-    for (std::list<T>::iterator it = input->GetContainer()->begin(); it != input->GetContainer()->end(); it++)
+    for (typename std::list<T>::iterator it = input->GetContainer()->begin(); it != input->GetContainer()->end(); it++)
     {
         T element = *it;
 

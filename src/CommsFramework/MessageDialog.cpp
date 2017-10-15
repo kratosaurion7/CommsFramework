@@ -9,13 +9,13 @@
 
 MessageDialog::MessageDialog()
 {
-    BaseDialog::BaseDialog();
+    //BaseDialog::BaseDialog();
 
 }
 
 MessageDialog::MessageDialog(std::string message)
 {
-    BaseDialog::BaseDialog();
+    //BaseDialog::BaseDialog();
 
     this->dialogMessage = message;
 
@@ -32,7 +32,7 @@ MessageDialog::MessageDialog(std::string message)
 
 MessageDialog::MessageDialog(std::string message, int windowTimeoutMiliseconds)
 {
-    BaseDialog::BaseDialog();
+    //BaseDialog::BaseDialog();
 
     this->dialogMessage = message;
 

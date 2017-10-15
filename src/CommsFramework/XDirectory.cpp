@@ -9,7 +9,7 @@ XDirectory::XDirectory(std::string path)
 {
     FullPath = path;
 
-    DirectoryPath = CStringToWideString(path);
+    //DirectoryPath = CStringToWideString(path);
 }
 
 
@@ -73,7 +73,7 @@ bool XDirectory::Check()
 {
 #ifdef WIN32
     return FullPath != "";
-#elif
+#else
     return false;
 #endif
 }
@@ -162,7 +162,7 @@ XDirectory* GetWorkingDir()
     XDirectory* currentDir = XDirectory::OpenDirectory(buf);
 
     return currentDir;
-#elif
+#else
     return NULL;
 #endif
 }

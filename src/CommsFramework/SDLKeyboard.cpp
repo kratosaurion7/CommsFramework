@@ -1,5 +1,6 @@
 #include "SDLKeyboard.h"
 
+#include <string.h>
 
 
 SDLKeyboard::SDLKeyboard()

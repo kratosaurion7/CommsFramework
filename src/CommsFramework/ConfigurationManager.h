@@ -3,6 +3,7 @@
 class XmlReader;
 
 #include <string>
+#include <string.h>
 
 #include "PointerList.h"
 #include "Pair.h"

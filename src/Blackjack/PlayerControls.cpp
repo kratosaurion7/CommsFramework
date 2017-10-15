@@ -7,7 +7,7 @@
 
 PlayerControls::PlayerControls()
 {
-    BaseActor::BaseActor();
+    //BaseActor::BaseActor();
 
     State = WAITING;
     Choice = NONE;

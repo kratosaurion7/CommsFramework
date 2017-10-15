@@ -24,7 +24,7 @@
 
 #include "TgaFile.h"
 
-#ifdef _WIN32
+#ifdef WIN32
 
 #include <Windows.h>
 #include "WindowsHelpers.h"

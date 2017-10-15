@@ -1,7 +1,7 @@
 #include "QuickWindow.h"
 
 
-#ifdef _WIN32
+#ifdef WIN32
 
 #include <d2d1.h>
 #include <wincodec.h>
@@ -270,10 +270,16 @@ void CloseQuickWindow(int windowIndex)
     }
 }
 
-#elif
-void QuickCreateWindow(TgaFile* content)
+#else
+
+int QuickCreateWindow(TgaFile* content)
 {
 }
-#endif // _WIN32
+
+void CloseQuickWindow(int windowIndex)
+{
+    
+}
+#endif // WIN32
 
 

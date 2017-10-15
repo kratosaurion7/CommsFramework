@@ -5,6 +5,7 @@ class XmlNodeAttribute;
 class FileContents;
 
 #include <string>
+#include <string.h>
 #include <functional>
 
 #include "rapidxml.hpp"

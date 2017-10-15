@@ -18,9 +18,9 @@ public:
         //delete(_container);
     };
 
-    void PointerList::Release()
+    void Release()
     {
-        for (std::list<T>::iterator it = _container->begin(); it != _container->end(); it++)
+        for (typename std::list<T>::iterator it = this->_container->begin(); it != this->_container->end(); it++)
         {
 			T obj = *it;
 
@@ -30,7 +30,7 @@ public:
 			}
         }
 
-        _container->clear();
+        this->_container->clear();
     };
 };
 
