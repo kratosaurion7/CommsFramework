@@ -156,3 +156,4 @@ FakesAssemblies/
 *.opendb
 *.VC.db
 *.pak
+.vs
