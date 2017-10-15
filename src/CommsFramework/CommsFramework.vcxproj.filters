@@ -22,9 +22,6 @@
     <Filter Include="Framework\Graphic\Base Classes">
       <UniqueIdentifier>{39c9a345-ea9f-4385-8198-85a5744a395d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Framework\Graphic\SFML">
-      <UniqueIdentifier>{caf1c03c-da63-4480-8d0c-58636161e336}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Framework\Game">
       <UniqueIdentifier>{89e85133-dbc5-4b58-b9b8-6e89d3bb39d9}</UniqueIdentifier>
     </Filter>
@@ -135,15 +132,6 @@
     <ClCompile Include="FileReader.cpp">
       <Filter>Framework\IO</Filter>
     </ClCompile>
-    <ClCompile Include="DSprite.cpp">
-      <Filter>Framework\Graphic\SFML</Filter>
-    </ClCompile>
-    <ClCompile Include="DTexture.cpp">
-      <Filter>Framework\Graphic\SFML</Filter>
-    </ClCompile>
-    <ClCompile Include="SFMLKeyboard.cpp">
-      <Filter>Framework\Graphic\SFML</Filter>
-    </ClCompile>
     <ClCompile Include="FPosition.cpp">
       <Filter>Framework\Geometry</Filter>
     </ClCompile>
@@ -152,12 +140,6 @@
     </ClCompile>
     <ClCompile Include="FRectangle.cpp">
       <Filter>Framework\Geometry</Filter>
-    </ClCompile>
-    <ClCompile Include="SFMLFont.cpp">
-      <Filter>Framework\Graphic\SFML</Filter>
-    </ClCompile>
-    <ClCompile Include="SFMLText.cpp">
-      <Filter>Framework\Graphic\SFML</Filter>
     </ClCompile>
     <ClCompile Include="DrawObject.cpp">
       <Filter>Framework\Graphic</Filter>
@@ -185,9 +167,6 @@
     </ClCompile>
     <ClCompile Include="WindowsHelpers.cpp">
       <Filter>Framework\Filesystem\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="SFMLMouse.cpp">
-      <Filter>Framework\Graphic\SFML</Filter>
     </ClCompile>
     <ClCompile Include="BaseMouse.cpp">
       <Filter>Framework\Graphic\Base Classes</Filter>
@@ -239,9 +218,6 @@
     </ClCompile>
     <ClCompile Include="BaseDialog.cpp">
       <Filter>Framework\Engine\Dialogs</Filter>
-    </ClCompile>
-    <ClCompile Include="SFMLGraphicEngine.cpp">
-      <Filter>Framework\Graphic\SFML</Filter>
     </ClCompile>
     <ClCompile Include="SDLGraphicEngine.cpp">
       <Filter>Framework\Graphic\SDL</Filter>
@@ -351,6 +327,9 @@
     <ClCompile Include="MyArrayList.cpp">
       <Filter>Framework\Collections\Custom</Filter>
     </ClCompile>
+    <ClCompile Include="UIImage.cpp">
+      <Filter>Framework\Graphic\Menus</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="XmlReader.h">
@@ -380,12 +359,6 @@
     <ClInclude Include="BaseTexture.h">
       <Filter>Framework\Graphic\Base Classes</Filter>
     </ClInclude>
-    <ClInclude Include="DSprite.h">
-      <Filter>Framework\Graphic\SFML</Filter>
-    </ClInclude>
-    <ClInclude Include="DTexture.h">
-      <Filter>Framework\Graphic\SFML</Filter>
-    </ClInclude>
     <ClInclude Include="Macros.h">
       <Filter>Framework</Filter>
     </ClInclude>
@@ -394,9 +367,6 @@
     </ClInclude>
     <ClInclude Include="BaseKeyboard.h">
       <Filter>Framework\Graphic\Base Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="SFMLKeyboard.h">
-      <Filter>Framework\Graphic\SFML</Filter>
     </ClInclude>
     <ClInclude Include="FPosition.h">
       <Filter>Framework\Geometry</Filter>
@@ -413,17 +383,8 @@
     <ClInclude Include="BaseFont.h">
       <Filter>Framework\Graphic\Base Classes</Filter>
     </ClInclude>
-    <ClInclude Include="SFMLFont.h">
-      <Filter>Framework\Graphic\SFML</Filter>
-    </ClInclude>
     <ClInclude Include="BaseText.h">
       <Filter>Framework\Graphic\Base Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="SFMLText.h">
-      <Filter>Framework\Graphic\SFML</Filter>
-    </ClInclude>
-    <ClInclude Include="SFMLDrawable.h">
-      <Filter>Framework\Graphic\SFML</Filter>
     </ClInclude>
     <ClInclude Include="PackageFile.h">
       <Filter>Framework\IO</Filter>
@@ -454,9 +415,6 @@
     </ClInclude>
     <ClInclude Include="BaseMouse.h">
       <Filter>Framework\Graphic\Base Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="SFMLMouse.h">
-      <Filter>Framework\Graphic\SFML</Filter>
     </ClInclude>
     <ClInclude Include="GameRule.h">
       <Filter>Framework\Game</Filter>
@@ -529,9 +487,6 @@
     </ClInclude>
     <ClInclude Include="IObservable.h">
       <Filter>Framework\Patterns</Filter>
-    </ClInclude>
-    <ClInclude Include="SFMLGraphicEngine.h">
-      <Filter>Framework\Graphic\SFML</Filter>
     </ClInclude>
     <ClInclude Include="SDLGraphicEngine.h">
       <Filter>Framework\Graphic\SDL</Filter>
@@ -637,6 +592,9 @@
     </ClInclude>
     <ClInclude Include="MyArrayList.h">
       <Filter>Framework\Collections\Custom</Filter>
+    </ClInclude>
+    <ClInclude Include="UIImage.h">
+      <Filter>Framework\Graphic\Menus</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

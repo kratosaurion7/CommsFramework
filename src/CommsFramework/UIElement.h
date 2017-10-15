@@ -23,4 +23,3 @@ protected:
 
     UIMenu* Owner;
 };
-

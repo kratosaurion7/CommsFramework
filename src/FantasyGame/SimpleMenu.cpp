@@ -32,7 +32,6 @@ SimpleMenu::SimpleMenu(GameEngine* engine) : UIMenu::UIMenu(engine)
     this->RegisterBackgroundImageAndSetSize(menuBackground);
 }
 
-
 SimpleMenu::~SimpleMenu()
 {
     this->RemoveElement(ButtonOne);

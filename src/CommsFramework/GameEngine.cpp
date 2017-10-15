@@ -7,10 +7,6 @@
 
 #include "GraphicEngineInitParams.h"
 
-
-#include "SFMLKeyboard.h"
-#include "SFMLMouse.h"
-
 #include "ConfigurationManager.h"
 
 #include "BaseKeyboard.h"

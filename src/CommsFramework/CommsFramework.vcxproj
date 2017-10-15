@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug-Static|Win32">
       <Configuration>Debug-Static</Configuration>
@@ -38,58 +38,58 @@
     <ProjectGuid>{BB1C3245-05C5-4512-93DB-E12D2ECD26E4}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>CommsFramework</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Static|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Static|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-Static|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-Static|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -371,11 +371,8 @@ XCOPY /Y /E "Assets\*" "$(TargetDir)Assets"</Command>
     <ClCompile Include="SDLText.cpp" />
     <ClCompile Include="SDLTexture.cpp" />
     <ClCompile Include="SDLUtilities.cpp" />
-    <ClCompile Include="SFMLGraphicEngine.cpp" />
     <ClCompile Include="FSize.cpp" />
     <ClCompile Include="FPosition.cpp" />
-    <ClCompile Include="DTexture.cpp" />
-    <ClCompile Include="DSprite.cpp" />
     <ClCompile Include="FileReader.cpp" />
     <ClCompile Include="GravityObjectsFallDownRule.cpp" />
     <ClCompile Include="MessageDialog.cpp" />
@@ -390,15 +387,12 @@ XCOPY /Y /E "Assets\*" "$(TargetDir)Assets"</Command>
     <ClCompile Include="TgaFile.cpp" />
     <ClCompile Include="UIButton.cpp" />
     <ClCompile Include="UIElement.cpp" />
+    <ClCompile Include="UIImage.cpp" />
     <ClCompile Include="UIMenu.cpp" />
     <ClCompile Include="Utils.cpp" />
     <ClCompile Include="RandomGen.cpp" />
-    <ClCompile Include="SFMLMouse.cpp" />
     <ClCompile Include="PackageFile.cpp" />
     <ClCompile Include="GameModule.cpp" />
-    <ClCompile Include="SFMLFont.cpp" />
-    <ClCompile Include="SFMLKeyboard.cpp" />
-    <ClCompile Include="SFMLText.cpp" />
     <ClCompile Include="Utilities.cpp" />
     <ClCompile Include="Viewport.cpp" />
     <ClCompile Include="WeightedNumberGenerator.cpp" />
@@ -476,25 +470,18 @@ XCOPY /Y /E "Assets\*" "$(TargetDir)Assets"</Command>
     <ClInclude Include="TgaFile.h" />
     <ClInclude Include="UIButton.h" />
     <ClInclude Include="UIElement.h" />
+    <ClInclude Include="UIImage.h" />
     <ClInclude Include="UIMenu.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="RandomGen.h" />
-    <ClInclude Include="SFMLMouse.h" />
     <ClInclude Include="PackageFile.h" />
     <ClInclude Include="PointerList.h" />
     <ClInclude Include="GraphicEngineInitParams.h" />
-    <ClInclude Include="SFMLGraphicEngine.h" />
     <ClInclude Include="FSize.h" />
     <ClInclude Include="FPosition.h" />
-    <ClInclude Include="DTexture.h" />
-    <ClInclude Include="DSprite.h" />
     <ClInclude Include="FileReader.h" />
     <ClInclude Include="Macros.h" />
     <ClInclude Include="GameModule.h" />
-    <ClInclude Include="SFMLDrawable.h" />
-    <ClInclude Include="SFMLFont.h" />
-    <ClInclude Include="SFMLKeyboard.h" />
-    <ClInclude Include="SFMLText.h" />
     <ClInclude Include="Utilities.h" />
     <ClInclude Include="Vectors.h" />
     <ClInclude Include="Viewport.h" />
