@@ -37,7 +37,7 @@ void FileSave::AddNumber(KEYTYPE name, int value)
 {
     GenType* newVal = new GenType();
     newVal->ValueType = GenType::SUPPORTED_TYPES::INT32;
-    
+
     newVal->Value = (void*)value;
 
     Pair<KEYTYPE, GenType*>* newItem = new Pair<KEYTYPE, GenType*>(name, newVal);
@@ -76,7 +76,7 @@ std::string* FileSave::GetString(KEYTYPE name)
         if (item->Item1 == name)
             return item;
 
-		return (Pair<std::string, GenType*>*)NULL; // Using the cast of NULL to help with the compiler deduced lambda return type.
+        return (Pair<std::string, GenType*>*)NULL; // Using the cast of NULL to help with the compiler deduced lambda return type.
     });
 
     if (foundItem != NULL)
@@ -85,10 +85,10 @@ std::string* FileSave::GetString(KEYTYPE name)
         {
             return (std::string*)foundItem->Item2->Value;
         }
-		else
-		{
-			// Mismatched type
-		}
+        else
+        {
+            // Mismatched type
+        }
     }
 
     return NULL;
@@ -100,8 +100,8 @@ int FileSave::GetNumber(KEYTYPE name)
         if (item->Item1 == name)
             return item;
 
-		return (Pair<std::string, GenType*>*)NULL; // Using the cast of NULL to help with the compiler deduced lambda return type.
-	});
+        return (Pair<std::string, GenType*>*)NULL; // Using the cast of NULL to help with the compiler deduced lambda return type.
+    });
 
     if (foundItem != NULL)
     {
@@ -110,10 +110,11 @@ int FileSave::GetNumber(KEYTYPE name)
             // TODO : x64 code losing half the bits
             return (long int)foundItem->Item2->Value;
         }
-		else
-		{
-			// Mismatched type
-		}
+        else
+        {
+            // Mismatched type
+            return NULL;
+        }
     }
     else
     {
@@ -127,7 +128,7 @@ bool FileSave::GetBool(KEYTYPE name)
         if (item->Item1 == name)
             return item;
 
-		return (Pair<std::string, GenType*>*)NULL; // Using the cast of NULL to help with the compiler deduced lambda return type.
+        return (Pair<std::string, GenType*>*)NULL; // Using the cast of NULL to help with the compiler deduced lambda return type.
     });
 
     if (foundItem != NULL)
@@ -136,10 +137,10 @@ bool FileSave::GetBool(KEYTYPE name)
         {
             return (bool)foundItem->Item2->Value;
         }
-		else
-		{
-			// Mismatched type
-		}
+        else
+        {
+            // Mismatched type
+        }
     }
 
     return NULL;
@@ -151,7 +152,7 @@ char* FileSave::GetData(KEYTYPE name, int & outLength)
         if (item->Item1 == name)
             return item;
 
-		return (Pair<std::string, GenType*>*)NULL; // Using the cast of NULL to help with the compiler deduced lambda return type.
+        return (Pair<std::string, GenType*>*)NULL; // Using the cast of NULL to help with the compiler deduced lambda return type.
     });
 
     if (foundItem != NULL)
@@ -160,10 +161,10 @@ char* FileSave::GetData(KEYTYPE name, int & outLength)
         {
             return (char*)foundItem->Item2->Value;
         }
-		else 
-		{
-			// Mismatched type
-		}
+        else
+        {
+            // Mismatched type
+        }
     }
 
     return NULL;
@@ -240,48 +241,48 @@ const char* FileSave::SaveToDataString(int& outLength)
 
         switch (element->Item2->ValueType)
         {
-            case GenType::SUPPORTED_TYPES::INT32:
-            {
-                int value = (long int)element->Item2->Value;
+        case GenType::SUPPORTED_TYPES::INT32:
+        {
+            int value = (long int)element->Item2->Value;
 
-                char* valueBytes = (char*)&(value);
+            char* valueBytes = (char*)&(value);
 
-                outString->append(valueBytes, 4);
-                outString->append("\0", 1); // Somehow have to add the element null terminator delimiter by hand
+            outString->append(valueBytes, 4);
+            outString->append("\0", 1); // Somehow have to add the element null terminator delimiter by hand
 
-                break;
-            }
-            case GenType::SUPPORTED_TYPES::BOOL:
-            {
-                bool value = (bool)element->Item2->Value;
+            break;
+        }
+        case GenType::SUPPORTED_TYPES::BOOL:
+        {
+            bool value = (bool)element->Item2->Value;
 
-                int numValue = (int)value;
+            int numValue = (int)value;
 
-                std::string serializedValue = std::to_string(numValue);
-                outString->append(serializedValue.c_str(), serializedValue.length() + 1);
+            std::string serializedValue = std::to_string(numValue);
+            outString->append(serializedValue.c_str(), serializedValue.length() + 1);
 
-                break;
-            }
-            case GenType::SUPPORTED_TYPES::STRING:
-            {
-                std::string* value = (std::string*)element->Item2->Value;
+            break;
+        }
+        case GenType::SUPPORTED_TYPES::STRING:
+        {
+            std::string* value = (std::string*)element->Item2->Value;
 
-                outString->append(value->c_str(), value->length() + 1);
+            outString->append(value->c_str(), value->length() + 1);
 
-                break;
-            }
-            case GenType::SUPPORTED_TYPES::DATA: 
-            {
-                char* value = (char*)element->Item2->Value;
+            break;
+        }
+        case GenType::SUPPORTED_TYPES::DATA:
+        {
+            char* value = (char*)element->Item2->Value;
 
-                std::string dataLengthString = std::to_string(element->Item2->ValueLength);
-                
-                char* sizeString = (char*)&(element->Item2->ValueLength);
-                outString->append(sizeString, 4);
-                outString->append(value, element->Item2->ValueLength + 1);
+            std::string dataLengthString = std::to_string(element->Item2->ValueLength);
 
-                break;
-            }
+            char* sizeString = (char*)&(element->Item2->ValueLength);
+            outString->append(sizeString, 4);
+            outString->append(value, element->Item2->ValueLength + 1);
+
+            break;
+        }
         }
 
         it++;
@@ -316,16 +317,16 @@ FileSave* FileSave::LoadFromFile(std::string filePath)
 
             switch (x)
             {
-                case FileSave::SAVE_VERSION::V1:
-                {
-                    loadedSave = FileSave::ProcessV1SaveFile(fs);
+            case FileSave::SAVE_VERSION::V1:
+            {
+                loadedSave = FileSave::ProcessV1SaveFile(fs);
 
-                    break;
-                }
-                default:
-                {
-                    break;
-                }
+                break;
+            }
+            default:
+            {
+                break;
+            }
             }
         }
 
@@ -354,55 +355,55 @@ FileSave* FileSave::ProcessV1SaveFile(std::ifstream* stream)
 
         switch (typeByte[0] - '0')
         {
-            case GenType::SUPPORTED_TYPES::INT32:
-            {
-                char numberBytes[4];
-                stream->read(numberBytes, 4);
+        case GenType::SUPPORTED_TYPES::INT32:
+        {
+            char numberBytes[4];
+            stream->read(numberBytes, 4);
 
-                int number = *((int*)numberBytes);
+            int number = *((int*)numberBytes);
 
-                newSave->AddNumber(elementName, number);
+            newSave->AddNumber(elementName, number);
 
-                break;
-            }
-            case GenType::SUPPORTED_TYPES::BOOL:
-            {
-                char val[1];
-                stream->read(val, 1);
+            break;
+        }
+        case GenType::SUPPORTED_TYPES::BOOL:
+        {
+            char val[1];
+            stream->read(val, 1);
 
-                bool value = val[0] - '0';
+            bool value = val[0] - '0';
 
-                newSave->AddBool(elementName, value);
+            newSave->AddBool(elementName, value);
 
-                break;
-            }
-            case GenType::SUPPORTED_TYPES::STRING:
-            {
-                char* inputString = new char[512]; // Implement safe max value ?
-                stream->getline(inputString, 512, '\0');
+            break;
+        }
+        case GenType::SUPPORTED_TYPES::STRING:
+        {
+            char* inputString = new char[512]; // Implement safe max value ?
+            stream->getline(inputString, 512, '\0');
 
-                std::string* newStr = new std::string(inputString);
+            std::string* newStr = new std::string(inputString);
 
-                newSave->AddString(elementName, newStr);
+            newSave->AddString(elementName, newStr);
 
-                break;
-            }
-            case GenType::SUPPORTED_TYPES::DATA:
-            {
-                char dataLen[4];
-                stream->read(dataLen, 4);
-                
-                int len = *((int*)dataLen); // Convert 4 ints to a char
+            break;
+        }
+        case GenType::SUPPORTED_TYPES::DATA:
+        {
+            char dataLen[4];
+            stream->read(dataLen, 4);
 
-                char* data = new char[len];
-                stream->read(data, len);
+            int len = *((int*)dataLen); // Convert 4 ints to a char
 
-                newSave->AddData(elementName, data, len);
+            char* data = new char[len];
+            stream->read(data, len);
 
-                break;
-            }
-            default:
-                break;
+            newSave->AddData(elementName, data, len);
+
+            break;
+        }
+        default:
+            break;
         }
 
         char valueEndDelim[1];
@@ -412,7 +413,7 @@ FileSave* FileSave::ProcessV1SaveFile(std::ifstream* stream)
         {
             int i = 0;
         }
-        
+
     }
 
     return newSave;

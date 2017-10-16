@@ -123,8 +123,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir)..\..\libs\SFML\x32\include;$(ProjectDir)..\..\libs\ZeroMQ\x32\include;$(ProjectDir)..\..\libs\rapidxml;$(ProjectDir)..\..\libs\SDL\include;$(ProjectDir)..\..\libs\SDL_Image\include;$(ProjectDir)..\..\libs\SDL_ttf\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDir)..\..\libs\SFML\x32\lib;$(ProjectDir)..\..\libs\ZeroMQ\x32\lib;$(ProjectDir)..\..\libs\SDL\lib\win32;$(ProjectDir)..\..\libs\SDL_Image\lib\x86;$(ProjectDir)..\..\libs\SDL_ttf\lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)..\..\libs\rapidxml;$(ProjectDir)..\..\libs\SDL\include;$(ProjectDir)..\..\libs\SDL_Image\include;$(ProjectDir)..\..\libs\SDL_ttf\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)..\..\libs\SDL\lib\win32;$(ProjectDir)..\..\libs\SDL_Image\lib\x86;$(ProjectDir)..\..\libs\SDL_ttf\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Static|Win32'">
     <LinkIncremental>true</LinkIncremental>
@@ -182,7 +182,7 @@ XCOPY /Y /E "Assets\*" "$(TargetDir)Assets"</Command>
     </PostBuildEvent>
     <Lib>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
-      <AdditionalDependencies>sfml-graphics-d.lib;sfml-system-d.lib;sfml-window-d.lib;sfml-main-d.lib;SDL2.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <Verbose>false</Verbose>
     </Lib>
   </ItemDefinitionGroup>

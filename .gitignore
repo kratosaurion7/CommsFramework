@@ -3,6 +3,7 @@ imports/GameCore
 include/GameCore
 assets_bin/
 Debug-Static/
+src/build
 
 
 # Created by https://www.gitignore.io/api/c++,clion,visualstudio
