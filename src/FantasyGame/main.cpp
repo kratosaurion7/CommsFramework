@@ -17,9 +17,6 @@
 #include <Functions.h>
 #include <ImageLoader.h>
 
-#include <Utils.h>
-
-
 #include <ConfigurationManager.h>
 #include "SimpleMenu.h"
 

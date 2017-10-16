@@ -123,7 +123,7 @@ HANDLE SocketServer::GetServerThread()
 
 void SocketServer::PrintInfo(char* formatStr, ...)
 {
-    DWORD wait = WaitForSingleObject(outMut, 200);
+   // DWORD wait = WaitForSingleObject(outMut, 200);
 
     va_list args;
     printf("[%s] ", this->ServerName.c_str());
@@ -132,7 +132,7 @@ void SocketServer::PrintInfo(char* formatStr, ...)
     va_end(args);
     printf("\n");
 
-    ReleaseMutex(outMut);
+    //ReleaseMutex(outMut);
 }
 
 DWORD WINAPI SocketServer::ServerListenFunc(LPVOID lpParam)

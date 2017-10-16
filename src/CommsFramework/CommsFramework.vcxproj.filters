@@ -82,9 +82,6 @@
     <Filter Include="Framework\Network">
       <UniqueIdentifier>{9e15695d-0b7c-4011-87fa-341b0c2088f5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Framework\Database">
-      <UniqueIdentifier>{5a9471e8-b235-40bc-a78c-c864a9d68148}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Framework\Patterns">
       <UniqueIdentifier>{057b92e5-15d2-4dc3-b855-3b6c4d254a6e}</UniqueIdentifier>
     </Filter>
@@ -201,17 +198,11 @@
     <ClCompile Include="YesNoDialog.cpp">
       <Filter>Framework\Engine\Dialogs</Filter>
     </ClCompile>
-    <ClCompile Include="Utils.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="SocketClient.cpp">
       <Filter>Framework\Network</Filter>
     </ClCompile>
     <ClCompile Include="SocketServer.cpp">
       <Filter>Framework\Network</Filter>
-    </ClCompile>
-    <ClCompile Include="RethinkDb.cpp">
-      <Filter>Framework\Database</Filter>
     </ClCompile>
     <ClCompile Include="MessageDialog.cpp">
       <Filter>Framework\Engine\Dialogs</Filter>
@@ -455,17 +446,11 @@
     <ClInclude Include="MouseClickInfo.h">
       <Filter>Framework\Input</Filter>
     </ClInclude>
-    <ClInclude Include="Utils.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="SocketClient.h">
       <Filter>Framework\Network</Filter>
     </ClInclude>
     <ClInclude Include="SocketServer.h">
       <Filter>Framework\Network</Filter>
-    </ClInclude>
-    <ClInclude Include="RethinkDb.h">
-      <Filter>Framework\Database</Filter>
     </ClInclude>
     <ClInclude Include="BaseQueue.h">
       <Filter>Framework\Collections</Filter>

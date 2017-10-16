@@ -291,7 +291,7 @@ void SocketClient::Close()
 
 void SocketClient::PrintInfo(char* formatStr, ...)
 {
-    DWORD wait = WaitForSingleObject(outMut, 200);
+    //DWORD wait = WaitForSingleObject(outMut, 200);
 
     va_list args;
     printf("[%s] ", this->ClientName.c_str());
@@ -300,7 +300,7 @@ void SocketClient::PrintInfo(char* formatStr, ...)
     va_end(args);
     printf("\n");
 
-    ReleaseMutex(outMut);
+    //ReleaseMutex(outMut);
 }
 
 DWORD WINAPI SocketClient::ClientReceiveFunc(LPVOID lpParam)
