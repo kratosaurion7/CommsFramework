@@ -168,13 +168,9 @@
       <AdditionalDependencies>libzmq-v120-mt-4_0_4.lib;sfml-graphics-d.lib;sfml-system-d.lib;sfml-window-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>XCOPY /Y "$(ProjectDir)..\..\libs\SFML\x32\bin\*.dll" "$(TargetDir)"
-
-XCOPY /Y "$(ProjectDir)..\..\libs\SDL\lib\win32\*.dll" "$(TargetDir)"
+      <Command>XCOPY /Y "$(ProjectDir)..\..\libs\SDL\lib\win32\*.dll" "$(TargetDir)"
 XCOPY /Y "$(ProjectDir)..\..\libs\SDL_Image\lib\x86\*.dll" "$(TargetDir)"
 XCOPY /Y "$(ProjectDir)..\..\libs\SDL_ttf\lib\x86\*.dll" "$(TargetDir)"
-
-XCOPY /Y "$(ProjectDir)..\..\libs\ZeroMQ\x32\bin\libzmq-v120-mt-4_0_4.dll" "$(TargetDir)"
 
 mkdir "$(TargetDir)Assets"
 
