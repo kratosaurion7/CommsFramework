@@ -69,6 +69,11 @@ IF(EMSCRIPTEN)
     set(SDL2_TTF_LIB ${SDL2TTF_LIBRARIES})
 
 ELSEIF(UNIX)
+    include_directories("../libs/linux/rapidxml")
+    include_directories("../libs/linux/SDL/include")
+    include_directories("../libs/linux/SDL_Image/include")
+    include_directories("../libs/linux/SDL_ttf/include")
+
     find_path(
         SDL2_INCLUDE
         SDL.h
@@ -103,6 +108,7 @@ ELSEIF(UNIX)
         PATHS ${SDL2_TTF_PATH}
     )
 
+    # Doesn't seem to work
     include_directories(${SDL2_INCLUDE})
     include_directories(${SDL2_IMAGE_INCLUDE})
     include_directories(${SDL2_TTF_INCLUDE})
@@ -130,8 +136,6 @@ ENDIF(EMSCRIPTEN)
 add_library(engine STATIC ${ENGINE_SOURCES} ${ENGINE_HEADERS})
 target_link_libraries(engine ${SDL2_LIB} ${SDL2_IMAGE_LIB} ${SDL2_TTF_LIB})
 
-set_target_properties(engine PROPERTIES LINK_FLAGS "-s USE_SDL=2")
-
 include_directories("CommsFramework")
 
 # Blackjack
@@ -139,16 +143,17 @@ add_executable(Blackjack ${BLACKJACK_HEADERS} ${BLACKJACK_SOURCES})
 target_link_libraries(Blackjack engine)
 target_link_libraries(Blackjack ${SDL2_LIB} ${SDL2_IMAGE_LIB} ${SDL2_TTF_LIB})
 
-set_target_properties(Blackjack PROPERTIES LINK_FLAGS "-s USE_SDL=2")
-
 
 #PuzzleGame
 add_executable(PuzzleGame ${PUZZLEGAME_HEADERS} ${PUZZLEGAME_SOURCES})
 target_link_libraries(PuzzleGame engine)
 target_link_libraries(PuzzleGame ${SDL2_LIB} ${SDL2_IMAGE_LIB} ${SDL2_TTF_LIB})
 
-set_target_properties(PuzzleGame PROPERTIES LINK_FLAGS "-s USE_SDL=2")
-
+IF(EMSCRIPTEN)
+    set_target_properties(engine PROPERTIES LINK_FLAGS "-s USE_SDL=2")
+    set_target_properties(Blackjack PROPERTIES LINK_FLAGS "-s USE_SDL=2")
+    set_target_properties(PuzzleGame PROPERTIES LINK_FLAGS "-s USE_SDL=2")
+ENDIF(EMSCRIPTEN)
 
 IF(WIN32)
 # Copy dependencies DLL
