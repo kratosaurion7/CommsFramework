@@ -1,14 +1,24 @@
 #include <GameEngine.h>
 #include <BaseGraphicEngine.h>
-#include <PointerList.h>
 
 #include "GameCore.h"
 #include "GameButton.h"
 
+#include <stdio.h>
+
+GameEngine* Engine;
+
+void play_one();
+
+#ifdef __EMSCRIPTEN__
+
+#include <emscripten.h>
+
+#endif
 
 int main()
 {
-    GameEngine* Engine = new GameEngine();
+    Engine = new GameEngine();
     Engine->Init(NB_TILES_W * TILE_W * TILE_SCALE, NB_TILES_H * TILE_H * TILE_SCALE);
 
     PointerList<GameButton*>* list = new PointerList<GameButton*>();
@@ -35,6 +45,11 @@ int main()
     Board = list->GetListAs2dArray(5);
     Board[2][2]->Toggle();
 
+#ifdef __EMSCRIPTEN__
+
+    emscripten_set_main_loop(play_one, 30, 0);
+
+#else
     while (true)
     {
         if (Engine->Graphics->IsTimeForFrame())
@@ -49,7 +64,24 @@ int main()
             Engine->Play();
         }
     }
-
+#endif
 
     return 0;
+}
+
+void play_one()
+{
+    printf("Rendering\n");
+
+    if (Engine->Graphics->IsTimeForFrame())
+    {
+        if (Engine->Mouse->LeftButtonClicked())
+        {
+            auto pos = Engine->Mouse->GetMousePosition();
+
+            fprintf(stdout, "Click at X: %f, Y: %f \n", pos.X, pos.Y);
+        }
+
+        Engine->Play();
+    }
 }

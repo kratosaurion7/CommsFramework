@@ -8,6 +8,10 @@
 
 #include <sys/time.h>
 
+#elif __EMSCRIPTEN__
+
+#include <emscripten.h>
+
 #endif
 
 void DumpData(const char* data, int size, std::string outputName)
@@ -34,7 +38,8 @@ int GetTicks()
             return 0;
 
     return (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
-    
+#elif __EMSCRIPTEN__
+    return emscripten_get_now();
 #else
     return 0;
 #endif

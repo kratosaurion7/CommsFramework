@@ -51,13 +51,24 @@ IF(WIN32)
 
 ENDIF(WIN32)
 
-IF(UNIX)
-    include_directories("../libs/linux/rapidxml")
-    include_directories("../libs/linux/SDL/include")
-    include_directories("../libs/linux/SDL_Image/include")
-    include_directories("../libs/linux/SDL_ttf/include")
+IF(EMSCRIPTEN)
 
+    INCLUDE(FindPkgConfig)
 
+    PKG_SEARCH_MODULE(SDL2 REQUIRED sdl2)
+    PKG_SEARCH_MODULE(SDL2IMAGE REQUIRED SDL2_image>=2.0.0)
+    PKG_SEARCH_MODULE(SDL2TTF REQUIRED SDL2_ttf)
+
+    include_directories("../libs/windows/rapidxml")
+    include_directories("../libs/windows/SDL/include")
+    include_directories("../libs/windows/SDL_Image/include")
+    include_directories("../libs/windows/SDL_ttf/include")
+
+    set(SDL2_LIB ${SDL2_LIBRARIES})
+    set(SDL2_IMAGE_LIB ${SDL2IMAGE_LIBRARIES})
+    set(SDL2_TTF_LIB ${SDL2TTF_LIBRARIES})
+
+ELSEIF(UNIX)
     find_path(
         SDL2_INCLUDE
         SDL.h
@@ -70,10 +81,10 @@ IF(UNIX)
     find_path(
         SDL2_IMAGE_INCLUDE
         SDL_image.h
-        HINTS 
+        HINTS
             ENV SDL2IMAGEDIR
             ENV SDL2DIR
-        PATH_SUFFIXES 
+        PATH_SUFFIXES
             SDL2
             # path suffixes to search inside ENV{SDLDIR}
             include/SDL2 include
@@ -85,7 +96,7 @@ IF(UNIX)
         HINTS
             ENV SDL2TTFDIR
             ENV SDL2DIR
-        PATH_SUFFIXES 
+        PATH_SUFFIXES
             SDL2
             # path suffixes to search inside ENV{SDLDIR}
             include/SDL2 include
@@ -111,14 +122,15 @@ IF(UNIX)
         NAMES SDL2_ttf
 #       HINTS "../libs/linux/SDL_ttf/lib/x86"
     )
-ENDIF(UNIX)
+ENDIF(EMSCRIPTEN)
 
 
 
 # Engine
 add_library(engine STATIC ${ENGINE_SOURCES} ${ENGINE_HEADERS})
 target_link_libraries(engine ${SDL2_LIB} ${SDL2_IMAGE_LIB} ${SDL2_TTF_LIB})
-#target_compile_features(engine PUBLIC cxx_std_11)
+
+set_target_properties(engine PROPERTIES LINK_FLAGS "-s USE_SDL=2")
 
 include_directories("CommsFramework")
 
@@ -126,13 +138,17 @@ include_directories("CommsFramework")
 add_executable(Blackjack ${BLACKJACK_HEADERS} ${BLACKJACK_SOURCES})
 target_link_libraries(Blackjack engine)
 target_link_libraries(Blackjack ${SDL2_LIB} ${SDL2_IMAGE_LIB} ${SDL2_TTF_LIB})
-#target_compile_features(Blackjack PUBLIC cxx_std_11)
+
+set_target_properties(Blackjack PROPERTIES LINK_FLAGS "-s USE_SDL=2")
+
 
 #PuzzleGame
 add_executable(PuzzleGame ${PUZZLEGAME_HEADERS} ${PUZZLEGAME_SOURCES})
 target_link_libraries(PuzzleGame engine)
 target_link_libraries(PuzzleGame ${SDL2_LIB} ${SDL2_IMAGE_LIB} ${SDL2_TTF_LIB})
-#target_compile_features(PuzzleGame PUBLIC cxx_std_11)
+
+set_target_properties(PuzzleGame PROPERTIES LINK_FLAGS "-s USE_SDL=2")
+
 
 IF(WIN32)
 # Copy dependencies DLL
