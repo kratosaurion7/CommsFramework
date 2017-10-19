@@ -1,7 +1,5 @@
 #include "GameEngine.h"
 
-#include "SDLKeyboard.h"
-#include "SDLMouse.h"
 #include "SDLGraphicEngine.h"
 #include <SDL_events.h>
 
@@ -21,6 +19,7 @@
 #include "EngineDialogMessage.h"
 #include "BaseQueue.h"
 
+#include "Platform.h"
 
 #include "FSize.h"
 
@@ -35,20 +34,14 @@ GameEngine::GameEngine()
 {
     GameEngine::_globalInstance = this;
 
-    Graphics = new SDLGraphicEngine();
+    Graphics = Platform::CreateDefaultPlatformGraphicEngine();
 
     GameSprites = new PointerList<BaseSprite*>();
     GameActors = new PointerList<BaseActor*>();
     GameTexts = new PointerList<BaseText*>();
 
-    SDLKeyboard* sfKeyboard = new SDLKeyboard();
-    //sfKeyboard->graphicsRef = this->Graphics;
-
-    SDLMouse* sfMouse = new SDLMouse();
-    //sfMouse->engineRef = this->Graphics;
-
-    GameEngine::Keyboard = sfKeyboard;
-    GameEngine::Mouse = sfMouse;
+    GameEngine::Keyboard = Platform::CreateDefaultPlatformKeyboard();
+    GameEngine::Mouse = Platform::CreateDefaultPlatformMouse();
 
     this->ConfigManager = new ConfigurationManager();
 
@@ -466,31 +459,33 @@ void GameEngine::DoEventLoop()
     GameEngine::Mouse->UpdatePastMouseState();
     GameEngine::Keyboard->UpdateKeyboardState();
 
-    SDL_Event myEvent;
-    while (SDL_PollEvent(&myEvent)) {
-        switch (myEvent.type)
-        {
-            case SDL_MOUSEMOTION:
-            case SDL_MOUSEBUTTONDOWN:
-            case SDL_MOUSEBUTTONUP:
-            {
-                ((SDLMouse*)Mouse)->HandleEvent(&myEvent);
-                break;
-            }
-            case SDL_QUIT:
-            {
-                exit(0);
+    Platform::ExecutePlatformEvents(Mouse, Keyboard);
 
-                break;
-            }
-            case SDL_WINDOWEVENT:
-            {
-                break;
-            }
-            default:
-                break;
-        }
-    }
+    //SDL_Event myEvent;
+    //while (SDL_PollEvent(&myEvent)) {
+    //    switch (myEvent.type)
+    //    {
+    //        case SDL_MOUSEMOTION:
+    //        case SDL_MOUSEBUTTONDOWN:
+    //        case SDL_MOUSEBUTTONUP:
+    //        {
+    //            ((SDLMouse*)Mouse)->HandleEvent(&myEvent);
+    //            break;
+    //        }
+    //        case SDL_QUIT:
+    //        {
+    //            exit(0);
+
+    //            break;
+    //        }
+    //        case SDL_WINDOWEVENT:
+    //        {
+    //            break;
+    //        }
+    //        default:
+    //            break;
+    //    }
+    //}
 }
 
 void GameEngine::CreateSpritesFromConfig()
