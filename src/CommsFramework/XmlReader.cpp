@@ -363,8 +363,8 @@ void XmlNode::NodesSearch(xml_node<>* node, std::function<bool(rapidxml::xml_nod
 
 XmlNodeAttribute::XmlNodeAttribute()
 {
-    this->AttributeName = "";
-    this->AttributeValue = "";
+    strcpy(this->AttributeName, "");
+    strcpy(this->AttributeValue, "");
 }
 
 XmlNodeAttribute::~XmlNodeAttribute()

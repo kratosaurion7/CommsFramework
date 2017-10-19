@@ -5,7 +5,7 @@
 #include "BaseList.h"
 
 
-BaseList<std::string>* StringSplit(std::string str, char* delimiter);
+BaseList<std::string>* StringSplit(std::string str, const char* delimiter);
 
 /*
  * Take a string a and subtract b from it

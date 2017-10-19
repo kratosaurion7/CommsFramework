@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 #include <string>
+#include <string.h>
 
 #include "SDL.h"
 #include "SDL_image.h"
@@ -12,7 +13,7 @@
 
 FontProcessor::FontProcessor()
 {
-    CharacterSet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    strcpy(CharacterSet, "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789");
 }
 
 

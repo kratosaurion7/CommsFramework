@@ -1,9 +1,7 @@
 #pragma once
 
 class RandomGen;
-class ResourceManager;
 struct GameEngineInitParams;
-class ResourceManagerInitParams;
 class GraphicEngineInitParams;
 class GameRule;
 
@@ -55,7 +53,6 @@ struct GameEngineInitParams
 {
     GraphicEngineInitParams* GraphicsParams;
 
-    ResourceManagerInitParams* ResourceParams;
 
     static GameEngineInitParams* CreateDefaultParams();
 };
@@ -69,7 +66,6 @@ public:
     ConfigurationManager* ConfigManager;
 
     BaseGraphicEngine* Graphics;
-    ResourceManager* Resources;
 
     static BaseKeyboard* Keyboard;
     static BaseMouse* Mouse;

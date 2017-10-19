@@ -2,24 +2,36 @@
 
 PrimitiveDrawInfo::~PrimitiveDrawInfo()
 {
-	switch (this->CallType)
-	{
-		case DrawType_LineList:
-		{
-			PrimitiveRectDraw* prim = (PrimitiveRectDraw*)this->DrawData;
-		
-			delete(prim);
+    switch (this->CallType)
+    {
+        case DrawType_Line:
+        {
+            PrimitiveLineDraw* prim = (PrimitiveLineDraw*)this->DrawData;
 
-			break;
-		}
-		default:
-			delete(DrawData);
+            delete(prim);
 
-			break;
-	}
+            break;
+        }
+        case DrawType_LineList:
+        {
+            PrimitiveRectDraw* prim = (PrimitiveRectDraw*)this->DrawData;
+
+            delete(prim);
+
+            break;
+        }
+        case DrawType_Rect:
+        {
+            PrimitiveRectDraw* prim = (PrimitiveRectDraw*)this->DrawData;
+
+            delete(prim);
+
+            break;
+        }
+    }
 }
 
 PrimitiveLineListDraw::~PrimitiveLineListDraw()
 {
-	delete(PointPairsArray);
+    delete(PointPairsArray);
 }

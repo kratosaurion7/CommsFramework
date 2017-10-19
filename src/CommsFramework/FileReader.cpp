@@ -34,7 +34,7 @@ void FileReader::OpenFile(char* fileName)
 
     if (errno != 0)
     {
-        printf(strerror(errno));
+        printf("%s", strerror(errno));
     }
 }
 
@@ -46,7 +46,7 @@ void FileReader::OpenFile(const char* fileName)
 
     if (errno != 0)
     {
-        printf(strerror(errno));
+        printf("%s", strerror(errno));
     }
 }
 

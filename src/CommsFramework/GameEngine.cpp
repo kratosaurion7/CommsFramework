@@ -1,8 +1,5 @@
 #include "GameEngine.h"
 
-#include "SDLGraphicEngine.h"
-#include <SDL_events.h>
-
 #include "GraphicEngineInitParams.h"
 
 #include "ConfigurationManager.h"
@@ -11,19 +8,13 @@
 #include "BaseMouse.h"
 #include "BaseGraphicEngine.h"
 #include "BaseActor.h"
-#include "BaseSprite.h"
 
 #include "MouseClickInfo.h"
 #include "GameRule.h"
-#include "RandomGen.h"
 #include "EngineDialogMessage.h"
 #include "BaseQueue.h"
 
 #include "Platform.h"
-
-#include "FSize.h"
-
-#include "MouseClickInfo.h"
 
 BaseKeyboard* GameEngine::Keyboard = 0;
 BaseMouse* GameEngine::Mouse = 0;
@@ -63,7 +54,6 @@ GameEngine::~GameEngine()
     // Delete pointers
     delete(engineInitParams);
     delete(Graphics);
-    delete(Resources);
     delete(FrameClickInfo);
     delete(GameSprites);
     delete(GameActors);

@@ -38,7 +38,8 @@ void FileSave::AddNumber(KEYTYPE name, int value)
     GenType* newVal = new GenType();
     newVal->ValueType = GenType::SUPPORTED_TYPES::INT32;
 
-    newVal->Value = (void*)value;
+    // TODO : Converting int to void* is hacky. Find better way.
+    //newVal->Value = (void*)value;
 
     Pair<KEYTYPE, GenType*>* newItem = new Pair<KEYTYPE, GenType*>(name, newVal);
 
@@ -107,18 +108,19 @@ int FileSave::GetNumber(KEYTYPE name)
     {
         if (foundItem->Item2->ValueType == GenType::SUPPORTED_TYPES::INT32)
         {
-            // TODO : x64 code losing half the bits
-            return (long int)foundItem->Item2->Value;
+            // TODO : Replace this shit class.
+            //return (int)foundItem->Item2->Value;
+            return 0;
         }
         else
         {
             // Mismatched type
-            return NULL;
+            return 0;
         }
     }
     else
     {
-        return NULL;
+        return 0;
     }
 }
 

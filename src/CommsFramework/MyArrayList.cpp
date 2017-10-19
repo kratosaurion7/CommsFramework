@@ -70,13 +70,14 @@ void MyArrayList::Remove(int index)
 
 void MyArrayList::Delete(int index)
 {
-    if (index >= elementsCount)
+    // TODO : Must implemenent delete in a context where we know the type. Deleting void* is undefined.
+    /*if (index >= elementsCount)
         return;
 
     delete(arrayElements[index]);
     arrayElements[index] = NULL;
 
-    MoveIn(index);
+    MoveIn(index);*/
 }
 
 int MyArrayList::Count()

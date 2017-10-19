@@ -1,7 +1,7 @@
 #include "StringFunctions.h"
 
 
-BaseList<std::string>* StringSplit(std::string str, char* delimiter)
+BaseList<std::string>* StringSplit(std::string str, const char* delimiter)
 {
     BaseList<std::string>* parts = new BaseList<std::string>();
 
