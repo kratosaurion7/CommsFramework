@@ -111,7 +111,7 @@ void MessageDialog::Update()
 void MessageDialog::SetupSprites()
 {
     DialogSprite = Engine->CreateSprite("YesNoDialogMessageFrame");
-    DialogSprite->SetTexture("assets\\dialogs\\DialogFrame.png");
+    DialogSprite->SetTexture("assets/dialogs/DialogFrame.png");
     DialogSprite->SetPos(300, 300);
 
     DialogText = Engine->CreateText(this->dialogMessage);

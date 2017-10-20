@@ -13,7 +13,7 @@ EngineDialogMessage::EngineDialogMessage(GameEngine* engine)
 
     DialogSprite = this->Engine->CreateSprite("EngineDialogSprite");
     
-    BaseTexture* dialogBackgroundTexture = this->Engine->Graphics->CreateTexture("DefaultDialogBackground", "Assets\\DefaultDialogBackground.png");
+    BaseTexture* dialogBackgroundTexture = this->Engine->Graphics->CreateTexture("DefaultDialogBackground", "assets\\DefaultDialogBackground.png");
     DialogSprite->SetTexture(dialogBackgroundTexture);
 
     DialogSprite->Show(false);

@@ -26,21 +26,6 @@ int main()
     BlackjackGame* game = new BlackjackGame();
     eng->AttachActor(game);
 
-    ////////////////////////// TEST SECTION ///////////////////////
-    
-    FileSave* save = new FileSave();
-
-    std::string playerNameValue = "Tristan";
-    save->AddData("Player_Name", (char*)playerNameValue.c_str(), playerNameValue.length());
-    save->AddBool("Alive", true);
-    save->AddNumber("Lives_Left", 5);
-    save->AddString("Current_Level_Name", new std::string("World_01"));
-    
-    save->SaveToFile("out.bin");
-    
-
-    //////////////////////// END TEST SECTION /////////////////////
-
 
     while (true)
     {

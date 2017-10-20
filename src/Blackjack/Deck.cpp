@@ -167,7 +167,7 @@ Card* Deck::DrawCard()
 
 void Deck::SetupCardSprites(Card * targetCard)
 {
-    char* cardBackName = "cardBack_blue1.png\0";
+    const char* cardBackName = "cardBack_blue1.png\0";
     char cardFileName[256];
     char suitName[256];
     char cardValue[256];
@@ -231,10 +231,10 @@ void Deck::SetupCardSprites(Card * targetCard)
 
     snprintf(cardFileName, 256, "card%s%s.png\0", suitName, cardValue);
 
-    std::string cardBackFileName = "assets\\cards\\back\\";
+    std::string cardBackFileName = "assets/cards/back/";
     cardBackFileName.append(cardBackName);
 
-    std::string cardFrontFileName = "assets\\cards\\front\\";
+    std::string cardFrontFileName = "assets/cards/front/";
     cardFrontFileName.append(cardFileName);
 
     targetCard->cardBack->SetTexture(cardBackFileName);

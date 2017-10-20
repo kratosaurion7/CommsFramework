@@ -225,3 +225,16 @@ add_custom_command(
 )
 
 ENDIF(WIN32)
+
+add_custom_command(
+        TARGET engine POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+        "${PROJECT_SOURCE_DIR}/CommsFramework/Assets"
+        $<TARGET_FILE_DIR:engine>/assets
+)
+add_custom_command(
+        TARGET Blackjack POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+        "${PROJECT_SOURCE_DIR}/Blackjack/assets"
+        $<TARGET_FILE_DIR:Blackjack>/assets
+)

@@ -27,7 +27,7 @@ SDL_Texture* SDLTexture::GetMissingTextureTexture(BaseGraphicEngine* engine)
     {
         SDLTexture* tex = (SDLTexture*)engine->CreateTexture("Missing_Texture");
 
-        tex->Load("Assets/engine/missing_texture.png");
+        tex->Load("assets/engine/missing_texture.png");
         
         SDLTexture::MissingTextureSingleton = tex;
     }
@@ -50,6 +50,7 @@ int SDLTexture::Load(std::string path)
 
     if (surface == NULL)
     {
+
         errorString = SDL_GetError();
         fprintf(stderr, "Unable to create surface for [%s] with error %s\n", path.c_str(), errorString);
 
