@@ -12,14 +12,14 @@ endif()
 
 set (CMAKE_CXX_STANDARD 11)
 
-file(GLOB ENGINE_HEADERS "CommsFramework/*.h")
-file(GLOB ENGINE_SOURCES "CommsFramework/*.cpp")
+file(GLOB_RECURSE ENGINE_HEADERS "CommsFramework/*.h")
+file(GLOB_RECURSE ENGINE_SOURCES "CommsFramework/*.cpp")
 
-file(GLOB BLACKJACK_HEADERS "Blackjack/*.h")
-file(GLOB BLACKJACK_SOURCES "Blackjack/*.cpp")
+file(GLOB_RECURSE BLACKJACK_HEADERS "Blackjack/*.h")
+file(GLOB_RECURSE BLACKJACK_SOURCES "Blackjack/*.cpp")
 
-file(GLOB PUZZLEGAME_HEADERS "PuzzleGame/*.h")
-file(GLOB PUZZLEGAME_SOURCES "PuzzleGame/*.cpp")
+file(GLOB_RECURSE PUZZLEGAME_HEADERS "PuzzleGame/*.h")
+file(GLOB_RECURSE PUZZLEGAME_SOURCES "PuzzleGame/*.cpp")
 
 IF(WIN32)
     add_definitions("-D_WINDOWS")
@@ -48,7 +48,8 @@ IF(WIN32)
         NAMES SDL2_ttf
         HINTS "../libs/windows/SDL_ttf/lib/${ARCH}"
     )
-
+    
+    add_definitions(-D_CRT_SECURE_NO_WARNINGS)
 ENDIF(WIN32)
 
 IF(EMSCRIPTEN)
@@ -137,6 +138,43 @@ add_library(engine STATIC ${ENGINE_SOURCES} ${ENGINE_HEADERS})
 target_link_libraries(engine ${SDL2_LIB} ${SDL2_IMAGE_LIB} ${SDL2_TTF_LIB})
 
 include_directories("CommsFramework")
+include_directories("CommsFramework/Framework")
+include_directories("CommsFramework/Framework/Collections")
+include_directories("CommsFramework/Framework/Collections/Custom")
+include_directories("CommsFramework/Framework/Configuration")
+include_directories("CommsFramework/Framework/Engine")
+include_directories("CommsFramework/Framework/Engine/Dialogs")
+include_directories("CommsFramework/Framework/Filesystem")
+include_directories("CommsFramework/Framework/Filesystem/Linux")
+include_directories("CommsFramework/Framework/Filesystem/Windows")
+include_directories("CommsFramework/Framework/Game")
+include_directories("CommsFramework/Framework/Game/Actors")
+include_directories("CommsFramework/Framework/Game/DataManager")
+include_directories("CommsFramework/Framework/Game/Rules")
+include_directories("CommsFramework/Framework/Game/Saving")
+include_directories("CommsFramework/Framework/Geometry")
+include_directories("CommsFramework/Framework/Graphic")
+include_directories("CommsFramework/Framework/Graphic/Animation")
+include_directories("CommsFramework/Framework/Graphic/Base Classes")
+include_directories("CommsFramework/Framework/Graphic/Menu")
+include_directories("CommsFramework/Framework/Graphic/Primitive Draws")
+include_directories("CommsFramework/Framework/Graphic/SDL")
+include_directories("CommsFramework/Framework/Graphic/Spritesheet")
+include_directories("CommsFramework/Framework/Image")
+include_directories("CommsFramework/Framework/Input")
+include_directories("CommsFramework/Framework/IO")
+include_directories("CommsFramework/Framework/Math")
+include_directories("CommsFramework/Framework/Network")
+include_directories("CommsFramework/Framework/Patterns")
+include_directories("CommsFramework/Framework/System")
+include_directories("CommsFramework/Framework/System/Windows")
+include_directories("CommsFramework/Framework/Tools")
+include_directories("CommsFramework/Framework/Tools/Font")
+include_directories("CommsFramework/Framework/Types")
+include_directories("CommsFramework/Framework/Utilities")
+include_directories("CommsFramework/Framework/XML")
+
+
 
 # Blackjack
 add_executable(Blackjack ${BLACKJACK_HEADERS} ${BLACKJACK_SOURCES})
@@ -156,6 +194,11 @@ IF(EMSCRIPTEN)
 ENDIF(EMSCRIPTEN)
 
 IF(WIN32)
+
+set_target_properties(engine PROPERTIES VS_DEBUGGER_WORKING_DIRECTORY "$(ProjectDir)/$(Configuration)")
+set_target_properties(Blackjack PROPERTIES VS_DEBUGGER_WORKING_DIRECTORY "$(ProjectDir)/$(Configuration)")
+set_target_properties(PuzzleGame PROPERTIES VS_DEBUGGER_WORKING_DIRECTORY "$(ProjectDir)/$(Configuration)")
+
 # Copy dependencies DLL
 
 #SDL2.dll
