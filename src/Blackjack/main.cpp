@@ -1,18 +1,23 @@
 #include <BaseGraphicEngine.h>
 #include <GameEngine.h>
-#include <LiteList.h>
 
 #include "Deck.h"
-#include "Card.h"
 
 #include "BlackjackGame.h"
 
-#include "PlayerControls.h"
 
 #include <MessageDialog.h>
-#include <SDLUtilities.h>
 
-#include <FileSave.h>
+GameEngine* eng;
+
+void play_one();
+
+#ifdef __EMSCRIPTEN__
+
+#include <emscripten.h>
+
+#endif
+
 
 int main()
 {
@@ -26,7 +31,11 @@ int main()
     BlackjackGame* game = new BlackjackGame();
     eng->AttachActor(game);
 
+#ifdef __EMSCRIPTEN__
 
+    emscripten_set_main_loop(play_one, 30, 0);
+
+#else
     while (true)
     {
         eng->Play();
@@ -41,6 +50,22 @@ int main()
             eng->Graphics->Scale(0.5);
         }
     }
+#endif
 
     return 0;
+}
+
+void play_one()
+{
+    eng->Play();
+
+    if (eng->Keyboard->IsKeyClicked(Key::_Escape))
+    {
+        return;
+    }
+
+    if (eng->Keyboard->IsKeyClicked(Key::Space))
+    {
+        //eng->Graphics->Scale(0.5);
+    }
 }
