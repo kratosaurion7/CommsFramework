@@ -16,7 +16,7 @@
 
 #include "Filesystem/XFile.h"
 #include "Filesystem/XDirectory.h"
-#include "Utilities\StringFunctions.h"
+#include "Utilities/StringFunctions.h"
 
 std::string GetLocalFileName(XFile* file)
 {
