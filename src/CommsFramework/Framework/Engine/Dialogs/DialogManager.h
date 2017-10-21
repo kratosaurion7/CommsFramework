@@ -1,9 +1,8 @@
 #pragma once
 
-#include "PointerList.h"
-#include "GameEngine.h"
-
-#include "EngineDialogMessage.h"
+#include "Collections/PointerList.h"
+#include "Engine/GameEngine.h"
+#include "Engine/Dialogs/EngineDialogMessage.h"
 
 #include <string>
 

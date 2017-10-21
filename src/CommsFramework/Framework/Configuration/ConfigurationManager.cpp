@@ -1,8 +1,8 @@
 #include "ConfigurationManager.h"
 
-#include "XmlReader.h"
-#include "XDirectory.h"
-#include "XFile.h"
+#include "XML/XmlReader.h"
+#include "Filesystem/XDirectory.h"
+#include "Filesystem/XFile.h"
 
 
 ConfigurationManager::ConfigurationManager()

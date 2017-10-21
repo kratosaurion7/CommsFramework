@@ -7,10 +7,10 @@ class CardHand;
 
 #include <string>
 
-#include <BaseList.h>
-#include <PointerList.h>
+#include <Collections/BaseList.h>
+#include <Collections/PointerList.h>
 
-#include <BaseActor.h>
+#include <Game/Actors/BaseActor.h>
 
 
 class CardActor : public BaseActor

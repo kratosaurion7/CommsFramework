@@ -1,10 +1,10 @@
 #include "BaseActor.h"
 
-#include "BaseGraphicEngine.h"
-#include "GameEngine.h"
-#include "BaseSprite.h"
+#include "Graphic/Base Classes/BaseGraphicEngine.h"
+#include "Engine/GameEngine.h"
+#include "Graphic/Base Classes/BaseSprite.h"
 
-#include "Keys.h"
+#include "Input/Keys.h"
 
 BaseActor::BaseActor()
 {

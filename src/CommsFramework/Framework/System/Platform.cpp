@@ -5,9 +5,9 @@
 
 #include <SDL_events.h>
 
-#include "SDLMouse.h"
-#include "SDLKeyboard.h"
-#include "SDLGraphicEngine.h"
+#include "Graphic/SDL/SDLMouse.h"
+#include "Graphic/SDL/SDLKeyboard.h"
+#include "Graphic/SDL/SDLGraphicEngine.h"
 
 #endif
 

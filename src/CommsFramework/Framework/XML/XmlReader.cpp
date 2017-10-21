@@ -1,6 +1,6 @@
 #include "XmlReader.h"
 
-#include "FileReader.h"
+#include "IO/FileReader.h"
 
 using namespace rapidxml;
 

@@ -1,10 +1,10 @@
 #include "Spritesheet.h"
 
-#include "BaseGraphicEngine.h"
-#include "BaseSprite.h"
-#include "BaseTexture.h"
-#include "XmlReader.h"
-#include "FRectangle.h"
+#include "Graphic/Base Classes/BaseGraphicEngine.h"
+#include "Graphic/Base Classes/BaseSprite.h"
+#include "Graphic/Base Classes/BaseTexture.h"
+#include "XML/XmlReader.h"
+#include "Geometry/FRectangle.h"
 
 Spritesheet::Spritesheet(std::string configFilePath, BaseGraphicEngine* engine)
 {

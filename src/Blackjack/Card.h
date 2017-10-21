@@ -2,7 +2,7 @@
 
 class BaseSprite;
 
-#include <BaseActor.h>
+#include <Game/Actors/BaseActor.h>
 
 class Card : public BaseActor
 {

@@ -4,8 +4,9 @@ class DrawObject;
 class BaseSprite;
 class BaseText;
 
-#include <BaseActor.h>
-#include <PointerList.h>
+#include <Game/Actors/BaseActor.h>
+#include <Collections/PointerList.h>
+
 
 class PlayerControls : public BaseActor
 {

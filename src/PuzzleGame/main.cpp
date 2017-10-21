@@ -1,5 +1,5 @@
-#include <GameEngine.h>
-#include <BaseGraphicEngine.h>
+#include <Engine/GameEngine.h>
+#include <Graphic/Base Classes/BaseGraphicEngine.h>
 
 #include "GameCore.h"
 #include "GameButton.h"

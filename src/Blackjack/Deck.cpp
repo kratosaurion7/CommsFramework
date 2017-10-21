@@ -1,10 +1,8 @@
 #include "Deck.h"
 
 #include <stdio.h>
-#include <GameEngine.h>
-#include <BaseSprite.h>
-#include <BaseList.h>
-
+#include <Engine/GameEngine.h>
+#include <Graphic/Base Classes/BaseSprite.h>
 
 #include "Card.h"
 

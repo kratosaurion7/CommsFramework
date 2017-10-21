@@ -2,15 +2,14 @@
 
 #ifdef WIN32
 
-#include "WindowsHelpers.h"
-
+#include "Filesystem/Windows/WindowsHelpers.h"
 #endif
 
 #include <assert.h>
 
-#include "IOUtilities.h"
 #include "XDirectory.h"
-#include "FileReader.h"
+#include "Filesystem/IOUtilities.h"
+#include "IO/FileReader.h"
 
 XFile::XFile()
 {

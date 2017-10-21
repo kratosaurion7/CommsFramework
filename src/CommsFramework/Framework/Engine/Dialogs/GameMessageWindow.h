@@ -1,12 +1,12 @@
 #pragma once
 
-#include "BaseSprite.h"
-#include "BaseText.h"
-#include "BaseTexture.h"
-#include "GameEngine.h"
+#include "Graphic/Base Classes/BaseSprite.h"
+#include "Graphic/Base Classes/BaseText.h"
+#include "Graphic/Base Classes/BaseTexture.h"
+#include "Engine/GameEngine.h"
 
-#include "FPosition.h"
-#include "FRectangle.h"
+#include "Geometry/FPosition.h"
+#include "Geometry/FRectangle.h"
 
 class GameMessageWindow
 {

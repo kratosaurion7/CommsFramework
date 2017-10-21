@@ -9,8 +9,8 @@ class BaseSprite;
 class UIButton;
 class UIImage;
 
-#include "PointerList.h"
-#include "FRectangle.h"
+#include "Collections/PointerList.h"
+#include "Geometry/FRectangle.h"
 
 
 class UIMenu

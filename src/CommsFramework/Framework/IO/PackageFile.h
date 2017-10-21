@@ -7,8 +7,8 @@ class EncryptedPackageFile;
 #include <cstdio>
 #include <string>
 
-#include "FileReader.h"
-#include "PointerList.h"
+#include "IO/FileReader.h"
+#include "Collections/PointerList.h"
 
 #define FILENAME_MAX_LENGTH 256
 #define PACK_FILE_SIG_LENGTH 4

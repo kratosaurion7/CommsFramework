@@ -1,8 +1,8 @@
 #include "BlackjackGame.h"
 
-#include <YesNoDialog.h>
-#include <MessageDialog.h>
-#include <GameEngine.h>
+#include <Engine/Dialogs/YesNoDialog.h>
+#include <Engine/Dialogs/MessageDialog.h>
+#include <Engine/GameEngine.h>
 
 #include "Card.h"
 #include "CardHand.h"

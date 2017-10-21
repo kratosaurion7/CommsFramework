@@ -1,11 +1,11 @@
 #include "MessageDialog.h"
 
-#include "Utilities.h"
-#include "IDialog.h"
-#include "BaseSprite.h"
-#include "BaseActor.h"
-#include "BaseText.h"
-#include "GameEngine.h"
+#include "System/Utilities.h"
+#include "Engine/Dialogs/IDialog.h"
+#include "Game/Actors/BaseActor.h"
+#include "Graphic/Base Classes/BaseSprite.h"
+#include "Graphic/Base Classes/BaseText.h"
+#include "Engine/GameEngine.h"
 
 MessageDialog::MessageDialog()
 {

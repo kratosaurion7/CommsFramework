@@ -1,8 +1,8 @@
 #include "BlackjackDealer.h"
 
-#include <BaseActor.h>
-#include <BaseText.h>
-#include <BaseSprite.h>
+#include <Game/Actors/BaseActor.h>
+#include <Graphic/Base Classes/BaseText.h>
+#include <Graphic/Base Classes/BaseSprite.h>
 #include "Card.h"
 #include "CardHand.h"
 

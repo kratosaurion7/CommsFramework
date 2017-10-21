@@ -9,7 +9,7 @@ class SDLFont;
 #include <cstdint>
 
 #include "SDLDrawable.h"
-#include "BaseText.h"
+#include "Graphic/Base Classes/BaseText.h"
 
 class SDLText : public BaseText, public SDLDrawable
 {

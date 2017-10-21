@@ -6,8 +6,8 @@ class GenType;
 #include <string>
 #include <string.h>
 
-#include "BaseList.h"
-#include "Pair.h"
+#include "Collections/BaseList.h"
+#include "Types/Pair.h"
 
 #define KEYTYPE std::string
 #define MAX_KEY_NAME 256

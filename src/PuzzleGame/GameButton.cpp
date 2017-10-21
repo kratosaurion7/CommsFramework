@@ -1,9 +1,9 @@
 #include "GameButton.h"
 
-#include <GameEngine.h>
-#include <BaseGraphicEngine.h>
-#include <BaseSprite.h>
-#include <BaseTexture.h>
+#include <Engine/GameEngine.h>
+#include <Graphic/Base Classes/BaseGraphicEngine.h>
+#include <Graphic/Base Classes/BaseSprite.h>
+#include <Graphic/Base Classes/BaseTexture.h>
 
 #include "GameCore.h"
 

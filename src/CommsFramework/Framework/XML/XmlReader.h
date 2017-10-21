@@ -10,8 +10,8 @@ class FileContents;
 
 #include "rapidxml.hpp"
 
-#include "BaseList.h"
-#include "PointerList.h"
+#include "Collections/BaseList.h"
+#include "Collections/PointerList.h"
 
 using namespace rapidxml;
 

@@ -1,7 +1,7 @@
 #include "UIButton.h"
 
-#include "MouseClickInfo.h"
-#include "BaseSprite.h"
+#include "Input/MouseClickInfo.h"
+#include "Graphic/Base Classes/BaseSprite.h"
 
 UIButton::UIButton(BaseSprite * activeSprite, BaseSprite * disabledSprite, BaseSprite * pushedSprite, BaseSprite * hoverSprite)
 {

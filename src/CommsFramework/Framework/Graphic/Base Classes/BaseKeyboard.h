@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Keys.h"
+#include "Input/Keys.h"
 
 class BaseKeyboard
 {

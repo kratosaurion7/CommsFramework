@@ -1,7 +1,5 @@
 #include "GameMessageWindow.h"
 
-
-
 GameMessageWindow::GameMessageWindow()
 {
     IsOpen = false;

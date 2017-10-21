@@ -5,7 +5,7 @@ class XDirectory;
 
 #include <string>
 
-#include "BaseList.h"
+#include "Collections/BaseList.h"
 
 /*
  * This function returns the name of the file without the folders.

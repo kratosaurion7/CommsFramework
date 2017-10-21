@@ -4,11 +4,10 @@ class FSize;
 class BaseGraphicEngine;
 
 #include <cstdint>
-
 #include <string>
 
-#include "FSize.h"
-#include "FRectangle.h"
+#include "Geometry/FSize.h"
+#include "Geometry/FRectangle.h"
 
 class BaseTexture
 {

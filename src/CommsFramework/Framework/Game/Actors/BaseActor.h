@@ -1,9 +1,9 @@
 #pragma once
 
-#include "PointerList.h"
-#include "Vectors.h"
-#include "FRectangle.h"
-#include "FSize.h"
+#include "Collections/PointerList.h"
+#include "Geometry/Vectors.h"
+#include "Geometry/FRectangle.h"
+#include "Geometry/FSize.h"
 
 class GameEngine;
 class DrawObject;

@@ -2,9 +2,9 @@
 
 #include <SDL_events.h>
 
-#include "Vectors.h"
+#include "Geometry/Vectors.h"
 
-#include "BaseMouse.h"
+#include "Graphic/Base Classes/BaseMouse.h"
 
 class SDLMouse : public BaseMouse
 {

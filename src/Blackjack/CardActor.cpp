@@ -1,9 +1,9 @@
 #include "CardActor.h"
 
 
-#include <BaseSprite.h>
-#include <BaseText.h>
-#include <GameEngine.h>
+#include <Graphic/Base Classes/BaseSprite.h>
+#include <Graphic/Base Classes/BaseText.h>
+#include <Engine/GameEngine.h>
 
 #include "Deck.h"
 #include "Card.h"

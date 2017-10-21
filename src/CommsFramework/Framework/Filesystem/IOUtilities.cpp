@@ -10,13 +10,13 @@
 #include "Shlwapi.h"
 #pragma comment(lib, "Shlwapi.lib")
 
-#include "WindowsHelpers.h"
+#include "Filesystem/Windows/WindowsHelpers.h"
 
 #endif // WIN32
 
-#include "XFile.h"
-#include "XDirectory.h"
-#include "StringFunctions.h"
+#include "Filesystem/XFile.h"
+#include "Filesystem/XDirectory.h"
+#include "Utilities\StringFunctions.h"
 
 std::string GetLocalFileName(XFile* file)
 {

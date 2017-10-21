@@ -1,5 +1,7 @@
 #include "BaseDialog.h"
 
+#include "Graphic/Base Classes/BaseText.h"
+#include "Graphic/Base Classes/BaseSprite.h"
 
 
 BaseDialog::BaseDialog()

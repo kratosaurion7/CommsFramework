@@ -8,9 +8,9 @@ class BaseMouse;
 
 #include <string>
 
-#include "DrawObject.h"
-#include "PointerList.h"
-#include "SpriteAnimation.h"
+#include "Graphic/DrawObject.h"
+#include "Collections/PointerList.h"
+#include "Graphic/Animation/SpriteAnimation.h"
 
 class BaseSprite : public DrawObject
 {

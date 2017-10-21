@@ -2,10 +2,10 @@
 
 #include <cstdio>
 
-#include "GenType.h"
-#include "XFile.h"
-#include "FileReader.h"
-#include "BitHelper.h"
+#include "Types/GenType.h"
+#include "Filesystem/XFile.h"
+#include "IO/FileReader.h"
+#include "System/BitHelper.h"
 
 FileSave::FileSave()
 {

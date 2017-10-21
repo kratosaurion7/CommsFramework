@@ -2,10 +2,8 @@
 
 #include <string>
 
-#include "IDialog.h"
-#include "BaseSprite.h"
-#include "BaseActor.h"
-#include "BaseText.h"
+#include "Engine/Dialogs/IDialog.h"
+#include "Game/Actors/BaseActor.h"
 
 
 class BaseDialog : public BaseActor, public IDialog

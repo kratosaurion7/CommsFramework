@@ -5,15 +5,15 @@
 #include <sstream>
 #include <assert.h>
 
-#include "XFile.h"
-#include "XDirectory.h"
-#include "PointerList.h"
+#include "Filesystem/XFile.h"
+#include "Filesystem/XDirectory.h"
+#include "Collections/PointerList.h"
 #include "Macros.h"
-#include "BitHelper.h"
-#include "Utilities.h"
-#include "IOUtilities.h"
-#include "StringFunctions.h"
-#include "EncryptedPackageFile.h"
+#include "System/BitHelper.h"
+#include "System/Utilities.h"
+#include "Filesystem/IOUtilities.h"
+#include "Utilities/StringFunctions.h"
+#include "IO/EncryptedPackageFile.h"
 
 
 PackageFile::PackageFile()

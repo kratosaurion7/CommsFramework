@@ -5,7 +5,7 @@
 #include <algorithm>
 #include <cassert>
 
-#include "RandomGen.h"
+#include "Math/RandomGen.h"
 
 #define ITBEGIN(x) x->GetContainer()->begin()
 #define ITEND(x) x->GetContainer()->end()

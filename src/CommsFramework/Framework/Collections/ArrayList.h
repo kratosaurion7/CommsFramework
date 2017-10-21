@@ -6,7 +6,7 @@
 #include <algorithm>
 #include <cassert>
 
-#include "RandomGen.h"  
+#include "Math/RandomGen.h"  
 
 template <class T>
 class ArrayList

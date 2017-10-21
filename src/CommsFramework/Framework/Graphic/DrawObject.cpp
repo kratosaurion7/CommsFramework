@@ -1,14 +1,11 @@
-#include "BaseGraphicEngine.h"
-#include "FPosition.h"
-#include "FRectangle.h"
-#include "FSize.h"
-#include "BaseMouse.h"
-#include "MouseClickInfo.h"
-
-
 #include "DrawObject.h"
 
-
+#include "Graphic/Base Classes/BaseGraphicEngine.h"
+#include "Graphic/Base Classes/BaseMouse.h"
+#include "Geometry/FPosition.h"
+#include "Geometry/FRectangle.h"
+#include "Geometry/FSize.h"
+#include "Input/MouseClickInfo.h"
 
 void DrawObject::Show(bool show)
 {

@@ -3,7 +3,7 @@
 class BaseTexture;
 struct SpriteFontGlyph;
 
-#include "BaseList.h"
+#include "Collections/BaseList.h"
 
 #define BLANK 0x00FFFFFF
 

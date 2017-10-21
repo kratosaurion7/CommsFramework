@@ -3,7 +3,7 @@
 #include <cmath>
 #include <cassert>
 
-#include "TgaFile.h"
+#include "Image/TgaFile.h"
 
 float* CreateSinusTrack(int amount, int amplitude)
 {

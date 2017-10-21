@@ -4,7 +4,7 @@ class BaseGraphicEngine;
 class BaseTexture;
 
 #include <string>
-#include "PointerList.h"
+#include "Collections/PointerList.h"
 
 class TextureRepository
 {

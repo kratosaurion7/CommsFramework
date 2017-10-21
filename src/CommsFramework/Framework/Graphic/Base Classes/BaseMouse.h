@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Vectors.h"
+#include "Geometry/Vectors.h"
 
 enum MouseButtons
 {

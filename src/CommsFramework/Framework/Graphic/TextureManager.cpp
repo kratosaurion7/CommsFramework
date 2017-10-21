@@ -1,8 +1,8 @@
 #include "TextureManager.h"
 
-#include "BaseGraphicEngine.h"
-#include "BaseTexture.h"
-#include "IOUtilities.h"
+#include "Graphic/Base Classes/BaseGraphicEngine.h"
+#include "Graphic/Base Classes/BaseTexture.h"
+#include "Filesystem/IOUtilities.h"
 
 TextureManager::TextureManager()
 {

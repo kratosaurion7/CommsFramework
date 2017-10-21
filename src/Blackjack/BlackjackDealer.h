@@ -2,8 +2,8 @@
 
 class CardHand;
 
-#include <BaseList.h>
-#include <PointerList.h>
+#include <Collections/BaseList.h>
+#include <Collections/PointerList.h>
 
 #include "CardActor.h"
 

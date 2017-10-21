@@ -6,7 +6,7 @@ class BaseText;
 
 #include <string>
 
-#include "FPosition.h"
+#include "Geometry/FPosition.h"
 
 class EngineDialogMessage
 {

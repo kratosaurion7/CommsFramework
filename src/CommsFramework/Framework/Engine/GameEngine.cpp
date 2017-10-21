@@ -1,20 +1,20 @@
 #include "GameEngine.h"
 
-#include "GraphicEngineInitParams.h"
+#include "Graphic/GraphicEngineInitParams.h"
 
-#include "ConfigurationManager.h"
+#include "Configuration/ConfigurationManager.h"
 
-#include "BaseKeyboard.h"
-#include "BaseMouse.h"
-#include "BaseGraphicEngine.h"
-#include "BaseActor.h"
+#include "Graphic/Base Classes/BaseKeyboard.h"
+#include "Graphic/Base Classes/BaseMouse.h"
+#include "Graphic/Base Classes/BaseGraphicEngine.h"
+#include "Game/Actors/BaseActor.h"
 
-#include "MouseClickInfo.h"
-#include "GameRule.h"
-#include "EngineDialogMessage.h"
-#include "BaseQueue.h"
+#include "Input/MouseClickInfo.h"
+#include "Game/GameRule.h"
+#include "Engine/Dialogs/EngineDialogMessage.h"
+#include "Collections/BaseQueue.h"
 
-#include "Platform.h"
+#include "System/Platform.h"
 
 BaseKeyboard* GameEngine::Keyboard = 0;
 BaseMouse* GameEngine::Mouse = 0;

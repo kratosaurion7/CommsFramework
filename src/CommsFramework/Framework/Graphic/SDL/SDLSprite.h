@@ -6,11 +6,10 @@ class SDLTexture;
 class SDLGraphicEngine;
 struct SDL_Texture;
 
-#include "PointerList.h"
+#include "Collections/PointerList.h"
+#include "Graphic/Base Classes/BaseSprite.h"
 #include "SDLTexture.h"
-
 #include "SDLDrawable.h"
-#include "BaseSprite.h"
 
 class SDLSprite : public BaseSprite, public SDLDrawable
 {

@@ -2,8 +2,8 @@
 
 #include <memory>
 
-#include "WindowsHelpers.h" // TODO : REplace that by a generic header, these functions are not specific to windows
-#include "XFile.h"
+#include "Filesystem/Windows/WindowsHelpers.h" // TODO : REplace that by a generic header, these functions are not specific to windows
+#include "Filesystem/XFile.h"
 
 XDirectory::XDirectory(std::string path)
 {

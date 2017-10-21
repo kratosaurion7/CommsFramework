@@ -21,7 +21,7 @@ Bla bla bla linux stuff should not compile.
 
 #include <string>
 
-#include "PointerList.h"
+#include "Collections/PointerList.h"
 
 class XFile;
 

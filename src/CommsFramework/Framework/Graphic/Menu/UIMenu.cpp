@@ -2,10 +2,10 @@
 
 #include "UIElement.h"
 #include "UIButton.h"
-#include "FPosition.h"
-#include "BaseSprite.h"
+#include "Geometry/FPosition.h"
+#include "Graphic/Base Classes/BaseSprite.h"
 
-#include "GameEngine.h"
+#include "Engine/GameEngine.h"
 
 UIMenu::UIMenu(GameEngine* engine)
 {

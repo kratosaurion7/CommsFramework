@@ -12,14 +12,16 @@ class GraphicEngineInitParams;
 
 #include <string>
 
-#include "BaseSprite.h"
-#include "BaseText.h"
-#include "BaseFont.h"
-#include "BaseTexture.h"
-#include "BaseKeyboard.h"
-#include "PointerList.h"
-#include "GraphicEngineInitParams.h"
-#include "TextureManager.h"
+#include "Graphic/Base Classes/BaseSprite.h"
+#include "Graphic/Base Classes/BaseText.h"
+#include "Graphic/Base Classes/BaseFont.h"
+#include "Graphic/Base Classes/BaseTexture.h"
+#include "Graphic/Base Classes/BaseKeyboard.h"
+#include "Collections/PointerList.h"
+#include "Graphic/GraphicEngineInitParams.h"
+#include "Graphic/TextureManager.h"
+#include "Geometry/FPosition.h"
+#include "Geometry/FRectangle.h"
 
 class BaseGraphicEngine
 {

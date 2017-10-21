@@ -3,9 +3,6 @@
 class BaseText;
 class CardHand;
 
-#include <BaseList.h>
-#include <PointerList.h>
-
 #include "CardActor.h"
 
 class BlackjackPlayer : public CardActor

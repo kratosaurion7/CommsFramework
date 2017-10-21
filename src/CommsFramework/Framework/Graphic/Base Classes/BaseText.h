@@ -7,7 +7,7 @@ class BaseTexture;
 #include <string>
 #include <cstdint>
 
-#include "DrawObject.h"
+#include "Graphic/DrawObject.h"
 
 enum TextStyle {
     TEXT_STYLE_REGULAR,

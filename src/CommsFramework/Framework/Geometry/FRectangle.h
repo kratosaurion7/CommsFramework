@@ -1,8 +1,8 @@
 #pragma once
 
-#include "FPosition.h"
-#include "FSize.h"
-#include "Vectors.h"
+#include "Geometry/FPosition.h"
+#include "Geometry/FSize.h"
+#include "Geometry/Vectors.h"
 
 enum DistanceFromType {
     OriginToOrigin,

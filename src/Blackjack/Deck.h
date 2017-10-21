@@ -3,9 +3,8 @@
 class GameEngine;
 class Card;
 
-#include <PointerList.h>
-#include <BaseStack.h>
-#include <BaseActor.h>
+#include <Collections/BaseStack.h>
+#include <Game/Actors/BaseActor.h>
 
 
 class Deck : public BaseActor

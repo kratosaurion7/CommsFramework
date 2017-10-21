@@ -5,7 +5,7 @@ class BaseText;
 
 #include <string>
 
-#include "BaseDialog.h"
+#include "Engine/Dialogs/BaseDialog.h"
 
 class YesNoDialog : public BaseDialog
 {

@@ -10,9 +10,9 @@ class SDLGraphicEngine;
 #include <SDL_surface.h>
 #include <SDL_render.h>
 
-#include "FSize.h"
+#include "Geometry/FSize.h"
 
-#include "BaseTexture.h"
+#include "Graphic/Base Classes/BaseTexture.h"
 
 class SDLTexture : public BaseTexture
 {

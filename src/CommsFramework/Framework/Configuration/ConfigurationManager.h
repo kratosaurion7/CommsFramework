@@ -5,8 +5,8 @@ class XmlReader;
 #include <string>
 #include <string.h>
 
-#include "PointerList.h"
-#include "Pair.h"
+#include "Collections/PointerList.h"
+#include "Types/Pair.h"
 
 class ConfigurationManager
 {

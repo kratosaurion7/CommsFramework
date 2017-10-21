@@ -5,7 +5,7 @@ class UIMenu;
 class FPosition;
 struct MouseClickInfo;
 
-#include "PointerList.h"
+#include "Collections/PointerList.h"
 
 class UIElement
 {

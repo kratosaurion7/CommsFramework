@@ -8,7 +8,7 @@ class BaseDialog;
 #include <string>
 
 
-#include "BaseDialog.h"
+#include "Engine/Dialogs/BaseDialog.h"
 
 // TODO : Add a BaseDialog class
 class MessageDialog : public BaseDialog

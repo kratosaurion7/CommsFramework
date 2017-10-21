@@ -22,12 +22,12 @@
 
 */
 
-#include "TgaFile.h"
+#include "Image/TgaFile.h"
 
 #ifdef WIN32
 
 #include <Windows.h>
-#include "WindowsHelpers.h"
+#include "Filesystem/Windows/WindowsHelpers.h"
 
 #define MAX_QUICKWINDOWS 10
 

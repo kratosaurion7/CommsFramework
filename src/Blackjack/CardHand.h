@@ -2,7 +2,7 @@
 
 class Card;
 
-#include <PointerList.h>
+#include <Collections/PointerList.h>
 
 class CardHand
 {

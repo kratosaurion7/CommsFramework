@@ -3,10 +3,10 @@
 #include <SDL_events.h>
 #include <SDL_scancode.h>
 
-#include "PointerList.h"
-#include "Pair.h"
+#include "Collections/PointerList.h"
+#include "Types/Pair.h"
 
-#include "BaseKeyboard.h"
+#include "Graphic/Base Classes/BaseKeyboard.h"
 
 class SDLKeyboard : public BaseKeyboard
 {

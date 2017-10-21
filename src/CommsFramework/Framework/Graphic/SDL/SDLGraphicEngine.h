@@ -19,9 +19,9 @@ struct PrimitiveDrawInfo;
 #include <string.h>
 #include <cstdint>
 
-#include "PointerList.h"
+#include "Collections/PointerList.h"
 
-#include "BaseGraphicEngine.h"
+#include "Graphic/Base Classes/BaseGraphicEngine.h"
 
 class SDLGraphicEngine : public BaseGraphicEngine
 {

@@ -1,11 +1,11 @@
 #pragma once
 
-#include <BaseActor.h>
-#include <PointerList.h>
-
 class Card;
 class Deck;
 class GameEngine;
+
+#include <Collections/BaseList.h>
+#include <Collections/PointerList.h>
 
 class CardsShoe
 {

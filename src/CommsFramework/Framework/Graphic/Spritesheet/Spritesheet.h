@@ -5,8 +5,8 @@ class BaseTexture;
 class BaseGraphicEngine;
 
 #include <string>
-#include "BaseList.h"
-#include "PointerList.h"
+#include "Collections/BaseList.h"
+#include "Collections/PointerList.h"
 
 class Spritesheet
 {

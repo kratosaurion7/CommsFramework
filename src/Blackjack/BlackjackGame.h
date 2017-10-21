@@ -8,10 +8,10 @@ class MessageDialog;
 class BetSelection;
 class PlayerControls;
 
-#include <BaseList.h>
-#include <PointerList.h>
+#include <Collections/BaseList.h>
+#include <Collections/PointerList.h>
 
-#include <BaseActor.h>
+#include <Game/Actors/BaseActor.h>
 
 class BlackjackGame : public BaseActor
 {

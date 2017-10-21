@@ -1,16 +1,17 @@
-#include "DrawObject.h"
-
-#include "BaseTexture.h"
-
-#include "BaseMouse.h"
-#include "FRectangle.h"
-
-#include "BaseGraphicEngine.h"
-#include "GameEngine.h"
-#include "Utilities.h"
-#include "IOUtilities.h"
-
 #include "BaseSprite.h"
+
+#include "Graphic/DrawObject.h"
+
+#include "Graphic/Base Classes/BaseTexture.h"
+
+#include "Graphic/Base Classes/BaseMouse.h"
+#include "Geometry/FRectangle.h"
+
+#include "Graphic/Base Classes/BaseGraphicEngine.h"
+#include "Engine/GameEngine.h"
+#include "System/Utilities.h"
+#include "Filesystem/IOUtilities.h"
+
 
 
 BaseSprite::~BaseSprite()

@@ -2,8 +2,8 @@
 
 #ifdef WIN32
 
-#include "TgaFile.h"
-#include "WindowsHelpers.h"
+#include "Image/TgaFile.h"
+#include "Filesystem/Windows/WindowsHelpers.h"
 
 ImageLoader::ImageLoader()
 {

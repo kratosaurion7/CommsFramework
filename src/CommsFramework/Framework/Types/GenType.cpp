@@ -1,7 +1,5 @@
 #include "GenType.h"
 
-
-
 GenType::GenType()
 {
 }

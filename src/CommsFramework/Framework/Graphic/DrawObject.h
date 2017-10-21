@@ -7,13 +7,13 @@ class FSize;
 class BaseMouse;
 struct MouseClickInfo;
 
-#include "BaseMouse.h"
+#include "Graphic/Base Classes/BaseMouse.h"
 
 #include <string>
-#include "Vectors.h"
-#include "FPosition.h"
-#include "FSize.h"
-#include "FRectangle.h"
+#include "Geometry/Vectors.h"
+#include "Geometry/FPosition.h"
+#include "Geometry/FSize.h"
+#include "Geometry/FRectangle.h"
 
 class DrawObject
 {

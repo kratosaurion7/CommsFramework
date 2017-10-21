@@ -1,9 +1,11 @@
 #include "BlackjackPlayer.h"
 
-#include <BaseActor.h>
-#include <BaseText.h>
-#include <BaseSprite.h>
-#include <GameEngine.h>
+#include <Collections/BaseList.h>
+#include <Collections/PointerList.h>
+#include <Game/Actors/BaseActor.h>
+#include <Engine/GameEngine.h>
+#include <Graphic/Base Classes/BaseText.h>
+#include <Graphic/Base Classes/BaseSprite.h>
 
 #include "Card.h"
 #include "CardHand.h"

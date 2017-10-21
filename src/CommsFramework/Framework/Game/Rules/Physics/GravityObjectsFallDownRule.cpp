@@ -1,10 +1,9 @@
 #include "GravityObjectsFallDownRule.h"
 
-#include "GameRule.h"
+#include "Game/GameRule.h"
 
-#include "GameEngine.h"
-#include "BaseSprite.h"
-
+#include "Engine/GameEngine.h"
+#include "Graphic/Base Classes/BaseSprite.h"
 
 GravityObjectsFallDownRule::GravityObjectsFallDownRule() : GameRule("r_gravity")
 {

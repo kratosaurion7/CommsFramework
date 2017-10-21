@@ -1,6 +1,6 @@
 #include "UIElement.h"
 
-#include "BaseSprite.h"
+#include "Graphic/Base Classes/BaseSprite.h"
 
 UIElement::UIElement()
 {

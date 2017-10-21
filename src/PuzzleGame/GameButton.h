@@ -4,8 +4,8 @@ class GameEngine;
 class BaseSprite;
 class BaseTexture;
 
-#include <BaseActor.h>
-#include <PointerList.h>
+#include <Game/Actors/BaseActor.h>
+#include <Collections/PointerList.h>
 
 class GameButton : public BaseActor
 {

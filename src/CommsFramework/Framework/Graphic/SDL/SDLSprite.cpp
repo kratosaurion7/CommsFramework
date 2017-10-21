@@ -3,12 +3,12 @@
 #include <SDL.h>
 #include <SDL_image.h>
 
-#include "BaseSprite.h"
-#include "BaseText.h"
-#include "BaseTexture.h"
+#include "Graphic/Base Classes/BaseSprite.h"
+#include "Graphic/Base Classes/BaseText.h"
+#include "Graphic/Base Classes/BaseTexture.h"
 #include "SDLTexture.h"
 #include "SDLGraphicEngine.h"
-#include "SpriteAnimation.h"
+#include "Graphic/Animation/SpriteAnimation.h"
 
 SDLSprite::SDLSprite()
 {

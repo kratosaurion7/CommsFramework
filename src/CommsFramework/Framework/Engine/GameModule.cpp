@@ -1,7 +1,5 @@
 #include "GameModule.h"
 
-
-
 GameModule::GameModule()
 {
     Resources = new PointerList<Resource*>();

@@ -4,8 +4,8 @@
 
 #include "SDLSprite.h"
 #include "SDLText.h"
-#include "FRectangle.h"
-#include "FSize.h"
+#include "Geometry/FRectangle.h"
+#include "Geometry/FSize.h"
 
 SDL_Rect FRectToSDL_Rect(FRectangle rec)
 {

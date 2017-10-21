@@ -13,8 +13,8 @@
 #include <list>
 
 #include "Network.h"
-#include "BaseList.h"
-#include "BaseQueue.h"
+#include "Collections/BaseList.h"
+#include "Collections/BaseQueue.h"
 
 #define MAX_SOCK_CLIENTS 5
 #define DEFAULT_BUFLEN 512

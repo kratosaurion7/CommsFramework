@@ -1,8 +1,8 @@
 #include "PlayerControls.h"
 
-#include <GameEngine.h>
-#include <BaseSprite.h>
-#include <BaseText.h>
+#include <Engine/GameEngine.h>
+#include <Graphic/Base Classes/BaseSprite.h>
+#include <Graphic/Base Classes/BaseText.h>
 
 
 PlayerControls::PlayerControls()

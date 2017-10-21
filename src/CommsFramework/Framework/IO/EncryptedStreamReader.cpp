@@ -1,7 +1,7 @@
 #include "EncryptedStreamReader.h"
 
-#include "FileReader.h"
-#include "XFile.h"
+#include "IO/FileReader.h"
+#include "Filesystem/XFile.h"
 
 EncryptedStreamReader::EncryptedStreamReader(char* key, int keyLen)
 {

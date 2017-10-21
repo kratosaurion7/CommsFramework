@@ -1,12 +1,9 @@
-#include <BaseGraphicEngine.h>
-#include <GameEngine.h>
+#include <Graphic/Base Classes/BaseGraphicEngine.h>
+#include <Engine/GameEngine.h>
 
 #include "Deck.h"
 
 #include "BlackjackGame.h"
-
-
-#include <MessageDialog.h>
 
 GameEngine* eng;
 

@@ -3,10 +3,10 @@
 class BaseSprite;
 class BaseText;
 
-#include <BaseList.h>
-#include <PointerList.h>
+#include <Collections/BaseList.h>
+#include <Collections/PointerList.h>
 
-#include <BaseActor.h>
+#include <Game/Actors/BaseActor.h>
 
 class BetSelection : public BaseActor
 {

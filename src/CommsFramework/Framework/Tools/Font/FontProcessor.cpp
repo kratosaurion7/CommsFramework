@@ -6,10 +6,10 @@
 
 #include "SDL.h"
 #include "SDL_image.h"
-#include "FRectangle.h"
-#include "SDLUtilities.h"
-#include "SDLTexture.h"
-#include "BaseFont.h"
+#include "Geometry/FRectangle.h"
+#include "Graphic/SDL/SDLUtilities.h"
+#include "Graphic/SDL/SDLTexture.h"
+#include "Graphic/Base Classes/BaseFont.h"
 
 FontProcessor::FontProcessor()
 {

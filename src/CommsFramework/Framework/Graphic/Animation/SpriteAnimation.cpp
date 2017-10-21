@@ -1,6 +1,6 @@
 #include "SpriteAnimation.h"
 
-#include "BaseTexture.h"
+#include "Graphic/Base Classes/BaseTexture.h"
 
 SpriteAnimation::SpriteAnimation()
 {

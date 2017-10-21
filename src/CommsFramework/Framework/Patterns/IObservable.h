@@ -1,7 +1,7 @@
 #pragma once
 
-#include "IObserver.h"
-#include "PointerList.h"
+#include "Patterns/IObserver.h"
+#include "Collections/PointerList.h"
 
 template <class TNotifyArg>
 class IObservable

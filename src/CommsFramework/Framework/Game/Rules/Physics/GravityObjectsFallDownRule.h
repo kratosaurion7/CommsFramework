@@ -2,7 +2,7 @@
 
 class GameEngine;
 
-#include "GameRule.h"
+#include "Game/GameRule.h"
 
 class GravityObjectsFallDownRule : public GameRule
 {

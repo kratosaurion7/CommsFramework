@@ -1,7 +1,5 @@
 #include "GameRule.h"
 
-
-
 GameRule::GameRule(std::string identifier)
 {
     RuleIdentifier = identifier;

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "BaseList.h"
-#include "PointerList.h"
+#include "Collections/BaseList.h"
+#include "Collections/PointerList.h"
 
 class BaseSprite;
 

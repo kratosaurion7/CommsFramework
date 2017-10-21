@@ -8,7 +8,7 @@
 #include <wincodecsdk.h>
 #pragma comment(lib, "d2d1.lib")
 
-#include "ImageLoader.h"
+#include "System/Windows/ImageLoader.h"
 
 // ===== WINDOW MANAGEMENT =====
 HINSTANCE qk_inst;

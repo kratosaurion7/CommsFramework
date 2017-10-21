@@ -1,10 +1,10 @@
 #include "EngineDialogMessage.h"
 
-#include "BaseSprite.h"
-#include "GameEngine.h"
-#include "BaseText.h"
-#include "BaseTexture.h"
-#include "BaseGraphicEngine.h"
+#include "Graphic/Base Classes/BaseSprite.h"
+#include "Graphic/Base Classes/BaseText.h"
+#include "Graphic/Base Classes/BaseTexture.h"
+#include "Graphic/Base Classes/BaseGraphicEngine.h"
+#include "Engine/GameEngine.h"
 
 
 EngineDialogMessage::EngineDialogMessage(GameEngine* engine)
