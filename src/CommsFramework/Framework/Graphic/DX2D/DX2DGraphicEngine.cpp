@@ -132,7 +132,7 @@ BOOL DX2DGraphicEngine::InitDirect2D()
         printf("Error = %d\n", err);
     }
 
-    TestBitmap = Loader->LoadImageFromDisk("assets/Square.png");
+    TestBitmap = Loader->LoadDirect2DImage("assets/Flag.png");
     
     ShowWindow(HMainWindow, SW_SHOWNOACTIVATE);
     UpdateWindow(HMainWindow);
@@ -283,9 +283,13 @@ LRESULT CALLBACK DX2DGraphicEngine::MainWindowProc(HWND hwnd, UINT uiMsg, WPARAM
             ID2D1Bitmap* bits = NULL;
             HRESULT hr = engine->RenderTarget->CreateBitmapFromWicBitmap(engine->TestBitmap, &bits);
 
+            engine->RenderTarget->BeginDraw();
+
             engine->RenderTarget->DrawBitmap(bits);
 
             engine->Draw();
+
+            engine->RenderTarget->EndDraw();
 
             EndPaint(hwnd, &ps);
 

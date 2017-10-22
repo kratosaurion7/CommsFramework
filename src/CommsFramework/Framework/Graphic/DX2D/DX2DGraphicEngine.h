@@ -80,7 +80,7 @@ private:
     ID2D1HwndRenderTarget* RenderTarget;
 
     ImageLoader* Loader;
-    IWICBitmap* TestBitmap;
+    IWICBitmapSource* TestBitmap;
 
     static LRESULT CALLBACK MainWindowProc(HWND hwnd, UINT uiMsg, WPARAM wParam, LPARAM lParam);
 
