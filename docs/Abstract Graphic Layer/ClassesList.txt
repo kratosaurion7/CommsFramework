@@ -1,0 +1,10 @@
+Base Graphical classes to implement
+
+- BaseGraphicEngine
+- BaseTexture
+- DrawObject
+- BaseSprite
+- BaseFont
+- BaseText
+- BaseMouse
+- BaseKeyboard

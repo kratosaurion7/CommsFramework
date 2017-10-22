@@ -23,6 +23,8 @@ class ImageLoader;
 class DX2DGraphicEngine : public BaseGraphicEngine
 {
 public:
+    ImageLoader* Loader;
+    
     DX2DGraphicEngine();
     ~DX2DGraphicEngine();
 
@@ -79,8 +81,7 @@ private:
     ID2D1Factory* D2Factory;
     ID2D1HwndRenderTarget* RenderTarget;
 
-    ImageLoader* Loader;
-    IWICBitmap* TestBitmap;
+    IWICBitmapSource* TestBitmap;
 
     static LRESULT CALLBACK MainWindowProc(HWND hwnd, UINT uiMsg, WPARAM wParam, LPARAM lParam);
 

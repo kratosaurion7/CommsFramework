@@ -6,7 +6,6 @@ class TgaFile;
 
 #include <Windows.h>
 #include <d2d1.h>
-
 #include <wincodec.h>
 #include <wincodecsdk.h>
 
@@ -21,7 +20,9 @@ public:
     ImageLoader();
     ~ImageLoader();
 
-    IWICBitmap* LoadImageFromDisk(std::string fileName);
+    IWICBitmapSource* LoadImageFromDisk(std::string fileName);
+    
+    IWICBitmapSource* LoadDirect2DImage(std::string fileName);
 
     IWICBitmap* CreateBitmap(TgaFile* originTga, bool supportAlpha = true);
 
