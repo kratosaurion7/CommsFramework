@@ -7,6 +7,7 @@ class BaseTexture;
 class BaseFont;
 class BaseText;
 class Spritesheet;
+class ImageLoader;
 
 #include <Windows.h>
 #include <d2d1.h>
@@ -68,12 +69,18 @@ public:
     virtual void ReorderSprite(DrawObject* first, DrawObject* second);
 
 private:
-    ID2D1Factory* D2Factory;
 
     // Window
     HINSTANCE AppInstance;
     WNDCLASS MainWindowClass;
     HWND HMainWindow;
+
+    //DirectX
+    ID2D1Factory* D2Factory;
+    ID2D1HwndRenderTarget* RenderTarget;
+
+    ImageLoader* Loader;
+    IWICBitmap* TestBitmap;
 
     static LRESULT CALLBACK MainWindowProc(HWND hwnd, UINT uiMsg, WPARAM wParam, LPARAM lParam);
 
@@ -83,6 +90,5 @@ private:
     BOOL InitDirect2D();
 
     DWORD ProcessWindowEvents();
-
 };
 

@@ -1,15 +1,20 @@
+#ifdef WIN32
 #include "DX2DGraphicEngine.h"
 
-#ifdef WIN32
+#include <wincodec.h>
 
-#include "Geometry\FSize.h"
+
+#include "Geometry/FSize.h"
+#include "System/Windows/ImageLoader.h"
 
 DX2DGraphicEngine::DX2DGraphicEngine()
 {
+    Loader = new ImageLoader();
 }
 
 DX2DGraphicEngine::~DX2DGraphicEngine()
 {
+    delete(Loader);
 }
 
 void DX2DGraphicEngine::Initialize(GraphicEngineInitParams * params)
@@ -109,8 +114,6 @@ BOOL DX2DGraphicEngine::InitDirect2D()
 
     RECT rec;
     GetClientRect(HMainWindow, &rec);
-    
-    ID2D1HwndRenderTarget* target;
 
     hr = D2Factory->CreateHwndRenderTarget(
         D2D1::RenderTargetProperties(),
@@ -120,7 +123,7 @@ BOOL DX2DGraphicEngine::InitDirect2D()
                 rec.right - rec.left,
                 rec.bottom - rec.top)
         ),
-        &target);
+        &RenderTarget);
 
     if (hr != S_OK)
     {
@@ -128,6 +131,8 @@ BOOL DX2DGraphicEngine::InitDirect2D()
         printf("Error creating the render target. HR = %d\n", hr);
         printf("Error = %d\n", err);
     }
+
+    TestBitmap = Loader->LoadImageFromDisk("assets/Square.png");
     
     ShowWindow(HMainWindow, SW_SHOWNOACTIVATE);
     UpdateWindow(HMainWindow);
@@ -274,6 +279,11 @@ LRESULT CALLBACK DX2DGraphicEngine::MainWindowProc(HWND hwnd, UINT uiMsg, WPARAM
         {
             PAINTSTRUCT ps;
             HDC hdc = BeginPaint(hwnd, &ps);
+
+            ID2D1Bitmap* bits = NULL;
+            HRESULT hr = engine->RenderTarget->CreateBitmapFromWicBitmap(engine->TestBitmap, &bits);
+
+            engine->RenderTarget->DrawBitmap(bits);
 
             engine->Draw();
 
