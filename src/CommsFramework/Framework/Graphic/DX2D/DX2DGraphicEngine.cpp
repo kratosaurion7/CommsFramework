@@ -3,7 +3,6 @@
 
 #include <wincodec.h>
 
-
 #include "Geometry/FSize.h"
 #include "System/Windows/ImageLoader.h"
 
