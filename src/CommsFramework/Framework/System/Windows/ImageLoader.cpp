@@ -56,6 +56,29 @@ IWICBitmap* ImageLoader::LoadImageFromDisk(std::string fileName)
     return bitmap;
 }
 
+IWICBitmap* LoadDirect2DImage(std::string fileName)
+{
+    std::wstring stemp = std::wstring(fileName.begin(), fileName.end());
+    LPCWSTR sw = stemp.c_str();
+
+    HRESULT hr;
+    IWICBitmapDecoder* decoder = NULL;
+    hr = WicFactory->CreateDecoderFromFilename(sw, nullptr, GENERIC_READ, WICDecodeMetadataCacheOnLoad, &decoder);
+    
+    IWICBitmapFrameDecode *frame = NULL;
+    hr = decoder->GetFrame(0, &frame);
+
+    IWICFormatConverter* converter = NULL;
+    wicFactory->CreateFormatConverter(&converter);
+
+    converter->Initialize(
+        frame, GUID_WICPixelFormat32bppPBGRA,
+        WICBitmapDitherTypeNone, nullptr, 0.f,
+        WICBitmapPaletteTypeMedianCut);
+
+     return converter;
+}
+
 IWICBitmap* ImageLoader::CreateBitmap(TgaFile* originTga, bool supportAlpha)
 {
     HRESULT hr;

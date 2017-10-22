@@ -22,6 +22,8 @@ public:
     ~ImageLoader();
 
     IWICBitmap* LoadImageFromDisk(std::string fileName);
+    
+    IWICBitmap* LoadDirect2DImage(std::string fileName);
 
     IWICBitmap* CreateBitmap(TgaFile* originTga, bool supportAlpha = true);
 
