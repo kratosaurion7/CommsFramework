@@ -16,8 +16,30 @@ void play_one();
 
 #endif
 
+#ifdef WIN32
+#include "Graphic/DX2D/DX2DGraphicEngine.h"
+#endif
 int main()
 {
+
+//#ifdef WIN32
+//    DX2DGraphicEngine* eng = new DX2DGraphicEngine();
+//
+//    GraphicEngineInitParams params;
+//    params.EnableVerticalSync = true;
+//    params.WindowSize = new FSize(600, 600);
+//    params.WindowTitle = "TITEL";
+//    
+//    eng->Initialize(&params);
+//
+//    while(true)
+//    {
+//        eng->ProcessEvents();
+//    }
+//
+//    return 0;
+//#endif
+
     Engine = new GameEngine();
     Engine->Init(NB_TILES_W * TILE_W * TILE_SCALE, NB_TILES_H * TILE_H * TILE_SCALE);
 
