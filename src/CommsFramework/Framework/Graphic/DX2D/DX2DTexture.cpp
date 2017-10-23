@@ -102,11 +102,11 @@ void DX2DTexture::SetSolidColor(uint32_t pixelColor)
     for (UINT i = 0; i < bufSize; i)
     {
         // Format is GUID_WICPixelFormat32bppPBGRA
-        BYTE r = (pixelColor & 0x0000FF00) >> 28;
-        BYTE g = (pixelColor & 0x00FF0000) >> 16;
-        BYTE b = (pixelColor & 0xFF000000) >> 8;
-        BYTE a = pixelColor & 0x000000FF;
-
+        BYTE a = (pixelColor & 0xFF000000) >> 24;
+        BYTE r = (pixelColor & 0x00FF0000) >> 16;
+        BYTE g = (pixelColor & 0x0000FF00) >> 8;
+        BYTE b = (pixelColor & 0x000000FF);
+        
         bits[i++] = static_cast<BYTE>(b);
         bits[i++] = static_cast<BYTE>(g);
         bits[i++] = static_cast<BYTE>(r);

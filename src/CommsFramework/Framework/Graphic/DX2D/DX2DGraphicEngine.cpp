@@ -2,6 +2,7 @@
 #include "DX2DGraphicEngine.h"
 
 #include <wincodec.h>
+#include <Windowsx.h>
 
 #include "DX2DDrawable.h"
 #include "DX2DSprite.h"
@@ -29,6 +30,13 @@ DX2DGraphicEngine::DX2DGraphicEngine()
     RunEngine = true;
 
     Loader = new ImageLoader();
+    
+    MouseX = 0;
+    MouseY = 0;
+    
+    leftButtonState = BTN_RELEASED;
+    rightButtonState = BTN_RELEASED;
+    
 }
 
 DX2DGraphicEngine::~DX2DGraphicEngine()
@@ -239,13 +247,15 @@ void DX2DGraphicEngine::ProcessDraw()
                     D2D1_RECT_F dest;
                     dest.left = target->GetX();
                     dest.top = target->GetY();
-                    dest.right = 50;// dest.left + target->GetWidth();
-                    dest.bottom = 50;// dest.top + target->GetHeight();
+                    dest.right = dest.left + target->GetWidth();
+                    dest.bottom = dest.top + target->GetHeight();
 
                     ID2D1Bitmap* bits = NULL;
                     HRESULT hr = RenderTarget->CreateBitmapFromWicBitmap(drawImpl->GetDrawableTexture(), &bits);
 
                     this->RenderTarget->DrawBitmap(bits, dest);
+                    
+                    bits->Release();
                 }
             }
 
@@ -422,8 +432,36 @@ LRESULT CALLBACK DX2DGraphicEngine::MainWindowProc(HWND hwnd, UINT uiMsg, WPARAM
             engine->ProcessDraw();
 
             engine->RenderTarget->EndDraw();
-
+            
             EndPaint(hwnd, &ps);
+
+            break;
+        }
+        case WM_LBUTTONDOWN:
+        {
+            engine->leftButtonState = BTN_CLICKED;
+
+            printf("Click\n");
+            
+            break;
+        }
+        case WM_LBUTTONUP:
+        {
+            engine->leftButtonState = BTN_RELEASED;
+
+            printf("Release\n");
+            
+            break;
+        }
+        case WM_MOUSEMOVE:
+        {
+            int xPos = GET_X_LPARAM(lParam);
+            int yPos = GET_Y_LPARAM(lParam);
+
+            engine->MouseX = xPos;
+            engine->MouseY = yPos;
+            
+            //printf("x: %d, y: %d\n", xPos, yPos);
 
             break;
         }

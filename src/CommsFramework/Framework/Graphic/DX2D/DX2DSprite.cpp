@@ -62,6 +62,8 @@ PointerList<BaseTexture*>* DX2DSprite::GetTextures()
 void DX2DSprite::SetTexture(BaseTexture* texture)
 {
     currentTexture = (DX2DTexture*)texture;
+
+    this->SetSize(texture->GetSize());
 }
 
 BaseSprite* DX2DSprite::Clone()

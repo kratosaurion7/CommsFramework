@@ -19,6 +19,7 @@ class ImageLoader;
 
 #include "Collections/PointerList.h"
 #include "Graphic/Base Classes/BaseGraphicEngine.h"
+#include "Graphic/Base Classes/BaseMouse.h"
 
 class DX2DGraphicEngine : public BaseGraphicEngine
 {
@@ -77,6 +78,12 @@ public:
 
     DWORD ProcessWindowEvents();
 
+    int MouseX;
+    int MouseY;
+    
+    ButtonState leftButtonState;
+    ButtonState rightButtonState;
+    
 //private:
 
     // Window

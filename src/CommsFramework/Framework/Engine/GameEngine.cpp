@@ -450,7 +450,7 @@ void GameEngine::DoEventLoop()
     GameEngine::Keyboard->UpdateKeyboardState();
 
     Platform::ExecutePlatformEvents(Graphics, Mouse, Keyboard);
-
+    
     //SDL_Event myEvent;
     //while (SDL_PollEvent(&myEvent)) {
     //    switch (myEvent.type)

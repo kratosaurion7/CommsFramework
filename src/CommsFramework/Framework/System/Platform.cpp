@@ -237,6 +237,11 @@ void Platform::ExecutePlatformEvents(BaseGraphicEngine* engine, BaseMouse* mouse
         DX2DGraphicEngine* eng = (DX2DGraphicEngine*)engine;
         eng->ProcessWindowEvents();
 
+        DX2DMouse* d2Mouse = (DX2DMouse*)mouse;
+        d2Mouse->MouseCoordX = eng->MouseX;
+        d2Mouse->MouseCoordY = eng->MouseY;
+        d2Mouse->Left_Current_State = eng->leftButtonState;
+        
         break;
     }
 #endif

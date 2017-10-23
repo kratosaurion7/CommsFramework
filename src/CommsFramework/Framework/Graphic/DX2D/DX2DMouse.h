@@ -9,6 +9,9 @@ public:
     DX2DMouse();
     ~DX2DMouse();
     
+    int MouseCoordX;
+    int MouseCoordY;
+    
     virtual bool IsClicked();
     virtual bool IsClicked(MouseButtons button);
 

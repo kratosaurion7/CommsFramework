@@ -32,7 +32,6 @@ bool BaseMouse::MiddleButtonClicked()
 
 void BaseMouse::UpdatePastMouseState()
 {
-
     Left_Previous_State = Left_Current_State;
     Right_Previous_State = Right_Current_State;
     Middle_Previous_State = Middle_Current_State;
