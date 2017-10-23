@@ -422,12 +422,7 @@ LRESULT CALLBACK DX2DGraphicEngine::MainWindowProc(HWND hwnd, UINT uiMsg, WPARAM
             PAINTSTRUCT ps;
             HDC hdc = BeginPaint(hwnd, &ps);
 
-            ID2D1Bitmap* bits = NULL;
-            HRESULT hr = engine->RenderTarget->CreateBitmapFromWicBitmap(engine->TestBitmap, &bits);
-
             engine->RenderTarget->BeginDraw();
-
-            engine->RenderTarget->DrawBitmap(bits);
 
             engine->ProcessDraw();
 
