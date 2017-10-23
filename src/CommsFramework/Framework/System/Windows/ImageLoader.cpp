@@ -229,6 +229,11 @@ void ImageLoader::SaveToPng(IWICBitmap* bmp, std::string destinationFilename)
     enc->Release();
 }
 
+IWICImagingFactory* ImageLoader::GetFactory()
+{
+    return WicFactory;
+}
+
 void ImageLoader::InitializeServices()
 {
     CoInitialize(NULL);

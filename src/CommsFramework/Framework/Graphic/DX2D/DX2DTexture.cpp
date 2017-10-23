@@ -23,6 +23,26 @@ void DX2DTexture::Initalize(float width, float height)
 {
     Width = width;
     Height = height;
+
+    IWICImagingFactory* factory = this->Graphics->Loader->GetFactory();
+
+    IWICBitmap* outBitmap = NULL;
+
+    /*D2D1_SIZE_U rec;
+    rec.height = height;
+    rec.width = width;
+
+    D2D1_BITMAP_PROPERTIES prop;
+    
+    ID2D1Bitmap* outBitmap;
+    HRESULT hr = Graphics->RenderTarget->CreateBitmap(rec, D2D1::BitmapProperties(), &outBitmap);
+*/
+    
+
+    //HRESULT hr = factory->CreateBitmap((UINT)width, (UINT)height, GUID_WICPixelFormat32bppRGBA, WICBitmapCacheOnDemand, &outBitmap);
+    HRESULT hr = factory->CreateBitmap((UINT)width, (UINT)height, GUID_WICPixelFormat32bppPBGRA, WICBitmapCacheOnDemand, &outBitmap);
+
+    this->texture = outBitmap;
 }
 
 int DX2DTexture::Load(std::string path)
@@ -58,6 +78,42 @@ BaseTexture* DX2DTexture::GetSubTexture(FRectangle rec)
 
 void DX2DTexture::SetSolidColor(uint32_t pixelColor)
 {
+    IWICImagingFactory* factory = this->Graphics->Loader->GetFactory();
+
+    IWICBitmap* bitmap;
+    HRESULT hr = factory->CreateBitmapFromSource(this->texture, WICBitmapNoCache, &bitmap);
+
+    WICRect r;
+    r.X = 0;
+    r.Y = 0;
+    r.Width = (INT)this->Width;
+    r.Height = (INT)this->Height;
+
+    IWICBitmapLock* lk;
+    hr = bitmap->Lock(&r, WICBitmapLockWrite, &lk);
+
+    UINT bufSize = 0;
+    UINT stride = 0;
+    BYTE* bits = NULL;
+    hr = lk->GetStride(&stride);
+
+    hr = lk->GetDataPointer(&bufSize, &bits);
+
+    for (UINT i = 0; i < bufSize; i)
+    {
+        // Format is GUID_WICPixelFormat32bppPBGRA
+        BYTE r = (pixelColor & 0x0000FF00) >> 28;
+        BYTE g = (pixelColor & 0x00FF0000) >> 16;
+        BYTE b = (pixelColor & 0xFF000000) >> 8;
+        BYTE a = pixelColor & 0x000000FF;
+
+        bits[i++] = static_cast<BYTE>(b);
+        bits[i++] = static_cast<BYTE>(g);
+        bits[i++] = static_cast<BYTE>(r);
+        bits[i++] = static_cast<BYTE>(a);
+    }
+
+    lk->Release();
 }
 
 void DX2DTexture::SaveTextureToFile()

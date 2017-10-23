@@ -55,4 +55,15 @@ BaseTexture* DX2DText::GetTextImage()
 {
     return NULL;
 }
+IWICBitmapSource * DX2DText::GetDrawableTexture()
+{
+    return this->textTexture;
+}
+void DX2DText::UpdateInnerImpl()
+{
+}
+void DX2DText::SetGraphicalFilter(int graphic_filter)
+{
+
+}
 #endif

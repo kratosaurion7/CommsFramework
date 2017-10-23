@@ -29,6 +29,8 @@ public:
     void SaveToPng(TgaFile* file, std::string destinationFilename);
     void SaveToPng(IWICBitmap* bmp, std::string destinationFilename);
 
+    IWICImagingFactory* GetFactory();
+
 private:
     IWICImagingFactory* WicFactory;
 

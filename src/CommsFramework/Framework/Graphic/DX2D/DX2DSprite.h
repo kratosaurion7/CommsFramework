@@ -26,4 +26,6 @@ public:
     virtual BaseSprite* Clone();
     
     virtual void SetGraphicalFilter(int graphic_filter);
+
+    virtual void UpdateInnerImpl();
 };

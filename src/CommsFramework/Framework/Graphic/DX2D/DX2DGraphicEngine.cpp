@@ -3,11 +3,31 @@
 
 #include <wincodec.h>
 
+#include "DX2DDrawable.h"
+#include "DX2DSprite.h"
+#include "DX2DTexture.h"
+#include "DX2DText.h"
+#include "DX2DFont.h"
+
 #include "Geometry/FSize.h"
 #include "System/Windows/ImageLoader.h"
+#include "Graphic/DrawObject.h"
+#include "Graphic/Viewport.h"
+#include "System/Utilities.h"
 
 DX2DGraphicEngine::DX2DGraphicEngine()
 {
+    TextureRepo = new TextureManager();
+    Viewport = new ViewportRect();
+    drawables = new PointerList<DrawObject*>();
+    
+    PreviousFrameTick = 0;
+    CurrentFrameTick = 0;
+    RenderingScaleX = 1;
+    RenderingScaleY = 1;
+    
+    RunEngine = true;
+
     Loader = new ImageLoader();
 }
 
@@ -25,14 +45,19 @@ void DX2DGraphicEngine::Initialize(GraphicEngineInitParams * params)
 
 void DX2DGraphicEngine::AddObject(BaseSprite * obj)
 {
+    drawables->Add(obj);
+    
+    zIndexNeedsReordering = true;
 }
 
 void DX2DGraphicEngine::AddObject(BaseText * obj)
 {
+    drawables->Add(obj);
 }
 
 void DX2DGraphicEngine::RemoveObject(DrawObject * obj)
 {
+    drawables->RemoveObject(obj);
 }
 
 void DX2DGraphicEngine::AddSpritesheet(Spritesheet * spritesheet)
@@ -143,7 +168,7 @@ DWORD DX2DGraphicEngine::ProcessWindowEvents()
 {
     MSG msg;
     BOOL bRet;
-    while ((bRet = GetMessage(&msg, NULL, 0, 0)) != 0)
+    while ((bRet = PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) != 0)
     {
         if (bRet == -1)
         {
@@ -164,34 +189,126 @@ DWORD DX2DGraphicEngine::ProcessWindowEvents()
     return 0;
 }
 
-PointerList<DrawObject*>* DX2DGraphicEngine::GetDrawableList()
+void DX2DGraphicEngine::ProcessDraw()
 {
-    return nullptr;
+    CurrentFrameTick = GetTicks();
+
+    if (IsTimeForFrame() && RunEngine)
+    {
+        auto iter = this->drawables->GetContainer()->begin();
+        while (iter != this->drawables->GetContainer()->end())
+        {
+            DrawObject* target = (*iter);
+
+            if (target->IsVisible())
+            {
+                DX2DDrawable* drawImpl = dynamic_cast<DX2DDrawable*>(target);
+
+                if (target->Ident != "")
+                {
+                    int i = 0;
+                }
+
+                if (drawImpl != NULL)
+                {
+                    //SDL_Rect destinationRect = this->GetSpriteRect(target);
+                    //SDL_Texture* tex = drawImpl->GetDrawableTexture();
+
+                    //if (target->Coordinate == DrawObject::VIEWPORT_RELATIVE)
+                    //{
+                    //    destinationRect.x -= (int)Viewport->X;
+                    //    destinationRect.y -= (int)Viewport->Y;
+                    //}
+
+                    //if (tex == NULL)
+                    //{
+                    //    tex = SDLTexture::GetMissingTextureTexture(this);
+                    //    destinationRect.w = (int)target->GetWidth();
+                    //    destinationRect.h = (int)target->GetHeight();
+
+                    //    // If the width or height is 0 nothing will be shown, this will set it do some default values
+                    //    // This is done to clearly mark the texture as missing
+                    //    if (destinationRect.h == 0 || destinationRect.w == 0)
+                    //    {
+                    //        destinationRect.w = 25;
+                    //        destinationRect.h = 25;
+                    //    }
+
+
+                    //}
+                    D2D1_RECT_F dest;
+                    dest.left = target->GetX();
+                    dest.top = target->GetY();
+                    dest.right = 50;// dest.left + target->GetWidth();
+                    dest.bottom = 50;// dest.top + target->GetHeight();
+
+                    ID2D1Bitmap* bits = NULL;
+                    HRESULT hr = RenderTarget->CreateBitmapFromWicBitmap(drawImpl->GetDrawableTexture(), &bits);
+
+                    this->RenderTarget->DrawBitmap(bits, dest);
+                }
+            }
+
+            iter++;
+        }
+
+        PreviousFrameTick = CurrentFrameTick;
+    }
 }
 
-DrawObject * DX2DGraphicEngine::GetDrawableObject(std::string identifier)
+PointerList<DrawObject*>* DX2DGraphicEngine::GetDrawableList()
 {
-    return nullptr;
+    return drawables;
+}
+
+DrawObject* DX2DGraphicEngine::GetDrawableObject(std::string identifier)
+{
+    std::list<DrawObject*>::iterator iter = drawables->GetContainer()->begin();
+
+    while (iter != drawables->GetContainer()->end())
+    {
+        DrawObject* targetSprite = (*iter);
+
+        if (strcmp(targetSprite->Ident.c_str(), identifier.c_str()) == 0)
+        {
+            return targetSprite;
+        }
+
+        iter++;
+    }
+
+    return NULL;
 }
 
 BaseSprite * DX2DGraphicEngine::CreateSpriteInstance()
 {
-    return nullptr;
+    DX2DSprite* spr = new DX2DSprite();
+    spr->Engine = this;
+
+    return spr;
 }
 
 BaseTexture * DX2DGraphicEngine::CreateTextureInstance()
 {
-    return nullptr;
+    DX2DTexture* tex = new DX2DTexture();
+    tex->Engine = this;
+    tex->Graphics = this;
+
+    return tex;
 }
 
 BaseFont * DX2DGraphicEngine::CreateFontInstance()
 {
-    return nullptr;
+    DX2DFont* font = new DX2DFont();
+
+    return font;
 }
 
 BaseText * DX2DGraphicEngine::CreateTextInstance()
 {
-    return nullptr;
+    DX2DText* text = new DX2DText();
+
+    return text;
 }
 
 void DX2DGraphicEngine::ReloadSpriteTextures()
@@ -200,16 +317,20 @@ void DX2DGraphicEngine::ReloadSpriteTextures()
 
 bool DX2DGraphicEngine::IsTimeForFrame()
 {
-    return false;
+    int ticks = GetTicks();
+
+    return this->PreviousFrameTick + (1000 / WantedFrameRate) <= ticks;
 }
 
 int DX2DGraphicEngine::GetFramerate()
 {
-    return 0;
+    return WantedFrameRate;
 }
 
 void DX2DGraphicEngine::SetFramerate(int framerate)
 {
+    WantedFrameRate = framerate;
+
 }
 
 void DX2DGraphicEngine::SetAutoManagedFramerate(bool isSet)
@@ -234,10 +355,12 @@ void DX2DGraphicEngine::Scale(float scaleFactor)
 
 void DX2DGraphicEngine::Start()
 {
+    RunEngine = true;
 }
 
 void DX2DGraphicEngine::Draw()
 {
+    PostMessage(HMainWindow, WM_PAINT, 0, 0);
 }
 
 void DX2DGraphicEngine::ProcessEvents()
@@ -247,19 +370,29 @@ void DX2DGraphicEngine::ProcessEvents()
 
 void DX2DGraphicEngine::Stop()
 {
+    RunEngine = false;
 }
 
 bool DX2DGraphicEngine::IsRunning()
 {
-    return false;
+    return RunEngine;
 }
 
 void DX2DGraphicEngine::ReorderSpritesByZIndex()
 {
+    auto spritesStart = this->drawables->GetContainer()->begin();
+    auto spritesEnd = this->drawables->GetContainer()->end();
+
+    drawables->GetContainer()->sort([](DrawObject* a, DrawObject* b) {
+        return b->GetZIndex() > a->GetZIndex();
+    });
+
+    this->zIndexNeedsReordering = false;
 }
 
 void DX2DGraphicEngine::FlagForZIndexSorting()
 {
+    zIndexNeedsReordering = true;
 }
 
 void DX2DGraphicEngine::ReorderSprite(DrawObject * first, DrawObject * second)
@@ -286,7 +419,7 @@ LRESULT CALLBACK DX2DGraphicEngine::MainWindowProc(HWND hwnd, UINT uiMsg, WPARAM
 
             engine->RenderTarget->DrawBitmap(bits);
 
-            engine->Draw();
+            engine->ProcessDraw();
 
             engine->RenderTarget->EndDraw();
 

@@ -5,6 +5,8 @@
 
 class DX2DText : public BaseText, public DX2DDrawable
 {
+    IWICBitmapSource* textTexture;
+
     virtual std::string GetText();
     virtual void SetText(std::string text);
 
@@ -21,4 +23,10 @@ class DX2DText : public BaseText, public DX2DDrawable
     virtual void SetColor(uint32_t color);
 
     virtual BaseTexture* GetTextImage();
+
+    virtual IWICBitmapSource* GetDrawableTexture();
+    virtual void UpdateInnerImpl();
+
+    virtual void SetGraphicalFilter(int graphic_filter);
+
 };

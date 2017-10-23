@@ -56,7 +56,7 @@ public:
     static BaseKeyboard* CreatePlatformKeyboard(enum AvailableInputLibraries choice);
     static BaseGraphicEngine* CreatePlatformGraphicEngine(enum AvailableGraphicEngines choice);
 
-    static void ExecutePlatformEvents(BaseMouse* mouse, BaseKeyboard* keyboard);
+    static void ExecutePlatformEvents(BaseGraphicEngine* engine, BaseMouse* mouse, BaseKeyboard* keyboard);
     
 private:
     static enum AvailableGraphicEngines CurrentGraphicEngine;

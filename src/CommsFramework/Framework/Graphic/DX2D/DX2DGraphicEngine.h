@@ -25,6 +25,10 @@ class DX2DGraphicEngine : public BaseGraphicEngine
 public:
     ImageLoader* Loader;
     
+    bool RunEngine;
+
+    int WantedFrameRate;
+
     DX2DGraphicEngine();
     ~DX2DGraphicEngine();
 
@@ -70,7 +74,10 @@ public:
     virtual void FlagForZIndexSorting();
     virtual void ReorderSprite(DrawObject* first, DrawObject* second);
 
-private:
+
+    DWORD ProcessWindowEvents();
+
+//private:
 
     // Window
     HINSTANCE AppInstance;
@@ -90,6 +97,7 @@ private:
 
     BOOL InitDirect2D();
 
-    DWORD ProcessWindowEvents();
+
+    void ProcessDraw();
 };
 

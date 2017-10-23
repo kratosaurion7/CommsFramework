@@ -12,6 +12,11 @@
 #endif
 
 #if SUPPORT_DIRECTX == 1
+
+#include "Graphic/DX2D/DX2DMouse.h"
+#include "Graphic/DX2D/DX2DKeyboard.h"
+#include "Graphic/DX2D/DX2DGraphicEngine.h"
+
 #endif
 
 #if SUPPORT_OPENGL == 1
@@ -26,6 +31,10 @@ enum AvailableInputLibraries Platform::CurrentInputLibrary = INPUTNONE;
 BaseMouse* Platform::CreateDefaultPlatformMouse()
 {
 #ifdef WIN32
+    CurrentInputLibrary = DIRECTINPUT;
+
+    return new DX2DMouse();
+
     CurrentInputLibrary = SDL2INPUT;
 
     return new SDLMouse();
@@ -48,6 +57,10 @@ BaseMouse* Platform::CreateDefaultPlatformMouse()
 BaseKeyboard* Platform::CreateDefaultPlatformKeyboard()
 {
 #ifdef WIN32
+    CurrentInputLibrary = DIRECTINPUT;
+
+    return new DX2DKeyboard();
+
     CurrentInputLibrary = SDL2INPUT;
 
     return new SDLKeyboard();
@@ -70,6 +83,10 @@ BaseKeyboard* Platform::CreateDefaultPlatformKeyboard()
 BaseGraphicEngine* Platform::CreateDefaultPlatformGraphicEngine()
 {
 #ifdef WIN32
+    CurrentGraphicEngine = DIRECTX;
+
+    return new DX2DGraphicEngine();
+
     CurrentGraphicEngine = SDL2GFX;
 
     return new SDLGraphicEngine();
@@ -176,7 +193,7 @@ BaseGraphicEngine* Platform::CreatePlatformGraphicEngine(enum AvailableGraphicEn
     return NULL;
 }
 
-void Platform::ExecutePlatformEvents(BaseMouse* mouse, BaseKeyboard* keyboard)
+void Platform::ExecutePlatformEvents(BaseGraphicEngine* engine, BaseMouse* mouse, BaseKeyboard* keyboard)
 {
     switch (CurrentInputLibrary)
     {
@@ -217,6 +234,9 @@ void Platform::ExecutePlatformEvents(BaseMouse* mouse, BaseKeyboard* keyboard)
 #if SUPPORT_DIRECTINPUT
     case DIRECTINPUT:
     {
+        DX2DGraphicEngine* eng = (DX2DGraphicEngine*)engine;
+        eng->ProcessWindowEvents();
+
         break;
     }
 #endif
