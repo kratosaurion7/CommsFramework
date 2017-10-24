@@ -1,0 +1,11 @@
+language: cpp
+
+before_install:
+  mkdir src/build
+
+script:
+  cd src/build
+  cmake ..
+  make
+
+install: true
