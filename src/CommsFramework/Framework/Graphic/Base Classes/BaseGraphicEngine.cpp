@@ -5,6 +5,9 @@
 
 BaseGraphicEngine::BaseGraphicEngine()
 {
+    PreviousFrameTick = 0;
+    CurrentFrameTick = 0;
+    WantedFrameRate = 60;
 }
 
 BaseSprite * BaseGraphicEngine::CreateSprite()
