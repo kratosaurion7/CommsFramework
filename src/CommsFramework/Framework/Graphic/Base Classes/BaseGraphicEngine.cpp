@@ -1,6 +1,7 @@
 #include "BaseGraphicEngine.h"
 
 #include "Graphic/Primitive Draws/Primitives.h"
+#include "System/Utilities.h"
 
 BaseGraphicEngine::BaseGraphicEngine()
 {
@@ -65,6 +66,28 @@ BaseTexture* BaseGraphicEngine::CreateTexture(std::string textureName, std::stri
     }
 
     return newTexture;
+}
+
+bool BaseGraphicEngine::IsTimeForFrame()
+{
+    int ticks = GetTicks();
+
+    return this->PreviousFrameTick + (1000 / WantedFrameRate) <= ticks;
+}
+
+int BaseGraphicEngine::GetFramerate()
+{
+    return WantedFrameRate;
+}
+
+void BaseGraphicEngine::SetFramerate(int framerate)
+{
+    WantedFrameRate = framerate;
+
+}
+
+void BaseGraphicEngine::SetAutoManagedFramerate(bool isSet)
+{
 }
 
 void BaseGraphicEngine::SetPrimitiveDrawParameters(uint32_t color, int zIndex)

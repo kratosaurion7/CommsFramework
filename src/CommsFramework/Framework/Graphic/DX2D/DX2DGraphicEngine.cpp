@@ -44,31 +44,31 @@ DX2DGraphicEngine::~DX2DGraphicEngine()
     delete(Loader);
 }
 
-void DX2DGraphicEngine::Initialize(GraphicEngineInitParams * params)
+void DX2DGraphicEngine::Initialize(GraphicEngineInitParams* params)
 {
     BOOL res = InitWindowApplication(params->WindowTitle, params->WindowSize);
 
     InitDirect2D();
 }
 
-void DX2DGraphicEngine::AddObject(BaseSprite * obj)
+void DX2DGraphicEngine::AddObject(BaseSprite* obj)
 {
     drawables->Add(obj);
     
     zIndexNeedsReordering = true;
 }
 
-void DX2DGraphicEngine::AddObject(BaseText * obj)
+void DX2DGraphicEngine::AddObject(BaseText* obj)
 {
     drawables->Add(obj);
 }
 
-void DX2DGraphicEngine::RemoveObject(DrawObject * obj)
+void DX2DGraphicEngine::RemoveObject(DrawObject* obj)
 {
     drawables->RemoveObject(obj);
 }
 
-void DX2DGraphicEngine::AddSpritesheet(Spritesheet * spritesheet)
+void DX2DGraphicEngine::AddSpritesheet(Spritesheet* spritesheet)
 {
 }
 
@@ -290,7 +290,7 @@ DrawObject* DX2DGraphicEngine::GetDrawableObject(std::string identifier)
     return NULL;
 }
 
-BaseSprite * DX2DGraphicEngine::CreateSpriteInstance()
+BaseSprite* DX2DGraphicEngine::CreateSpriteInstance()
 {
     DX2DSprite* spr = new DX2DSprite();
     spr->Engine = this;
@@ -298,7 +298,7 @@ BaseSprite * DX2DGraphicEngine::CreateSpriteInstance()
     return spr;
 }
 
-BaseTexture * DX2DGraphicEngine::CreateTextureInstance()
+BaseTexture* DX2DGraphicEngine::CreateTextureInstance()
 {
     DX2DTexture* tex = new DX2DTexture();
     tex->Engine = this;
@@ -307,14 +307,14 @@ BaseTexture * DX2DGraphicEngine::CreateTextureInstance()
     return tex;
 }
 
-BaseFont * DX2DGraphicEngine::CreateFontInstance()
+BaseFont* DX2DGraphicEngine::CreateFontInstance()
 {
     DX2DFont* font = new DX2DFont();
 
     return font;
 }
 
-BaseText * DX2DGraphicEngine::CreateTextInstance()
+BaseText* DX2DGraphicEngine::CreateTextInstance()
 {
     DX2DText* text = new DX2DText();
 
@@ -322,28 +322,6 @@ BaseText * DX2DGraphicEngine::CreateTextInstance()
 }
 
 void DX2DGraphicEngine::ReloadSpriteTextures()
-{
-}
-
-bool DX2DGraphicEngine::IsTimeForFrame()
-{
-    int ticks = GetTicks();
-
-    return this->PreviousFrameTick + (1000 / WantedFrameRate) <= ticks;
-}
-
-int DX2DGraphicEngine::GetFramerate()
-{
-    return WantedFrameRate;
-}
-
-void DX2DGraphicEngine::SetFramerate(int framerate)
-{
-    WantedFrameRate = framerate;
-
-}
-
-void DX2DGraphicEngine::SetAutoManagedFramerate(bool isSet)
 {
 }
 

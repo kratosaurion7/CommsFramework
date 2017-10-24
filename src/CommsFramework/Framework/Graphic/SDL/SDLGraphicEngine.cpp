@@ -259,20 +259,6 @@ void SDLGraphicEngine::ReloadSpriteTextures()
     }
 }
 
-int SDLGraphicEngine::GetFramerate()
-{
-    return WantedFrameRate;
-}
-
-void SDLGraphicEngine::SetFramerate(int framerate)
-{
-    WantedFrameRate = framerate;
-}
-
-void SDLGraphicEngine::SetAutoManagedFramerate(bool isSet)
-{
-}
-
 void SDLGraphicEngine::SetBackgroundColor(uint32_t color)
 {
     // TODO : Implementation doesn't work correctly.
@@ -541,15 +527,6 @@ void SDLGraphicEngine::DrawPrimitive(PrimitiveDrawInfo* primitive)
 			break;
 		}
 
-}
-
-bool SDLGraphicEngine::IsTimeForFrame()
-{
-    int ticks = GetTicks();
-
-    return this->PreviousFrameTick + (1000 / WantedFrameRate) <= ticks;
-
-    //return this->PreviousFrameTick + (1000 / WantedFrameRate) <= this->CurrentFrameTick;
 }
 
 void SDLGraphicEngine::SetupBackground()

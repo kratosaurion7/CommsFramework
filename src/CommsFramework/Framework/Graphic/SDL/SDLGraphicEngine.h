@@ -64,11 +64,6 @@ public:
 
 	virtual void ReloadSpriteTextures();
 
-    virtual bool IsTimeForFrame();
-    virtual int GetFramerate();
-    virtual void SetFramerate(int framerate);
-    virtual void SetAutoManagedFramerate(bool isSet);
-
     virtual void SetBackgroundColor(uint32_t color);
     virtual void SetBackgroundColor(uint8_t r, uint8_t g, uint8_t b, uint8_t a = 255);
     virtual void SetBackgroundTexture(BaseTexture* texture);

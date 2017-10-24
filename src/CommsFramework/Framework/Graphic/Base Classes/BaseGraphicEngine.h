@@ -35,6 +35,8 @@ public:
 
     bool zIndexNeedsReordering = false;
 
+    int WantedFrameRate;
+
     float DiagonalDPI;
     float HorizontalDPI;
     float VerticalDPI;
@@ -78,10 +80,10 @@ public:
 
     virtual void ReloadSpriteTextures() = 0;
 
-    virtual bool IsTimeForFrame() = 0;
-    virtual int GetFramerate() = 0;
-    virtual void SetFramerate(int framerate) = 0;
-    virtual void SetAutoManagedFramerate(bool isSet) = 0;
+    virtual bool IsTimeForFrame();
+    virtual int GetFramerate();
+    virtual void SetFramerate(int framerate);
+    virtual void SetAutoManagedFramerate(bool isSet);
 
     virtual void SetBackgroundColor(uint32_t color) = 0;
     virtual void SetBackgroundColor(uint8_t r, uint8_t g, uint8_t b, uint8_t a = 255) = 0;

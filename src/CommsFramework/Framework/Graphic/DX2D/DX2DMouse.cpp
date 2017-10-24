@@ -34,7 +34,6 @@ bool DX2DMouse::IsClicked(MouseButtons button)
 
             if (this->Left_Current_State == BTN_CLICKED)
             {
-                printf("I'm clicked !");
                 return true;
             }
             else
