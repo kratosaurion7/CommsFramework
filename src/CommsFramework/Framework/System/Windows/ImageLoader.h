@@ -14,6 +14,10 @@ class TgaFile;
 
 #include <string>
 
+/*
+ * Pixel formats https://msdn.microsoft.com/en-us/library/windows/desktop/ee719797(v=vs.85).aspx
+ */
+
 class ImageLoader
 {
 public:
