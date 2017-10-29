@@ -44,9 +44,10 @@ DX2DSprite::~DX2DSprite()
     
 }
 
-IWICBitmapSource* DX2DSprite::GetDrawableTexture()
+ID2D1Bitmap* DX2DSprite::GetDrawableTexture()
 {
     return currentTexture->texture;
+    
 }
 
 BaseTexture* DX2DSprite::GetCurrentTexture()

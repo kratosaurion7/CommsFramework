@@ -16,6 +16,8 @@ class DX2DTextureLoader
 public:
     DX2DTextureLoader(IWICImagingFactory* wicFactory, ID2D1HwndRenderTarget* renderTarget);
     ~DX2DTextureLoader();
+
+    IWICBitmap* CreateEmptyBitmap(int w, int h);
     
     IWICBitmap* LoadFromDisk(std::string path);
     

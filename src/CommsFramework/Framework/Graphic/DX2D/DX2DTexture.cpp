@@ -24,35 +24,36 @@ void DX2DTexture::Initalize(float width, float height)
     Width = width;
     Height = height;
 
-    IWICImagingFactory* factory = this->Graphics->Loader->GetFactory();
-
-    IWICBitmap* outBitmap = NULL;
-
-    /*D2D1_SIZE_U rec;
-    rec.height = height;
-    rec.width = width;
-
-    D2D1_BITMAP_PROPERTIES prop;
-    
-    ID2D1Bitmap* outBitmap;
-    HRESULT hr = Graphics->RenderTarget->CreateBitmap(rec, D2D1::BitmapProperties(), &outBitmap);
-*/
-    
-
-    //HRESULT hr = factory->CreateBitmap((UINT)width, (UINT)height, GUID_WICPixelFormat32bppRGBA, WICBitmapCacheOnDemand, &outBitmap);
-    HRESULT hr = factory->CreateBitmap((UINT)width, (UINT)height, GUID_WICPixelFormat32bppPBGRA, WICBitmapCacheOnDemand, &outBitmap);
-
-    this->texture = outBitmap;
+//    IWICImagingFactory* factory = this->Graphics->Loader->GetFactory();
+//
+//    IWICBitmap* outBitmap = NULL;
+//
+//    /*D2D1_SIZE_U rec;
+//    rec.height = height;
+//    rec.width = width;
+//
+//    D2D1_BITMAP_PROPERTIES prop;
+//    
+//    ID2D1Bitmap* outBitmap;
+//    HRESULT hr = Graphics->RenderTarget->CreateBitmap(rec, D2D1::BitmapProperties(), &outBitmap);
+//*/
+//    
+//    
+//
+//    //HRESULT hr = factory->CreateBitmap((UINT)width, (UINT)height, GUID_WICPixelFormat32bppRGBA, WICBitmapCacheOnDemand, &outBitmap);
+//    HRESULT hr = factory->CreateBitmap((UINT)width, (UINT)height, GUID_WICPixelFormat32bppPBGRA, WICBitmapCacheOnDemand, &outBitmap);
+//
+//    this->texture = outBitmap;
 }
 
 int DX2DTexture::Load(std::string path)
 {
-    ImageLoader* loader = Graphics->Loader;
+    DX2DTextureLoader* loader = Graphics->Loader;
     
-    IWICBitmapSource* image = loader->LoadDirect2DImage(path);
-    
-    texture = image;
+    IWICBitmap* image = loader->LoadFromDisk(path);
 
+    this->texture = loader->CreateD2DXBitmap(image);
+    
     return 0;
 }
 
@@ -62,13 +63,14 @@ void DX2DTexture::LoadFromMemory(char* data, int dataSize)
 
 FSize DX2DTexture::GetSize()
 {
-    UINT w = 0;
-    UINT h = 0;
+    if (texture == NULL)
+    {
+        return FSize(0, 0);
+    }
     
-    HRESULT hr = texture->GetSize(&w, &h);
-    assert(hr == S_OK);
+    D2D1_SIZE_F size = texture->GetSize();
     
-    return FSize((float)h, (float)w);
+    return FSize((float)size.height, (float)size.width);
 }
 
 BaseTexture* DX2DTexture::GetSubTexture(FRectangle rec)
@@ -78,10 +80,8 @@ BaseTexture* DX2DTexture::GetSubTexture(FRectangle rec)
 
 void DX2DTexture::SetSolidColor(uint32_t pixelColor)
 {
-    IWICImagingFactory* factory = this->Graphics->Loader->GetFactory();
-
-    IWICBitmap* bitmap;
-    HRESULT hr = factory->CreateBitmapFromSource(this->texture, WICBitmapNoCache, &bitmap);
+    HRESULT hr;
+    IWICBitmap* bitmap = this->Graphics->Loader->CreateEmptyBitmap(this->Width, this->Height);
 
     WICRect r;
     r.X = 0;
@@ -114,6 +114,8 @@ void DX2DTexture::SetSolidColor(uint32_t pixelColor)
     }
 
     lk->Release();
+
+    this->texture = this->Graphics->Loader->CreateD2DXBitmap(bitmap);
 }
 
 void DX2DTexture::SaveTextureToFile()

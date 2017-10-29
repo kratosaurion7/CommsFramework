@@ -3,6 +3,8 @@
 #include "Graphic/Base Classes/BaseText.h"
 #include "DX2DDrawable.h"
 
+struct IWICBitmapSource;
+
 class DX2DText : public BaseText, public DX2DDrawable
 {
     IWICBitmapSource* textTexture;
@@ -24,7 +26,7 @@ class DX2DText : public BaseText, public DX2DDrawable
 
     virtual BaseTexture* GetTextImage();
 
-    virtual IWICBitmapSource* GetDrawableTexture();
+    virtual ID2D1Bitmap* GetDrawableTexture();
     virtual void UpdateInnerImpl();
 
     virtual void SetGraphicalFilter(int graphic_filter);

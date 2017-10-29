@@ -29,7 +29,7 @@ DX2DGraphicEngine::DX2DGraphicEngine()
     
     RunEngine = true;
 
-    Loader = new ImageLoader();
+    Loader = NULL;
     
     MouseX = 0;
     MouseY = 0;
@@ -49,6 +49,10 @@ void DX2DGraphicEngine::Initialize(GraphicEngineInitParams* params)
     BOOL res = InitWindowApplication(params->WindowTitle, params->WindowSize);
 
     InitDirect2D();
+
+    InitWIC();
+
+    Loader = new DX2DTextureLoader(WicFactory, RenderTarget);
 }
 
 void DX2DGraphicEngine::AddObject(BaseSprite* obj)
@@ -170,6 +174,20 @@ BOOL DX2DGraphicEngine::InitDirect2D()
     return TRUE;
 }
 
+BOOL DX2DGraphicEngine::InitWIC()
+{
+    CoInitialize(NULL);
+
+    HRESULT hr = CoCreateInstance(
+        CLSID_WICImagingFactory,
+        NULL,
+        CLSCTX_INPROC_SERVER,
+        IID_PPV_ARGS(&WicFactory)
+    );
+
+    return SUCCEEDED(hr);
+}
+
 DWORD DX2DGraphicEngine::ProcessWindowEvents()
 {
     MSG msg;
@@ -248,19 +266,14 @@ void DX2DGraphicEngine::ProcessDraw()
                     dest.right = dest.left + target->GetWidth();
                     dest.bottom = dest.top + target->GetHeight();
 
-                    ID2D1Bitmap* bits = NULL;
-                    IWICBitmapSource* source = drawImpl->GetDrawableTexture();
+                    ID2D1Bitmap* source = drawImpl->GetDrawableTexture();
 
                     if (source == NULL)
                     {
                         break;
                     }
 
-                    HRESULT hr = RenderTarget->CreateBitmapFromWicBitmap(source, &bits);
-
-                    this->RenderTarget->DrawBitmap(bits, dest);
-                    
-                    bits->Release();
+                    this->RenderTarget->DrawBitmap(source, dest);
                 }
             }
 

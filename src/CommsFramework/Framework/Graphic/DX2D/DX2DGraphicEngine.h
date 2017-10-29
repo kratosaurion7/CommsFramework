@@ -20,11 +20,13 @@ class ImageLoader;
 #include "Collections/PointerList.h"
 #include "Graphic/Base Classes/BaseGraphicEngine.h"
 #include "Graphic/Base Classes/BaseMouse.h"
+#include "DX2DTextureLoader.h"
 
 class DX2DGraphicEngine : public BaseGraphicEngine
 {
 public:
-    ImageLoader* Loader;
+    //ImageLoader* Loader;
+    DX2DTextureLoader* Loader;
     
     bool RunEngine;
 
@@ -84,6 +86,9 @@ public:
     WNDCLASS MainWindowClass;
     HWND HMainWindow;
 
+    // WIC
+    IWICImagingFactory* WicFactory;
+
     //DirectX
     ID2D1Factory* D2Factory;
     ID2D1HwndRenderTarget* RenderTarget;
@@ -94,6 +99,7 @@ public:
     // Init steps
     BOOL InitWindowApplication(std::string windowTitle, FSize* windowSize);
     BOOL InitDirect2D();
+    BOOL InitWIC();
 
     void ProcessDraw();
 };

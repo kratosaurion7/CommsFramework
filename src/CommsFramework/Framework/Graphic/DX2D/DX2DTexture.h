@@ -1,6 +1,7 @@
 #pragma once
 
 class DX2DGraphicEngine;
+struct ID2D1Bitmap;
 
 #include <string>
 #include <cstdint>
@@ -16,7 +17,7 @@ class DX2DGraphicEngine;
 class DX2DTexture : public BaseTexture
 {
 public:
-    IWICBitmapSource* texture;
+    ID2D1Bitmap* texture;
     
     DX2DGraphicEngine* Graphics;
     

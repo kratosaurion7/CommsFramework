@@ -1,9 +1,9 @@
 #pragma once
 
-struct IWICBitmapSource;
+struct ID2D1Bitmap;
 
 class DX2DDrawable
 {
 public:
-    virtual IWICBitmapSource* GetDrawableTexture() = 0;
+    virtual ID2D1Bitmap* GetDrawableTexture() = 0;
 };

@@ -17,6 +17,23 @@ DX2DTextureLoader::~DX2DTextureLoader()
     renderer = NULL;
 }
 
+IWICBitmap* DX2DTextureLoader::CreateEmptyBitmap(int w, int h)
+{
+    IWICBitmap* result;
+    HRESULT hr = factory->CreateBitmap(w, h, GUID_WICPixelFormat32bppPBGRA, WICBitmapCacheOnDemand, &result);
+
+    if (FAILED(hr))
+    {
+        std::string errorString = GetLastErrorString();
+
+        printf(errorString.c_str());
+
+        return NULL;
+    }
+
+    return result;
+}
+
 IWICBitmap* DX2DTextureLoader::LoadFromDisk(std::string path)
 {
     HRESULT hr;
@@ -162,8 +179,11 @@ IWICBitmap* DX2DTextureLoader::ConvertTextureFormat(IWICBitmap* bitmap, REFWICPi
 
 ID2D1Bitmap* DX2DTextureLoader::CreateD2DXBitmap(IWICBitmap* bitmap)
 {
+    IWICBitmap* converted = NULL;
+    converted = this->ConvertTextureFormat(bitmap, GUID_WICPixelFormat32bppPBGRA);
+
     ID2D1Bitmap* bits = NULL;
-    HRESULT hr = renderer->CreateBitmapFromWicBitmap(bitmap, &bits);
+    HRESULT hr = renderer->CreateBitmapFromWicBitmap(converted, &bits);
 
     if(FAILED(hr))
     {
@@ -173,7 +193,7 @@ ID2D1Bitmap* DX2DTextureLoader::CreateD2DXBitmap(IWICBitmap* bitmap)
         
         return NULL;
     }
-    
+
     return bits;
 }
 

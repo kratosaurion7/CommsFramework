@@ -55,9 +55,9 @@ BaseTexture* DX2DText::GetTextImage()
 {
     return NULL;
 }
-IWICBitmapSource * DX2DText::GetDrawableTexture()
+ID2D1Bitmap * DX2DText::GetDrawableTexture()
 {
-    return this->textTexture;
+    return NULL;
 }
 void DX2DText::UpdateInnerImpl()
 {

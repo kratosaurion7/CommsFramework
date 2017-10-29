@@ -1,7 +1,7 @@
 #pragma once
 
 class DX2DTexture;
-struct IWICBitmapSource;
+struct ID2D1Bitmap;
 class BaseSprite;
 class BaseTexture;
 
@@ -16,7 +16,7 @@ public:
     DX2DSprite();
     ~DX2DSprite();
     
-    virtual IWICBitmapSource* GetDrawableTexture();
+    virtual ID2D1Bitmap* GetDrawableTexture();
     
     virtual BaseTexture* GetCurrentTexture();
     virtual PointerList<BaseTexture*>* GetTextures();
