@@ -164,8 +164,6 @@ BOOL DX2DGraphicEngine::InitDirect2D()
         printf("Error = %d\n", err);
     }
 
-    TestBitmap = Loader->LoadDirect2DImage("assets/Flag.png");
-    
     ShowWindow(HMainWindow, SW_SHOWNOACTIVATE);
     UpdateWindow(HMainWindow);
 
@@ -251,7 +249,14 @@ void DX2DGraphicEngine::ProcessDraw()
                     dest.bottom = dest.top + target->GetHeight();
 
                     ID2D1Bitmap* bits = NULL;
-                    HRESULT hr = RenderTarget->CreateBitmapFromWicBitmap(drawImpl->GetDrawableTexture(), &bits);
+                    IWICBitmapSource* source = drawImpl->GetDrawableTexture();
+
+                    if (source == NULL)
+                    {
+                        break;
+                    }
+
+                    HRESULT hr = RenderTarget->CreateBitmapFromWicBitmap(source, &bits);
 
                     this->RenderTarget->DrawBitmap(bits, dest);
                     
@@ -333,7 +338,7 @@ void DX2DGraphicEngine::SetBackgroundColor(uint8_t r, uint8_t g, uint8_t b, uint
 {
 }
 
-void DX2DGraphicEngine::SetBackgroundTexture(BaseTexture * texture)
+void DX2DGraphicEngine::SetBackgroundTexture(BaseTexture* texture)
 {
 }
 
@@ -385,6 +390,44 @@ void DX2DGraphicEngine::FlagForZIndexSorting()
 
 void DX2DGraphicEngine::ReorderSprite(DrawObject * first, DrawObject * second)
 {
+    std::list<DrawObject*>* spriteslist = this->drawables->GetContainer();
+    bool foundFirst = false;
+    bool foundSecond = false;
+    std::list<DrawObject*>::iterator iterFirst;
+    std::list<DrawObject*>::iterator iterSecond;
+
+    int loops = 0;
+
+    auto it = spriteslist->begin();
+    while (it != spriteslist->end())
+    {
+        DrawObject* iter = (*it);
+
+        if (iter == first)
+        {
+            iterFirst = it;
+            foundFirst = true;
+        }
+        else if (iter == second)
+        {
+            iterSecond = it;
+            foundSecond = true;
+        }
+
+        if (foundFirst && foundSecond) // Early break
+            break;
+
+        it++;
+        loops++;
+    }
+
+    if (foundFirst && foundSecond)
+    {
+        spriteslist->erase(iterSecond);
+
+        spriteslist->insert(iterFirst, second);
+    }
+
 }
 
 LRESULT CALLBACK DX2DGraphicEngine::MainWindowProc(HWND hwnd, UINT uiMsg, WPARAM wParam, LPARAM lParam)

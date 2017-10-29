@@ -6,23 +6,17 @@
 #define SUPPORT_DIRECTX 1
 #define SUPPORT_OPENGL 1
 
-#define SUPPORT_DIRECTINPUT 1
-
 #elif linux
 
 #define SUPPORT_SDL 1
 #define SUPPORT_DIRECTX 0
 #define SUPPORT_OPENGL 1
 
-#define SUPPORT_DIRECTINPUT 0
-
 #elif __EMSCRIPTEN__
 
 #define SUPPORT_SDL 1
 #define SUPPORT_DIRECTX 0
 #define SUPPORT_OPENGL 0
-
-#define SUPPORT_DIRECTINPUT 0
 
 #endif
 
@@ -42,7 +36,7 @@ enum AvailableInputLibraries
 {
     INPUTNONE = -1,
     SDL2INPUT,
-    DIRECTINPUT
+    DIRECTXINPUT
 };
 
 class Platform

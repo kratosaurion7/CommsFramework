@@ -88,16 +88,12 @@ public:
     ID2D1Factory* D2Factory;
     ID2D1HwndRenderTarget* RenderTarget;
 
-    IWICBitmapSource* TestBitmap;
-
+    // Window Procedure
     static LRESULT CALLBACK MainWindowProc(HWND hwnd, UINT uiMsg, WPARAM wParam, LPARAM lParam);
 
     // Init steps
     BOOL InitWindowApplication(std::string windowTitle, FSize* windowSize);
-
     BOOL InitDirect2D();
-
 
     void ProcessDraw();
 };
-

@@ -1,6 +1,6 @@
+#ifdef WIN32
 #include "ImageLoader.h"
 
-#ifdef WIN32
 
 #include "Image/TgaFile.h"
 #include "Filesystem/Windows/WindowsHelpers.h"
