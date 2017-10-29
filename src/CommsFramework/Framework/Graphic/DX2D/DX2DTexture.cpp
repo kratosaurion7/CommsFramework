@@ -23,27 +23,6 @@ void DX2DTexture::Initalize(float width, float height)
 {
     Width = width;
     Height = height;
-
-//    IWICImagingFactory* factory = this->Graphics->Loader->GetFactory();
-//
-//    IWICBitmap* outBitmap = NULL;
-//
-//    /*D2D1_SIZE_U rec;
-//    rec.height = height;
-//    rec.width = width;
-//
-//    D2D1_BITMAP_PROPERTIES prop;
-//    
-//    ID2D1Bitmap* outBitmap;
-//    HRESULT hr = Graphics->RenderTarget->CreateBitmap(rec, D2D1::BitmapProperties(), &outBitmap);
-//*/
-//    
-//    
-//
-//    //HRESULT hr = factory->CreateBitmap((UINT)width, (UINT)height, GUID_WICPixelFormat32bppRGBA, WICBitmapCacheOnDemand, &outBitmap);
-//    HRESULT hr = factory->CreateBitmap((UINT)width, (UINT)height, GUID_WICPixelFormat32bppPBGRA, WICBitmapCacheOnDemand, &outBitmap);
-//
-//    this->texture = outBitmap;
 }
 
 int DX2DTexture::Load(std::string path)

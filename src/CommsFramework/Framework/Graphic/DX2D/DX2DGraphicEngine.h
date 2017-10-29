@@ -25,7 +25,6 @@ class ImageLoader;
 class DX2DGraphicEngine : public BaseGraphicEngine
 {
 public:
-    //ImageLoader* Loader;
     DX2DTextureLoader* Loader;
     
     bool RunEngine;

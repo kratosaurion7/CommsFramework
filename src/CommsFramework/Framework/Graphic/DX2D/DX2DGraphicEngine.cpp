@@ -235,31 +235,6 @@ void DX2DGraphicEngine::ProcessDraw()
 
                 if (drawImpl != NULL)
                 {
-                    //SDL_Rect destinationRect = this->GetSpriteRect(target);
-                    //SDL_Texture* tex = drawImpl->GetDrawableTexture();
-
-                    //if (target->Coordinate == DrawObject::VIEWPORT_RELATIVE)
-                    //{
-                    //    destinationRect.x -= (int)Viewport->X;
-                    //    destinationRect.y -= (int)Viewport->Y;
-                    //}
-
-                    //if (tex == NULL)
-                    //{
-                    //    tex = SDLTexture::GetMissingTextureTexture(this);
-                    //    destinationRect.w = (int)target->GetWidth();
-                    //    destinationRect.h = (int)target->GetHeight();
-
-                    //    // If the width or height is 0 nothing will be shown, this will set it do some default values
-                    //    // This is done to clearly mark the texture as missing
-                    //    if (destinationRect.h == 0 || destinationRect.w == 0)
-                    //    {
-                    //        destinationRect.w = 25;
-                    //        destinationRect.h = 25;
-                    //    }
-
-
-                    //}
                     D2D1_RECT_F dest;
                     dest.left = target->GetX();
                     dest.top = target->GetY();
@@ -270,6 +245,7 @@ void DX2DGraphicEngine::ProcessDraw()
 
                     if (source == NULL)
                     {
+                        // TODO : Implement missing textures management.
                         break;
                     }
 
