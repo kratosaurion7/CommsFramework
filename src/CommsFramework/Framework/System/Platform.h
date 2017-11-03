@@ -3,10 +3,10 @@
 #ifdef WIN32
 
 #define SUPPORT_SDL 1
-#define SUPPORT_DIRECTX 1
-#define SUPPORT_OPENGL 1
+#define SUPPORT_DIRECTX 0
+#define SUPPORT_OPENGL 0
 
-#define SUPPORT_DIRECTINPUT 1
+#define SUPPORT_DIRECTINPUT 0
 
 #elif linux
 
