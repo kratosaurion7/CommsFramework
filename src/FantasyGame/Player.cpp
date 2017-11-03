@@ -1,11 +1,11 @@
 #include "Player.h"
 
-#include <GameEngine.h>
-#include <BaseKeyboard.h>
-#include <BaseMouse.h>
-#include <BaseSprite.h>
-#include <BaseTexture.h>
-#include <BaseText.h>
+#include <Engine/GameEngine.h>
+#include <Graphic/Base Classes/BaseKeyboard.h>
+#include <Graphic/Base Classes/BaseMouse.h>
+#include <Graphic/Base Classes/BaseSprite.h>
+#include <Graphic/Base Classes/BaseTexture.h>
+#include <Graphic/Base Classes/BaseText.h>
 
 
 Player::Player()

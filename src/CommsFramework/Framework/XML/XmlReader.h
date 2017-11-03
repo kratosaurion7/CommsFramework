@@ -77,10 +77,10 @@ private:
 class XmlNodeAttribute
 {
 public:
-    char* AttributeName;
+    char AttributeName[256];
 
     int valueSize; // TODO : Check if removing this member
-    char* AttributeValue; // MUST BE NULL TERMINATED
+    char AttributeValue[256]; // MUST BE NULL TERMINATED
 
     XmlNodeAttribute();
     ~XmlNodeAttribute();

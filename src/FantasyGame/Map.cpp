@@ -1,18 +1,18 @@
 #include "Map.h"
 
-#include <XmlReader.h>
+#include <XML/XmlReader.h>
 
 #include "ProgDef.h"
 
-#include <GameEngine.h>
-#include <BaseGraphicEngine.h>
-#include <BaseText.h>
-#include <BaseTexture.h>
-#include <TextureRepository.h>
-#include <FPosition.h>
-#include <BaseSprite.h>
-#include <RandomGen.h>
-#include <PathLoader.h>
+#include <Engine/GameEngine.h>
+#include <Graphic/Base Classes/BaseGraphicEngine.h>
+#include <Graphic/Base Classes/BaseText.h>
+#include <Graphic/Base Classes/BaseTexture.h>
+#include <Graphic/TextureRepository.h>
+#include <Geometry/FPosition.h>
+#include <Graphic/Base Classes/BaseSprite.h>
+#include <Math/RandomGen.h>
+#include <Filesystem/PathLoader.h>
 
 #include "FantasyGame.h"
 #include "Tile.h"

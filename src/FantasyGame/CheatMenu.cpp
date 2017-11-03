@@ -1,11 +1,11 @@
 #include "CheatMenu.h"
 
-#include <GameEngine.h>
-#include <BaseGraphicEngine.h>
-#include <DrawObject.h>
-#include <BaseSprite.h>
-#include <BaseTexture.h>
-#include <BaseText.h>
+#include <Engine/GameEngine.h>
+#include <Graphic/Base Classes/BaseGraphicEngine.h>
+#include <Graphic/DrawObject.h>
+#include <Graphic/Base Classes/BaseSprite.h>
+#include <Graphic/Base Classes/BaseTexture.h>
+#include <Graphic/Base Classes/BaseText.h>
 
 CheatMenu::CheatMenu()
 {

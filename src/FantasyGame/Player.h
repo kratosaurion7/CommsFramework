@@ -3,8 +3,8 @@
 class BaseSprite;
 
 #include <string>
-#include <BaseActor.h>
-#include <Vectors.h>
+#include <Game/Actors/BaseActor.h>
+#include <Geometry/Vectors.h>
 
 class Player : public BaseActor
 {

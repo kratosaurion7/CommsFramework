@@ -1,8 +1,8 @@
 #include "Tile.h"
 
-#include <BaseSprite.h>
-#include <BaseText.h>
-#include <FPosition.h>
+#include <Graphic/Base Classes/BaseSprite.h>
+#include <Graphic/Base Classes/BaseText.h>
+#include <Geometry/FPosition.h>
 
 Tile::Tile()
 {

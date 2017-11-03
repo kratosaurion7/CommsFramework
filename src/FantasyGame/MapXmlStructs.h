@@ -3,7 +3,7 @@
 struct TileDescriptionEntry;
 
 #include <string>
-#include <PointerList.h>
+#include <Collections/PointerList.h>
 
 struct TileDescriptionList
 {

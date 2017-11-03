@@ -180,8 +180,10 @@ XmlNodeAttribute XmlNode::GetAttribute(std::string attributeName)
 
         if (attr != NULL)
         {
-            returnAttr.AttributeName = attr->name();
-            returnAttr.AttributeValue = attr->value();
+            strcpy(returnAttr.AttributeName, attr->name());
+            //returnAttr.AttributeName = attr->name();
+            strcpy(returnAttr.AttributeValue, attr->value());
+            //returnAttr.AttributeValue = attr->value();
             returnAttr.valueSize = (int)attr->value_size();
 
             return returnAttr;

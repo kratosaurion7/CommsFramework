@@ -4,7 +4,7 @@ class BaseSprite;
 class BaseTexture;
 class BaseText;
 
-#include <BaseActor.h>
+#include <Game/Actors/BaseActor.h>
 
 class CheatMenu : public BaseActor
 {

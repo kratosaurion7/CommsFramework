@@ -1,7 +1,7 @@
 #include "SimpleMenu.h"
 
-#include <GameEngine.h>
-#include <BaseSprite.h>
+#include <Engine/GameEngine.h>
+#include <Graphic/Base Classes/BaseSprite.h>
 
 SimpleMenu::SimpleMenu(GameEngine* engine) : UIMenu::UIMenu(engine)
 {

@@ -1,8 +1,8 @@
 #pragma once
 
-#include <UIMenu.h>
-#include <UIElement.h>
-#include <UIButton.h>
+#include <Graphic/Menu/UIMenu.h>
+#include <Graphic/Menu/UIElement.h>
+#include <Graphic/Menu/UIButton.h>
 
 class BaseSprite;
 class GameEngine;

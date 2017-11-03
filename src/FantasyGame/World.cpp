@@ -1,7 +1,7 @@
 #include "World.h"
 
-#include <XmlReader.h>
-#include <PathLoader.h>
+#include <XML/XmlReader.h>
+#include <Filesystem/PathLoader.h>
 
 #include "MapXmlStructs.h"
 

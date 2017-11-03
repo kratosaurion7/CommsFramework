@@ -2,25 +2,24 @@
 
 #include <cassert>
 
-#include <GameEngine.h>
-#include <BaseGraphicEngine.h>
-#include <Spritesheet.h>
-#include <DrawObject.h>
-#include <BaseSprite.h>
-#include <BaseText.h>
-#include <Vectors.h>
-#include <XmlReader.h>
-#include <Spritesheet.h>
-#include <FRectangle.h>
-#include <FSize.h>
-#include <XDirectory.h>
-#include <XFile.h>
-#include <ConfigurationManager.h>
-#include <TgaFile.h>
-#include <QuickWindow.h>
-#include <PathLoader.h>
-#include <Viewport.h>
-#include <MouseClickInfo.h>
+#include <Engine/GameEngine.h>
+#include <Graphic/Base Classes/BaseGraphicEngine.h>
+#include <Graphic/Spritesheet/Spritesheet.h>
+#include <Graphic/DrawObject.h>
+#include <Graphic/Base Classes/BaseSprite.h>
+#include <Graphic/Base Classes/BaseText.h>
+#include <Geometry/Vectors.h>
+#include <XML/XmlReader.h>
+#include <Geometry/FRectangle.h>
+#include <Geometry/FSize.h>
+#include <Filesystem/XDirectory.h>
+#include <Filesystem/XFile.h>
+#include <Configuration/ConfigurationManager.h>
+#include <Image/TgaFile.h>
+#include <Utilities/QuickWindow.h>
+#include <Filesystem/PathLoader.h>
+#include <Graphic/Viewport.h>
+#include <Input/Keys.h>
 
 #include "SimpleMenu.h"
 

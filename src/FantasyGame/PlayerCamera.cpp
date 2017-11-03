@@ -1,7 +1,7 @@
 #include "PlayerCamera.h"
 
-#include <BaseSprite.h>
-#include <FRectangle.h>
+#include <Graphic/Base Classes/BaseSprite.h>
+#include <Geometry/FRectangle.h>
 
 #include "Player.h"
 

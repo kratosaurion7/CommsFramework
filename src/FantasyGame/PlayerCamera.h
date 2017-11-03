@@ -1,8 +1,8 @@
 #pragma once
 
-#include <BaseActor.h>
+#include <Game/Actors/BaseActor.h>
 
-#include <Vectors.h>
+#include <Geometry/Vectors.h>
 
 class Player;
 class FRectangle;

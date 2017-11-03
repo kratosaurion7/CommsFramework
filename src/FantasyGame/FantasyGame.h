@@ -19,9 +19,9 @@ class PlayerCamera;
 class CheatMenu;
 class SimpleMenu;
 
-#include <Vectors.h>
+#include <Geometry/Vectors.h>
 #include <string>
-#include <PointerList.h>
+#include <Collections/PointerList.h>
 
 class FantasyGame
 {

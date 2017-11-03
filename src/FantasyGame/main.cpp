@@ -1,23 +1,23 @@
 #include "ProgDef.h"
 
-#include <GameEngine.h>
-#include <BaseGraphicEngine.h>
+#include <Engine/GameEngine.h>
+#include <Graphic/Base Classes/BaseGraphicEngine.h>
 
-#include <BaseSprite.h>
-#include <BaseTexture.h>
-#include <PointerList.h>
-#include <Spritesheet.h>
-#include <XFile.h>
-#include <XDirectory.h>
+#include <Graphic/Base Classes/BaseSprite.h>
+#include <Graphic/Base Classes/BaseTexture.h>
+#include <Collections/PointerList.h>
+#include <Graphic/Spritesheet/Spritesheet.h>
+#include <Filesystem/XFile.h>
+#include <Filesystem/XDirectory.h>
 
 #include "FantasyGame.h"
 #include "Map.h"
 
-#include <TgaFile.h>
-#include <Functions.h>
-#include <ImageLoader.h>
+#include <Image/TgaFile.h>
+#include <Math/Functions.h>
+#include <System/Windows/ImageLoader.h>
 
-#include <ConfigurationManager.h>
+#include <Configuration/ConfigurationManager.h>
 #include "SimpleMenu.h"
 
 int main()

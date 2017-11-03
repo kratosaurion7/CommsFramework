@@ -21,6 +21,9 @@ file(GLOB_RECURSE BLACKJACK_SOURCES "Blackjack/*.cpp")
 file(GLOB_RECURSE PUZZLEGAME_HEADERS "PuzzleGame/*.h")
 file(GLOB_RECURSE PUZZLEGAME_SOURCES "PuzzleGame/*.cpp")
 
+file(GLOB_RECURSE FANTASYGAME_HEADERS "FantasyGame/*.h")
+file(GLOB_RECURSE FANTASYGAME_SOURCES "FantasyGame/*.cpp")
+
 IF(WIN32)
     add_definitions("-D_WINDOWS")
     add_definitions("-D_UNICODE")
@@ -152,10 +155,16 @@ add_executable(PuzzleGame ${PUZZLEGAME_HEADERS} ${PUZZLEGAME_SOURCES})
 target_link_libraries(PuzzleGame engine)
 target_link_libraries(PuzzleGame ${SDL2_LIB} ${SDL2_IMAGE_LIB} ${SDL2_TTF_LIB})
 
+#FantasyGame
+add_executable(FantasyGame ${FANTASYGAME_HEADERS} ${FANTASYGAME_SOURCES})
+target_link_libraries(FantasyGame engine)
+target_link_libraries(FantasyGame ${SDL2_LIB} ${SDL2_IMAGE_LIB} ${SDL2_TTF_LIB})
+
 IF(EMSCRIPTEN)
     set_target_properties(engine PROPERTIES LINK_FLAGS "-s USE_SDL=2")
     set_target_properties(Blackjack PROPERTIES LINK_FLAGS "-s USE_SDL=2")
     set_target_properties(PuzzleGame PROPERTIES LINK_FLAGS "-s USE_SDL=2")
+    set_target_properties(FantasyGame PROPERTIES LINK_FLAGS "-s USE_SDL=2")
 ENDIF(EMSCRIPTEN)
 
 IF(WIN32)
@@ -163,6 +172,7 @@ IF(WIN32)
 set_target_properties(engine PROPERTIES VS_DEBUGGER_WORKING_DIRECTORY "$(ProjectDir)/$(Configuration)")
 set_target_properties(Blackjack PROPERTIES VS_DEBUGGER_WORKING_DIRECTORY "$(ProjectDir)/$(Configuration)")
 set_target_properties(PuzzleGame PROPERTIES VS_DEBUGGER_WORKING_DIRECTORY "$(ProjectDir)/$(Configuration)")
+set_target_properties(FantasyGame PROPERTIES VS_DEBUGGER_WORKING_DIRECTORY "$(ProjectDir)/$(Configuration)")
 
 # Copy dependencies DLL
 
