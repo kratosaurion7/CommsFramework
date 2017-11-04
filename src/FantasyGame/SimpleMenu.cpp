@@ -20,7 +20,7 @@ SimpleMenu::SimpleMenu(GameEngine* engine) : UIMenu::UIMenu(engine)
     BaseSprite* btnOnePushedState = engine->CreateSprite("4", "assets/Menu/Button_Pushed.png");
     btnOnePushedState->SetZIndex(PRIO::UI);
 
-    BaseSprite* menuBackground = engine->CreateSprite("5", "assets/dsMenu/MenuBackground.png");
+    BaseSprite* menuBackground = engine->CreateSprite("5", "assets/Menu/MenuBackground.png");
     menuBackground->SetZIndex(PRIO::UI);
     menuBackground->Coordinate = DrawObject::GAME_ABSOLUTE;
 
