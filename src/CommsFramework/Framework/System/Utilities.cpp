@@ -23,7 +23,7 @@ void DumpData(const char* data, int size, std::string outputName)
     outStream.close();
 }
 
-u_int32_t GetTicks()
+uint32_t GetTicks()
 {
 #ifdef WIN32
 
