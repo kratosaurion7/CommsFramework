@@ -61,7 +61,7 @@ void FantasyGame::Init()
 {
     ReadCoreSettings();
 
-	char* rootAssetPath = Settings->Get("assets_root", "assets\\");
+	char* rootAssetPath = Settings->Get("assets_root", "assets/");
     PathLoader::SetBasePath(rootAssetPath);
 
     // Init the engine first, this gives access to the services proposed by the engine

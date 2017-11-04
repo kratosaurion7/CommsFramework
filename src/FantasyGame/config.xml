@@ -2,9 +2,9 @@
 
   <settings>
 
-    <assets_root>assets\\</assets_root>
+    <assets_root>assets/</assets_root>
 
-    <Spritesheet>assets\\spritesheet.xml</Spritesheet>
+    <Spritesheet>assets/spritesheet.xml</Spritesheet>
 
     <game_name>FantasyGame</game_name>
 
@@ -23,7 +23,7 @@
   </settings>
   
   <!--<link dir="assets" pattern=".xml" />-->
-  <link src="assets\\map1.xml" />
+  <link src="assets/map1.xml" />
 
 
   <game>

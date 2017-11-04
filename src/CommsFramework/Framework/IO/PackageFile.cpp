@@ -161,7 +161,7 @@ void PackageFile::AddFile(std::string filename, std::string directoryRoot)
     else
     {
         newFile->RelativeDirectoryParentRoot = GetParentDirectoryPath(directoryRoot);
-        newFile->RelativeDirectoryParentRoot.append("\\"); // TODO : HAcked for now, decide if want trailing slashes
+        newFile->RelativeDirectoryParentRoot.append("/"); // TODO : HAcked for now, decide if want trailing slashes
     }
 
     filesList->Add(newFile);
@@ -353,7 +353,7 @@ void PackageFile::Extract(std::string outPath)
         if (outPath != "")
         {
             finalFilePath.append(outPath);
-            finalFilePath.append("\\");
+            finalFilePath.append("/");
         }
         
         finalFilePath.append(entry->fileName);

@@ -126,7 +126,7 @@ void GameGrid::Setup()
     totalScoreExplain->SetColor(0xFFFFFFFF);
 
 
-    btnNextLevel = Engine->CreateSprite("btnNextLevel", "assets\\Button_NextLevel.png");
+    btnNextLevel = Engine->CreateSprite("btnNextLevel", "assets/Button_NextLevel.png");
     btnNextLevel->SetScale(0.5);
 
     FPosition targetPos = InfoTiles->Get(InfoTiles->Count() - 1)->BackgroundSprite->GetOffsetPos();
@@ -135,7 +135,7 @@ void GameGrid::Setup()
 
     // Message setup
     LevelCompleteMessage = new GameMessageWindow();
-    LevelCompleteMessage->WindowSprite = Engine->CreateSprite("LevelCompleteMsg", "assets\\DefaultDialogBackground.png");
+    LevelCompleteMessage->WindowSprite = Engine->CreateSprite("LevelCompleteMsg", "assets/DefaultDialogBackground.png");
     LevelCompleteMessage->WindowSprite->SetScale(2.0);
     LevelCompleteMessage->WindowText = Engine->CreateText("Level Complete\n !");
     LevelCompleteMessage->SetDialogPosition(FPosition(200, 200));

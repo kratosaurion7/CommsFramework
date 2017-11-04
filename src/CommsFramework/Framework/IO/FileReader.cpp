@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <string>
 #include <string.h>
+#include <errno.h>
 
 #define READ_BLOCK_SIZE 128
 
@@ -45,7 +46,8 @@ void FileReader::OpenFile(const char* fileName)
 
     if (errno != 0)
     {
-        printf("%s", strerror(errno));
+        char* errorMsg = strerror(errno);
+        printf("%s", errorMsg);
     }
 }
 

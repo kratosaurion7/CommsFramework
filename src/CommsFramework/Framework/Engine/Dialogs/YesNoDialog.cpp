@@ -13,16 +13,16 @@ YesNoDialog::YesNoDialog()
     //BaseActor::BaseActor();
 
     DialogSprite = Engine->CreateSprite("YesNoDialogMessageFrame");
-    DialogSprite->SetTexture("assets\\dialogs\\DialogFrame.png");
+    DialogSprite->SetTexture("assets/dialogs/DialogFrame.png");
     DialogSprite->SetPos(300, 300);
 
     ButtonYes = Engine->CreateSprite("YesNoDialogYesButton");
-    ButtonYes->SetTexture("assets\\dialogs\\YesButton.png");
+    ButtonYes->SetTexture("assets/dialogs/YesButton.png");
     ButtonYes->SetPos(300, 350);
     
 
     ButtonNo = Engine->CreateSprite("YesNoDialogNoButton");
-    ButtonNo->SetTexture("assets\\dialogs\\NoButton.png");
+    ButtonNo->SetTexture("assets/dialogs/NoButton.png");
     ButtonNo->SetPos(455, 300);
 
     DialogText = Engine->CreateText("");
@@ -44,16 +44,16 @@ YesNoDialog::YesNoDialog(std::string windowText)
     //BaseActor::BaseActor();
 
     DialogSprite = Engine->CreateSprite("YesNoDialogMessageFrame");
-    DialogSprite->SetTexture("assets\\dialogs\\DialogFrame.png");
+    DialogSprite->SetTexture("assets/dialogs/DialogFrame.png");
     DialogSprite->SetPos(300, 300);
 
     ButtonYes = Engine->CreateSprite("YesNoDialogYesButton");
-    ButtonYes->SetTexture("assets\\dialogs\\YesButton.png");
+    ButtonYes->SetTexture("assets/dialogs/YesButton.png");
     ButtonYes->SetPos(335, 350);
     ButtonYes->SetZIndex(PRIO::DIALOG);
 
     ButtonNo = Engine->CreateSprite("YesNoDialogNoButton");
-    ButtonNo->SetTexture("assets\\dialogs\\NoButton.png");
+    ButtonNo->SetTexture("assets/dialogs/NoButton.png");
     ButtonNo->SetPos(455, 350);
 
     DialogText = Engine->CreateText(windowText);

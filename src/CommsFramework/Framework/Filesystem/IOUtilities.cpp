@@ -41,7 +41,7 @@ BaseList<std::string>* GetFilePathComponents(XFile* file)
 
 BaseList<std::string>* GetFilePathComponents(std::string path)
 {
-    BaseList<std::string>* components = StringSplit(path, "\\");
+    BaseList<std::string>* components = StringSplit(path, "/");
 
     return components;
 }
@@ -62,7 +62,7 @@ std::string GetFileExtension(XFile* file)
 std::string GetFileName(std::string filePath)
 {
     // Get only the file part of the path
-    size_t filePartStartIndex = filePath.find_last_of('\\') + 1;
+    size_t filePartStartIndex = filePath.find_last_of('/') + 1;
     std::string filePart = filePath.substr(filePartStartIndex, filePath.length() - filePartStartIndex);
 
     // Get the filename from the filename + extension string
@@ -76,7 +76,7 @@ std::string GetParentDirectoryPath(std::string path)
 {
     assert(path != "");
 
-    std::string::size_type lastSlash = path.rfind('\\', std::string::npos);
+    std::string::size_type lastSlash = path.rfind('/', std::string::npos);
 
     std::string newString = path.substr(0, lastSlash);
 
@@ -208,7 +208,7 @@ void CreatePath(std::string path)
         }
 
         currentComponent++;
-        pathBuilder.append("\\");
+        pathBuilder.append("/");
 
     }
 

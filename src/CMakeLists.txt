@@ -256,3 +256,15 @@ add_custom_command(
         "${PROJECT_SOURCE_DIR}/Blackjack/assets"
         $<TARGET_FILE_DIR:Blackjack>/assets
 )
+add_custom_command(
+        TARGET FantasyGame POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+        "${PROJECT_SOURCE_DIR}/FantasyGame/assets"
+        $<TARGET_FILE_DIR:FantasyGame>/assets
+)
+add_custom_command(
+        TARGET FantasyGame POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy
+        "${PROJECT_SOURCE_DIR}/FantasyGame/config.xml"
+        $<TARGET_FILE_DIR:FantasyGame>/config.xml
+)

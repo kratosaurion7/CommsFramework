@@ -11,7 +11,7 @@
 Player::Player()
 {
     this->PlayerSprite = this->MakeSprite("Player");
-    this->PlayerSprite->SetTexture("assets\\flag.png");
+    this->PlayerSprite->SetTexture("assets/flag.png");
     this->PlayerSprite->SetPos(5, 5);
     this->PlayerSprite->SetZIndex(900);
     this->PlayerSprite->Show(true);

@@ -7,6 +7,6 @@
 
 void DumpData(const char* data, int size, std::string outputName = "output.png");
 
-int GetTicks();
+uint32_t GetTicks();
 
 float SafeCharToFloat(char* data, float defaultValue = 0);

@@ -10,6 +10,7 @@ void PathLoader::SetBasePath(std::string basePath)
 
 std::string PathLoader::GetPath(std::string pathLastPart)
 {
+    std::string x = PathLoader::basePath + pathLastPart;
     return PathLoader::basePath + pathLastPart;
 }
 

@@ -73,7 +73,7 @@ BaseTexture* BaseGraphicEngine::CreateTexture(std::string textureName, std::stri
 
 bool BaseGraphicEngine::IsTimeForFrame()
 {
-    int ticks = GetTicks();
+    uint32_t ticks = GetTicks();
 
     return this->PreviousFrameTick + (1000 / WantedFrameRate) <= ticks;
 }
