@@ -132,9 +132,14 @@ public:
     PointerList<GameRule*>* GameRules;
 
     void ShowEngineDialog(std::string engineMessageForDialog);
-    
+
+    void PlayLoop();
+    void StopLoop();
+
 private:
     static GameEngine* _globalInstance; // Ugh, TODO CHANGE STATIC TO SOMETHING NOT BULLSHIT
+
+    bool LoopEngine;
 
     void FlagClickedSprites();
     void RemoveSpriteClickedFlag();

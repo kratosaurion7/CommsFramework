@@ -1,30 +1,20 @@
 #pragma once
 
-class Tile;
-
+#include <Collections/ArrayList.h>
 #include <Collections/PointerList.h>
+
+class Tile;
+class XmlNode;
 
 class Map
 {
-public:
-	
     Map(int width, int height);
     ~Map();
 
-	static Map* CreateFromXml(std::string xmlPath);
+    static Map* CreateFromXML(XmlNode* mapConfig);
 
-	std::string MapName;
+    Tile*** Tiles;
 
-	// Bounds of the map
-	int Height;
-	int Width;
-	
-	// 2D array of tile pointers
-	Tile*** Tiles;
-
-	// Linked list of Tiles for easier access, albeit slower.
-	PointerList<Tile*>* TilesList;
-
-private:
-    void InitializeDefaultMap();
+    PointerList<Tile*>* TilesList;
 };
+

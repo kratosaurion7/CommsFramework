@@ -507,6 +507,24 @@ void GameEngine::UpdateGraphicEngineSpritesFromActors()
     }
 }
 
+void GameEngine::PlayLoop()
+{
+    this->LoopEngine = true;
+
+    while (this->LoopEngine)
+    {
+        if (this->Graphics->IsTimeForFrame())
+        {
+            this->Play();
+        }
+    }
+}
+
+void GameEngine::StopLoop()
+{
+    this->LoopEngine = false;
+}
+
 GameEngineInitParams* GameEngineInitParams::CreateDefaultParams()
 {
     GameEngineInitParams* newParams = new GameEngineInitParams();
