@@ -21,49 +21,49 @@ World::~World()
 
 World* World::CreateWorldFromXml(std::string xmlPath)
 {
-	XmlReader worldFileReader = XmlReader();
-	World* ret = new World();
+    XmlReader worldFileReader = XmlReader();
+    World* ret = new World();
 
-	worldFileReader.LoadFile(PathLoader::GetPath(xmlPath));
+    worldFileReader.LoadFile(PathLoader::GetPath(xmlPath));
 
-	// Read the <tiles> node
-	auto mapNodes = worldFileReader.GetNode("maps")->GetNodes("map");
+    // Read the <tiles> node
+    auto mapNodes = worldFileReader.GetNode("maps")->GetNodes("map");
 
-	auto it = ITBEGIN(mapNodes);
-	while (it != ITEND(mapNodes))
-	{
-		XmlNode* element = *it;
+    auto it = ITBEGIN(mapNodes);
+    while (it != ITEND(mapNodes))
+    {
+        XmlNode* element = *it;
 
-		std::string mapName = element->GetAttribute("name").AttributeValue;
-		std::string mapFilepath = element->GetAttribute("source").AttributeValue;
+        std::string mapName = element->GetAttribute("name").AttributeValue;
+        std::string mapFilepath = element->GetAttribute("source").AttributeValue;
 
-		Map* newMap = Map::CreateFromXml(mapFilepath);
+        Map* newMap = Map::CreateFromXml(mapFilepath);
 
-		ret->Maps->Add(newMap);
+        ret->Maps->Add(newMap);
 
-		it++;
-	}
+        it++;
+    }
 
-	// Read the <tile_description> node
-	auto descriptionNode = worldFileReader.FindNode("tile_description")->GetNodes("tile");
-	TileDescriptionList* descList = new TileDescriptionList();
-	ret->TileMapping = descList;
+    // Read the <tile_description> node
+    auto descriptionNode = worldFileReader.FindNode("tile_description")->GetNodes("tile");
+    TileDescriptionList* descList = new TileDescriptionList();
+    ret->TileMapping = descList;
 
-	descList->Entries = new PointerList<TileDescriptionEntry*>();
+    descList->Entries = new PointerList<TileDescriptionEntry*>();
 
-	auto descIt = ITBEGIN(descriptionNode);
-	while (descIt != ITEND(descriptionNode))
-	{
-		XmlNode* element = *descIt;
+    auto descIt = ITBEGIN(descriptionNode);
+    while (descIt != ITEND(descriptionNode))
+    {
+        XmlNode* element = *descIt;
 
-		TileDescriptionEntry* newEntry = new TileDescriptionEntry();
-		newEntry->id = atoi(element->GetAttribute("id").AttributeValue);
-		newEntry->TextureName = element->GetAttribute("texture").AttributeValue;
+        TileDescriptionEntry* newEntry = new TileDescriptionEntry();
+        newEntry->id = atoi(element->GetAttribute("id").AttributeValue);
+        newEntry->TextureName = element->GetAttribute("texture").AttributeValue;
 
-		descList->Entries->Add(newEntry);
+        descList->Entries->Add(newEntry);
 
-		descIt++;
-	}
+        descIt++;
+    }
 
-	return ret;
+    return ret;
 }

@@ -22,12 +22,7 @@
 
 int main()
 {
-    
-
-
     FantasyGame* game = new FantasyGame();
-
-
 
     game->Init();
     

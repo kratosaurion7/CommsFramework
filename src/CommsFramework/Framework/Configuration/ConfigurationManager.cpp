@@ -12,6 +12,8 @@ ConfigurationManager::ConfigurationManager()
 
 ConfigurationManager::~ConfigurationManager()
 {
+    this->SettingsList->Release();
+    delete(this->SettingsList);
 }
 
 void ConfigurationManager::LoadConfig()
@@ -19,10 +21,10 @@ void ConfigurationManager::LoadConfig()
     XmlReader settingsReader = XmlReader();
     settingsReader.LoadFile(defaultConfigFileName);
 
-	if (settingsReader.IsValid() == false)
-	{
-		return; // No config present
-	}
+    if (settingsReader.IsValid() == false)
+    {
+        return; // No config present
+    }
 
     this->ExtractConfigFromFile(&settingsReader, this->SettingsList);
 }

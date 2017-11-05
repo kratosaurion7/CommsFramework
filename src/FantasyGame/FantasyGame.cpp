@@ -61,7 +61,7 @@ void FantasyGame::Init()
 {
     ReadCoreSettings();
 
-	char* rootAssetPath = Settings->Get("assets_root", "assets/");
+    char* rootAssetPath = Settings->Get("assets_root", "assets/");
     PathLoader::SetBasePath(rootAssetPath);
 
     // Init the engine first, this gives access to the services proposed by the engine
@@ -86,9 +86,9 @@ void FantasyGame::ReadCoreSettings()
 
     Settings->LoadConfig();
 
-	scaleFactor = Settings->GetFloat("game_scale_factor", 4);
-	tileSize = Settings->GetFloat("game_tile_size", 16);
-	scaledSize = tileSize * scaleFactor;
+    scaleFactor = Settings->GetFloat("game_scale_factor", 4);
+    tileSize = Settings->GetFloat("game_tile_size", 16);
+    scaledSize = tileSize * scaleFactor;
 }
 
 void FantasyGame::InitEngine()
